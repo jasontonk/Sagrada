@@ -2,7 +2,12 @@ package model;
 
 public class RoundTrackField {
 
-	Die[][] dieSavingSpots = new Die[10][9]
+	private Die[][] dieSavingSpots;
+	
+	public RoundTrackField() {
+		// TODO Auto-generated constructor stub
+		dieSavingSpots = = new Die[10][9];
+	}
 
 	public void placeDie(Die die, round int) { // methode je geeft een dobbelsteen mee en de ronde en plaatst de dobbelsteen op het eerste lege plekje in het ronde spoor
 		for (int i = 0; i < dieSavingSpots.length; i++) {
