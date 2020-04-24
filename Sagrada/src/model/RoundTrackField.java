@@ -18,8 +18,22 @@ public class RoundTrackField {
 		}
 	}
 	
-
+	public die takeDie(int die) {
+		Die returndie;
+		if (die != null) {
+			returndie = dieSavingSpot[die];
+			dieSavingSpot = null;
+			return returndie;
+			
+		}
+		return returndie;
+	}
+	public Die[] getDieSavingSpot() {
+		return dieSavingSpot;
+	}
+	public void setDieSavingSpot(Die[] dieSavingSpot) {
+		this.dieSavingSpot = dieSavingSpot;
+	}
 	
 	
-
 }
