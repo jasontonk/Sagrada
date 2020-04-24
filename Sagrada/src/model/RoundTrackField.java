@@ -2,24 +2,24 @@ package model;
 
 public class RoundTrackField {
 
-	Dice[][] diceSavingSpots = new Dice[10][9]
+	Die[][] dieSavingSpots = new Die[10][9]
 
-	public void placeDice(Dice dice, round int) { // methode je geeft een dobbelsteen mee en de ronde en plaatst de dobbelsteen op het eerste lege plekje in het ronde spoor
-		for (int i = 0; i < diceSavingSpots.length; i++) {
-			if (diceSavingSpots[round][i] == null) {
-				diceSavingSpots[round][i] = dice;	
+	public void placeDie(Die die, round int) { // methode je geeft een dobbelsteen mee en de ronde en plaatst de dobbelsteen op het eerste lege plekje in het ronde spoor
+		for (int i = 0; i < dieSavingSpots.length; i++) {
+			if (dieSavingSpots[round][i] == null) {
+				dieSavingSpots[round][i] = die;	
 				return;
 			}
 		}				
 	}
 
-	public Dice takeDice(round int, dice int) {
-		if (diceSavingSpots[round][dice] != null) {
-			Dice returndice = diceSavingSpots[round][dice];
-			diceSavingSpots[round][dice] = null;
-			return returndice;
+	public Die takeDie(round int, die int) {// hoe gaan we de rondes bij houden ?
+		if (dieSavingSpots[round][die] != null) {
+			Die returndie = dieSavingSpots[round][die];
+			dieSavingSpots[round][die] = null;
+			return returndie;
 		}
-		 return dice;
+		 return die;
 	}
 	
 
