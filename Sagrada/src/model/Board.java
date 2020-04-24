@@ -39,6 +39,7 @@ public class Board {
 	}
 	
 	
+	
 	/**
      * Checks if it is the first turn of the player
      */
