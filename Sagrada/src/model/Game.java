@@ -1,4 +1,6 @@
 
 public class Game {
-//test
+// add players
+// add roundtrack
+//add gamedie	//add chat ?
 }
