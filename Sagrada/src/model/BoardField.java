@@ -6,7 +6,6 @@ public class BoardField {
 	
 	public BoardField() {
 		// TODO Auto-generated constructor stub
-		this.die = setDie(die);
 	}
 	
 	public Die getDie() {
