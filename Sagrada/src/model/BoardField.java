@@ -2,7 +2,7 @@ package model;
 
 public class BoardField {
 	
-	private Die die;
+	private GameDie die;
 	private int xPos;
 	private int yPos;
 	
@@ -10,11 +10,11 @@ public class BoardField {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Die getDie() {
+	public GameDie getDie() {
 		return die;
 	}
 	
-	public void setDie(Die die) {
+	public void setDie(GameDie die) {
 		this.die = die;
 	}
 
