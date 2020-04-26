@@ -15,6 +15,16 @@ public class Board {
 	}
 	
 	
+	public PatternCard getPatternCard() {
+		return patternCard;
+	}
+
+
+	public void setPatternCard(PatternCard patternCard) {
+		this.patternCard = patternCard;
+	}
+
+
 	/**
      * places a die on the coordinates of the parameters
      */
@@ -65,91 +75,91 @@ public class Board {
 	}
 
 //	/**
-//     * validates if there is a die with the color of the parameter north west of the boardfield of the parameter
+//     * checks if there is a die with the color of the parameter north west of the boardfield of the parameter
 //     */
-//	private boolean validateNorthWestDieColor(BoardField boardField, Color color, boolean isDie) {
+//	private boolean checkNorthWestDieColor(BoardField boardField, Color color, boolean isDie) {
 //		if(boardField.getyPos() == 1 || boardField.getxPos() == 1) {
 //			return true;
 //		}
 //		BoardField boardFieldNext = getBoardField(boardField.getxPos() - 1, boardField.getyPos() - 1);
-//		return validateFieldColorAndDieColor(boardFieldNext, color, isDie);
+//		return checkFieldColorAndDieColor(boardFieldNext, color, isDie);
 //	}
 //	
 //	/**
-//     * validates if there is a die with the value of the parameter north west of the boardfield of the parameter
+//     * checks if there is a die with the value of the parameter north west of the boardfield of the parameter
 //     */
-//	private boolean validateNorthWestDieValue(BoardField boardField, int value, boolean isDie) {
+//	private boolean checkNorthWestDieValue(BoardField boardField, int value, boolean isDie) {
 //		if(boardField.getyPos() == 1 || boardField.getxPos() == 1) {
 //			return true;
 //		}
 //		BoardField boardFieldNext = getBoardField(boardField.getxPos() - 1, boardField.getyPos() - 1);
-//		return validateFieldValueAndDieValue(boardFieldNext, value, isDie);
+//		return checkFieldValueAndDieValue(boardFieldNext, value, isDie);
 //	}
 //	
 //	/**
-//     * validates if there is a die with the color of the parameter north east of the boardfield of the parameter
+//     * checks if there is a die with the color of the parameter north east of the boardfield of the parameter
 //     */
-//	private boolean validateNorthEastDieColor(BoardField boardField, Color color, boolean isDie) {
+//	private boolean checkNorthEastDieColor(BoardField boardField, Color color, boolean isDie) {
 //		if(boardField.getyPos() == 1 || boardField.getxPos() == BOARD_SQUARES_HORIZONTAL) {
 //			return true;
 //		}
 //		BoardField boardFieldNext = getBoardField(boardField.getxPos() + 1, boardField.getyPos() - 1);
-//		return validateFieldColorAndDieColor(boardFieldNext, color, isDie);
+//		return checkFieldColorAndDieColor(boardFieldNext, color, isDie);
 //	}
 //	
 //	/**
-//     * validates if there is a die with the value of the parameter north east of the boardfield of the parameter
+//     * checks if there is a die with the value of the parameter north east of the boardfield of the parameter
 //     */
-//	private boolean validateNorthEastDieValue(BoardField boardField, int value, boolean isDie) {
+//	private boolean checkNorthEastDieValue(BoardField boardField, int value, boolean isDie) {
 //		if(boardField.getyPos() == 1 || boardField.getxPos() == BOARD_SQUARES_HORIZONTAL) {
 //			return true;
 //		}
 //		BoardField boardFieldNext = getBoardField(boardField.getxPos() + 1, boardField.getyPos() - 1);
-//		return validateFieldValueAndDieValue(boardFieldNext, value, isDie);
+//		return checkFieldValueAndDieValue(boardFieldNext, value, isDie);
 //	}
 //	
 //	/**
-//     * validates if there is a die with the color of the parameter south east of the boardfield of the parameter
+//     * checks if there is a die with the color of the parameter south east of the boardfield of the parameter
 //     */
-//	private boolean validateSouthEastDieColor(BoardField boardField, Color color, boolean isDie) {
+//	private boolean checkSouthEastDieColor(BoardField boardField, Color color, boolean isDie) {
 //		if(boardField.getyPos() == BOARD_SQUARES_VERTICAL || boardField.getxPos() == BOARD_SQUARES_HORIZONTAL) {
 //			return true;
 //		}
 //		BoardField boardFieldNext = getBoardField(boardField.getxPos() + 1, boardField.getyPos() + 1);
-//		return validateFieldColorAndDieColor(boardFieldNext, color, isDie);
+//		return checkFieldColorAndDieColor(boardFieldNext, color, isDie);
 //	}
 //	
 //	/**
-//     * validates if there is a die with the value of the parameter south east of the boardfield of the parameter
+//     * checks if there is a die with the value of the parameter south east of the boardfield of the parameter
 //     */
-//	private boolean validateSouthEastDieValue(BoardField boardField, int value, boolean isDie) {
+//	private boolean checkSouthEastDieValue(BoardField boardField, int value, boolean isDie) {
 //		if(boardField.getyPos() == BOARD_SQUARES_VERTICAL || boardField.getxPos() == BOARD_SQUARES_HORIZONTAL) {
 //			return true;
 //		}
 //		BoardField boardFieldNext = getBoardField(boardField.getxPos() + 1, boardField.getyPos() + 1);
-//		return validateFieldValueAndDieValue(boardFieldNext, value, isDie);
+//		return checkFieldValueAndDieValue(boardFieldNext, value, isDie);
 //	}
 //	
 //	/**
-//     * validates if there is a die with the value of the parameter south west of the boardfield of the parameter
+//     * checks if there is a die with the value of the parameter south west of the boardfield of the parameter
 //     */
-//	private boolean validateSouthWestDieValue(BoardField boardField, int value, boolean isDie) {
+//	private boolean checkSouthWestDieValue(BoardField boardField, int value, boolean isDie) {
 //		if(boardField.getyPos() == BOARD_SQUARES_VERTICAL || boardField.getxPos() == 1) {
 //			return true;
 //		}
 //		BoardField boardFieldNext = getBoardField(boardField.getxPos() - 1, boardField.getyPos() + 1);
-//		return validateFieldValueAndDieValue(boardFieldNext, value, isDie);
+//		return checkFieldValueAndDieValue(boardFieldNext, value, isDie);
 //	}
 //	
 //	/**
-//     * validates if there is a die with the color of the parameter south west of the boardfield of the parameter
+//     * checks if there is a die with the color of the parameter south west of the boardfield of the parameter
 //     */
-//	private boolean validateSouthWestDieColor(BoardField boardField, Color color, boolean isDie) {
+//	private boolean checkSouthWestDieColor(BoardField boardField, Color color, boolean isDie) {
 //		if(boardField.getyPos() == BOARD_SQUARES_VERTICAL || boardField.getxPos() == 1) {
 //			return true;
 //		}
 //		BoardField boardFieldNext = getBoardField(boardField.getxPos() - 1, boardField.getyPos() + 1);
-//		return validateFieldColorAndDieColor(boardFieldNext, color, isDie);
+//		return checkFieldColorAndDieColor(boardFieldNext, color, isDie);
 //	}
 	
 	
@@ -157,45 +167,45 @@ public class Board {
 	/**
      * checks if the dice north of the boardfield has the color of the parameter
      */
-	private boolean validateNorthDieColor(BoardField boardField, Color color, boolean isDie) {
+	private boolean checkNorthDieColor(BoardField boardField, Color color, boolean isDie) {
 		if(boardField.getyPos() == 1) {
 			return true;
 		}
 		BoardField boardFieldNext = getBoardField(boardField.getxPos(), boardField.getyPos() - 1);
-		return validateFieldColorAndDieColor(boardFieldNext, color, isDie);
+		return checkFieldColorAndDieColor(boardFieldNext, color, isDie);
 	}
 
 	/**
      * checks if the dice west of the boardfield has the color of the parameter
      */
-	private boolean validateWestDieColor(BoardField boardField, Color color, boolean isDie) {
+	private boolean checkWestDieColor(BoardField boardField, Color color, boolean isDie) {
 		if(boardField.getxPos() == 1) {
 			return true;
 		}
 		BoardField boardFieldNext = getBoardField(boardField.getxPos() - 1, boardField.getyPos());
-		return validateFieldColorAndDieColor(boardFieldNext, color, isDie);
+		return checkFieldColorAndDieColor(boardFieldNext, color, isDie);
 	}
 	
 	/**
      * checks if the dice east of the boardfield has the color of the parameter
      */
-	private boolean validateEastDieColor(BoardField boardField, Color color, boolean isDie) {
+	private boolean checkEastDieColor(BoardField boardField, Color color, boolean isDie) {
 		if(boardField.getxPos() == BOARD_SQUARES_HORIZONTAL) {
 			return true;
 		}
 		BoardField boardFieldNext = getBoardField(boardField.getxPos() + 1, boardField.getyPos());
-		return validateFieldColorAndDieColor(boardFieldNext, color, isDie);
+		return checkFieldColorAndDieColor(boardFieldNext, color, isDie);
 	}
 	
 	/**
      * checks if the dice south of the boardfield has the color of the parameter
      */
-	private boolean validateSouthDieColor(BoardField boardField, Color color, boolean isDie) {
+	private boolean checkSouthDieColor(BoardField boardField, Color color, boolean isDie) {
 		if(boardField.getyPos() == BOARD_SQUARES_VERTICAL) {
 			return true;
 		}
 		BoardField boardFieldNext = getBoardField(boardField.getxPos(), boardField.getyPos() + 1);
-		return validateFieldColorAndDieColor(boardFieldNext, color, isDie);
+		return checkFieldColorAndDieColor(boardFieldNext, color, isDie);
 	}
 	
 	
@@ -203,81 +213,89 @@ public class Board {
 	/**
      * checks if the dice north of the boardfield has the value of the parameter
      */
-	private boolean validateNorthDieValue(BoardField boardField, int value, boolean isDie) {
+	private boolean checkNorthDieValue(BoardField boardField, int value, boolean isDie) {
 		if(boardField.getyPos() == 1) {
 			return true;
 		}
 		BoardField boardFieldNext = getBoardField(boardField.getxPos(), boardField.getyPos() - 1);
-		return validateFieldValueAndDieValue(boardFieldNext, value, isDie);
+		return checkFieldValueAndDieValue(boardFieldNext, value, isDie);
 	}
 	
 	/**
      * checks if the dice west of the boardfield has the value of the parameter
      */
-	private boolean validateWestDieValue(BoardField boardField, int value, boolean isDie) {
+	private boolean checkWestDieValue(BoardField boardField, int value, boolean isDie) {
 		if(boardField.getxPos() == 1) {
 			return true;
 		}
 		BoardField boardFieldNext = getBoardField(boardField.getxPos() - 1, boardField.getyPos());
-		return validateFieldValueAndDieValue(boardFieldNext, value, isDie);
+		return checkFieldValueAndDieValue(boardFieldNext, value, isDie);
 	}
 	
 	/**
      * checks if the dice east of the boardfield has the value of the parameter
      */
-	private boolean validateEastDieValue(BoardField boardField, int value, boolean isDie) {
+	private boolean checkEastDieValue(BoardField boardField, int value, boolean isDie) {
 		if(boardField.getxPos() == BOARD_SQUARES_HORIZONTAL) {
 			return true;
 		}
 		BoardField boardFieldNext = getBoardField(boardField.getxPos() + 1, boardField.getyPos());
-		return validateFieldValueAndDieValue(boardFieldNext, value, isDie);
+		return checkFieldValueAndDieValue(boardFieldNext, value, isDie);
 	}
 	
 	/**
      * checks if the dice south of the boardfield has the value of the parameter
      */
-	private boolean validateSouthDieValue(BoardField boardField, int value, boolean isDie) {
+	private boolean checkSouthDieValue(BoardField boardField, int value, boolean isDie) {
 		if(boardField.getyPos() == BOARD_SQUARES_VERTICAL) {
 			return true;
 		}
 		BoardField boardFieldNext = getBoardField(boardField.getxPos(), boardField.getyPos() + 1);
-		return validateFieldValueAndDieValue(boardFieldNext, value, isDie);
+		return checkFieldValueAndDieValue(boardFieldNext, value, isDie);
 	}
 	
 	
 	
 	
 	/**
+     * checks if the dice on the side have the same color
      * 
      */
-	public boolean validateSidesColor(BoardField boardField, Color color, boolean isDie) {
-		return validateNorthDieColor(boardField, color, isDie)
-				&& validateEastDieColor(boardField, color, isDie)
-				&& validateSouthDieColor(boardField, color, isDie)
-				&& validateWestDieColor(boardField, color, isDie);
+	public boolean checkSidesColor(BoardField boardField, Color color, boolean isDie) {
+		return checkNorthDieColor(boardField, color, isDie)
+				&& checkEastDieColor(boardField, color, isDie)
+				&& checkSouthDieColor(boardField, color, isDie)
+				&& checkWestDieColor(boardField, color, isDie);
 	}
 	
 	/**
-     * 
+     * checks if the dice on the side have the same value
      */
-	public boolean validateSidesValue(BoardField boardField, int value, boolean isDie) {
-		return validateNorthDieValue(boardField, value, isDie)
-				&& validateEastDieValue(boardField, value, isDie)
-				&& validateSouthDieValue(boardField, value, isDie)
-				&& validateWestDieValue(boardField, value, isDie);
+	public boolean checkSidesValue(BoardField boardField, int value, boolean isDie) {
+		return checkNorthDieValue(boardField, value, isDie)
+				&& checkEastDieValue(boardField, value, isDie)
+				&& checkSouthDieValue(boardField, value, isDie)
+				&& checkWestDieValue(boardField, value, isDie);
 	}
 	
 	
 	
 	
-	public boolean validateFieldColorAndDieColor(BoardField boardField, Color color, boolean isDie) {
+	public boolean checkFieldColorAndDieColor(BoardField boardField, Color color, boolean isDie) {
 		//TODO
 		return false;
 	}
 	
-	public boolean validateFieldValueAndDieValue(BoardField boardField, int value, boolean isDie) {
-		//TODO
-		return false;
+	public boolean checkFieldValueAndDieValue(BoardField boardField, int value, boolean isDie) {
+		if (!isDie) {
+            if (boardField.hasValue()) {
+                return !(boardField.getValue() == value);
+            }
+        }
+        if (boardField.hasDie()) {
+            return !(boardField.getDie().getEyes() == value);
+        }
+        return true;
 	}
 	
 	
@@ -285,7 +303,7 @@ public class Board {
 	/**
      * checks if there is a die on the north of the boardfield
      */
-	private boolean validateIsNextToDieNorth(BoardField boardField) {
+	private boolean checkIsNextToDieNorth(BoardField boardField) {
 		if (boardField.getyPos() == 1) {
             return false;
         }
@@ -295,7 +313,7 @@ public class Board {
 	/**
      * checks if there is a die on the south of the boardfield
      */
-	private boolean validateIsNextToDieSouth(BoardField boardField) {
+	private boolean checkIsNextToDieSouth(BoardField boardField) {
 		if (boardField.getyPos() == BOARD_SQUARES_VERTICAL) {
             return false;
         }
@@ -305,7 +323,7 @@ public class Board {
 	/**
      * checks if there is a die on the east of the boardfield
      */
-	private boolean validateIsNextToDieEast(BoardField boardField) {
+	private boolean checkIsNextToDieEast(BoardField boardField) {
 		if (boardField.getxPos() == BOARD_SQUARES_HORIZONTAL) {
             return false;
         }
@@ -315,7 +333,7 @@ public class Board {
 	/**
      * checks if there is a die on the west of the boardfield
      */
-	private boolean validateIsNextToDieWest(BoardField boardField) {
+	private boolean checkIsNextToDieWest(BoardField boardField) {
 		if (boardField.getxPos() == 1) {
             return false;
         }
@@ -326,7 +344,7 @@ public class Board {
 	/**
      * checks if there is a die on the north east of the boardfield
      */
-	private boolean validateIsNextToDieNorthEast(BoardField boardField) {
+	private boolean checkIsNextToDieNorthEast(BoardField boardField) {
 		if (boardField.getyPos() == 1 || boardField.getxPos() == BOARD_SQUARES_HORIZONTAL) {
             return false;
         }
@@ -337,7 +355,7 @@ public class Board {
 	/**
      * checks if there is a die on the north west of the boardfield
      */
-	private boolean validateIsNextToDieNorthWest(BoardField boardField) {
+	private boolean checkIsNextToDieNorthWest(BoardField boardField) {
 		if (boardField.getxPos()== 1 || boardField.getyPos() == 1) {
             return false;
         }
@@ -348,7 +366,7 @@ public class Board {
 	/**
      * checks if there is a die on the south east of the boardfield
      */
-	private boolean validateIsNextToDieSouthEast(BoardField boardField) {
+	private boolean checkIsNextToDieSouthEast(BoardField boardField) {
 		if (boardField.getxPos() == 5 || boardField.getyPos() == 4) {
             return false;
         }
@@ -359,7 +377,7 @@ public class Board {
 	/**
      * checks if there is a die on the south west of the boardfield
      */
-	private boolean validateIsNextToDieSouthWest(BoardField boardField) {
+	private boolean checkIsNextToDieSouthWest(BoardField boardField) {
 		if (boardField.getyPos() == 4 || boardField.getxPos() == 1) {
             return false;
         }
@@ -367,12 +385,12 @@ public class Board {
     }
 	
 	/**
-     * validates if there is any Die next to or diagonal to the placed Die
+     * checks if there is any Die next to or diagonal to the placed Die
      */
-	public boolean validateIsNextToDie(BoardField boardField) {
-		if(validateIsNextToDieNorth(boardField) || validateIsNextToDieSouth(boardField) || validateIsNextToDieEast(boardField) 
-			|| validateIsNextToDieWest(boardField) || validateIsNextToDieNorthEast(boardField) || validateIsNextToDieNorthWest(boardField) 
-			|| validateIsNextToDieSouthEast(boardField) || validateIsNextToDieSouthWest(boardField)) {
+	public boolean checkIsNextToDie(BoardField boardField) {
+		if(checkIsNextToDieNorth(boardField) || checkIsNextToDieSouth(boardField) || checkIsNextToDieEast(boardField) 
+			|| checkIsNextToDieWest(boardField) || checkIsNextToDieNorthEast(boardField) || checkIsNextToDieNorthWest(boardField) 
+			|| checkIsNextToDieSouthEast(boardField) || checkIsNextToDieSouthWest(boardField)) {
 			return true;
 		}
 		return false;
