@@ -19,7 +19,6 @@ public class Board {
 		return patternCard;
 	}
 
-
 	public void setPatternCard(PatternCard patternCard) {
 		this.patternCard = patternCard;
 	}
@@ -287,15 +286,8 @@ public class Board {
 	}
 	
 	public boolean checkFieldValueAndDieValue(BoardField boardField, int value, boolean isDie) {
-		if (!isDie) {
-            if (boardField.hasValue()) {
-                return !(boardField.getValue() == value);
-            }
-        }
-        if (boardField.hasDie()) {
-            return !(boardField.getDie().getEyes() == value);
-        }
-        return true;
+		//TODO
+		return false;
 	}
 	
 	
