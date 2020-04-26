@@ -6,4 +6,5 @@ public class Player {
 	private PatternCard patternCard;
 	private FavorToken favorToken;
 	private Color color;
+	
 }
