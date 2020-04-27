@@ -1,6 +1,6 @@
 package test;
 
-public class RoundTrackfield {/
+public class RoundTrackfield {
 
 	private Die[] dieSavingSpot;// array to save dies max 9 dies per round
 
