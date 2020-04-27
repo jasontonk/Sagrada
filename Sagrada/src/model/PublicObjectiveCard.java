@@ -13,5 +13,6 @@ public class PublicObjectiveCard {
 	}
 	public String getDescription() {
 		return description;
+		
 	}
 }
