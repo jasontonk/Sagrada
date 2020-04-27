@@ -11,7 +11,8 @@ public class Game {
 	private Objectivecard[] objectiveCards
 	private Gamedie[] diesinBag
 	private RoundTrack roundTrack
-	private Chat chat
+	private Chat chat\
+	private int round
 	
 	public void play() {
 		
