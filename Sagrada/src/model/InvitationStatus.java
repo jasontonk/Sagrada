@@ -1,5 +1,5 @@
+package model;
 
 public enum InvitationStatus {
-	Challenger,
-	Challenged
+	Challenger, Challenged
 }
