@@ -10,7 +10,7 @@ public class Board {
 	private Player player;
 	
 	public Board(int boardId) {
-		this.boardId = boardId;
+		this.setBoardId(boardId);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -29,6 +29,22 @@ public class Board {
 
 	public void setPlayer(Player player) {
 		this.player = player;
+	}
+
+	public boolean isHasPatternCard() {
+		return hasPatternCard;
+	}
+
+	public void setHasPatternCard(boolean hasPatternCard) {
+		this.hasPatternCard = hasPatternCard;
+	}
+
+	public int getBoardId() {
+		return boardId;
+	}
+
+	public void setBoardId(int boardId) {
+		this.boardId = boardId;
 	}
 
 	/**

@@ -107,42 +107,48 @@ public class Account {
      * 
      */
 	public int getHighestScore() {
-		AccountDBA aDB = new AccountDBA();
-		aDB.getHighestScore(this);
+		return 0;//TODO
+//		AccountDBA aDB = new AccountDBA();
+//		aDB.getHighestScore(this);
 	}
 	
 	/**
      * 
      */
 	public int getMostUsedValue() {
-		AccountDBA aDB = new AccountDBA();
-		aDB.getMostUsedValue(this);
+		return 0;//TODO
+//		AccountDBA aDB = new AccountDBA();
+//		aDB.getMostUsedValue(this);
 	}
 	
 	/**
      * 
      */
 	public int getMostUsedColor() {
-		AccountDBA aDB = new AccountDBA();
-		aDB.getMostUsedColor(this);
+		return 0;//TODO
+//		AccountDBA aDB = new AccountDBA();
+//		aDB.getMostUsedColor(this);
 	}
 	
 	/**
      * 
      */
 	public int getValueOfDifferentPlayedAccounts() {
-		AccountDBA aDB = new AccountDBA();
-		aDB.getValueOfDifferentPlayedAccounts(this);
+		return 0;//TODO
+//		AccountDBA aDB = new AccountDBA();
+//		aDB.getValueOfDifferentPlayedAccounts(this);
 	}
 	
 	/**
      * 
      */
 	public int[] getWinsAndLoses() {
-		AccountDBA aDB = new AccountDBA();
-		int wins = aDB.getWins(this);
-		int loses = aDB.getLoses(this);
-		int[] winsAndLoses = {wins, loses};
-		return winsAndLoses;
+		return null;
+		//TODO
+//		AccountDBA aDB = new AccountDBA();
+//		int wins = aDB.getWins(this);
+//		int loses = aDB.getLoses(this);
+//		int[] winsAndLoses = {wins, loses};
+//		return winsAndLoses;
 	}
 }

@@ -116,6 +116,14 @@ public class Player {
 		this.favorTokens = favorTokens;
 	}
 
+	public PatternCard getPatternCard() {
+		return patternCard;//TODO
+	}
+
+	public void setPatternCard(PatternCard patternCard) {
+		this.patternCard = patternCard;
+	}
+
 	public ArrayList<PatternCard> getPatternCardsToChoose() {
 		return patternCardsToChoose;//TODO
 	}
@@ -138,6 +146,25 @@ public class Player {
 
 	public void setPlacedDie(boolean placedDie) {
 		this.placedDie = placedDie;
+	}
+	
+	public void assignFavorTokens() {
+		//TODO alle favortokens uit de database halen
+		ArrayList<FavorToken> favorTokens = new ArrayList<>();
+		for(int i = 0; i < patternCard.getDifficulty(); i++) {
+			//TODO token uit de database halen en uit de arraylist verwijderen
+			//deze token toewijzen aan spelen en dus toevoegen aan arraylist favorTokens
+		}
+	}
+	
+	public void setNextSequenceNumber() {
+		int players = this.getGame().getPlayers().size();
+		int NewSequenceNumber = sequenceNumber;
+		
+		//TODO sequence nummer aanpassen op basis van de game grootte
+		
+		this.setSequenceNumber(NewSequenceNumber);
+		//TODO update in database
 	}
 	
 	public int calculateScore(BoardField[][] boardFields) {
