@@ -5,15 +5,14 @@ public class Board {
 	private BoardField[][] boardFields;
 	private int boardId;
 	private boolean hasPatternCard;
-	private static final int BOARD_SQUARES_HORIZONTAL = 5;
-	private static final int BOARD_SQUARES_VERTICAL = 4;
+	public static final int BOARD_SQUARES_HORIZONTAL = 5;
+	public static final int BOARD_SQUARES_VERTICAL = 4;
 	private Player player;
 	
 	public Board(int boardId) {
 		this.boardId = boardId;
 		// TODO Auto-generated constructor stub
 	}
-	
 	
 	public PatternCard getPatternCard() {
 		return patternCard;
@@ -23,6 +22,14 @@ public class Board {
 		this.patternCard = patternCard;
 	}
 
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
 
 	/**
      * places a die on the coordinates of the parameters

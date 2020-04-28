@@ -37,5 +37,9 @@ public class BoardField {
 	public boolean hasDie() {
 		return die != null;
 	}
+	
+    public void remove() {
+        die = null;
+    }
 
 }
