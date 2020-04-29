@@ -310,7 +310,7 @@ public class Board {
 		if(fieldColor == color) {
 			return true;
 		}
-		else {
+		else { 
 			return false;
 		}
 	}
