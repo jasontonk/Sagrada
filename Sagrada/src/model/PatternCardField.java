@@ -39,7 +39,7 @@ public class PatternCardField {
 
 	// Set the PositionY of this PatternCardField.
 
-	public void setPositionY(char positionY) {
+	public void setPositionY(int positionY) {
 
 		this.positionY = positionY;
 	}
