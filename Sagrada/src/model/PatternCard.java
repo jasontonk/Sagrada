@@ -30,7 +30,25 @@ public class PatternCard {
 				int coloredFieldLocationx = (int)(Math.random() * 5) + 1; 							//generates a random number between 1 and 5 for the x location of a colored field
 				int coloredFieldLocationy = (int)(Math.random() * 4) + 1; 							//generates a random number between 1 and 4 for the y location of a colored field
 				if(patterncard[x][y].getColor() == null && patterncard[x][y].getValue() == null) { 	//check to see if field already has a color or value
-					patterncard[x][y].setColor(color);//TODO add color
+					int randomColorNumber = (int)(Math.random() * 5) + 1; 							//generates a rondom number for the switch to get random color
+					switch(randomColorNumber) {														//sets random color to color based on random number
+						case 1: 
+							color = RED;
+							break;
+						case 2: 
+							color = GREEN;
+							break;
+						case 3: 
+							color = YELLOW;
+							break;
+						case 4: 
+							color = PURPLE;
+							break;
+						case 5: 
+							color = BLUE;
+							break;
+					}
+					patterncard[x][y].setColor(color);
 				}
 				else {
 					i--;
