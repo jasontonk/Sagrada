@@ -304,13 +304,27 @@ public class Board {
 	
 	
 	public boolean checkFieldColorAndDieColor(BoardField boardField, Color color, boolean isDie) {
-		//TODO
-		return false;
+		int xPos = boardField.getxPos();
+		int yPos = boardField.getyPos();
+		Color fieldColor = patternCard.checkFieldColor(xPos, yPos);
+		if(fieldColor == color) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	public boolean checkFieldValueAndDieValue(BoardField boardField, int value, boolean isDie) {
-		//TODO
-		return false;
+		int xPos = boardField.getxPos();
+		int yPos = boardField.getyPos();
+		int fieldValue = patternCard.checkFieldValue(xPos, yPos);
+		if(fieldValue == value) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	
