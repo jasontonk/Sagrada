@@ -17,8 +17,7 @@ public class RoundTrack {
 		for (int i = 0; i < roundTrackFields.length; i++) {
 			if(roundTrackFields[i] == null) {
 				roundTrackFields[i].addDice(die);
-				roundCounter++;
-				return;
+ 				return;
 			}
 		}
 	}
@@ -26,11 +25,12 @@ public class RoundTrack {
 	
 	/*
 	 * Returns die that gets chosen
+	 * TODO change to the right method for getRound
 	 */
 	public Die takeDie(int die) {
-		if(roundTrackFields[roundCounter].getDieSavingSpot() != null) {
+		if(roundTrackFields[game.getRound].getDieSavingSpot() != null) {
 			//krijgt array terug
-			Die[] dieOnField = roundTrackFields[roundCounter].getDieSavingSpot();
+			Die[] dieOnField = roundTrackFields[game.getRound].getDieSavingSpot();
 			return dieOnField[die];
 		}
 	}

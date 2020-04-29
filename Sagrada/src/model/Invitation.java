@@ -5,6 +5,7 @@ public class Invitation {
 	private String message;
 	private Player sender;
 	private Player receiver;
+	private InvitationStatus invitationStatus; 
 	
 	
 	//Constructor that adds sender, receiver and message to the invitation 
@@ -27,6 +28,21 @@ public class Invitation {
 	//adds the message that should be sent with the invitation
 	private void addText(String text) {
 		message = text;
+	}
+	
+	
+	public Invitation getInvitation() {
+		return Invitation;
+	}
+	
+	//sets status to challenger
+	public void setChallenger() {
+		invitationStatus = Challenger;
+	}
+	
+	//sets status to challenged
+	public void setChallenged() {
+		inviatationStatus = Challenged;
 	}
 	
 }
