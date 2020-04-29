@@ -32,9 +32,9 @@ public class AccountDBA {
 		return false;
 	}
 	
-	public String GetAccountDB(String s) {
+	public String GetAccountDB(String user) {
 		String account = "";
-		String query = "SELECT * FROM account WHERE username = '"+s+"';";
+		String query = "SELECT * FROM account WHERE username = '"+user+"';";
 		
 		try {
 			Statement stmt = conn.createStatemant();
@@ -130,9 +130,9 @@ public class AccountDBA {
 		return list;
 	}
 	
-	public int getHighestScore(String username) {
+	public int getHighestScore(Account account) { 
 		int score = 0;
-		String query = "SELECT MAX(score) AS hoogste_score FROM player WHERE username = '"+username+"';";
+		String query = "SELECT MAX(score) AS hoogste_score FROM player WHERE username = '"+account.getUsername()+"';";
 		try {
 			Statement stmt = conn.createStatemant();
 			ResultSet rs = stmt.executeQuery(query);
@@ -146,9 +146,9 @@ public class AccountDBA {
 		return score;
 	}
 	
-	public String getMostUsedColor(String username) {
+	public String getMostUsedColor(Account account) { 
 		String color= "";
-		String query = "SELECT diecolor AS color, COUNT(diecolor) AS meest_gebruikte_kleur FROM playerframefield JOIN player ON player.idplayer = playerframefield.player_idplayer WHERE player.username= '"+username+"' GROUP BY diecolor ORDER BY meest_gebruikte_kleur DESC LIMIT 1;";
+		String query = "SELECT diecolor AS color, COUNT(diecolor) AS meest_gebruikte_kleur FROM playerframefield JOIN player ON player.idplayer = playerframefield.player_idplayer WHERE player.username= '"+account.getUsername()+"' GROUP BY diecolor ORDER BY meest_gebruikte_kleur DESC LIMIT 1;";
 		
 		try {
 			Statement stmt = conn.createStatemant();
@@ -163,9 +163,9 @@ public class AccountDBA {
 		return color;
 	}
 	
-	public int getMostUsedValue(String username) {
+	public int getMostUsedValue(Account account) {
 		int value = 0;
-		String query = "SELECT eyes, COUNT(eyes) AS aantal_keer_gebruikt FROM playerframefield JOIN player ON player.idplayer = playerframefield.player_idplayer JOIN gamedie ON gamedie.dienumber = playerframefield.dienumber WHERE player.username = '"+username+"' GROUP BY eyes ORDER BY aantal_keer_gebruikt DESC LIMIT 1";
+		String query = "SELECT eyes, COUNT(eyes) AS aantal_keer_gebruikt FROM playerframefield JOIN player ON player.idplayer = playerframefield.player_idplayer JOIN gamedie ON gamedie.dienumber = playerframefield.dienumber WHERE player.username = '"+account.getUsername()+"' GROUP BY eyes ORDER BY aantal_keer_gebruikt DESC LIMIT 1";
 		
 		try {
 			Statement stmt = conn.createStatemant();
@@ -180,9 +180,9 @@ public class AccountDBA {
 		return value;
 	}
 	
-	public int getValueOfDifferentPlayedAccounts(String username){
+	public int getValueOfDifferentPlayedAccounts(Account account){
 		int value = 0;
-		String query = "SELECT COUNT(DISTINCT username) AS count FROM player WHERE username != '"+username+"' AND game_idgame IN(SELECT game_idgame FROM player WHERE username = '"+username+"')";
+		String query = "SELECT COUNT(DISTINCT username) AS count FROM player WHERE username != '"+account.getUsername()+"' AND game_idgame IN(SELECT game_idgame FROM player WHERE username = '"+account+"')";
 		
 		try {
 			Statement stmt = conn.createStatemant();
@@ -197,7 +197,7 @@ public class AccountDBA {
 		return value;
 	}
 	
-	public int getWins(String username) {
+	public int getWins(Account account) {
 		ArrayList<Integer> games = new GameDBA(conn).getAllGamesId();
 		int wins = 0;
 		for(int i = 0; i <games.size();i++){
@@ -206,7 +206,7 @@ public class AccountDBA {
 				Statement stmt = conn.createStatemant();
 				ResultSet rs = stmt.executeQuery(query);
 				if (rs.next()) {
-	                if(rs.getString("username").equals(username)) {
+	                if(rs.getString("username").equals(account.getUsername())) {
 	                	wins++;
 	                }
 	            }
@@ -218,7 +218,7 @@ public class AccountDBA {
 		return wins;
 	}
 	
-	public int getLoses(String username){
+	public int getLoses(Account account){
 		ArrayList<Integer> games = new GameDBA(conn).getAllGamesId();
 		int loses = 0;
 		for(int i = 0; i <games.size();i++){
@@ -227,7 +227,7 @@ public class AccountDBA {
 				Statement stmt = conn.createStatemant();
 				ResultSet rs = stmt.executeQuery(query);
 				if (rs.next()) {
-	                if(rs.getString("username").equals(username)) {
+	                if(rs.getString("username").equals(account.getUsername())) {
 	                	loses++;
 	                }
 	            }
