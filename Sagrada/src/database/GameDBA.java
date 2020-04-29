@@ -8,6 +8,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import model.Game;
+
 public class GameDBA {
 	
 	private DataBaseConnection conn;
@@ -97,5 +99,40 @@ public class GameDBA {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public ArrayList<Integer> getAllGamesId(){
+		ArrayList<Integer> gameid = new ArrayList<Integer>();
+		String query = "SELEC idgame FROM game";
+		
+		try {
+			Statement stmt = conn.createStatemant();
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				gameid.add(rs.getInt("idgame"));
+            }
+			stmt.close();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return gameid;
+	}
+	
+	public int getCurrentRound(int gameid) {
+		int currentRound = 1;
+		String query = "SELECT DISTINCT(round) FROM gamedie WHERE idgame = "+gameid+" AND roundtrack IS NOT NULL ORDER BY round DESC LIMIT 1;"; 
+		try {
+			Statement stmt = conn.createStatemant();
+			ResultSet rs = stmt.executeQuery(query);
+			if (rs.next()) {
+                currentRound = rs.getInt("round") + 1;
+            }
+			stmt.close();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return currentRound;
 	}
 }

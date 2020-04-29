@@ -1,4 +1,8 @@
+package model;
+
 import java.util.List;
+
+import database.PatternCardDBA;
 
 public class PatternCard {
 
@@ -6,7 +10,8 @@ public class PatternCard {
 	private int difficulty; 
 	private PatternCardField[][] patterncard;
 	private PatternCardDBA patterncardDB;
-	private Color color
+	private Color color;
+	private int idpatterncard;
 	
 	//TODO remove
 	private PatternCardField temp = new PatternCardField();
@@ -77,4 +82,11 @@ public class PatternCard {
 	public int checkFieldValue(int xPos, int yPos) {
 		return patterncard[xPos][yPos].getValue();
 	}
+	public int getIdpatterncard() {
+		return idpatterncard;
+	}
+	public void setIdpatterncard(int idpatterncard) {
+		this.idpatterncard = idpatterncard;
+	}
+	
 }

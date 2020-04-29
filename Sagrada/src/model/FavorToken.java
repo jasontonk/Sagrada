@@ -16,7 +16,12 @@ public class FavorToken {
 		this.player = player;
 
 		this.game = player.getGame();
+		
 
+	}
+	
+	public FavorToken(int id) {
+		
 	}
 
 	// Return the id of FavorToken.

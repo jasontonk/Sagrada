@@ -24,6 +24,7 @@ public class PlayerDBA {
 		game = new GameDBA(c);
 	}
 	
+	
 	public boolean addPlayer(String username, int idgame, String playstatus, int seqnr, String playerColor, int idpattercard, int score ) {
 		int playerid = autoIdPlayer();
 		

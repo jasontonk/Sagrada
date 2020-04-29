@@ -17,7 +17,7 @@ public class Game {
 	private RoundTrack roundTrack;
 	private Chat chat;
 	private int round;
-
+	
 	public Game(Account account1, Account account2) {// boolean generated toevoegen ja of nee generated patterncards
 		players = new ArrayList<Player>();
 		toolcards = new ArrayList<Toolcard>();
