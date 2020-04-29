@@ -86,35 +86,35 @@ public class Game {
 	
 	public void gamesetup() {
 		for (players player : players) {
-			selecteer 2 patterncards met 4 patronen 
-			selecteer 1 pattern
+//			selecteer 2 patterncards met 4 patronen 
+//			selecteer 1 pattern
 			player.setpatterncard();
 			player.assignFavorTokens();
 			player.setcolor();
 		}
-		bepaal public objective
-			bepaal toolcards
+//		bepaal public objective
+//			bepaal toolcards
 	}
 	
 	public void playfirstround() { // met boolean first round treu 
 		int amountofdice = players.size()*2+1;
-		methode die dobbelstenen selecteert // hoe gaan we iedere keer amount of dice pakken en dan iedere keer andere dobbelstenen  ? en waar maken we ze aan en hoeveel 
+//		methode die dobbelstenen selecteert // hoe gaan we iedere keer amount of dice pakken en dan iedere keer andere dobbelstenen  ? en waar maken we ze aan en hoeveel 
 		for (int i = 0; i < players.size(); i++) {
 		
 		}
 		for (int j = players.size(); j < 0; j--) {
-			dobbelsteen kiezen,passen of toolcard gebruiken
-		 gekozen actie uitvoeren
-		 dobbelsteen kiezen,einde beurt of toolcard - de eerder gekozen optie 
-		 actie uitvoeren 
-		 volgende speler
+//			dobbelsteen kiezen,passen of toolcard gebruiken
+//		 gekozen actie uitvoeren
+//		 dobbelsteen kiezen,einde beurt of toolcard - de eerder gekozen optie 
+//		 actie uitvoeren 
+//		 volgende speler
 		}
 		
 		 
 		 
 		
-		 voeg overige dobbelstenen aan rondespoor toe
-		for each over de overige dobbelstenen 
+//		 voeg overige dobbelstenen aan rondespoor toe
+//		for each over de overige dobbelstenen 
 		RoundTrack.placedie(die-van-foreach,round);
 		 round++;
 		
@@ -126,13 +126,13 @@ public class Game {
 	
 	public void playround() {// boolean first round false
 		int amountofdice = players.size()*2+1;
-		methode die dobbelstenen selecteert 
-		 dobbelsteen kiezen,passen of toolcard gebruiken // if met speler in put en dan de methode die er aan vast zit passen is door naar volgende speler 
-		 gekozen actie uitvoeren
-		 
-		 dobbelsteen kiezen,einde beurt of toolcard - de eerder gekozen optie 
-		 actie uitvoeren 
-		 volgende speler
+//		methode die dobbelstenen selecteert 
+//		 dobbelsteen kiezen,passen of toolcard gebruiken // if met speler in put en dan de methode die er aan vast zit passen is door naar volgende speler 
+//		 gekozen actie uitvoeren
+//		 
+//		 dobbelsteen kiezen,einde beurt of toolcard - de eerder gekozen optie 
+//		 actie uitvoeren 
+//		 volgende speler
 		
 		 voeg overige dobbelstenen aan rondespoor toe
 		 round++;
