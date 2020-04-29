@@ -1,5 +1,3 @@
-package model;
-
 import java.util.List;
 
 public class PatternCard {
@@ -8,6 +6,7 @@ public class PatternCard {
 	private int difficulty; 
 	private PatternCardField[][] patterncard;
 	private PatternCardDBA patterncardDB;
+	private Color color
 	
 	//TODO remove
 	private PatternCardField temp = new PatternCardField();
@@ -24,15 +23,6 @@ public class PatternCard {
 	 * method generates a random patterncard with 4-6 colored fields and 4-8 numbered fields. 
 	 * To request random, give parameter true.
 	 */
-	
-	public int getDifficulty() {
-		return difficulty;
-	}
-	
-	public void setDifficulty(int difficulty) {
-		this.difficulty = difficulty;
-	}
-	
 	public void setpattern(boolean random) {
 		if(random) {
 			int amountOfColoredFields = (int) (Math.random() * 3) + 4; 								//generates a random number between 4 and 6 for the amount of colored fields
@@ -62,5 +52,11 @@ public class PatternCard {
 		else {
 			private patterncard[][] = patterncardDB.getPatternCard();
 		}
+	}
+	public Color checkFieldColor(int xPos, int yPos) {
+		return patterncard[xPos][yPos].getColor();
+	}
+	public int checkFieldValue(int xPos, int yPos) {
+		return patterncard[xPos][yPos].getValue();
 	}
 }
