@@ -13,10 +13,10 @@ public class RoundTrack {
 	/*
 	 * Places Die on the roundtrack, calls roundtrackfield method 
 	 */
-	public void placeDie(Die die) {
+	public void placeDie(Die die,int round) {
 		for (int i = 0; i < roundTrackFields.length; i++) {
-			if(roundTrackFields[i] == null) {
-				roundTrackFields[i].addDice(die);
+			if(roundTrackFields[round] == null) {
+				roundTrackFields[round].addDice(die);
  				return;
 			}
 		}
