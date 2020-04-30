@@ -1,17 +1,17 @@
 package model;
 
 public class Die {
-	
+
 	private Color color;
-	private int eyes;
+	private int number;
 	
 	
 	/**
      * constructor to initialize all instance variables
      */
-	public Die(Color color, int eyes) {
+	public Die(Color color, int number) {
 		this.color = color;
-		this.eyes = eyes;
+		this.number = number;
 	}
 	
 	/**
@@ -19,7 +19,7 @@ public class Die {
      */
 	public Die(Die die) {
 		this.color = die.getColor();
-		this.eyes = die.getEyes();
+		this.number = die.getNumber();
 	}
 	
 	/**
@@ -37,17 +37,17 @@ public class Die {
 	}
 
 	/**
-     * returns the amount of eyes
+     * returns the die number
      */
-	public int getEyes() {
-		return eyes;
+	public int getNumber() {
+		return number;
 	}
 
 	/**
-     * sets the amount of eyes
+     * sets the die number
      */
-	public void setEyes(int eyes) {
-		this.eyes = eyes;
+	public void setNumber(int number) {
+		this.number = number;
 	}	
 	
 }
