@@ -10,7 +10,7 @@ public class FavorToken {
 	private int gameId;
 	private Player player;
 	private Toolcard toolcard;
-	private FavorTokenDBA db;
+	private FavorTokenDBA favorTokenDB;
 
 	// Partial constructor, generate favor tokens of player.
 
@@ -22,7 +22,7 @@ public class FavorToken {
 
 		gameId = gameid;
 
-		db = new FavorTokenDBA(c);
+		favorTokenDB = new FavorTokenDBA(c);
 
 	}
 
@@ -42,7 +42,7 @@ public class FavorToken {
 	// Set the game of is FavorToken is located.
 
 	public void setGameId(int gameid) {
-		db.addFavorToken(gameid);
+		favorTokenDB.addFavorToken(gameid);
 	}
 
 	// Return the player of this FavorToken.
@@ -69,7 +69,7 @@ public class FavorToken {
 	// Set the Toolcard of which this FavorToken is used for.
 
 	public void setToolcard(int playerid, int toolcard, int round, int favortokenid) {
-		db.setFavortokensForToolCard(playerid, toolcard, round, favortokenid);
+		favorTokenDB.setFavortokensForToolCard(playerid, toolcard, round, favortokenid);
 
 	}
 }
