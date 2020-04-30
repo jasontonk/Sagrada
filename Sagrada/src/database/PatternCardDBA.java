@@ -16,6 +16,87 @@ public class PatternCardDBA {
 		this.conn = c;
 	}
 	
+	public PatternCard getPatterncard() {
+        PatternCard patternCard = null;
+        
+        String query = "SELECT * FROM patterncard WHERE idpatterncard= "+getRandomPattercardID()+";";
+        try {
+			Statement stmt = conn.createStatemant();
+			ResultSet rs = stmt.executeQuery(query);
+			if(rs.next()) {
+				patternCard = new PatternCard(rs.getString("name"), rs.getInt("difficulty"));
+				patternCard.setPatterncardID(rs.getInt("idpatterncard"));
+			}
+			stmt.close();
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+        return patternCard;
+    }
+
+	public void addPatterncard(PatternCard patternCard ) {
+		 String query = "INSERT INTO patterncard (idpattercard,difficulty,standard) VALUES("+autoIdPatternCard()+","+patternCard.getDifficulty()+",0);";
+		 
+		 try {
+				Statement stmt = conn.createStatemant();
+				stmt.executeUpdate(query);
+				stmt.close();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}	
+	}
+	
+	private int autoIdPatternCard() {
+		int patterncardid = 0;
+		
+		ArrayList<Integer> results = new ArrayList<Integer>();
+		
+		String query = "SELECT idpatterncard FROM patterncard;";
+		try {
+			Statement stmt = conn.createStatemant();
+			ResultSet rs = stmt.executeQuery(query);
+			while(rs.next()) {
+				int idgame = rs.getInt("idpatterncard");
+				results.add(idgame);
+			}
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		for(int i = 0; i < results.size();i++) {
+			if(patterncardid < results.get(i)) {
+				patterncardid = results.get(i);
+			}
+		}
+		patterncardid = patterncardid +1;
+		
+		return patterncardid;
+	}
+	
+	private int getRandomPattercardID() {
+		int id = 0;
+		int totaalid = 0;
+		String query = "SELECT idpatterncard FROM patterncard;";
+        try {
+			Statement stmt = conn.createStatemant();
+			ResultSet rs = stmt.executeQuery(query);
+			while(rs.next()) {
+				totaalid++;
+			}
+			stmt.close();
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+        
+        id =  (int)(Math.random() * totaalid + 1);
+        
+        return id;
+	}
+	
 	public PatternCard getSelectedPatterncardOfPlayer(int idplayer, Player player) {
         PatternCard patternCard = null;
         String query = "SELECT patterncard.* FROM patterncard INNER JOIN player p on patterncard.idpatterncard = p.patterncard_idpatterncard WHERE p.idplayer= "+idplayer+";";
@@ -24,15 +105,15 @@ public class PatternCardDBA {
 			ResultSet rs = stmt.executeQuery(query);
 			if(rs.next()) {
 				patternCard = new PatternCard(rs.getString("name"), rs.getInt("difficulty"));
-				patternCard.setidpatterncard = (rs.getInt("idpatterncard"));
-				patternCard.setstandard(rs.getBoolean("standard"));
-				patternCard.setPlayer = (player);
+				patternCard.setPatterncardID(rs.getInt("idpatterncard"));
+				patternCard.setPlayer(player);
 			}
 			stmt.close();
 			
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
+        return patternCard;
     }
 	
 	public ArrayList<PatternCard> getOptionalPatternCardsOfPlayer(int idplayer, Player player) {
@@ -43,9 +124,8 @@ public class PatternCardDBA {
 			ResultSet rs = stmt.executeQuery(query);
 			if(rs.next()) {
 				PatternCard patternCard = new PatternCard(rs.getString("name"), rs.getInt("difficulty"));
-				patternCard.setIdpatterncard = (rs.getInt("idpatterncard"));
-				patternCard.setstandard(rs.getBoolean("standard"));
-				patternCard.setPlayer = (player);
+				patternCard.setPatterncardID(rs.getInt("idpatterncard"));
+				patternCard.setPlayer(player);
 				list.add(patternCard);
 			}
 			stmt.close();
