@@ -8,10 +8,12 @@ public class PatternCard {
 
 	private String name;
 	private int difficulty; 
+	private int patterncardID;
 	private PatternCardField[][] patterncard;
 	private PatternCardDBA patterncardDB;
 	private Color color;
 	private int idpatterncard;
+	private Player player;
 	
 	//TODO remove
 	private PatternCardField temp = new PatternCardField();
@@ -71,6 +73,22 @@ public class PatternCard {
 					i--;
 				}
 			}
+			int amountOfSpecialFields = amountOfColoredFields + amountOfNumberedFields;
+			switch(amountOfSpecialFields) {
+			case 8:
+				difficulty = 3;
+				break;
+			case 9: case 10:
+				difficulty = 4;
+				break;
+			case 11: case 12:
+				difficulty = 5;
+				break;
+			case 13: case 14:
+				difficulty = 6;
+				break;
+			}
+			this();
 		}
 		else {
 			private patterncard[][] = patterncardDB.getPatternCard();
@@ -87,6 +105,21 @@ public class PatternCard {
 	}
 	public void setIdpatterncard(int idpatterncard) {
 		this.idpatterncard = idpatterncard;
+	}
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+	public Player getPlayer() {
+		return player;
+	}
+	public void setPatterncardID(int patterncardID) {
+		this.patterncardID = patterncardID;
+	}
+	public int getPatterncardID() {
+		return patterncardID;
+	}
+	public int getDifficulty() {
+		return Difficulty();
 	}
 	
 }
