@@ -20,7 +20,7 @@ public class PatternCardFieldDBA {
 		 public ArrayList<PatternCardField> getPatternCardFieldsOfPatterncard(PatternCard patternCard) {
 			 ArrayList<PatternCardField> list = new ArrayList<>();
 			 Color color = Color.BLUE;
-			 String query = "SELECT * FROM patterncardfield WHERE patterncard_idpatterncard= "+patternCard.getIdpatterncard()+" ORDER BY position_x, position_y";
+			 String query = "SELECT * FROM patterncardfield WHERE patterncard_idpatterncard= "+patternCard.getPatterncardID()+" ORDER BY position_x, position_y";
 			 try {
 					Statement stmt = conn.createStatemant();
 					ResultSet rs = stmt.executeQuery(query);
@@ -57,8 +57,40 @@ public class PatternCardFieldDBA {
 			 return list;
 		 }
 		 
-		 public void addPatternCardField(PatternCardField patterncardfield){
+		 public void addPatternCardField(ArrayList<PatternCardField> patterncardfield, PatternCard patterncard){
+			 String color;
 			 
-		 }
-		        
+			 for(int i = 0; i < patterncardfield.size(); i++) {
+				 
+				 switch(patterncardfield.get(i).getColor()) {
+					case BLUE:
+						color = "blue" ;
+						break;
+					case GREEN:
+						color = "green";
+						break;
+					case PURPLE:
+						color = "purple";
+						break;
+					case RED:
+						color = "red";
+						break;
+					case YELLOW:
+						color = "yellow";
+						break;
+					default:
+						color = null;
+					}
+				 String query = "INSERT INTO patterncardfield VALUES("+patterncard.getPatterncardID()+","+patterncardfield.get(i).getPositionX()+","+patterncardfield.get(i).getPositionY()+","+color+","+patterncardfield.get(i).getValue()+");";
+				 try {
+						Statement stmt = conn.createStatemant();
+						stmt.executeUpdate(query);
+						stmt.close();
+						
+					}catch(SQLException e) {
+						e.printStackTrace();
+						
+					}	
+			 }
+		 }      
 }

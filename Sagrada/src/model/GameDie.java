@@ -55,6 +55,4 @@ public class GameDie extends Die {
 	public void setEyes(int eyes) {
 		this.eyes = eyes;
 	}
-
-
 }

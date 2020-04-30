@@ -5,18 +5,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import model.Color;
+import model.Game;
+import model.PatternCard;
+import model.Player;
+
 public class PlayerDBA {
 
 	private DataBaseConnection conn;
-	private int idplayer;
-	private String username;
-	private int idGame;
-	private String playStatus;
-	private int seqnr;
-	private String cardColor;
-	private int idPatternCard;
-	private int score;
-	private String query; 
 	private GameDBA game;
 	
 	public PlayerDBA(DataBaseConnection c) {
@@ -25,21 +21,71 @@ public class PlayerDBA {
 	}
 	
 	
-	public boolean addPlayer(String username, int idgame, String playstatus, int seqnr, String playerColor, int idpattercard, int score ) {
+	public boolean addPlayer(Player player) {
 		int playerid = autoIdPlayer();
 		
-		query = "INSERT INTO player VALUES("+playerid+",'"+username+"',"+idgame+",'"+playstatus+"',"+seqnr+",'"+playerColor+"',"+idpattercard+","+score+");";
+		String query = "INSERT INTO player VALUES("+playerid+",'"+player.getName()+"',"+player.getGame().getGameID()+
+				",'"+player.getPlayerStatus()+"',"+player.getSequenceNumber()+",'"+getStringFromColor(player)+
+				"',"+player.getPatternCard().getPatterncardID()+","+player.getScore()+");";
 		
 		try {
 			Statement stmt = conn.createStatemant();
 			stmt.executeUpdate(query);
 			stmt.close();
-			game.addPlayerDB(playerid, idgame);
+			game.addPlayerDB(playerid, player.getGame().getGameID());
 			return true;
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;
 		}	
+	}
+	
+	private String getStringFromColor(Player player) {
+		String color;
+		switch(player.getColor()) {
+		case BLUE:
+			color = "blue" ;
+			break;
+		case GREEN:
+			color = "green";
+			break;
+		case PURPLE:
+			color = "purple";
+			break;
+		case RED:
+			color = "red";
+			break;
+		case YELLOW:
+			color = "yellow";
+			break;
+		default:
+			color = null;
+		}
+		return color;
+	}
+	
+	private Color getColorFromString(String c) {
+		Color color = Color.BLUE;
+		switch(c) {
+		case "blue":
+			color = Color.BLUE;
+			break;
+		case "green":
+			color = Color.GREEN;
+			break;
+		case "purple":
+			color = Color.PURPLE;
+			break;
+		case "red":
+			color = Color.RED;
+			break;
+		case "yellow":
+			color = Color.YELLOW;
+			break;
+		default:
+			color = null;
+		}
+		return color;
 	}
 	
 	private int autoIdPlayer() {
@@ -48,7 +94,7 @@ public class PlayerDBA {
 		
 		ArrayList<Integer> results = new ArrayList<Integer>();
 		
-		query = "SELECT idplayer FROM player;";
+		String query = "SELECT idplayer FROM player;";
 		try {
 			Statement stmt = conn.createStatemant();
 			ResultSet rs = stmt.executeQuery(query);
@@ -58,7 +104,6 @@ public class PlayerDBA {
 			}
 			stmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -72,90 +117,98 @@ public class PlayerDBA {
 		return playerid;
 	}
 	
-	public String playerInfo(int playerid) {
-		String result = "";
+	public void setPlayerStatus(Player player){
 		
-		query = "SELECT * FROM player WHERE idplayer = "+playerid+";";
-	
-		try {
-			Statement stmt = conn.createStatemant();
-			ResultSet rs = stmt.executeQuery(query);
-			while(rs.next()) {
-				idplayer = rs.getInt("idplayer");
-				this.username = rs.getString("username");
-				idGame = rs.getInt("idgame");
-				playStatus = rs.getString("playstatus");
-				seqnr = rs.getInt("seqnr");
-				cardColor = rs.getString("private_objectivecard_color");
-				idPatternCard = rs.getInt("idpatterncard");
-				score = rs.getInt("score");
-				
-				result= idplayer+", "+username+", "+idGame+", "+playStatus+", "+seqnr+", "+cardColor+", "+idPatternCard+", "+score;
-			}
-			stmt.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return result;
-	}
-	
-	private void updatePlayer() {
+		String query = "UPDATE player SET playstatus = '"+player.getPlayerStatus()+"' WHERE idplayer = "+player.getId()+";";
 		try {
 			Statement stmt = conn.createStatemant();
 			stmt.executeUpdate(query);
 			stmt.close();
 		
-	}catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public void setPlayStatus(int playerid, String playstatus){
+	public void setScore(Player player) {
+		String query = "UPDATE player SET score = "+player.getScore()+" WHERE idplayer = "+player.getId()+";";
+		try {
+			Statement stmt = conn.createStatemant();
+			stmt.executeUpdate(query);
+			stmt.close();
 		
-		query = "UPDATE player SET playstatus = '"+playstatus+"' WHERE idplayer = "+playerid+";";
-		updatePlayer();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public void setScore(int playerid, int score) {
-		query = "UPDATE player SET score = "+score+" WHERE idplayer = "+playerid+";";
-		updatePlayer();
-	}
+	public Player getPlayerUsingID(int idplayer) {
+		
+		Player player = new Player();
+        String query = "SELECT * FROM player WHERE idplayer="+idplayer+";";
+        try {
+        	Statement stmt = conn.createStatemant();
+			ResultSet rs = stmt.executeQuery(query);
+            if (rs.next()) {
+            	PatternCardDBA patternCard = new PatternCardDBA(conn);
+            	GameDBA game = new GameDBA(conn);
+            	AccountDBA account = new AccountDBA(conn);
+            	player.setAccount(account.GetAccountDB(rs.getString("username")));
+            	player.setName(rs.getString("username"));
+            	player.setId(idplayer);
+            	player.setPlayerStatus(rs.getString("playstatus"));
+            	player.setSequenceNumber(rs.getInt("seqnr"));
+            	player.setScore(rs.getInt("score"));
+            	player.setColor(getColorFromString(rs.getString("private_objectivecard_color")));
+            	player.setPatternCard(patternCard.getPatterncardByID(rs.getInt("idpatterncard")));
+            	player.setGame(game.getGameByID(rs.getInt("idgame")));
+            }
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return player;
+    }
 	
-	public String getUsername(int playerid) {
-		playerInfo(playerid);
-		return username;
+	public Player getPlayerUsingSeqnrAndGame(int seqnr, Game game) {
+			
+			Player player = new Player();
+	        String query = "SELECT * FROM player WHERE seqnr= "+seqnr+" AND idgame="+game.getGameID()+";";
+	        try {
+	        	Statement stmt = conn.createStatemant();
+				ResultSet rs = stmt.executeQuery(query);
+	            if (rs.next()) {
+	            	PatternCardDBA patternCard = new PatternCardDBA(conn);
+	            	AccountDBA account = new AccountDBA(conn);
+	            	GameDBA g = new GameDBA(conn);
+	            	player.setAccount(account.GetAccountDB(rs.getString("username")));
+	            	player.setName(rs.getString("username"));
+	            	player.setId(rs.getInt("idplayer"));
+	            	player.setPlayerStatus(rs.getString("playstatus"));
+	            	player.setSequenceNumber(rs.getInt("seqnr"));
+	            	player.setScore(rs.getInt("score"));
+	            	player.setColor(getColorFromString(rs.getString("private_objectivecard_color")));
+	            	player.setPatternCard(patternCard.getPatterncardByID(rs.getInt("idpatterncard")));
+	            	player.setGame(g.getGameByID(rs.getInt("idgame")));
+	            }
+	            stmt.close();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        return player;
+	    }
+
+public void setPlayerPatternCard(PatternCard patternCard,Player player){
+		
+		String query = "UPDATE player SET idpatterncard = "+patternCard.getPatterncardID()+" WHERE idplayer = "+player.getId()+";";
+		try {
+			Statement stmt = conn.createStatemant();
+			stmt.executeUpdate(query);
+			stmt.close();
+		
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public int getIdGame(int playerid) {
-		playerInfo(playerid);
-		return idGame;
-	}
-
-	public String getPlayStatus(int playerid) {
-		playerInfo(playerid);
-		return playStatus;
-	}
-
-	public int getSeqnr(int playerid) {
-		playerInfo(playerid);
-		return seqnr;
-	}
-
-	public String getCardColor(int playerid) {
-		playerInfo(playerid);
-		return cardColor;
-	}
-
-	public int getIdPatternCard(int playerid) {
-		playerInfo(playerid);
-		return idPatternCard;
-	}
-
-	public int getScore(int playerid) {
-		playerInfo(playerid);
-		return score;
-	}
 }

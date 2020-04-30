@@ -12,7 +12,6 @@ public class PatternCard {
 	private PatternCardField[][] patterncard;
 	private PatternCardDBA patterncardDB;
 	private Color color;
-	private int idpatterncard;
 	private Player player;
 	
 	//TODO remove
@@ -100,12 +99,7 @@ public class PatternCard {
 	public int checkFieldValue(int xPos, int yPos) {
 		return patterncard[xPos][yPos].getValue();
 	}
-	public int getIdpatterncard() {
-		return idpatterncard;
-	}
-	public void setIdpatterncard(int idpatterncard) {
-		this.idpatterncard = idpatterncard;
-	}
+	
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
@@ -119,7 +113,7 @@ public class PatternCard {
 		return patterncardID;
 	}
 	public int getDifficulty() {
-		return Difficulty();
+		return difficulty;
 	}
 	
 }

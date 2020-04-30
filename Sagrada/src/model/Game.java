@@ -17,6 +17,7 @@ public class Game {
 	private RoundTrack roundTrack;
 	private Chat chat;
 	private int round;
+	private int gameID;
 	
 	public Game(Account account1, Account account2) {// boolean generated toevoegen ja of nee generated patterncards
 		players = new ArrayList<Player>();
@@ -61,6 +62,10 @@ public class Game {
 
 		checkInvites();
 
+	}
+	
+	public Game(int id) {
+		gameID = id;
 	}
 
 	public void checkInvites() {
@@ -154,4 +159,21 @@ public class Game {
 		this.players = players;
 	}
 
+	public int getGameID() {
+		return gameID;
+	}
+
+	public void setGameID(int gameID) {
+		this.gameID = gameID;
+	}
+
+	public int getRound() {
+		return round;
+	}
+
+	public void setRound(int round) {
+		this.round = round;
+	}
+	
+	
 }

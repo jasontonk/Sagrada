@@ -19,6 +19,25 @@ public class GameDBA {
 		this.conn = c;
 	}
 	
+	public Game getGameByID(int id) {
+		Game game = null;
+        
+        String query = "SELECT * FROM game WHERE idgame= "+id+";";
+        try {
+			Statement stmt = conn.createStatemant();
+			ResultSet rs = stmt.executeQuery(query);
+			if(rs.next()) {
+				game = new Game(rs.getInt("idgame"));
+				game.setRound(getCurrentRound(id));
+			}
+			stmt.close();
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+        return game;
+    }
+	
 	public boolean addNewGameDB(LocalDateTime datetime) {
 		
 		String query = "INSERT INTO game VALUES("+autoIdGame()+",null,'"+datetime+"');";

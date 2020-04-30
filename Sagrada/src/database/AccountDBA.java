@@ -32,17 +32,15 @@ public class AccountDBA {
 		return false;
 	}
 	
-	public String GetAccountDB(String user) {
-		String account = "";
-		String query = "SELECT * FROM account WHERE username = '"+user+"';";
+	public Account GetAccountDB(String username) {
+		Account account = null;
+		String query = "SELECT * FROM account WHERE username = '"+username+"';";
 		
 		try {
 			Statement stmt = conn.createStatemant();
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next()) {
-				String username = rs.getString("username");
-				String password = rs.getString("password");
-				account = username + ","+ password;
+				account = new Account(rs.getString("username"),rs.getString("password"));
 			}
 			stmt.close();
 			

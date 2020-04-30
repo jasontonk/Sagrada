@@ -138,7 +138,7 @@ public class PatternCardDBA {
 	
 	 public void saveOptionalPatternCardsOfPlayer(ArrayList<PatternCard> optionalPatterncards, int idplayer) {
 		 for (PatternCard patternCard : optionalPatterncards) {
-			 String query = "INSERT INTO patterncardoption VALUES("+patternCard.getIdpatterncard()+","+idplayer+");";
+			 String query = "INSERT INTO patterncardoption VALUES("+patternCard.getPatterncardID()+","+idplayer+");";
 				
 				try {
 					Statement stmt = conn.createStatemant();
@@ -149,5 +149,24 @@ public class PatternCardDBA {
 				}	
 		 }
 	 }
+	 
+	 public PatternCard getPatterncardByID(int id) {
+	        PatternCard patternCard = null;
+	        
+	        String query = "SELECT * FROM patterncard WHERE idpatterncard= "+id+";";
+	        try {
+				Statement stmt = conn.createStatemant();
+				ResultSet rs = stmt.executeQuery(query);
+				if(rs.next()) {
+					patternCard = new PatternCard(rs.getString("name"), rs.getInt("difficulty"));
+					patternCard.setPatterncardID(rs.getInt("idpatterncard"));
+				}
+				stmt.close();
+				
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
+	        return patternCard;
+	    }
 }
 

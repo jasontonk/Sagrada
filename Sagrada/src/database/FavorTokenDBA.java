@@ -70,18 +70,16 @@ private DataBaseConnection conn;
 		}	
 	}
 	
-	public boolean setFavortokenForPlayer(int favortokenid, int playerid) {
+	public void setFavortokenForPlayer(int favortokenid, int playerid) {
 		String query = "UPDATE gamefavortoken SET idplayer= "+playerid+" WHERE idfavortoken= "+favortokenid+";";
 
 			try {
 					Statement stmt = conn.createStatemant();
 					stmt.executeUpdate(query);
 					stmt.close();
-					return true;
 				
 			}catch (SQLException e) {
 				e.printStackTrace();
-				return false;
 			}
 	}
 	
@@ -103,17 +101,14 @@ private DataBaseConnection conn;
 		return list;
 	}
 	
-	public boolean setFavortokensForToolCard(int playerid, int gametoolcard, int round, int idfavortoken) {
+	public void setFavortokensForToolCard(int playerid, int gametoolcard, int round, int idfavortoken) {
 		String query = "UPDATE gamefavortoken SET idplayer= "+playerid+", gametoolcard= "+gametoolcard+", round= "+round+" WHERE idfavortoken="+idfavortoken+";";
 		try {
 			Statement stmt = conn.createStatemant();
 			stmt.executeUpdate(query);
 			stmt.close();
-			return true;
-		
 		}catch (SQLException e) {
 		e.printStackTrace();
-		return false;
 		}
 	}
 }
