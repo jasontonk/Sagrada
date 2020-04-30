@@ -2,20 +2,18 @@ package model;
 
 public class GameDie extends Die {
 
-	private int dieNumber;
-	private int gameRound;
+	private int eyes;
 	private boolean isAvailable;
 	private boolean isFirstTurn;
 	private boolean isOnRoundTrack;
 	private BoardField boardField;
 	
-	public GameDie(Color color, int eyes, int dieNumber, int gameRound) {
-		super(color, eyes);
-		this.dieNumber = dieNumber;
+	public GameDie(Color color, int number, int eyes) {
+		super(color, number);
+		this.setEyes(eyes);
 		isAvailable = false;
 		isFirstTurn = false;
 		isOnRoundTrack = false;
-		this.gameRound = gameRound;
 	}
 	
 	public void setBoardField(BoardField boardField) {
@@ -25,18 +23,6 @@ public class GameDie extends Die {
 	public BoardField getBoardField() {
         return boardField;
     }
-
-	public int getDieNumber() {
-		return dieNumber;
-	}
-
-	public void setDieNumber(int dieNumber) {
-		this.dieNumber = dieNumber;
-	}
-
-	public void setGameRound(int gameRound) {
-		this.gameRound = gameRound;
-	}
 
 	public boolean isAvailable() {
 		return isAvailable;
@@ -60,6 +46,14 @@ public class GameDie extends Die {
 
 	public void setOnRoundTrack(boolean isOnRoundTrack) {
 		this.isOnRoundTrack = isOnRoundTrack;
+	}
+
+	public int getEyes() {
+		return eyes;
+	}
+
+	public void setEyes(int eyes) {
+		this.eyes = eyes;
 	}
 
 
