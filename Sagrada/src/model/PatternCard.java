@@ -11,19 +11,26 @@ public class PatternCard {
 	private int patterncardID;
 	private PatternCardField[][] patterncard;
 	private PatternCardDBA patterncardDB;
+	private PatternCardDBA patterncardfieldDB
 	private Color color;
 	private Player player;
+	private DataBaseConnection conn;
 	
-	//TODO remove
-	private PatternCardField temp = new PatternCardField();
 	
-	public PatternCard(String name, int difficulty) {
+	public PatternCard(String name, int difficulty, DataBaseConnection conn) {
 		this.name = name;
 		this.difficulty = difficulty;
+		this.conn = conn;
 		patterncard = new PatternCardField[5][4]();
+		for(int i = 0; i < 5; i++) {
+			for(int c = 0; c < 4; c++) {
+				patterncard[i][c].setPositionX(i);
+				patterncard[i][c].setPositionY(c);
+			}
+		}
 		patterncardDB = new PatternCardDBA();
+		
 	}
-	//TODO figure out how to get patterncard from database with matheus
 	/*
 	 * Sets up patterncard. If random patterncard is requested, 
 	 * method generates a random patterncard with 4-6 colored fields and 4-8 numbered fields. 
@@ -87,10 +94,22 @@ public class PatternCard {
 				difficulty = 6;
 				break;
 			}
-			this();
+			patterncardDB.addPatterncard(this);
+			ArrayList<PatternCardField> patterncardfields = new Arraylist<>();
+			for(int i = 0; i < 5; i++) {
+				for(int c = 0; c < 4; c++) {
+					patterncardfields.add(patterncard[i][c]);
+				}
+			}
+			patterncardfieldDB.addPatternCardField(patterncardfields, this);
 		}
 		else {
-			private patterncard[][] = patterncardDB.getPatternCard();
+			PatternCard temp = patterncardDB.getPatterncard();
+			setPatterncardID(temp.getPatterncardID());
+			setName(temp.getName());
+			setDifficulty(temp.getDifficulty());
+			ArrayList<PatternCardField> list = patterncardfieldDB.getPatternCardFieldsOfPatterncard(this);
+			//TODO how to create a 2d patterncard from ArrayList?
 		}
 	}
 	public Color checkFieldColor(int xPos, int yPos) {
@@ -112,8 +131,17 @@ public class PatternCard {
 	public int getPatterncardID() {
 		return patterncardID;
 	}
+	public int setDifficulty(int difficulty) {
+		this.difficulty = difficulty;
+	}
 	public int getDifficulty() {
 		return difficulty;
+	}
+	public int setName(String name) {
+		this.name = name;
+	}
+	public String getName() {
+		return name;
 	}
 	
 }
