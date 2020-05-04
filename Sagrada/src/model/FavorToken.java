@@ -29,7 +29,7 @@ public class FavorToken {
 	// Return the id of FavorToken.
 
 	public int getId() {
-		return 1;
+		return id;
 	}
 
 	// Return the game of player.

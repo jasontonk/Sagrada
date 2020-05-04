@@ -110,7 +110,9 @@ public class PatternCard {
 			setName(temp.getName());
 			setDifficulty(temp.getDifficulty());
 			ArrayList<PatternCardField> list = patterncardfieldDB.getPatternCardFieldsOfPatterncard(this);
-			//TODO how to create a 2d patterncard from ArrayList?
+			for(PatternCardField p:list) {
+				patterncard[p.getPositionX()][p.getPositionY()] = p;
+			}
 		}
 	}
 	public Color checkFieldColor(int xPos, int yPos) {
