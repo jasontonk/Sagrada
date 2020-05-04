@@ -161,7 +161,7 @@ public class Game {
 		for (int i = 72; i < 90; i++) {
 			diesInBag.add(new GameDie(RED,i,random.nextInt(7)));
 		}
-		
+		//push
 	}
 	
 	public Player announcewinner() {
