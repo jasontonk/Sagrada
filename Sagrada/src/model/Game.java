@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Game {
 // add players
@@ -144,6 +145,22 @@ public class Game {
 	}
 
 	public void makedice() {
+		Random r = new Random();
+		for (int i = 0; i < 18; i++) {
+			diesInBag.add(new GameDie(GREEN,i,random.nextInt(7)));
+		}
+		for (int i = 18; i < 36; i++) {
+			diesInBag.add(new GameDie(BLUE,i,random.nextInt(7)));
+		}
+		for (int i = 36; i < 54; i++) {
+			diesInBag.add(new GameDie(YELLOW,i,random.nextInt(7)));
+		}
+		for (int i = 54; i < 72; i++) {
+			diesInBag.add(new GameDie(PURPLE,i,random.nextInt(7)));
+		}
+		for (int i = 72; i < 90; i++) {
+			diesInBag.add(new GameDie(RED,i,random.nextInt(7)));
+		}
 		
 	}
 	
