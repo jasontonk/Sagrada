@@ -24,7 +24,7 @@ public class PatternCardDBA {
 			Statement stmt = conn.createStatemant();
 			ResultSet rs = stmt.executeQuery(query);
 			if(rs.next()) {
-				patternCard = new PatternCard(rs.getString("name"), rs.getInt("difficulty"));
+				patternCard = new PatternCard(rs.getString("name"), rs.getInt("difficulty"),conn);
 				patternCard.setPatterncardID(rs.getInt("idpatterncard"));
 			}
 			stmt.close();
@@ -104,7 +104,7 @@ public class PatternCardDBA {
 			Statement stmt = conn.createStatemant();
 			ResultSet rs = stmt.executeQuery(query);
 			if(rs.next()) {
-				patternCard = new PatternCard(rs.getString("name"), rs.getInt("difficulty"));
+				patternCard = new PatternCard(rs.getString("name"), rs.getInt("difficulty"),conn);
 				patternCard.setPatterncardID(rs.getInt("idpatterncard"));
 				patternCard.setPlayer(player);
 			}
@@ -123,7 +123,7 @@ public class PatternCardDBA {
 			Statement stmt = conn.createStatemant();
 			ResultSet rs = stmt.executeQuery(query);
 			if(rs.next()) {
-				PatternCard patternCard = new PatternCard(rs.getString("name"), rs.getInt("difficulty"));
+				PatternCard patternCard = new PatternCard(rs.getString("name"), rs.getInt("difficulty"),conn);
 				patternCard.setPatterncardID(rs.getInt("idpatterncard"));
 				patternCard.setPlayer(player);
 				list.add(patternCard);
@@ -158,7 +158,7 @@ public class PatternCardDBA {
 				Statement stmt = conn.createStatemant();
 				ResultSet rs = stmt.executeQuery(query);
 				if(rs.next()) {
-					patternCard = new PatternCard(rs.getString("name"), rs.getInt("difficulty"));
+					patternCard = new PatternCard(rs.getString("name"), rs.getInt("difficulty"),conn);
 					patternCard.setPatterncardID(rs.getInt("idpatterncard"));
 				}
 				stmt.close();

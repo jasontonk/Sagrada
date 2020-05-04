@@ -2,6 +2,7 @@ package model;
 
 import java.util.List;
 
+import database.DataBaseConnection;
 import database.PatternCardDBA;
 
 public class PatternCard {
@@ -11,7 +12,7 @@ public class PatternCard {
 	private int patterncardID;
 	private PatternCardField[][] patterncard;
 	private PatternCardDBA patterncardDB;
-	private PatternCardDBA patterncardfieldDB
+	private PatternCardDBA patterncardfieldDB;
 	private Color color;
 	private Player player;
 	private DataBaseConnection conn;
