@@ -1,22 +1,24 @@
 package model;
 
+import database.DataBaseConnection;
 import database.ToolCardDBA;
 
 public class Toolcard {
 
 	private String name;
 	private int id;
-	private int seqnr;
 	private String description;
 	private int amountOfCoins;
 	private ToolCardDBA toolcardDB;
+	private DataBaseConnection conn;
 	
-	public Toolcard(String name, String description,int id) {
+	public Toolcard(String name, String description,int id, DataBaseConnection conn) {
 		this.name = name;
 		this.id = id;
 		this.description = description;
 		amountOfCoins = 0;
-		toolcardDB = new ToolCardDBA();
+		this.conn=conn;
+		toolcardDB = new ToolCardDBA(conn);
 	}
 	
 	public void addFavorToken(int amount) {
@@ -40,14 +42,6 @@ public class Toolcard {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getSeqnr() {
-		return seqnr;
-	}
-
-	public void setSeqnr(int seqnr) {
-		this.seqnr = seqnr;
 	}
 
 	public String getDescription() {

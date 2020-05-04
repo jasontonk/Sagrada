@@ -63,16 +63,13 @@ public class PublicObjectiveCardDBA {
 	}
 	
 	public PublicObjectiveCard getPublicObjectiveCard(int id) {
-		PublicObjectiveCard publicObjectiveCard = new PublicObjectiveCard();
+		PublicObjectiveCard publicObjectiveCard = null;
 	       String query = "SELECT * FROM public_objectivecard WHERE idpublic_objectivecard="+id+";";
 	        try {
 	        	Statement stmt = conn.createStatemant();
 				ResultSet rs = stmt.executeQuery(query);
 				if(rs.next()) {
-					publicObjectiveCard.setId(id);
-					publicObjectiveCard.setName(rs.getString("name"));
-					publicObjectiveCard.setDescription(rs.getString("description"));
-					publicObjectiveCard.setPoints(rs.getInt("points"));
+					publicObjectiveCard = new PublicObjectiveCard(rs.getString("name"),rs.getString("description"),rs.getInt("points"),id);
 				}
 				stmt.close();
 	        } catch (SQLException e) {

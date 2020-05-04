@@ -14,10 +14,6 @@ public class PublicObjectiveCard {
 		this.id = id;
 	}
 	
-	public PublicObjectiveCard() {
-	
-	}
-	
 	public String getName() {
 		return name;
 	}

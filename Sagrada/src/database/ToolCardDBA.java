@@ -4,8 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
-import model.PublicObjectiveCard;
+import model.Game;
 import model.Toolcard;
 
 public class ToolCardDBA {
@@ -16,7 +15,7 @@ public class ToolCardDBA {
 		this.conn = c;
 	}
 	
-	public ArrayList<Toolcard> get3Toolcards() {
+	public ArrayList<Toolcard> get3ToolcardsForAGame() {
 				
 		int id1 =  (int)(Math.random() * 12 + 1);
 		int id2 = (int)(Math.random() * 12 + 1);
@@ -34,7 +33,7 @@ public class ToolCardDBA {
 	        Statement stmt = conn.createStatemant();
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next()) {
-				Toolcard toolcard = new Toolcard(rs.getString("name"),rs.getString("description"),rs.getInt("points"),rs.getInt("idpublic_objectivecard"));
+				Toolcard toolcard = new Toolcard(rs.getString("name"), rs.getString("description"),rs.getInt("idtoolcard"),conn);
 				list.add(toolcard);
 			}
 			stmt.close();
@@ -43,4 +42,66 @@ public class ToolCardDBA {
 	        }
 	        return list;
 	    }
+	
+	public ArrayList<Toolcard> getToolcardsFromGame(Game game) {
+		   
+		ArrayList<Toolcard> list = new ArrayList<Toolcard>();
+	    String query = "SELECT toolcard.* FROM toolcard INNER JOIN gametoolcard g on toolcard.idtoolcard = g.idtoolcard WHERE g.idgame= "+game.getGameID()+";";
+	    try {
+	        Statement stmt = conn.createStatemant();
+			ResultSet rs = stmt.executeQuery(query);
+			while(rs.next()) {
+				Toolcard toolcard = new Toolcard(rs.getString("name"), rs.getString("description"),rs.getInt("idtoolcard"),conn);
+				list.add(toolcard);
+			}
+			stmt.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        return list;
+	    }
+	
+	public Toolcard getToolCard(int id) {
+		Toolcard toolcard = null;
+	       String query = "SELECT * FROM public_objectivecard WHERE idpublic_objectivecard="+id+";";
+	        try {
+	        	Statement stmt = conn.createStatemant();
+				ResultSet rs = stmt.executeQuery(query);
+				if(rs.next()) {
+					toolcard = new Toolcard(rs.getString("name"),rs.getString("description"),rs.getInt("idtoolvard"),conn);
+				}
+				stmt.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        return toolcard;
+	    }
+	
+	public void addToolCardToGame(Game game,Toolcard toolcard) {
+			
+			String query = "INSERT INTO gametoolcard VALUES("+autoToolcardId()+","+toolcard.getId()+","+game.getGameID()+");";
+			try {
+				Statement stmt = conn.createStatemant();
+				stmt.executeUpdate(query);
+				stmt.close();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}	
+		}
+	
+	private int autoToolcardId() {
+        int id = 0;
+        String query = "SELECT MAX(gametoolcard) AS highestGameToolcardId FROM gametoolcard";
+        try {
+        	Statement stmt = conn.createStatemant();
+			ResultSet rs = stmt.executeQuery(query);
+            if (rs.next()) {
+                id = rs.getInt("highestGameToolcardId") + 1;
+            }
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
 }
