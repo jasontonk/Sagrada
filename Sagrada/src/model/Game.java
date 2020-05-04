@@ -97,6 +97,7 @@ public class Game {
 			player.setpatterncard();
 			player.assignFavorTokens();
 			player.setcolor();
+			makedie()
 		}
 //		bepaal public objective
 //			bepaal toolcards
@@ -144,7 +145,7 @@ public class Game {
 		 round++;
 	}
 
-	public void makedice() {
+	public void makedie() {
 		Random r = new Random();
 		for (int i = 0; i < 18; i++) {
 			diesInBag.add(new GameDie(GREEN,i,random.nextInt(7)));
@@ -161,7 +162,6 @@ public class Game {
 		for (int i = 72; i < 90; i++) {
 			diesInBag.add(new GameDie(RED,i,random.nextInt(7)));
 		}
-		//push
 	}
 	
 	public Player announcewinner() {
