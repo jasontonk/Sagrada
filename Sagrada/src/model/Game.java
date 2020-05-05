@@ -6,11 +6,6 @@ import java.util.Random;
 import database.DataBaseConnection;
 
 public class Game {
-// add players
-// add roundtrack
-	// add toolcard
-	// add public objective
-//add gamedie	//add chat ?
 	private ArrayList<Player> players;
 	private ArrayList<Account> accounts;
 	private Board board;
