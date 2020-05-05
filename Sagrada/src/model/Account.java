@@ -12,7 +12,7 @@ public class Account {
 	private String username;
 	private String password;
 	private ArrayList<Player> players;
-	private ArrayList<Invitation> invitations;
+	private ArrayList<Invitation> invitations; 
 	private DataBaseConnection connection;
 	
 	/**
