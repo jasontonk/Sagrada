@@ -39,8 +39,10 @@ public class Game {
 
 		accounts.add(account1);
 		accounts.add(account2);
+		players.add(account1);
+		players.add(account2);
 		
-		gamePatterncards = generatePatterncards(randomgeneratedpatterncards);
+		gamePatterncards = generategamePatterncards(randomgeneratedpatterncards);
 
 //		checkInvites();
 
@@ -59,8 +61,12 @@ public class Game {
 		accounts.add(account1);
 		accounts.add(account2);
 		accounts.add(account3);
+		players.add(account1);
+		players.add(account2);
+		players.add(account3);
+		
 
-		gamePatterncards = generatePatterncards(randomgeneratedpatterncards);
+		gamePatterncards = generategamePatterncards(randomgeneratedpatterncards);
 		
 //		checkInvites();
 
@@ -80,8 +86,13 @@ public class Game {
 		accounts.add(account2);
 		accounts.add(account3);
 		accounts.add(account4);
+		players.add(account1);
+		players.add(account2);
+		players.add(account3);
+		players.add(account4);
 
-		gamePatterncards = generatePatterncards(randomgeneratedpatterncards);
+		
+		gamePatterncards = generategamePatterncards(randomgeneratedpatterncards);
 		
 //		checkInvites();
 
@@ -113,20 +124,17 @@ public class Game {
 	}
 
 	public void gamesetup() {
-//	foreach loop {
-
-//			selecteer 2 patterncards met 4 patronen 
-//			selecteer 1 pattern
-//			player.setpatterncard();
-//			player.assignFavorTokens();
-//			player.setcolor();
-//		}
 		makedie();
 		for (Player player : players) {
 			setPlayerPatternCards(player);
+			player.assignFavorTokens();
+			player.setColor(Color.GREEN);//todo color mee geven voor speler
 		}
-//		bepaal public objective
+		for (int i = 0; i < 3; i++) {
+//			bepaal public objective
 //		bepaal toolcards
+		}
+	
 	}
 
 	public void playfirstround() { // met boolean first round treu
