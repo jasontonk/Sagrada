@@ -86,7 +86,7 @@ public class AccountDBA {
 			}catch (SQLException e) {
 				e.printStackTrace();
 				return "ging wat fout";
-			}
+			} 
 	}
 	
 	public boolean accountExists(String username) {
