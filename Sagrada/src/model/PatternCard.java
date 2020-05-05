@@ -1,35 +1,37 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import database.DataBaseConnection;
 import database.PatternCardDBA;
+import database.PatternCardFieldDBA;
 
 public class PatternCard {
 
 	private String name;
 	private int difficulty; 
 	private int patterncardID;
-	private PatternCardField[][] patterncard;
+	private PatternCardField[][] patterncard = new PatternCardField[5][4];
 	private PatternCardDBA patterncardDB;
-	private PatternCardDBA patterncardfieldDB;
+	private PatternCardFieldDBA patterncardfieldDB;
 	private Color color;
 	private Player player;
 	private DataBaseConnection conn;
+	
 	
 	
 	public PatternCard(String name, int difficulty, DataBaseConnection conn) {
 		this.name = name;
 		this.difficulty = difficulty;
 		this.conn = conn;
-		patterncard = new PatternCardField[5][4]();
 		for(int i = 0; i < 5; i++) {
 			for(int c = 0; c < 4; c++) {
 				patterncard[i][c].setPositionX(i);
 				patterncard[i][c].setPositionY(c);
 			}
 		}
-		patterncardDB = new PatternCardDBA();
+		patterncardDB = new PatternCardDBA(conn);
 		
 	}
 	/*
@@ -43,26 +45,27 @@ public class PatternCard {
 			for(int i = 0; i < amountOfColoredFields; i++) {
 				int coloredFieldLocationx = (int)(Math.random() * 5) + 1; 							//generates a random number between 1 and 5 for the x location of a colored field
 				int coloredFieldLocationy = (int)(Math.random() * 4) + 1; 							//generates a random number between 1 and 4 for the y location of a colored field
-				if(patterncard[x][y].getColor() == null && patterncard[x][y].getValue() == null) { 	//check to see if field already has a color or value
-					int randomColorNumber = (int)(Math.random() * 5) + 1; 							//generates a rondom number for the switch to get random color
-					switch(randomColorNumber) {														//sets random color to color based on random number
-						case 1: 
-							color = RED;
-							break;
-						case 2: 
-							color = GREEN;
-							break;
-						case 3: 
-							color = YELLOW;
-							break;
-						case 4: 
-							color = PURPLE;
-							break;
-						case 5: 
-							color = BLUE;
-							break;
+				if(patterncard[coloredFieldLocationx][coloredFieldLocationy].getColor() == null 
+						&& patterncard[coloredFieldLocationx][coloredFieldLocationy].getValue() == 0) { 	//check to see if field already has a color or value
+							int randomColorNumber = (int)(Math.random() * 5) + 1; 							//generates a rondom number for the switch to get random color
+							switch(randomColorNumber) {														//sets random color to color based on random number
+								case 1: 
+									color = Color.RED;
+									break;
+								case 2: 
+									color = Color.GREEN;
+									break;
+								case 3: 
+									color = Color.YELLOW;
+									break;
+								case 4: 
+									color = Color.PURPLE;
+									break;
+								case 5: 
+									color = Color.BLUE;
+									break;
 					}
-					patterncard[x][y].setColor(color);
+					patterncard[coloredFieldLocationx][coloredFieldLocationy].setColor(color);
 				}
 				else {
 					i--;
@@ -73,8 +76,9 @@ public class PatternCard {
 				int numberedFieldLocationx = (int)(Math.random() * 5) + 1; 							//generates a random number between 1 and 5 for the x location of a numbered field
 				int numberedFieldLocationy = (int)(Math.random() * 4) + 1; 							//generates a random number between 1 and 4 for the y location of a numbered field
 				int randomValue = (int)(Math.random() * 6) + 1; 									//generates an random number to give to field
-				if(patterncard[x][y].getColor() == null && patterncard[x][y].getValue() == null) { 	//check to see if field already has a color or value
-					patterncard[x][y].setValue(randomValue);
+				if(patterncard[numberedFieldLocationx][numberedFieldLocationy].getColor() == null 
+						&& patterncard[numberedFieldLocationx][numberedFieldLocationy].getValue() == 0) { 	//check to see if field already has a color or value
+							patterncard[numberedFieldLocationx][numberedFieldLocationy].setValue(randomValue);
 				}
 				else {
 					i--;
@@ -96,7 +100,7 @@ public class PatternCard {
 				break;
 			}
 			patterncardDB.addPatterncard(this);
-			ArrayList<PatternCardField> patterncardfields = new Arraylist<>();
+			ArrayList<PatternCardField> patterncardfields = new ArrayList<>();
 			for(int i = 0; i < 5; i++) {
 				for(int c = 0; c < 4; c++) {
 					patterncardfields.add(patterncard[i][c]);
@@ -134,13 +138,13 @@ public class PatternCard {
 	public int getPatterncardID() {
 		return patterncardID;
 	}
-	public int setDifficulty(int difficulty) {
+	public void setDifficulty(int difficulty) {
 		this.difficulty = difficulty;
 	}
 	public int getDifficulty() {
 		return difficulty;
 	}
-	public int setName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 	public String getName() {

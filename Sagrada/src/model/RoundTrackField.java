@@ -12,17 +12,18 @@ public class RoundTrackField {
 	public void addDice(Die die) { // adds die to the dieSavingSpot array on the first possible place
 		for (int i = 0; i < dieSavingSpot.length; i++) {
 			if (dieSavingSpot[i] == null) {
-				dieSavingSpot[i] = i;
+				dieSavingSpot[i] = die;//changed i to die
 				break;
 			}
 		}
 	}
 
 	public Die takeDie(int die) { // select number of die in array returns die that was selected if die not null and removes it from the array
-		Die returndie;
-		if (die != null) {
-			returndie = dieSavingSpot[die];
-
+		if (die != 0) {
+			return dieSavingSpot[die];//changed returntype to die
+		}
+		return null;//changed to return null if needed
+	}
 	public Die[] getDieSavingSpot() {
 		return dieSavingSpot;
 	}

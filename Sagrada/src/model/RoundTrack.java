@@ -3,11 +3,12 @@ package model;
 public class RoundTrack {
 	
 	private RoundTrackField[] roundTrackFields;
-	private int roundCounter = 1;
+	private Game game; //deleted roundcounter and added game to fix error
 	
 	//constructor
-	public RoundTrack() {
+	public RoundTrack(Game game) {
 		roundTrackFields = new RoundTrackField[10];
+		this.game = game;
 	}
 	
 	/*
@@ -28,11 +29,12 @@ public class RoundTrack {
 	 * TODO change to the right method for getRound
 	 */
 	public Die takeDie(int die) {
-		if(roundTrackFields[game.getRound].getDieSavingSpot() != null) {
+		if(roundTrackFields[game.getRound()].getDieSavingSpot() != null) {//changed to getRounc() to fix error
 			//krijgt array terug
-			Die[] dieOnField = roundTrackFields[game.getRound].getDieSavingSpot();
+			Die[] dieOnField = roundTrackFields[game.getRound()].getDieSavingSpot();
 			return dieOnField[die];
 		}
+		return null;//returns null if nothing can be returned
 	}
 	
 	

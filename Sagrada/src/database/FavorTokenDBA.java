@@ -6,7 +6,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import model.FavorToken;
-import model.Game;
 import model.Player;
 
 public class FavorTokenDBA {
@@ -25,7 +24,7 @@ private DataBaseConnection conn;
 			Statement stmt = conn.createStatemant();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
-                FavorToken favorToken = new FavorToken(rs.getInt("idfavortoken"), player);
+                FavorToken favorToken = new FavorToken(rs.getInt("idfavortoken"), player, rs.getInt("idgame"), conn); //edited to fix error
                 list.add(favorToken);
             }
 			stmt.close();
@@ -83,15 +82,15 @@ private DataBaseConnection conn;
 			}
 	}
 	
-	public ArrayList<FavorToken> getUnusedFavorTokensOfGame(int gameid, Game game){
+	public ArrayList<FavorToken> getUnusedFavorTokensOfGame(int gameid){//removed game to fix error
 		ArrayList<FavorToken> list = new ArrayList<>();
 		String query = "SELECT * FROM gamefavortoken WHERE idgame= "+gameid+" AND idplayer IS NULL;";
 		try {
 			Statement stmt = conn.createStatemant();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
-                FavorToken favorToken = new FavorToken(rs.getInt("idfavortoken"));
-                favorToken.setGame(game);
+                FavorToken favorToken = new FavorToken(rs.getInt("idfavortoken"), gameid, conn);// changed to add gameid and conn to constructor
+                favorToken.setGameId(gameid); //changed to setgameID to fix error
                 list.add(favorToken);
             }
 			stmt.close();

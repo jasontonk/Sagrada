@@ -32,17 +32,18 @@ public class Invitation {
 	
 	
 	public Invitation getInvitation() {
-		return Invitation;
+		return this; //changed to this to fix error
 	}
 	
 	//sets status to challenger
 	public void setChallenger() {
-		invitationStatus = Challenger;
+		invitationStatus = InvitationStatus.Challenger; //changed to InvitationStatus.Challenger to fix error
 	}
 	
 	//sets status to challenged
 	public void setChallenged() {
-		inviatationStatus = Challenged;
+		invitationStatus = InvitationStatus.Challenged;//changed to InvitationStatus.Challenged to fix error
+
 	}
 	
 }

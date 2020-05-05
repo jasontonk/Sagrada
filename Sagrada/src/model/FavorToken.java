@@ -25,6 +25,12 @@ public class FavorToken {
 		favorTokenDB = new FavorTokenDBA(c);
 
 	}
+	
+	public FavorToken(int id, int gameId, DataBaseConnection c) {//added constructor to fix error in FaverTokenDBA
+		this.id = id;
+		this.gameId = gameId;
+		favorTokenDB = new FavorTokenDBA(c);
+	}
 
 	// Return the id of FavorToken.
 

@@ -70,7 +70,7 @@ private DataBaseConnection conn;
 			Statement stmt = conn.createStatemant();
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next()) {
-				Chat chat = new Chat(rs.getInt("player_idplayer"), rs.getString("message")); 
+				Chat chat = new Chat(rs.getInt("player_idplayer"), rs.getString("message"), conn); //edited to fix error
 				chat.setTime(rs.getTimestamp("time"));
 				chatlines.add(chat);
 			}

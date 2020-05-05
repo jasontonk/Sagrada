@@ -55,7 +55,8 @@ public class Chat {
 
 	public String getMessage(int playerid, Timestamp timestamp) {
 
-		return chatDB.getChatTextDB(playerid, timestamp);
+		message = chatDB.getChatTextDB(playerid, timestamp);
+		return message;										//saved message form DB into message
 	}
 
 	// Set the message of this chat.
