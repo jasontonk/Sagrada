@@ -120,13 +120,13 @@ public class Game {
 //			player.setpatterncard();
 //			player.assignFavorTokens();
 //			player.setcolor();
-		makedie();
 //		}
+		makedie();
+		for (Player player : players) {
+			setPlayerPatternCards(player);
+		}
 //		bepaal public objective
-//			bepaal toolcards
-
-		patterncards.add(patterncard);
-		
+//		bepaal toolcards
 	}
 
 	public void playfirstround() { // met boolean first round treu
@@ -166,10 +166,7 @@ public class Game {
 						}
 					}
 				}
-				
-
 			}
-
 		}
 	}
 	public boolean checkDieUsed(GameDie selectedDice) {
@@ -214,13 +211,22 @@ public class Game {
 		}
 	}
 	
-	public ArrayList<PatternCard> generatePatterncards(boolean randomgenerated){
+	public ArrayList<PatternCard> generategamePatterncards(boolean randomgenerated){
 		ArrayList<PatternCard> patterncards = new ArrayList<PatternCard>();
 		for(int i = 0;i<(accounts.size()*4);i++){
 			PatternCard patterncard = new PatternCard(conn);
 			patterncards.add(patterncard);
 		}
 		return patterncards;
+	}
+	public void setPlayerPatternCards(Player player) {
+		for(int i = 0; i < 4; i++) {
+			int randomPatterncardNumber = (int)(Math.random() * gamePatterncards.size());
+			playerPatterncards.add(gamePatterncards.get(randomPatterncardNumber));
+			gamePatterncards.remove(i);
+		}
+		player.setPatternCardsToChoose(playerPatterncards);
+		playerPatterncards.clear();
 	}
 
 //	public Player announceWinner() {
