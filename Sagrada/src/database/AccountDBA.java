@@ -40,7 +40,7 @@ public class AccountDBA {
 			Statement stmt = conn.createStatemant();
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next()) {
-				account = new Account(rs.getString("username"),rs.getString("password"));
+				account = new Account(rs.getString("username"),rs.getString("password"), conn);
 			}
 			stmt.close();
 			
@@ -118,7 +118,7 @@ public class AccountDBA {
 			while(rs.next()){
 				String username = rs.getString("username");
 				String password = rs.getString("password");
-				Account account = new Account(username,password);
+				Account account = new Account(username,password, conn);
 				list.add(account);
 			}
 			stmt.close();
