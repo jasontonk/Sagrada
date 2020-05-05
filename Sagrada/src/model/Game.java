@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.Random;
 
+import database.DataBaseConnection;
+
 public class Game {
 // add players
 // add roundtrack
@@ -20,8 +22,11 @@ public class Game {
 	private Chat chat;
 	private int round;
 	private int gameID;
+	private ArrayList<PatternCard> patterncards = new ArrayList<>();
+	private DataBaseConnection conn;
 
-	public Game(Account account1, Account account2) {// boolean generated toevoegen ja of nee generated patterncards
+	public Game(Account account1, Account account2, DataBaseConnection conn) {// boolean generated toevoegen ja of nee generated patterncards
+		this.conn = conn;
 		players = new ArrayList<Player>();
 		toolcards = new ArrayList<Toolcard>();
 		publicObjectiveCards = new ArrayList<PublicObjectiveCard>();
@@ -36,7 +41,8 @@ public class Game {
 
 	}
 
-	public Game(Account account1, Account account2, Account account3) {
+	public Game(Account account1, Account account2, Account account3, DataBaseConnection conn) {
+		this.conn = conn;
 		players = new ArrayList<Player>();
 		toolcards = new ArrayList<Toolcard>();
 		publicObjectiveCards = new ArrayList<PublicObjectiveCard>();
@@ -51,7 +57,8 @@ public class Game {
 
 	}
 
-	public Game(Account account1, Account account2, Account account3, Account account4) {
+	public Game(Account account1, Account account2, Account account3, Account account4, DataBaseConnection conn) {
+		this.conn = conn;
 		players = new ArrayList<Player>();
 		toolcards = new ArrayList<Toolcard>();
 		publicObjectiveCards = new ArrayList<PublicObjectiveCard>();
@@ -104,6 +111,11 @@ public class Game {
 //		}
 //		bepaal public objective
 //			bepaal toolcards
+		
+		PatternCard patterncard = new PatternCard("test", 0, conn);
+		patterncard.setpattern(false);
+		patterncards.add(patterncard);
+		
 	}
 
 	public void playfirstround() { // met boolean first round treu
