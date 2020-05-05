@@ -76,7 +76,7 @@ public class AccountDBA {
 			try {
 				if(accountExists(username)) {
 					Statement stmt = conn.createStatemant();
-					stmt.executeUpdate(query);
+					stmt.executeUpdate(querzy);
 					stmt.close();
 					return "Wachtwoord is succesvol geupdated";
 				}else {
