@@ -125,7 +125,7 @@ public class Game {
 //		bepaal public objective
 //			bepaal toolcards
 
-		patterncards.add(patterncard);
+		patterncards.add(patterncard); 
 		
 	}
 
