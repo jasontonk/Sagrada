@@ -45,7 +45,7 @@ public class PatternCard {
 		}
 		patterncardDB = new PatternCardDBA(conn);
 		patterncardfieldDB = new PatternCardFieldDBA(conn);
-	} 
+	}  
 	
 	/*
 	 * Sets up patterncard. If random patterncard is requested, 
