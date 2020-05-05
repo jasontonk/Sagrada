@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 
 import database.AccountDBA;
+import database.DataBaseConnection;
+import database.PlayerDBA;
 
 public class Account {
 	
@@ -11,26 +13,26 @@ public class Account {
 	private String password;
 	private ArrayList<Player> players;
 	private ArrayList<Invitation> invitations;
-	private DatabaseConnection c;
+	private DataBaseConnection connection;
 	
 	/**
      * 
      */
-	public Account(DatabaseConnection c) {
+	public Account(DataBaseConnection c) {
 		players = new ArrayList<Player>();
 		invitations = new ArrayList<>();
-		AccountDBA accountDBA = new AccountDBA(c);
+		connection = c;
 	}
 	
 	/**
      * 
      */
-	public Account(String username, String password, DatabaseConnection c) {
+	public Account(String username, String password, DataBaseConnection c) {
 		this.username = username;
 		this.password = password;
 		players = new ArrayList<>();
 		invitations = new ArrayList<>();	
-		AccountDBA accountDBA = new AccountDBA(c);
+		connection = c;
 	}
 
 	/**
@@ -79,7 +81,7 @@ public class Account {
      * 
      */
 	public ArrayList<Player> getPlayers() {
-		PlayerDBA playerDBA = new PlayerDBA(c);
+		PlayerDBA playerDBA = new PlayerDBA(connection);
 		players = playerDBA.getPlayersOfAccount(this);//TODO matheus
 		return players;
 	}
@@ -91,12 +93,14 @@ public class Account {
 		this.players = players;
 	}
 
-//	/**
-//     * 
-//     */
-//	public ArrayList<Invitation> getInvitations() {
-//		return invitations;
-//	}
+	/**
+     * 
+     */
+	public ArrayList<Invitation> getInvitations() {
+		AccountDBA accountDBA = new AccountDBA(connection);
+		invitations = accountDBA.getInvitations();//TODO matheus
+		return invitations;
+	}
 
 	/**
      * 
@@ -112,48 +116,43 @@ public class Account {
      * 
      */
 	public int getHighestScore() {
-		return 0;//TODO
-//		AccountDBA aDB = new AccountDBA();
-//		aDB.getHighestScore(this);
+		AccountDBA aDB = new AccountDBA(connection);
+		return aDB.getHighestScore(this);
 	}
 	
 	/**
      * 
      */
 	public int getMostUsedValue() {
-		return 0;//TODO
-//		AccountDBA aDB = new AccountDBA();
-//		aDB.getMostUsedValue(this);
+		AccountDBA accountDBA = new AccountDBA(connection);
+		return accountDBA.getMostUsedValue(this);
 	}
 	
 	/**
      * 
      */
-	public int getMostUsedColor() {
-		return 0;//TODO
-//		AccountDBA aDB = new AccountDBA();
-//		aDB.getMostUsedColor(this);
+	public Color getMostUsedColor() {
+		AccountDBA accountDBA = new AccountDBA(connection);
+		String color = accountDBA.getMostUsedColor(this);
+		//TODO kleur terug geven van string naar color
 	}
 	
 	/**
      * 
      */
 	public int getValueOfDifferentPlayedAccounts() {
-		return 0;//TODO
-//		AccountDBA aDB = new AccountDBA();
-//		aDB.getValueOfDifferentPlayedAccounts(this);
+		AccountDBA accountDBA = new AccountDBA(connection);
+		return accountDBA.getValueOfDifferentPlayedAccounts(this);
 	}
 	
 	/**
      * 
      */
 	public int[] getWinsAndLoses() {
-		return null;
-		//TODO
-//		AccountDBA aDB = new AccountDBA();
-//		int wins = aDB.getWins(this);
-//		int loses = aDB.getLoses(this);
-//		int[] winsAndLoses = {wins, loses};
-//		return winsAndLoses;
+		AccountDBA accountDBA = new AccountDBA(connection);
+		int wins = accountDBA.getWins(this);
+		int loses = accountDBA.getLoses(this);
+		int[] winsAndLoses = {wins, loses};
+		return winsAndLoses;
 	}
 }
