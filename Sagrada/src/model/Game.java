@@ -39,7 +39,7 @@ public class Game {
 		
 		gamePatterncards = generategamePatterncards(randomgeneratedpatterncards);
 
-//		checkInvites();
+//		checkInvites(); 
 
 	}
 
