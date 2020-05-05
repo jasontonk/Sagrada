@@ -17,18 +17,21 @@ public class Game {
 	private ArrayList<Toolcard> toolcards;
 	private ArrayList<PublicObjectiveCard> publicObjectiveCards;
 	private GameDie[] diesInBag; // 18 per kleur 5 kleuren
-	GameDie[] usedDice ;
+	private GameDie[] usedDice ;
 	private RoundTrack roundTrack;
 	private Chat chat;
 	private int round;
 	private int gameID;
-	private ArrayList<PatternCard> patterncards = new ArrayList<>();
+	private ArrayList<PatternCard> gamePatterncards;
+	private ArrayList<PatternCard> playerPatterncards;
 	private DataBaseConnection conn;
 
-	public Game(Account account1, Account account2, DataBaseConnection conn) {// boolean generated toevoegen ja of nee generated patterncards
+	public Game(Account account1, Account account2, boolean randomgeneratedpatterncards, DataBaseConnection conn) {// boolean generated toevoegen ja of nee generated patterncards
 		this.conn = conn;
 		players = new ArrayList<Player>();
 		toolcards = new ArrayList<Toolcard>();
+		gamePatterncards = new ArrayList<PatternCard>();
+		playerPatterncards = new ArrayList<PatternCard>();
 		publicObjectiveCards = new ArrayList<PublicObjectiveCard>();
 		diesInBag = new GameDie[90];
 		usedDice = new GameDie[90];
@@ -36,15 +39,19 @@ public class Game {
 
 		accounts.add(account1);
 		accounts.add(account2);
+		
+		gamePatterncards = generatePatterncards(randomgeneratedpatterncards);
 
 //		checkInvites();
 
 	}
 
-	public Game(Account account1, Account account2, Account account3, DataBaseConnection conn) {
+	public Game(Account account1, Account account2, Account account3, boolean randomgeneratedpatterncards, DataBaseConnection conn) {
 		this.conn = conn;
 		players = new ArrayList<Player>();
 		toolcards = new ArrayList<Toolcard>();
+		gamePatterncards = new ArrayList<PatternCard>();
+		playerPatterncards = new ArrayList<PatternCard>();
 		publicObjectiveCards = new ArrayList<PublicObjectiveCard>();
 		diesInBag = new GameDie[90];
 		round = 1;
@@ -53,14 +60,18 @@ public class Game {
 		accounts.add(account2);
 		accounts.add(account3);
 
+		gamePatterncards = generatePatterncards(randomgeneratedpatterncards);
+		
 //		checkInvites();
 
 	}
 
-	public Game(Account account1, Account account2, Account account3, Account account4, DataBaseConnection conn) {
+	public Game(Account account1, Account account2, Account account3, Account account4, boolean randomgeneratedpatterncards, DataBaseConnection conn) {
 		this.conn = conn;
 		players = new ArrayList<Player>();
 		toolcards = new ArrayList<Toolcard>();
+		gamePatterncards = new ArrayList<PatternCard>();
+		playerPatterncards = new ArrayList<PatternCard>();
 		publicObjectiveCards = new ArrayList<PublicObjectiveCard>();
 		diesInBag = new GameDie[90];
 		round = 1;
@@ -70,6 +81,8 @@ public class Game {
 		accounts.add(account3);
 		accounts.add(account4);
 
+		gamePatterncards = generatePatterncards(randomgeneratedpatterncards);
+		
 //		checkInvites();
 
 	}
@@ -111,9 +124,7 @@ public class Game {
 //		}
 //		bepaal public objective
 //			bepaal toolcards
-		
-		PatternCard patterncard = new PatternCard("test", 0, conn);
-		patterncard.setpattern(false);
+
 		patterncards.add(patterncard);
 		
 	}
@@ -201,6 +212,15 @@ public class Game {
 		for (int i = 72; i < 90; i++) {
 			diesInBag[i] = (new GameDie(Color.RED, i, r.nextInt(6)+1)); 
 		}
+	}
+	
+	public ArrayList<PatternCard> generatePatterncards(boolean randomgenerated){
+		ArrayList<PatternCard> patterncards = new ArrayList<PatternCard>();
+		for(int i = 0;i<(accounts.size()*4);i++){
+			PatternCard patterncard = new PatternCard(conn);
+			patterncards.add(patterncard);
+		}
+		return patterncards;
 	}
 
 //	public Player announceWinner() {

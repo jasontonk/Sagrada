@@ -32,8 +32,21 @@ public class PatternCard {
 			}
 		}
 		patterncardDB = new PatternCardDBA(conn);
+		patterncardfieldDB = new PatternCardFieldDBA(conn);
 		
 	}
+	public PatternCard(DataBaseConnection conn) {
+		this.conn = conn;
+		for(int i = 0; i < 5; i++) {
+			for(int c = 0; c < 4; c++) {
+				patterncard[i][c].setPositionX(i);
+				patterncard[i][c].setPositionY(c);
+			}
+		}
+		patterncardDB = new PatternCardDBA(conn);
+		patterncardfieldDB = new PatternCardFieldDBA(conn);
+	}
+	
 	/*
 	 * Sets up patterncard. If random patterncard is requested, 
 	 * method generates a random patterncard with 4-6 colored fields and 4-8 numbered fields. 
