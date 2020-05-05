@@ -175,26 +175,26 @@ public class Game {
 	public void makedie() {
 		Random r = new Random();
 		for (int i = 0; i < 18; i++) {
-			diesInBag[i] = new GameDie(Color.GREEN, i, r.nextInt(7));
+			diesInBag[i] = new GameDie(Color.GREEN, i, r.nextInt(6)+1);
 		}
 		for (int i = 18; i < 36; i++) {
-			diesInBag[i] = (new GameDie(Color.BLUE, i, r.nextInt(7)));
+			diesInBag[i] = (new GameDie(Color.BLUE, i, r.nextInt(6)+1));
 		}
 		for (int i = 36; i < 54; i++) {
-			diesInBag[i] = (new GameDie(Color.YELLOW, i, r.nextInt(7)));
+			diesInBag[i] = (new GameDie(Color.YELLOW, i, r.nextInt(6)+1));
 		}
 		for (int i = 54; i < 72; i++) {
-			diesInBag[i] = (new GameDie(Color.PURPLE, i, r.nextInt(7)));
+			diesInBag[i] = (new GameDie(Color.PURPLE, i, r.nextInt(6)+1));
 		}
 		for (int i = 72; i < 90; i++) {
-			diesInBag[i] = (new GameDie(Color.RED, i, r.nextInt(7)));
+			diesInBag[i] = (new GameDie(Color.RED, i, r.nextInt(6)+1));
 		}
 	}
 
 //	public Player announceWinner() {
 //		
 //		return Player;  
-//	}/
+//	}
 
 	public ArrayList<Player> getPlayers() {
 		return players;
