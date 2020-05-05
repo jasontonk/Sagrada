@@ -93,7 +93,7 @@ public class Board {
 	/**
      * Returns the board field of the parameters
      */
-	private BoardField getBoardField(int x, int y) {
+	public BoardField getBoardField(int x, int y) {
 		return boardFields[x][y];
 	}
 

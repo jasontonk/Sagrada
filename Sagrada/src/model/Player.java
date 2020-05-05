@@ -2,6 +2,11 @@ package model;
 
 import java.util.ArrayList;
 
+import database.DataBaseConnection;
+import database.FavorTokenDBA;
+import database.PatternCardDBA;
+import database.PlayerDBA;
+
 public class Player {
 	
 	private int id;
@@ -23,9 +28,11 @@ public class Player {
 	private ArrayList<PatternCard> patternCardsToChoose;
 	
 	private Game game;
+	private DataBaseConnection connection;
 	
-	public Player() {
-		// TODO Auto-generated constructor stub
+	public Player(DataBaseConnection c, Account account) {
+		connection = c;
+		this.account = account;
 	}
 
 	public int getId() {
@@ -85,7 +92,7 @@ public class Player {
 	}
 
 	public Board getBoard() {
-		return board;//TODO
+		return board;
 	}
 
 	public void setBoard(Board board) {
@@ -109,7 +116,9 @@ public class Player {
 	}
 
 	public ArrayList<FavorToken> getFavorTokens() {
-		return favorTokens;//TODO
+		FavorTokenDBA favorTokenDBA = new FavorTokenDBA(connection);
+		this.favorTokens = favorTokenDBA.getFavortokensOfPlayer(getId(), this);
+		return favorTokens;
 	}
 
 	public void setFavorTokens(ArrayList<FavorToken> favorTokens) {
@@ -117,7 +126,9 @@ public class Player {
 	}
 
 	public PatternCard getPatternCard() {
-		return patternCard;//TODO
+		PatternCardDBA patternCardDBA = new PatternCardDBA(connection);
+		patternCard = patternCardDBA.getSelectedPatterncardOfPlayer(getId(), this);
+		return patternCard;
 	}
 
 	public void setPatternCard(PatternCard patternCard) {
@@ -125,11 +136,16 @@ public class Player {
 	}
 
 	public ArrayList<PatternCard> getPatternCardsToChoose() {
-		return patternCardsToChoose;//TODO
+		PatternCardDBA patternCardDBA = new PatternCardDBA(connection);
+		patternCardsToChoose = patternCardDBA.getOptionalPatternCardsOfPlayer(getId(), this);
+		
+		return patternCardsToChoose;
 	}
 
 	public void setPatternCardsToChoose(ArrayList<PatternCard> patternCardsToChoose) {
-		this.patternCardsToChoose = patternCardsToChoose;//TODO
+		this.patternCardsToChoose = patternCardsToChoose;
+		PatternCardDBA patternCardDBA = new PatternCardDBA(connection);
+		patternCardDBA.saveOptionalPatternCardsOfPlayer(patternCardsToChoose, getId());
 	}
 
 	public Game getGame() {
@@ -148,34 +164,92 @@ public class Player {
 		this.placedDie = placedDie;
 	}
 	
+	/**
+	* Assign favor tokens of a game to the player
+	*/
 	public void assignFavorTokens() {
-		//TODO alle favortokens uit de database halen
+		FavorTokenDBA favorTokenDBA = new FavorTokenDBA(connection);
+		ArrayList<FavorToken> allUnusedGameFavorTokens = favorTokenDBA.getUnusedFavorTokensOfGame(game.getGameID());
 		ArrayList<FavorToken> favorTokens = new ArrayList<>();
 		for(int i = 0; i < patternCard.getDifficulty(); i++) {
-			//TODO token uit de database halen en uit de arraylist verwijderen
-			//deze token toewijzen aan spelen en dus toevoegen aan arraylist favorTokens
+			FavorToken favorToken = allUnusedGameFavorTokens.get(0);
+			allUnusedGameFavorTokens.remove(0);
+			favorTokenDBA.setFavortokenForPlayer(favorToken.getId(), this.getId());
+			favorTokens.add(favorToken);
 		}
+		this.favorTokens = favorTokens;
 	}
 	
 	public void setNextSequenceNumber() {
 		int players = this.getGame().getPlayers().size();
 		int NewSequenceNumber = sequenceNumber;
 		
-		//TODO sequence nummer aanpassen op basis van de game grootte
+        if (NewSequenceNumber == 1) { // NewSequenceNumber: 1
+            if (players == 2) { // players: 2
+            	NewSequenceNumber = 4;
+            } else if (players == 3) { // players: 3
+            	NewSequenceNumber = 6;
+            } else if (players == 4) { // players: 4
+            	NewSequenceNumber = 8;
+            }
+        } else if (NewSequenceNumber == 2) { // NewSequenceNumber: 2
+            if (players == 2) { // players: 2
+            	NewSequenceNumber = 3;
+            } else if (players == 3) { // players: 3
+            	NewSequenceNumber = 5;
+            } else if (players == 4) { // players: 4
+            	NewSequenceNumber = 7;
+            }
+        } else if (NewSequenceNumber == 3) { // NewSequenceNumber: 3
+            if (players == 2) { //players: 2
+            	NewSequenceNumber = 1;
+            } else if (players == 3) { // players: 3
+                NewSequenceNumber = 4;
+            } else if (players == 4) { // players: 4
+                NewSequenceNumber = 6;
+            }
+        } else if (NewSequenceNumber == 4) { // NewSequenceNumber: 4
+            if (players == 2) { //players: 2
+                NewSequenceNumber = 2;
+            } else if (players == 3) { // players: 3
+                NewSequenceNumber = 2;
+            } else if (players == 4) { // players: 4
+                NewSequenceNumber = 5;
+            }
+        } else if (NewSequenceNumber == 5) { // NewSequenceNumber: 5
+            if (players == 3) { // players: 3
+                NewSequenceNumber = 1;
+            } else if (players == 4) { // players: 4
+                NewSequenceNumber = 3;
+            }
+        } else if (NewSequenceNumber == 6) { // NewSequenceNumber: 6
+            if (players == 3) { // players: 3
+                NewSequenceNumber = 3;
+            } else if (players == 4) { // players: 4
+                NewSequenceNumber = 2;
+            }
+        } else if (NewSequenceNumber == 7) {
+            NewSequenceNumber = 1;
+        } else if (NewSequenceNumber == 8) {
+            NewSequenceNumber = 4;
+        }
 		
 		this.setSequenceNumber(NewSequenceNumber);
 		//TODO update in database
 	}
 	
-	public int calculateScore(BoardField[][] boardFields) {
+	public int calculateScore() {
+		if (patternCard == null) {
+            patternCard = getPatternCard();
+        }
 		int score = 0;
-		for(int x = 0; x < Board.BOARD_SQUARES_HORIZONTAL; x++) {
-			for(int y = 0; y < Board.BOARD_SQUARES_VERTICAL; y++) {
-				if(!boardFields[x][y].hasDie()) {
+		for(int x = 1; x < Board.BOARD_SQUARES_HORIZONTAL; x++) {
+			for(int y = 1; y < Board.BOARD_SQUARES_VERTICAL; y++) {
+				if(!board.getBoardField(x, y).hasDie()) {
 					score = score - 1;
 				}
 				else {
-					if(boardFields[x][y].getDie().getColor().equals(color)) {
+					if(board.getBoardField(x, y).getDie().getColor().equals(color)) {
 						score = score + 1;
 					}
 				}
@@ -190,7 +264,8 @@ public class Player {
 		
 		this.score = score;
 		
-		//TODO update in database
+		PlayerDBA playerDBA = new PlayerDBA(connection);
+		playerDBA.setScore(this);
 		
 		return score;
 	}

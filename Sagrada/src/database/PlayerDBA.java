@@ -144,7 +144,7 @@ public class PlayerDBA {
 	
 	public Player getPlayerUsingID(int idplayer) {
 		
-		Player player = new Player();
+		Player player = new Player(conn, null);
         String query = "SELECT * FROM player WHERE idplayer="+idplayer+";";
         try {
         	Statement stmt = conn.createStatemant();
@@ -172,7 +172,7 @@ public class PlayerDBA {
 	
 	public Player getPlayerUsingSeqnrAndGame(int seqnr, Game game) {
 			
-			Player player = new Player();
+			Player player = new Player(conn, null);
 	        String query = "SELECT * FROM player WHERE seqnr= "+seqnr+" AND idgame="+game.getGameID()+";";
 	        try {
 	        	Statement stmt = conn.createStatemant();
