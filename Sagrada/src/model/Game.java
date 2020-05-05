@@ -34,8 +34,8 @@ public class Game {
 
 		accounts.add(account1);
 		accounts.add(account2);
-		players.add(account1);
-		players.add(account2);
+		players.add(new Player(conn, account1));
+		players.add(new Player(conn, account2));
 		
 		gamePatterncards = generategamePatterncards(randomgeneratedpatterncards);
 
@@ -56,9 +56,9 @@ public class Game {
 		accounts.add(account1);
 		accounts.add(account2);
 		accounts.add(account3);
-		players.add(account1);
-		players.add(account2);
-		players.add(account3);
+		players.add(new Player(conn, account1));
+		players.add(new Player(conn, account2));
+		players.add(new Player(conn, account3));
 		
 
 		gamePatterncards = generategamePatterncards(randomgeneratedpatterncards);
@@ -81,10 +81,11 @@ public class Game {
 		accounts.add(account2);
 		accounts.add(account3);
 		accounts.add(account4);
-		players.add(account1);
-		players.add(account2);
-		players.add(account3);
-		players.add(account4);
+		players.add(new Player(conn, account1));
+		players.add(new Player(conn, account2));
+		players.add(new Player(conn, account3));
+		players.add(new Player(conn, account4));
+		
 
 		
 		gamePatterncards = generategamePatterncards(randomgeneratedpatterncards);
