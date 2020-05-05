@@ -199,7 +199,7 @@ public class Game {
 			diesInBag[i] = (new GameDie(Color.PURPLE, i, r.nextInt(6)+1));
 		}
 		for (int i = 72; i < 90; i++) {
-			diesInBag[i] = (new GameDie(Color.RED, i, r.nextInt(6)+1));
+			diesInBag[i] = (new GameDie(Color.RED, i, r.nextInt(6)+1)); 
 		}
 	}
 
