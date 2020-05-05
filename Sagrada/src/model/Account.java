@@ -11,23 +11,26 @@ public class Account {
 	private String password;
 	private ArrayList<Player> players;
 	private ArrayList<Invitation> invitations;
+	private DatabaseConnection c;
 	
 	/**
      * 
      */
-	public Account() {
+	public Account(DatabaseConnection c) {
 		players = new ArrayList<Player>();
-		invitations = new ArrayList<>();	
+		invitations = new ArrayList<>();
+		AccountDBA accountDBA = new AccountDBA(c);
 	}
 	
 	/**
      * 
      */
-	public Account(String username, String password) {
+	public Account(String username, String password, DatabaseConnection c) {
 		this.username = username;
 		this.password = password;
 		players = new ArrayList<>();
 		invitations = new ArrayList<>();	
+		AccountDBA accountDBA = new AccountDBA(c);
 	}
 
 	/**
@@ -72,12 +75,14 @@ public class Account {
 		this.password = password;
 	}
 
-//	/**
-//     * 
-//     */
-//	public ArrayList<Player> getPlayers() {
-//		return players;
-//	}
+	/**
+     * 
+     */
+	public ArrayList<Player> getPlayers() {
+		PlayerDBA playerDBA = new PlayerDBA(c);
+		players = playerDBA.getPlayersOfAccount(this);//TODO matheus
+		return players;
+	}
 
 	/**
      * 
