@@ -266,7 +266,7 @@ public class Player {
 		
 		PlayerDBA playerDBA = new PlayerDBA(connection);
 		playerDBA.setScore(this);
-		
+		 
 		return score;
 	}
 	
