@@ -29,7 +29,7 @@ public class DataBaseConnection {
 	private boolean makeConnection() {
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/sagrada?user=root&password=1234");
+			conn = DriverManager.getConnection("jdbc:mysql://databases.aii.avans.nl:3306/jjtonk_db2?user=jjtonk&password=Ab12345");
 			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
