@@ -134,7 +134,31 @@ public class Account {
 	public Color getMostUsedColor() {
 		AccountDBA accountDBA = new AccountDBA(connection);
 		String color = accountDBA.getMostUsedColor(this);
-		//TODO kleur terug geven van string naar color
+		return getColorFromString(color);
+	}
+	
+	private Color getColorFromString(String c) {
+		Color color = Color.BLUE;
+		switch(c) {
+		case "blue":
+			color = Color.BLUE;
+			break;
+		case "green":
+			color = Color.GREEN;
+			break;
+		case "purple":
+			color = Color.PURPLE;
+			break;
+		case "red":
+			color = Color.RED;
+			break;
+		case "yellow":
+			color = Color.YELLOW;
+			break;
+		default:
+			color = null;
+		}
+		return color;
 	}
 	
 	/**
