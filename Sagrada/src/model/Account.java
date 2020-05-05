@@ -82,7 +82,7 @@ public class Account {
      */
 	public ArrayList<Player> getPlayers() {
 		PlayerDBA playerDBA = new PlayerDBA(connection);
-		players = playerDBA.getPlayersOfAccount(this);//TODO matheus
+//		players = playerDBA.getPlayersOfAccount(this);//TODO matheus
 		return players;
 	}
 
@@ -98,7 +98,7 @@ public class Account {
      */
 	public ArrayList<Invitation> getInvitations() {
 		AccountDBA accountDBA = new AccountDBA(connection);
-		invitations = accountDBA.getInvitations();//TODO matheus
+//		invitations = accountDBA.getInvitations();//TODO matheus
 		return invitations;
 	}
 

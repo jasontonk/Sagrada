@@ -119,10 +119,10 @@ public class PatternCard {
 			}
 		}
 	}
-	public Color checkFieldColor(int xPos, int yPos) {
+	public Color getFieldColor(int xPos, int yPos) {
 		return patterncard[xPos][yPos].getColor();
 	}
-	public int checkFieldValue(int xPos, int yPos) {
+	public int getFieldValue(int xPos, int yPos) {
 		return patterncard[xPos][yPos].getValue();
 	}
 	
