@@ -14,6 +14,7 @@ public class Account {
 	private ArrayList<Player> players;
 	private ArrayList<Invitation> invitations; 
 	private DataBaseConnection connection;
+	private AccountDBA accountDBA;
 	
 	/**
      * 
@@ -22,6 +23,7 @@ public class Account {
 		players = new ArrayList<Player>();
 		invitations = new ArrayList<>();
 		connection = c;
+		accountDBA = new AccountDBA(c);
 	}
 	
 	/**
@@ -33,6 +35,7 @@ public class Account {
 		players = new ArrayList<>();
 		invitations = new ArrayList<>();	
 		connection = c;
+		accountDBA = new AccountDBA(c);
 	}
 
 	/**
@@ -62,12 +65,21 @@ public class Account {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	
+	public void setAccount(String username, String password) {
+		accountDBA.addAccountDB(username, password);
+	}
+	
+	public boolean accountExists(String username) {
+		accountDBA.accountExists(username);
+	}
 
 	/**
      * 
      */
-	public String getPassword() {
-		return password;
+	public String getPassword(String username) {
+		//TODO
+		return accountDBA.getPassword(username);
 	}
 
 	/**
@@ -97,7 +109,6 @@ public class Account {
      * 
      */
 	public ArrayList<Invitation> getInvitations() {
-		AccountDBA accountDBA = new AccountDBA(connection);
 //		invitations = accountDBA.getInvitations();//TODO matheus
 		return invitations;
 	}
@@ -116,15 +127,13 @@ public class Account {
      * 
      */
 	public int getHighestScore() {
-		AccountDBA aDB = new AccountDBA(connection);
-		return aDB.getHighestScore(this);
+		return accountDBA.getHighestScore(this);
 	}
 	
 	/**
      * 
      */
 	public int getMostUsedValue() {
-		AccountDBA accountDBA = new AccountDBA(connection);
 		return accountDBA.getMostUsedValue(this);
 	}
 	
@@ -132,7 +141,6 @@ public class Account {
      * 
      */
 	public Color getMostUsedColor() {
-		AccountDBA accountDBA = new AccountDBA(connection);
 		String color = accountDBA.getMostUsedColor(this);
 		return getColorFromString(color);
 	}
@@ -165,7 +173,6 @@ public class Account {
      * 
      */
 	public int getValueOfDifferentPlayedAccounts() {
-		AccountDBA accountDBA = new AccountDBA(connection);
 		return accountDBA.getValueOfDifferentPlayedAccounts(this);
 	}
 	
@@ -173,7 +180,6 @@ public class Account {
      * 
      */
 	public int[] getWinsAndLoses() {
-		AccountDBA accountDBA = new AccountDBA(connection);
 		int wins = accountDBA.getWins(this);
 		int loses = accountDBA.getLoses(this);
 		int[] winsAndLoses = {wins, loses};
