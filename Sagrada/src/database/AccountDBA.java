@@ -50,6 +50,24 @@ public class AccountDBA {
 		return account;
 	}
 	
+	public String GetPassword(String username) {
+		String password = "";
+		String query = "SELECT password FROM account WHERE username = '"+username+"';";
+		
+		try {
+			Statement stmt = conn.createStatemant();
+			ResultSet rs = stmt.executeQuery(query);
+			if(rs.next()) {
+				password = rs.getString("password");
+			}
+			stmt.close();
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return password;
+	}
+	
 	public String updateUsernameDB(String oldaccount,String newaccount) {
 		
 		String query = "UPDATE account SET username = '"+newaccount+"' WHERE username = '"+oldaccount+"';";
