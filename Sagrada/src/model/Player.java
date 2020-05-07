@@ -20,7 +20,7 @@ public class Player {
 	
 	private Account account;
 	private FavorToken favorToken;
-	private Color color;
+	private ModelColor modelColor;
 	private Board board;
 	
 	private ArrayList<FavorToken> favorTokens;
@@ -107,12 +107,12 @@ public class Player {
 		this.favorToken = favorToken;
 	}
 
-	public Color getColor() {
-		return color;
+	public ModelColor getColor() {
+		return modelColor;
 	}
 
-	public void setColor(Color color) {
-		this.color = color;
+	public void setColor(ModelColor modelColor) {
+		this.modelColor = modelColor;
 	}
 
 	public ArrayList<FavorToken> getFavorTokens() {
@@ -249,7 +249,7 @@ public class Player {
 					score = score - 1;
 				}
 				else {
-					if(board.getBoardField(x, y).getDie().getColor().equals(color)) {
+					if(board.getBoardField(x, y).getDie().getColor().equals(modelColor)) {
 						score = score + 1;
 					}
 				}

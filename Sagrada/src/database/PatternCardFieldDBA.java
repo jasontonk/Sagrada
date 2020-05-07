@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import model.PatternCard;
 import model.PatternCardField;
-import model.Color;
+import model.ModelColor;
 
 public class PatternCardFieldDBA {
 	
@@ -19,7 +19,7 @@ public class PatternCardFieldDBA {
 		
 		 public ArrayList<PatternCardField> getPatternCardFieldsOfPatterncard(PatternCard patternCard) {
 			 ArrayList<PatternCardField> list = new ArrayList<>();
-			 Color color = null;
+			 ModelColor modelColor = null;
 			 String query = "SELECT * FROM patterncardfield WHERE patterncard_idpatterncard= "+patternCard.getPatterncardID()+" ORDER BY position_x, position_y";
 			 try {
 					Statement stmt = conn.createStatemant();
@@ -31,23 +31,23 @@ public class PatternCardFieldDBA {
 						int value = rs.getInt("value");
 						switch(c) {
 						case "blue":
-							color = Color.BLUE;
+							modelColor = ModelColor.BLUE;
 							break;
 						case "green":
-							color = Color.GREEN;
+							modelColor = ModelColor.GREEN;
 							break;
 						case "purple":
-							color = Color.PURPLE;
+							modelColor = ModelColor.PURPLE;
 							break;
 						case "red":
-							color = Color.RED;
+							modelColor = ModelColor.RED;
 							break;
 						case "yellow":
-							color = Color.YELLOW;
+							modelColor = ModelColor.YELLOW;
 							break;
 						}
 						
-						PatternCardField patternCardField = new PatternCardField(color,value, ypos,xpos);
+						PatternCardField patternCardField = new PatternCardField(modelColor,value, ypos,xpos);
 						list.add(patternCardField);
 					}
 					stmt.close();
@@ -94,9 +94,9 @@ public class PatternCardFieldDBA {
 			 }
 		 } 
 		 
-		 public Color getColorOfField(int id, int xpos, int ypos) {
+		 public ModelColor getColorOfField(int id, int xpos, int ypos) {
 		
-			 Color color = null;
+			 ModelColor modelColor = null;
 			 String query = "SELECT color FROM patterncardfield WHERE patterncard_idpatterncard= "+id+"AND position_x = "+xpos+" And position_y ="+ypos+";";
 			 try {
 					Statement stmt = conn.createStatemant();
@@ -105,19 +105,19 @@ public class PatternCardFieldDBA {
 						String c = rs.getString("color");
 						switch(c) {
 						case "blue":
-							color = Color.BLUE;
+							modelColor = ModelColor.BLUE;
 							break;
 						case "green":
-							color = Color.GREEN;
+							modelColor = ModelColor.GREEN;
 							break;
 						case "purple":
-							color = Color.PURPLE;
+							modelColor = ModelColor.PURPLE;
 							break;
 						case "red":
-							color = Color.RED;
+							modelColor = ModelColor.RED;
 							break;
 						case "yellow":
-							color = Color.YELLOW;
+							modelColor = ModelColor.YELLOW;
 							break;
 						}
 					}
@@ -125,7 +125,7 @@ public class PatternCardFieldDBA {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-			 return color;
+			 return modelColor;
 		 }
 		 
 		 public int getValueOfField(int id, int xpos, int ypos) {

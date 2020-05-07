@@ -8,8 +8,8 @@ public class GameDie extends Die {
 	private boolean isOnRoundTrack;
 	private BoardField boardField;
 	
-	public GameDie(Color color, int number, int eyes) {
-		super(color, number);
+	public GameDie(ModelColor modelColor, int number, int eyes) {
+		super(modelColor, number);
 		this.setEyes(eyes);
 		isAvailable = false;
 		isFirstTurn = false;

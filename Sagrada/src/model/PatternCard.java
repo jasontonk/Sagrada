@@ -15,7 +15,7 @@ public class PatternCard {
 	private PatternCardField[][] patterncard = new PatternCardField[5][4];
 	private PatternCardDBA patterncardDB;
 	private PatternCardFieldDBA patterncardfieldDB;
-	private Color color;
+	private ModelColor modelColor;
 	private Player player;
 	private DataBaseConnection conn;
 	
@@ -63,22 +63,22 @@ public class PatternCard {
 							int randomColorNumber = (int)(Math.random() * 5) + 1; 							//generates a rondom number for the switch to get random color
 							switch(randomColorNumber) {														//sets random color to color based on random number
 								case 1: 
-									color = Color.RED;
+									modelColor = ModelColor.RED;
 									break;
 								case 2: 
-									color = Color.GREEN;
+									modelColor = ModelColor.GREEN;
 									break;
 								case 3: 
-									color = Color.YELLOW;
+									modelColor = ModelColor.YELLOW;
 									break;
 								case 4: 
-									color = Color.PURPLE;
+									modelColor = ModelColor.PURPLE;
 									break;
 								case 5: 
-									color = Color.BLUE;
+									modelColor = ModelColor.BLUE;
 									break;
 					}
-					patterncard[coloredFieldLocationx][coloredFieldLocationy].setColor(color);
+					patterncard[coloredFieldLocationx][coloredFieldLocationy].setColor(modelColor);
 				}
 				else {
 					i--;
@@ -132,7 +132,7 @@ public class PatternCard {
 			}
 		}
 	}
-	public Color getFieldColor(int xPos, int yPos) {
+	public ModelColor getFieldColor(int xPos, int yPos) {
 		return patterncard[xPos][yPos].getColor();
 	}
 	public int getFieldValue(int xPos, int yPos) {

@@ -2,21 +2,21 @@ package model;
 
 public class PatternCardField {
 
-	private Color color;
+	private ModelColor modelColor;
 	private int value;
 	private int positionY;
 	private int positionX;
 
 	// Return the color of this PatternCardField.
 
-	public Color getColor() {
-		return color;
+	public ModelColor getColor() {
+		return modelColor;
 	}
 
 	// Set the color of this PatternCardField.
-	public void setColor(Color color) {
+	public void setColor(ModelColor modelColor) {
 
-		this.color = color;
+		this.modelColor = modelColor;
 	}
 
 	// Return the value of this PatternCardField.
@@ -61,8 +61,8 @@ public class PatternCardField {
 	// Partial constructor, generate the color, value and position of
 	// PatternCardField.
 
-	public PatternCardField(Color color, int value, int positionY, int positionX) {
-		this.color = color;
+	public PatternCardField(ModelColor modelColor, int value, int positionY, int positionX) {
+		this.modelColor = modelColor;
 		this.value = value;
 		this.positionY = positionY;
 		this.positionX = positionX;

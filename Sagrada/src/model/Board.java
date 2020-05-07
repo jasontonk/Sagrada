@@ -100,13 +100,13 @@ public class Board {
 	/**
      * returns true if there is a die with the color of the parameter north west of the boardfield of the parameter
      */
-	private boolean checkNorthWestDieColor(BoardField boardField, Color color) {
+	private boolean checkNorthWestDieColor(BoardField boardField, ModelColor modelColor) {
 		if(boardField.getyPos() == 1 || boardField.getxPos() == 1) {
 			return false;
 		}
 		BoardField boardFieldNext = getBoardField(boardField.getxPos() - 1, boardField.getyPos() - 1);
 		if(boardFieldNext.hasDie()) {
-			return checkFieldColorAndDieColor(boardFieldNext, color);
+			return checkFieldColorAndDieColor(boardFieldNext, modelColor);
 		}
 		return false;
 	}
@@ -216,13 +216,13 @@ public class Board {
 	/**
      * returns true if the dice north of the boardfield has the color of the parameter
      */
-	private boolean checkNorthDieColor(BoardField boardField, Color color) {
+	private boolean checkNorthDieColor(BoardField boardField, ModelColor modelColor) {
 		if(boardField.getyPos() == 1) {
 			return false;
 		}
 		BoardField boardFieldNext = getBoardField(boardField.getxPos(), boardField.getyPos() - 1);
 		if(boardFieldNext.hasDie()) {
-			return checkFieldColorAndDieColor(boardFieldNext, color);
+			return checkFieldColorAndDieColor(boardFieldNext, modelColor);
 		}
 		return false;
 	}
@@ -230,13 +230,13 @@ public class Board {
 	/**
      * returns true if the dice west of the boardfield has the color of the parameter
      */
-	private boolean checkWestDieColor(BoardField boardField, Color color) {
+	private boolean checkWestDieColor(BoardField boardField, ModelColor modelColor) {
 		if(boardField.getxPos() == 1) {
 			return false;
 		}
 		BoardField boardFieldNext = getBoardField(boardField.getxPos() - 1, boardField.getyPos());
 		if(boardFieldNext.hasDie()) {
-			return checkFieldColorAndDieColor(boardFieldNext, color);
+			return checkFieldColorAndDieColor(boardFieldNext, modelColor);
 		}
 		return false;
 	}
@@ -244,13 +244,13 @@ public class Board {
 	/**
      * returns true if the dice east of the boardfield has the color of the parameter
      */
-	private boolean checkEastDieColor(BoardField boardField, Color color) {
+	private boolean checkEastDieColor(BoardField boardField, ModelColor modelColor) {
 		if(boardField.getxPos() == BOARD_SQUARES_HORIZONTAL) {
 			return false;
 		}
 		BoardField boardFieldNext = getBoardField(boardField.getxPos() + 1, boardField.getyPos());
 		if(boardFieldNext.hasDie()) {
-			return checkFieldColorAndDieColor(boardFieldNext, color);
+			return checkFieldColorAndDieColor(boardFieldNext, modelColor);
 		}
 		return false;
 	}
@@ -258,13 +258,13 @@ public class Board {
 	/**
      * returns true if the dice south of the boardfield has the color of the parameter
      */
-	private boolean checkSouthDieColor(BoardField boardField, Color color) {
+	private boolean checkSouthDieColor(BoardField boardField, ModelColor modelColor) {
 		if(boardField.getyPos() == BOARD_SQUARES_VERTICAL) {
 			return false;
 		}
 		BoardField boardFieldNext = getBoardField(boardField.getxPos(), boardField.getyPos() + 1);
 		if (boardFieldNext.hasDie()) {
-			return checkFieldColorAndDieColor(boardFieldNext, color);
+			return checkFieldColorAndDieColor(boardFieldNext, modelColor);
 		}
 		return false;
 	}
@@ -334,11 +334,11 @@ public class Board {
      * returns true if the dice on the side have the same color as the parameter
      * 
      */
-	public boolean checkSidesColor(BoardField boardField, Color color) {
-		return checkNorthDieColor(boardField, color)
-				&& checkEastDieColor(boardField, color)
-				&& checkSouthDieColor(boardField, color)
-				&& checkWestDieColor(boardField, color);
+	public boolean checkSidesColor(BoardField boardField, ModelColor modelColor) {
+		return checkNorthDieColor(boardField, modelColor)
+				&& checkEastDieColor(boardField, modelColor)
+				&& checkSouthDieColor(boardField, modelColor)
+				&& checkWestDieColor(boardField, modelColor);
 	}
 	
 	/**
@@ -356,11 +356,11 @@ public class Board {
 	 /**
      * Returns true when the boardfield has the same color as the parameter
      */
-	public boolean checkFieldColorAndDieColor(BoardField boardField, Color color) {
+	public boolean checkFieldColorAndDieColor(BoardField boardField, ModelColor modelColor) {
 		int xPos = boardField.getxPos();
 		int yPos = boardField.getyPos();
-		Color fieldColor = patternCard.getFieldColor(xPos, yPos);
-		if(fieldColor == color) {
+		ModelColor fieldColor = patternCard.getFieldColor(xPos, yPos);
+		if(fieldColor == modelColor) {
 			return true;
 		}
 		else { 

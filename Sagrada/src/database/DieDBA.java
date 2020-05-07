@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import model.Color;
+import model.ModelColor;
 import model.Die;
 
 public class DieDBA {
@@ -19,30 +19,30 @@ public class DieDBA {
 	public ArrayList<Die> getDice(){
 		ArrayList<Die> list = new ArrayList<>();
 		String query = "SELECT * FROM die;";
-		Color color = Color.BLUE;
+		ModelColor modelColor = ModelColor.BLUE;
 		try {
 			Statement stmt = conn.createStatemant();
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next()){
 				switch(rs.getString("color")) {
 				case "blue":
-					color = Color.BLUE;
+					modelColor = ModelColor.BLUE;
 					break;
 				case "green":
-					color = Color.GREEN;
+					modelColor = ModelColor.GREEN;
 					break;
 				case "purple":
-					color = Color.PURPLE;
+					modelColor = ModelColor.PURPLE;
 					break;
 				case "red":
-					color = Color.RED;
+					modelColor = ModelColor.RED;
 					break;
 				case "yellow":
-					color = Color.YELLOW;
+					modelColor = ModelColor.YELLOW;
 					break;
 				}
 				
-				Die die = new Die(color ,rs.getInt("number"));
+				Die die = new Die(modelColor ,rs.getInt("number"));
 				list.add(die);
 			}
 			stmt.close();

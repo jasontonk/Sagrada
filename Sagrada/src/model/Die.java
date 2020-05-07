@@ -2,15 +2,15 @@ package model;
 
 public class Die {
 
-	private Color color;
+	private ModelColor modelColor;
 	private int number;
 	
 	
 	/**
      * constructor to initialize all instance variables
      */
-	public Die(Color color, int number) {
-		this.color = color;
+	public Die(ModelColor modelColor, int number) {
+		this.modelColor = modelColor;
 		this.number = number;
 	}
 	
@@ -18,22 +18,22 @@ public class Die {
      * constructor to initialize all instance variables
      */
 	public Die(Die die) {
-		this.color = die.getColor();
+		this.modelColor = die.getColor();
 		this.number = die.getNumber();
 	}
 	
 	/**
      * returns the color of the Die
      */
-	public Color getColor() {
-		return color;
+	public ModelColor getColor() {
+		return modelColor;
 	}
 	
 	/**
      * sets the color of the Die
      */
-	public void setColor(Color color) {
-		this.color = color;
+	public void setColor(ModelColor modelColor) {
+		this.modelColor = modelColor;
 	}
 
 	/**

@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import model.Color;
+import model.ModelColor;
 import model.Game;
 import model.PatternCard;
 import model.Player;
@@ -64,28 +64,28 @@ public class PlayerDBA {
 		return color;
 	}
 	
-	private Color getColorFromString(String c) {
-		Color color = Color.BLUE;
+	private ModelColor getColorFromString(String c) {
+		ModelColor modelColor = ModelColor.BLUE;
 		switch(c) {
 		case "blue":
-			color = Color.BLUE;
+			modelColor = ModelColor.BLUE;
 			break;
 		case "green":
-			color = Color.GREEN;
+			modelColor = ModelColor.GREEN;
 			break;
 		case "purple":
-			color = Color.PURPLE;
+			modelColor = ModelColor.PURPLE;
 			break;
 		case "red":
-			color = Color.RED;
+			modelColor = ModelColor.RED;
 			break;
 		case "yellow":
-			color = Color.YELLOW;
+			modelColor = ModelColor.YELLOW;
 			break;
 		default:
-			color = null;
+			modelColor = null;
 		}
-		return color;
+		return modelColor;
 	}
 	
 	private int autoIdPlayer() {
