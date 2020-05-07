@@ -23,8 +23,8 @@ public class Maintest extends Application {
 		Scene scene = new Scene(new AccountView());
 		stage.setScene(scene);
 		stage.setWidth(800);
-		stage.setHeight(600);
+		stage.setHeight(600); 
 		stage.show();
-	}
+	} 
 
 }
