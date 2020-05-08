@@ -7,6 +7,6 @@
 	</classpathentry>
 	<classpathentry kind="src" path="Sagrada/src"/>
 	<classpathentry kind="src" path="resources"/>
-	<classpathentry kind="lib" path="C:/Users/Matheus/Documents/Avans/Java/mysql-connector-java-5.1.48.jar"/>
+	<classpathentry kind="lib" path="Sagrada/src/database/mysql-connector-java-5.1.48.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
