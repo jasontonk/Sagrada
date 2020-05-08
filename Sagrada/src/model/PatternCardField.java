@@ -7,6 +7,9 @@ public class PatternCardField {
 	private int positionY;
 	private int positionX;
 
+	public PatternCardField() {
+		
+	}
 	// Return the color of this PatternCardField.
 
 	public ModelColor getColor() {
