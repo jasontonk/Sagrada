@@ -36,7 +36,9 @@ public class PatternCardDBA {
     }
 
 	public void addPatterncard(PatternCard patternCard ) {
-		 String query = "INSERT INTO patterncard (idpattercard,difficulty,standard) VALUES("+autoIdPatternCard()+","+patternCard.getDifficulty()+",0);";
+		int ID = autoIdPatternCard();
+		patternCard.setPatterncardID(ID);
+		String query = "INSERT INTO patterncard (idpatterncard,difficulty,standard) VALUES("+ID+","+patternCard.getDifficulty()+",0);";
 		 
 		 try {
 				Statement stmt = conn.createStatemant();
@@ -79,7 +81,7 @@ public class PatternCardDBA {
 	private int getRandomPattercardID() {
 		int id = 0;
 		int totaalid = 0;
-		String query = "SELECT idpatterncard FROM patterncard;";
+		String query = "SELECT idpatterncard FROM patterncard WHERE name IS NOT NULL;";
         try {
 			Statement stmt = conn.createStatemant();
 			ResultSet rs = stmt.executeQuery(query);

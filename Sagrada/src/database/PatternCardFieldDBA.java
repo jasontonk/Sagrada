@@ -20,7 +20,7 @@ public class PatternCardFieldDBA {
 		 public ArrayList<PatternCardField> getPatternCardFieldsOfPatterncard(PatternCard patternCard) {
 			 ArrayList<PatternCardField> list = new ArrayList<>();
 			 ModelColor modelColor = null;
-			 String query = "SELECT * FROM patterncardfield WHERE patterncard_idpatterncard= "+patternCard.getPatterncardID()+" ORDER BY position_x, position_y";
+			 String query = "SELECT * FROM patterncardfield WHERE idpatterncard= "+patternCard.getPatterncardID()+" ORDER BY position_x, position_y";
 			 try {
 					Statement stmt = conn.createStatemant();
 					ResultSet rs = stmt.executeQuery(query);
@@ -29,22 +29,27 @@ public class PatternCardFieldDBA {
 						int ypos = rs.getInt("position_y");
 						String c = rs.getString("color");
 						int value = rs.getInt("value");
-						switch(c) {
-						case "blue":
-							modelColor = ModelColor.BLUE;
-							break;
-						case "green":
-							modelColor = ModelColor.GREEN;
-							break;
-						case "purple":
-							modelColor = ModelColor.PURPLE;
-							break;
-						case "red":
-							modelColor = ModelColor.RED;
-							break;
-						case "yellow":
-							modelColor = ModelColor.YELLOW;
-							break;
+						if(c == null) {
+							modelColor = null;
+						}
+						else {
+							switch(c) {
+							case "blue":
+								modelColor = ModelColor.BLUE;
+								break;
+							case "green":
+								modelColor = ModelColor.GREEN;
+								break;
+							case "purple":
+								modelColor = ModelColor.PURPLE;
+								break;
+							case "red":
+								modelColor = ModelColor.RED;
+								break;
+							case "yellow":
+								modelColor = ModelColor.YELLOW;
+								break;
+							}
 						}
 						
 						PatternCardField patternCardField = new PatternCardField(modelColor,value, ypos,xpos);
@@ -59,29 +64,37 @@ public class PatternCardFieldDBA {
 		 
 		 public void addPatternCardField(ArrayList<PatternCardField> patterncardfield, PatternCard patterncard){
 			 String color;
-			 
+			 String query;			 
+		
 			 for(int i = 0; i < patterncardfield.size(); i++) {
-				 
-				 switch(patterncardfield.get(i).getColor()) {
-					case BLUE:
-						color = "blue" ;
-						break;
-					case GREEN:
-						color = "green";
-						break;
-					case PURPLE:
-						color = "purple";
-						break;
-					case RED:
-						color = "red";
-						break;
-					case YELLOW:
-						color = "yellow";
-						break;
-					default:
-						color = null;
-					}
-				 String query = "INSERT INTO patterncardfield VALUES("+patterncard.getPatterncardID()+","+patterncardfield.get(i).getPositionX()+","+patterncardfield.get(i).getPositionY()+","+color+","+patterncardfield.get(i).getValue()+");";
+				 color = null;
+				 if(patterncardfield.get(i).getColor() != null) {
+					 switch(patterncardfield.get(i).getColor()) {
+						case BLUE:
+							color = "'blue'" ;
+							break;
+						case GREEN:
+							color = "'green'";
+							break;
+						case PURPLE:
+							color = "'purple'";
+							break;
+						case RED:
+							color = "'red'";
+							break;
+						case YELLOW:
+							color = "'yellow'";
+							break;
+						default:
+							color = null;
+						}
+				 }
+				 if(patterncardfield.get(i).getValue() == 0) {
+					 query = "INSERT INTO patterncardfield (idpatterncard, position_x, position_y, color, value) VALUES("+patterncard.getPatterncardID()+","+patterncardfield.get(i).getPositionX()+","+patterncardfield.get(i).getPositionY()+","+color+","+null+");"; 
+				 }
+				 else {
+					 query = "INSERT INTO patterncardfield (idpatterncard, position_x, position_y, color, value) VALUES("+patterncard.getPatterncardID()+","+patterncardfield.get(i).getPositionX()+","+patterncardfield.get(i).getPositionY()+","+color+","+patterncardfield.get(i).getValue()+");";
+				 }
 				 try {
 						Statement stmt = conn.createStatemant();
 						stmt.executeUpdate(query);
@@ -97,7 +110,7 @@ public class PatternCardFieldDBA {
 		 public ModelColor getColorOfField(int id, int xpos, int ypos) {
 		
 			 ModelColor modelColor = null;
-			 String query = "SELECT color FROM patterncardfield WHERE patterncard_idpatterncard= "+id+"AND position_x = "+xpos+" And position_y ="+ypos+";";
+			 String query = "SELECT color FROM patterncardfield WHERE idpatterncard= "+id+"AND position_x = "+xpos+" And position_y ="+ypos+";";
 			 try {
 					Statement stmt = conn.createStatemant();
 					ResultSet rs = stmt.executeQuery(query);
@@ -131,7 +144,7 @@ public class PatternCardFieldDBA {
 		 public int getValueOfField(int id, int xpos, int ypos) {
 			
 			 int value = 0;
-			 String query = "SELECT value FROM patterncardfield WHERE patterncard_idpatterncard= "+id+"AND position_x = "+xpos+" And position_y ="+ypos+";";
+			 String query = "SELECT value FROM patterncardfield WHERE idpatterncard= "+id+"AND position_x = "+xpos+" And position_y ="+ypos+";";
 			 try {
 					Statement stmt = conn.createStatemant();
 					ResultSet rs = stmt.executeQuery(query);
