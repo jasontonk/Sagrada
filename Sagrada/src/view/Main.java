@@ -1,6 +1,5 @@
 package view;
 
-
 import controller.PatterncardController;
 import database.DataBaseConnection;
 import javafx.application.Application;
