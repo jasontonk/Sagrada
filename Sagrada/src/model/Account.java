@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import database.AccountDBA;
 import database.DataBaseConnection;
 import database.PlayerDBA;
+import javafx.scene.paint.Color;
 
 public class Account {
 	
@@ -15,6 +16,12 @@ public class Account {
 	private ArrayList<Invitation> invitations; 
 	private DataBaseConnection connection;
 	private AccountDBA accountDBA;
+	
+	private int mostUsedValue;
+	private Color mostUsedColor;
+	private int[] winsAndLoses;
+	private int highestScore;
+	private int differentOpponents;
 	
 	/**
      * 
@@ -71,7 +78,7 @@ public class Account {
 	}
 	
 	public boolean accountExists(String username) {
-		accountDBA.accountExists(username);
+		return accountDBA.accountExists(username);
 	}
 
 	/**
@@ -79,7 +86,7 @@ public class Account {
      */
 	public String getPassword(String username) {
 		//TODO
-		return accountDBA.getPassword(username);
+		return accountDBA.GetPassword(username);
 	}
 
 	/**
@@ -183,6 +190,11 @@ public class Account {
 		int wins = accountDBA.getWins(this);
 		int loses = accountDBA.getLoses(this);
 		int[] winsAndLoses = {wins, loses};
-		return winsAndLoses;
+		return winsAndLoses; 
 	}
+	
+	public ArrayList<Account> getAllAccounts(){
+		return accountDBA.GetAllAccountsDB();
+	}
+
 }

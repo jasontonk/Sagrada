@@ -22,25 +22,19 @@ public class AccountView extends BorderPane {
     private AccountController accountController;
     private Pane output; 
     private ArrayList<Game> games;
+    private MyScene myScene;
 	
-	public AccountView() {
+	public AccountView(AccountController accountController) {
 		this.accountController = accountController;
         accounts = new ArrayList<Account>();
         this.setPrefSize(800, 600);
         this.makeAccountPane();
 	}
 	
-	private void makeAccountPane() {
-		// TODO Auto-generated method stub
+	public void makeAccountPane() {
 		HBox accountView = new HBox();
 		
-//		Account azmat = new Account("azmat", 1, "rood");
-//		Account rutger = new Account("rutger", 5, "blauw");
-//		Account milan = new Account("milan", 4, "groen");
-		
-//		accounts.add(0, azmat);
-//		accounts.add(1, rutger);
-//		accounts.add(2, milan);
+		accounts = accountController.getAllAccounts();
 		
 		Pane overview = new Pane();
 		overview.setBackground(new Background(new BackgroundFill(Color.BLUE, null, null)));
@@ -74,11 +68,19 @@ public class AccountView extends BorderPane {
 		
 		accountView.getChildren().addAll(left, right);
 		this.getChildren().add(accountView);
+		
 	}
 	
-	private void showStats(Account a) {
+	private void showStats(Account account) {
 		TextArea stats = new TextArea();
-//		stats.appendText(a.getStats(a) + "\n");
+		stats.appendText("Hoogste score: " + account.getHighestScore() + "\n");
+		stats.appendText("Meest gebruikte kleur: " + account.getMostUsedColor() + "\n");
+		stats.appendText("Meest gebruikte waarde:  " + account.getMostUsedValue() + "\n");
+		stats.appendText("Verschillende tegenstanders: " + account.getValueOfDifferentPlayedAccounts() + "\n");
+		
+		int[] winsloses = account.getWinsAndLoses();
+		
+		stats.appendText("Overwinningen en verliezen: " + winsloses[0] + " - " + winsloses[1] + "\n");
 		output.getChildren().add(stats);
 	}
 	

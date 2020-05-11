@@ -1,9 +1,12 @@
 package controller;
 
+import java.util.ArrayList;
+
 import database.DataBaseConnection;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import model.Account;
+import view.AccountView;
 import view.LoginView;
 
 public class AccountController {
@@ -11,33 +14,36 @@ public class AccountController {
 	private Account account;
 	private LoginView loginView;
 	private DataBaseConnection connection;
+	private AccountView accountView;
 	
-	public AccountController(Account account, DataBaseConnection c) {
-		this.account = account;
+	public AccountController(DataBaseConnection c) {
 		this.connection = c;
 		loginView = new LoginView(this);
+		account = new Account(c);
 		// TODO Auto-generated constructor stub
 	}
 	
-	public EventHandler<ActionEvent> actionLogin(String username, String password) {
+	public void actionLogin(String username, String password) {
 		if(account.accountExists(username)) {
-			if(password.equals(account.getPassword())) {
-				
+			if(password.equals(account.getPassword(password))) {
+				accountView.makeAccountPane();
 			}
 		}
 		// TODO Auto-generated method stub
-		return null;
+		else System.out.println("fout");
 	}
 
-	public EventHandler<ActionEvent> actionRegister(String username, String password) {
+	public void actionRegister(String username, String password) {
 		if(account.accountExists(username)) {
 			loginView.addError();
 		} else {
-			//TODO vragen of het alleen in db opgeslagen wordt, of ook lokaal
-			account.setUsername(username);
-			account.setPassword(password);
 			account.setAccount(username, password);
+			accountView.makeAccountPane();
 		}
+	}
+	
+	public ArrayList<Account> getAllAccounts() {
+		return account.getAllAccounts();
 	}
 
 }
