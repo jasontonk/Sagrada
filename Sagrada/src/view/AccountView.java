@@ -22,7 +22,7 @@ public class AccountView extends BorderPane {
     private AccountController accountController;
     private Pane output; 
     private ArrayList<Game> games;
-    private MyScene myScene;
+//  private MyScene myScene;
 	
 	public AccountView(AccountController accountController) {
 		this.accountController = accountController;
