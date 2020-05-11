@@ -29,7 +29,7 @@ public class PlayerDBA {
 				"',"+player.getPatternCard().getPatterncardID()+","+player.getScore()+");";
 		
 		try {
-			Statement stmt = conn.createStatemant();
+			Statement stmt = conn.getConn().createStatement();
 			stmt.executeUpdate(query);
 			stmt.close();
 			game.addPlayerDB(playerid, player.getGame().getGameID());
@@ -41,49 +41,52 @@ public class PlayerDBA {
 	}
 	
 	private String getStringFromColor(Player player) {
-		String color;
-		switch(player.getColor()) {
-		case BLUE:
-			color = "blue" ;
-			break;
-		case GREEN:
-			color = "green";
-			break;
-		case PURPLE:
-			color = "purple";
-			break;
-		case RED:
-			color = "red";
-			break;
-		case YELLOW:
-			color = "yellow";
-			break;
-		default:
-			color = null;
+		String color = null;
+		if(player.getColor()!=null) {
+			switch(player.getColor()) {
+			case BLUE:
+				color = "blue" ;
+				break;
+			case GREEN:
+				color = "green";
+				break;
+			case PURPLE:
+				color = "purple";
+				break;
+			case RED:
+				color = "red";
+				break;
+			case YELLOW:
+				color = "yellow";
+				break;
+			}
 		}
+		
 		return color;
 	}
 	
 	private ModelColor getColorFromString(String c) {
-		ModelColor modelColor = ModelColor.BLUE;
-		switch(c) {
-		case "blue":
-			modelColor = ModelColor.BLUE;
-			break;
-		case "green":
-			modelColor = ModelColor.GREEN;
-			break;
-		case "purple":
-			modelColor = ModelColor.PURPLE;
-			break;
-		case "red":
-			modelColor = ModelColor.RED;
-			break;
-		case "yellow":
-			modelColor = ModelColor.YELLOW;
-			break;
-		default:
-			modelColor = null;
+		ModelColor modelColor = null;
+		if(c != null){
+			switch(c) {
+			case "blue":
+				modelColor = ModelColor.BLUE;
+				break;
+			case "green":
+				modelColor = ModelColor.GREEN;
+				break;
+			case "purple":
+				modelColor = ModelColor.PURPLE;
+				break;
+			case "red":
+				modelColor = ModelColor.RED;
+				break;
+			case "yellow":
+				modelColor = ModelColor.YELLOW;
+				break;
+			default:
+				modelColor = null;
+			}
 		}
 		return modelColor;
 	}
@@ -96,7 +99,7 @@ public class PlayerDBA {
 		
 		String query = "SELECT idplayer FROM player;";
 		try {
-			Statement stmt = conn.createStatemant();
+			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next()) {
 				int idgame = rs.getInt("idplayer");
@@ -121,7 +124,7 @@ public class PlayerDBA {
 		
 		String query = "UPDATE player SET playstatus = '"+player.getPlayerStatus()+"' WHERE idplayer = "+player.getId()+";";
 		try {
-			Statement stmt = conn.createStatemant();
+			Statement stmt = conn.getConn().createStatement();
 			stmt.executeUpdate(query);
 			stmt.close();
 		
@@ -133,7 +136,7 @@ public class PlayerDBA {
 	public void setScore(Player player) {
 		String query = "UPDATE player SET score = "+player.getScore()+" WHERE idplayer = "+player.getId()+";";
 		try {
-			Statement stmt = conn.createStatemant();
+			Statement stmt = conn.getConn().createStatement();
 			stmt.executeUpdate(query);
 			stmt.close();
 		
@@ -147,7 +150,7 @@ public class PlayerDBA {
 		Player player = new Player(conn, null);
         String query = "SELECT * FROM player WHERE idplayer="+idplayer+";";
         try {
-        	Statement stmt = conn.createStatemant();
+        	Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
             if (rs.next()) {
             	PatternCardDBA patternCard = new PatternCardDBA(conn);
@@ -175,7 +178,7 @@ public class PlayerDBA {
 			Player player = new Player(conn, null);
 	        String query = "SELECT * FROM player WHERE seqnr= "+seqnr+" AND idgame="+game.getGameID()+";";
 	        try {
-	        	Statement stmt = conn.createStatemant();
+	        	Statement stmt = conn.getConn().createStatement();
 				ResultSet rs = stmt.executeQuery(query);
 	            if (rs.next()) {
 	            	PatternCardDBA patternCard = new PatternCardDBA(conn);
@@ -202,7 +205,7 @@ public void setPlayerPatternCard(PatternCard patternCard,Player player){
 		
 		String query = "UPDATE player SET idpatterncard = "+patternCard.getPatterncardID()+" WHERE idplayer = "+player.getId()+";";
 		try {
-			Statement stmt = conn.createStatemant();
+			Statement stmt = conn.getConn().createStatement();
 			stmt.executeUpdate(query);
 			stmt.close();
 		

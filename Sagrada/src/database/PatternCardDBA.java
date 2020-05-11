@@ -21,7 +21,7 @@ public class PatternCardDBA {
         
         String query = "SELECT * FROM patterncard WHERE idpatterncard= "+getRandomPattercardID()+";";
         try {
-			Statement stmt = conn.createStatemant();
+			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			if(rs.next()) {
 				patternCard = new PatternCard(rs.getString("name"), rs.getInt("difficulty"),conn);
@@ -41,7 +41,7 @@ public class PatternCardDBA {
 		String query = "INSERT INTO patterncard (idpatterncard,difficulty,standard) VALUES("+ID+","+patternCard.getDifficulty()+",0);";
 		 
 		 try {
-				Statement stmt = conn.createStatemant();
+				Statement stmt = conn.getConn().createStatement();
 				stmt.executeUpdate(query);
 				stmt.close();
 			}catch(SQLException e) {
@@ -56,7 +56,7 @@ public class PatternCardDBA {
 		
 		String query = "SELECT idpatterncard FROM patterncard;";
 		try {
-			Statement stmt = conn.createStatemant();
+			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next()) {
 				int idgame = rs.getInt("idpatterncard");
@@ -83,7 +83,7 @@ public class PatternCardDBA {
 		int totaalid = 0;
 		String query = "SELECT idpatterncard FROM patterncard WHERE name IS NOT NULL;";
         try {
-			Statement stmt = conn.createStatemant();
+			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next()) {
 				totaalid++;
@@ -103,7 +103,7 @@ public class PatternCardDBA {
         PatternCard patternCard = null;
         String query = "SELECT patterncard.* FROM patterncard INNER JOIN player p on patterncard.idpatterncard = p.patterncard_idpatterncard WHERE p.idplayer= "+idplayer+";";
         try {
-			Statement stmt = conn.createStatemant();
+			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			if(rs.next()) {
 				patternCard = new PatternCard(rs.getString("name"), rs.getInt("difficulty"),conn);
@@ -122,7 +122,7 @@ public class PatternCardDBA {
 		ArrayList<PatternCard> list = new ArrayList<>();
 		String query = "SELECT * FROM patterncard INNER JOIN patterncardoption p on patterncard.idpatterncard = p.patterncard_idpatterncard WHERE player_idplayer= "+idplayer+";";
 		try {
-			Statement stmt = conn.createStatemant();
+			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			if(rs.next()) {
 				PatternCard patternCard = new PatternCard(rs.getString("name"), rs.getInt("difficulty"),conn);
@@ -143,7 +143,7 @@ public class PatternCardDBA {
 			 String query = "INSERT INTO patterncardoption VALUES("+patternCard.getPatterncardID()+","+idplayer+");";
 				
 				try {
-					Statement stmt = conn.createStatemant();
+					Statement stmt = conn.getConn().createStatement();
 					stmt.executeUpdate(query);
 					stmt.close();
 				}catch(SQLException e) {
@@ -157,7 +157,7 @@ public class PatternCardDBA {
 	        
 	        String query = "SELECT * FROM patterncard WHERE idpatterncard= "+id+";";
 	        try {
-				Statement stmt = conn.createStatemant();
+				Statement stmt = conn.getConn().createStatement();
 				ResultSet rs = stmt.executeQuery(query);
 				if(rs.next()) {
 					patternCard = new PatternCard(rs.getString("name"), rs.getInt("difficulty"),conn);

@@ -19,27 +19,29 @@ public class DieDBA {
 	public ArrayList<Die> getDice(){
 		ArrayList<Die> list = new ArrayList<>();
 		String query = "SELECT * FROM die;";
-		ModelColor modelColor = ModelColor.BLUE;
+		ModelColor modelColor = null;
 		try {
-			Statement stmt = conn.createStatemant();
+			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next()){
-				switch(rs.getString("color")) {
-				case "blue":
-					modelColor = ModelColor.BLUE;
-					break;
-				case "green":
-					modelColor = ModelColor.GREEN;
-					break;
-				case "purple":
-					modelColor = ModelColor.PURPLE;
-					break;
-				case "red":
-					modelColor = ModelColor.RED;
-					break;
-				case "yellow":
-					modelColor = ModelColor.YELLOW;
-					break;
+				if(rs.getString("color") != null) {
+					switch(rs.getString("color")) {
+					case "blue":
+						modelColor = ModelColor.BLUE;
+						break;
+					case "green":
+						modelColor = ModelColor.GREEN;
+						break;
+					case "purple":
+						modelColor = ModelColor.PURPLE;
+						break;
+					case "red":
+						modelColor = ModelColor.RED;
+						break;
+					case "yellow":
+						modelColor = ModelColor.YELLOW;
+						break;
+					}
 				}
 				
 				Die die = new Die(modelColor ,rs.getInt("number"));

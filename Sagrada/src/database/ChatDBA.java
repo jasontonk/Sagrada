@@ -21,7 +21,7 @@ private DataBaseConnection conn;
 		String query = "INSERT INTO chatline VALUES('"+idplayer+"','"+timestamp+"','"+message+"');";
 		
 		try {
-			Statement stmt = conn.createStatemant();
+			Statement stmt = conn.getConn().createStatement();
 			stmt.executeUpdate(query);
 			stmt.close();
 			return true;
@@ -36,7 +36,7 @@ private DataBaseConnection conn;
 		
 		String query = "SELECT * FROM chatline WHERE player_idplayer = "+idplayer+" AND time ='"+timestamp+"';";
 		try {
-			Statement stmt = conn.createStatemant();
+			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next()) {
 				text = rs.getString("message");
@@ -52,7 +52,7 @@ private DataBaseConnection conn;
 	public void getTime(Chat chatline) {
 		String query = "SELECT NOW()";
 		try {
-			Statement stmt = conn.createStatemant();
+			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next()) {
 				chatline.setTime(rs.getTimestamp("NOW()"));
@@ -67,7 +67,7 @@ private DataBaseConnection conn;
 		ArrayList<Chat> chatlines = new ArrayList<>();
 		String query = "SELECT chatline.* FROM chatline JOIN player ON chatline.player_idplayer = player.idplayer WHERE game_idgame = "+gameid+" ORDER BY time ASC;";
 		try {
-			Statement stmt = conn.createStatemant();
+			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next()) {
 				Chat chat = new Chat(rs.getInt("player_idplayer"), rs.getString("message"), conn); //edited to fix error

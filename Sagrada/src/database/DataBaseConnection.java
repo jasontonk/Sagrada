@@ -3,7 +3,6 @@ package database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class DataBaseConnection {
 	
@@ -38,14 +37,7 @@ public class DataBaseConnection {
 		}
 	}
 	
-	public Statement createStatemant() {
-		try {
-			return conn.createStatement();
-		}catch(SQLException e){
-			return null;
-		}
+	public Connection getConn() {
+		return conn;
 	}
-	
-	
-
 }

@@ -21,7 +21,7 @@ private DataBaseConnection conn;
 		String query = "SELECT * FROM gamefavortoken WHERE idplayer= "+playerid+" AND gametoolcard IS NULL;";
 		
 		try {
-			Statement stmt = conn.createStatemant();
+			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
                 FavorToken favorToken = new FavorToken(rs.getInt("idfavortoken"), player, rs.getInt("idgame"), conn); //edited to fix error
@@ -40,7 +40,7 @@ private DataBaseConnection conn;
 		String query = "SELECT MAX(idfavortoken) AS highestFavorTokenId FROM gamefavortoken;";
 		
 		try {
-			Statement stmt = conn.createStatemant();
+			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			 if (rs.next()) {
 	                favorTokenId = rs.getInt("highestFavorTokenId") + 1;
@@ -59,7 +59,7 @@ private DataBaseConnection conn;
 		String query = "INSERT INTO gamefavortoken ((idfavortoken, idgame) VALUES("+favortokenid+","+gameid+");";
 		
 		try {
-			Statement stmt = conn.createStatemant();
+			Statement stmt = conn.getConn().createStatement();
 			stmt.executeUpdate(query);
 			stmt.close();
 			return true;
@@ -73,7 +73,7 @@ private DataBaseConnection conn;
 		String query = "UPDATE gamefavortoken SET idplayer= "+playerid+" WHERE idfavortoken= "+favortokenid+";";
 
 			try {
-					Statement stmt = conn.createStatemant();
+					Statement stmt = conn.getConn().createStatement();
 					stmt.executeUpdate(query);
 					stmt.close();
 				
@@ -86,7 +86,7 @@ private DataBaseConnection conn;
 		ArrayList<FavorToken> list = new ArrayList<>();
 		String query = "SELECT * FROM gamefavortoken WHERE idgame= "+gameid+" AND idplayer IS NULL;";
 		try {
-			Statement stmt = conn.createStatemant();
+			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
                 FavorToken favorToken = new FavorToken(rs.getInt("idfavortoken"), gameid, conn);// changed to add gameid and conn to constructor
@@ -103,7 +103,7 @@ private DataBaseConnection conn;
 	public void setFavortokensForToolCard(int playerid, int gametoolcard, int round, int idfavortoken) {
 		String query = "UPDATE gamefavortoken SET idplayer= "+playerid+", gametoolcard= "+gametoolcard+", round= "+round+" WHERE idfavortoken="+idfavortoken+";";
 		try {
-			Statement stmt = conn.createStatemant();
+			Statement stmt = conn.getConn().createStatement();
 			stmt.executeUpdate(query);
 			stmt.close();
 		}catch (SQLException e) {
