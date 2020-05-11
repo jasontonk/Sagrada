@@ -31,8 +31,8 @@ public class AccountController {
 		}
 		// TODO Auto-generated method stub
 		else System.out.println("fout");
-	}
-
+	}  //test
+ 
 	public void actionRegister(String username, String password) {
 		if(account.accountExists(username)) {
 			loginView.addError();

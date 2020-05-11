@@ -30,9 +30,9 @@ public class AccountView extends BorderPane {
         this.setPrefSize(800, 600);
         this.makeAccountPane();
 	}
-	
+
 	public void makeAccountPane() {
-		HBox accountView = new HBox();
+		HBox accountView = new HBox();  //test
 		
 		accounts = accountController.getAllAccounts();
 		

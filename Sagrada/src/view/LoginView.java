@@ -133,7 +133,8 @@ public class LoginView extends VBox {
 		
 		HBox yesno = new HBox();
 		yesno.getChildren().addAll(register,back);
-		yesno.setAlignment(Pos.CENTER);
+		yesno.setAlignment(Pos.CENTER); 
+		 //test
 		
 		registerPane.getChildren().addAll(textPane, loginFields, yesno);
 		
