@@ -9,7 +9,7 @@ public class PatterncardController {
 	PatternCard patterncard;
 	public PatterncardController(DataBaseConnection conn) {
 		patterncard = new PatternCard(conn); 
-		patterncard.setpattern(true);
+		patterncard.setpattern(false);
 	}
 	
 	public ModelColor getFieldColor(int x, int y){

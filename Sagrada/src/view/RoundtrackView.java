@@ -54,7 +54,8 @@ public class RoundtrackView extends VBox {
 	public BorderPane drawRound() {
 		BorderPane roundPane =  new BorderPane();
 		Text round = new Text();
-		round.setText("Ronde: " + roundtrackController.getRound());
+		round.setText("ronde: 6");
+//		round.setText("Ronde: " + roundtrackController.getRound());
 		roundPane.setPadding(padding);
 		roundPane.setRight(round);
 		return roundPane;
