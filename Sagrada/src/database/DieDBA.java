@@ -21,7 +21,7 @@ public class DieDBA {
 		String query = "SELECT * FROM die;";
 		ModelColor modelColor = null;
 		try {
-			Statement stmt = conn.createStatemant();
+			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next()){
 				if(rs.getString("color") != null) {
