@@ -36,6 +36,9 @@ public class RoundTrack {
 		}
 		return null;//returns null if nothing can be returned
 	}
+	public int getCurrentRound() {
+		return game.getRound();
+	}
 	
 	
 }

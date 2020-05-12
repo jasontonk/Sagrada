@@ -18,7 +18,7 @@ public class Main extends Application  {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Scene scene = new Scene(new DicePoolView(controller));
+		Scene scene = new Scene(new RoundtrackView(null));
 		
 		primaryStage.setScene(scene);
 		primaryStage.show();

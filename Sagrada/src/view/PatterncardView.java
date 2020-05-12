@@ -78,7 +78,7 @@ public class PatterncardView extends VBox{
 	public BorderPane drawDifficulty() {
 		BorderPane difficultyPane = new BorderPane();
 		Text difficulty = new Text();
-		difficulty.setText("Difficulty = " + patterncardController.getDifficulty());
+		difficulty.setText("Moeilijkheidsgraad = " + patterncardController.getDifficulty());
 		difficultyPane.setPadding(padding);
 	    difficultyPane.setRight(difficulty);
 	    return difficultyPane;
