@@ -11,8 +11,9 @@ public class Game {
 	private Board board;
 	private ArrayList<Toolcard> toolcards;
 	private ArrayList<PublicObjectiveCard> publicObjectiveCards;
-	private GameDie[] diesInBag; // 18 per kleur 5 kleuren
-	private GameDie[] usedDice ;
+	private GameDie[] diceInBag; // 18 per kleur 5 kleuren
+	private ArrayList<GameDie> usedDice ;
+	private GameDie[] offer;
 	private RoundTrack roundTrack;
 	private Chat chat;
 	private int round;
@@ -28,8 +29,9 @@ public class Game {
 		gamePatterncards = new ArrayList<PatternCard>();
 		playerPatterncards = new ArrayList<PatternCard>();
 		publicObjectiveCards = new ArrayList<PublicObjectiveCard>();
-		diesInBag = new GameDie[90];
-		usedDice = new GameDie[90];
+		diceInBag = new GameDie[90];
+		usedDice = new ArrayList<>();
+		offer = new GameDie[9];
 		round = 1;
 
 		accounts.add(account1);
@@ -50,7 +52,9 @@ public class Game {
 		gamePatterncards = new ArrayList<PatternCard>();
 		playerPatterncards = new ArrayList<PatternCard>();
 		publicObjectiveCards = new ArrayList<PublicObjectiveCard>();
-		diesInBag = new GameDie[90];
+		diceInBag = new GameDie[90];
+		usedDice = new ArrayList<>();
+		offer = new GameDie[9];
 		round = 1;
 
 		accounts.add(account1);
@@ -74,7 +78,9 @@ public class Game {
 		gamePatterncards = new ArrayList<PatternCard>();
 		playerPatterncards = new ArrayList<PatternCard>();
 		publicObjectiveCards = new ArrayList<PublicObjectiveCard>();
-		diesInBag = new GameDie[90];
+		diceInBag = new GameDie[90];
+		usedDice = new ArrayList<>();
+		offer = new GameDie[9];
 		round = 1;
 
 		accounts.add(account1);
@@ -96,6 +102,7 @@ public class Game {
 
 	public Game(int id) {
 		gameID = id;
+		offer = new GameDie[9];
 	}
 
 //	public void checkInvites() {
@@ -154,32 +161,54 @@ public class Game {
 
 	}
 
-	public void selectDice() {
+	public void grabDiceFromBag() {
 		int amountofdice = players.size() * 2 + 1;
 		Random r = new Random();
-		GameDie[] offer = new GameDie[9];
+		
 		
 		while (offer[8] == null) {
 			for (int i = 0; i < amountofdice; i++) {
-				GameDie selectedDice = diesInBag[r.nextInt(89)];
+				GameDie selectedDice = diceInBag[r.nextInt(89)];
 				if (!checkDieUsed(selectedDice)) {
 					offer[i] = selectedDice;
-					for (int j = 0; j < usedDice.length; j++) {
-						if (usedDice[j] == null) {
-							usedDice[j] = selectedDice;
+					for (int j = 0; j < usedDice.size(); j++) {
+						if (usedDice.get(j) == null) {
+							selectedDice = usedDice.get(j);
+							selectedDice.setRoundID(this);
 						}
 					}
 				}
 			}
 		}
 	}
+	
+	public void getDicePoolFromDB() {
+		offer = diceInBag[0].getAllRoundDice(this).toArray(offer);
+		usedDice.addAll(diceInBag[0].getAllRoundDice(this));//TODO find other solution
+		
+	}
+	
+	public GameDie[] getDicePool() {
+		offer[0] = new GameDie(ModelColor.PURPLE, 1, 5);
+		offer[1] = new GameDie(ModelColor.BLUE, 2, 3); 
+		offer[2] = new GameDie(ModelColor.RED, 3, 1); 
+		offer[3] = new GameDie(ModelColor.GREEN, 4, 2); 
+		offer[4] = new GameDie(ModelColor.YELLOW, 5, 4); 
+		offer[5] = new GameDie(ModelColor.RED, 6, 6); 
+		offer[6] = new GameDie(ModelColor.BLUE, 7, 6); 
+		offer[7] = new GameDie(ModelColor.GREEN, 8, 3); 
+		offer[8] = new GameDie(ModelColor.PURPLE, 9, 5); 
+				
+		return offer;
+	}
+	
 	public boolean checkDieUsed(GameDie selectedDice) {
-		for (int i = 0; i < usedDice.length; i++) {
-			if (usedDice[i] == selectedDice) {
-				return true;
-			}
+		if(selectedDice.getRoundID(this) != 0){
+			return true;
 		}
-		return false;
+		else {
+			return false;
+		}
 	}
 
 	public void playround() {// boolean first round false
@@ -199,20 +228,26 @@ public class Game {
 	public void makedie() {
 		Random r = new Random();
 		for (int i = 0; i < 18; i++) {
-			diesInBag[i] = new GameDie(ModelColor.GREEN, i, r.nextInt(6)+1);
+			diceInBag[i] = new GameDie(ModelColor.GREEN, i, r.nextInt(6)+1);
+			diceInBag[i].addDieToDB(this);
 		}
 		for (int i = 18; i < 36; i++) {
-			diesInBag[i] = (new GameDie(ModelColor.BLUE, i, r.nextInt(6)+1));
+			diceInBag[i] = (new GameDie(ModelColor.BLUE, i, r.nextInt(6)+1));
+			diceInBag[i].addDieToDB(this);
 		}
 		for (int i = 36; i < 54; i++) {
-			diesInBag[i] = (new GameDie(ModelColor.YELLOW, i, r.nextInt(6)+1));
+			diceInBag[i] = (new GameDie(ModelColor.YELLOW, i, r.nextInt(6)+1));
+			diceInBag[i].addDieToDB(this);
 		}
 		for (int i = 54; i < 72; i++) {
-			diesInBag[i] = (new GameDie(ModelColor.PURPLE, i, r.nextInt(6)+1));
+			diceInBag[i] = (new GameDie(ModelColor.PURPLE, i, r.nextInt(6)+1));
+			diceInBag[i].addDieToDB(this);
 		}
 		for (int i = 72; i < 90; i++) {
-			diesInBag[i] = (new GameDie(ModelColor.RED, i, r.nextInt(6)+1)); 
+			diceInBag[i] = (new GameDie(ModelColor.RED, i, r.nextInt(6)+1));
+			diceInBag[i].addDieToDB(this);
 		}
+		
 	}
 	
 	public ArrayList<PatternCard> generategamePatterncards(boolean randomgenerated){

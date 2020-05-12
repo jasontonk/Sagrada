@@ -27,14 +27,13 @@ public class PatterncardView extends VBox{
 	
 	public PatterncardView(PatterncardController patterncardController) {
 		this.patterncardController = patterncardController;
-//		this.setPrefSize(800, 600);
 		this.getChildren().addAll(drawTitle(), drawPatterncard(), drawDifficulty());
 	}
 	
 	public GridPane drawPatterncard() {
 		GridPane patterncardfields = new GridPane();
 		patterncardfields.setBackground(new Background(new BackgroundFill(Color.BLACK,null,null)));
-		patterncardfields.setPrefSize((5 * (PATTERNCARDFIELD_SIZE + GRIDSPACING) + GRIDSPACING), (4 * (PATTERNCARDFIELD_SIZE + GRIDSPACING) + GRIDSPACING));
+		patterncardfields.setMinSize((5 * (PATTERNCARDFIELD_SIZE + GRIDSPACING) + GRIDSPACING), (4 * (PATTERNCARDFIELD_SIZE + GRIDSPACING) + GRIDSPACING));
 		patterncardfields.setPadding(padding);
 		patterncardfields.setHgap(GRIDSPACING);
 		patterncardfields.setVgap(GRIDSPACING);

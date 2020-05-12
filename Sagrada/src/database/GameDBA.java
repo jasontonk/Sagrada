@@ -24,7 +24,7 @@ public class GameDBA {
         
         String query = "SELECT * FROM game WHERE idgame= "+id+";";
         try {
-			Statement stmt = conn.getConn().createStatement();
+			Statement stmt = conn.createStatemant();
 			ResultSet rs = stmt.executeQuery(query);
 			if(rs.next()) {
 				game = new Game(rs.getInt("idgame"));
@@ -43,7 +43,7 @@ public class GameDBA {
 		String query = "INSERT INTO game VALUES("+autoIdGame()+",null,'"+datetime+"');";
 		
 		try {
-			Statement stmt = conn.getConn().createStatement();
+			Statement stmt = conn.createStatemant();
 			stmt.executeUpdate(query);
 			stmt.close();
 			return true;
@@ -59,7 +59,7 @@ public class GameDBA {
 		String query = "SELECT * FROM game WHERE idgame = '"+gameid+"';";
 	
 		try {
-			Statement stmt = conn.getConn().createStatement();
+			Statement stmt = conn.createStatemant();
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next()) {
 				int idgame = rs.getInt("idgame");
@@ -84,7 +84,7 @@ public class GameDBA {
 		
 		String query = "SELECT idgame FROM game;";
 		try {
-			Statement stmt = conn.getConn().createStatement();
+			Statement stmt = conn.createStatemant();
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next()) {
 				int idgame = rs.getInt("idgame");
@@ -110,7 +110,7 @@ public class GameDBA {
 		
 		String query = "UPDATE game SET turn_idplayer = "+playerid+" WHERE idgame = "+gameid+";";
 		try {
-				Statement stmt = conn.getConn().createStatement();
+				Statement stmt = conn.createStatemant();
 				stmt.executeUpdate(query);
 				stmt.close();
 			
@@ -125,7 +125,7 @@ public class GameDBA {
 		String query = "SELEC idgame FROM game";
 		
 		try {
-			Statement stmt = conn.getConn().createStatement();
+			Statement stmt = conn.createStatemant();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
 				gameid.add(rs.getInt("idgame"));
@@ -142,7 +142,7 @@ public class GameDBA {
 		int currentRound = 1;
 		String query = "SELECT DISTINCT(round) FROM gamedie WHERE idgame = "+gameid+" AND roundtrack IS NOT NULL ORDER BY round DESC LIMIT 1;"; 
 		try {
-			Statement stmt = conn.getConn().createStatement();
+			Statement stmt = conn.createStatemant();
 			ResultSet rs = stmt.executeQuery(query);
 			if (rs.next()) {
                 currentRound = rs.getInt("round") + 1;

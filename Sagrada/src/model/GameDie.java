@@ -1,5 +1,9 @@
 package model;
 
+import java.util.ArrayList;
+
+import database.GameDieDBA;
+
 public class GameDie extends Die {
 
 	private int eyes;
@@ -7,6 +11,7 @@ public class GameDie extends Die {
 	private boolean isFirstTurn;
 	private boolean isOnRoundTrack;
 	private BoardField boardField;
+	private GameDieDBA gameDieDBA;
 	
 	public GameDie(ModelColor modelColor, int number, int eyes) {
 		super(modelColor, number);
@@ -24,7 +29,10 @@ public class GameDie extends Die {
         return boardField;
     }
 
-	public boolean isAvailable() {
+	public boolean isAvailable(Game game) {
+		if(gameDieDBA.getRoundID(this, game) != 0) {
+			isAvailable = true;
+		}
 		return isAvailable;
 	}
 
@@ -54,5 +62,18 @@ public class GameDie extends Die {
 
 	public void setEyes(int eyes) {
 		this.eyes = eyes;
+	}
+	public void addDieToDB(Game game) {
+		gameDieDBA.addGameDie(this, game);
+	}
+	public void setRoundID(Game game) {
+		gameDieDBA.addRoundID(this,game, game.getRound());
+		
+	}
+	public ArrayList<GameDie> getAllRoundDice(Game game){
+		return gameDieDBA.getAllRoundDice(game);
+	}
+	public int getRoundID(Game game) {
+		return gameDieDBA.getRoundID(this, game);
 	}
 }

@@ -2,8 +2,9 @@ package model;
 
 public class Die {
 
+	
 	private ModelColor modelColor;
-	private int number;
+	private int dieNumber;
 	
 	
 	/**
@@ -11,7 +12,7 @@ public class Die {
      */
 	public Die(ModelColor modelColor, int number) {
 		this.modelColor = modelColor;
-		this.number = number;
+		this.dieNumber = number;
 	}
 	
 	/**
@@ -19,7 +20,7 @@ public class Die {
      */
 	public Die(Die die) {
 		this.modelColor = die.getColor();
-		this.number = die.getNumber();
+		this.dieNumber = die.getNumber();
 	}
 	
 	/**
@@ -40,14 +41,14 @@ public class Die {
      * returns the die number
      */
 	public int getNumber() {
-		return number;
+		return dieNumber;
 	}
 
 	/**
      * sets the die number
      */
 	public void setNumber(int number) {
-		this.number = number;
+		this.dieNumber = number;
 	}	
 	
 }

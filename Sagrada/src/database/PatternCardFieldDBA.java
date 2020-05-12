@@ -22,7 +22,7 @@ public class PatternCardFieldDBA {
 			 ModelColor modelColor = null;
 			 String query = "SELECT * FROM patterncardfield WHERE idpatterncard= "+patternCard.getPatterncardID()+" ORDER BY position_x, position_y";
 			 try {
-					Statement stmt = conn.getConn().createStatement();
+					Statement stmt = conn.createStatemant();
 					ResultSet rs = stmt.executeQuery(query);
 					while(rs.next()) {
 						int xpos = rs.getInt("position_x");
@@ -96,7 +96,7 @@ public class PatternCardFieldDBA {
 					 query = "INSERT INTO patterncardfield (idpatterncard, position_x, position_y, color, value) VALUES("+patterncard.getPatterncardID()+","+patterncardfield.get(i).getPositionX()+","+patterncardfield.get(i).getPositionY()+","+color+","+patterncardfield.get(i).getValue()+");";
 				 }
 				 try {
-						Statement stmt = conn.getConn().createStatement();
+						Statement stmt = conn.createStatemant();
 						stmt.executeUpdate(query);
 						stmt.close();
 						
@@ -112,7 +112,7 @@ public class PatternCardFieldDBA {
 			 ModelColor modelColor = null;
 			 String query = "SELECT color FROM patterncardfield WHERE idpatterncard= "+id+"AND position_x = "+xpos+" And position_y ="+ypos+";";
 			 try {
-					Statement stmt = conn.getConn().createStatement();
+					Statement stmt = conn.createStatemant();
 					ResultSet rs = stmt.executeQuery(query);
 					if(rs.next()) {
 						String c = rs.getString("color");
@@ -146,7 +146,7 @@ public class PatternCardFieldDBA {
 			 int value = 0;
 			 String query = "SELECT value FROM patterncardfield WHERE idpatterncard= "+id+"AND position_x = "+xpos+" And position_y ="+ypos+";";
 			 try {
-					Statement stmt = conn.getConn().createStatement();
+					Statement stmt = conn.createStatemant();
 					ResultSet rs = stmt.executeQuery(query);
 					if(rs.next()) {
 						value = rs.getInt("value");
