@@ -1,15 +1,19 @@
 package view;
 
 import controller.RoundtrackController;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 public class RoundtrackView extends VBox {
 
@@ -31,12 +35,14 @@ public class RoundtrackView extends VBox {
 		roundtrack.setHgap(SPACING);
 		
 		for (int i = 0; i < 10; i++) {
-			Text text =  new Text("ronde " + (i+1));
+			Text text =  new Text(""+(i+1));
 			text.setFill(Color.WHITE);
+			text.setStyle("-fx-font-size: 20px;");
 			Button button = new Button();
 			button.setPrefSize(ROUNDTRACKFIELD_SIZE, ROUNDTRACKFIELD_SIZE);
 			button.setBackground(new Background(new BackgroundFill(Color.WHITE,null,null)));
 			roundtrack.add(text, i, 1);
+			roundtrack.setHalignment(text, HPos.CENTER);
 			roundtrack.add(button, i, 2);
 			
 		}
@@ -54,7 +60,7 @@ public class RoundtrackView extends VBox {
 	public BorderPane drawRound() {
 		BorderPane roundPane =  new BorderPane();
 		Text round = new Text();
-		round.setText("ronde: 6");
+		round.setText("Ronde: 6");
 //		round.setText("Ronde: " + roundtrackController.getRound());
 		roundPane.setPadding(padding);
 		roundPane.setRight(round);

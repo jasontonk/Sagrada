@@ -25,11 +25,25 @@ public class DicePoolView extends GridPane {
 		this.setVgap(GRIDSPACING);
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
-				dieView = new DieView(dieController, dieController.getDieColor(number), dieController.getDieValue(number));
-				this.add(dieView,i,j);
-				number++;
+				if(dieController.getDieColor(number) != null) {
+					dieView = new DieView(dieController, dieController.getDieColor(number), dieController.getDieValue(number), number);
+					this.add(dieView,i,j);
+					number++;
+				}
 			}
 			
 		}
+	}
+	
+	//TODO Remove the right dieview on the right index Also set new indexes for the other dieviews when a dieview is removed
+	public void deleteDie(int index) {
+		this.getChildren().remove(i);
+		for(int i = 0; i < this.getChildren().size()-index;i++) {
+			if(this.getChildren().get(index + i) != null) {
+				this.getChildren().get(index + i).decreaseDiePoolID();
+			}
+			
+		}
+		
 	}
 } 

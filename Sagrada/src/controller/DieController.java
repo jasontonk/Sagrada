@@ -1,56 +1,86 @@
 package controller;
 
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
 import database.DataBaseConnection;
-import model.Die;
-import model.Game;
 import model.GameDie;
 import model.ModelColor;
 
 public class DieController {
 
-	private GameDie[] die;
-	private Game game;
+	private List<GameDie> die;
+	private GameController gameController;
+	private String selectedDieURL;
 	
-	public DieController(DataBaseConnection conn) {
-//		this.game = game;
-//		die = game.getDie();
-		game =  new Game(26);
-		die = game.getDicePool();
+	public DieController(DataBaseConnection conn, GameController gameController) {
+		this.gameController = gameController;
+		die = new LinkedList<GameDie>(Arrays.asList(gameController.getDicePool()));
 	}
 	
 	
 	public String getDieColor(int number) {
-		String color;
-		ModelColor modelColor = die[number].getColor();
-		if(modelColor != null) {
-			switch (modelColor) {
-			case BLUE:
-				color = "Blue";
-				break;
-			case GREEN:
-				color = "Green";
-				break;
-			case RED:
-				color = "Red";
-				break;
-			case PURPLE:
-				color = "Purple";
-				break;
-			case YELLOW:
-				color = "Yellow";
-				break;
-			default:
-				color = null;
-				break;
+		String color = null;
+			ModelColor modelColor = die.get(number).getColor();
+			if(modelColor != null) {
+				switch (modelColor) {
+				case BLUE:
+					color = "Blue";
+					break;
+				case GREEN:
+					color = "Green";
+					break;
+				case RED:
+					color = "Red";
+					break;
+				case PURPLE:
+					color = "Purple";
+					break;
+				case YELLOW:
+					color = "Yellow";
+					break;
+				default:
+					color = null;
+					break;
+				}
 			}
-			return color;
+		return color;
+	}
+	public int getDieValue(int number) {
+		return die.get(number).getEyes();
+	}
+
+	public int getDieID(int number) {
+			return die.get(number).getNumber();
+	}
+
+	public void setSelectedDie(int dieID, String selectedDieURL) {
+		gameController.setSelectedDie(die.get(dieID));
+		this.selectedDieURL = selectedDieURL;
+	}
+
+
+	public String getSelectedDieURL() {
+		if(selectedDieURL != null) {
+		return selectedDieURL;
 		}
 		else {
 			return null;
 		}
 	}
-	public int getDieValue(int number) {
+
+
+	public void deleteSelectedDie(GameDie selectedDie) {
+		for(int i = 0; i < die.size(); i++) {
+			if(selectedDie == die.get(i)) {
+				gameController.getGameView().getDicePoolView().deleteDie(i);
+				die.remove(i);
+			}
+		}
 		
-		return die[number].getEyes();
 	}
+
+
 }

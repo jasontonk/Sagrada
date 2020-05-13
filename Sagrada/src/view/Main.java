@@ -12,10 +12,7 @@ import model.Game;
 
 public class Main extends Application  {
 	DataBaseConnection conn = new DataBaseConnection("com.mysql.jdbc.Driver");
-	private GameController gameController = new GameController();
-	private DieController dieController= new DieController(conn);
-	private PatterncardController patterncardController= new PatterncardController(conn);
-	private RoundtrackController roundtrackController= new RoundtrackController(null);
+	private GameController gameController = new GameController(conn);
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -23,7 +20,7 @@ public class Main extends Application  {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Scene scene = new Scene(new GameView(gameController, dieController, patterncardController, roundtrackController));
+		Scene scene = new Scene(gameController.getGameView());
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}

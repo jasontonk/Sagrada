@@ -7,7 +7,10 @@ import model.PatternCard;
 public class PatterncardController {
   
 	PatternCard patterncard;
-	public PatterncardController(DataBaseConnection conn) {
+	GameController gameController;
+	
+	public PatterncardController(DataBaseConnection conn, GameController gameController) {
+		this.gameController = gameController;
 		patterncard = new PatternCard(conn); 
 		patterncard.setpattern(false);
 	}
@@ -27,6 +30,21 @@ public class PatterncardController {
 	
 	public int getDifficulty(){
 		return patterncard.getDifficulty();
+	}
+
+	public void getSelectedDie() {
+		gameController.getSelectedDie();
+		
+	}
+
+	public String getSelectedDieUrl() {
+		return gameController.getDieController().getSelectedDieURL();
+		
+	}
+
+	public void deleteDieFromPool() {
+		gameController.deleteSelectedDie();
+		
 	}
 }
   

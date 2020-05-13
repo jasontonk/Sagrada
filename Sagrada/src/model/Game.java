@@ -21,6 +21,7 @@ public class Game {
 	private ArrayList<PatternCard> gamePatterncards;
 	private ArrayList<PatternCard> playerPatterncards;
 	private DataBaseConnection conn;
+	private GameDie selectedDie;
 
 	public Game(Account account1, Account account2, boolean randomgeneratedpatterncards, DataBaseConnection conn) {// boolean generated toevoegen ja of nee generated patterncards
 		this.conn = conn;
@@ -295,6 +296,14 @@ public class Game {
 
 	public void setRound(int round) {
 		this.round = round;
+	}
+
+	public void setSelectedDie(GameDie die) {
+		this.selectedDie = die;
+	}
+
+	public GameDie getSelectedDie() {
+		return selectedDie;
 	}
 
 }

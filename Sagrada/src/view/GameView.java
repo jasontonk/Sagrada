@@ -13,13 +13,26 @@ public class GameView extends BorderPane {
 	private PatterncardView patterncardView;
 	private RoundtrackView roundtrackView;
 	
-	public GameView(GameController gameController, DieController dieController, PatterncardController patterncardController, RoundtrackController roundtrackController){
+	public GameView(GameController gameController){
 		this.gameController = gameController;
-		dicePoolView = new DicePoolView(dieController);
-		patterncardView = new PatterncardView(patterncardController);
-		roundtrackView = new RoundtrackView(roundtrackController);
+		dicePoolView = new DicePoolView(gameController.getDieController());
+		patterncardView = new PatterncardView(gameController.getPatterncardController());
+		roundtrackView = new RoundtrackView(gameController.getRoundtrackController());
 		this.setLeft(patterncardView);
 		this.setRight(dicePoolView);
 		this.setBottom(roundtrackView);
 	}
+
+	public DicePoolView getDicePoolView() {
+		return dicePoolView;
+	}
+
+	public PatterncardView getPatterncardView() {
+		return patterncardView;
+	}
+
+	public RoundtrackView getRoundtrackView() {
+		return roundtrackView;
+	}
+	
 }

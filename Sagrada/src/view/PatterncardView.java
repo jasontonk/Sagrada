@@ -12,6 +12,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -21,9 +22,10 @@ public class PatterncardView extends VBox{
 
 	private PatterncardController patterncardController;
 	private JavafxColor javafxColor = new JavafxColor();;
-	private final int PATTERNCARDFIELD_SIZE = 40;
+	private final int PATTERNCARDFIELD_SIZE = 50;
 	private final double GRIDSPACING = 5.0;
-	private Insets padding = new Insets(5);  
+	private Insets padding = new Insets(5);
+	private String imgURL;
 	
 	public PatterncardView(PatterncardController patterncardController) {
 		this.patterncardController = patterncardController;
@@ -40,10 +42,10 @@ public class PatterncardView extends VBox{
 		
 		for(int x = 0; x < 5; x++) {
 			for (int y = 0; y < 4; y++) {
+				StackPane stackpane = new StackPane();
 				Button button = new Button();
 				button.setPrefSize(PATTERNCARDFIELD_SIZE, PATTERNCARDFIELD_SIZE);
-//				TODO button.setOnAction(e-> );
-				
+				button.setOnMouseClicked(e-> placeSelectedDie(stackpane));
 				String imgURL;
 				
 				ModelColor modelColor = patterncardController.getFieldColor(x, y);
@@ -57,16 +59,28 @@ public class PatterncardView extends VBox{
 					button.setBackground(new Background(new BackgroundFill(color, null, null)));
 				}
 				else if(value != 0) {
-					//TODO get images
 					imgURL = "/images/" + Integer.toString(value) + "_fieldValue.jpg";
 					Image image = new Image(getClass().getResource(imgURL).toString());
 					button.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
 				}
-				patterncardfields.add(button, x, y);
+				stackpane.getChildren().add(button);
+				patterncardfields.add(stackpane, x, y);
 			}
 		}
 		return patterncardfields;
 	}
+	private void placeSelectedDie(StackPane stackpane) {
+		Button die = new Button();
+		
+		imgURL = patterncardController.getSelectedDieUrl();
+		System.out.println(imgURL);
+		Image image = new Image(getClass().getResource(imgURL).toString());
+		die.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
+		die.setPrefSize(40, 40);
+		stackpane.getChildren().add(die);
+		patterncardController.deleteDieFromPool();
+	}
+
 	public BorderPane drawTitle() {
 		BorderPane titlePane = new BorderPane();
 		Text title = new Text();
