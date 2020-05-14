@@ -1,4 +1,5 @@
 package view;
+
 import controller.AccountController;
 import database.DataBaseConnection;
 import javafx.geometry.Pos;
@@ -14,32 +15,28 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-public class LoginView extends VBox {
-	
-	private AccountController accountController;
-	
+public class RegisterView extends Pane {
+
 	private final int BUTTON_WIDTH = 100;
 	private final int BUTTON_HEIGHT = 50;
 	private final int TEXTFIELD_WIDTH = 200;
     private final int TEXTFIELD_HEIGHT = 25;
-	private Pane loginPane;
-	
-	
-	public LoginView(AccountController accountController) {
+    private AccountController accountController;
+    private Pane registerPane;
+    
+	public RegisterView(AccountController accountController) {
 		this.accountController = accountController;
-		this.setPrefSize(800, 600);
-		makeLoginPane();
 	}
-
 	
-	public Pane makeLoginPane() {
+	public Pane makeRegisterPane() {
 		this.getChildren().clear();
-		VBox lp = new VBox();
-		loginPane = lp;
-		loginPane.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, null, null)));
+		VBox rp = new VBox();
+		registerPane = rp;
+		
+		registerPane.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, null, null)));
 		
 		BorderPane textPane = new BorderPane();
-		Text text = new Text("Login");
+		Text text = new Text("Registreer");
 		text.setStyle("-fx-font: 24 arial;");
 		textPane.setCenter(text);
 		
@@ -56,25 +53,32 @@ public class LoginView extends VBox {
 		
 		loginFields.getChildren().addAll(usernameLabel, usernameTextField, passwordLabel, passwordTextField);
 		
-		Button login = new Button("Login");
-		login.setOnAction(e -> accountController.actionLogin(usernameTextField.getText(), passwordTextField.getText()));
-		
-		login.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-		
+		Button register = new Button("Maak account");
+		register.setOnAction(e -> accountController.actionRegister(usernameTextField.getText(), passwordTextField.getText()));
 		
 		Button back = new Button("Terug");
 		back.setOnAction(e -> accountController.viewChoose());
-		back.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 		
 		HBox yesno = new HBox();
-		yesno.getChildren().addAll(login,back);
-		yesno.setAlignment(Pos.CENTER);
+		yesno.getChildren().addAll(register,back);
+		yesno.setAlignment(Pos.CENTER); 
+
+		register.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		back.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 		
-		loginPane.getChildren().addAll(textPane, loginFields, yesno);
-		return loginPane;
+		registerPane.getChildren().addAll(textPane, loginFields, yesno);
+		
+		
+		return registerPane;
 	}
 	
-	
-	
-	
+	public void addError() {
+		Text text = new Text("Gebruikersnaam is al bezet");
+		text.setStyle("-fx-font: 24 arial;");
+		text.setFill(Color.RED);
+		registerPane.getChildren().add(text);
+		this.getChildren().addAll(registerPane);
+		System.out.println("test");
+		
+	}
 }

@@ -28,10 +28,10 @@ public class AccountView extends BorderPane {
 		this.accountController = accountController;
         accounts = new ArrayList<Account>();
         this.setPrefSize(800, 600);
-        this.makeAccountPane();
 	}
 
-	public void makeAccountPane() {
+	public Pane makeAccountPane() {
+		this.getChildren().clear();
 		HBox accountView = new HBox();  //test
 		
 		accounts = accountController.getAllAccounts();
@@ -67,8 +67,7 @@ public class AccountView extends BorderPane {
 		}
 		
 		accountView.getChildren().addAll(left, right);
-		this.getChildren().add(accountView);
-		
+		return accountView;
 	}
 	
 	private void showStats(Account account) {
