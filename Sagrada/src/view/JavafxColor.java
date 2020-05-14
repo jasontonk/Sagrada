@@ -6,6 +6,7 @@ import model.ModelColor;
 public class JavafxColor {
 
 	Color color;
+	ModelColor modelColor;
 	public Color getJavafxColor(ModelColor modelcolor) {
 		if(modelcolor == null) {
 			color = Color.WHITE;
@@ -32,5 +33,31 @@ public class JavafxColor {
 			}
 		}
 		return color;
+	}
+	public ModelColor getModelColor(Color color) {
+		if(color == null) {
+			modelColor = null;
+		}
+		else {
+			if(color == Color.RED) {
+				modelColor = ModelColor.RED;
+			}
+			else if(color == Color.GREEN) {
+				modelColor = ModelColor.GREEN;
+			}
+			else if(color == Color.YELLOW) {
+				modelColor = ModelColor.YELLOW;		
+			}
+			else if(color == Color.PURPLE) {
+				modelColor = ModelColor.PURPLE;
+			}
+			else if(color == Color.BLUE) {
+				modelColor = ModelColor.BLUE;
+			}
+			else{
+				modelColor = null;
+			}
+		}
+		return modelColor;
 	}
 }

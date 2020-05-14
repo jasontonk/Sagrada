@@ -16,6 +16,7 @@ public class Game {
 	private GameDie[] offer;
 	private RoundTrack roundTrack;
 	private Chat chat;
+	private Player currentPlayer;
 	private int round;
 	private int gameID;
 	private ArrayList<PatternCard> gamePatterncards;
@@ -304,6 +305,28 @@ public class Game {
 
 	public GameDie getSelectedDie() {
 		return selectedDie;
+	}
+	public Player getCurrentPlayer() {
+		return currentPlayer;
+	}
+
+	public void setCurrentPlayer() {
+		for (int i = 0; i < players.size(); i++) {
+			if(players.get(i).isCurrentPlayer()) {
+				currentPlayer = players.get(i);
+				break;
+			}
+		}
+	}
+
+
+	public boolean checkPlacementAgainstRules(int x, int y, ModelColor modelColor, int value) {
+		for (int i = 0; i < players.size(); i++) {
+			if(players.get(i) == currentPlayer) {
+				return players.get(i).checkPlacementAgainstRules(x, y, modelColor, value);
+			}
+		}
+		return false;
 	}
 
 }

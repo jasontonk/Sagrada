@@ -24,6 +24,8 @@ public class RoundtrackView extends VBox {
 	
 	public RoundtrackView(RoundtrackController roundtrackController) {
 		this.roundtrackController = roundtrackController;
+		this.setPadding(new Insets(0, 30, 0, 30));
+		this.setMaxWidth((10 * (ROUNDTRACKFIELD_SIZE + SPACING) + SPACING));
 		this.getChildren().addAll(drawTitle(), drawRoundtrack(), drawRound());
 	}
 	

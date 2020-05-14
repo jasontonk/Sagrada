@@ -269,6 +269,8 @@ public class Player {
 		 
 		return score;
 	}
-	
+	public boolean checkPlacementAgainstRules(int x, int y, ModelColor modelColor, int value) {
+		return board.checkAll(board.getBoardField(x, y), modelColor, value);
+	}
 	
 }

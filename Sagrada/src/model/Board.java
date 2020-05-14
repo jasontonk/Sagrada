@@ -480,5 +480,18 @@ public class Board {
 		}
 		return false;
 	}
-	
+	public boolean checkAll(BoardField boardField, ModelColor modelColor, int value) {
+		if(checkIsNextToDie(boardField)) {
+			if(!checkSidesColor(boardField, modelColor)) {
+				if(!checkSidesValue(boardField, value)) {
+					if(checkFieldColorAndDieColor(boardField, modelColor)) {
+						if(checkFieldValueAndDieValue(boardField, value)) {
+							return true;
+						}
+					}
+				}
+			}
+		}
+		return false;
+	}
 }

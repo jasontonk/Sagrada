@@ -4,6 +4,7 @@ import database.DataBaseConnection;
 import javafx.scene.Parent;
 import model.Game;
 import model.GameDie;
+import model.ModelColor;
 import view.GameView;
 
 public class GameController {
@@ -54,5 +55,9 @@ public class GameController {
 
 	public GameView getGameView() {
 		return gameView;
+	}
+
+	public boolean checkPlacementAgainstRules(int x, int y, ModelColor modelColor, int value) {
+		return game.checkPlacementAgainstRules(x, y, modelColor, value);
 	}
 }

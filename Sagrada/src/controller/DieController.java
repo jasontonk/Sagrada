@@ -79,6 +79,7 @@ public class DieController {
 				die.remove(i);
 			}
 		}
+		selectedDieURL = null;
 		
 	}
 

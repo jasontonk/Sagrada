@@ -25,10 +25,12 @@ public class PatterncardView extends VBox{
 	private final int PATTERNCARDFIELD_SIZE = 50;
 	private final double GRIDSPACING = 5.0;
 	private Insets padding = new Insets(5);
+	private StackPane stackpane = new StackPane();
 	private String imgURL;
 	
 	public PatterncardView(PatterncardController patterncardController) {
 		this.patterncardController = patterncardController;
+		this.setPadding(new Insets(0, 30, 0, 30));
 		this.getChildren().addAll(drawTitle(), drawPatterncard(), drawDifficulty());
 	}
 	
@@ -42,10 +44,9 @@ public class PatterncardView extends VBox{
 		
 		for(int x = 0; x < 5; x++) {
 			for (int y = 0; y < 4; y++) {
-				StackPane stackpane = new StackPane();
 				Button button = new Button();
 				button.setPrefSize(PATTERNCARDFIELD_SIZE, PATTERNCARDFIELD_SIZE);
-				button.setOnMouseClicked(e-> placeSelectedDie(stackpane));
+				button.setOnMouseClicked(e-> checkPlacementAgainstRules());
 				String imgURL;
 				
 				ModelColor modelColor = patterncardController.getFieldColor(x, y);
@@ -74,11 +75,17 @@ public class PatterncardView extends VBox{
 		
 		imgURL = patterncardController.getSelectedDieUrl();
 		System.out.println(imgURL);
-		Image image = new Image(getClass().getResource(imgURL).toString());
-		die.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
-		die.setPrefSize(40, 40);
-		stackpane.getChildren().add(die);
-		patterncardController.deleteDieFromPool();
+		if(imgURL != null) {
+			Image image = new Image(getClass().getResource(imgURL).toString());
+			die.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
+			die.setPrefSize(40, 40);
+			stackpane.getChildren().add(die);
+			patterncardController.deleteDieFromPool();
+		}
+		else {
+			System.out.println("no die selected");
+			//TODO make popup field for errors
+		}
 	}
 
 	public BorderPane drawTitle() {
@@ -96,6 +103,17 @@ public class PatterncardView extends VBox{
 		difficultyPane.setPadding(padding);
 	    difficultyPane.setRight(difficulty);
 	    return difficultyPane;
+	}
+	public boolean checkPlacementAgainstRules() {
+		
+		if(patterncardController.checkPlacementAgainstRules()) {
+			placeSelectedDie(stackpane);
+			return true;
+		}
+		else {
+			return false;
+		}
+		
 	}
 	
 	

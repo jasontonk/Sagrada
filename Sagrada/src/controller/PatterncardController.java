@@ -46,5 +46,9 @@ public class PatterncardController {
 		gameController.deleteSelectedDie();
 		
 	}
+
+	public boolean checkPlacementAgainstRules(int x, int y, ModelColor modelColor, int value) {
+		return gameController.checkPlacementAgainstRules(x, y, modelColor, value);
+	}
 }
   
