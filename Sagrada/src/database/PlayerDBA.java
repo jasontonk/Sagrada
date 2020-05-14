@@ -6,6 +6,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import model.ModelColor;
+import model.Account;
 import model.Game;
 import model.PatternCard;
 import model.Player;
@@ -172,6 +173,34 @@ public class PlayerDBA {
         }
         return player;
     }
+	
+public ArrayList<Player> getPlayersOAccount(Account account){
+		Player player = new Player(conn,null);
+		ArrayList<Player> list = new ArrayList<>();
+		String query = "SELECT * FROM player WHERE username = "+account.getUsername()+";";
+		try {
+			Statement stmt = conn.getConn().createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			while(rs.next()){
+				PatternCardDBA patternCard = new PatternCardDBA(conn);
+            	GameDBA game = new GameDBA(conn);
+            	player.setAccount(account);
+            	player.setName(rs.getString("username"));
+            	player.setId(rs.getInt("idplayer"));
+            	player.setPlayerStatus(rs.getString("playstatus"));
+            	player.setSequenceNumber(rs.getInt("seqnr"));
+            	player.setScore(rs.getInt("score"));
+            	player.setColor(getColorFromString(rs.getString("private_objectivecard_color")));
+            	player.setPatternCard(patternCard.getPatterncardByID(rs.getInt("idpatterncard")));
+            	player.setGame(game.getGameByID(rs.getInt("idgame")));
+				list.add(player);
+			}
+			stmt.close();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 	
 	public Player getPlayerUsingSeqnrAndGame(int seqnr, Game game) {
 			
