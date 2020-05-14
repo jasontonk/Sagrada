@@ -8,7 +8,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import model.Account;
-import view.AccountView;
+import view.LobbyView;
 import view.ChooseView;
 import view.LoginView;
 import view.MyScene;
@@ -19,7 +19,7 @@ public class AccountController {
 	private Account account;
 	private LoginView loginView;
 	private DataBaseConnection connection;
-	private AccountView accountView;
+	private LobbyView accountView;
 	private MyScene myScene;
 	
 	public AccountController(DataBaseConnection c, MyScene myScene) {
@@ -84,7 +84,7 @@ public class AccountController {
 	}
 	
 	public void viewLobby() {
-		AccountView accountView = new AccountView(this);
+		LobbyView accountView = new LobbyView(this);
 		myScene.setContentPane(accountView.makeAccountPane());
 	}
 

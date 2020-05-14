@@ -16,7 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-public class AccountView extends BorderPane {
+public class LobbyView extends BorderPane {
 	
 	private ArrayList<Account> accounts;
     private AccountController accountController;
@@ -24,7 +24,7 @@ public class AccountView extends BorderPane {
     private ArrayList<Game> games;
 //  private MyScene myScene;
 	
-	public AccountView(AccountController accountController) {
+	public LobbyView(AccountController accountController) {
 		this.accountController = accountController;
         accounts = new ArrayList<Account>();
         this.setPrefSize(800, 600);
