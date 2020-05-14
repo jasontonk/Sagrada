@@ -122,7 +122,7 @@ public class GameDBA {
 	
 	public ArrayList<Integer> getAllGamesId(){
 		ArrayList<Integer> gameid = new ArrayList<Integer>();
-		String query = "SELEC idgame FROM game";
+		String query = "SELECT idgame FROM game";
 		
 		try {
 			Statement stmt = conn.getConn().createStatement();
