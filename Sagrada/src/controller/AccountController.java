@@ -8,10 +8,12 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import model.Account;
+import model.Player;
 import view.LobbyView;
 import view.ChooseView;
 import view.LoginView;
 import view.MyScene;
+import view.Player;
 import view.RegisterView;
 
 public class AccountController {
@@ -86,6 +88,10 @@ public class AccountController {
 	public void viewLobby() {
 		LobbyView accountView = new LobbyView(this);
 		myScene.setContentPane(accountView.makeAccountPane());
+	}
+
+	public ArrayList<Player> getAllPlayersOfThisAccount() {
+		return account.getPlayers();
 	}
 
 }

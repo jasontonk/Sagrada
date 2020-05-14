@@ -102,6 +102,7 @@ public class Account {
 	public ArrayList<Player> getPlayers() {
 		PlayerDBA playerDBA = new PlayerDBA(connection);
 //		players = playerDBA.getPlayersOfAccount(this);//TODO matheus
+		players.add(new Player(connection, this));
 		return players;
 	}
 

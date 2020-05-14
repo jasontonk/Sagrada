@@ -5,6 +5,7 @@ import database.DataBaseConnection;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -47,7 +48,7 @@ public class RegisterView extends Pane {
 		usernameTextField.setMaxSize(TEXTFIELD_WIDTH, TEXTFIELD_HEIGHT);
 		
 		Label passwordLabel = new Label("Wachtwoord");
-		TextField passwordTextField = new TextField();
+		PasswordField passwordTextField = new PasswordField();
 		passwordTextField.setPromptText("Wachtwoord");
 		passwordTextField.setMaxSize(TEXTFIELD_WIDTH, TEXTFIELD_HEIGHT);
 		

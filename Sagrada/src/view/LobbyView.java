@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import controller.AccountController;
 import model.Account;
 import model.Game;
+import model.Player;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,12 +22,13 @@ public class LobbyView extends BorderPane {
 	private ArrayList<Account> accounts;
     private AccountController accountController;
     private Pane output; 
-    private ArrayList<Game> games;
+    private ArrayList<Player> players;
 //  private MyScene myScene;
 	
 	public LobbyView(AccountController accountController) {
 		this.accountController = accountController;
         accounts = new ArrayList<Account>();
+        players = accountController.getAllPlayersOfThisAccount();
         this.setPrefSize(800, 600);
 	}
 
@@ -38,8 +40,21 @@ public class LobbyView extends BorderPane {
 		
 		Pane overview = new Pane();
 		overview.setBackground(new Background(new BackgroundFill(Color.BLUE, null, null)));
-		overview.setMinSize(600, 400);
+		overview.setMinSize(550, 400);
 		
+		for(Player p : players) {
+			HBox playerlist = new HBox();
+			
+			Label gameid = new Label("Game-ID: " + p.getGame().getGameID());
+			gameid.setPadding(new Insets(5, 4, 5, 4));
+			gameid.setMinWidth(150);
+            
+            Button playGame = buildButton("Speel!");
+            playGame.setOnAction(e -> System.out.println("speel"));
+            
+            playerlist.getChildren().addAll(gameid,playGame);
+            overview.getChildren().add(playerlist);
+		}
 		
 		Pane op = new Pane();
 		this.output = op;
@@ -49,7 +64,7 @@ public class LobbyView extends BorderPane {
 		VBox left = new VBox(overview, output);
 		
 		VBox right = new VBox();
-		right.setMinSize(200, 600);
+		right.setMinSize(250, 600);
 		right.setBackground(new Background(new BackgroundFill(Color.GREY, null, null)));
 		
 		for(Account a : accounts) {
@@ -59,10 +74,13 @@ public class LobbyView extends BorderPane {
 			username.setPadding(new Insets(5, 4, 5, 4));
             username.setMinWidth(150);
             
-            Button viewStatsButton = buildButton();
+            Button viewStatsButton = buildButton("Stats");
             viewStatsButton.setOnAction(e -> showStats(a));
             
-            playerlist.getChildren().addAll(username,viewStatsButton);
+            Button invite = buildButton("Invite");
+            invite.setOnAction(e -> System.out.println("invite"));//TODO invite
+            
+            playerlist.getChildren().addAll(username,viewStatsButton, invite);
             right.getChildren().add(playerlist);
 		}
 		
@@ -72,6 +90,7 @@ public class LobbyView extends BorderPane {
 	
 	private void showStats(Account account) {
 		TextArea stats = new TextArea();
+		stats.appendText("Naam speler: " + account.getUsername() + "\n");
 		stats.appendText("Hoogste score: " + account.getHighestScore() + "\n");
 		stats.appendText("Meest gebruikte kleur: " + account.getMostUsedColor() + "\n");
 		stats.appendText("Meest gebruikte waarde:  " + account.getMostUsedValue() + "\n");
@@ -83,8 +102,8 @@ public class LobbyView extends BorderPane {
 		output.getChildren().add(stats);
 	}
 	
-	private Button buildButton() {
-		Button button = new Button("stats");
+	private Button buildButton(String text) {
+		Button button = new Button(text);
         return button;
 	}
 	
