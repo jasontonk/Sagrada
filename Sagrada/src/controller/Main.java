@@ -3,6 +3,7 @@ package controller;
 import database.DataBaseConnection;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import view.LobbyView;
 import view.LoginView;
@@ -22,6 +23,9 @@ public class Main extends Application  {
 		primaryStage.setScene(scene);
 		primaryStage.setWidth(800);
 		primaryStage.setHeight(600);
+		primaryStage.setTitle("Sagrada - Projectgroep B");
+		Image icon = new Image("/images/SagradaIcon.png");
+		primaryStage.getIcons().add(icon);
 		primaryStage.show();
 	}
 }
