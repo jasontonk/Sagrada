@@ -1,10 +1,11 @@
 package view;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 import controller.AccountController;
-import model.Account;
-import model.Game;
-import model.Player;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,6 +17,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import model.Account;
+import model.Player;
 
 public class LobbyView extends BorderPane {
 	
@@ -78,7 +81,7 @@ public class LobbyView extends BorderPane {
             viewStatsButton.setOnAction(e -> showStats(a));
             
             Button invite = buildButton("Invite");
-            invite.setOnAction(e -> System.out.println("invite"));//TODO invite
+            invite.setOnAction(e -> invite());//TODO invite
             
             playerlist.getChildren().addAll(username,viewStatsButton, invite);
             right.getChildren().add(playerlist);
@@ -88,6 +91,10 @@ public class LobbyView extends BorderPane {
 		return accountView;
 	}
 	
+	private void invite() {
+		accountController.viewInvitation();
+	}
+
 	private void showStats(Account account) {
 		TextArea stats = new TextArea();
 		stats.appendText("Naam speler: " + account.getUsername() + "\n");
