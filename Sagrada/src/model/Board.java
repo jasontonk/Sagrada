@@ -101,7 +101,13 @@ public class Board {
      * Returns the board field of the parameters
      */
 	public BoardField getBoardField(int x, int y) {
-		return boardFields[x][y];
+		System.out.println("XPos: "+x+" YPos: "+y);
+		if(boardFields[x][y] != null){
+			return boardFields[x][y];
+		}
+		else {
+			return null;
+		}
 	}
 
 	/**
@@ -252,7 +258,7 @@ public class Board {
      * returns true if the dice east of the boardfield has the color of the parameter
      */
 	private boolean checkEastDieColor(BoardField boardField, ModelColor modelColor) {
-		if(boardField.getxPos()-1 == BOARD_SQUARES_HORIZONTAL) {
+		if(boardField.getxPos()+1 == BOARD_SQUARES_HORIZONTAL) {
 			return false;
 		}
 		BoardField boardFieldNext = getBoardField(boardField.getxPos() + 1, boardField.getyPos());
@@ -266,7 +272,7 @@ public class Board {
      * returns true if the dice south of the boardfield has the color of the parameter
      */
 	private boolean checkSouthDieColor(BoardField boardField, ModelColor modelColor) {
-		if(boardField.getyPos()-1 == BOARD_SQUARES_VERTICAL) {
+		if(boardField.getyPos()+1 == BOARD_SQUARES_VERTICAL) {
 			return false;
 		}
 		BoardField boardFieldNext = getBoardField(boardField.getxPos(), boardField.getyPos() + 1);
@@ -310,7 +316,7 @@ public class Board {
      * returns true if the dice east of the boardfield has the value of the parameter
      */
 	private boolean checkEastDieValue(BoardField boardField, int value) {
-		if(boardField.getxPos()-1 == BOARD_SQUARES_HORIZONTAL) {
+		if(boardField.getxPos()+1 == BOARD_SQUARES_HORIZONTAL) {
 			return false;
 		}
 		BoardField boardFieldNext = getBoardField(boardField.getxPos() + 1, boardField.getyPos());
@@ -324,7 +330,7 @@ public class Board {
      * returns true if the dice south of the boardfield has the value of the parameter
      */
 	private boolean checkSouthDieValue(BoardField boardField, int value) {
-		if(boardField.getyPos()-1 == BOARD_SQUARES_VERTICAL) {
+		if(boardField.getyPos()+1 == BOARD_SQUARES_VERTICAL) {
 			return false;
 		}
 		BoardField boardFieldNext = getBoardField(boardField.getxPos(), boardField.getyPos() + 1);
@@ -408,7 +414,7 @@ public class Board {
      * returns true if there is a die on the south of the boardfield
      */
 	private boolean checkIsNextToDieSouth(BoardField boardField) {
-		if (boardField.getyPos()-1 == BOARD_SQUARES_VERTICAL) {
+		if (boardField.getyPos()+1 == BOARD_SQUARES_VERTICAL) {
             return false;
         }
         return getBoardField(boardField.getxPos(), boardField.getyPos() + 1).hasDie();
@@ -418,7 +424,7 @@ public class Board {
      * returns true if there is a die on the east of the boardfield
      */
 	private boolean checkIsNextToDieEast(BoardField boardField) {
-		if (boardField.getxPos()-1 == BOARD_SQUARES_HORIZONTAL) {
+		if (boardField.getxPos()+1 == BOARD_SQUARES_HORIZONTAL) {
             return false;
         }
         return getBoardField(boardField.getxPos() + 1, boardField.getyPos()).hasDie();
@@ -439,7 +445,7 @@ public class Board {
      * returns true if there is a die on the north east of the boardfield
      */
 	private boolean checkIsNextToDieNorthEast(BoardField boardField) {
-		if (boardField.getyPos() == 0 || boardField.getxPos()-1 == BOARD_SQUARES_HORIZONTAL) {
+		if (boardField.getyPos() == 0 || boardField.getxPos()+1 == BOARD_SQUARES_HORIZONTAL) {
             return false;
         }
         return getBoardField(boardField.getxPos() + 1, boardField.getyPos() - 1).hasDie();
@@ -491,10 +497,11 @@ public class Board {
 	}
 	public boolean checkAll(BoardField boardField, ModelColor modelColor, int value) {
 		if(checkIsNextToDie(boardField)||true) {
-			if(!checkSidesColor(boardField, modelColor)||!checkSidesValue(boardField, value)) {
+			if(!checkSidesColor(boardField, modelColor) || !checkSidesValue(boardField, value)) {
 				if(checkFieldColorAndDieColor(boardField, modelColor) || checkFieldValueAndDieValue(boardField, value) || 
 						!checkFieldColorAndDieColor(boardField, modelColor) && !checkFieldValueAndDieValue(boardField, value) && 
-							patternCard.getFieldColor(boardField.getxPos(), boardField.getyPos()) == null) {
+							patternCard.getFieldColor(boardField.getxPos(), boardField.getyPos()) == null && 
+								patternCard.getFieldValue(boardField.getxPos(), boardField.getyPos()) == 0){
 					placeDie(boardField, player.getSelectedDie());			
 					return true;
 				}

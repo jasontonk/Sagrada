@@ -25,8 +25,8 @@ public class PatterncardView extends VBox{
 	private final int PATTERNCARDFIELD_SIZE = 50;
 	private final double GRIDSPACING = 5.0;
 	private Insets padding = new Insets(5);
-	private final int[] xPos = new int[] {0,1,2,3,4};
-	private final int[] yPos = new int[] {0,1,2,3};
+//	private final int[] xPos = new int[] {0,1,2,3,4};
+//	private final int[] yPos = new int[] {0,1,2,3};
 	
 	private String imgURL;
 	
@@ -49,7 +49,8 @@ public class PatterncardView extends VBox{
 				StackPane stackpane = new StackPane();
 				Button button = new Button();
 				button.setPrefSize(PATTERNCARDFIELD_SIZE, PATTERNCARDFIELD_SIZE);
-				
+				int xPos = x;
+				int yPos = y;
 				String imgURL;
 				
 				ModelColor modelColor = patterncardController.getFieldColor(x, y);
@@ -67,7 +68,7 @@ public class PatterncardView extends VBox{
 					Image image = new Image(getClass().getResource(imgURL).toString());
 					button.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
 				}
-				button.setOnMouseClicked(e-> checkPlacementAgainstRules(xPos[0], yPos[1], stackpane));
+				button.setOnMouseClicked(e-> checkPlacementAgainstRules(xPos, yPos, stackpane));
 				stackpane.getChildren().add(button);
 				patterncardfields.add(stackpane, x, y);
 			}
@@ -109,6 +110,7 @@ public class PatterncardView extends VBox{
 	    return difficultyPane;
 	}
 	public boolean checkPlacementAgainstRules(int x, int y, StackPane stackpane) {
+		System.out.println(x+""+y);
 		if(patterncardController.checkPlacementAgainstRules(x, y, patterncardController.getSelectedDieColor(), patterncardController.getSelectedDieValue())) {
 			placeSelectedDie(stackpane);
 			return true;
