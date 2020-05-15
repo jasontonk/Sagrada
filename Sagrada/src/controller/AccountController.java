@@ -92,7 +92,7 @@ public class AccountController {
 
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK){
-		    // ... user chose OK
+		    // ... user chose OK 
 		} else {
 		    // ... user chose CANCEL or closed the dialog
 		}

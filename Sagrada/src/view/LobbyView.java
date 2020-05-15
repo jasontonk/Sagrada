@@ -92,7 +92,7 @@ public class LobbyView extends BorderPane {
 	}
 	
 	private void invite() {
-		accountController.viewInvitation();
+		accountController.viewInvitation(); 
 	}
 
 	private void showStats(Account account) {

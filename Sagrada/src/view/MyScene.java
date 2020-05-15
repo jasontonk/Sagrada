@@ -24,7 +24,7 @@ public class MyScene extends Scene {
         contentPane = new Pane();
 		
         setRoot(contentPane);
-        accountController.viewChoose();
+        accountController.viewChoose();  
 	}
 
 	public void setContentPane(Pane pane) {
