@@ -8,7 +8,7 @@ public class PatternCardField {
 	private int positionX;
 
 	public PatternCardField() {
-		modelColor = ModelColor.WHITE;
+		modelColor = null;
 		value = 0;
 	}
 	// Return the color of this PatternCardField.

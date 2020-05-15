@@ -494,7 +494,8 @@ public class Board {
 			if(!checkSidesColor(boardField, modelColor)||!checkSidesValue(boardField, value)) {
 				if(checkFieldColorAndDieColor(boardField, modelColor) || checkFieldValueAndDieValue(boardField, value) || 
 						!checkFieldColorAndDieColor(boardField, modelColor) && !checkFieldValueAndDieValue(boardField, value) && 
-						patternCard.getFieldColor(boardField.getxPos(), boardField.getyPos()) == ModelColor.WHITE) {
+							patternCard.getFieldColor(boardField.getxPos(), boardField.getyPos()) == null) {
+					placeDie(boardField, player.getSelectedDie());			
 					return true;
 				}
 			}

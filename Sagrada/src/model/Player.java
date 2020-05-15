@@ -30,9 +30,10 @@ public class Player {
 	private Game game;
 	private DataBaseConnection connection;
 	
-	public Player(DataBaseConnection c, Account account) {
+	public Player(DataBaseConnection c, Account account, Game game) {
 		connection = c;
 		this.account = account;
+		this.game = game;
 		patternCard = new PatternCard(c);
 		board = new Board(1, this);
 	}
@@ -272,6 +273,11 @@ public class Player {
 	}
 	public boolean checkPlacementAgainstRules(int x, int y, ModelColor modelColor, int value) {
 		return board.checkAll(board.getBoardField(x, y), modelColor, value);
+	}
+
+	public GameDie getSelectedDie() {
+		return game.getSelectedDie();
+		
 	}
 	
 }

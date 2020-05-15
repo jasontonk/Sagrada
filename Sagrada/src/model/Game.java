@@ -38,8 +38,8 @@ public class Game {
 
 		accounts.add(account1);
 		accounts.add(account2);
-		players.add(new Player(conn, account1));
-		players.add(new Player(conn, account2));
+		players.add(new Player(conn, account1, this));
+		players.add(new Player(conn, account2, this));
 		
 		gamePatterncards = generategamePatterncards(randomgeneratedpatterncards);
 
@@ -62,9 +62,9 @@ public class Game {
 		accounts.add(account1);
 		accounts.add(account2);
 		accounts.add(account3);
-		players.add(new Player(conn, account1));
-		players.add(new Player(conn, account2));
-		players.add(new Player(conn, account3));
+		players.add(new Player(conn, account1, this));
+		players.add(new Player(conn, account2, this));
+		players.add(new Player(conn, account3, this));
 		
 
 		gamePatterncards = generategamePatterncards(randomgeneratedpatterncards);
@@ -89,10 +89,10 @@ public class Game {
 		accounts.add(account2);
 		accounts.add(account3);
 		accounts.add(account4);
-		players.add(new Player(conn, account1));
-		players.add(new Player(conn, account2));
-		players.add(new Player(conn, account3));
-		players.add(new Player(conn, account4));
+		players.add(new Player(conn, account1, this));
+		players.add(new Player(conn, account2, this));
+		players.add(new Player(conn, account3, this));
+		players.add(new Player(conn, account4, this));
 		
 
 		
@@ -106,7 +106,7 @@ public class Game {
 		gameID = id;
 		offer = new GameDie[9];
 		players = new ArrayList<Player>();
-		currentPlayer = new Player(conn, new Account(conn));
+		currentPlayer = new Player(conn, new Account(conn), this);
 		players.add(currentPlayer);
 		
 	}
