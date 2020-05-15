@@ -6,8 +6,9 @@ public class BoardField {
 	private int xPos;
 	private int yPos;
 	
-	public BoardField() {
-		// TODO Auto-generated constructor stub
+	public BoardField(int x, int y) {
+		xPos = x;
+		yPos = y;
 	}
 	
 	public GameDie getDie() {

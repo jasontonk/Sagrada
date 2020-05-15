@@ -5,5 +5,6 @@ public enum ModelColor {
 	GREEN,
 	YELLOW,
 	PURPLE,
-	BLUE
+	BLUE, 
+	WHITE
 }

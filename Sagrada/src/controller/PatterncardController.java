@@ -11,7 +11,7 @@ public class PatterncardController {
 	
 	public PatterncardController(DataBaseConnection conn, GameController gameController) {
 		this.gameController = gameController;
-		patterncard = new PatternCard(conn); 
+		patterncard = gameController.getPlayerPatterncard(gameController.getCurrentPlayer());
 		patterncard.setpattern(false);
 	}
 	
@@ -49,6 +49,14 @@ public class PatterncardController {
 
 	public boolean checkPlacementAgainstRules(int x, int y, ModelColor modelColor, int value) {
 		return gameController.checkPlacementAgainstRules(x, y, modelColor, value);
+	}
+
+	public ModelColor getSelectedDieColor() {
+		return gameController.getSelectedDieColor();
+	}
+
+	public int getSelectedDieValue() {
+		return gameController.getSelectedDieValue();
 	}
 }
   

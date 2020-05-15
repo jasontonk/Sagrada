@@ -5,6 +5,8 @@ import javafx.scene.Parent;
 import model.Game;
 import model.GameDie;
 import model.ModelColor;
+import model.PatternCard;
+import model.Player;
 import view.GameView;
 
 public class GameController {
@@ -16,7 +18,7 @@ public class GameController {
 	private RoundtrackController roundtrackController;
 	
 	public GameController(DataBaseConnection conn) {
-		game =  new Game(26);
+		game =  new Game(26, conn);
 		dieController = new DieController(conn, this);
 		patterncardController= new PatterncardController(conn, this);
 		roundtrackController= new RoundtrackController(null);
@@ -59,5 +61,21 @@ public class GameController {
 
 	public boolean checkPlacementAgainstRules(int x, int y, ModelColor modelColor, int value) {
 		return game.checkPlacementAgainstRules(x, y, modelColor, value);
+	}
+
+	public Player getCurrentPlayer() {
+		return game.getCurrentPlayer();
+	}
+
+	public PatternCard getPlayerPatterncard(Player Player) {
+		return game.getPlayerPatterncard(Player);
+	}
+
+	public ModelColor getSelectedDieColor() {
+		return game.getSelectedDieColor();
+	}
+
+	public int getSelectedDieValue() {
+		return game.getSelectedDieValue();
 	}
 }

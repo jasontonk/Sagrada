@@ -25,7 +25,7 @@ public class PatterncardView extends VBox{
 	private final int PATTERNCARDFIELD_SIZE = 50;
 	private final double GRIDSPACING = 5.0;
 	private Insets padding = new Insets(5);
-	private StackPane stackpane = new StackPane();
+	
 	private String imgURL;
 	
 	public PatterncardView(PatterncardController patterncardController) {
@@ -44,9 +44,10 @@ public class PatterncardView extends VBox{
 		
 		for(int x = 0; x < 5; x++) {
 			for (int y = 0; y < 4; y++) {
+				StackPane stackpane = new StackPane();
 				Button button = new Button();
 				button.setPrefSize(PATTERNCARDFIELD_SIZE, PATTERNCARDFIELD_SIZE);
-				button.setOnMouseClicked(e-> checkPlacementAgainstRules());
+				
 				String imgURL;
 				
 				ModelColor modelColor = patterncardController.getFieldColor(x, y);
@@ -64,6 +65,7 @@ public class PatterncardView extends VBox{
 					Image image = new Image(getClass().getResource(imgURL).toString());
 					button.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
 				}
+				button.setOnMouseClicked(e-> checkPlacementAgainstRules(0, 1, stackpane));
 				stackpane.getChildren().add(button);
 				patterncardfields.add(stackpane, x, y);
 			}
@@ -104,16 +106,15 @@ public class PatterncardView extends VBox{
 	    difficultyPane.setRight(difficulty);
 	    return difficultyPane;
 	}
-	public boolean checkPlacementAgainstRules() {
-		
-		if(patterncardController.checkPlacementAgainstRules()) {
+	public boolean checkPlacementAgainstRules(int x, int y, StackPane stackpane) {
+		if(patterncardController.checkPlacementAgainstRules(x, y, patterncardController.getSelectedDieColor(), patterncardController.getSelectedDieValue())) {
 			placeSelectedDie(stackpane);
 			return true;
 		}
 		else {
+			System.out.println("unable to place die due to rules");
 			return false;
 		}
-		
 	}
 	
 	

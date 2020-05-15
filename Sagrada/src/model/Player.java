@@ -33,6 +33,8 @@ public class Player {
 	public Player(DataBaseConnection c, Account account) {
 		connection = c;
 		this.account = account;
+		patternCard = new PatternCard(c);
+		board = new Board(1, this);
 	}
 
 	public int getId() {
@@ -126,8 +128,7 @@ public class Player {
 	}
 
 	public PatternCard getPatternCard() {
-		PatternCardDBA patternCardDBA = new PatternCardDBA(connection);
-		patternCard = patternCardDBA.getSelectedPatterncardOfPlayer(getId(), this);
+		patternCard.setpattern(false);
 		return patternCard;
 	}
 

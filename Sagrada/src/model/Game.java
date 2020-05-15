@@ -102,9 +102,13 @@ public class Game {
 
 	}
 
-	public Game(int id) {
+	public Game(int id, DataBaseConnection conn) {
 		gameID = id;
 		offer = new GameDie[9];
+		players = new ArrayList<Player>();
+		currentPlayer = new Player(conn, new Account(conn));
+		players.add(currentPlayer);
+		
 	}
 
 //	public void checkInvites() {
@@ -327,6 +331,18 @@ public class Game {
 			}
 		}
 		return false;
+	}
+
+	public PatternCard getPlayerPatterncard(Player player) {
+		return player.getPatternCard();
+	}
+
+	public ModelColor getSelectedDieColor() {
+		return selectedDie.getColor();
+	}
+
+	public int getSelectedDieValue() {
+		return selectedDie.getEyes();
 	}
 
 }
