@@ -68,4 +68,12 @@ public class DicePoolView extends VBox {
 		dieView.remove(index);
 		dicePool.getChildren().remove(index);
 	}
+
+	public void removeAllBorders() {
+		for (int i = 0; i < dieView.size(); i++) {
+			dieView.get(i).removeBorder();
+			
+		}
+		
+	}
 } 

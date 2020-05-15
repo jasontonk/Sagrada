@@ -8,7 +8,13 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 
 
 
@@ -17,13 +23,14 @@ public class DieView extends BorderPane {
 	private DieController dieController;
 	private final int DIE_SIZE = 60;
 	private int diePoolID;
+	private Button die = new Button();
 
 	
 	
 	public DieView(DieController dieController, String color, int value, int dieID) {
 		this.dieController = dieController;
 		this.diePoolID = dieID;
-		Button die = new Button();
+		
 		String imgURL;
 		die.setMinSize(DIE_SIZE, DIE_SIZE);
 		
@@ -44,7 +51,15 @@ public class DieView extends BorderPane {
 		diePoolID--;
 	}
 	private void setSelectedDie(String imgURL) {
+		dieController.removeAllBorders();
+		setBorder();
 		dieController.setSelectedDie(diePoolID, imgURL);
+	}
+	public void setBorder(){
+		die.setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(3))));
+	}
+	public void removeBorder() {
+		die.setBorder(null);
 	}
 
 }

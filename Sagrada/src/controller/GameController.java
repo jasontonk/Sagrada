@@ -78,4 +78,9 @@ public class GameController {
 	public int getSelectedDieValue() {
 		return game.getSelectedDieValue();
 	}
+
+	public void removeAllBorders() {
+		gameView.getDicePoolView().removeAllBorders();
+		
+	}
 }

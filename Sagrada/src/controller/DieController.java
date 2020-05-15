@@ -8,6 +8,7 @@ import java.util.List;
 import database.DataBaseConnection;
 import model.GameDie;
 import model.ModelColor;
+import view.DicePoolView;
 
 public class DieController {
 
@@ -81,6 +82,11 @@ public class DieController {
 		}
 		selectedDieURL = null;
 		
+	}
+
+
+	public void removeAllBorders() {
+		gameController.removeAllBorders();
 	}
 
 
