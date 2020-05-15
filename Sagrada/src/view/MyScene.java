@@ -21,11 +21,8 @@ public class MyScene extends Scene {
 		super(new Pane());
 		accountController =  new AccountController(db, this);
 		
-//		rootPane = new StackPane();
         contentPane = new Pane();
-        contentPane.setBackground(new Background(new BackgroundFill(Color.BLUE, null, null)));
-//		
-//		rootPane.getChildren().add(contentPane);
+		
         setRoot(contentPane);
         accountController.viewChoose();
 	}
