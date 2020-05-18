@@ -1,9 +1,11 @@
 package model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Random;
 
 import database.DataBaseConnection;
+import database.GameDBA;
 
 public class Game {
 	private ArrayList<Player> players;
@@ -23,6 +25,7 @@ public class Game {
 	private ArrayList<PatternCard> playerPatterncards;
 	private DataBaseConnection conn;
 	private GameDie selectedDie;
+	private GameDBA gameDBA;
 
 	public Game(Account account1, Account account2, boolean randomgeneratedpatterncards, DataBaseConnection conn) {// boolean generated toevoegen ja of nee generated patterncards
 		this.conn = conn;
@@ -38,8 +41,8 @@ public class Game {
 
 		accounts.add(account1);
 		accounts.add(account2);
-		players.add(new Player(conn, account1, this));
-		players.add(new Player(conn, account2, this));
+//		players.add(new Player(conn, account1, this));
+//		players.add(new Player(conn, account2, this));
 		
 		gamePatterncards = generategamePatterncards(randomgeneratedpatterncards);
 
@@ -62,9 +65,9 @@ public class Game {
 		accounts.add(account1);
 		accounts.add(account2);
 		accounts.add(account3);
-		players.add(new Player(conn, account1, this));
-		players.add(new Player(conn, account2, this));
-		players.add(new Player(conn, account3, this));
+//		players.add(new Player(conn, account1, this));
+//		players.add(new Player(conn, account2, this));
+//		players.add(new Player(conn, account3, this));
 		
 
 		gamePatterncards = generategamePatterncards(randomgeneratedpatterncards);
@@ -89,10 +92,10 @@ public class Game {
 		accounts.add(account2);
 		accounts.add(account3);
 		accounts.add(account4);
-		players.add(new Player(conn, account1, this));
-		players.add(new Player(conn, account2, this));
-		players.add(new Player(conn, account3, this));
-		players.add(new Player(conn, account4, this));
+//		players.add(new Player(conn, account1, this));
+//		players.add(new Player(conn, account2, this));
+//		players.add(new Player(conn, account3, this));
+//		players.add(new Player(conn, account4, this));
 		
 
 		
@@ -102,11 +105,12 @@ public class Game {
 
 	}
 
-	public Game(int id, DataBaseConnection conn) {
-		gameID = id;
+	public Game(DataBaseConnection conn) {
+		gameDBA = new GameDBA(conn);
+		gameDBA.addNewGameDB(LocalDateTime.now(), this);
 		offer = new GameDie[9];
 		players = new ArrayList<Player>();
-		currentPlayer = new Player(conn, new Account(conn), this);
+		currentPlayer = new Player(conn, new Account(conn), this, "tester", PlayerStatus.CHALLENGER);
 		players.add(currentPlayer);
 		
 	}
@@ -338,11 +342,17 @@ public class Game {
 	}
 
 	public ModelColor getSelectedDieColor() {
-		return selectedDie.getColor();
+		if(selectedDie != null) {
+			return selectedDie.getColor();
+		}
+		return null;
 	}
 
 	public int getSelectedDieValue() {
-		return selectedDie.getEyes();
+		if(selectedDie != null) {
+			return selectedDie.getEyes();
+		}
+		return 0;
 	}
 
 }

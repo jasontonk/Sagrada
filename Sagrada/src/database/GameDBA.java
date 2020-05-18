@@ -27,7 +27,8 @@ public class GameDBA {
 			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			if(rs.next()) {
-				game = new Game(rs.getInt("idgame"), conn);
+				game = new Game(conn);
+				game.setGameID(rs.getInt("idgame"));
 				game.setRound(getCurrentRound(id));
 			}
 			stmt.close();
@@ -38,9 +39,11 @@ public class GameDBA {
         return game;
     }
 	
-	public boolean addNewGameDB(LocalDateTime datetime) {
+	public boolean addNewGameDB(LocalDateTime datetime, Game game) {
 		
-		String query = "INSERT INTO game VALUES("+autoIdGame()+",null,'"+datetime+"');";
+		int gameID = autoIdGame();
+		game.setGameID(gameID);
+		String query = "INSERT INTO game VALUES("+gameID+",null,'"+datetime+"');";
 		
 		try {
 			Statement stmt = conn.getConn().createStatement();

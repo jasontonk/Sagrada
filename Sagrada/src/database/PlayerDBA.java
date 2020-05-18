@@ -24,7 +24,7 @@ public class PlayerDBA {
 	
 	public boolean addPlayer(Player player) {
 		int playerid = autoIdPlayer();
-		
+		player.setId(playerid);
 		String query = "INSERT INTO player VALUES("+playerid+",'"+player.getName()+"',"+player.getGame().getGameID()+
 				",'"+player.getPlayerStatus()+"',"+player.getSequenceNumber()+",'"+getStringFromColor(player)+
 				"',"+player.getPatternCard().getPatterncardID()+","+player.getScore()+");";
@@ -148,7 +148,7 @@ public class PlayerDBA {
 	
 	public Player getPlayerUsingID(int idplayer) {
 		
-		Player player = new Player(conn, null);
+		Player player = new Player(conn, null, null, null, null);
         String query = "SELECT * FROM player WHERE idplayer="+idplayer+";";
         try {
         	Statement stmt = conn.getConn().createStatement();
@@ -174,8 +174,8 @@ public class PlayerDBA {
         return player;
     }
 	
-public ArrayList<Player> getPlayersOAccount(Account account){
-		Player player = new Player(conn,null);
+public ArrayList<Player> getPlayersOfAccount(Account account){
+		Player player = new Player(conn,null,null, null, null);
 		ArrayList<Player> list = new ArrayList<>();
 		String query = "SELECT * FROM player WHERE username = "+account.getUsername()+";";
 		try {
@@ -204,7 +204,7 @@ public ArrayList<Player> getPlayersOAccount(Account account){
 	
 	public Player getPlayerUsingSeqnrAndGame(int seqnr, Game game) {
 			
-			Player player = new Player(conn, null);
+			Player player = new Player(conn, null, game, null, null);
 	        String query = "SELECT * FROM player WHERE seqnr= "+seqnr+" AND idgame="+game.getGameID()+";";
 	        try {
 	        	Statement stmt = conn.getConn().createStatement();

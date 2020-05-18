@@ -1,15 +1,11 @@
 package view;
 
-import controller.DieController;
 import controller.GameController;
-import controller.PatterncardController;
-import controller.RoundtrackController;
 import database.DataBaseConnection;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import model.Game;
 
 public class Main extends Application  {
 	DataBaseConnection conn = new DataBaseConnection("com.mysql.jdbc.Driver");

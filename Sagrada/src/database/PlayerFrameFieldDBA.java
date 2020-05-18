@@ -13,11 +13,11 @@ public class PlayerFrameFieldDBA {
 		this.conn = c;
 	}
 	
-	public void addPlayerFrameField(Player player, GameDie gamedie, int xposition, int yposition) {
+	public void addPlayerFrameField(Player player, int xposition, int yposition) {
 		// TODO list van fields.
-		
-		String query = "INSERT INTO playerframefield VALUES("+player.getId()+","+xposition+","+xposition+
-				",'"+player.getGame().getGameID()+");";
+
+		String query = "INSERT INTO playerframefield(idplayer, position_x, position_y, idgame) VALUES("+player.getId()+","+xposition+","+xposition+
+				","+player.getGame().getGameID()+");";
 		
 		try {
 			Statement stmt = conn.getConn().createStatement();
@@ -29,7 +29,7 @@ public class PlayerFrameFieldDBA {
 		}	
 	}
 	
-	public void setOrUpdateDie(GameDie die, Player player, int xposition, int yposition){
+	public void setDie(GameDie die, Player player, int xposition, int yposition){
 		String color = null;
 		if(die.getColor() != null) {
 			switch(die.getColor()) {

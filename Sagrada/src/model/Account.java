@@ -101,7 +101,7 @@ public class Account {
      */
 	public ArrayList<Player> getPlayers() {
 		PlayerDBA playerDBA = new PlayerDBA(connection);
-		players = playerDBA.getPlayersOAccount(this);
+		players = playerDBA.getPlayersOfAccount(this);
 		players.add(new Player(connection, this));
 		return players;
 	}

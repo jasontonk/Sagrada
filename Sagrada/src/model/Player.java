@@ -13,7 +13,7 @@ public class Player {
 	private int sequenceNumber;
 	private int score;
 	private String name;
-	private String playerStatus;
+	private PlayerStatus playerStatus;
 	
 	private boolean isCurrentPlayer;
 	private boolean placedDie;
@@ -30,12 +30,18 @@ public class Player {
 	private Game game;
 	private DataBaseConnection connection;
 	
-	public Player(DataBaseConnection c, Account account, Game game) {
+	private PlayerDBA playerDBA ;
+	
+	public Player(DataBaseConnection c, Account account, Game game, String username, PlayerStatus playerStatus) {
 		connection = c;
 		this.account = account;
 		this.game = game;
+		this.name = username;
+		this.playerStatus = playerStatus;
+		playerDBA = new PlayerDBA(c);
 		patternCard = new PatternCard(c);
-		board = new Board(1, this);
+		board = new Board(1, this, c);
+		playerDBA.addPlayer(this);
 	}
 
 	public int getId() {
@@ -70,11 +76,11 @@ public class Player {
 		this.name = name;
 	}
 
-	public String getPlayerStatus() {
+	public PlayerStatus getPlayerStatus() {
 		return playerStatus;
 	}
 
-	public void setPlayerStatus(String playerStatus) {
+	public void setPlayerStatus(PlayerStatus playerStatus) {
 		this.playerStatus = playerStatus;
 	}
 
