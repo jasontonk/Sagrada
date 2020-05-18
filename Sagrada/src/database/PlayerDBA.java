@@ -10,6 +10,7 @@ import model.Account;
 import model.Game;
 import model.PatternCard;
 import model.Player;
+import model.PlayerStatus;
 
 public class PlayerDBA {
 
@@ -92,6 +93,57 @@ public class PlayerDBA {
 		return modelColor;
 	}
 	
+	private String getStringFromPlayerStatus(Player player) {
+		String playerStatus = null;
+		if(player.getPlayerStatus()!=null) {
+			switch(player.getPlayerStatus()) {
+			case ACCEPTED:
+				playerStatus = "accepted" ;
+				break;
+			case CHALLENGEE:
+				playerStatus = "challengee";
+				break;
+			case CHALLENGER:
+				playerStatus = "challenger";
+				break;
+			case FINISHED:
+				playerStatus = "finished";
+				break;
+			case REFUSED:
+				playerStatus = "refused";
+				break;
+			}
+		}
+		
+		return playerStatus;
+	}
+	
+	private PlayerStatus getPlayerStatusFromString(String status) {
+		PlayerStatus playerStatus = null;
+		if(status != null){
+			switch(status) {
+			case "accepted":
+				playerStatus = PlayerStatus.ACCEPTED;
+				break;
+			case "challengee":
+				playerStatus = PlayerStatus.CHALLENGEE;
+				break;
+			case "challenger":
+				playerStatus = PlayerStatus.CHALLENGER;
+				break;
+			case "finished":
+				playerStatus = PlayerStatus.FINISHED;
+				break;
+			case "refused":
+				playerStatus = PlayerStatus.REFUSED;
+				break;
+			default:
+				playerStatus = null;
+			}
+		}
+		return playerStatus;
+	}
+	
 	private int autoIdPlayer() {
 
 		int playerid = 0;
@@ -160,7 +212,7 @@ public class PlayerDBA {
             	player.setAccount(account.GetAccountDB(rs.getString("username")));
             	player.setName(rs.getString("username"));
             	player.setId(idplayer);
-            	player.setPlayerStatus(rs.getString("playstatus"));
+            	player.setPlayerStatus(getPlayerStatusFromString(rs.getString("playstatus")));
             	player.setSequenceNumber(rs.getInt("seqnr"));
             	player.setScore(rs.getInt("score"));
             	player.setColor(getColorFromString(rs.getString("private_objectivecard_color")));
@@ -187,7 +239,7 @@ public ArrayList<Player> getPlayersOfAccount(Account account){
             	player.setAccount(account);
             	player.setName(rs.getString("username"));
             	player.setId(rs.getInt("idplayer"));
-            	player.setPlayerStatus(rs.getString("playstatus"));
+            	player.setPlayerStatus(getPlayerStatusFromString(rs.getString("playstatus")));
             	player.setSequenceNumber(rs.getInt("seqnr"));
             	player.setScore(rs.getInt("score"));
             	player.setColor(getColorFromString(rs.getString("private_objectivecard_color")));
@@ -216,7 +268,7 @@ public ArrayList<Player> getPlayersOfAccount(Account account){
 	            	player.setAccount(account.GetAccountDB(rs.getString("username")));
 	            	player.setName(rs.getString("username"));
 	            	player.setId(rs.getInt("idplayer"));
-	            	player.setPlayerStatus(rs.getString("playstatus"));
+	            	player.setPlayerStatus(getPlayerStatusFromString(rs.getString("playstatus")));
 	            	player.setSequenceNumber(rs.getInt("seqnr"));
 	            	player.setScore(rs.getInt("score"));
 	            	player.setColor(getColorFromString(rs.getString("private_objectivecard_color")));
