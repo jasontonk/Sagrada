@@ -68,7 +68,7 @@ public class GameController {
 
 	public boolean checkPlacementAgainstRules(int x, int y, ModelColor modelColor, int value) {
 		if(!game.checkPlacementAgainstRules(x, y, modelColor, value)) {
-			showWarning("Dobbelsteen zetten", "De geselecteerde dobbelsteen kan niet op deze plek worden geplaats.");
+			showWarning("Dobbelsteen zetten", "De geselecteerde dobbelsteen kan niet op deze plek worden geplaatst.");
 		}
 		return game.checkPlacementAgainstRules(x, y, modelColor, value);
 	}

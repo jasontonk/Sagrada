@@ -1,9 +1,7 @@
 package view;
 
-import controller.DieController;
+
 import controller.GameController;
-import controller.PatterncardController;
-import controller.RoundtrackController;
 import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
 
@@ -22,7 +20,7 @@ public class GameView extends BorderPane {
 		this.setLeft(patterncardView);
 		this.setRight(dicePoolView);
 		this.setBottom(roundtrackView);
-		this.setMinSize(1000, 600);
+		this.setPrefSize(800, 600);
 		this.setAlignment(roundtrackView, Pos.CENTER);
 	}
 

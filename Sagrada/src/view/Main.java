@@ -23,6 +23,8 @@ public class Main extends Application  {
 		Image icon = new Image("/images/SagradaIcon.png");
 		primaryStage.getIcons().add(icon);
 		primaryStage.show();
-		primaryStage.setResizable(false);
+		primaryStage.setResizable(true);
+		primaryStage.setMinHeight(600);
+		primaryStage.setMinWidth(800);
 	}
 }
