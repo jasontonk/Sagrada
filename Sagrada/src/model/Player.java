@@ -32,16 +32,19 @@ public class Player {
 	
 	private PlayerDBA playerDBA ;
 	
-	public Player(DataBaseConnection c, Account account, Game game, String username, PlayerStatus playerStatus) {
+	public Player(DataBaseConnection c, Account account, Game game, PlayerStatus playerStatus) {
 		connection = c;
 		this.account = account;
 		this.game = game;
-		this.name = username;
+		this.name = "test";
+		modelColor = modelColor.RED;
 		this.playerStatus = playerStatus;
 		playerDBA = new PlayerDBA(c);
+		playerDBA.addPlayer(this);
 		patternCard = new PatternCard(c);
 		board = new Board(1, this, c);
-		playerDBA.addPlayer(this);
+		
+			
 	}
 
 	public int getId() {

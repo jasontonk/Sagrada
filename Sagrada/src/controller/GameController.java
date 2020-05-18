@@ -21,10 +21,15 @@ public class GameController {
 	
 	public GameController(DataBaseConnection conn) {
 		game =  new Game(conn);
+		System.out.println("stap1");
 		dieController = new DieController(conn, this);
+		System.out.println("stap2");
 		patterncardController= new PatterncardController(conn, this);
-		roundtrackController= new RoundtrackController(null);
+		System.out.println("stap3");
+		roundtrackController= new RoundtrackController(game, this);
+		System.out.println("stap4");
 		gameView = new GameView(this);
+		System.out.println("stap 5");
 		
 	}
 
@@ -98,5 +103,9 @@ public class GameController {
 		alert.setHeaderText(header);
 		alert.setContentText(text);
 		alert.showAndWait();
+	}
+
+	public int getCurrentRound() {
+		return game.getRound();
 	}
 }

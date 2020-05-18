@@ -20,8 +20,7 @@ public class GameDieDBA {
 	}
 	
 	public void addGameDie(GameDie gamedie,Game game) {
-		
-		String query = "INSERT INTO gamedie(idgame,dienumber,diecolor) VALUES("+game.getGameID()+","+gamedie.getNumber()+","+getStringFromColor(gamedie)+","+gamedie.getEyes()+");";
+		String query = "INSERT INTO gamedie(idgame,dienumber,diecolor) VALUES("+game.getGameID()+","+gamedie.getNumber()+",'"+getStringFromColor(gamedie)+"');";
 		try {
 			Statement stmt = conn.getConn().createStatement();
 			stmt.executeUpdate(query);
@@ -31,9 +30,9 @@ public class GameDieDBA {
 		}	
 	}
 	
-	public void addRoundID(GameDie gamedie, Game game, int round) {
+	public void addRoundID(GameDie gamedie, Game game) {
 		
-		String query = "UPDATE gamedie SET roundID = "+round+" WHERE idgame = "+game.getGameID()+"AND dienumber ="+gamedie.getNumber()+"AND diecolor= "+getStringFromColor(gamedie)+";";
+		String query = "UPDATE gamedie SET roundID = "+game.getRound()+" WHERE idgame = "+game.getGameID()+" AND dienumber ="+gamedie.getNumber()+" AND diecolor= '"+getStringFromColor(gamedie)+"';";
 		try {
 				Statement stmt = conn.getConn().createStatement();
 				stmt.executeUpdate(query);
@@ -46,12 +45,12 @@ public class GameDieDBA {
 	public int getRoundID(GameDie gamedie, Game game) {
 		
 		int round = 0;
-        String query = "SELECT roundID FROM gamedie WHERE idgame="+game.getGameID()+"AND dienumber ="+gamedie.getNumber()+"AND diecolor= "+getStringFromColor(gamedie)+";";
+        String query = "SELECT roundID FROM gamedie WHERE idgame="+game.getGameID()+" AND dienumber ="+gamedie.getNumber()+" AND diecolor= '"+getStringFromColor(gamedie)+"';";
         try {
         	Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
             if (rs.next()) {
-            	if(rs.getString("round")!= null) {
+            	if(rs.getString("roundID")!= null) {
             		round = rs.getInt("roundID");
             	}
             }
@@ -62,7 +61,7 @@ public class GameDieDBA {
         return round;
 	}
 	public void addEyes(GameDie gamedie, Game game, int eyes) {
-		String query = "UPDATE gamedie SET eyes = "+eyes+" WHERE idgame = "+game.getGameID()+"AND dienumber = "+gamedie.getNumber()+"AND diecolor = "+getStringFromColor(gamedie)+";";
+		String query = "UPDATE gamedie SET eyes = "+eyes+" WHERE idgame = "+game.getGameID()+" AND dienumber = "+gamedie.getNumber()+" AND diecolor = '"+getStringFromColor(gamedie)+"';";
 		try {
 				Statement stmt = conn.getConn().createStatement();
 				stmt.executeUpdate(query);
@@ -138,7 +137,7 @@ public class GameDieDBA {
         	Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                GameDie gameDie = new GameDie(getColorFromString(rs.getString("color")),rs.getInt("dienumber"),rs.getInt("eyes"));
+                GameDie gameDie = new GameDie(getColorFromString(rs.getString("color")),rs.getInt("dienumber"),rs.getInt("eyes"), game, conn);
                 list.add(gameDie);
             }
             stmt.close();
@@ -155,7 +154,7 @@ public class GameDieDBA {
 	        	Statement stmt = conn.getConn().createStatement();
 				ResultSet rs = stmt.executeQuery(query);
 	            while (rs.next()) {
-	                gameDie = new GameDie(getColorFromString(rs.getString("color")),rs.getInt("dienumber"),rs.getInt("eyes"));
+	                gameDie = new GameDie(getColorFromString(rs.getString("color")),rs.getInt("dienumber"),rs.getInt("eyes"), game, conn);
 	            }
 	            stmt.close();
 	        } catch (Exception e) {
@@ -171,7 +170,7 @@ public class GameDieDBA {
         	Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                GameDie gameDie = new GameDie(getColorFromString(rs.getString("color")),rs.getInt("dienumber"),rs.getInt("eyes"));
+                GameDie gameDie = new GameDie(getColorFromString(rs.getString("color")),rs.getInt("dienumber"),rs.getInt("eyes"), game, conn);
                 list.add(gameDie);
             }
             stmt.close();
@@ -191,7 +190,7 @@ public class GameDieDBA {
         	Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                GameDie gameDie = new GameDie(getColorFromString(rs.getString("color")),rs.getInt("dienumber"),rs.getInt("eyes"));
+                GameDie gameDie = new GameDie(getColorFromString(rs.getString("color")),rs.getInt("dienumber"),rs.getInt("eyes"), game, conn);
                 gameDie.setAvailable(true);
                 list.add(gameDie);
             }
@@ -209,7 +208,7 @@ public class GameDieDBA {
         	Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                GameDie gameDie = new GameDie(getColorFromString(rs.getString("color")),rs.getInt("dienumber"),rs.getInt("eyes"));
+                GameDie gameDie = new GameDie(getColorFromString(rs.getString("color")),rs.getInt("dienumber"),rs.getInt("eyes"), game, conn);
                 gameDie.setAvailable(false);
                 list.add(gameDie);
             }

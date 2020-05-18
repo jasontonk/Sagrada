@@ -24,6 +24,7 @@ public class DieController {
 	
 	public String getDieColor(int number) {
 		String color = null;
+		if(die.get(number) != null) {
 			ModelColor modelColor = die.get(number).getColor();
 			if(modelColor != null) {
 				switch (modelColor) {
@@ -47,6 +48,7 @@ public class DieController {
 					break;
 				}
 			}
+		}
 		return color;
 	}
 	public int getDieValue(int number) {

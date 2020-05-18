@@ -106,12 +106,18 @@ public class Game {
 	}
 
 	public Game(DataBaseConnection conn) {
+		this.conn = conn;
+		round = 1;
 		gameDBA = new GameDBA(conn);
 		gameDBA.addNewGameDB(LocalDateTime.now(), this);
 		offer = new GameDie[9];
 		players = new ArrayList<Player>();
-		currentPlayer = new Player(conn, new Account(conn), this, "tester", PlayerStatus.CHALLENGER);
+		currentPlayer = new Player(conn, new Account(conn), this, PlayerStatus.CHALLENGER);
 		players.add(currentPlayer);
+		System.out.println(players.size());
+		diceInBag = new GameDie[90];
+		usedDice = new ArrayList<GameDie>();
+		makedie();
 		
 	}
 
@@ -175,20 +181,24 @@ public class Game {
 		int amountofdice = players.size() * 2 + 1;
 		Random r = new Random();
 		
-		
-		while (offer[8] == null) {
+		while (offer[amountofdice-1] == null) {
 			for (int i = 0; i < amountofdice; i++) {
 				GameDie selectedDice = diceInBag[r.nextInt(89)];
 				if (!checkDieUsed(selectedDice)) {
 					offer[i] = selectedDice;
+					usedDice.add(selectedDice);
 					for (int j = 0; j < usedDice.size(); j++) {
-						if (usedDice.get(j) == null) {
-							selectedDice = usedDice.get(j);
+						if (usedDice.get(j).getRoundID(this) == 0) {
 							selectedDice.setRoundID(this);
 						}
 					}
 				}
+				else {
+					i--;
+				}
+				System.out.println("test 1");
 			}
+			System.out.println("test 2");
 		}
 	}
 	
@@ -199,16 +209,7 @@ public class Game {
 	}
 	
 	public GameDie[] getDicePool() {
-		offer[0] = new GameDie(ModelColor.PURPLE, 1, 5);
-		offer[1] = new GameDie(ModelColor.BLUE, 2, 3); 
-		offer[2] = new GameDie(ModelColor.RED, 3, 1); 
-		offer[3] = new GameDie(ModelColor.GREEN, 4, 2); 
-		offer[4] = new GameDie(ModelColor.YELLOW, 5, 4); 
-		offer[5] = new GameDie(ModelColor.RED, 6, 6); 
-		offer[6] = new GameDie(ModelColor.BLUE, 7, 6); 
-		offer[7] = new GameDie(ModelColor.GREEN, 8, 3); 
-		offer[8] = new GameDie(ModelColor.PURPLE, 9, 5); 
-				
+		grabDiceFromBag();
 		return offer;
 	}
 	
@@ -238,24 +239,19 @@ public class Game {
 	public void makedie() {
 		Random r = new Random();
 		for (int i = 0; i < 18; i++) {
-			diceInBag[i] = new GameDie(ModelColor.GREEN, i, r.nextInt(6)+1);
-			diceInBag[i].addDieToDB(this);
+			diceInBag[i] = new GameDie(ModelColor.GREEN, i+1, r.nextInt(6)+1, this, conn);
 		}
-		for (int i = 18; i < 36; i++) {
-			diceInBag[i] = (new GameDie(ModelColor.BLUE, i, r.nextInt(6)+1));
-			diceInBag[i].addDieToDB(this);
+		for (int i = 0; i < 18; i++) {
+			diceInBag[i+17] = new GameDie(ModelColor.BLUE, i+1, r.nextInt(6)+1, this, conn);
 		}
-		for (int i = 36; i < 54; i++) {
-			diceInBag[i] = (new GameDie(ModelColor.YELLOW, i, r.nextInt(6)+1));
-			diceInBag[i].addDieToDB(this);
+		for (int i = 0; i < 18; i++) {
+			diceInBag[i+35] = new GameDie(ModelColor.YELLOW, i+1, r.nextInt(6)+1, this, conn);
 		}
-		for (int i = 54; i < 72; i++) {
-			diceInBag[i] = (new GameDie(ModelColor.PURPLE, i, r.nextInt(6)+1));
-			diceInBag[i].addDieToDB(this);
+		for (int i = 0; i < 18; i++) {
+			diceInBag[i+53] = new GameDie(ModelColor.PURPLE, i+1, r.nextInt(6)+1, this, conn);
 		}
-		for (int i = 72; i < 90; i++) {
-			diceInBag[i] = (new GameDie(ModelColor.RED, i, r.nextInt(6)+1));
-			diceInBag[i].addDieToDB(this);
+		for (int i = 0; i < 18; i++) {
+			diceInBag[i+71] = new GameDie(ModelColor.RED, i+1, r.nextInt(6)+1, this, conn);
 		}
 		
 	}

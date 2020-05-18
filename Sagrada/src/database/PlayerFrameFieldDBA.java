@@ -16,7 +16,7 @@ public class PlayerFrameFieldDBA {
 	public void addPlayerFrameField(Player player, int xposition, int yposition) {
 		// TODO list van fields.
 
-		String query = "INSERT INTO playerframefield(idplayer, position_x, position_y, idgame) VALUES("+player.getId()+","+xposition+","+xposition+
+		String query = "INSERT INTO playerframefield(idplayer, position_x, position_y, idgame) VALUES("+player.getId()+","+(xposition+1)+","+(yposition+1)+
 				","+player.getGame().getGameID()+");";
 		
 		try {

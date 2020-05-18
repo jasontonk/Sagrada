@@ -43,6 +43,7 @@ public class Account {
 		invitations = new ArrayList<>();	
 		connection = c;
 		accountDBA = new AccountDBA(c);
+		accountDBA.addAccountDB(username, password);
 	}
 
 	/**
@@ -63,6 +64,7 @@ public class Account {
      * 
      */
 	public String getUsername() {
+		accountDBA.
 		return username;
 	}
 
@@ -102,7 +104,7 @@ public class Account {
 	public ArrayList<Player> getPlayers() {
 		PlayerDBA playerDBA = new PlayerDBA(connection);
 		players = playerDBA.getPlayersOfAccount(this);
-		players.add(new Player(connection, this));
+//		players.add(new Player(connection, this, playerDBA));
 		return players;
 	}
 

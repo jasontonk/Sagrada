@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
+import database.DataBaseConnection;
 import database.GameDieDBA;
 
 public class GameDie extends Die {
@@ -13,9 +14,11 @@ public class GameDie extends Die {
 	private BoardField boardField;
 	private GameDieDBA gameDieDBA;
 	
-	public GameDie(ModelColor modelColor, int number, int eyes) {
+	public GameDie(ModelColor modelColor, int number, int eyes, Game game, DataBaseConnection conn) {
 		super(modelColor, number);
-		this.setEyes(eyes);
+		gameDieDBA = new GameDieDBA(conn);
+		addDieToDB(game);
+		this.setEyes(game, eyes);
 		isAvailable = false;
 		isFirstTurn = false;
 		isOnRoundTrack = false;
@@ -60,14 +63,15 @@ public class GameDie extends Die {
 		return eyes;
 	}
 
-	public void setEyes(int eyes) {
+	public void setEyes(Game game, int eyes) {
+		gameDieDBA.addEyes(this, game, eyes);
 		this.eyes = eyes;
 	}
 	public void addDieToDB(Game game) {
 		gameDieDBA.addGameDie(this, game);
 	}
 	public void setRoundID(Game game) {
-		gameDieDBA.addRoundID(this,game, game.getRound());
+		gameDieDBA.addRoundID(this,game);
 		
 	}
 	public ArrayList<GameDie> getAllRoundDice(Game game){
