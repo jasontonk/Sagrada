@@ -217,7 +217,7 @@ public class AccountDBA {
 		ArrayList<Integer> games = new GameDBA(conn).getAllGamesId();
 		int wins = 0;
 		for(int i = 0; i <games.size();i++){
-			String query = "SELECT username, MAX(score) AS winscore FROM player WHERE idgame = "+games.get(i)+" AND playstatus_playstatus = 'uitgespeeld' GROUP BY username, idgame ORDER BY winscore DESC LIMIT 1";
+			String query = "SELECT username, MAX(score) AS winscore FROM player WHERE idgame = "+games.get(i)+" AND playstatus = 'uitgespeeld' GROUP BY username, idgame ORDER BY winscore DESC LIMIT 1";
 			try {
 				Statement stmt = conn.getConn().createStatement();
 				ResultSet rs = stmt.executeQuery(query);
@@ -238,7 +238,7 @@ public class AccountDBA {
 		ArrayList<Integer> games = new GameDBA(conn).getAllGamesId();
 		int loses = 0;
 		for(int i = 0; i <games.size();i++){
-			String query = "SELECT username FROM player WHERE idgame = "+games.get(i)+" AND playstatus_playstatus = 'uitgespeeld' AND score < (SELECT MAX(score) FROM player WHERE idgame= "+games.get(i)+") GROUP BY username, idgame;";
+			String query = "SELECT username FROM player WHERE idgame = "+games.get(i)+" AND playstatus = 'uitgespeeld' AND score < (SELECT MAX(score) FROM player WHERE idgame= "+games.get(i)+") GROUP BY username, idgame;";
 			try {
 				Statement stmt = conn.getConn().createStatement();
 				ResultSet rs = stmt.executeQuery(query);

@@ -3,11 +3,13 @@ package controller;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import database.AccountDBA;
 import database.DataBaseConnection;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import model.Account;
+import model.Player;
 import view.ChooseView;
 import view.LobbyView;
 import view.LoginView;
@@ -23,21 +25,36 @@ public class AccountController {
 	private DataBaseConnection connection;
 	private LobbyView lobbyView;
 	private MyScene myScene;
+	private AccountDBA accountDBA;
 	
 	public AccountController(DataBaseConnection c, MyScene myScene) {
 		this.connection = c;
 		this.myScene = myScene;
-		loginView = new LoginView(this);
-		registerView = new RegisterView(this);
-		chooseView = new ChooseView(this);
+		
+		setAccount(new Account(connection));
+		
 		lobbyView = new LobbyView(this);
-		account = new Account(c);
-		// TODO Auto-generated constructor stub
+		chooseView = new ChooseView(this);
+		registerView = new RegisterView(this);
+		loginView = new LoginView(this);
+		
+		accountDBA = new AccountDBA(c);
+	}
+	
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+	
+	public Account getAccount() {
+		return account;
 	}
 	
 	public void actionLogin(String username, String password) {
+		Account account = accountDBA.GetAccountDB(username);
+		
 		if(account.accountExists(username)) {
 			if(password.equals(account.getPassword(username))) {
+				this.account = account;
 				viewLobby();
 			}
 			else {
@@ -50,13 +67,15 @@ public class AccountController {
 	}  
  
 	public void actionRegister(String username, String password) {
+		Account account = new Account(connection);
+		
 		if(account.accountExists(username)) {
 			showWarning("gebruikersnaam", "gebruikersnaam is al bezet");		
 		} else if(password.length() < 3) {
 			showWarning("wachtwoord", "Wachtwoord moet minimaal 3 tekens zijn");
 		} else {
 			account.setAccount(username, password);
-			viewLobby();
+			viewLogin();
 		}
 	}
 	
@@ -64,9 +83,10 @@ public class AccountController {
 		return account.getAllAccounts();
 	}
 	
-//	public ArrayList<Player> getAllPlayersOfThisAccount() {
-//		return account.getPlayers();
-//	}
+	public ArrayList<Player> getAllPlayersOfThisAccount() {
+		return account.getPlayers();
+//		return null;
+	}
 	
 	public void viewLogin() {
 		myScene.setContentPane(loginView.makeLoginPane());
@@ -104,6 +124,10 @@ public class AccountController {
 		alert.setHeaderText(header);
 		alert.setContentText(text);
 		alert.showAndWait();
+	}
+
+	public void makeGame() {
+		GameController gameContoller = new GameController(connection, myScene);
 	}
 
 }

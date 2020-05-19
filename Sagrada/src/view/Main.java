@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application  {
 	DataBaseConnection conn = new DataBaseConnection("com.mysql.jdbc.Driver");
-	private GameController gameController = new GameController(conn);
+	private GameController gameController = new GameController(conn, null);
 	private PatterncardSelectionView patterncardSelectionView = new PatterncardSelectionView(gameController);
 	
 	public static void main(String[] args) {

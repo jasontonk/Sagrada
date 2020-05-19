@@ -32,19 +32,27 @@ public class Player {
 	
 	private PlayerDBA playerDBA ;
 	
-	public Player(DataBaseConnection c, Account account, Game game, PlayerStatus playerStatus) {
+	public Player(DataBaseConnection c, Account a, Game game, PlayerStatus playerStatus) {
 		connection = c;
-		this.account = account;
-		this.game = game;
-		this.name = "test";
+		
+		this.account = a;
+		this.setName(account.getUsername());
+		this.setGame(game);
+		
+		this.setPlayerStatus(PlayerStatus.CHALLENGER);
+	
 		modelColor = modelColor.RED;
-		this.playerStatus = playerStatus;
+		this.setColor(modelColor);
+		
 		playerDBA = new PlayerDBA(c);
 		playerDBA.addPlayer(this);
 		patternCard = new PatternCard(c);
-		board = new Board(1, this, c);
+		board = new Board(1, this, c);		
+	}
+	
+	public Player(DataBaseConnection c) {
+		connection = c;
 		
-			
 	}
 
 	public int getId() {

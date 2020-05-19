@@ -12,6 +12,9 @@ import model.ModelColor;
 import model.PatternCard;
 import model.Player;
 import view.GameView;
+import view.MyScene;
+import view.PatterncardSelectionView;
+import view.PatterncardView;
 
 public class GameController {
 
@@ -21,9 +24,14 @@ public class GameController {
 	private PatterncardController patterncardController;
 	private RoundtrackController roundtrackController;
 	private DataBaseConnection conn;
+	private MyScene myScene;
 	
-	public GameController(DataBaseConnection conn) {
+	private PatterncardView patterncardView;
+	private PatterncardSelectionView patterncardSelectionView;
+	
+	public GameController(DataBaseConnection conn, MyScene ms) {
 		this.conn= conn;
+		myScene = ms;
 		game =  new Game(conn, true);
 		System.out.println("loading...20%");
 		dieController = new DieController(conn, this);
@@ -35,6 +43,10 @@ public class GameController {
 		gameView = new GameView(this);
 		System.out.println("loading...100%");
 		
+		patterncardView = new PatterncardView(patterncardController);
+		patterncardSelectionView = new PatterncardSelectionView(this);
+		
+		myScene.setContentPane(patterncardSelectionView);
 	}
 	
 public ArrayList<PatterncardController> getPatternCardsToChoose(){

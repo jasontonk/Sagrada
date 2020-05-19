@@ -27,7 +27,7 @@ public class GameDBA {
 			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			if(rs.next()) {
-				game = new Game(conn);
+				game = new Game(conn, false);
 				game.setGameID(rs.getInt("idgame"));
 				game.setRound(getCurrentRound(id));
 			}
@@ -110,7 +110,6 @@ public class GameDBA {
 	}
 	
 	public void addPlayerDB(int playerid, int gameid) {
-		
 		String query = "UPDATE game SET turn_idplayer = "+playerid+" WHERE idgame = "+gameid+";";
 		try {
 				Statement stmt = conn.getConn().createStatement();
@@ -143,7 +142,7 @@ public class GameDBA {
 	
 	public int getCurrentRound(int gameid) {
 		int currentRound = 1;
-		String query = "SELECT DISTINCT(round) FROM gamedie WHERE idgame = "+gameid+" AND roundtrack IS NOT NULL ORDER BY round DESC LIMIT 1;"; 
+		String query = "SELECT DISTINCT('round') FROM gamedie WHERE idgame = "+gameid+" AND roundtrack IS NOT NULL ORDER BY round DESC LIMIT 1;"; 
 		try {
 			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);

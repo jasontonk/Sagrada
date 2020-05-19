@@ -11,7 +11,6 @@ import javafx.scene.paint.Color;
 
 public class MyScene extends Scene {
 
-	private Pane rootPane;
     private Pane contentPane;
     private AccountController accountController;
     

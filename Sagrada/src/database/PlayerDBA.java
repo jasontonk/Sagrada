@@ -23,21 +23,20 @@ public class PlayerDBA {
 	}
 	
 	
-	public boolean addPlayer(Player player) {
+	public void addPlayer(Player player) {
 		int playerid = autoIdPlayer();
 		player.setId(playerid);
+		player.setName("hoi");
 		String query = "INSERT INTO player (idplayer,username,idgame,playstatus,private_objectivecard_color) VALUES("+playerid+",'"+player.getName()+"',"+player.getGame().getGameID()+
 				",'"+player.getPlayerStatus()+"','"+getStringFromColor(player)+"');";
-		
 		try {
 			Statement stmt = conn.getConn().createStatement();
 			stmt.executeUpdate(query);
 			stmt.close();
 			game.addPlayerDB(playerid, player.getGame().getGameID());
-			return true;
+			System.out.println("gelukt");
 		}catch(SQLException e) {
 			e.printStackTrace();
-			return false;
 		}	
 	}
 	
@@ -224,15 +223,18 @@ public class PlayerDBA {
     }
 	
 public ArrayList<Player> getPlayersOfAccount(Account account){
-		Player player = new Player(conn,null,null, null);
+		
 		ArrayList<Player> list = new ArrayList<>();
-		String query = "SELECT * FROM player WHERE username = "+account.getUsername()+";";
+//		String username = "'" + account.getUsername() + "'";
+		String username = "'hoi'";
+		String query = "SELECT * FROM player WHERE username = "+username;
 		try {
 			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next()){
 				PatternCardDBA patternCard = new PatternCardDBA(conn);
-            	GameDBA game = new GameDBA(conn);
+//            	GameDBA game = new GameDBA(conn);
+            	Player player = new Player(conn);
             	player.setAccount(account);
             	player.setName(rs.getString("username"));
             	player.setId(rs.getInt("idplayer"));
