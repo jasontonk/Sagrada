@@ -9,6 +9,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -37,6 +38,10 @@ public class PatterncardSelectionView extends VBox {
 		gridpane.setVgap(10.0);
 		for (int i = 0; i < patterncardView.size(); i++) {
 			gridpane.add(patterncardView.get(i), i, 1);
+			
+			StackPane glass = new StackPane();
+	        glass.setStyle("-fx-background-color: transparent;");
+	        gridpane.add(glass, i, 1);
 		}
 		for (int i = 0; i < patterncardView.size(); i++) {
 			Button button = new Button();
