@@ -120,7 +120,7 @@ public class PatternCardDBA {
 	
 	public ArrayList<PatternCard> getOptionalPatternCardsOfPlayer(int idplayer, Player player) {
 		ArrayList<PatternCard> list = new ArrayList<>();
-		String query = "SELECT * FROM patterncard INNER JOIN patterncardoption p on patterncard.idpatterncard = p.patterncard_idpatterncard WHERE player_idplayer= "+idplayer+";";
+		String query = "SELECT * FROM patterncard INNER JOIN patterncardoption p on patterncard.idpatterncard = p.idpatterncard WHERE idplayer= "+idplayer+";";
 		try {
 			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);

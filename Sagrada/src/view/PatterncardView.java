@@ -79,17 +79,12 @@ public class PatterncardView extends VBox{
 		Button die = new Button();
 		
 		imgURL = patterncardController.getSelectedDieUrl();
-		System.out.println(imgURL);
 		if(imgURL != null) {
 			Image image = new Image(getClass().getResource(imgURL).toString());
 			die.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
 			die.setPrefSize(40, 40);
 			stackpane.getChildren().add(die);
 			patterncardController.deleteDieFromPool();
-		}
-		else {
-			System.out.println("no die selected");
-			//TODO make popup field for errors
 		}
 	}
 
@@ -110,13 +105,11 @@ public class PatterncardView extends VBox{
 	    return difficultyPane;
 	}
 	public boolean checkPlacementAgainstRules(int x, int y, StackPane stackpane) {
-		System.out.println(x+""+y);
 		if(patterncardController.checkPlacementAgainstRules(x, y, patterncardController.getSelectedDieColor(), patterncardController.getSelectedDieValue())) {
 			placeSelectedDie(stackpane);
 			return true;
 		}
 		else {
-			System.out.println("unable to place die due to rules");
 			return false;
 		}
 	}

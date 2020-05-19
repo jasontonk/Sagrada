@@ -20,16 +20,16 @@ public class GameController {
 	private RoundtrackController roundtrackController;
 	
 	public GameController(DataBaseConnection conn) {
-		game =  new Game(conn);
-		System.out.println("stap1");
+		game =  new Game(conn, true);
+		System.out.println("loading...20%");
 		dieController = new DieController(conn, this);
-		System.out.println("stap2");
+		System.out.println("loading...40%");
 		patterncardController= new PatterncardController(conn, this);
-		System.out.println("stap3");
+		System.out.println("loading...60%");
 		roundtrackController= new RoundtrackController(game, this);
-		System.out.println("stap4");
+		System.out.println("loading...80%");
 		gameView = new GameView(this);
-		System.out.println("stap 5");
+		System.out.println("loading...100%");
 		
 	}
 
@@ -107,5 +107,9 @@ public class GameController {
 
 	public int getCurrentRound() {
 		return game.getRound();
+	}
+
+	public boolean isRandom() {
+		return game.isRandom();
 	}
 }

@@ -146,10 +146,10 @@ public class Player {
 		this.patternCard = patternCard;
 	}
 
-	public ArrayList<PatternCard> getPatternCardsToChoose() {
-		PatternCardDBA patternCardDBA = new PatternCardDBA(connection);
-		patternCardsToChoose = patternCardDBA.getOptionalPatternCardsOfPlayer(getId(), this);
-		
+	public ArrayList<PatternCard> getPatternCardsToChoose(boolean random) {
+//		PatternCardDBA patternCardDBA = new PatternCardDBA(connection);
+//		patternCardsToChoose = patternCardDBA.getOptionalPatternCardsOfPlayer(getId(), this);
+		patternCardsToChoose = patternCard.getPatternCardsToChoose(random, this);
 		return patternCardsToChoose;
 	}
 
@@ -281,7 +281,6 @@ public class Player {
 		return score;
 	}
 	public boolean checkPlacementAgainstRules(int x, int y, ModelColor modelColor, int value) {
-		System.out.println(x+""+y);
 		return board.checkAll(board.getBoardField(x, y), modelColor, value);
 	}
 

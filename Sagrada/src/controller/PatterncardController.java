@@ -1,11 +1,14 @@
 package controller;
 
+import java.util.ArrayList;
+
 import database.DataBaseConnection;
 import model.ModelColor;
 import model.PatternCard;
 
 public class PatterncardController {
   
+	ArrayList<PatternCard> patterncardOptions;
 	PatternCard patterncard;
 	GameController gameController;
 	
@@ -13,6 +16,8 @@ public class PatterncardController {
 		this.gameController = gameController;
 		patterncard = gameController.getPlayerPatterncard(gameController.getCurrentPlayer());
 		patterncard.setpattern(false);
+		patterncardOptions = gameController.getCurrentPlayer().getPatternCardsToChoose(gameController.isRandom());
+		
 	}
 	
 	public ModelColor getFieldColor(int x, int y){

@@ -5,8 +5,13 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -14,23 +19,28 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import model.GameDie;
+import model.ModelColor;
 
 public class RoundtrackView extends VBox {
 
 	private RoundtrackController roundtrackController;
+	private JavafxColor javafxColor;
 	private final int ROUNDTRACKFIELD_SIZE = 60;
 	private final double SPACING = 5.0;
 	private Insets padding = new Insets(5);  
+	private GridPane roundtrack = new GridPane();
 	
 	public RoundtrackView(RoundtrackController roundtrackController) {
 		this.roundtrackController = roundtrackController;
+		javafxColor = new JavafxColor();
 		this.setPadding(new Insets(0, 30, 0, 30));
 		this.setMaxWidth((10 * (ROUNDTRACKFIELD_SIZE + SPACING) + SPACING));
 		this.getChildren().addAll(drawTitle(), drawRoundtrack(), drawRound());
 	}
 	
 	public GridPane drawRoundtrack() {
-		GridPane roundtrack = new GridPane();
+		
 		roundtrack.setBackground(new Background(new BackgroundFill(Color.BLACK,null,null)));
 		roundtrack.setMinSize((10 * (ROUNDTRACKFIELD_SIZE + SPACING) + SPACING), (ROUNDTRACKFIELD_SIZE + SPACING + SPACING));
 		roundtrack.setPadding(padding);
@@ -46,7 +56,6 @@ public class RoundtrackView extends VBox {
 			roundtrack.add(text, i, 1);
 			roundtrack.setHalignment(text, HPos.CENTER);
 			roundtrack.add(button, i, 2);
-			
 		}
 		
 		return roundtrack;
@@ -66,5 +75,25 @@ public class RoundtrackView extends VBox {
 		roundPane.setPadding(padding);
 		roundPane.setRight(round);
 		return roundPane;
+	}
+	public void addDice(int round, ModelColor[] colors, int[] values) {
+		roundtrack.getChildren().remove(round,2);
+		for(int i = 0; i < colors.length; i++) {
+			Button button = new Button();
+			Color color = javafxColor.getJavafxColor(colors[i]);
+			
+			if(color == null && values[i] == 0) {
+				button.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));	
+			}
+			else if(colors[i] != null) {
+				button.setBackground(new Background(new BackgroundFill(color, null, null)));
+			}
+			else if(values[i] != 0) {
+				String imgURL = "/images/" + Integer.toString(values[i]) + "_fieldValue.jpg";
+				Image image = new Image(getClass().getResource(imgURL).toString());
+				button.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
+			}
+			roundtrack.add(button, round, i+2);
+		}
 	}
 }

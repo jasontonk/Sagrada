@@ -19,8 +19,11 @@ public class Game {
 	private RoundTrack roundTrack;
 	private Chat chat;
 	private Player currentPlayer;
+	private Player personalPlayer;
 	private int round;
 	private int gameID;
+	private boolean finishedGame;
+	private boolean randomPatterncards;
 	private ArrayList<PatternCard> gamePatterncards;
 	private ArrayList<PatternCard> playerPatterncards;
 	private DataBaseConnection conn;
@@ -38,7 +41,7 @@ public class Game {
 		usedDice = new ArrayList<>();
 		offer = new GameDie[9];
 		round = 1;
-
+		this.randomPatterncards = randomgeneratedpatterncards;
 		accounts.add(account1);
 		accounts.add(account2);
 //		players.add(new Player(conn, account1, this));
@@ -61,6 +64,7 @@ public class Game {
 		usedDice = new ArrayList<>();
 		offer = new GameDie[9];
 		round = 1;
+		this.randomPatterncards = randomgeneratedpatterncards;
 
 		accounts.add(account1);
 		accounts.add(account2);
@@ -87,6 +91,7 @@ public class Game {
 		usedDice = new ArrayList<>();
 		offer = new GameDie[9];
 		round = 1;
+		this.randomPatterncards = randomgeneratedpatterncards;
 
 		accounts.add(account1);
 		accounts.add(account2);
@@ -105,8 +110,9 @@ public class Game {
 
 	}
 
-	public Game(DataBaseConnection conn) {
+	public Game(DataBaseConnection conn, boolean randomgeneratedpatterncards) {
 		this.conn = conn;
+		this.randomPatterncards = randomgeneratedpatterncards;
 		round = 1;
 		gameDBA = new GameDBA(conn);
 		gameDBA.addNewGameDB(LocalDateTime.now(), this);
@@ -114,10 +120,10 @@ public class Game {
 		players = new ArrayList<Player>();
 		currentPlayer = new Player(conn, new Account(conn), this, PlayerStatus.CHALLENGER);
 		players.add(currentPlayer);
-		System.out.println(players.size());
 		diceInBag = new GameDie[90];
 		usedDice = new ArrayList<GameDie>();
 		makedie();
+		finishedGame = false;
 		
 	}
 
@@ -136,7 +142,7 @@ public class Game {
 	public void play() {
 		gamesetup();
 		playfirstround();
-		for (int i = 0; i < 9; i++) {
+		while(!finishedGame) {
 			playround();
 		}
 
@@ -179,7 +185,6 @@ public class Game {
 
 	public void grabDiceFromBag() {
 		int amountofdice = players.size() * 2 + 1;
-		amountofdice = 9;
 		Random r = new Random();
 		
 		while (offer[amountofdice-1] == null) {
@@ -197,9 +202,7 @@ public class Game {
 				else {
 					i--;
 				}
-				System.out.println("test 1");
 			}
-			System.out.println("test 2");
 		}
 	}
 	
@@ -225,6 +228,26 @@ public class Game {
 
 	public void playround() {// boolean first round false
 		int amountofdice = players.size() * 2 + 1;
+		boolean finishedRound = false;
+		
+		while(!finishedRound) {
+			if(round == gameDBA.getCurrentRound(this.getGameID())) {
+				if(currentPlayer == personalPlayer) {
+					
+				}
+			}
+			else {
+				if(round == 10) {
+					finishedGame = true;
+				}
+				round = gameDBA.getCurrentRound(this.getGameID());
+				finishedRound = true;
+				
+			}
+		}
+		
+		
+		
 //		methode die dobbelstenen selecteert 
 //		 dobbelsteen kiezen,passen of toolcard gebruiken // if met speler in put en dan de methode die er aan vast zit passen is door naar volgende speler 
 //		 gekozen actie uitvoeren
@@ -235,6 +258,13 @@ public class Game {
 //		
 //		 voeg overige dobbelstenen aan rondespoor toe
 		round++;
+	}
+	public void playTurn() {
+		boolean finishedTurn = false;
+		
+		while(!finishedTurn) {
+			
+		}
 	}
 
 	public void makedie() {
@@ -350,6 +380,11 @@ public class Game {
 			return selectedDie.getEyes();
 		}
 		return 0;
+	}
+
+	public boolean isRandom() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

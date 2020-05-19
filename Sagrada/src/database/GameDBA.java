@@ -43,7 +43,7 @@ public class GameDBA {
 		
 		int gameID = autoIdGame();
 		game.setGameID(gameID);
-		String query = "INSERT INTO game VALUES("+gameID+",null,'"+datetime+"');";
+		String query = "INSERT INTO game VALUES("+gameID+",null, null,'"+datetime+"');";
 		
 		try {
 			Statement stmt = conn.getConn().createStatement();

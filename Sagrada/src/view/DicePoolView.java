@@ -58,7 +58,6 @@ public class DicePoolView extends VBox {
 	
 	//TODO Remove the right dieview on the right index Also set new indexes for the other dieviews when a dieview is removed
 	public void deleteDie(int index) {
-		System.out.println(index);
 		for(int i = 0; i < dicePool.getChildren().size()-index;i++) {
 			if(dicePool.getChildren().get(index + i) != null && index + 1 != 9) {
 				dieView.get(index+i).decreaseDiePoolID();

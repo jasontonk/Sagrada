@@ -107,7 +107,6 @@ public class Board {
      * Returns the board field of the parameters
      */
 	public BoardField getBoardField(int x, int y) {
-		System.out.println("XPos: "+x+" YPos: "+y);
 		if(boardFields[x][y] != null){
 			return boardFields[x][y];
 		}
@@ -241,9 +240,7 @@ public class Board {
 		}
 		BoardField boardFieldNext = getBoardField(boardField.getxPos(), boardField.getyPos() - 1);
 		if(boardFieldNext.hasDie()) {
-			System.out.println(""+boardFieldNext.getDie().getColor()+" "+modelColor);
 			if(boardFieldNext.getDie().getColor().equals(modelColor)) {
-				System.out.println("test");
 				return true;
 			}
 		}
@@ -275,7 +272,6 @@ public class Board {
 		}
 		BoardField boardFieldNext = getBoardField(boardField.getxPos() + 1, boardField.getyPos());
 		if(boardFieldNext.hasDie()) {
-			System.out.println( "test2");
 			if(boardFieldNext.getDie().getColor() == modelColor) {
 				return true;
 			}

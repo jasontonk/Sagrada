@@ -182,5 +182,19 @@ public class PatternCard {
 	public String getName() {
 		return name;
 	}
+	public ArrayList<PatternCard> getPatternCardsToChoose(boolean random, Player player) {
+		ArrayList<PatternCard> patternCardsToChoose = new ArrayList<>();
+		if(!random) {
+			patternCardsToChoose = patterncardDB.getOptionalPatternCardsOfPlayer(player.getId(), player);
+		}
+		else {
+			for (int i = 0; i < 4; i++) {
+				PatternCard  patternCard = new PatternCard(conn);
+				patternCard.setpattern(random);
+				patternCardsToChoose.add(patternCard);
+			}
+		}
+		return patternCardsToChoose;
+	}
 	
 }
