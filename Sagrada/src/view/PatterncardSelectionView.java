@@ -1,6 +1,10 @@
 package view;
 
+import java.util.ArrayList;
+
 import controller.GameController;
+import controller.PatterncardController;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -10,14 +14,18 @@ import javafx.scene.text.Text;
 
 public class PatterncardSelectionView extends VBox {
 	
-	private PatterncardView[] patterncardView;
+	private ArrayList<PatterncardView> patterncardView;
+	private ArrayList<PatterncardController> patterncardControllers;
 	private Insets padding = new Insets(5);
 	
 	
 	public PatterncardSelectionView(GameController gameController) {
-		patterncardView = new PatterncardView[4];
-		for (int i = 0; i < patterncardView.length; i++) {
-			patterncardView[i] = new PatterncardView(gameController.getPatterncardController());
+		patterncardView = new ArrayList<PatterncardView>();
+		patterncardControllers = new ArrayList<PatterncardController>();
+		
+		patterncardControllers = gameController.getPatternCardsToChoose();
+		for (int i = 0; i < 4; i++) {
+			patterncardView.add(new PatterncardView(patterncardControllers.get(i)));
 		}
 		this.getChildren().addAll(drawTitle(),drawPatterncards());
 	}
@@ -25,13 +33,16 @@ public class PatterncardSelectionView extends VBox {
 
 	private GridPane drawPatterncards() {
 		GridPane gridpane = new GridPane();
-		for (int i = 0; i < patterncardView.length; i++) {
-			gridpane.add(patterncardView[i], i, 1);
+		gridpane.setPadding(padding);
+		gridpane.setVgap(10.0);
+		for (int i = 0; i < patterncardView.size(); i++) {
+			gridpane.add(patterncardView.get(i), i, 1);
 		}
-		for (int i = 0; i < patterncardView.length; i++) {
+		for (int i = 0; i < patterncardView.size(); i++) {
 			Button button = new Button();
 			button.setText("Selecteer mij!");
 			gridpane.add(button, i, 2);
+			gridpane.setHalignment(button, HPos.CENTER);
 		}
 		return gridpane;
 	}

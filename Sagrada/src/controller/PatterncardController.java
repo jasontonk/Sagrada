@@ -8,17 +8,26 @@ import model.PatternCard;
 
 public class PatterncardController {
   
-	ArrayList<PatternCard> patterncardOptions;
-	PatternCard patterncard;
-	GameController gameController;
+	private ArrayList<PatternCard> patterncardOptions;
+	private PatternCard patterncard;
+	private GameController gameController;
 	
 	public PatterncardController(DataBaseConnection conn, GameController gameController) {
 		this.gameController = gameController;
 		patterncard = gameController.getPlayerPatterncard(gameController.getCurrentPlayer());
 		patterncard.setpattern(false);
-		patterncardOptions = gameController.getCurrentPlayer().getPatternCardsToChoose(gameController.isRandom());
 		
+		patterncardOptions = gameController.getCurrentPlayer().getPatternCardsToChoose(gameController.isRandom());
+		for(int i = 0;i < patterncardOptions.size();i++) {
+			System.out.println(patterncardOptions.get(i).getName());
+		}
 	}
+	
+	public PatterncardController(PatternCard patterncard) {
+		this.patterncard = patterncard;
+		patterncard.setpattern(false);
+	}
+	
 	
 	public ModelColor getFieldColor(int x, int y){
 		return patterncard.getFieldColor(x, y);

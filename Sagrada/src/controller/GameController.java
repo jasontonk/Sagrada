@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.ArrayList;
+
 import database.DataBaseConnection;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
@@ -18,8 +20,10 @@ public class GameController {
 	private DieController dieController;
 	private PatterncardController patterncardController;
 	private RoundtrackController roundtrackController;
+	private DataBaseConnection conn;
 	
 	public GameController(DataBaseConnection conn) {
+		this.conn= conn;
 		game =  new Game(conn, true);
 		System.out.println("loading...20%");
 		dieController = new DieController(conn, this);
@@ -31,6 +35,19 @@ public class GameController {
 		gameView = new GameView(this);
 		System.out.println("loading...100%");
 		
+	}
+	
+public ArrayList<PatterncardController> getPatternCardsToChoose(){
+		ArrayList<PatterncardController> patterncardControllers = new ArrayList<PatterncardController>();
+		ArrayList<PatternCard> patternCard = new ArrayList<PatternCard>();
+		patternCard = getCurrentPlayer().getPatternCardsToChoose(this.isRandom());
+		
+		for(int i = 0;i < 4;i++) {
+			
+			patterncardControllers.add(new PatterncardController(patternCard.get(i)));	
+			
+		}
+		return patterncardControllers;
 	}
 
 	public DieController getDieController() {

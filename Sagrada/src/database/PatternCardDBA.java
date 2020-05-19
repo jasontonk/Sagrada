@@ -118,13 +118,13 @@ public class PatternCardDBA {
         return patternCard;
     }
 	
-	public ArrayList<PatternCard> getOptionalPatternCardsOfPlayer(int idplayer, Player player) {
+	public ArrayList<PatternCard> getOptionalPatternCardsOfPlayer(Player player) {
 		ArrayList<PatternCard> list = new ArrayList<>();
-		String query = "SELECT * FROM patterncard INNER JOIN patterncardoption p on patterncard.idpatterncard = p.idpatterncard WHERE idplayer= "+idplayer+";";
+		String query = "SELECT * FROM patterncard INNER JOIN patterncardoption p on patterncard.idpatterncard = p.idpatterncard WHERE idplayer= "+player.getId()+";";
 		try {
 			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
-			if(rs.next()) {
+			while(rs.next()) {
 				PatternCard patternCard = new PatternCard(rs.getString("name"), rs.getInt("difficulty"),conn);
 				patternCard.setPatterncardID(rs.getInt("idpatterncard"));
 				patternCard.setPlayer(player);

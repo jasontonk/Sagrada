@@ -185,7 +185,9 @@ public class PatternCard {
 	public ArrayList<PatternCard> getPatternCardsToChoose(boolean random, Player player) {
 		ArrayList<PatternCard> patternCardsToChoose = new ArrayList<>();
 		if(!random) {
-			patternCardsToChoose = patterncardDB.getOptionalPatternCardsOfPlayer(player.getId(), player);
+			for(int i = 0; i < 4;i++) {
+				patternCardsToChoose.add(patterncardDB.getPatterncard());	
+			}
 		}
 		else {
 			for (int i = 0; i < 4; i++) {

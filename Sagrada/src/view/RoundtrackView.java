@@ -78,21 +78,15 @@ public class RoundtrackView extends VBox {
 	}
 	public void addDice(int round, ModelColor[] colors, int[] values) {
 		roundtrack.getChildren().remove(round,2);
+		String imgURL;
 		for(int i = 0; i < colors.length; i++) {
 			Button button = new Button();
 			Color color = javafxColor.getJavafxColor(colors[i]);
 			
-			if(color == null && values[i] == 0) {
-				button.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));	
-			}
-			else if(colors[i] != null) {
-				button.setBackground(new Background(new BackgroundFill(color, null, null)));
-			}
-			else if(values[i] != 0) {
-				String imgURL = "/images/" + Integer.toString(values[i]) + "_fieldValue.jpg";
-				Image image = new Image(getClass().getResource(imgURL).toString());
-				button.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
-			}
+			imgURL = "/images/" + color + values[i] + "_Die.png";
+			Image image = new Image(getClass().getResource(imgURL).toString());
+			button.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
+			
 			roundtrack.add(button, round, i+2);
 		}
 	}
