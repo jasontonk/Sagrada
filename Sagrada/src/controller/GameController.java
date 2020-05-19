@@ -45,6 +45,7 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 		for(int i = 0;i < 4;i++) {
 			
 			patterncardControllers.add(new PatterncardController(patternCard.get(i)));	
+			System.out.println(patternCard.get(i).getName());
 			
 		}
 		return patterncardControllers;

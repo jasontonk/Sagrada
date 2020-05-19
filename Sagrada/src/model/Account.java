@@ -64,7 +64,6 @@ public class Account {
      * 
      */
 	public String getUsername() {
-		accountDBA.
 		return username;
 	}
 

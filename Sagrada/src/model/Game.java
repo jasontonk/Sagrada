@@ -185,6 +185,7 @@ public class Game {
 
 	public void grabDiceFromBag() {
 		int amountofdice = players.size() * 2 + 1;
+		amountofdice = 9;
 		Random r = new Random();
 		
 		while (offer[amountofdice-1] == null) {

@@ -16,11 +16,6 @@ public class PatterncardController {
 		this.gameController = gameController;
 		patterncard = gameController.getPlayerPatterncard(gameController.getCurrentPlayer());
 		patterncard.setpattern(false);
-		
-		patterncardOptions = gameController.getCurrentPlayer().getPatternCardsToChoose(gameController.isRandom());
-		for(int i = 0;i < patterncardOptions.size();i++) {
-			System.out.println(patterncardOptions.get(i).getName());
-		}
 	}
 	
 	public PatterncardController(PatternCard patterncard) {
