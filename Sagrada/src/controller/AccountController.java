@@ -150,6 +150,7 @@ public class AccountController {
 		player.setPlayerStatus(PlayerStatus.CHALLENGER);
 		player.setColor(ModelColor.BLUE);
 		player.addPlayer(player);
+		invitePlayerList.add(player);
 		
 		for (Account account : inviteList) {
 			Player p = new Player(connection);
@@ -161,10 +162,15 @@ public class AccountController {
 			p.addPlayer(p);
 			invitePlayerList.add(p);
 		}
-		invitePlayerList.add(player);
+		
 	}
 
 	public ArrayList<Player> getInvitePlayerList() {
 		return invitePlayerList;
+	}
+
+	public void render() {
+		myScene.setContentPane(lobbyView.makeAccountPane());
+		System.out.println("hij werkt");
 	}
 }

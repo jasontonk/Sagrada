@@ -23,6 +23,7 @@ import javafx.scene.paint.Color;
 import model.Account;
 import model.Invitation;
 import model.Player;
+import model.PlayerStatus;
 
 public class LobbyView extends BorderPane {
 	
@@ -31,6 +32,7 @@ public class LobbyView extends BorderPane {
     private Pane output; 
     private ArrayList<Player> players;
     private ArrayList<Account> inviteList;
+    private ArrayList<Player> gameLobby;
 	
 	public LobbyView(AccountController accountController) {
 		this.accountController = accountController;
@@ -38,6 +40,7 @@ public class LobbyView extends BorderPane {
         inviteList = new ArrayList<Account>();
         players = accountController.getAllPlayersOfThisAccount();
         this.setPrefSize(800, 600);
+        gameLobby = new ArrayList<Player>();
 	}
 
 	public Pane makeAccountPane() {
@@ -79,36 +82,35 @@ public class LobbyView extends BorderPane {
 		VBox center = new VBox();
 		center.setMinSize(250, 600);
 		
-		
-		
 		VBox top = new VBox();
 		top.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, null, null)));
 		top.setMinSize(250, 300);
 		Button startGame = new Button("Start het spel");
 		startGame.setOnAction(e -> makeGame());
 		top.getChildren().add(startGame);
-		
-		
-		
-		
+
+		Button refresh = new Button("Vernieuw");
+		refresh.setOnAction(e -> accountController.render());
+		top.getChildren().add(refresh);
 		
 		VBox bottom = new VBox();
 		bottom.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, null, null)));
 		bottom.setMinSize(250, 300);
 		
-		ArrayList<Player> gameLobby = new ArrayList<Player>();
 		for (Player player : accountController.getInvitePlayerList()) {
-			if(player.getPlayerStatus().equals("ACCEPTED")) {
+			if(player.getPlayerStatus().equals(PlayerStatus.CHALLENGEE)  || player.getPlayerStatus().equals(PlayerStatus.CHALLENGER)) {
 				gameLobby.add(player);
+				System.out.println(gameLobby);
 			}
 		}
 		
 		for (Player player : gameLobby) {
 			HBox playerlist = new HBox();
-			
-			Label username = new Label("Speler: " + player.getName());
+			Label username = new Label("Speler: " + player.getName() + " = " + player.getPlayerStatus());
             username.setMinWidth(100);
-          
+            
+            System.out.println("Speler:" + player.getName());
+            player.setPlayerStatus(PlayerStatus.ACCEPTED);
             playerlist.getChildren().add(username);
             top.getChildren().add(playerlist);
 		}
@@ -131,8 +133,9 @@ public class LobbyView extends BorderPane {
             
             CheckBox invite = new CheckBox();
             invite.setText("Invite");
-            invite.setOnAction(e -> addPlayerToInviteList(a));
-
+         
+            invite.setOnAction(e -> addPlayerToInviteList(invite, a));
+            
             
             playerlist.getChildren().addAll(username,viewStatsButton, invite);
             right.getChildren().add(playerlist);
@@ -145,14 +148,21 @@ public class LobbyView extends BorderPane {
 		accountView.getChildren().addAll(left, center, right);
 		return accountView;
 	}
+
+	private ArrayList<Account> addPlayerToInviteList(CheckBox invite, Account a) {
+		if(invite.isSelected()) {
+			inviteList.add(a);
+		}
+		else {
+			inviteList.remove(a);
+		}
+		return inviteList;
+	}
 	
 	private void makeGame() {
 		accountController.makeGame();
 	}
 
-	private void addPlayerToInviteList(Account account) {
-		inviteList.add(account);
-	}
 
 	private void invite() {
 		accountController.inviteAccounts(inviteList);
