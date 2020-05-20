@@ -118,7 +118,7 @@ public class Game {
 		gameDBA.addNewGameDB(LocalDateTime.now(), this);
 		offer = new GameDie[9];
 		players = new ArrayList<Player>();
-		currentPlayer = new Player(conn, new Account(conn), this, PlayerStatus.CHALLENGER);
+//		currentPlayer = new Player(conn, new Account(conn), this, PlayerStatus.CHALLENGER);
 		players.add(currentPlayer);
 		diceInBag = new GameDie[90];
 		usedDice = new ArrayList<GameDie>();

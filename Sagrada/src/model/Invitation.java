@@ -1,49 +1,103 @@
 package model;
 
 public class Invitation {
-	
-	private String message;
-	private Player sender;
-	private Player receiver;
-	private InvitationStatus invitationStatus; 
-	
-	
-	//Constructor that adds sender, receiver and message to the invitation 
-	public Invitation(Player sendingPlayer, Player receivingPlayer, String message) {
-		addSender(sendingPlayer);
-		addReceiver(receivingPlayer);
-		addText(message);
-	}
-	
-	//adds the player who sent the invitation
-	private void addSender(Player sendingPlayer) {
-		sender = sendingPlayer;
-	}
-	
-	//adds the player who should receiver the invitation
-	private void addReceiver(Player receivingPlayer) {
-		receiver = receivingPlayer;
-	}
-	
-	//adds the message that should be sent with the invitation
-	private void addText(String text) {
-		message = text;
-	}
-	
-	
-	public Invitation getInvitation() {
-		return this; //changed to this to fix error
-	}
-	
-	//sets status to challenger
-	public void setChallenger() {
-		invitationStatus = InvitationStatus.Challenger; //changed to InvitationStatus.Challenger to fix error
-	}
-	
-	//sets status to challenged
-	public void setChallenged() {
-		invitationStatus = InvitationStatus.Challenged;//changed to InvitationStatus.Challenged to fix error
+    private Account invitedAccount;
+    private Game game;
+    private boolean accepted;
+    private boolean denied;
+    private Player player;
 
-	}
-	
+    /**
+     * Constructor
+     */
+    public Invitation() {
+        accepted = false;
+        denied = false;
+    }
+
+    /**
+     * Accepts the invite
+     */
+    public void acceptInvite() {
+        accepted = true;
+        denied = false;
+    }
+
+    /**
+     * Denies the invite request
+     */
+    public void denyInvite() {
+        accepted = false;
+        denied = true;
+    }
+
+    /**
+     * Gets the status of the invite as a String
+     *
+     * @return String
+     */
+    public String getStatus() {
+        if (accepted) {
+            return "geaccepteerd";
+        } else if (denied) {
+            return "geweigerd";
+        } else {
+            return "uitgedaagde";
+        }
+    }
+
+    /**
+     * Checks if the invite has not been responded to
+     *
+     * @return boolean
+     */
+    public boolean isPending() {
+        return (!accepted && !denied);
+    }
+
+    /**
+     * Get the account that is invited
+     *
+     * @return Account
+     */
+    public Account getInvitedAccount() {
+        return invitedAccount;
+    }
+
+    /**
+     * Set the account that the invite is for
+     */
+    public void setInvitedAccount(Account account) {
+        invitedAccount = account;
+    }
+
+    /**
+     * Get the game that the invite is for
+     *
+     * @return Game
+     */
+    public Game getGame() {
+        return game;
+    }
+
+    /**
+     * Set the game that is connected to the invite
+     */
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    /**
+     * Gets the player that the invite is for
+     */
+    public Player getPlayer() {
+        return player;
+    }
+
+    /**
+     * Sets a player for who the invite is
+     */
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 }

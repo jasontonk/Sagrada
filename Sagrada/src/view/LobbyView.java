@@ -21,6 +21,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import model.Account;
+import model.Invitation;
 import model.Player;
 
 public class LobbyView extends BorderPane {
@@ -131,7 +132,7 @@ public class LobbyView extends BorderPane {
 	}
 
 	private void invite() {
-		System.out.println(inviteList);
+		accountController.inviteAccounts(inviteList);
 	}
 
 	private void showStats(Account account) {

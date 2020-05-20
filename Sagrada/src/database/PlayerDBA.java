@@ -26,7 +26,6 @@ public class PlayerDBA {
 	public void addPlayer(Player player) {
 		int playerid = autoIdPlayer();
 		player.setId(playerid);
-		player.setName("hoi");
 		String query = "INSERT INTO player (idplayer,username,idgame,playstatus,private_objectivecard_color) VALUES("+playerid+",'"+player.getName()+"',"+player.getGame().getGameID()+
 				",'"+player.getPlayerStatus()+"','"+getStringFromColor(player)+"');";
 		try {
@@ -196,7 +195,7 @@ public class PlayerDBA {
 	
 	public Player getPlayerUsingID(int idplayer) {
 		
-		Player player = new Player(conn, null, null, null);
+		Player player = new Player(conn);
         String query = "SELECT * FROM player WHERE idplayer="+idplayer+";";
         try {
         	Statement stmt = conn.getConn().createStatement();

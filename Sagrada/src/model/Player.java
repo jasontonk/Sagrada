@@ -52,7 +52,12 @@ public class Player {
 	
 	public Player(DataBaseConnection c) {
 		connection = c;
+		playerDBA = new PlayerDBA(c);
 		
+	}
+	
+	public void addPlayer(Player player) {
+		playerDBA.addPlayer(player);
 	}
 
 	public int getId() {

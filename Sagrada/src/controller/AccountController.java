@@ -5,11 +5,17 @@ import java.util.Optional;
 
 import database.AccountDBA;
 import database.DataBaseConnection;
+import database.GameDBA;
+import database.PlayerDBA;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import model.Account;
+import model.Game;
+import model.Invitation;
+import model.ModelColor;
 import model.Player;
+import model.PlayerStatus;
 import view.ChooseView;
 import view.LobbyView;
 import view.LoginView;
@@ -128,6 +134,29 @@ public class AccountController {
 
 	public void makeGame() {
 		GameController gameContoller = new GameController(connection, myScene);
+	}
+
+	public void inviteAccounts(ArrayList<Account> inviteList) {
+		System.out.println(inviteList);
+		Invitation invite = new Invitation();
+		Game game = new Game(connection, false);
+		Player player = new Player(connection);
+		player.setAccount(account);
+		player.setName(account.getUsername());
+		player.setGame(game);
+		player.setPlayerStatus(PlayerStatus.CHALLENGER);
+		player.setColor(ModelColor.BLUE);
+		player.addPlayer(player);
+		
+		for (Account account : inviteList) {
+			Player p = new Player(connection);
+			p.setAccount(account);
+			p.setName(account.getUsername());
+			p.setGame(game);
+			p.setPlayerStatus(PlayerStatus.CHALLENGEE);
+			p.setColor(ModelColor.BLUE);
+			p.addPlayer(p);
+		}
 	}
 
 }
