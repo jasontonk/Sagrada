@@ -32,7 +32,7 @@ public class AccountController {
 	private LobbyView lobbyView;
 	private MyScene myScene;
 	private AccountDBA accountDBA;
-	
+	private ArrayList<Player> invitePlayerList;
 	public AccountController(DataBaseConnection c, MyScene myScene) {
 		this.connection = c;
 		this.myScene = myScene;
@@ -43,6 +43,7 @@ public class AccountController {
 		chooseView = new ChooseView(this);
 		registerView = new RegisterView(this);
 		loginView = new LoginView(this);
+		invitePlayerList = new ArrayList<Player>();
 		
 		accountDBA = new AccountDBA(c);
 	}
@@ -77,9 +78,11 @@ public class AccountController {
 		
 		if(account.accountExists(username)) {
 			showWarning("gebruikersnaam", "gebruikersnaam is al bezet");		
+		} else if(username.length() < 3) {
+			showWarning("gebruikersnaam", "Gebruikersnaam moet minimaal 3 tekens zijn");
 		} else if(password.length() < 3) {
 			showWarning("wachtwoord", "Wachtwoord moet minimaal 3 tekens zijn");
-		} else {
+		}else {
 			account.setAccount(username, password);
 			viewLogin();
 		}
@@ -156,7 +159,12 @@ public class AccountController {
 			p.setPlayerStatus(PlayerStatus.CHALLENGEE);
 			p.setColor(ModelColor.BLUE);
 			p.addPlayer(p);
+			invitePlayerList.add(p);
 		}
+		invitePlayerList.add(player);
 	}
 
+	public ArrayList<Player> getInvitePlayerList() {
+		return invitePlayerList;
+	}
 }

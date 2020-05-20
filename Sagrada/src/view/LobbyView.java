@@ -79,6 +79,8 @@ public class LobbyView extends BorderPane {
 		VBox center = new VBox();
 		center.setMinSize(250, 600);
 		
+		
+		
 		VBox top = new VBox();
 		top.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, null, null)));
 		top.setMinSize(250, 300);
@@ -86,9 +88,30 @@ public class LobbyView extends BorderPane {
 		startGame.setOnAction(e -> makeGame());
 		top.getChildren().add(startGame);
 		
+		
+		
+		
+		
 		VBox bottom = new VBox();
 		bottom.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, null, null)));
 		bottom.setMinSize(250, 300);
+		
+		ArrayList<Player> gameLobby = new ArrayList<Player>();
+		for (Player player : accountController.getInvitePlayerList()) {
+			if(player.getPlayerStatus().equals("ACCEPTED")) {
+				gameLobby.add(player);
+			}
+		}
+		
+		for (Player player : gameLobby) {
+			HBox playerlist = new HBox();
+			
+			Label username = new Label("Speler: " + player.getName());
+            username.setMinWidth(100);
+          
+            playerlist.getChildren().add(username);
+            top.getChildren().add(playerlist);
+		}
 		
 		
 		center.getChildren().addAll(top, bottom);
