@@ -29,6 +29,7 @@ public class Game {
 	private DataBaseConnection conn;
 	private GameDie selectedDie;
 	private GameDBA gameDBA;
+	private boolean finishedTurn;
 
 	public Game(Account account1, Account account2, boolean randomgeneratedpatterncards, DataBaseConnection conn) {// boolean generated toevoegen ja of nee generated patterncards
 		this.conn = conn;
@@ -112,26 +113,27 @@ public class Game {
 
 	public Game(DataBaseConnection conn, boolean randomgeneratedpatterncards) {
 		this.conn = conn;
-//		this.randomPatterncards = randomgeneratedpatterncards;
+		this.randomPatterncards = randomgeneratedpatterncards;
 		round = 1;
 		gameDBA = new GameDBA(conn);
 		gameDBA.addNewGameDB(LocalDateTime.now(), this);
-//		offer = new GameDie[9];
+		offer = new GameDie[9];
 		players = new ArrayList<Player>();
 
 		currentPlayer = new Player(conn, new Account("ditis", "eentest", conn), this, PlayerStatus.CHALLENGER);
 		Player player = new Player(conn, new Account("ditiseentest", "testtest", conn), this, PlayerStatus.CHALLENGEE);
 		players.add(currentPlayer);
 		players.add(player);
-		players.get(0).setSequenceNumber(2);
-		players.get(1).setSequenceNumber(1);
+		currentPlayer = players.get(0);
+		players.get(0).setSequenceNumber(1);
+		players.get(1).setSequenceNumber(2);
+		personalPlayer = players.get(0);
 		System.out.println(players.get(0).getId());
 		System.out.println(players.get(1).getId());
-//		diceInBag = new GameDie[90];
-//		usedDice = new ArrayList<GameDie>();
-//		makedie();
-//		finishedGame = false;
-		playTurn();
+		diceInBag = new GameDie[90];
+		usedDice = new ArrayList<GameDie>();
+		makedie();
+		finishedGame = false;
 		
 	}
 
@@ -244,6 +246,9 @@ public class Game {
 				if(currentPlayer == personalPlayer) {
 					playTurn();
 				}
+				else {
+					System.out.println("wacht tot een andere speler de beurt beindigt");
+				}
 			}
 			else {
 				for (int i = 0; i < players.size(); i++) {
@@ -254,9 +259,10 @@ public class Game {
 						players.get(i).setSequenceNumber(players.get(i).getSequenceNumber()+1);
 					}
 				}
-				if(round == 10) {
+				if(round == 20) {
 					finishedGame = true;
 				}
+				gameDBA.setNextRound(this);
 				round = gameDBA.getCurrentRound(this.getGameID());
 				finishedRound = true;
 				
@@ -277,19 +283,26 @@ public class Game {
 		round++;
 	}
 	public void playTurn() {
-		boolean finishedTurn = true;
+		finishedTurn = false;
 		System.out.println(currentPlayer.getId());
 		
 		while(!finishedTurn) {
-			
+			/* 
+			 * 
+			 * 
+			 * 
+			 * 
+			 * 
+			 * 
+			 * 
+			 * 
+			 * 
+			 */
 		}
 		boolean isClockwise = gameDBA.isRoundClockwise(this);
-		System.out.println("test"+ isClockwise);
 		if(!isClockwise){
-			System.out.println("option1");
 			for (int i = 0; i < players.size(); i++) {
 				if(currentPlayer.getSequenceNumber() == players.get(i).getSequenceNumber()) {
-					System.out.println("stap 2");
 					if(i == 0) {
 						currentPlayer = players.get(players.size()-1);
 					}
@@ -302,15 +315,13 @@ public class Game {
 			}
 		} 
 		else if(currentPlayer.getSequenceNumber() == players.size() && isClockwise) {
-			System.out.println("option2");
 			gameDBA.changeRoundDirection(this);
+			round++;
 		}
 		else if(isClockwise) {
-			System.out.println("option3");
 			for (int i = players.size()-1; i >= 0; i--) {
 				
 				if(currentPlayer.getSequenceNumber() == players.get(i).getSequenceNumber()) {
-					System.out.println("stap 2");
 					if(i == players.size()-1) {
 						currentPlayer = players.get(0);
 					}
@@ -443,6 +454,11 @@ public class Game {
 	public boolean isRandom() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public void setFinishedTurnTrue() {
+		finishedTurn = true;
+		
 	}
 
 }

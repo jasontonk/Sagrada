@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 public class Main extends Application  {
 	DataBaseConnection conn = new DataBaseConnection("com.mysql.jdbc.Driver");
 	private GameController gameController = new GameController(conn, null);
-//	private PatterncardSelectionView patterncardSelectionView = new PatterncardSelectionView(gameController);
+	private PatterncardSelectionView patterncardSelectionView = new PatterncardSelectionView(gameController);
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -28,6 +28,7 @@ public class Main extends Application  {
 		primaryStage.setResizable(true);
 		primaryStage.setMinHeight(600);
 		primaryStage.setMinWidth(800);
+		
 		
 //		Scene scene = new Scene(patterncardSelectionView);
 //		primaryStage.setScene(scene);

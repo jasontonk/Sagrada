@@ -32,7 +32,7 @@ public class Player {
 	
 	private PlayerDBA playerDBA ;
 	
-	public Player(DataBaseConnection c, Account a, Game game, PlayerStatus playerStatus) {
+	public Player(DataBaseConnection c, Account account, Game game, PlayerStatus playerStatus) {
 		connection = c;
 		this.account = account;
 		this.setName(account.getUsername());

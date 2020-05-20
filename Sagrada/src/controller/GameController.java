@@ -19,6 +19,9 @@ import view.PatterncardView;
 public class GameController {
 
 	private Game game;
+	public Game getGame() {
+		return game;
+	}
 	private GameView gameView;
 	private DieController dieController;
 	private PatterncardController patterncardController;
@@ -36,18 +39,19 @@ public class GameController {
 		myScene = ms;
 		game =  new Game(conn, true);
 		System.out.println("loading...20%");
-//		dieController = new DieController(conn, this);
-//		System.out.println("loading...40%");
-//		patterncardController= new PatterncardController(conn, this);
-//		System.out.println("loading...60%");
-//		roundtrackController= new RoundtrackController(game, this);
-//		System.out.println("loading...80%");
-//		gameView = new GameView(this);
-//		System.out.println("loading...100%");
-		patterncardView = new PatterncardView(patterncardController);
-		patterncardSelectionView = new PatterncardSelectionView(this);
-
-		myScene.setContentPane(patterncardSelectionView);
+		dieController = new DieController(conn, this);
+		System.out.println("loading...40%");
+		patterncardController= new PatterncardController(conn, this);
+		System.out.println("loading...60%");
+		roundtrackController= new RoundtrackController(game, this);
+		System.out.println("loading...80%");
+		gameView = new GameView(this);
+		System.out.println("loading...100%");
+//		game.playround();
+//		patterncardView = new PatterncardView(patterncardController);
+//		patterncardSelectionView = new PatterncardSelectionView(this);
+//
+//		myScene.setContentPane(patterncardSelectionView);
 //		myScene.setContentPane(gameView.getPatterncardSelectionView());
 
 	}
@@ -145,5 +149,8 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 
 	public boolean isRandom() {
 		return game.isRandom();
+	}
+	public void setFinishedTurnTrue() {
+		game.setFinishedTurnTrue();
 	}
 }

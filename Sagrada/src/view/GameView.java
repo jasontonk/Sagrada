@@ -2,7 +2,9 @@ package view;
 
 
 import controller.GameController;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 
 public class GameView extends BorderPane {
@@ -17,9 +19,12 @@ public class GameView extends BorderPane {
 		dicePoolView = new DicePoolView(gameController.getDieController());
 		patterncardView = new PatterncardView(gameController.getPatterncardController());
 		roundtrackView = new RoundtrackView(gameController.getRoundtrackController());
+		Button button = new Button("Klik om uw beurt te beëindigen.");					//TODO temporary
+		button.setOnMouseClicked(e-> gameController.setFinishedTurnTrue());
 		this.setLeft(patterncardView);
 		this.setRight(dicePoolView);
 		this.setBottom(roundtrackView);
+		this.setTop(button);
 		this.setPrefSize(800, 600);
 		this.setAlignment(roundtrackView, Pos.CENTER);
 	}

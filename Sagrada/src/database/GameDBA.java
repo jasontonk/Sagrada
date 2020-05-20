@@ -189,4 +189,17 @@ public class GameDBA {
 			e.printStackTrace();
 		}
 	}
+
+	public void setNextRound(Game game) {
+		String query = "UPDATE game SET current_roundID = "+(game.getRound()+2)+" WHERE idgame = "+game.getGameID()+";";
+		try {
+				Statement stmt = conn.getConn().createStatement();
+				stmt.executeUpdate(query);
+				stmt.close();
+			
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
