@@ -34,28 +34,30 @@ public class Player {
 	
 	public Player(DataBaseConnection c, Account a, Game game, PlayerStatus playerStatus) {
 		connection = c;
-		
-		this.account = a;
+		this.account = account;
 		this.setName(account.getUsername());
 		this.setGame(game);
-		
 		this.setPlayerStatus(PlayerStatus.CHALLENGER);
-	
+
 		modelColor = modelColor.RED;
 		this.setColor(modelColor);
-		
+
+
 		playerDBA = new PlayerDBA(c);
 		playerDBA.addPlayer(this);
 		patternCard = new PatternCard(c);
 		board = new Board(1, this, c);		
 	}
-	
+
+
 	public Player(DataBaseConnection c) {
 		connection = c;
 		playerDBA = new PlayerDBA(c);
-		
-	}
-	
+
+
+		}		
+
+
 	public void addPlayer(Player player) {
 		playerDBA.addPlayer(player);
 	}
@@ -69,11 +71,12 @@ public class Player {
 	}
 
 	public int getSequenceNumber() {
-		return sequenceNumber;
+		return playerDBA.getPlayerSeqNumber(this);
 	}
 
-	public void setSequenceNumber(int sequenceNumber) {
-		this.sequenceNumber = sequenceNumber;
+	public void setSequenceNumber(int seqnr) {
+		this.sequenceNumber = seqnr;
+		playerDBA.setPlayerSeqNumber(seqnr, this);;
 	}
 
 	public int getScore() {

@@ -112,18 +112,26 @@ public class Game {
 
 	public Game(DataBaseConnection conn, boolean randomgeneratedpatterncards) {
 		this.conn = conn;
-		this.randomPatterncards = randomgeneratedpatterncards;
+//		this.randomPatterncards = randomgeneratedpatterncards;
 		round = 1;
 		gameDBA = new GameDBA(conn);
 		gameDBA.addNewGameDB(LocalDateTime.now(), this);
-		offer = new GameDie[9];
+//		offer = new GameDie[9];
 		players = new ArrayList<Player>();
-//		currentPlayer = new Player(conn, new Account(conn), this, PlayerStatus.CHALLENGER);
+
+		currentPlayer = new Player(conn, new Account("ditis", "eentest", conn), this, PlayerStatus.CHALLENGER);
+		Player player = new Player(conn, new Account("ditiseentest", "testtest", conn), this, PlayerStatus.CHALLENGEE);
 		players.add(currentPlayer);
-		diceInBag = new GameDie[90];
-		usedDice = new ArrayList<GameDie>();
-		makedie();
-		finishedGame = false;
+		players.add(player);
+		players.get(0).setSequenceNumber(2);
+		players.get(1).setSequenceNumber(1);
+		System.out.println(players.get(0).getId());
+		System.out.println(players.get(1).getId());
+//		diceInBag = new GameDie[90];
+//		usedDice = new ArrayList<GameDie>();
+//		makedie();
+//		finishedGame = false;
+		playTurn();
 		
 	}
 
@@ -234,10 +242,18 @@ public class Game {
 		while(!finishedRound) {
 			if(round == gameDBA.getCurrentRound(this.getGameID())) {
 				if(currentPlayer == personalPlayer) {
-					
+					playTurn();
 				}
 			}
 			else {
+				for (int i = 0; i < players.size(); i++) {
+					if(players.get(i).getSequenceNumber() == players.size()) {
+						players.get(i).setSequenceNumber(1);
+					}
+					else {
+						players.get(i).setSequenceNumber(players.get(i).getSequenceNumber()+1);
+					}
+				}
 				if(round == 10) {
 					finishedGame = true;
 				}
@@ -261,11 +277,52 @@ public class Game {
 		round++;
 	}
 	public void playTurn() {
-		boolean finishedTurn = false;
+		boolean finishedTurn = true;
+		System.out.println(currentPlayer.getId());
 		
 		while(!finishedTurn) {
 			
 		}
+		boolean isClockwise = gameDBA.isRoundClockwise(this);
+		System.out.println("test"+ isClockwise);
+		if(!isClockwise){
+			System.out.println("option1");
+			for (int i = 0; i < players.size(); i++) {
+				if(currentPlayer.getSequenceNumber() == players.get(i).getSequenceNumber()) {
+					System.out.println("stap 2");
+					if(i == 0) {
+						currentPlayer = players.get(players.size()-1);
+					}
+					else {
+						currentPlayer = players.get(i-1);
+					}
+					gameDBA.changeCurrentPlayer(currentPlayer.getId(), this);
+					break;
+				}
+			}
+		} 
+		else if(currentPlayer.getSequenceNumber() == players.size() && isClockwise) {
+			System.out.println("option2");
+			gameDBA.changeRoundDirection(this);
+		}
+		else if(isClockwise) {
+			System.out.println("option3");
+			for (int i = players.size()-1; i >= 0; i--) {
+				
+				if(currentPlayer.getSequenceNumber() == players.get(i).getSequenceNumber()) {
+					System.out.println("stap 2");
+					if(i == players.size()-1) {
+						currentPlayer = players.get(0);
+					}
+					else {
+						currentPlayer = players.get(i+1);
+					}
+					gameDBA.changeCurrentPlayer(currentPlayer.getId(), this);
+					break;
+				}
+			}
+		}
+		System.out.println(currentPlayer.getId());
 	}
 
 	public void makedie() {

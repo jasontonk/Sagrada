@@ -43,7 +43,7 @@ public class GameDBA {
 		
 		int gameID = autoIdGame();
 		game.setGameID(gameID);
-		String query = "INSERT INTO game VALUES("+gameID+",null, null,'"+datetime+"');";
+		String query = "INSERT INTO game VALUES("+gameID+",null, 1,'"+datetime+"');";
 		
 		try {
 			Statement stmt = conn.getConn().createStatement();
@@ -109,8 +109,11 @@ public class GameDBA {
 		return gameid;
 	}
 	
-	public void addPlayerDB(int playerid, int gameid) {
-		String query = "UPDATE game SET turn_idplayer = "+playerid+" WHERE idgame = "+gameid+";";
+
+	public void changeCurrentPlayer(int playerid, Game game) {
+		
+		String query = "UPDATE game SET turn_idplayer = "+playerid+" WHERE idgame = "+game.getGameID()+";";
+
 		try {
 				Statement stmt = conn.getConn().createStatement();
 				stmt.executeUpdate(query);
@@ -155,5 +158,35 @@ public class GameDBA {
 		}
 		
 		return currentRound;
+	}
+
+	public boolean isRoundClockwise(Game game) {
+		boolean isClockwise = false;
+		String query = "SELECT clockwise FROM round INNER JOIN game ON game.current_roundID = round.roundID WHERE idgame = "+game.getGameID()+";"; 
+		try {
+			Statement stmt = conn.getConn().createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			if (rs.next()) {
+                isClockwise = rs.getBoolean("clockwise");
+            }
+			stmt.close();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return isClockwise;
+	}
+
+	public void changeRoundDirection(Game game) {
+		
+		String query = "UPDATE game SET current_roundID = "+(game.getRound()+1)+" WHERE idgame = "+game.getGameID()+";";
+		try {
+				Statement stmt = conn.getConn().createStatement();
+				stmt.executeUpdate(query);
+				stmt.close();
+			
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

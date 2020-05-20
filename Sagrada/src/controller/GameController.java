@@ -25,28 +25,31 @@ public class GameController {
 	private RoundtrackController roundtrackController;
 	private DataBaseConnection conn;
 	private MyScene myScene;
-	
+
+
 	private PatterncardView patterncardView;
 	private PatterncardSelectionView patterncardSelectionView;
 	
+
 	public GameController(DataBaseConnection conn, MyScene ms) {
 		this.conn= conn;
 		myScene = ms;
 		game =  new Game(conn, true);
 		System.out.println("loading...20%");
-		dieController = new DieController(conn, this);
-		System.out.println("loading...40%");
-		patterncardController= new PatterncardController(conn, this);
-		System.out.println("loading...60%");
-		roundtrackController= new RoundtrackController(game, this);
-		System.out.println("loading...80%");
-		gameView = new GameView(this);
-		System.out.println("loading...100%");
-		
+//		dieController = new DieController(conn, this);
+//		System.out.println("loading...40%");
+//		patterncardController= new PatterncardController(conn, this);
+//		System.out.println("loading...60%");
+//		roundtrackController= new RoundtrackController(game, this);
+//		System.out.println("loading...80%");
+//		gameView = new GameView(this);
+//		System.out.println("loading...100%");
 		patterncardView = new PatterncardView(patterncardController);
 		patterncardSelectionView = new PatterncardSelectionView(this);
-		
+
 		myScene.setContentPane(patterncardSelectionView);
+//		myScene.setContentPane(gameView.getPatterncardSelectionView());
+
 	}
 	
 public ArrayList<PatterncardController> getPatternCardsToChoose(){
@@ -97,10 +100,11 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 	}
 
 	public boolean checkPlacementAgainstRules(int x, int y, ModelColor modelColor, int value) {
-		if(!game.checkPlacementAgainstRules(x, y, modelColor, value)) {
+		boolean checkplacement = game.checkPlacementAgainstRules(x, y, modelColor, value);
+		if(!checkplacement) {
 			showWarning("Dobbelsteen zetten", "De geselecteerde dobbelsteen kan niet op deze plek worden geplaatst.");
 		}
-		return game.checkPlacementAgainstRules(x, y, modelColor, value);
+		return checkplacement;
 	}
 
 	public Player getCurrentPlayer() {

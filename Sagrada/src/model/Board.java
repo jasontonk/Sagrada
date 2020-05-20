@@ -521,20 +521,23 @@ public class Board {
 		return false;
 	}
 	public boolean checkAll(BoardField boardField, ModelColor modelColor, int value) {
-		if(checkIsNextToDie(boardField)||true) {
-			if(!checkSidesColor(boardField, modelColor)) { 
-				if(!checkSidesValue(boardField, value)) {
-					if(checkFieldColorAndDieColor(boardField, modelColor) || checkFieldValueAndDieValue(boardField, value) || 
-							!checkFieldColorAndDieColor(boardField, modelColor) && !checkFieldValueAndDieValue(boardField, value) && 
-								patternCard.getFieldColor(boardField.getxPos(), boardField.getyPos()) == null && 
-									patternCard.getFieldValue(boardField.getxPos(), boardField.getyPos()) == 0){
-						placeDie(boardField, player.getSelectedDie());
-						playerFrameFieldDBA.setDie(player.getSelectedDie(), player, boardField.getxPos(), boardField.getyPos());
-						return true;
+		
+		boolean firstturn = isFirstTurn();
+		if(firstturn && (boardField.getxPos() == 0 || boardField.getyPos() == 0 || boardField.getxPos() == 4 || boardField.getyPos() == 3) || 
+				!firstturn && checkIsNextToDie(boardField)) {
+				if(!checkSidesColor(boardField, modelColor)) { 
+					if(!checkSidesValue(boardField, value)) {
+						if(checkFieldColorAndDieColor(boardField, modelColor) || checkFieldValueAndDieValue(boardField, value) || 
+								!checkFieldColorAndDieColor(boardField, modelColor) && !checkFieldValueAndDieValue(boardField, value) && 
+									patternCard.getFieldColor(boardField.getxPos(), boardField.getyPos()) == null && 
+										patternCard.getFieldValue(boardField.getxPos(), boardField.getyPos()) == 0){
+							placeDie(boardField, player.getSelectedDie());
+							playerFrameFieldDBA.setDie(player.getSelectedDie(), player, boardField.getxPos(), boardField.getyPos());
+							return true;
+						}
 					}
 				}
 			}
-		}
 		return false;
 	}
 }
