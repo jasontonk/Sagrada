@@ -225,8 +225,12 @@ public class PlayerDBA {
 public ArrayList<Player> getPlayersOfAccount(Account account){
 		
 		ArrayList<Player> list = new ArrayList<>();
-//		String username = "'" + account.getUsername() + "'";
-		String username = "'hoi'";
+		
+
+		Player player = new Player(conn);
+    	player.setAccount(account);
+		String username = "'" + account.getUsername() + "'";
+//		String username = "'hoi'";
 		String query = "SELECT * FROM player WHERE username = "+username;
 		try {
 			Statement stmt = conn.getConn().createStatement();
@@ -234,8 +238,7 @@ public ArrayList<Player> getPlayersOfAccount(Account account){
 			while(rs.next()){
 				PatternCardDBA patternCard = new PatternCardDBA(conn);
 //            	GameDBA game = new GameDBA(conn);
-            	Player player = new Player(conn);
-            	player.setAccount(account);
+            	
             	player.setName(rs.getString("username"));
             	player.setId(rs.getInt("idplayer"));
             	player.setPlayerStatus(getPlayerStatusFromString(rs.getString("playstatus")));
