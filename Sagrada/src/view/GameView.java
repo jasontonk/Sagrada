@@ -28,7 +28,7 @@ public class GameView extends BorderPane {
 		return dicePoolView;
 	}
 
-	public PatterncardView getPatterncardView() {
+	public PatterncardView getPatterncardView() { 
 		return patterncardView;
 	}
 
