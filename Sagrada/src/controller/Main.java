@@ -27,6 +27,7 @@ public class Main extends Application  {
 		Image icon = new Image("/images/SagradaIcon.png");
 		primaryStage.getIcons().add(icon);
 		primaryStage.show();
+
 	}
 }
 //test

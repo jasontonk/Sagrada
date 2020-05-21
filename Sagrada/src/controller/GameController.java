@@ -49,9 +49,9 @@ public class GameController {
 		System.out.println("loading...100%");
 //		game.playround();
 //		patterncardView = new PatterncardView(patterncardController);
-//		patterncardSelectionView = new PatterncardSelectionView(this);
+		patterncardSelectionView = new PatterncardSelectionView(this);
 //
-//		myScene.setContentPane(patterncardSelectionView);
+		myScene.setContentPane(patterncardSelectionView);
 //		myScene.setContentPane(gameView.getPatterncardSelectionView());
 
 	}

@@ -113,19 +113,7 @@ public class AccountController {
 		myScene.setContentPane(lobbyView.makeAccountPane());
 	}
 	
-	public void viewInvitation() {
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Invite");
-		alert.setHeaderText("Deze speler wil je inviten voor een game");
-		alert.setContentText("Wil je dit accepteren?");
-
-		Optional<ButtonType> result = alert.showAndWait();
-		if (result.get() == ButtonType.OK){
-		    // ... user chose OK 
-		} else {
-		    // ... user chose CANCEL or closed the dialog
-		}
-	}
+	
 	
 	public void showWarning(String header, String text) {
 		Alert alert = new Alert(AlertType.WARNING);
@@ -161,6 +149,7 @@ public class AccountController {
 			p.setColor(ModelColor.BLUE);
 			p.addPlayer(p);
 			invitePlayerList.add(p);
+			PlayerController pc = new PlayerController(this);
 		}
 		
 	}
