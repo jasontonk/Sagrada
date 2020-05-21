@@ -53,7 +53,7 @@ public class GameController {
 //		game.playround();
 //		patterncardView = new PatterncardView(patterncardController);
 		patterncardSelectionView = new PatterncardSelectionView(this);
-//
+// 
 		myScene.setContentPane(patterncardSelectionView);
 //		myScene.setContentPane(gameView.getPatterncardSelectionView());
 
