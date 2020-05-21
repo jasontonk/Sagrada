@@ -19,12 +19,15 @@ public class GameView extends BorderPane {
 		dicePoolView = new DicePoolView(gameController.getDieController());
 		patterncardView = new PatterncardView(gameController.getPatterncardController());
 		roundtrackView = new RoundtrackView(gameController.getRoundtrackController());
-		Button button = new Button("Klik om uw beurt te beëindigen.");					//TODO temporary
+		Button button = new Button("Klik om uw beurt te beëindigen.");//TODO temporary
 		button.setOnMouseClicked(e-> gameController.setFinishedTurnTrue());
+		Button button2 = new Button("Klik om beurt te beginnen");
+		button2.setOnMouseClicked(e-> gameController.playround());
 		this.setLeft(patterncardView);
 		this.setRight(dicePoolView);
 		this.setBottom(roundtrackView);
 		this.setTop(button);
+		this.setCenter(button2);
 		this.setPrefSize(800, 600);
 		this.setAlignment(roundtrackView, Pos.CENTER);
 	}

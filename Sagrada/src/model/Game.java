@@ -195,7 +195,6 @@ public class Game {
 
 	public void grabDiceFromBag() {
 		int amountofdice = players.size() * 2 + 1;
-		amountofdice = 9;
 		Random r = new Random();
 		
 		while (offer[amountofdice-1] == null) {
@@ -237,11 +236,11 @@ public class Game {
 		}
 	}
 
-	public void playround() {// boolean first round false
+	public boolean playround() {// boolean first round false
 		int amountofdice = players.size() * 2 + 1;
 		boolean finishedRound = false;
 		
-		while(!finishedRound) {
+		if(!finishedRound) {
 			if(round == gameDBA.getCurrentRound(this.getGameID())) {
 				if(currentPlayer == personalPlayer) {
 					playTurn();
@@ -267,6 +266,11 @@ public class Game {
 				finishedRound = true;
 				
 			}
+			return false;
+		}
+		else {
+			round++;
+			return true;
 		}
 		
 		
@@ -280,13 +284,13 @@ public class Game {
 //		 volgende speler
 //		
 //		 voeg overige dobbelstenen aan rondespoor toe
-		round++;
+		
 	}
 	public void playTurn() {
 		finishedTurn = false;
 		System.out.println(currentPlayer.getId());
 		
-		while(!finishedTurn) {
+		if(!finishedTurn) {
 			/* 
 			 * 
 			 * 
@@ -298,42 +302,50 @@ public class Game {
 			 * 
 			 * 
 			 */
+			System.out.println("still your turn");
+			finishedTurn = getFinishedTurn();
 		}
-		boolean isClockwise = gameDBA.isRoundClockwise(this);
-		if(!isClockwise){
-			for (int i = 0; i < players.size(); i++) {
-				if(currentPlayer.getSequenceNumber() == players.get(i).getSequenceNumber()) {
-					if(i == 0) {
-						currentPlayer = players.get(players.size()-1);
+		else {
+			boolean isClockwise = gameDBA.isRoundClockwise(this);
+			if(!isClockwise){
+				for (int i = 0; i < players.size(); i++) {
+					if(currentPlayer.getSequenceNumber() == players.get(i).getSequenceNumber()) {
+						if(i == 0) {
+							currentPlayer = players.get(players.size()-1);
+						}
+						else {
+							currentPlayer = players.get(i-1);
+						}
+						gameDBA.changeCurrentPlayer(currentPlayer.getId(), this);
+						break;
 					}
-					else {
-						currentPlayer = players.get(i-1);
+				}
+			} 
+			else if(currentPlayer.getSequenceNumber() == players.size() && isClockwise) {
+				gameDBA.changeRoundDirection(this);
+				round++;
+			}
+			else if(isClockwise) {
+				for (int i = players.size()-1; i >= 0; i--) {
+					
+					if(currentPlayer.getSequenceNumber() == players.get(i).getSequenceNumber()) {
+						if(i == players.size()-1) {
+							currentPlayer = players.get(0);
+						}
+						else {
+							currentPlayer = players.get(i+1);
+						}
+						gameDBA.changeCurrentPlayer(currentPlayer.getId(), this);
+						break;
 					}
-					gameDBA.changeCurrentPlayer(currentPlayer.getId(), this);
-					break;
 				}
 			}
-		} 
-		else if(currentPlayer.getSequenceNumber() == players.size() && isClockwise) {
-			gameDBA.changeRoundDirection(this);
-			round++;
+			System.out.println(currentPlayer.getId());
 		}
-		else if(isClockwise) {
-			for (int i = players.size()-1; i >= 0; i--) {
-				
-				if(currentPlayer.getSequenceNumber() == players.get(i).getSequenceNumber()) {
-					if(i == players.size()-1) {
-						currentPlayer = players.get(0);
-					}
-					else {
-						currentPlayer = players.get(i+1);
-					}
-					gameDBA.changeCurrentPlayer(currentPlayer.getId(), this);
-					break;
-				}
-			}
-		}
-		System.out.println(currentPlayer.getId());
+	}
+
+	private boolean getFinishedTurn() {
+		return finishedTurn;
 	}
 
 	public void makedie() {

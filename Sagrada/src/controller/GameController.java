@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Timer;
 
 import database.DataBaseConnection;
 import javafx.scene.Parent;
@@ -47,6 +48,8 @@ public class GameController {
 		System.out.println("loading...80%");
 		gameView = new GameView(this);
 		System.out.println("loading...100%");
+//		Timer timer = new Timer();
+//		Task task = new Task;
 //		game.playround();
 //		patterncardView = new PatterncardView(patterncardController);
 		patterncardSelectionView = new PatterncardSelectionView(this);
@@ -152,5 +155,11 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 	}
 	public void setFinishedTurnTrue() {
 		game.setFinishedTurnTrue();
+	}
+
+	public void playround() {
+		while(!game.playround()) {
+			
+		}
 	}
 }
