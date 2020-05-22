@@ -118,18 +118,18 @@ public class Game {
 		gameDBA = new GameDBA(conn);
 		gameDBA.addNewGameDB(LocalDateTime.now(), this);
 		offer = new GameDie[9];
-//		players = new ArrayList<Player>();
+		players = new ArrayList<Player>();
 
-//		currentPlayer = new Player(conn, new Account("ditis", "eentest", conn), this, PlayerStatus.CHALLENGER);
-//		Player player = new Player(conn, new Account("ditiseentest", "testtest", conn), this, PlayerStatus.CHALLENGEE);
-//		players.add(currentPlayer);
-//		players.add(player);
-//		currentPlayer = players.get(0);
-//		players.get(0).setSequenceNumber(1);
-//		players.get(1).setSequenceNumber(2);
-//		personalPlayer = players.get(0);
-//		System.out.println(players.get(0).getId());
-//		System.out.println(players.get(1).getId());
+		currentPlayer = new Player(conn, new Account("ditis", "eentest", conn), this, PlayerStatus.CHALLENGER);
+		Player player = new Player(conn, new Account("ditiseentest", "testtest", conn), this, PlayerStatus.CHALLENGEE);
+		players.add(currentPlayer);
+		players.add(player);
+		currentPlayer = players.get(0);
+		players.get(0).setSequenceNumber(1);
+		players.get(1).setSequenceNumber(2);
+		personalPlayer = players.get(0);
+		System.out.println(players.get(0).getId());
+		System.out.println(players.get(1).getId());
 		diceInBag = new GameDie[90];
 		usedDice = new ArrayList<GameDie>();
 		makedie();
@@ -303,7 +303,6 @@ public class Game {
 			 * 
 			 */
 			System.out.println("still your turn");
-			finishedTurn = getFinishedTurn();
 		}
 		else {
 			boolean isClockwise = gameDBA.isRoundClockwise(this);

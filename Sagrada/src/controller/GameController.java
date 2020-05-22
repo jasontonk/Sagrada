@@ -20,15 +20,13 @@ import view.PatterncardView;
 public class GameController {
 
 	private Game game;
-	public Game getGame() {
-		return game;
-	}
 	private GameView gameView;
 	private DieController dieController;
 	private PatterncardController patterncardController;
 	private RoundtrackController roundtrackController;
 	private DataBaseConnection conn;
 	private MyScene myScene;
+	private GamePoller gamePoller;
 
 
 	private PatterncardView patterncardView;
@@ -38,6 +36,7 @@ public class GameController {
 	public GameController(DataBaseConnection conn, MyScene ms) {
 		this.conn= conn;
 		myScene = ms;
+		gamePoller = new GamePoller(this,3);
 		game =  new Game(conn, true);
 		System.out.println("loading...20%");
 		dieController = new DieController(conn, this);
@@ -54,7 +53,7 @@ public class GameController {
 //		patterncardView = new PatterncardView(patterncardController);
 		patterncardSelectionView = new PatterncardSelectionView(this);
 // 
-		myScene.setContentPane(patterncardSelectionView);
+//		myScene.setContentPane(patterncardSelectionView);
 //		myScene.setContentPane(gameView.getPatterncardSelectionView());
 
 	}
@@ -158,8 +157,16 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 	}
 
 	public void playround() {
-		while(!game.playround()) {
-			
-		}
+		Thread playround = new Thread(gamePoller);
+		playround.start();
+	}
+	
+	
+	public GamePoller getGamePoller() {
+		return gamePoller;
+	}
+
+	public Game getGame() {
+		return game;
 	}
 }

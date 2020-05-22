@@ -20,7 +20,7 @@ public class GameView extends BorderPane {
 		patterncardView = new PatterncardView(gameController.getPatterncardController());
 		roundtrackView = new RoundtrackView(gameController.getRoundtrackController());
 		Button button = new Button("Klik om uw beurt te beëindigen.");//TODO temporary
-		button.setOnMouseClicked(e-> gameController.setFinishedTurnTrue());
+		button.setOnMouseClicked(e-> gameController.getGamePoller().setFinishedTurn(true));
 		Button button2 = new Button("Klik om beurt te beginnen");
 		button2.setOnMouseClicked(e-> gameController.playround());
 		this.setLeft(patterncardView);
