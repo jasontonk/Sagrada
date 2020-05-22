@@ -38,7 +38,7 @@ public class LobbyView extends BorderPane {
 		this.accountController = accountController;
         accounts = new ArrayList<Account>();
         inviteList = new ArrayList<Account>();
-//        players = accountController.getAllPlayersOfThisAccount();
+        players = accountController.getAllPlayersOfThisAccount();
         this.setPrefSize(800, 600);
         gameLobby = new ArrayList<Player>();
 	}
@@ -58,19 +58,19 @@ public class LobbyView extends BorderPane {
 		
 		System.out.println(players);
 		
-//		for(Player p : players) {
-//			HBox playerlist = new HBox();
-//			
-//			Label gameid = new Label("Game-ID: " + p.getGame().getGameID());
-//			gameid.setPadding(new Insets(5, 4, 5, 4));
-//			gameid.setMinWidth(150);
-//            
-//            Button playGame = buildButton("Speel!");
-//            playGame.setOnAction(e -> System.out.println("speel"));
-//            
-//            playerlist.getChildren().addAll(gameid,playGame);
-//            overview.getChildren().add(playerlist);
-//		}
+		for(Player p : players) {
+			HBox playerlist = new HBox();
+			
+			Label gameid = new Label("Game-ID: " + p.getGame().getGameID());
+			gameid.setPadding(new Insets(5, 4, 5, 4));
+			gameid.setMinWidth(150);
+            
+            Button playGame = buildButton("Speel!");
+            playGame.setOnAction(e -> System.out.println("speel"));
+            
+            playerlist.getChildren().addAll(gameid,playGame);
+            overview.getChildren().add(playerlist);
+		}
 		overviewscroll.setContent(overview);
 		Pane op = new Pane();
 		this.output = op;

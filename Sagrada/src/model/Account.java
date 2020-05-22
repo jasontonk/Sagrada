@@ -48,6 +48,11 @@ public class Account {
 		playerDBA = new PlayerDBA(c);
 	}
 
+	public Account(DataBaseConnection c) {
+		this.connection = c;
+		accountDBA = new AccountDBA(connection);
+	}
+
 	/**
      * 
      */
@@ -103,7 +108,6 @@ public class Account {
      * 
      */
 	public ArrayList<Player> getPlayers() {
-
 		System.out.println("Account getPlayers() - regel 109: "+playerDBA.getPlayersOfAccount(this));	
 		return playerDBA.getPlayersOfAccount(this);
 	}

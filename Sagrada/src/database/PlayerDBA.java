@@ -205,7 +205,7 @@ public class PlayerDBA {
 
 
 		Player player = new Player(conn);
-		String query = "SELECT * FROM player WHERE idplayer=" + idplayer + ";";
+		String query = "SELECT * FROM player WHERE idplayer = " + idplayer + ";";
 		try {
 			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
@@ -233,18 +233,19 @@ public class PlayerDBA {
 
 	public ArrayList<Player> getPlayersOfAccount(Account account) {
 		ArrayList<Player> list = new ArrayList<>();
-		Player player = new Player(conn);
-    	player.setAccount(account);
-//		String username = "'" + account.getUsername() + "'";
-		String username = "'test10'";
-//		String username = "'hoi'";
+		
+    	
+		String username = "'" + account.getUsername() + "'";
+		System.out.println("'" + account.getUsername() + "'");
+//		String username = "'test10'";
 		String query = "SELECT * FROM player WHERE username = "+username;
 		try {
 			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
+				Player player = new Player(conn);
+				player.setAccount(account);
 				PatternCardDBA patternCard = new PatternCardDBA(conn);
-//				GameDBA game = new GameDBA(conn);
 				player.setName(rs.getString("username"));
 				player.setId(rs.getInt("idplayer"));
 				player.setPlayerStatus(getPlayerStatusFromString(rs.getString("playstatus")));
@@ -253,7 +254,6 @@ public class PlayerDBA {
 				player.setColor(getColorFromString(rs.getString("private_objectivecard_color")));
 				player.setPatternCard(patternCard.getPatterncardByID(rs.getInt("idpatterncard")));
 				player.setGame(game.getGameByID(rs.getInt("idgame")));
-
 				list.add(player);
 			}
 			stmt.close();

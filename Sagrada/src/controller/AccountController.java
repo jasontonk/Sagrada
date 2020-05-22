@@ -72,7 +72,7 @@ public class AccountController {
 	}  
  
 	public void actionRegister(String username, String password) {
-		Account account = new Account(username, password, connection);
+		Account account = new Account(connection);
 		
 		if(account.accountExists(username)) {
 			showWarning("gebruikersnaam", "gebruikersnaam is al bezet");		
@@ -120,7 +120,7 @@ public class AccountController {
 		if(lobbyView == null) {
 			lobbyView = new LobbyView(this);
 		}
-//		makeThread();
+		makeThread();
 		myScene.setContentPane(lobbyView.makeAccountPane());
 	}
 	
@@ -142,20 +142,39 @@ public class AccountController {
 		System.out.println(inviteList);
 		Invitation invite = new Invitation();
 		Game game = new Game(connection, false);
+		
+		
 		Player player = new Player(connection);
+		System.out.println("148");
 		player.setAccount(account);
+		System.out.println("150");
 		player.setName(account.getUsername());
+		System.out.println("152");
 		player.setGame(game);
-		player.setPlayerStatus(PlayerStatus.CHALLENGER);
+		System.out.println("153");
+		player.setPlayerStatus(PlayerStatus.CHALLENGEE);
+		System.out.println("156");
 		player.setColor(ModelColor.BLUE);
+		System.out.println("158");
+		
+		System.out.println(player.getPlayerStatus());
+		System.out.println(player.getName());
+		System.out.println(player.getGame().getGameID());
+		
+		
 		player.addPlayer(player);
+		
+		System.out.println("160");
 		invitePlayerList.add(player);
+		System.out.println("162");
+		
 		
 		for (Account account : inviteList) {
 			Player p = new Player(connection);
 			p.setAccount(account);
 			p.setName(account.getUsername());
 			p.setGame(game);
+			System.out.println("177");
 			p.setPlayerStatus(PlayerStatus.CHALLENGEE);
 			p.setColor(ModelColor.BLUE);
 			p.addPlayer(p);
