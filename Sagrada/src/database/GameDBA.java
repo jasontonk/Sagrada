@@ -23,6 +23,7 @@ public class GameDBA {
 		Game game = null;
         
         String query = "SELECT * FROM game WHERE idgame= "+id+";";
+        
         try {
 			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);

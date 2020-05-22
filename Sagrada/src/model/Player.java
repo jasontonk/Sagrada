@@ -96,6 +96,8 @@ public class Player {
 	}
 
 	public PlayerStatus getPlayerStatus() {
+		playerStatus = playerDBA.getPlayerUsingID(this.getId()).getPlayerStatus();
+		System.out.println(playerStatus);
 		return playerStatus;
 	}
 

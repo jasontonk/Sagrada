@@ -39,12 +39,8 @@ public class AccountController {
 		this.connection = c;
 		this.myScene = myScene;
 		
-		setAccount(new Account(connection));
+//		setAccount(new Account(connection));
 		
-		lobbyView = new LobbyView(this);
-		chooseView = new ChooseView(this);
-		registerView = new RegisterView(this);
-		loginView = new LoginView(this);
 		invitePlayerList = new ArrayList<Player>();
 		
 		accountDBA = new AccountDBA(c);
@@ -76,7 +72,7 @@ public class AccountController {
 	}  
  
 	public void actionRegister(String username, String password) {
-		Account account = new Account(connection);
+		Account account = new Account(username, password, connection);
 		
 		if(account.accountExists(username)) {
 			showWarning("gebruikersnaam", "gebruikersnaam is al bezet");		
@@ -100,24 +96,36 @@ public class AccountController {
 	}
 	
 	public void viewLogin() {
+		if(loginView == null) {
+			loginView = new LoginView(this);
+		}
 		myScene.setContentPane(loginView.makeLoginPane());
 	}
 	
 	public void viewRegister() {
+		if(registerView == null) {
+			registerView = new RegisterView(this);
+		}
 		myScene.setContentPane(registerView.makeRegisterPane());
 	}
 	
 	public void viewChoose() {
+		if(chooseView == null) {
+			chooseView = new ChooseView(this);
+		}
 		myScene.setContentPane(chooseView.makeChoosePane());
 	}
 	
 	public void viewLobby() {
-		makeThread();
+		if(lobbyView == null) {
+			lobbyView = new LobbyView(this);
+		}
+//		makeThread();
 		myScene.setContentPane(lobbyView.makeAccountPane());
 	}
 	
 	public void makeThread() {
-		Thread invitationChecker = new Thread(new InvitationController(account, 3, this)); 
+		Thread invitationChecker = new Thread(new InvitationController(account, 10, this)); 
 		invitationChecker.start();
 	}
 	
@@ -129,9 +137,6 @@ public class AccountController {
 		alert.showAndWait();
 	}
 
-	public void makeGame() {
-		GameController gameContoller = new GameController(connection, myScene);
-	}
 
 	public void inviteAccounts(ArrayList<Account> inviteList) {
 		System.out.println(inviteList);
@@ -166,5 +171,9 @@ public class AccountController {
 	public void render() {
 		myScene.setContentPane(lobbyView.makeAccountPane());
 		System.out.println("hij werkt");
+	}
+
+	public void makeGame() {
+		System.out.println("maak game");
 	}
 }

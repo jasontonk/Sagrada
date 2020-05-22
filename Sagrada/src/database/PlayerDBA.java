@@ -235,7 +235,8 @@ public class PlayerDBA {
 		ArrayList<Player> list = new ArrayList<>();
 		Player player = new Player(conn);
     	player.setAccount(account);
-		String username = "'" + account.getUsername() + "'";
+//		String username = "'" + account.getUsername() + "'";
+		String username = "'test10'";
 //		String username = "'hoi'";
 		String query = "SELECT * FROM player WHERE username = "+username;
 		try {

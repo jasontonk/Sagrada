@@ -23,16 +23,16 @@ public class Account {
 	private int highestScore;
 	private int differentOpponents;
 	
-	/**
-     * 
-     */
-	public Account(DataBaseConnection c) {
-		players = new ArrayList<Player>();
-		invitations = new ArrayList<>();
-		connection = c;
-		accountDBA = new AccountDBA(c);
-		playerDBA = new PlayerDBA(c);
-	}
+//	/**
+//     * 
+//     */
+//	public Account(DataBaseConnection c) {
+//		players = new ArrayList<Player>();
+//		invitations = new ArrayList<>();
+//		connection = c;
+//		accountDBA = new AccountDBA(c);
+//		playerDBA = new PlayerDBA(c);
+//	}
 	
 	/**
      * 
@@ -103,13 +103,8 @@ public class Account {
      * 
      */
 	public ArrayList<Player> getPlayers() {
-		
-		System.out.println("test 1" + this);
-//		System.out.println("test 2" +players);
-//		System.out.println("test 2"+playerDBA.getPlayersOfAccount(this));
-//		players = playerDBA.getPlayersOfAccount(this);
-		
-		
+
+		System.out.println("Account getPlayers() - regel 109: "+playerDBA.getPlayersOfAccount(this));	
 		return playerDBA.getPlayersOfAccount(this);
 	}
 
