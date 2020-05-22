@@ -19,7 +19,7 @@ public class GamePoller implements Runnable {
 		
 		while(!finishedTurn) {
 			try {
-				Thread.sleep(1 * 1000);
+				Thread.sleep(seconds * 1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -27,8 +27,6 @@ public class GamePoller implements Runnable {
 		}
 		
 	}
-
-
 
 	public void setFinishedTurn(boolean finishedTurn) {
 		this.finishedTurn = finishedTurn;

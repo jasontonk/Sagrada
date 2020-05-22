@@ -20,9 +20,7 @@ import view.PatterncardView;
 public class GameController {
 
 	private Game game;
-	public Game getGame() {
-		return game;
-	}
+	private GamePoller gamePoller;
 	private GameView gameView;
 	private DieController dieController;
 	private PatterncardController patterncardController;
@@ -37,6 +35,7 @@ public class GameController {
 
 	public GameController(DataBaseConnection conn, MyScene ms, Game game) {
 		this.conn= conn;
+		gamePoller =  new GamePoller(this, 1);
 		myScene = ms;
 		this.game = game;
 //		game =  new Game(conn, true);
@@ -159,8 +158,10 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 	}
 
 	public void playround() {
-		while(!game.playround()) {
-			
-		}
+		Thread playround = new Thread(gamePoller);
+		playround.start();
+	}
+	public Game getGame() {
+		return game;
 	}
 }

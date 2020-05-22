@@ -3,6 +3,7 @@ package view;
 import controller.GameController;
 import database.DataBaseConnection;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -36,5 +37,11 @@ public class Main extends Application  {
 //		Image icon = new Image("/images/SagradaIcon.png");
 //		primaryStage.getIcons().add(icon);
 //		primaryStage.show();
+	}
+	
+	@Override
+	public void stop() {
+		Platform.exit();
+		System.exit(0);
 	}
 }
