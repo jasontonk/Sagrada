@@ -33,6 +33,8 @@ public class AccountController {
 	private MyScene myScene;
 	private AccountDBA accountDBA;
 	private ArrayList<Player> invitePlayerList;
+	
+	
 	public AccountController(DataBaseConnection c, MyScene myScene) {
 		this.connection = c;
 		this.myScene = myScene;
@@ -46,6 +48,7 @@ public class AccountController {
 		invitePlayerList = new ArrayList<Player>();
 		
 		accountDBA = new AccountDBA(c);
+		makeThread();
 	}
 	
 	public void setAccount(Account account) {
@@ -113,7 +116,10 @@ public class AccountController {
 		myScene.setContentPane(lobbyView.makeAccountPane());
 	}
 	
-	
+	public void makeThread() {
+		Thread invitationChecker = new Thread(new InvitationController(account, 3, this));
+		invitationChecker.start();
+	}
 	
 	public void showWarning(String header, String text) {
 		Alert alert = new Alert(AlertType.WARNING);

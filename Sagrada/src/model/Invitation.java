@@ -13,6 +13,7 @@ public class Invitation {
     public Invitation() {
         accepted = false;
         denied = false;
+        
     }
 
     /**

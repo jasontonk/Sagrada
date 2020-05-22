@@ -117,14 +117,6 @@ public class Account {
 	/**
      * 
      */
-	public ArrayList<Invitation> getInvitations() {
-//		invitations = accountDBA.getInvitations();//TODO matheus
-		return invitations;
-	}
-
-	/**
-     * 
-     */
 	public void setInvitations(ArrayList<Invitation> invitations) {
 		this.invitations = invitations;
 	}

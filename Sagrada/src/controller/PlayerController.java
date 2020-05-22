@@ -18,13 +18,13 @@ public class PlayerController {
 		test();
 	}
 	
-	public void test() {
-		for (Player player : accountController.getInvitePlayerList()) {
-			if(player.getPlayerStatus().equals(PlayerStatus.CHALLENGEE)) {
-				viewInvitation();
-			}
-		}
-	}
+//	public void test() {
+//		for (Player player : accountController.getInvitePlayerList()) {
+//			if(player.getPlayerStatus().equals(PlayerStatus.CHALLENGEE)) {
+//				viewInvitation();
+//			}
+//		}
+//	}
 	
 	public void viewInvitation() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
