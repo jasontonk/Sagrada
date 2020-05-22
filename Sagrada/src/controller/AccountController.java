@@ -48,7 +48,6 @@ public class AccountController {
 		invitePlayerList = new ArrayList<Player>();
 		
 		accountDBA = new AccountDBA(c);
-		makeThread();
 	}
 	
 	public void setAccount(Account account) {
@@ -113,6 +112,7 @@ public class AccountController {
 	}
 	
 	public void viewLobby() {
+		makeThread();
 		myScene.setContentPane(lobbyView.makeAccountPane());
 	}
 	

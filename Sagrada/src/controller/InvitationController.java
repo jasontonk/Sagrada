@@ -31,8 +31,8 @@ public class InvitationController implements Runnable {
 				e.printStackTrace();
 			}
 			System.out.println("Running...");
-			System.out.println(accountController.getAllPlayersOfThisAccount());
-			for(Player player : account.getPlayers()) {
+			System.out.println(accountController.getAccount());
+			for(Player player : accountController.getAccount().getPlayers()) {
 				System.out.println(player.getName());
 				if (player.getPlayerStatus().equals(PlayerStatus.CHALLENGEE)){
 					PlayerController playerController = new PlayerController(accountController);

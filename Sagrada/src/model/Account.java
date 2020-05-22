@@ -45,6 +45,7 @@ public class Account {
 		connection = c;
 		accountDBA = new AccountDBA(c);
 		accountDBA.addAccountDB(username, password);
+		playerDBA = new PlayerDBA(c);
 	}
 
 	/**
@@ -102,8 +103,14 @@ public class Account {
      * 
      */
 	public ArrayList<Player> getPlayers() {
-		players = playerDBA.getPlayersOfAccount(this);
-		return players;
+		
+		System.out.println("test 1" + this);
+//		System.out.println("test 2" +players);
+//		System.out.println("test 2"+playerDBA.getPlayersOfAccount(this));
+//		players = playerDBA.getPlayersOfAccount(this);
+		
+		
+		return playerDBA.getPlayersOfAccount(this);
 	}
 
 	/**
