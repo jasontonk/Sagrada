@@ -15,7 +15,6 @@ public class PlayerController {
 	
 	public PlayerController(AccountController accountController) {
 		this.accountController = accountController;
-		test();
 	}
 	
 //	public void test() {

@@ -155,7 +155,6 @@ public class AccountController {
 			p.setColor(ModelColor.BLUE);
 			p.addPlayer(p);
 			invitePlayerList.add(p);
-			PlayerController pc = new PlayerController(this);
 		}
 		
 	}
