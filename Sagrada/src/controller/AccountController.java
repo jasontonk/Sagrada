@@ -117,7 +117,7 @@ public class AccountController {
 	}
 	
 	public void makeThread() {
-		Thread invitationChecker = new Thread(new InvitationController(account, 3, this));
+		Thread invitationChecker = new Thread(new InvitationController(account, 3, this)); 
 		invitationChecker.start();
 	}
 	
