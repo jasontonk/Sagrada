@@ -111,7 +111,7 @@ public class LobbyView extends BorderPane {
             
             System.out.println("Speler:" + player.getName());
             player.setPlayerStatus(PlayerStatus.ACCEPTED);
-            playerlist.getChildren().add(username);
+            playerlist.getChildren().add(username); 
             top.getChildren().add(playerlist);
 		}
 		
