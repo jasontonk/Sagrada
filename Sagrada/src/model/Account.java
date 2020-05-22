@@ -16,7 +16,7 @@ public class Account {
 	private ArrayList<Invitation> invitations; 
 	private DataBaseConnection connection;
 	private AccountDBA accountDBA;
-	
+	private PlayerDBA playerDBA;
 	private int mostUsedValue;
 	private Color mostUsedColor;
 	private int[] winsAndLoses;
@@ -31,6 +31,7 @@ public class Account {
 		invitations = new ArrayList<>();
 		connection = c;
 		accountDBA = new AccountDBA(c);
+		playerDBA = new PlayerDBA(c);
 	}
 	
 	/**
@@ -101,9 +102,7 @@ public class Account {
      * 
      */
 	public ArrayList<Player> getPlayers() {
-		PlayerDBA playerDBA = new PlayerDBA(connection);
 		players = playerDBA.getPlayersOfAccount(this);
-//		players.add(new Player(connection, this, playerDBA));
 		return players;
 	}
 

@@ -31,21 +31,12 @@ public class InvitationController implements Runnable {
 				e.printStackTrace();
 			}
 			System.out.println("Running...");
-			
+			System.out.println(accountController.getAllPlayersOfThisAccount());
 			for(Player player : account.getPlayers()) {
+				System.out.println(player.getName());
 				if (player.getPlayerStatus().equals(PlayerStatus.CHALLENGEE)){
-	
-						Alert alert = new Alert(AlertType.CONFIRMATION);
-						alert.setTitle("Invite");
-						alert.setHeaderText("Deze speler wil je inviten voor een game");
-						alert.setContentText("Wil je dit accepteren?");
-	
-						Optional<ButtonType> result = alert.showAndWait();
-						if (result.get() == ButtonType.OK){
-						   player.setPlayerStatus(PlayerStatus.ACCEPTED); 
-						} else {
-							player.setPlayerStatus(PlayerStatus.REFUSED); 
-						}
+					PlayerController playerController = new PlayerController(accountController);
+					playerController.viewInvitation();
 				}
 			}
 			System.out.println("Stop...");

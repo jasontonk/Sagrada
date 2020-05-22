@@ -236,7 +236,6 @@ public class PlayerDBA {
 		Player player = new Player(conn);
     	player.setAccount(account);
 		String username = "'" + account.getUsername() + "'";
-//		String username = "'hoi'";
 		String query = "SELECT * FROM player WHERE username = "+username;
 		try {
 			Statement stmt = conn.getConn().createStatement();
