@@ -1,11 +1,15 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import database.AccountDBA;
 import database.DataBaseConnection;
+import database.GameDBA;
+import database.PlayerDBA;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import model.Account;
 import model.Game;
 import model.Invitation;
@@ -29,7 +33,6 @@ public class AccountController {
 	private MyScene myScene;
 	private AccountDBA accountDBA;
 	private ArrayList<Player> invitePlayerList;
-	
 	public AccountController(DataBaseConnection c, MyScene myScene) {
 		this.connection = c;
 		this.myScene = myScene;
@@ -43,6 +46,12 @@ public class AccountController {
 		invitePlayerList = new ArrayList<Player>();
 		
 		accountDBA = new AccountDBA(c);
+		makeThread();
+	}
+	
+	public void makeThread() {
+		Thread invitationChecker = new Thread(new InvitationController(10, this));
+		invitationChecker.start();
 	}
 	
 	public void setAccount(Account account) {
@@ -109,14 +118,10 @@ public class AccountController {
 		if(lobbyView == null) {
 			lobbyView = new LobbyView(this);
 		}
-		makeThread();
 		myScene.setContentPane(lobbyView.makeAccountPane());
 	}
 	
-	public void makeThread() {
-		Thread invitationChecker = new Thread(new InvitationController(account, 10, this)); 
-		invitationChecker.start();
-	}
+	
 	
 	public void showWarning(String header, String text) {
 		Alert alert = new Alert(AlertType.WARNING);
@@ -125,9 +130,30 @@ public class AccountController {
 		alert.setContentText(text);
 		alert.showAndWait();
 	}
+	
+	public void showInvite(Player player) {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Invite");
+				
+		System.out.println("TEST 1" + player);
+		System.out.println("TEST 2" + player.getGame());
+		System.out.println("TEST 3" + player.getGame().getChallengerOfGameWithID(player.getGame().getGameID()));
+				String inviter = player.getGame().getChallengerOfGameWithID(player.getGame().getGameID());
+				alert.setHeaderText(inviter + " wil je inviten voor een game");
+
+		alert.setContentText("Wil je dit accepteren?");
+
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK){
+			
+			player.setPlayerStatus(PlayerStatus.ACCEPTED);
+		} else {
+			player.setPlayerStatus(PlayerStatus.REFUSED);
+		}
+	}
 
 	public void makeGame() {
-		System.out.println("maak game");
+//		GameController gameContoller = new GameController(connection, myScene);
 	}
 
 	public void inviteAccounts(ArrayList<Account> inviteList) {
@@ -138,7 +164,7 @@ public class AccountController {
 		player.setAccount(account);
 		player.setName(account.getUsername());
 		player.setGame(game);
-//		player.setPlayerStatus(PlayerStatus.CHALLENGER);
+		player.setPlayerStatus(PlayerStatus.CHALLENGER);
 		player.setColor(ModelColor.BLUE);
 		player.addPlayer(player);
 		invitePlayerList.add(player);
@@ -148,11 +174,10 @@ public class AccountController {
 			p.setAccount(account);
 			p.setName(account.getUsername());
 			p.setGame(game);
-//			p.setPlayerStatus(PlayerStatus.CHALLENGEE);
+			p.setPlayerStatus(PlayerStatus.CHALLENGEE);
 			p.setColor(ModelColor.BLUE);
 			p.addPlayer(p);
 			invitePlayerList.add(p);
-			PlayerController pc = new PlayerController(this);
 		}
 		
 	}
@@ -163,6 +188,6 @@ public class AccountController {
 
 	public void render() {
 		myScene.setContentPane(lobbyView.makeAccountPane());
-		System.out.println("hij werkt");
+		System.out.println("========== LOBBYVIEW GERENDERD");
 	}
 }
