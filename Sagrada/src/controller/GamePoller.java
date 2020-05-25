@@ -16,8 +16,14 @@ public class GamePoller implements Runnable {
 	@Override
 	public void run() {
 		finishedTurn = false;
-		
+		gameController.getGame().setPlacedDie(false);
 		while(!finishedTurn) {
+			
+			
+			
+			
+			
+			
 			try {
 				Thread.sleep(seconds * 1000);
 			} catch (InterruptedException e) {
@@ -25,11 +31,14 @@ public class GamePoller implements Runnable {
 			}
 			gameController.getGame().playround();
 		}
+		gameController.getGame().setNextPlayer();
 		
+		// 1221 2112 1221
 	}
 
 	public void setFinishedTurn(boolean finishedTurn) {
 		this.finishedTurn = finishedTurn;
+		gameController.setFinishedTurnTrue();
 	}
 	
 	

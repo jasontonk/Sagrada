@@ -146,12 +146,12 @@ public class GameDBA {
 	
 	public int getCurrentRound(int gameid) {
 		int currentRound = 1;
-		String query = "SELECT DISTINCT('round') FROM gamedie WHERE idgame = "+gameid+" AND roundtrack IS NOT NULL ORDER BY round DESC LIMIT 1;"; 
+		String query = "SELECT current_roundID FROM game WHERE idgame =" +gameid+";"; 
 		try {
 			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			if (rs.next()) {
-                currentRound = rs.getInt("round") + 1;
+                currentRound = rs.getInt("current_roundID");
             }
 			stmt.close();
 		}catch (SQLException e) {
@@ -192,7 +192,7 @@ public class GameDBA {
 	}
 
 	public void setNextRound(Game game) {
-		String query = "UPDATE game SET current_roundID = "+(game.getRound()+2)+" WHERE idgame = "+game.getGameID()+";";
+		String query = "UPDATE game SET current_roundID = "+(game.getRound()+1)+" WHERE idgame = "+game.getGameID()+";";
 		try {
 				Statement stmt = conn.getConn().createStatement();
 				stmt.executeUpdate(query);

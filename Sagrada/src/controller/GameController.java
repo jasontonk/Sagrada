@@ -52,9 +52,9 @@ public class GameController {
 //		Task task = new Task;
 //		game.playround();
 //		patterncardView = new PatterncardView(patterncardController);
-		patterncardSelectionView = new PatterncardSelectionView(this);
+//		patterncardSelectionView = new PatterncardSelectionView(this);
 		gamePoller =  new GamePoller(this, 1);
-		myScene.setContentPane(patterncardSelectionView);
+//		myScene.setContentPane(patterncardSelectionView);
 //		myScene.setContentPane(gameView.getPatterncardSelectionView());
 
 	}

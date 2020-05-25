@@ -31,6 +31,7 @@ public class Game {
 	private GameDie selectedDie;
 	private GameDBA gameDBA;
 	private boolean finishedTurn;
+	private boolean placedDie;
 
 //	public Game(Account account1, Account account2, boolean randomgeneratedpatterncards, DataBaseConnection conn) {// boolean generated toevoegen ja of nee generated patterncards
 //		this.conn = conn;
@@ -121,7 +122,6 @@ public class Game {
 		gameDBA.addNewGameDB(LocalDateTime.now(), this);
 		offer = new GameDie[9];
 		players = new ArrayList<Player>();
-		System.out.println("test");
 		currentPlayer = new Player(conn, new Account("ditis2", "eentest", conn), this, PlayerStatus.CHALLENGER);
 		Player player = new Player(conn, new Account("ditiseentest2", "testtest", conn), this, PlayerStatus.CHALLENGEE);
 		players.add(currentPlayer);
@@ -136,6 +136,7 @@ public class Game {
 		usedDice = new ArrayList<GameDie>();
 		makedie();
 		finishedGame = false;
+		placedDie = true;
 		
 		
 	}
@@ -226,9 +227,7 @@ public class Game {
 	}
 	
 	public GameDie[] getDicePool() {
-		System.out.println("1");
 		grabDiceFromBag();
-		System.out.println(""+offer+ "1");
 		return offer;
 	}
 	
@@ -246,6 +245,8 @@ public class Game {
 		boolean finishedRound = false;
 		
 		if(!finishedRound) {
+			
+			System.out.println("round: " +round+ " Databaseround: "+gameDBA.getCurrentRound(this.getGameID()));
 			if(round == gameDBA.getCurrentRound(this.getGameID())) {
 				if(currentPlayer == personalPlayer) {
 					playTurn();
@@ -263,14 +264,13 @@ public class Game {
 						players.get(i).setSequenceNumber(players.get(i).getSequenceNumber()+1);
 					}
 				}
-				if(round == 20) {
+				if(round >= 20) {
 					finishedGame = true;
 				}
 				gameDBA.setNextRound(this);
-				round = gameDBA.getCurrentRound(this.getGameID());
 				finishedRound = true;
-				
 			}
+			round = gameDBA.getCurrentRound(this.getGameID());
 			return false;
 		}
 		else {
@@ -292,10 +292,7 @@ public class Game {
 		
 	}
 	public void playTurn() {
-		finishedTurn = false;
 		System.out.println(currentPlayer.getId());
-		
-		if(!finishedTurn) {
 			/* 
 			 * 
 			 * 
@@ -308,24 +305,15 @@ public class Game {
 			 * 
 			 */
 			System.out.println("still your turn");
-		}
-		else {
+	}
+	public void setNextPlayer() {
 			boolean isClockwise = gameDBA.isRoundClockwise(this);
-			if(!isClockwise){
-				for (int i = 0; i < players.size(); i++) {
-					if(currentPlayer.getSequenceNumber() == players.get(i).getSequenceNumber()) {
-						if(i == 0) {
-							currentPlayer = players.get(players.size()-1);
-						}
-						else {
-							currentPlayer = players.get(i-1);
-						}
-						gameDBA.changeCurrentPlayer(currentPlayer.getId(), this);
-						break;
-					}
-				}
-			} 
-			else if(currentPlayer.getSequenceNumber() == players.size() && isClockwise) {
+			
+			if(currentPlayer.getSequenceNumber() == players.size() && isClockwise) {
+				gameDBA.changeRoundDirection(this);
+				round++;
+			}
+			else if(currentPlayer.getSequenceNumber() == 1 && !isClockwise) {
 				gameDBA.changeRoundDirection(this);
 				round++;
 			}
@@ -343,9 +331,22 @@ public class Game {
 						break;
 					}
 				}
-			}
+			} 
+			else if(!isClockwise){
+				for (int i = 0; i < players.size(); i++) {
+					if(currentPlayer.getSequenceNumber() == players.get(i).getSequenceNumber()) {
+						if(i == 0) {
+							currentPlayer = players.get(players.size()-1);
+						}
+						else {
+							currentPlayer = players.get(i-1);
+						}
+						gameDBA.changeCurrentPlayer(currentPlayer.getId(), this);
+						break;
+					}
+				}
+			} 
 			System.out.println(currentPlayer.getId());
-		}
 	}
 
 	private boolean getFinishedTurn() {
@@ -441,9 +442,14 @@ public class Game {
 
 
 	public boolean checkPlacementAgainstRules(int x, int y, ModelColor modelColor, int value) {
-		for (int i = 0; i < players.size(); i++) {
-			if(players.get(i) == currentPlayer) {
-				return players.get(i).checkPlacementAgainstRules(x, y, modelColor, value);
+		if(!placedDie) {
+			for (int i = 0; i < players.size(); i++) {
+				if(players.get(i) == currentPlayer) {
+					if(players.get(i).checkPlacementAgainstRules(x, y, modelColor, value)) {
+						placedDie = true;
+						return true;
+					}
+				}
 			}
 		}
 		return false;
@@ -469,11 +475,16 @@ public class Game {
 
 	public boolean isRandom() {
 		// TODO Auto-generated method stub
-		return false;
+		return randomPatterncards;
 	}
 
 	public void setFinishedTurnTrue() {
 		finishedTurn = true;
+		
+	}
+
+	public void setPlacedDie(boolean b) {
+		placedDie = b;
 		
 	}
 
