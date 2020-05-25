@@ -240,57 +240,19 @@ public class Game {
 		}
 	}
 
-	public boolean playround() {// boolean first round false
-		int amountofdice = players.size() * 2 + 1;
-		boolean finishedRound = false;
-		
-		if(!finishedRound) {
-			
-			System.out.println("round: " +round+ " Databaseround: "+gameDBA.getCurrentRound(this.getGameID()));
-			if(round == gameDBA.getCurrentRound(this.getGameID())) {
-				if(currentPlayer == personalPlayer) {
-					playTurn();
-				}
-				else {
-					System.out.println("wacht tot een andere speler de beurt beindigt");
-				}
+	public void playround() {// boolean first round false
+		System.out.println("round: " +round+ " Databaseround: "+gameDBA.getCurrentRound(this.getGameID()));
+		if(round == gameDBA.getCurrentRound(this.getGameID())) {
+			if(currentPlayer == personalPlayer) {
+				playTurn();
 			}
 			else {
-				for (int i = 0; i < players.size(); i++) {
-					if(players.get(i).getSequenceNumber() == players.size()) {
-						players.get(i).setSequenceNumber(1);
-					}
-					else {
-						players.get(i).setSequenceNumber(players.get(i).getSequenceNumber()+1);
-					}
-				}
-				if(round >= 20) {
-					finishedGame = true;
-				}
-				gameDBA.setNextRound(this);
-				finishedRound = true;
+				System.out.println("wacht tot een andere speler de beurt beindigt");
 			}
-			round = gameDBA.getCurrentRound(this.getGameID());
-			return false;
 		}
-		else {
-			round++;
-			return true;
-		}
-		
-		
-		
-//		methode die dobbelstenen selecteert 
-//		 dobbelsteen kiezen,passen of toolcard gebruiken // if met speler in put en dan de methode die er aan vast zit passen is door naar volgende speler 
-//		 gekozen actie uitvoeren
-//		 
-//		 dobbelsteen kiezen,einde beurt of toolcard - de eerder gekozen optie 
-//		 actie uitvoeren 
-//		 volgende speler
-//		
-//		 voeg overige dobbelstenen aan rondespoor toe
-		
+		round = gameDBA.getCurrentRound(this.getGameID());
 	}
+	
 	public void playTurn() {
 		System.out.println(currentPlayer.getId());
 			/* 
@@ -314,6 +276,7 @@ public class Game {
 				round++;
 			}
 			else if(currentPlayer.getSequenceNumber() == 1 && !isClockwise) {
+				changeSequenceNumber();
 				gameDBA.changeRoundDirection(this);
 				round++;
 			}
@@ -347,6 +310,31 @@ public class Game {
 				}
 			} 
 			System.out.println(currentPlayer.getId());
+	}
+	public void changeSequenceNumber() {
+		System.out.println("stap 1");
+		if(currentPlayer.getSequenceNumber() == 1 && !gameDBA.isRoundClockwise(this)) {
+			System.out.println("stap 2");
+			for (int i = 0; i < players.size(); i++) {
+				if(players.get(i).getSequenceNumber() == players.size()) {
+					System.out.println("stap 3.1");
+					players.get(i).setSequenceNumber(1);
+				}
+				else {
+					System.out.println("stap 3.2");
+					players.get(i).setSequenceNumber(players.get(i).getSequenceNumber()+1);
+				}
+			}
+			if(round >= 20) {
+				finishedGame = true;
+			}
+			for (int i = 0; i < players.size(); i++) {
+				if(players.get(i).getSequenceNumber() == 1) {
+					currentPlayer = players.get(i);
+				}
+			}
+			gameDBA.changeCurrentPlayer(currentPlayer.getId(), this);
+		}
 	}
 
 	private boolean getFinishedTurn() {
@@ -443,12 +431,10 @@ public class Game {
 
 	public boolean checkPlacementAgainstRules(int x, int y, ModelColor modelColor, int value) {
 		if(!placedDie) {
-			for (int i = 0; i < players.size(); i++) {
-				if(players.get(i) == currentPlayer) {
-					if(players.get(i).checkPlacementAgainstRules(x, y, modelColor, value)) {
-						placedDie = true;
-						return true;
-					}
+			if(personalPlayer == currentPlayer) {
+				if(currentPlayer.checkPlacementAgainstRules(x, y, modelColor, value)) {
+					placedDie = true;
+					return true;
 				}
 			}
 		}
@@ -487,5 +473,7 @@ public class Game {
 		placedDie = b;
 		
 	}
+
+	
 
 }

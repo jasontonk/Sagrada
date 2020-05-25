@@ -33,6 +33,7 @@ public class GamePoller implements Runnable {
 		}
 		gameController.getGame().setNextPlayer();
 		
+		
 		// 1221 2112 1221
 	}
 

@@ -320,6 +320,8 @@ public class PlayerDBA {
 			e.printStackTrace();
 		}
 		return seqnr;
+		
+		//139|140|140|139 139|140
 	}
 
 	public void setPlayerPatternCard(PatternCard patternCard, Player player) {
