@@ -208,8 +208,9 @@ public class GameDieDBA {
         	Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                GameDie gameDie = new GameDie(getColorFromString(rs.getString("color")),rs.getInt("dienumber"),rs.getInt("eyes"), game, conn);
+                GameDie gameDie = new GameDie(getColorFromString(rs.getString("color")),rs.getInt("dienumber"),rs.getInt("eyes"), game, conn); 
                 gameDie.setAvailable(false);
+                gameDie.setOnRoundTrack(rs.getInt("roundtrack"));
                 list.add(gameDie);
             }
             stmt.close();

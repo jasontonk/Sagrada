@@ -7,6 +7,7 @@ import java.util.Random;
 import controller.GameController;
 import database.DataBaseConnection;
 import database.GameDBA;
+import database.GameDieDBA;
 
 public class Game {
 	private ArrayList<Player> players;
@@ -391,6 +392,12 @@ public class Game {
 
 	public void setPlacedDie(boolean b) {
 		placedDie = b;
+		
+	}
+
+	public ArrayList<GameDie> getDiceOnRoundtrack() {
+		GameDieDBA gamedieDBA = new GameDieDBA(conn);
+		return gamedieDBA.getDiceOnRoundTrack(this);
 		
 	}
 

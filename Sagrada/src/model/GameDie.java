@@ -10,7 +10,7 @@ public class GameDie extends Die {
 	private int eyes;
 	private boolean isAvailable;
 	private boolean isFirstTurn;
-	private boolean isOnRoundTrack;
+	private int isOnRoundtrackfield;
 	private BoardField boardField;
 	private GameDieDBA gameDieDBA;
 	
@@ -21,7 +21,7 @@ public class GameDie extends Die {
 		this.setEyes(game, eyes);
 		isAvailable = false;
 		isFirstTurn = false;
-		isOnRoundTrack = false;
+		isOnRoundtrackfield = 0;
 	}
 	
 	public void setBoardField(BoardField boardField) {
@@ -51,12 +51,12 @@ public class GameDie extends Die {
 		this.isFirstTurn = isFirstTurn;
 	}
 
-	public boolean isOnRoundTrack() {
-		return isOnRoundTrack;
+	public int isOnRoundTrack() {
+		return isOnRoundtrackfield;
 	}
 
-	public void setOnRoundTrack(boolean isOnRoundTrack) {
-		this.isOnRoundTrack = isOnRoundTrack;
+	public void setOnRoundTrack(int isOnRoundTrack) {
+		this.isOnRoundtrackfield = isOnRoundTrack;
 	}
 
 	public int getEyes() {
