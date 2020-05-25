@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 
 import model.GameDie;
+import model.ModelColor;
 
 public class GameUpdater implements Runnable {
 
@@ -16,7 +17,7 @@ public class GameUpdater implements Runnable {
 	public void run() {
 		while(true){
 			updateAll();
-			
+			System.out.println("updated games");
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -33,8 +34,21 @@ public class GameUpdater implements Runnable {
 	}
 
 	private void updateRountrack() {
+		ArrayList<ModelColor> colors = new ArrayList<>();
+		ArrayList<Integer> values = new ArrayList<>();
 		ArrayList<GameDie> diceOnRoundTrack;
 		diceOnRoundTrack = gameCtrl.getGame().getDiceOnRoundtrack();
+		for (int i = 1; i <= 10; i++) {
+			for (int j = 0; j < diceOnRoundTrack.size(); j++) {
+				if(diceOnRoundTrack.get(i).isOnRoundTrack() == i) {
+					colors.add(diceOnRoundTrack.get(i).getColor());
+					values.add(diceOnRoundTrack.get(i).getEyes());
+				}
+			}
+			gameCtrl.getGameView().getRoundtrackView().addDice(i, colors, values);
+			colors.clear();
+			values.clear();
+		}
 		
 	}
 

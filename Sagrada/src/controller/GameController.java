@@ -21,6 +21,7 @@ public class GameController {
 
 	private Game game;
 	private GameRoundPlayer gameRoundPlayer;
+	private GameUpdater gameUpdater;
 	private GameView gameView;
 	private DieController dieController;
 	private PatterncardController patterncardController;
@@ -53,7 +54,10 @@ public class GameController {
 //		game.playround();
 //		patterncardView = new PatterncardView(patterncardController);
 //		patterncardSelectionView = new PatterncardSelectionView(this);
-		gameRoundPlayer =  new GameRoundPlayer(this, 1);
+		gameRoundPlayer =  new GameRoundPlayer(this, 3);
+		gameUpdater = new GameUpdater(this);
+		Thread updateGame = new Thread(gameUpdater);
+		updateGame.start();
 //		myScene.setContentPane(patterncardSelectionView);
 //		myScene.setContentPane(gameView.getPatterncardSelectionView());
 
