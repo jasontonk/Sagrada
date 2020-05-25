@@ -401,6 +401,8 @@ public class Game {
 		
 	}
 
-	
+	public String getChallengerOfGameWithID(int gameID) {
+		return gameDBA.getChallengerOfGameWithID(gameID);
+	}
 
 }
