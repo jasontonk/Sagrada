@@ -67,6 +67,7 @@ public class Board {
 	public void placeDie(GameDie gameDie, int xPos, int Ypos) {
 		BoardField boardField = boardFields[xPos][Ypos];
 		boardField.setDie(gameDie);
+		playerFrameFieldDBA.setDie(gameDie, this.getPlayer(), xPos+1, Ypos+1);
 	}
 	
 	/**
