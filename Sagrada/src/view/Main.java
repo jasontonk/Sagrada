@@ -8,10 +8,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import model.Game;
 
 public class Main extends Application  {
 	DataBaseConnection conn = new DataBaseConnection("com.mysql.jdbc.Driver");
-	private GameController gameController = new GameController(conn, null);
+	Game game = new Game(conn, false);
+	private GameController gameController = new GameController(conn, null, game);
 	private PatterncardSelectionView patterncardSelectionView = new PatterncardSelectionView(gameController);
 	
 	public static void main(String[] args) {

@@ -35,7 +35,7 @@ public class GameController {
 
 	public GameController(DataBaseConnection conn, MyScene ms, Game game) {
 		this.conn= conn;
-		gamePoller =  new GamePoller(this, 1);
+		
 		myScene = ms;
 		this.game = game;
 //		game =  new Game(conn, true);
@@ -53,7 +53,7 @@ public class GameController {
 //		game.playround();
 //		patterncardView = new PatterncardView(patterncardController);
 		patterncardSelectionView = new PatterncardSelectionView(this);
-// 
+		gamePoller =  new GamePoller(this, 1);
 		myScene.setContentPane(patterncardSelectionView);
 //		myScene.setContentPane(gameView.getPatterncardSelectionView());
 
@@ -78,6 +78,7 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 	}
 
 	public GameDie[] getDicePool() {
+		System.out.println("test");
 		return game.getDicePool();
 	}
 
@@ -163,5 +164,9 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 	}
 	public Game getGame() {
 		return game;
+	}
+
+	public GamePoller getGamePoller() {
+		return gamePoller;
 	}
 }

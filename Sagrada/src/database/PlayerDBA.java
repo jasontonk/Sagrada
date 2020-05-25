@@ -230,6 +230,7 @@ public class PlayerDBA {
 		}
 		return player;
 	}
+	
 
 	public ArrayList<Player> getPlayersOfAccount(Account account) {
 		ArrayList<Player> list = new ArrayList<>();
@@ -333,6 +334,24 @@ public class PlayerDBA {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+
+
+	public PlayerStatus getPlayerStatusFromDB(Player playerUsingID) {
+		String playerstatusString = null;
+		String query = "SELECT playstatus FROM player WHERE idplayer= " + playerUsingID.getId() + ";";
+		try {
+			Statement stmt = conn.getConn().createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			if (rs.next()) {
+				playerstatusString = rs.getString("playstatus");
+			}
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return getPlayerStatusFromString(playerstatusString);
 	}
 
 }

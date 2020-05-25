@@ -42,11 +42,14 @@ public class Player {
 		modelColor = modelColor.RED;
 		this.setColor(modelColor);
 
-
+		
 		playerDBA = new PlayerDBA(c);
+		
 		playerDBA.addPlayer(this);
+		System.out.println("test2");
 		patternCard = new PatternCard(c);
 		board = new Board(1, this, c);		
+		
 	}
 
 
@@ -96,7 +99,10 @@ public class Player {
 	}
 
 	public PlayerStatus getPlayerStatus() {
-		playerStatus = playerDBA.getPlayerUsingID(this.getId()).getPlayerStatus();
+		System.out.println("rest");
+		if(playerStatus == null) {
+			playerStatus = playerDBA.getPlayerStatusFromDB(playerDBA.getPlayerUsingID(this.getId())); 
+		}
 		System.out.println(playerStatus);
 		return playerStatus;
 	}
