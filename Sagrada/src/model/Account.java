@@ -16,6 +16,7 @@ public class Account {
 	private ArrayList<Invitation> invitations; 
 	private DataBaseConnection connection;
 	private AccountDBA accountDBA;
+	private PlayerDBA playerDBA;
 	
 	private int mostUsedValue;
 	private Color mostUsedColor;
@@ -31,6 +32,7 @@ public class Account {
 		invitations = new ArrayList<>();
 		connection = c;
 		accountDBA = new AccountDBA(c);
+		playerDBA = new PlayerDBA(connection);
 	}
 	
 	/**
@@ -44,6 +46,7 @@ public class Account {
 		connection = c;
 		accountDBA = new AccountDBA(c);
 		accountDBA.addAccountDB(username, password);
+		playerDBA = new PlayerDBA(connection);
 	}
 
 	/**
@@ -101,7 +104,7 @@ public class Account {
      * 
      */
 	public ArrayList<Player> getPlayers() {
-		PlayerDBA playerDBA = new PlayerDBA(connection);
+		
 		players = playerDBA.getPlayersOfAccount(this);
 		System.out.println("=================== PLAYERS OF THIS ACCOUNT: " + players);
 		return players;
@@ -197,6 +200,10 @@ public class Account {
 	
 	public ArrayList<Account> getAllAccounts(){
 		return accountDBA.GetAllAccountsDB();
+	}
+
+	public ArrayList<Player> getChallengeePlayers() {
+		return playerDBA.getChallengeePlayers(this);
 	}
 
 }  

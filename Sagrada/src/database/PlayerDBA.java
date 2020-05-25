@@ -356,4 +356,39 @@ public class PlayerDBA {
 		return getPlayerStatusFromString(playerstatusString);
 	}
 
+
+
+	public ArrayList<Player> getChallengeePlayers(Account account) {
+			ArrayList<Player> list = new ArrayList<>();
+		
+    	
+		String username = "'" + account.getUsername() + "'";
+		System.out.println("'" + account.getUsername() + "'");
+
+		String query = "SELECT * FROM player WHERE username = "+username+" AND playstatus = 'CHALLENGEE';";
+		try {
+			Statement stmt = conn.getConn().createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				Player player = new Player(conn);
+				player.setAccount(account);
+				PatternCardDBA patternCard = new PatternCardDBA(conn);
+				player.setName(rs.getString("username"));
+				player.setId(rs.getInt("idplayer"));
+				player.setPlayerStatus(getPlayerStatusFromString(rs.getString("playstatus")));
+				player.setSequenceNumber(rs.getInt("seqnr"));
+				player.setScore(rs.getInt("score"));
+				player.setColor(getColorFromString(rs.getString("private_objectivecard_color")));
+				player.setPatternCard(patternCard.getPatterncardByID(rs.getInt("idpatterncard")));
+				player.setGame(game.getGameByID(rs.getInt("idgame")));
+				list.add(player);
+			}
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+
 }

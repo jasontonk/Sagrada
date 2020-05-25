@@ -21,7 +21,7 @@ public class InvitationController implements Runnable {
 			
 			System.out.println("Running...");
 //			System.out.println(accountController.getAccount().getPlayers());
-			for(Player player : accountController.getAccount().getPlayers()) {
+			for(Player player : accountController.getAccount().getChallengeePlayers()) {
 //				System.out.println("=====================================================");
 //				System.out.println("Player name: " + player.getName());
 //				System.out.println( "Player: "+ player );
