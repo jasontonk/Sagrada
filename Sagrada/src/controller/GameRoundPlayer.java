@@ -1,12 +1,12 @@
 package controller;
 
-public class GamePoller implements Runnable {
+public class GameRoundPlayer implements Runnable {
 
 	private GameController gameController;
 	private int seconds;
 	private boolean finishedTurn;
 	
-	public GamePoller(GameController gameController, int seconds) {
+	public GameRoundPlayer(GameController gameController, int seconds) {
 		this.gameController = gameController;
 		this.seconds = seconds ;
 	}
