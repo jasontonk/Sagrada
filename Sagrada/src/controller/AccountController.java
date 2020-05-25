@@ -1,15 +1,11 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 import database.AccountDBA;
 import database.DataBaseConnection;
-import database.GameDBA;
-import database.PlayerDBA;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
 import model.Account;
 import model.Game;
 import model.Invitation;
@@ -34,13 +30,16 @@ public class AccountController {
 	private AccountDBA accountDBA;
 	private ArrayList<Player> invitePlayerList;
 	
-	
 	public AccountController(DataBaseConnection c, MyScene myScene) {
 		this.connection = c;
 		this.myScene = myScene;
 		
-//		setAccount(new Account(connection));
+		setAccount(new Account(connection));
 		
+		
+		chooseView = new ChooseView(this);
+		registerView = new RegisterView(this);
+		loginView = new LoginView(this);
 		invitePlayerList = new ArrayList<Player>();
 		
 		accountDBA = new AccountDBA(c);
@@ -92,27 +91,17 @@ public class AccountController {
 	
 	public ArrayList<Player> getAllPlayersOfThisAccount() {
 		return account.getPlayers();
-//		return null;
 	}
 	
 	public void viewLogin() {
-		if(loginView == null) {
-			loginView = new LoginView(this);
-		}
 		myScene.setContentPane(loginView.makeLoginPane());
 	}
 	
 	public void viewRegister() {
-		if(registerView == null) {
-			registerView = new RegisterView(this);
-		}
 		myScene.setContentPane(registerView.makeRegisterPane());
 	}
 	
 	public void viewChoose() {
-		if(chooseView == null) {
-			chooseView = new ChooseView(this);
-		}
 		myScene.setContentPane(chooseView.makeChoosePane());
 	}
 	
@@ -137,48 +126,33 @@ public class AccountController {
 		alert.showAndWait();
 	}
 
+	public void makeGame() {
+		System.out.println("maak game");
+	}
 
 	public void inviteAccounts(ArrayList<Account> inviteList) {
 		System.out.println(inviteList);
 		Invitation invite = new Invitation();
 		Game game = new Game(connection, false);
-		
-		
 		Player player = new Player(connection);
-		System.out.println("148");
 		player.setAccount(account);
-		System.out.println("150");
 		player.setName(account.getUsername());
-		System.out.println("152");
 		player.setGame(game);
-		System.out.println("153");
-		player.setPlayerStatus(PlayerStatus.CHALLENGEE);
-		System.out.println("156");
+//		player.setPlayerStatus(PlayerStatus.CHALLENGER);
 		player.setColor(ModelColor.BLUE);
-		System.out.println("158");
-		
-		System.out.println(player.getPlayerStatus());
-		System.out.println(player.getName());
-		System.out.println(player.getGame().getGameID());
-		
-		
 		player.addPlayer(player);
-		
-		System.out.println("160");
 		invitePlayerList.add(player);
-		System.out.println("162");
-		
 		
 		for (Account account : inviteList) {
 			Player p = new Player(connection);
 			p.setAccount(account);
 			p.setName(account.getUsername());
 			p.setGame(game);
-			System.out.println("177");
-			p.setPlayerStatus(PlayerStatus.CHALLENGEE);
+//			p.setPlayerStatus(PlayerStatus.CHALLENGEE);
 			p.setColor(ModelColor.BLUE);
 			p.addPlayer(p);
 			invitePlayerList.add(p);
+			PlayerController pc = new PlayerController(this);
 		}
 		
 	}
@@ -190,9 +164,5 @@ public class AccountController {
 	public void render() {
 		myScene.setContentPane(lobbyView.makeAccountPane());
 		System.out.println("hij werkt");
-	}
-
-	public void makeGame() {
-		System.out.println("maak game");
 	}
 }

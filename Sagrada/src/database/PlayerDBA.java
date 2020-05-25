@@ -27,7 +27,7 @@ public class PlayerDBA {
 	public void addPlayer(Player player) {
 		int playerid = autoIdPlayer();
 		player.setId(playerid);
-
+	
 		String query = "INSERT INTO player (idplayer,username,idgame,playstatus,private_objectivecard_color) VALUES("
 				+ playerid + ",'" + player.getName() + "'," + player.getGame().getGameID() + ",'"
 				+ player.getPlayerStatus() + "','" + getStringFromColor(player) + "');";

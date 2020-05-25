@@ -53,7 +53,7 @@ public class Player {
 	public Player(DataBaseConnection c) {
 		connection = c;
 		playerDBA = new PlayerDBA(c);
-
+		this.setPlayerStatus(PlayerStatus.CHALLENGEE);
 
 		}		
 
