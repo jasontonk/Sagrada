@@ -44,7 +44,6 @@ public class LobbyView extends BorderPane {
 	}
 
 	public Pane makeAccountPane() {
-		System.out.println("LobbyView - makeAccountPane - regel 47: " + accountController.getAccount().getUsername());
 		this.getChildren().clear();
 		HBox accountView = new HBox();  
 		
@@ -83,8 +82,9 @@ public class LobbyView extends BorderPane {
 		center.setMinSize(250, 600);
 		
 		VBox top = new VBox();
+		
 		top.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, null, null)));
-		top.setMinSize(250, 300);
+		top.setMinSize(250, 600);
 		Button startGame = new Button("Start het spel");
 		startGame.setOnAction(e -> makeGame());
 		top.getChildren().add(startGame);
@@ -93,12 +93,9 @@ public class LobbyView extends BorderPane {
 		refresh.setOnAction(e -> accountController.render());
 		top.getChildren().add(refresh);
 		
-		VBox bottom = new VBox();
-		bottom.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, null, null)));
-		bottom.setMinSize(250, 300);
 		
 		for (Player player : accountController.getInvitePlayerList()) {
-			if(player.getPlayerStatus().equals(PlayerStatus.CHALLENGEE)  || player.getPlayerStatus().equals(PlayerStatus.CHALLENGER)) {
+			if((player.getPlayerStatus().equals(PlayerStatus.CHALLENGEE)  || player.getPlayerStatus().equals(PlayerStatus.CHALLENGER)) && !gameLobby.contains(player)) {
 				gameLobby.add(player);
 				System.out.println(gameLobby);
 			}
@@ -110,13 +107,12 @@ public class LobbyView extends BorderPane {
             username.setMinWidth(100);
             
             System.out.println("Speler:" + player.getName());
-            player.setPlayerStatus(PlayerStatus.ACCEPTED);
-            playerlist.getChildren().add(username); 
+            playerlist.getChildren().add(username);
             top.getChildren().add(playerlist);
 		}
 		
 		
-		center.getChildren().addAll(top, bottom);
+		center.getChildren().addAll(top);
 		
 		VBox right = new VBox();
 		right.setMinSize(250, 600);
@@ -160,7 +156,7 @@ public class LobbyView extends BorderPane {
 	}
 	
 	private void makeGame() {
-		accountController.makeGame();
+//		accountController.makeGame();
 	}
 
 

@@ -125,7 +125,7 @@ public class PlayerDBA {
 	private PlayerStatus getPlayerStatusFromString(String status) {
 		PlayerStatus playerStatus = null;
 		if (status != null) {
-			switch (status) {
+			switch (status.toLowerCase()) {
 			case "accepted":
 				playerStatus = PlayerStatus.ACCEPTED;
 				break;

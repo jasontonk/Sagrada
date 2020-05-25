@@ -16,23 +16,22 @@ public class Account {
 	private ArrayList<Invitation> invitations; 
 	private DataBaseConnection connection;
 	private AccountDBA accountDBA;
-	private PlayerDBA playerDBA;
+	
 	private int mostUsedValue;
 	private Color mostUsedColor;
 	private int[] winsAndLoses;
 	private int highestScore;
 	private int differentOpponents;
 	
-//	/**
-//     * 
-//     */
-//	public Account(DataBaseConnection c) {
-//		players = new ArrayList<Player>();
-//		invitations = new ArrayList<>();
-//		connection = c;
-//		accountDBA = new AccountDBA(c);
-//		playerDBA = new PlayerDBA(c);
-//	}
+	/**
+     * 
+     */
+	public Account(DataBaseConnection c) {
+		players = new ArrayList<Player>();
+		invitations = new ArrayList<>();
+		connection = c;
+		accountDBA = new AccountDBA(c);
+	}
 	
 	/**
      * 
@@ -45,12 +44,6 @@ public class Account {
 		connection = c;
 		accountDBA = new AccountDBA(c);
 		accountDBA.addAccountDB(username, password);
-		playerDBA = new PlayerDBA(c);
-	}
-
-	public Account(DataBaseConnection c) {
-		this.connection = c;
-		accountDBA = new AccountDBA(connection);
 	}
 
 	/**
@@ -108,8 +101,10 @@ public class Account {
      * 
      */
 	public ArrayList<Player> getPlayers() {
-		System.out.println("Account getPlayers() - regel 109: "+playerDBA.getPlayersOfAccount(this));	
-		return playerDBA.getPlayersOfAccount(this);
+		PlayerDBA playerDBA = new PlayerDBA(connection);
+		players = playerDBA.getPlayersOfAccount(this);
+		System.out.println("=================== PLAYERS OF THIS ACCOUNT: " + players);
+		return players;
 	}
 
 	/**
@@ -117,6 +112,14 @@ public class Account {
      */
 	public void setPlayers(ArrayList<Player> players) {
 		this.players = players;
+	}
+
+	/**
+     * 
+     */
+	public ArrayList<Invitation> getInvitations() {
+//		invitations = accountDBA.getInvitations();//TODO matheus
+		return invitations;
 	}
 
 	/**

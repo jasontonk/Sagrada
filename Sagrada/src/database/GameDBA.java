@@ -203,4 +203,23 @@ public class GameDBA {
 			e.printStackTrace();
 		}
 	}
+
+
+	public String getChallengerOfGameWithID(int gameID) {
+		String name = "";
+		String query = "SELECT username FROM player WHERE idgame = " + gameID + " AND playstatus = 'CHALLENGER';";
+		try {
+				Statement stmt = conn.getConn().createStatement();
+				ResultSet rs = stmt.executeQuery(query);
+				if (rs.next()) {
+	                name = rs.getString("username");
+	            }
+				stmt.close();
+			
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return name;
+	}
 }
