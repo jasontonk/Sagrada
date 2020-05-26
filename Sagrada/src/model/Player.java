@@ -34,6 +34,7 @@ public class Player {
 	
 	public Player(DataBaseConnection c, Account account, Game game, PlayerStatus playerStatus) {
 		connection = c;
+		playerDBA = new PlayerDBA(c);
 		this.account = account;
 		this.setName(account.getUsername());
 		this.setGame(game);
@@ -43,7 +44,7 @@ public class Player {
 		this.setColor(modelColor);
 
 		
-		playerDBA = new PlayerDBA(c);
+		
 		
 		playerDBA.addPlayer(this);
 		System.out.println("test2");

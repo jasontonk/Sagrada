@@ -6,7 +6,7 @@ import javafx.concurrent.Task;
 import model.GameDie;
 import model.ModelColor;
 
-public class GameViewUpdater<V> extends Task<V> {
+public class GameViewUpdater extends Task<Void> {
 	private GameController gameCtrl;
 	private GameUpdater gameUpdates;
 	
@@ -16,12 +16,14 @@ public class GameViewUpdater<V> extends Task<V> {
 	}
 	
 	@Override
-	protected V call() throws Exception {
+	public Void call() throws Exception {
 		while(true){
+			System.out.println("threadtester");
 			updateAll();
+			System.out.println("threadtester2");
 			System.out.println("updated Views");
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -29,24 +31,35 @@ public class GameViewUpdater<V> extends Task<V> {
 	}
 	private void updateAll() {
 		updateDicePoolView();
+		System.out.println("threadtester2");
 		updatePatterncardsView();
+		System.out.println("threadtester3");
 		updateRountrackView();
+		System.out.println("threadtester4");
 	}
 	
 	private void updateRountrackView() {
-		ArrayList<GameDie> diceOnRoundTrack = gameUpdates.getDiceOnRoundTrack();
+		ArrayList<GameDie> diceOnRoundTrack = new ArrayList<GameDie>();
+		diceOnRoundTrack = gameUpdates.getDiceOnRoundTrack();
+		System.out.println("threadtester4");
 		ArrayList<ModelColor> colors = new ArrayList<>();
 		ArrayList<Integer> values = new ArrayList<>();
 		for (int i = 1; i <= 10; i++) {
+			System.out.println("threadtester5");
+			System.out.println("dobbelsten: "+ diceOnRoundTrack.size());
 			for (int j = 0; j < diceOnRoundTrack.size(); j++) {
+				System.out.println("System.out.println(\"threadtester2\");");
 				if(diceOnRoundTrack.get(j).isOnRoundTrack() == i) {
+					System.out.println("Hier zou hij niet moeten komen");
 					colors.add(diceOnRoundTrack.get(j).getColor());
 					values.add(diceOnRoundTrack.get(j).getEyes());
 				}
 			}
-			gameCtrl.getGameView().getRoundtrackView().addDice(i, colors, values);
-			colors.clear();
-			values.clear();
+			if(colors.size() != 0) {
+				gameCtrl.getGameView().getRoundtrackView().addDice(i, colors, values);
+				colors.clear();
+				values.clear();
+			}
 		}
 		
 	}

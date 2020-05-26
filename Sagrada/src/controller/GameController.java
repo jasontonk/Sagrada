@@ -59,10 +59,11 @@ public class GameController {
 		gameRoundPlayer =  new GameRoundPlayer(this, 3);
 		gameUpdater = new GameUpdater(this);
 		gameViewUpdater = new GameViewUpdater(this, gameUpdater);
-		Task task  = new Task(gameViewUpdater);
 		Thread updateGame = new Thread(gameUpdater);
+		updateGame.setDaemon(true);
 		updateGame.start();
 		Thread updateViews = new Thread(gameViewUpdater);
+		updateViews.setDaemon(true);
 		updateViews.start();
 //		myScene.setContentPane(patterncardSelectionView);
 //		myScene.setContentPane(gameView.getPatterncardSelectionView());

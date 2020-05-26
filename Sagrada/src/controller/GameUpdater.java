@@ -20,7 +20,7 @@ public class GameUpdater implements Runnable {
 			updateAll();
 			System.out.println("updated games");
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -35,9 +35,7 @@ public class GameUpdater implements Runnable {
 	}
 
 	private void updateRountrack() {
-
 		diceOnRoundTrack = gameCtrl.getGame().getDiceOnRoundtrack();
-		
 	}
 
 	private void updatePatterncards() {
