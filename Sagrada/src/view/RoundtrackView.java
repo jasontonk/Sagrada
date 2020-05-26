@@ -3,6 +3,7 @@ package view;
 import java.util.ArrayList;
 
 import controller.RoundtrackController;
+import javafx.application.Platform;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -29,14 +30,21 @@ public class RoundtrackView extends VBox {
 
 	private RoundtrackController roundtrackController;
 	private JavafxColor javafxColor;
-	private final int ROUNDTRACKFIELD_SIZE = 60;
-	private final double SPACING = 5.0;
-	private Insets padding = new Insets(5);  
-	private GridPane roundtrack = new GridPane();
+	private final int ROUNDTRACKFIELD_SIZE;
+	private final double SPACING;
+	private Insets padding;
+	private GridPane roundtrack;
+	private ArrayList<StackPane> stackpanes;
+ 	
 	
 	public RoundtrackView(RoundtrackController roundtrackController) {
 		this.roundtrackController = roundtrackController;
 		javafxColor = new JavafxColor();
+		roundtrack = new GridPane();
+		padding = new Insets(5);
+		SPACING = 5.0;
+		ROUNDTRACKFIELD_SIZE = 60;
+		stackpanes = new ArrayList<StackPane>();
 		this.setPadding(new Insets(0, 30, 0, 30));
 		this.setMaxWidth((10 * (ROUNDTRACKFIELD_SIZE + SPACING) + SPACING));
 		this.getChildren().addAll(drawTitle(), drawRoundtrack(), drawRound());
@@ -54,11 +62,14 @@ public class RoundtrackView extends VBox {
 			text.setFill(Color.WHITE);
 			text.setStyle("-fx-font-size: 20px;");
 			Button button = new Button();
+			StackPane stackpane = new StackPane();
 			button.setPrefSize(ROUNDTRACKFIELD_SIZE, ROUNDTRACKFIELD_SIZE);
 			button.setBackground(new Background(new BackgroundFill(Color.WHITE,null,null)));
 			roundtrack.add(text, i, 1);
 			roundtrack.setHalignment(text, HPos.CENTER);
-			roundtrack.add(button, i, 2);
+			stackpane.getChildren().add(button);
+			stackpanes.add(stackpane);
+			roundtrack.add(stackpanes.get(i), i, 2);
 		}
 		
 		return roundtrack;
@@ -80,9 +91,14 @@ public class RoundtrackView extends VBox {
 		return roundPane;
 	}
 	public void addDice(int round, ArrayList<ModelColor> colors, ArrayList<Integer> values) {
-		if(colors.size() != 0) {
-//			roundtrack.getChildren().remove(round,2);
-		}
+//		if(colors.size() != 0) {
+//			Platform.runLater(new Runnable() {
+//				@Override
+//				public void run() {
+//					roundtrack.getChildren().remove(round,2);
+//				}
+//			});
+//		}
 		
 		for(int i = 0; i < colors.size(); i++) {
 			String imgURL;
@@ -93,8 +109,33 @@ public class RoundtrackView extends VBox {
 			System.out.println(imgURL);
 			Image image = new Image(getClass().getResource(imgURL).toString());
 			button.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
-			
-			roundtrack.add(button, round, i+3);
+			if(i == 0) {
+				final int spot = i;
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						stackpanes.get(round-1).getChildren().add(button);
+					}
+				});
+			}
+			else {
+				final int spot = i;
+				
+				Button button2 = new Button();
+				StackPane stackpane = new StackPane();
+				button2.setPrefSize(ROUNDTRACKFIELD_SIZE, ROUNDTRACKFIELD_SIZE);
+				button2.setBackground(new Background(new BackgroundFill(Color.WHITE,null,null)));
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						stackpane.getChildren().add(button2);
+						stackpanes.add(stackpane);
+						roundtrack.add(stackpanes.get(round-1+spot+9), round-1, 2+spot);
+						
+						stackpanes.get(round-1+spot+9).getChildren().add(button);
+					}
+				});
+			}
 		}
 	}
 }

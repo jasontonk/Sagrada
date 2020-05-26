@@ -203,7 +203,7 @@ public class GameDieDBA {
 	
 	public ArrayList<GameDie> getDiceOnRoundTrack(Game game) {
         ArrayList<GameDie> list = new ArrayList<GameDie>();
-        String query = "SELECT * FROM gamedie WHERE idgame = "+game.getGameID()+" AND roundtrack IS NOT NULL;";
+        String query = "SELECT * FROM gamedie WHERE idgame = "+game.getGameID()+" AND roundtrack IS NOT NULL ORDER BY roundtrack, diecolor, eyes ASC;";
         try {
         	Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
