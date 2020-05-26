@@ -7,6 +7,9 @@ import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Game;
 
@@ -31,8 +34,7 @@ public class Main extends Application  {
 		primaryStage.setResizable(true);
 		primaryStage.setMinHeight(600);
 		primaryStage.setMinWidth(800);
-		
-		
+	
 //		Scene scene = new Scene(patterncardSelectionView);
 //		primaryStage.setScene(scene);
 //		primaryStage.setTitle("Sagrada - Projectgroep B");

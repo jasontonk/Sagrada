@@ -7,7 +7,8 @@ import model.ModelColor;
 
 public class GameUpdater implements Runnable {
 
-	GameController gameCtrl;
+	private GameController gameCtrl;
+	private ArrayList<GameDie> diceOnRoundTrack;
 	
 	public GameUpdater(GameController gamecontroller) {
 		gameCtrl = gamecontroller;
@@ -34,21 +35,8 @@ public class GameUpdater implements Runnable {
 	}
 
 	private void updateRountrack() {
-		ArrayList<ModelColor> colors = new ArrayList<>();
-		ArrayList<Integer> values = new ArrayList<>();
-		ArrayList<GameDie> diceOnRoundTrack;
+
 		diceOnRoundTrack = gameCtrl.getGame().getDiceOnRoundtrack();
-		for (int i = 1; i <= 10; i++) {
-			for (int j = 0; j < diceOnRoundTrack.size(); j++) {
-				if(diceOnRoundTrack.get(j).isOnRoundTrack() == i) {
-					colors.add(diceOnRoundTrack.get(j).getColor());
-					values.add(diceOnRoundTrack.get(j).getEyes());
-				}
-			}
-			gameCtrl.getGameView().getRoundtrackView().addDice(i, colors, values);
-			colors.clear();
-			values.clear();
-		}
 		
 	}
 
@@ -60,5 +48,9 @@ public class GameUpdater implements Runnable {
 	private void updateDicePool() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public ArrayList<GameDie> getDiceOnRoundTrack() {
+		return diceOnRoundTrack;
 	}
 }

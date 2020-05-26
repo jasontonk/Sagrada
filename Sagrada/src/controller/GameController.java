@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 
 import database.DataBaseConnection;
+import javafx.concurrent.Task;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -22,6 +23,7 @@ public class GameController {
 	private Game game;
 	private GameRoundPlayer gameRoundPlayer;
 	private GameUpdater gameUpdater;
+	private GameViewUpdater gameViewUpdater;
 	private GameView gameView;
 	private DieController dieController;
 	private PatterncardController patterncardController;
@@ -56,8 +58,12 @@ public class GameController {
 //		patterncardSelectionView = new PatterncardSelectionView(this);
 		gameRoundPlayer =  new GameRoundPlayer(this, 3);
 		gameUpdater = new GameUpdater(this);
+		gameViewUpdater = new GameViewUpdater(this, gameUpdater);
+		Task task  = new Task(gameViewUpdater);
 		Thread updateGame = new Thread(gameUpdater);
 		updateGame.start();
+		Thread updateViews = new Thread(gameViewUpdater);
+		updateViews.start();
 //		myScene.setContentPane(patterncardSelectionView);
 //		myScene.setContentPane(gameView.getPatterncardSelectionView());
 
