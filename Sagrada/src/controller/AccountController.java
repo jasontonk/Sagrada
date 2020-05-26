@@ -100,12 +100,12 @@ public class AccountController {
 		}
 		
 		Pattern pt = Pattern.compile("[^a-zA-Z0-9]");
-        Matcher usernameMatch = pt.matcher(username);
-        Matcher passwordMatch = pt.matcher(password);
+        Matcher usernameMatcher = pt.matcher(username);
+        Matcher passwordMatcher = pt.matcher(password);
 		
-        if (usernameMatch.find()) {
+        if (usernameMatcher.find()) {
         	showWarning("gebruikersnaam", "Gebruikersnaam moet alleen letters en/of cijfers bevatten.");
-        } else if (passwordMatch.find()) {
+        } else if (passwordMatcher.find()) {
         	showWarning("wachtwoord", "Wachtwoord moet alleen letters en/of cijfers bevatten.");
         }
         
@@ -182,10 +182,14 @@ public class AccountController {
 			 	showWarning("invites niet verstuurd", "Te weinig accounts geselecteerd");
 	            return;
 	        }
-	        if (inviteList.size() > 3) {
-	        	showWarning("invites niet verstuurd", "Te veel accounts geselecteerd");
-	            return;
-	        }
+	     if (inviteList.size() > 3) {
+	       	showWarning("invites niet verstuurd", "Te veel accounts geselecteerd");
+	        return;
+	     	}
+	     if(inviteList.contains(this.getAccount())) {
+	    	 showWarning("invites niet verstuurd", "Je kan niet jezelf uitnodigen");
+		     return; 
+	     }
 			Game game = new Game(connection, false);
 			Player player = new Player(connection);
 			player.setAccount(account);

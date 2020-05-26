@@ -36,18 +36,18 @@ public class LobbyView extends BorderPane {
 	
 	public LobbyView(AccountController accountController) {
 		this.accountController = accountController;
-        accounts = new ArrayList<Account>();
-        inviteList = new ArrayList<Account>();
-        players = accountController.getAllPlayersOfThisAccount();
         this.setPrefSize(800, 600);
-        gameLobby = new ArrayList<Player>();
 	}
 
 	public Pane makeAccountPane() {
+		accounts = accountController.getAllAccounts();
+        inviteList = new ArrayList<Account>();
+        players = accountController.getAllPlayersOfThisAccount();  
+        
+        
 		this.getChildren().clear();
 		HBox accountView = new HBox();  
 		
-		accounts = accountController.getAllAccounts();
 		
 		ScrollPane overviewscroll = new ScrollPane();
 		overviewscroll.setMinSize(300, 400);
@@ -93,7 +93,7 @@ public class LobbyView extends BorderPane {
 		refresh.setOnAction(e -> accountController.render());
 		top.getChildren().add(refresh);
 		
-		
+		gameLobby = new ArrayList<Player>();
 		for (Player player : accountController.getInvitePlayerList()) {
 			if((player.getPlayerStatus().equals(PlayerStatus.CHALLENGEE)  || player.getPlayerStatus().equals(PlayerStatus.CHALLENGER)) && !gameLobby.contains(player)) {
 				gameLobby.add(player);
@@ -131,38 +131,38 @@ public class LobbyView extends BorderPane {
             invite.setText("Invite");
          
             invite.setOnAction(e -> addPlayerToInviteList(invite, a));
-            
-            
+
             playerlist.getChildren().addAll(username,viewStatsButton, invite);
             right.getChildren().add(playerlist);
 		}
 		
 		Button inviteButton = buildButton("Invite");
-		inviteButton.setOnAction(e -> invite());//TODO invite
+		inviteButton.setOnAction(e -> accountController.inviteAccounts(inviteList));
 		right.getChildren().add(inviteButton);
 		
 		accountView.getChildren().addAll(left, center, right);
 		return accountView;
 	}
 
-	private ArrayList<Account> addPlayerToInviteList(CheckBox invite, Account a) {
-		if(invite.isSelected()) {
+	private void addPlayerToInviteList(CheckBox invite, Account a) {
+		
+		if(a.getUsername().equals(accountController.getAccount().getUsername())) {
+			accountController.showWarning("invite", "Je kunt niet jezelf uitnodingen");
+			return;
+		}
+		else if(invite.isSelected()) {
 			inviteList.add(a);
 		}
 		else {
 			inviteList.remove(a);
 		}
-		return inviteList;
 	}
 	
 	private void makeGame() {
 //		accountController.makeGame();
 	}
 
-
-	private void invite() {
-		accountController.inviteAccounts(inviteList);
-	}
+	
 
 	private void showStats(Account account) {
 		TextArea stats = new TextArea();

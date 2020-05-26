@@ -99,11 +99,11 @@ public class Player {
 	}
 
 	public PlayerStatus getPlayerStatus() {
-		System.out.println("rest");
+		System.out.println("Getting playerstatus of: " + this.getName());
 		if(playerStatus == null) {
 			playerStatus = playerDBA.getPlayerStatusFromDB(playerDBA.getPlayerUsingID(this.getId())); 
 		}
-		System.out.println(playerStatus);
+		System.out.println("Playerstatus is: " + playerStatus);
 		return playerStatus;
 	}
 
