@@ -17,6 +17,7 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -79,17 +80,21 @@ public class RoundtrackView extends VBox {
 		return roundPane;
 	}
 	public void addDice(int round, ArrayList<ModelColor> colors, ArrayList<Integer> values) {
-		roundtrack.getChildren().remove(round,2);
-		String imgURL;
+		if(colors.size() != 0) {
+//			roundtrack.getChildren().remove(round,2);
+		}
+		
 		for(int i = 0; i < colors.size(); i++) {
+			String imgURL;
 			Button button = new Button();
-			Color color = javafxColor.getJavafxColor(colors.get(i));
+			String color = javafxColor.getStringColorFromModelColor(colors.get(i));
 			
 			imgURL = "/images/" + color + values.get(i) + "_Die.png";
+			System.out.println(imgURL);
 			Image image = new Image(getClass().getResource(imgURL).toString());
 			button.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
 			
-			roundtrack.add(button, round, i+2);
+			roundtrack.add(button, round, i+3);
 		}
 	}
 }

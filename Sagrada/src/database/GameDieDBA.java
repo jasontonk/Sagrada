@@ -203,12 +203,12 @@ public class GameDieDBA {
 	
 	public ArrayList<GameDie> getDiceOnRoundTrack(Game game) {
         ArrayList<GameDie> list = new ArrayList<GameDie>();
-        String query = "SELECT * FROM gamedie WHERE idgame="+game.getGameID()+"AND roundtrack IS NOT NULL;";
+        String query = "SELECT * FROM gamedie WHERE idgame = "+game.getGameID()+" AND roundtrack IS NOT NULL;";
         try {
         	Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                GameDie gameDie = new GameDie(getColorFromString(rs.getString("color")),rs.getInt("dienumber"),rs.getInt("eyes"), game, conn); 
+                GameDie gameDie = new GameDie(getColorFromString(rs.getString("diecolor")),rs.getInt("dienumber"),rs.getInt("eyes"), game, conn); 
                 gameDie.setAvailable(false);
                 gameDie.setOnRoundTrack(rs.getInt("roundtrack"));
                 list.add(gameDie);

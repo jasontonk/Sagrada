@@ -265,20 +265,29 @@ public class Game {
 		Random r = new Random();
 		for (int i = 0; i < 18; i++) {
 			diceInBag[i] = new GameDie(ModelColor.GREEN, i+1, r.nextInt(6)+1, this, conn);
+			diceInBag[i].addDieToDB(this);
+			diceInBag[i].setEyes(this);
 		}
 		for (int i = 0; i < 18; i++) {
 			diceInBag[i+17] = new GameDie(ModelColor.BLUE, i+1, r.nextInt(6)+1, this, conn);
+			diceInBag[i+17].addDieToDB(this);
+			diceInBag[i+17].setEyes(this);
 		}
 		for (int i = 0; i < 18; i++) {
 			diceInBag[i+35] = new GameDie(ModelColor.YELLOW, i+1, r.nextInt(6)+1, this, conn);
+			diceInBag[i+35].addDieToDB(this);
+			diceInBag[i+35].setEyes(this);
 		}
 		for (int i = 0; i < 18; i++) {
 			diceInBag[i+53] = new GameDie(ModelColor.PURPLE, i+1, r.nextInt(6)+1, this, conn);
+			diceInBag[i+53].addDieToDB(this);
+			diceInBag[i+53].setEyes(this);
 		}
 		for (int i = 0; i < 18; i++) {
 			diceInBag[i+71] = new GameDie(ModelColor.RED, i+1, r.nextInt(6)+1, this, conn);
+			diceInBag[i+71].addDieToDB(this);
+			diceInBag[i+71].setEyes(this);
 		}
-		
 	}
 	
 	public ArrayList<PatternCard> generategamePatterncards(boolean randomgenerated){

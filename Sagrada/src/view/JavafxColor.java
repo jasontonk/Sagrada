@@ -7,6 +7,7 @@ public class JavafxColor {
 
 	Color color;
 	ModelColor modelColor;
+	String colorString;
 	public Color getJavafxColor(ModelColor modelcolor) {
 		if(modelcolor == null) {
 			color = Color.WHITE;
@@ -59,5 +60,32 @@ public class JavafxColor {
 			}
 		}
 		return modelColor;
+	}
+	public String getStringColorFromModelColor(ModelColor modelcolor) {
+		if(modelcolor == null) {
+			colorString = null;
+		}
+		else {
+			switch(modelcolor) {
+				case RED:
+					colorString = "red";
+					break;
+				case GREEN:
+					colorString = "green";
+					break;
+				case YELLOW:
+					colorString = "yellow";
+					break;
+				case PURPLE:
+					colorString = "purple";
+					break;
+				case BLUE:
+					colorString = "blue";
+					break;
+				default:
+					colorString = null;
+			}
+		}
+		return colorString;
 	}
 }

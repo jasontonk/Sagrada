@@ -40,9 +40,9 @@ public class GameUpdater implements Runnable {
 		diceOnRoundTrack = gameCtrl.getGame().getDiceOnRoundtrack();
 		for (int i = 1; i <= 10; i++) {
 			for (int j = 0; j < diceOnRoundTrack.size(); j++) {
-				if(diceOnRoundTrack.get(i).isOnRoundTrack() == i) {
-					colors.add(diceOnRoundTrack.get(i).getColor());
-					values.add(diceOnRoundTrack.get(i).getEyes());
+				if(diceOnRoundTrack.get(j).isOnRoundTrack() == i) {
+					colors.add(diceOnRoundTrack.get(j).getColor());
+					values.add(diceOnRoundTrack.get(j).getEyes());
 				}
 			}
 			gameCtrl.getGameView().getRoundtrackView().addDice(i, colors, values);

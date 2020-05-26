@@ -17,8 +17,8 @@ public class GameDie extends Die {
 	public GameDie(ModelColor modelColor, int number, int eyes, Game game, DataBaseConnection conn) {
 		super(modelColor, number);
 		gameDieDBA = new GameDieDBA(conn);
-		addDieToDB(game);
-		this.setEyes(game, eyes);
+//		addDieToDB(game);
+		this.eyes = eyes;
 		isAvailable = false;
 		isFirstTurn = false;
 		isOnRoundtrackfield = 0;
@@ -63,9 +63,8 @@ public class GameDie extends Die {
 		return eyes;
 	}
 
-	public void setEyes(Game game, int eyes) {
+	public void setEyes(Game game) {
 		gameDieDBA.addEyes(this, game, eyes);
-		this.eyes = eyes;
 	}
 	public void addDieToDB(Game game) {
 		gameDieDBA.addGameDie(this, game);
