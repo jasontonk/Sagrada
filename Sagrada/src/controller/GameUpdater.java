@@ -11,6 +11,7 @@ public class GameUpdater implements Runnable {
 	private ArrayList<GameDie> diceOnRoundTrack;
 	
 	public GameUpdater(GameController gamecontroller) {
+		diceOnRoundTrack = new ArrayList<GameDie>();
 		gameCtrl = gamecontroller;
 	}
 	

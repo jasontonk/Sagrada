@@ -22,11 +22,7 @@ public class GameViewUpdater extends Task<Void> {
 			updateAll();
 			System.out.println("threadtester2");
 			System.out.println("updated Views");
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			Thread.sleep(2000);
 		}
 	}
 	private void updateAll() {
@@ -46,7 +42,6 @@ public class GameViewUpdater extends Task<Void> {
 		ArrayList<Integer> values = new ArrayList<>();
 		for (int i = 1; i <= 10; i++) {
 			System.out.println("threadtester5");
-			System.out.println("dobbelsten: "+ diceOnRoundTrack.size());
 			for (int j = 0; j < diceOnRoundTrack.size(); j++) {
 				System.out.println("System.out.println(\"threadtester2\");");
 				if(diceOnRoundTrack.get(j).isOnRoundTrack() == i) {
