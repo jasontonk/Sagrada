@@ -18,28 +18,20 @@ public class InvitationController implements Runnable {
 	public void run() {
 		
 		while(true) {
-			
-			System.out.println("Running...");
-//			System.out.println(accountController.getAccount().getPlayers());
+			System.out.println("Invitation Controller Running...");
+
 			for(Player player : accountController.getAccount().getChallengeePlayers()) {
-//				System.out.println("=====================================================");
-//				System.out.println("Player name: " + player.getName());
-//				System.out.println( "Player: "+ player );
-//				System.out.println( "Playerstatus: "+  player.getPlayerStatus());
-//				System.out.println("=====================================================");
 				if (player.getPlayerStatus() == PlayerStatus.CHALLENGEE){
 					Platform.runLater(new Runnable() {
-
 						@Override
 						public void run() {
 							accountController.showInvite(player);
-						}
-						
+						}				
 					});
 				}
 			}
-			System.out.println("Stop...");
 			
+			System.out.println("Invitation Controller Stop...");
 			try {
 				Thread.sleep(seconds * 1000);
 			} catch (Exception e) {

@@ -2,6 +2,8 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import database.AccountDBA;
 import database.DataBaseConnection;
@@ -65,18 +67,21 @@ public class AccountController {
 	public void actionLogin(String username, String password) {
 		Account account = accountDBA.GetAccountDB(username);
 		
-		if(account.accountExists(username)) {
-			if(password.equals(account.getPassword(username))) {
-				this.account = account;
-				viewLobby();
-			}
-			else {
-				showWarning("wachtwoord", "Dit is niet het juiste wachtwoord");
+		if (account != null) {
+			if(account.accountExists(username)) {
+				if(password.equals(account.getPassword(username))) {
+					this.account = account;
+					viewLobby();
+				}
+				else {
+					showWarning("wachtwoord", "Dit is niet het juiste wachtwoord");
+				}
 			}
 		}
 		else {
 			showWarning("gebruikersnaam", "Dit is niet de juiste gebruikersnaam");
 		}
+		
 	}  
  
 	public void actionRegister(String username, String password) {
@@ -88,7 +93,23 @@ public class AccountController {
 			showWarning("gebruikersnaam", "Gebruikersnaam moet minimaal 3 tekens zijn");
 		} else if(password.length() < 3) {
 			showWarning("wachtwoord", "Wachtwoord moet minimaal 3 tekens zijn");
-		}else {
+		} else if(password.length() > 25) {
+			showWarning("wachtwoord", "Wachtwoord moet maximaal 25 tekens zijn");
+		} else if(username.length() > 25) {
+			showWarning("gebruikersnaam", "Gebruikersnaam moet maximaal 25 tekens zijn");
+		}
+		
+		Pattern pt = Pattern.compile("[^a-zA-Z0-9]");
+        Matcher usernameMatch = pt.matcher(username);
+        Matcher passwordMatch = pt.matcher(password);
+		
+        if (usernameMatch.find()) {
+        	showWarning("gebruikersnaam", "Gebruikersnaam moet alleen letters en/of cijfers bevatten.");
+        } else if (passwordMatch.find()) {
+        	showWarning("wachtwoord", "Wachtwoord moet alleen letters en/of cijfers bevatten.");
+        }
+        
+		else {
 			account.setAccount(username, password);
 			viewLogin();
 		}
@@ -120,8 +141,6 @@ public class AccountController {
 		}
 		myScene.setContentPane(lobbyView.makeAccountPane());
 	}
-	
-	
 	
 	public void showWarning(String header, String text) {
 		Alert alert = new Alert(AlertType.WARNING);
@@ -158,27 +177,35 @@ public class AccountController {
 
 	public void inviteAccounts(ArrayList<Account> inviteList) {
 		System.out.println(inviteList);
-		Invitation invite = new Invitation();
-		Game game = new Game(connection, false);
-		Player player = new Player(connection);
-		player.setAccount(account);
-		player.setName(account.getUsername());
-		player.setGame(game);
-		player.setPlayerStatus(PlayerStatus.CHALLENGER);
-		player.setColor(ModelColor.BLUE);
-		player.addPlayer(player);
-		invitePlayerList.add(player);
 		
-		for (Account account : inviteList) {
-			Player p = new Player(connection);
-			p.setAccount(account);
-			p.setName(account.getUsername());
-			p.setGame(game);
-			p.setPlayerStatus(PlayerStatus.CHALLENGEE);
-			p.setColor(ModelColor.BLUE);
-			p.addPlayer(p);
-			invitePlayerList.add(p);
-		}
+		 if (inviteList.size() == 0) {
+			 	showWarning("invites niet verstuurd", "Te weinig accounts geselecteerd");
+	            return;
+	        }
+	        if (inviteList.size() > 3) {
+	        	showWarning("invites niet verstuurd", "Te veel accounts geselecteerd");
+	            return;
+	        }
+			Game game = new Game(connection, false);
+			Player player = new Player(connection);
+			player.setAccount(account);
+			player.setName(account.getUsername());
+			player.setGame(game);
+			player.setPlayerStatus(PlayerStatus.CHALLENGER);
+			player.setColor(ModelColor.BLUE);
+			player.addPlayer(player);
+			invitePlayerList.add(player);
+			
+			for (Account account : inviteList) {
+				Player p = new Player(connection);
+				p.setAccount(account);
+				p.setName(account.getUsername());
+				p.setGame(game);
+				p.setPlayerStatus(PlayerStatus.CHALLENGEE);
+				p.setColor(ModelColor.BLUE);
+				p.addPlayer(p);
+				invitePlayerList.add(p);
+			}
 		
 	}
 

@@ -17,12 +17,7 @@ public class Account {
 	private DataBaseConnection connection;
 	private AccountDBA accountDBA;
 	private PlayerDBA playerDBA;
-	
-	private int mostUsedValue;
-	private Color mostUsedColor;
-	private int[] winsAndLoses;
-	private int highestScore;
-	private int differentOpponents;
+
 	
 	/**
      * 
@@ -89,7 +84,6 @@ public class Account {
      * 
      */
 	public String getPassword(String username) {
-		//TODO
 		return accountDBA.GetPassword(username);
 	}
 

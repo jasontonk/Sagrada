@@ -109,6 +109,7 @@ public class Player {
 
 	public void setPlayerStatus(PlayerStatus playerStatus) {
 		this.playerStatus = playerStatus;
+		playerDBA.setPlayerStatus(this);
 	}
 
 	public boolean isCurrentPlayer() {
