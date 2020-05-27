@@ -103,7 +103,7 @@ public class LobbyView extends BorderPane {
 		
 		for (Player player : gameLobby) {
 			HBox playerlist = new HBox();
-			Label username = new Label("Speler: " + player.getName() + " = " + player.getPlayerStatus());
+			Label username = new Label("Speler: " + player.getName() + " | Playerstatus: " + player.getPlayerStatus());
             username.setMinWidth(100);
             
             System.out.println("Speler:" + player.getName());

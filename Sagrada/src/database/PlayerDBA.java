@@ -24,13 +24,13 @@ public class PlayerDBA {
 
 
 
-	public void addPlayer(Player player) {
+	public void addPlayer(Player player, PlayerStatus playerStatus) {
 		int playerid = autoIdPlayer();
 		player.setId(playerid);
 	
 		String query = "INSERT INTO player (idplayer,username,idgame,playstatus,private_objectivecard_color) VALUES("
 				+ playerid + ",'" + player.getName() + "'," + player.getGame().getGameID() + ",'"
-				+ player.getPlayerStatus() + "','" + getStringFromColor(player) + "');";
+				+ playerStatus + "','" + getStringFromColor(player) + "');";
 
 
 		try {
@@ -123,6 +123,7 @@ public class PlayerDBA {
 	}
 
 	private PlayerStatus getPlayerStatusFromString(String status) {
+		
 		PlayerStatus playerStatus = null;
 		if (status != null) {
 			switch (status.toLowerCase()) {
@@ -175,9 +176,11 @@ public class PlayerDBA {
 		return playerid;
 	}
 
-	public void setPlayerStatus(Player player) {
+	public void setPlayerStatus(Player player, PlayerStatus status) {
 
-		String query = "UPDATE player SET playstatus = '" + player.getPlayerStatus() + "' WHERE idplayer = "
+//		String query = "UPDATE player SET playstatus = '" + player.getPlayerStatus() + "' WHERE idplayer = "
+//				+ player.getId() + ";";
+		String query = "UPDATE player SET playstatus = '" + status + "' WHERE idplayer = "
 				+ player.getId() + ";";
 		try {
 			Statement stmt = conn.getConn().createStatement();
@@ -202,7 +205,7 @@ public class PlayerDBA {
 	}
 
 	public Player getPlayerUsingID(int idplayer) {
-
+		
 
 		Player player = new Player(conn);
 		String query = "SELECT * FROM player WHERE idplayer = " + idplayer + ";";
@@ -211,19 +214,22 @@ public class PlayerDBA {
 			ResultSet rs = stmt.executeQuery(query);
 			if (rs.next()) {
 				PatternCardDBA patternCard = new PatternCardDBA(conn);
-
+				
 				GameDBA game = new GameDBA(conn);
 				AccountDBA account = new AccountDBA(conn);
 				player.setAccount(account.GetAccountDB(rs.getString("username")));
 				player.setName(rs.getString("username"));
 				player.setId(idplayer);
+				
 				player.setPlayerStatus(getPlayerStatusFromString(rs.getString("playstatus")));
+				
 				player.setSequenceNumber(rs.getInt("seqnr"));
 				player.setScore(rs.getInt("score"));
 				player.setColor(getColorFromString(rs.getString("private_objectivecard_color")));
 				player.setPatternCard(patternCard.getPatterncardByID(rs.getInt("idpatterncard")));
 				player.setGame(game.getGameByID(rs.getInt("idgame")));
 			}
+			
 			stmt.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -341,6 +347,7 @@ public class PlayerDBA {
 
 
 	public PlayerStatus getPlayerStatusFromDB(Player playerUsingID) {
+		System.out.println("jaaaaaa");
 		String playerstatusString = null;
 		String query = "SELECT playstatus FROM player WHERE idplayer= " + playerUsingID.getId() + ";";
 		try {

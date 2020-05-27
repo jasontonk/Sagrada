@@ -21,7 +21,7 @@ public class InvitationController implements Runnable {
 			System.out.println("Invitation Controller Running...");
 
 			for(Player player : accountController.getAccount().getChallengeePlayers()) {
-				if (player.getPlayerStatus() == PlayerStatus.CHALLENGEE){
+				if (player.getPlayerStatus().equals(PlayerStatus.CHALLENGEE)){
 					Platform.runLater(new Runnable() {
 						@Override
 						public void run() {

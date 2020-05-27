@@ -44,7 +44,7 @@ public class Game {
 		roundTrack = new RoundTrack(this);
 		gameDBA = new GameDBA(conn);
 		gamedieDBA = new GameDieDBA(conn);
-		gameDBA.addNewGameDB(LocalDateTime.now(), this);
+//		gameDBA.addNewGameDB(LocalDateTime.now(), this);
 		offer = new GameDie[9];
 		players = new ArrayList<Player>();
 		currentPlayer = new Player(conn, new Account("ditis2", "eentest", conn), this, PlayerStatus.CHALLENGER);
@@ -62,6 +62,20 @@ public class Game {
 		makedie();
 		finishedGame = false;
 		placedDie = true;
+	}
+	
+	public Game(DataBaseConnection conn) {
+		this.conn = conn;
+		gameDBA = new GameDBA(conn);
+		gamedieDBA = new GameDieDBA(conn);
+		
+		gameDBA.addNewGameDB(LocalDateTime.now(), this);
+		
+		round = 1;
+		roundTrack = new RoundTrack(this);
+		
+		offer = new GameDie[9];
+		players = new ArrayList<Player>();
 	}
 
 //	public void checkInvites() {

@@ -190,7 +190,7 @@ public class AccountController {
 	    	 showWarning("invites niet verstuurd", "Je kan niet jezelf uitnodigen");
 		     return; 
 	     }
-			Game game = new Game(connection, false);
+			Game game = new Game(connection);
 			Player player = new Player(connection);
 			player.setAccount(account);
 			player.setName(account.getUsername());

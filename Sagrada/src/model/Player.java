@@ -15,6 +15,7 @@ public class Player {
 	private String name;
 	private PlayerStatus playerStatus;
 	
+	
 	private boolean isCurrentPlayer;
 	private boolean placedDie;
 	
@@ -46,7 +47,7 @@ public class Player {
 		
 		
 		
-		playerDBA.addPlayer(this);
+		playerDBA.addPlayer(this, playerStatus);
 		System.out.println("test2");
 		patternCard = new PatternCard(c);
 		board = new Board(1, this, c);		
@@ -63,7 +64,7 @@ public class Player {
 
 
 	public void addPlayer(Player player) {
-		playerDBA.addPlayer(player);
+		playerDBA.addPlayer(player, playerStatus);
 	}
 
 	public int getId() {
@@ -101,16 +102,16 @@ public class Player {
 
 	public PlayerStatus getPlayerStatus() {
 		System.out.println("Getting playerstatus of: " + this.getName());
-		if(playerStatus == null) {
-			playerStatus = playerDBA.getPlayerStatusFromDB(playerDBA.getPlayerUsingID(this.getId())); 
-		}
+		System.out.println("getplayerusingid" + (playerDBA.getPlayerUsingID(this.getId())).getAccount());
+		playerStatus = playerDBA.getPlayerStatusFromDB(playerDBA.getPlayerUsingID(this.getId())); 
 		System.out.println("Playerstatus is: " + playerStatus);
 		return playerStatus;
 	}
 
 	public void setPlayerStatus(PlayerStatus playerStatus) {
+		System.out.println("SET PLAYERSTATUS:   " + playerStatus);
 		this.playerStatus = playerStatus;
-		playerDBA.setPlayerStatus(this);
+		playerDBA.setPlayerStatus(this, playerStatus);
 	}
 
 	public boolean isCurrentPlayer() {

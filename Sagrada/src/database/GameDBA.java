@@ -28,7 +28,8 @@ public class GameDBA {
 			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			if(rs.next()) {
-				game = new Game(conn, false);
+//				game = new Game(conn, false);
+				game = new Game(conn);
 				game.setGameID(rs.getInt("idgame"));
 				game.setRound(getCurrentRound(id));
 			}
