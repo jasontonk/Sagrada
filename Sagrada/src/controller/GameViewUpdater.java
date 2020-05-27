@@ -21,7 +21,7 @@ public class GameViewUpdater extends Task<Void> {
 			updateAll();
 			System.out.println("updated Views");
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(3000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -51,13 +51,9 @@ public class GameViewUpdater extends Task<Void> {
 			colors.clear();
 			values.clear();
 		}
-		System.out.println("forloopclosedown");
 		colors.clear();
 		values.clear();
-		System.out.println("afterclearing");
 		gameCtrl.clearChangedDiceOnRoundTrack(); 
-		System.out.println("finalstep");
-		
 	}
 	private void updatePatterncardsView() {
 		// TODO Auto-generated method stub
@@ -65,7 +61,8 @@ public class GameViewUpdater extends Task<Void> {
 	}
 
 	private void updateDicePoolView() {
-		// TODO Auto-generated method stub
+		GameDie[] offer = gameCtrl.getGame().getOffer();
+		gameCtrl.getDieController().updateDicePool(offer);
 		
 	}
 

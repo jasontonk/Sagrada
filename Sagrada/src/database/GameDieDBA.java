@@ -185,12 +185,12 @@ public class GameDieDBA {
         String query = "SELECT gamedie.* FROM gamedie LEFT JOIN playerframefield ON gamedie.dienumber = playerframefield.dienumber "
         		+ "AND gamedie.idgame = playerframefield.idgame AND gamedie.diecolor = playerframefield.diecolor "
         		+ "WHERE playerframefield.dienumber IS NULL AND playerframefield.diecolor IS NULL "
-        		+ "AND gamedie.idgame= "+game.getGameID()+" AND round= "+game.getRound()+";";
+        		+ "AND gamedie.idgame= "+game.getGameID()+" AND roundID= "+game.getRound()+";";
         try {
         	Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                GameDie gameDie = new GameDie(getColorFromString(rs.getString("color")),rs.getInt("dienumber"),rs.getInt("eyes"), game, conn, this);
+                GameDie gameDie = new GameDie(getColorFromString(rs.getString("diecolor")),rs.getInt("dienumber"),rs.getInt("eyes"), game, conn, this);
                 gameDie.setAvailable(true);
                 list.add(gameDie);
             }

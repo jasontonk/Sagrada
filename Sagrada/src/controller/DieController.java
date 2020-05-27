@@ -18,7 +18,7 @@ public class DieController {
 	
 	public DieController(DataBaseConnection conn, GameController gameController) {
 		this.gameController = gameController;
-		die = new LinkedList<GameDie>(Arrays.asList(gameController.getDicePool()));
+		die = new LinkedList<GameDie>(Arrays.asList(gameController.getGame().getOffer()));
 	}
 	
 	
@@ -89,6 +89,12 @@ public class DieController {
 
 	public void removeAllBorders() {
 		gameController.removeAllBorders();
+	}
+
+
+	public void updateDicePool(GameDie[] offer) {
+		gameController.getGameView().updateDicePoolView();
+		
 	}
 
 

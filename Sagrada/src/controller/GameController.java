@@ -100,7 +100,7 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 
 	public GameDie[] getDicePool() {
 		System.out.println("test");
-		return game.getDicePool();
+		return game.getOffer();
 	}
 
 	public void getSelectedDie() {
@@ -192,15 +192,10 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 	}
 	
 	public void updateRoundTrack(ArrayList<GameDie> diceOnRoundTrackFromDB) {
-//		System.out.println("diceonrountracksize = "+diceOnRoundTrack.size()+"    diceonroundtrackfromdbsize = "+ diceOnRoundTrackFromDB.size());
-//		System.out.println("diceonrountracksize = "+diceOnRoundTrack.size()+"    diceonroundtrackfromdbsize = "+ diceOnRoundTrackFromDB.size());
 		for (GameDie gameDieFromDB : diceOnRoundTrackFromDB) {
-//			System.out.println("test1");
 			changedDiceOnRoundTrack.add(gameDieFromDB);
 			for (int i = 0; i < diceOnRoundTrack.size(); i++) {
-//				System.out.println("test2");
 				if(gameDieFromDB.getColor() == diceOnRoundTrack.get(i).getColor() && gameDieFromDB.getNumber() == diceOnRoundTrack.get(i).getNumber()) {
-//					System.out.println("test3");
 					ArrayList<GameDie> temporaryList = (ArrayList<GameDie>) changedDiceOnRoundTrack.clone();
 					for (int j = 0; j < changedDiceOnRoundTrack.size(); j++) {
 						if(gameDieFromDB.getColor() == changedDiceOnRoundTrack.get(j).getColor() && gameDieFromDB.getNumber() == changedDiceOnRoundTrack.get(j).getNumber()) {
@@ -211,10 +206,7 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 				}
 			}
 		}
-//		System.out.println("amount of changes:"+changedDiceOnRoundTrack.size());
-//		System.out.println("diceonrountracksize = "+diceOnRoundTrack.size()+"    diceonroundtrackfromdbsize = "+ diceOnRoundTrackFromDB.size());
 		diceOnRoundTrack = (ArrayList<GameDie>) diceOnRoundTrackFromDB.clone();
-//		System.out.println("diceonrountracksize = "+diceOnRoundTrack.size()+"    diceonroundtrackfromdbsize = "+ diceOnRoundTrackFromDB.size());
 	}
 	
 	public ArrayList<GameDie> getChangedDiceOnRoundTrack() {
@@ -222,11 +214,6 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 	}
 	
 	public void clearChangedDiceOnRoundTrack() {
-		System.out.println("arraysize:"+changedDiceOnRoundTrack.size());
-//		for (GameDie gameDie : changedDiceOnRoundTrack) {
-//			changedDiceOnRoundTrack.remove(gameDie);
-//		}
 		changedDiceOnRoundTrack.clear();
-		System.out.println("arraysize:"+changedDiceOnRoundTrack.size());
 	}
 }

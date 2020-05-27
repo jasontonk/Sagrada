@@ -144,14 +144,13 @@ public class Game {
 	}
 	
 	public void getDicePoolFromDB() {
-		offer = diceInBag[0].getAllRoundDice(this).toArray(offer);
-		usedDice.addAll(diceInBag[0].getAllRoundDice(this));//TODO find other solution
+		offer = gamedieDBA.getAllavailableDiceOfRound(this).toArray(offer);
+		usedDice.addAll(gamedieDBA.getAllavailableDiceOfRound(this));//TODO find other solution
 		
 	}
 	
-	public GameDie[] getDicePool() {
+	public void getDicePool() {
 		grabDiceFromBag();
-		return offer;
 	}
 	
 	public boolean checkDieUsed(GameDie selectedDice) {
@@ -411,13 +410,20 @@ public class Game {
 		return gamedieDBA.getDiceOnRoundTrack(this);
 		
 	}
-
 	public String getChallengerOfGameWithID(int gameID) {
 		return gameDBA.getChallengerOfGameWithID(gameID);
 	}
 
 	public RoundTrack getRoundTrack() {
 		return roundTrack;
+	}
+
+	public GameDie[] getOffer() {
+		if(currentPlayer.getSequenceNumber() == 1 && round%2 == 1) {
+			grabDiceFromBag();
+		}
+		return offer;
+		
 	}
 
 }
