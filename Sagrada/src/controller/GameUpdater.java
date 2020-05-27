@@ -40,21 +40,25 @@ public class GameUpdater implements Runnable {
 	}
 
 	private void updateRountrack() {
-		diceOnRoundTrackFromDB = gameCtrl.getGame().getDiceOnRoundtrack();
-		changedDiceOnRoundTrack = diceOnRoundTrackFromDB;
-		System.out.println("DB arraysize:"+diceOnRoundTrackFromDB.size());
-		for (GameDie gameDieFromDB : diceOnRoundTrackFromDB) {
-			for (GameDie gameDie : diceOnRoundTrack) {
-				if(gameDieFromDB.getColor() == gameDie.getColor() && gameDieFromDB.getNumber() == gameDie.getNumber()) {
-					System.out.println("test");
-					changedDiceOnRoundTrack.remove(gameDie);
-					
-				}
-			}
-		}
-		System.out.println("amount of changes:"+changedDiceOnRoundTrack.size());
-		diceOnRoundTrack = diceOnRoundTrackFromDB;
-		
+//		System.out.println("diceonrountracksize = "+diceOnRoundTrack.size()+"    diceonroundtrackfromdbsize = "+ diceOnRoundTrackFromDB.size());
+//		diceOnRoundTrackFromDB = gameCtrl.getGame().getDiceOnRoundtrack();
+//		changedDiceOnRoundTrack = diceOnRoundTrackFromDB;
+//		System.out.println("diceonrountracksize = "+diceOnRoundTrack.size()+"    diceonroundtrackfromdbsize = "+ diceOnRoundTrackFromDB.size());
+//		for (GameDie gameDieFromDB : diceOnRoundTrackFromDB) {
+//			System.out.println("test1");
+//			for (int i = 0; i < diceOnRoundTrack.size(); i++) {
+//				System.out.println("test2");
+//				if(gameDieFromDB.getColor() == diceOnRoundTrack.get(i).getColor() && gameDieFromDB.getNumber() == diceOnRoundTrack.get(i).getNumber()) {
+//					System.out.println("test3");
+//					changedDiceOnRoundTrack.remove(diceOnRoundTrack.get(i));
+//					
+//				}
+//			}
+//		}
+//		System.out.println("amount of changes:"+changedDiceOnRoundTrack.size());
+//		System.out.println("diceonrountracksize = "+diceOnRoundTrack.size()+"    diceonroundtrackfromdbsize = "+ diceOnRoundTrackFromDB.size());
+//		diceOnRoundTrack = diceOnRoundTrackFromDB;
+//		System.out.println("diceonrountracksize = "+diceOnRoundTrack.size()+"    diceonroundtrackfromdbsize = "+ diceOnRoundTrackFromDB.size());
 		
 //		diceOnRoundTrackFromDB = gameCtrl.getGame().getDiceOnRoundtrack();
 //		for (GameDie gameDie : diceOnRoundTrackFromDB) {
@@ -69,7 +73,7 @@ public class GameUpdater implements Runnable {
 //			gameCtrl.getGame().getRoundTrack().placeDie(gameDie,gameDie.isOnRoundTrack());
 //		}
 		
-		
+		gameCtrl.updateRoundTrack(gameCtrl.getGame().getDiceOnRoundtrack());
 	}
 
 	private void updatePatterncards() {
@@ -80,15 +84,5 @@ public class GameUpdater implements Runnable {
 	private void updateDicePool() {
 		// TODO Auto-generated method stub
 		
-	}
-
-	public ArrayList<GameDie> getChangedDiceOnRoundTrack() {
-		return changedDiceOnRoundTrack;
-	}
-
-	public void clearChangedDiceOnRoundTrack() {
-		System.out.println("arraysize:"+changedDiceOnRoundTrack.size());
-		changedDiceOnRoundTrack.clear();
-		System.out.println("arraysize:"+changedDiceOnRoundTrack.size());
 	}
 }
