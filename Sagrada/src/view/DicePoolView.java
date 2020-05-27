@@ -3,6 +3,7 @@ package view;
 import java.util.ArrayList;
 
 import controller.DieController;
+import javafx.application.Platform;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.layout.Background;
@@ -38,14 +39,22 @@ public class DicePoolView extends VBox {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
 				if(dieController.getDieColor(number) != null) {
-					dieView.add(new DieView(dieController, dieController.getDieColor(number), dieController.getDieValue(number), number));
-					dicePool.add(dieView.get(number),i,j);
+					final int index = number;
+					final int x = i;
+					final int y = j;
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							dieView.add(new DieView(dieController, dieController.getDieColor(index), dieController.getDieValue(index), index));
+							dicePool.add(dieView.get(index),x,y);
+						}
+					});
 					number++;
 				}
 			}
-			
 		}
 	}
+	
 	
 	public BorderPane drawTitle() {
 		BorderPane titlePane = new BorderPane();
@@ -55,23 +64,86 @@ public class DicePoolView extends VBox {
 		titlePane.setCenter(title);
 		return titlePane;
 	}
+	public void addAllDiceFromDicepool() {
+		int number = 0;
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				if(dieController.getDieColor(number) != null) {
+					final int index = number;
+					final int x = i;
+					final int y = j;
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							dieView.add(new DieView(dieController, dieController.getDieColor(index), dieController.getDieValue(index), index));
+							dicePool.add(dieView.get(index),x,y);
+						}
+					});
+					number++;
+				}
+			}
+		}
+	}
 	
-	//TODO Remove the right dieview on the right index Also set new indexes for the other dieviews when a dieview is removed
 	public void deleteDie(int index) {
 		for(int i = 0; i < dicePool.getChildren().size()-index;i++) {
-			if(dicePool.getChildren().get(index + i) != null && index + 1 != 9) {
+			System.out.println("ik ben een for loop");
+			if(dicePool.getChildren().get(index + i) != null && (index + 1) != 9) {
 				dieView.get(index+i).decreaseDiePoolID();
-				//this.getChildren().get((index + i)).decreaseDiePoolID();
 			}	
 		}
-		dieView.remove(index);
-		dicePool.getChildren().remove(index);
+				System.out.println("Dit is index daarna:" + index);
+				dieView.remove(index);
+				System.out.println("tussemdoortje");
+				dicePool.getChildren().remove(index);
+				System.out.println("test");
+
 	}
 
 	public void removeAllBorders() {
 		for (int i = 0; i < dieView.size(); i++) {
 			dieView.get(i).removeBorder();
-			
+		}
+		
+	}
+
+	public void updateDicePool() {
+//		int index = dicePool.getChildren().size();
+//		for (int i = 0; i < index; i++) {
+//			if(dicePool.getChildren().get(i) != null) {
+//				System.out.println("Dit is index nu:" + i);
+//				System.out.println("werk dit nog");
+//				deleteDie(i);
+//			}
+//		}
+		
+//		dieView.clear();
+		deleteAllDiceFromDicepool();
+		System.out.println("stap 1 tester");
+		addAllDiceFromDicepool();
+		System.out.println("stap 2 tester");
+	}
+
+
+	private void deleteAllDiceFromDicepool() {
+		int index = dicePool.getChildren().size();
+		int counter = 0;
+		for(int i = 0; i < index;i++) {
+			System.out.println("kijk waar ik ben");
+				if(dicePool.getChildren().get(i) != null && counter < index) {
+					System.out.println("kom ik hier wel?");
+					dieView.remove(i);
+					final int number = i;
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							System.out.println("wat is nummer hier?"+ number);
+							dicePool.getChildren().remove(number);
+						}
+					});
+					i--;
+				}
+				counter++;
 		}
 		
 	}

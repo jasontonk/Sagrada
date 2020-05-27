@@ -21,7 +21,7 @@ public class GameViewUpdater extends Task<Void> {
 			updateAll();
 			System.out.println("updated Views");
 			try {
-				Thread.sleep(3000);
+				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

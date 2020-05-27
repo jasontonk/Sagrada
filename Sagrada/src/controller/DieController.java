@@ -18,7 +18,7 @@ public class DieController {
 	
 	public DieController(DataBaseConnection conn, GameController gameController) {
 		this.gameController = gameController;
-		die = new LinkedList<GameDie>(Arrays.asList(gameController.getGame().getOffer()));
+		die = new LinkedList<GameDie>(Arrays.asList(gameController.getDicePool()));
 	}
 	
 	
@@ -94,6 +94,13 @@ public class DieController {
 
 	public void updateDicePool(GameDie[] offer) {
 		gameController.getGameView().updateDicePoolView();
+		
+//		int index = die.size();
+//		for (int i = index; i > 0; i--) {
+//			System.out.println("werk dit nog");
+//			gameController.getGameView().getDicePoolView().deleteDie(i);
+//		}
+//		gameController.getGameView().getDicePoolView().addAllDiceFromDicepool();
 		
 	}
 
