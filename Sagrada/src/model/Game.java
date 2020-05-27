@@ -32,7 +32,8 @@ public class Game {
 	private GameDie selectedDie;
 	private GameDBA gameDBA;
 	private boolean finishedTurn;
-	private boolean placedDie;
+	private boolean placedDie;	
+	private GameDieDBA gamedieDBA = new GameDieDBA(conn);
 
 
 	public Game(DataBaseConnection conn, boolean randomgeneratedpatterncards) {
@@ -42,6 +43,7 @@ public class Game {
 		round = 1;
 		roundTrack = new RoundTrack(this);
 		gameDBA = new GameDBA(conn);
+		gamedieDBA = new GameDieDBA(conn);
 		gameDBA.addNewGameDB(LocalDateTime.now(), this);
 		offer = new GameDie[9];
 		players = new ArrayList<Player>();
@@ -265,27 +267,27 @@ public class Game {
 	public void makedie() {
 		Random r = new Random();
 		for (int i = 0; i < 18; i++) {
-			diceInBag[i] = new GameDie(ModelColor.GREEN, i+1, r.nextInt(6)+1, this, conn);
+			diceInBag[i] = new GameDie(ModelColor.GREEN, i+1, r.nextInt(6)+1, this, conn, gamedieDBA);
 			diceInBag[i].addDieToDB(this);
 			diceInBag[i].setEyes(this);
 		}
 		for (int i = 0; i < 18; i++) {
-			diceInBag[i+17] = new GameDie(ModelColor.BLUE, i+1, r.nextInt(6)+1, this, conn);
+			diceInBag[i+17] = new GameDie(ModelColor.BLUE, i+1, r.nextInt(6)+1, this, conn, gamedieDBA);
 			diceInBag[i+17].addDieToDB(this);
 			diceInBag[i+17].setEyes(this);
 		}
 		for (int i = 0; i < 18; i++) {
-			diceInBag[i+35] = new GameDie(ModelColor.YELLOW, i+1, r.nextInt(6)+1, this, conn);
+			diceInBag[i+35] = new GameDie(ModelColor.YELLOW, i+1, r.nextInt(6)+1, this, conn, gamedieDBA);
 			diceInBag[i+35].addDieToDB(this);
 			diceInBag[i+35].setEyes(this);
 		}
 		for (int i = 0; i < 18; i++) {
-			diceInBag[i+53] = new GameDie(ModelColor.PURPLE, i+1, r.nextInt(6)+1, this, conn);
+			diceInBag[i+53] = new GameDie(ModelColor.PURPLE, i+1, r.nextInt(6)+1, this, conn, gamedieDBA);
 			diceInBag[i+53].addDieToDB(this);
 			diceInBag[i+53].setEyes(this);
 		}
 		for (int i = 0; i < 18; i++) {
-			diceInBag[i+71] = new GameDie(ModelColor.RED, i+1, r.nextInt(6)+1, this, conn);
+			diceInBag[i+71] = new GameDie(ModelColor.RED, i+1, r.nextInt(6)+1, this, conn, gamedieDBA);
 			diceInBag[i+71].addDieToDB(this);
 			diceInBag[i+71].setEyes(this);
 		}
@@ -406,7 +408,6 @@ public class Game {
 	}
 
 	public ArrayList<GameDie> getDiceOnRoundtrack() {
-		GameDieDBA gamedieDBA = new GameDieDBA(conn);
 		return gamedieDBA.getDiceOnRoundTrack(this);
 		
 	}

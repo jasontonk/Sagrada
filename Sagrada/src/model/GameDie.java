@@ -14,9 +14,9 @@ public class GameDie extends Die {
 	private BoardField boardField;
 	private GameDieDBA gameDieDBA;
 	
-	public GameDie(ModelColor modelColor, int number, int eyes, Game game, DataBaseConnection conn) {
+	public GameDie(ModelColor modelColor, int number, int eyes, Game game, DataBaseConnection conn, GameDieDBA gameDieDBA) {
 		super(modelColor, number);
-		gameDieDBA = new GameDieDBA(conn);
+		this.gameDieDBA = gameDieDBA;
 //		addDieToDB(game);
 		this.eyes = eyes;
 		isAvailable = false;

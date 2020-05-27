@@ -42,14 +42,17 @@ public class GameUpdater implements Runnable {
 	private void updateRountrack() {
 		diceOnRoundTrackFromDB = gameCtrl.getGame().getDiceOnRoundtrack();
 		changedDiceOnRoundTrack = diceOnRoundTrackFromDB;
+		System.out.println("DB arraysize:"+diceOnRoundTrackFromDB.size());
 		for (GameDie gameDieFromDB : diceOnRoundTrackFromDB) {
 			for (GameDie gameDie : diceOnRoundTrack) {
 				if(gameDieFromDB.getColor() == gameDie.getColor() && gameDieFromDB.getNumber() == gameDie.getNumber()) {
+					System.out.println("test");
 					changedDiceOnRoundTrack.remove(gameDie);
+					
 				}
 			}
 		}
-		
+		System.out.println("amount of changes:"+changedDiceOnRoundTrack.size());
 		diceOnRoundTrack = diceOnRoundTrackFromDB;
 		
 		
@@ -84,6 +87,7 @@ public class GameUpdater implements Runnable {
 	}
 
 	public void clearChangedDiceOnRoundTrack() {
+		System.out.println("arraysize:"+changedDiceOnRoundTrack.size());
 		changedDiceOnRoundTrack.clear();
 		System.out.println("arraysize:"+changedDiceOnRoundTrack.size());
 	}
