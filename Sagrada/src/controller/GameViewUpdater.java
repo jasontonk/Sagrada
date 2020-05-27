@@ -21,7 +21,7 @@ public class GameViewUpdater extends Task<Void> {
 			updateAll();
 			System.out.println("updated Views");
 			try {
-				Thread.sleep(10000);
+				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -35,7 +35,7 @@ public class GameViewUpdater extends Task<Void> {
 	
 	private void updateRountrackView() {
 		ArrayList<GameDie> diceOnRoundTrack = new ArrayList<GameDie>();
-		diceOnRoundTrack = gameUpdates.getDiceOnRoundTrack();
+		diceOnRoundTrack = gameUpdates.getChangedDiceOnRoundTrack();
 		ArrayList<ModelColor> colors = new ArrayList<>();
 		ArrayList<Integer> values = new ArrayList<>();
 		for (int i = 1; i <= 10; i++) {
@@ -53,6 +53,7 @@ public class GameViewUpdater extends Task<Void> {
 		}
 		colors.clear();
 		values.clear();
+		gameUpdates.clearChangedDiceOnRoundTrack(); 
 		
 	}
 	private void updatePatterncardsView() {

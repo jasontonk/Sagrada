@@ -114,7 +114,7 @@ public class RoundtrackView extends VBox {
 				Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
-						stackpanes.get(round-1).getChildren().add(button);
+							stackpanes.get(round-1).getChildren().add(button);
 					}
 				});
 			}
@@ -131,8 +131,7 @@ public class RoundtrackView extends VBox {
 						stackpane.getChildren().add(button2);
 						stackpanes.add(stackpane);
 						roundtrack.add(stackpanes.get(round-1+spot+9), round-1, 2+spot);
-						
-						stackpanes.get(round-1+spot+9).getChildren().add(button);
+							stackpanes.get(round-1+spot+9).getChildren().add(button);
 					}
 				});
 			}

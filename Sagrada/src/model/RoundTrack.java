@@ -14,13 +14,8 @@ public class RoundTrack {
 	/*
 	 * Places Die on the roundtrack, calls roundtrackfield method 
 	 */
-	public void placeDie(Die die,int round) {
-		for (int i = 0; i < roundTrackFields.length; i++) {
-			if(roundTrackFields[round] == null) {
-				roundTrackFields[round].addDice(die);
- 				return;
-			}
-		}
+	public void placeDie(GameDie die,int round) {
+		roundTrackFields[round].addDice(die);
 	}
 	
 	
@@ -28,13 +23,16 @@ public class RoundTrack {
 	 * Returns die that gets chosen
 	 * TODO change to the right method for getRound
 	 */
-	public Die takeDie(int die) {
+	public GameDie takeDie(int die) {
 		if(roundTrackFields[game.getRound()].getDieSavingSpot() != null) {//changed to getRounc() to fix error
 			//krijgt array terug
-			Die[] dieOnField = roundTrackFields[game.getRound()].getDieSavingSpot();
+			GameDie[] dieOnField = roundTrackFields[game.getRound()].getDieSavingSpot();
 			return dieOnField[die];
 		}
 		return null;//returns null if nothing can be returned
+	}
+	public RoundTrackField[] getRoundTrackFields(){
+		return roundTrackFields;
 	}
 	
 	

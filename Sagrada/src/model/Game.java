@@ -40,6 +40,7 @@ public class Game {
 		this.conn = conn;
 		this.randomPatterncards = randomgeneratedpatterncards;
 		round = 1;
+		roundTrack = new RoundTrack(this);
 		gameDBA = new GameDBA(conn);
 		gameDBA.addNewGameDB(LocalDateTime.now(), this);
 		offer = new GameDie[9];
@@ -412,6 +413,10 @@ public class Game {
 
 	public String getChallengerOfGameWithID(int gameID) {
 		return gameDBA.getChallengerOfGameWithID(gameID);
+	}
+
+	public RoundTrack getRoundTrack() {
+		return roundTrack;
 	}
 
 }
