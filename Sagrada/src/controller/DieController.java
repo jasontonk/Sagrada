@@ -13,13 +13,14 @@ import view.DicePoolView;
 
 public class DieController {
 
-	private List<GameDie> die;
+	private ArrayList<GameDie> die;
 	private GameController gameController;
 	private String selectedDieURL;
 	
 	public DieController(DataBaseConnection conn, GameController gameController) {
 		this.gameController = gameController;
-		die = new LinkedList<GameDie>(gameController.getDicePool());
+		die = new ArrayList<GameDie>();
+		die = gameController.getDicePool();
 	}
 	
 	
@@ -95,7 +96,9 @@ public class DieController {
 
 	public void updateDicePool(ArrayList<GameDie> offer) {
 		die = offer;
-		gameController.getGameView().updateDicePoolView(offer.size());
+		int offersize = offer.size();
+		System.out.println("offer: " + offersize);
+		gameController.getGameView().updateDicePoolView(offersize);
 		
 		
 //		int index = die.size();

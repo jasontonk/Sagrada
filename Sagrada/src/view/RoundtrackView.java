@@ -91,41 +91,34 @@ public class RoundtrackView extends VBox {
 		return roundPane;
 	}
 	public void addDice(int round, ArrayList<ModelColor> colors, ArrayList<Integer> values) {
-		for(int i = 0; i < colors.size(); i++) {
-			String imgURL;
-			Button button = new Button();
-			String color = javafxColor.getStringColorFromModelColor(colors.get(i));
-			
-			imgURL = "/images/" + color + values.get(i) + "_Die.png";
-			Image image = new Image(getClass().getResource(imgURL).toString());
-			button.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
-			button.setPrefSize(50, 50);
-			if(i == 0) {
-				final int spot = i;
-				Platform.runLater(new Runnable() {
-					@Override
-					public void run() {
-							stackpanes.get(round-1).getChildren().add(button);
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				for(int i = 0; i < colors.size(); i++) {
+					String imgURL;
+					Button button = new Button();
+					String color = javafxColor.getStringColorFromModelColor(colors.get(i));
+					
+					imgURL = "/images/" + color + values.get(i) + "_Die.png";
+					Image image = new Image(getClass().getResource(imgURL).toString());
+					button.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
+					button.setPrefSize(50, 50);
+					if(i == 0) {
+						stackpanes.get(round-1).getChildren().add(button);
 					}
-				});
-			}
-			else {
-				final int spot = i;
-				
-				Button button2 = new Button();
-				StackPane stackpane = new StackPane();
-				button2.setPrefSize(ROUNDTRACKFIELD_SIZE, ROUNDTRACKFIELD_SIZE);
-				button2.setBackground(new Background(new BackgroundFill(Color.WHITE,null,null)));
-				Platform.runLater(new Runnable() {
-					@Override
-					public void run() {
+					else {
+						
+						Button button2 = new Button();
+						StackPane stackpane = new StackPane();
+						button2.setPrefSize(ROUNDTRACKFIELD_SIZE, ROUNDTRACKFIELD_SIZE);
+						button2.setBackground(new Background(new BackgroundFill(Color.WHITE,null,null)));
 						stackpane.getChildren().add(button2);
-						roundtrack.add(stackpane, round-1, 2+spot);
+						roundtrack.add(stackpane, round-1, 2+i);
 						stackpane.getChildren().add(button);
 						stackpanes.add(stackpane);
+						}
 					}
-				});
 			}
-		}
+		});
 	}
 }

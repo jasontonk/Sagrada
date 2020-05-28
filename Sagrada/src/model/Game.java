@@ -183,7 +183,6 @@ public class Game {
 	public void getDicePoolFromDB() {
 		ArrayList<GameDie> offerfromDB = gamedieDBA.getAllavailableDiceOfRound(this);
 		offer =	offerfromDB;
-		System.out.println(offer +", ");
 		usedDice.addAll(offerfromDB);
 	}
 	
