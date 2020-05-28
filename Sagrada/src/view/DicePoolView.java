@@ -65,31 +65,31 @@ public class DicePoolView extends VBox {
 		return titlePane;
 	}
 	public void addAllDiceFromDicepool(int amountofdice) {
-		int number = 0;
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 3; j++) {
-				if(dieController.getDieColor(number) != null && number < amountofdice) {
-					final int index = number;
-					final int x = i;
-					final int y = j;
-					if(dieController.getDieColor(index) != null) {
+		
 						Platform.runLater(new Runnable() {
 							@Override
 							public void run() { 
-								System.out.println("test");
-									dieView.add(new DieView(dieController, dieController.getDieColor(index), dieController.getDieValue(index), index));
-									dicePool.add(dieView.get(index),x,y);
-									System.out.println("test 2");
+								int number = 0;
+								for (int i = 0; i < 3; i++) {
+									for (int j = 0; j < 3; j++) {
+										if(number < amountofdice && dieController.getDieColor(number) != null) {
+											System.out.println(i+" en "+j);
+											if(dieController.getDieColor(number) != null) {
+												System.out.println("test");
+													dieView.add(new DieView(dieController, dieController.getDieColor(number), dieController.getDieValue(number), number));
+													dicePool.add(dieView.get(number),i,j);
+													System.out.println("test 2");
+											}
+											number++;
+											System.out.println("test 13 and index : "+number+" and number: "+ number+" amountofdice = "+amountofdice);
+										}
+										
+									}
+									System.out.println("test 15");
+								}
 							}
 						});
-					}
-					number++;
-					System.out.println("test 13 and index : "+index+" and number: "+ number);
-				}
-				
-			}
-			System.out.println("test 15");
-		}
+					
 		System.out.println("test 16");
 	}
 	
