@@ -55,8 +55,8 @@ public class Game {
 		players.get(0).setSequenceNumber(1);
 		players.get(1).setSequenceNumber(2);
 		personalPlayer = players.get(0);
-		System.out.println(players.get(0).getId());
-		System.out.println(players.get(1).getId());
+		System.out.println("player 1 : " + players.get(0).getId());
+		System.out.println("player 2 : " + players.get(1).getId());
 		diceInBag = new GameDie[90];
 		usedDice = new ArrayList<GameDie>();
 		makedie();
@@ -85,8 +85,8 @@ public class Game {
 		players.get(0).setSequenceNumber(1);
 		players.get(1).setSequenceNumber(2);
 		personalPlayer = players.get(0);
-		System.out.println(players.get(0).getId());
-		System.out.println(players.get(1).getId());
+		System.out.println("player 1 : " + players.get(0).getId());
+		System.out.println("player 2 : " + players.get(1).getId());
 		diceInBag = new GameDie[90];
 		usedDice = new ArrayList<GameDie>();
 		makedie();
@@ -134,26 +134,26 @@ public class Game {
 	
 	}
 
-	public void playfirstround() { // met boolean first round treu
-
-//		methode die dobbelstenen selecteert // hoe gaan we iedere keer amount of dice pakken en dan iedere keer andere dobbelstenen  ? en waar maken we ze aan en hoeveel 
-		for (int i = 0; i < players.size(); i++) {
-
-		}
-		for (int j = players.size(); j < 0; j--) {
-//			dobbelsteen kiezen,passen of toolcard gebruiken
-//		 gekozen actie uitvoeren
-//		 dobbelsteen kiezen,einde beurt of toolcard - de eerder gekozen optie 
-//		 actie uitvoeren 
-//		 volgende speler
-		}
-
-//		 voeg overige dobbelstenen aan rondespoor toe
-//		for each over de overige dobbelstenen 
-//		RoundTrack.placedie(die-van-foreach,round);
-		round++;
-
-	}
+//	public void playfirstround() { // met boolean first round treu
+//
+////		methode die dobbelstenen selecteert // hoe gaan we iedere keer amount of dice pakken en dan iedere keer andere dobbelstenen  ? en waar maken we ze aan en hoeveel 
+//		for (int i = 0; i < players.size(); i++) {
+//
+//		}
+//		for (int j = players.size(); j < 0; j--) {
+////			dobbelsteen kiezen,passen of toolcard gebruiken
+////		 gekozen actie uitvoeren
+////		 dobbelsteen kiezen,einde beurt of toolcard - de eerder gekozen optie 
+////		 actie uitvoeren 
+////		 volgende speler
+//		}
+//
+////		 voeg overige dobbelstenen aan rondespoor toe
+////		for each over de overige dobbelstenen 
+////		RoundTrack.placedie(die-van-foreach,round);
+//		round++;
+//
+//	}
 
 	public void grabDiceFromBag() {
 		int amountofdice = players.size() * 2 + 1;
@@ -211,18 +211,7 @@ public class Game {
 	}
 	
 	public void playTurn() {
-		System.out.println(currentPlayer.getId());
-			/* 
-			 * 
-			 * 
-			 * 
-			 * 
-			 * 
-			 * 
-			 * 
-			 * 
-			 * 
-			 */
+		
 			System.out.println("still your turn");
 	}
 	public void setNextPlayer() {
@@ -266,7 +255,7 @@ public class Game {
 					}
 				}
 			} 
-			System.out.println(currentPlayer.getId());
+			System.out.println("next player : " + currentPlayer.getId());
 	}
 	public void changeSequenceNumber() {
 		System.out.println("stap 1");
@@ -400,7 +389,6 @@ public class Game {
 			if(personalPlayer == currentPlayer) {
 				if(currentPlayer.checkPlacementAgainstRules(x, y, modelColor, value)) {
 					placedDie = true;
-					//die uit dicepool halen
 					return true;
 				}
 			}
@@ -427,7 +415,6 @@ public class Game {
 	}
 
 	public boolean isRandom() {
-		// TODO Auto-generated method stub
 		return randomPatterncards;
 	}
 

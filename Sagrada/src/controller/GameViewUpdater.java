@@ -32,7 +32,7 @@ public class GameViewUpdater extends Task<Void> {
 		updateDicePoolView();
 		updatePatterncardsView();
 		updateRountrackView();
-		updateScoreBoard();
+//		updateScoreBoard();
 	}
 	
 	private void updateRountrackView() {
@@ -68,13 +68,13 @@ public class GameViewUpdater extends Task<Void> {
 		
 	}
 	
-	private void updateScoreBoard() {
+//	private void updateScoreBoard() {
 //		for (Player p : gameCtrl.getGame().getPlayers()) {
 //			p.calculateScore();
 //		}
 //		gameCtrl.getGameView().getScoreView().makeScoreBoard();
 //		System.out.println("gelukt 2");
-	}
+//	}
 
 
 }

@@ -133,7 +133,6 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 	}
 
 	public GameDie[] getDicePool() {
-		System.out.println("test");
 		return game.getOffer();
 	}
 

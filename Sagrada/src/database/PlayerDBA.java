@@ -208,7 +208,6 @@ public class PlayerDBA {
 
 	public void setScore(Player player, int score) {
 		String query = "UPDATE player SET score = " + score + " WHERE idplayer = " + player.getId() + ";";
-		System.out.println(query);
 		try {
 			Statement stmt = conn.getConn().createStatement();
 			stmt.executeUpdate(query);
@@ -363,7 +362,6 @@ public class PlayerDBA {
 
 
 	public PlayerStatus getPlayerStatusFromDB(Player playerUsingID) {
-		System.out.println("jaaaaaa");
 		String playerstatusString = null;
 		String query = "SELECT playstatus FROM player WHERE idplayer= " + playerUsingID.getId() + ";";
 		try {
@@ -449,7 +447,6 @@ public class PlayerDBA {
 
 
 	public int getScoreFromDB(Player player) {
-		System.out.println("jaaaaaa");
 		int playerscore = 0;
 		String query = "SELECT score FROM player WHERE idplayer= " + player.getId() + ";";
 		try {
