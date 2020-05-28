@@ -132,7 +132,7 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 		return dieController;
 	}
 
-	public GameDie[] getDicePool() {
+	public ArrayList<GameDie> getDicePool() {
 		return game.getOffer();
 	}
 

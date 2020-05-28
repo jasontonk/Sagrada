@@ -1,6 +1,7 @@
 package controller;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,7 +19,7 @@ public class DieController {
 	
 	public DieController(DataBaseConnection conn, GameController gameController) {
 		this.gameController = gameController;
-		die = new LinkedList<GameDie>(Arrays.asList(gameController.getDicePool()));
+		die = new LinkedList<GameDie>(gameController.getDicePool());
 	}
 	
 	
@@ -92,8 +93,10 @@ public class DieController {
 	}
 
 
-	public void updateDicePool(GameDie[] offer) {
-		gameController.getGameView().updateDicePoolView();
+	public void updateDicePool(ArrayList<GameDie> offer) {
+		die = offer;
+		gameController.getGameView().updateDicePoolView(offer.size());
+		
 		
 //		int index = die.size();
 //		for (int i = index; i > 0; i--) {

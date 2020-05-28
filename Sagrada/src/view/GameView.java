@@ -54,8 +54,8 @@ public class GameView extends BorderPane {
 		return scoreView;
 	}
 	
-	public void updateDicePoolView() {
-		dicePoolView.updateDicePool();
+	public void updateDicePoolView(int amountofdice) {
+		dicePoolView.updateDicePool(amountofdice);
 	}
 	
 }

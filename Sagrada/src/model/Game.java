@@ -17,7 +17,7 @@ public class Game {
 	private ArrayList<PublicObjectiveCard> publicObjectiveCards;
 	private GameDie[] diceInBag; // 18 per kleur 5 kleuren
 	private ArrayList<GameDie> usedDice ;
-	private GameDie[] offer;
+	private ArrayList<GameDie> offer;
 	private RoundTrack roundTrack;
 	private Chat chat;
 	private Player currentPlayer;
@@ -45,7 +45,7 @@ public class Game {
 		gameDBA = new GameDBA(conn);
 		gamedieDBA = new GameDieDBA(conn);
 		gameDBA.addNewGameDB(LocalDateTime.now(), this);
-		offer = new GameDie[9];
+		offer = new ArrayList<GameDie>();
 		players = new ArrayList<Player>();
 		currentPlayer = new Player(conn, new Account("ditis2", "eentest", conn), this, PlayerStatus.CHALLENGER);
 		Player player = new Player(conn, new Account("ditiseentest2", "testtest", conn), this, PlayerStatus.CHALLENGEE);
@@ -75,7 +75,7 @@ public class Game {
 		round = 1;
 		roundTrack = new RoundTrack(this);
 		
-		offer = new GameDie[9];
+		offer = new ArrayList<GameDie>();
 		players = new ArrayList<Player>();
 		currentPlayer = new Player(conn, new Account("ditis2", "eentest", conn), this, PlayerStatus.CHALLENGER);
 		Player player = new Player(conn, new Account("ditiseentest2", "testtest", conn), this, PlayerStatus.CHALLENGEE);
@@ -113,7 +113,7 @@ public class Game {
 
 	public void play() {
 		gamesetup();
-		playfirstround();
+//		playfirstround();
 		while(!finishedGame) {
 			playround();
 		}
@@ -157,13 +157,14 @@ public class Game {
 
 	public void grabDiceFromBag() {
 		int amountofdice = players.size() * 2 + 1;
+		System.out.println("amountofdice : " + amountofdice);
 		Random r = new Random();
 		
-		while (offer[amountofdice-1] == null) {
+		while (offer.size() < amountofdice) {
 			for (int i = 0; i < amountofdice; i++) {
 				GameDie selectedDice = diceInBag[r.nextInt(89)];
 				if (!checkDieUsed(selectedDice)) {
-					offer[i] = selectedDice;
+					offer.add(selectedDice);
 					usedDice.add(selectedDice);
 					for (int j = 0; j < usedDice.size(); j++) {
 						if (usedDice.get(j).getRoundID(this) == 0) {
@@ -174,14 +175,16 @@ public class Game {
 				else {
 					i--;
 				}
+				System.out.println("offersize : "+offer.size());
 			}
 		}
 	}
 	
 	public void getDicePoolFromDB() {
-		offer = gamedieDBA.getAllavailableDiceOfRound(this).toArray(offer);
-		usedDice.addAll(gamedieDBA.getAllavailableDiceOfRound(this));//TODO find other solution
-		
+		ArrayList<GameDie> offerfromDB = gamedieDBA.getAllavailableDiceOfRound(this);
+		offer =	offerfromDB;
+		System.out.println(offer +", ");
+		usedDice.addAll(offerfromDB);
 	}
 	
 	public void getDicePool() {
@@ -441,7 +444,7 @@ public class Game {
 		return roundTrack;
 	}
 
-	public GameDie[] getOffer() {
+	public ArrayList<GameDie> getOffer() {
 		if(currentPlayer.getSequenceNumber() == 1 && round%2 == 1) {
 			grabDiceFromBag();
 		}

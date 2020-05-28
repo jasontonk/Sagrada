@@ -63,8 +63,13 @@ public class GameViewUpdater extends Task<Void> {
 	}
 
 	private void updateDicePoolView() {
-		GameDie[] offer = gameCtrl.getGame().getOffer();
+		ArrayList<GameDie> offer = gameCtrl.getGame().getOffer();
+		System.out.println("got offer");
+//		for (int i = 0; i < offer.length; i++) {
+//			System.out.println(offer[i] +", ");
+//		}
 		gameCtrl.getDieController().updateDicePool(offer);
+		System.out.println("updated dicepool");
 		
 	}
 	
