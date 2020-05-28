@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javafx.concurrent.Task;
 import model.GameDie;
 import model.ModelColor;
+import model.Player;
 
 public class GameViewUpdater extends Task<Void> {
 	private GameController gameCtrl;
@@ -31,6 +32,7 @@ public class GameViewUpdater extends Task<Void> {
 		updateDicePoolView();
 		updatePatterncardsView();
 		updateRountrackView();
+		updateScoreBoard();
 	}
 	
 	private void updateRountrackView() {
@@ -64,6 +66,14 @@ public class GameViewUpdater extends Task<Void> {
 		GameDie[] offer = gameCtrl.getGame().getOffer();
 		gameCtrl.getDieController().updateDicePool(offer);
 		
+	}
+	
+	private void updateScoreBoard() {
+		for (Player p : gameCtrl.getGame().getPlayers()) {
+			p.calculateScore();
+		}
+		gameCtrl.getGameView().getScoreView().makeScoreBoard();
+		System.out.println("gelukt 2");
 	}
 
 

@@ -49,6 +49,11 @@ public class GameView extends BorderPane {
 	public RoundtrackView getRoundtrackView() {
 		return roundtrackView;
 	}
+	
+	public ScoreView getScoreView() {
+		return scoreView;
+	}
+	
 	public void updateDicePoolView() {
 		dicePoolView.updateDicePool();
 	}

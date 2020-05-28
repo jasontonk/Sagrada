@@ -1,5 +1,7 @@
 package controller;
 
+import model.Player;
+
 public class GameRoundPlayer implements Runnable {
 
 	private GameController gameController;
@@ -39,7 +41,7 @@ public class GameRoundPlayer implements Runnable {
 
 	public void setFinishedTurn(boolean finishedTurn) {
 		this.finishedTurn = finishedTurn;
-		gameController.setFinishedTurnTrue();
+		gameController.setFinishedTurnTrue();		
 	}
 	
 	

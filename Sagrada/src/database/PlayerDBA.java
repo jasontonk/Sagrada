@@ -211,6 +211,7 @@ public class PlayerDBA {
 		try {
 			Statement stmt = conn.getConn().createStatement();
 			stmt.executeUpdate(query);
+			System.out.println("========= SCORE GEUPDATE IN DATABASE");
 			stmt.close();
 
 		} catch (SQLException e) {

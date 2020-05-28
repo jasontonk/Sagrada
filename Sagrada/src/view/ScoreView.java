@@ -28,7 +28,8 @@ public class ScoreView extends BorderPane {
         makeScoreBoard();
     }
 
-	private void makeScoreBoard() {
+	public void makeScoreBoard() {
+		getChildren().clear();
         VBox scoreBoardContent = new VBox();
         ArrayList<HBox> scoreLines = new ArrayList<HBox>();
 
@@ -43,16 +44,7 @@ public class ScoreView extends BorderPane {
             HBox playerLine = new HBox();
 
             String playerName = game.getPlayers().get(i).getAccount().getUsername();
-            String[] playerNameArray = playerName.split("");
-            if (playerNameArray.length > 7) {
-                playerName = "";
-                for (int x = 0; x < playerNameArray.length; x++) {
-                    playerName = playerName + playerNameArray[x];
-                    if (x == 7) {
-                        break;
-                    }
-                }
-            }
+            
             Label playerNameLabel =
                     new Label(playerName + ": ");
             playerNameLabel.setTextAlignment(TextAlignment.CENTER);
@@ -64,12 +56,10 @@ public class ScoreView extends BorderPane {
                 playerScore.setText("" + cst.getValue());
                 playerScore.setTextAlignment(TextAlignment.CENTER);
                 playerLine.getChildren().addAll(playerNameLabel, playerScore);
-                playerLine.setAlignment(Pos.CENTER_LEFT);
-                playerLine.setMargin(playerNameLabel, new Insets(10));
+                playerLine.setAlignment(Pos.CENTER);
             });
             Thread thread = new Thread(cst);
             thread.setName("Calculate score");
-            thread.setDaemon(true);
             thread.start();
             scoreLines.add(i, playerLine);
         }

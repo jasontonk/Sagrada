@@ -6,10 +6,7 @@ import model.Player;
 public class CalculateScoreTask extends Task<Integer> {
     private Player player;
     
-    /**
-     * Constructor for the calculate score task
-     * @param player
-     */
+ 
     public CalculateScoreTask(Player player) {
         this.player = player;
     }

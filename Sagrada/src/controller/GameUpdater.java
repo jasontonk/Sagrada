@@ -2,8 +2,10 @@ package controller;
 
 import java.util.ArrayList;
 
+import javafx.application.Platform;
 import model.GameDie;
 import model.ModelColor;
+import model.Player;
 
 public class GameUpdater implements Runnable {
 
@@ -18,8 +20,14 @@ public class GameUpdater implements Runnable {
 	@Override
 	public void run() {
 		while(true){
-			updateAll();
-			System.out.println("updated games");
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					updateAll();
+					System.out.println("updated games");
+				}				
+			});
+			
 			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {
@@ -33,6 +41,7 @@ public class GameUpdater implements Runnable {
 		updateDicePool();
 		updatePatterncards();
 		updateRountrack();
+		updateScore();
 	}
 
 	private void updateRountrack() {
@@ -52,5 +61,13 @@ public class GameUpdater implements Runnable {
 	private void updateDicePool() {
 		
 		gameCtrl.getGame().getDicePoolFromDB();
+	}
+	
+	private void updateScore() {
+		for (Player p : gameCtrl.getGame().getPlayers()) {
+			p.calculateScore();
+		}
+		gameCtrl.getGameView().getScoreView().makeScoreBoard();
+		System.out.println("gelukt 1");
 	}
 }

@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
+import controller.CalculateScoreTask;
 import database.DataBaseConnection;
 import database.FavorTokenDBA;
 import database.PatternCardDBA;
@@ -169,6 +170,7 @@ public class Player {
 
 	public void setPatternCard(PatternCard patternCard) {
 		this.patternCard = patternCard;
+
 	}
 
 	public ArrayList<PatternCard> getPatternCardsToChoose(boolean random) {
@@ -271,23 +273,29 @@ public class Player {
         }
 		
 		this.setSequenceNumber(NewSequenceNumber);
-		//TODO update in database
+		playerDBA.setPlayerSeqNumber(NewSequenceNumber, this);
+	}
+	
+	public CalculateScoreTask calculateScoreTask() {
+		CalculateScoreTask cst = new CalculateScoreTask(this);
+        return cst;
 	}
 	
 	public int calculateScore() {
 		if (patternCard == null) {
             patternCard = getPatternCard();
         }
+		
 		int score = 0;
-		for(int x = 1; x < Board.BOARD_SQUARES_HORIZONTAL; x++) {
-			for(int y = 1; y < Board.BOARD_SQUARES_VERTICAL; y++) {
+		for(int x = 0; x < Board.BOARD_SQUARES_HORIZONTAL; x++) {
+			for(int y = 0; y < Board.BOARD_SQUARES_VERTICAL; y++) {
 				if(!board.getBoardField(x, y).hasDie()) {
 					score = score - 1;
+					System.out.println("SPELER: " + this.getName() + " SCORE -1 =================== " + "BOARDFIELD (" + x + ", " + y + ") SCORE: " + score);
 				}
-				else {
-					if(board.getBoardField(x, y).getDie().getColor().equals(modelColor)) {
-						score = score + 1;
-					}
+				else if(board.getBoardField(x, y).getDie().getColor().equals(modelColor)) {
+					score = score + 1;
+					System.out.println("SPELER: " + this.getName() + " SCORE -1 =================== " + "BOARDFIELD (" + x + ", " + y + ") SCORE: " + score);
 				}
 			}
 		}
@@ -300,7 +308,7 @@ public class Player {
 		
 		this.score = score;
 		
-		PlayerDBA playerDBA = new PlayerDBA(connection);
+	
 		playerDBA.setScore(this);
 		 
 		return score;
