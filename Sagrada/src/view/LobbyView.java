@@ -86,7 +86,7 @@ public class LobbyView extends BorderPane {
 		top.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, null, null)));
 		top.setMinSize(250, 600);
 		Button startGame = new Button("Start het spel");
-		startGame.setOnAction(e -> makeGame());
+		startGame.setOnAction(e -> startGame());
 		top.getChildren().add(startGame);
 
 		Button refresh = new Button("Vernieuw");
@@ -95,7 +95,7 @@ public class LobbyView extends BorderPane {
 		
 		gameLobby = new ArrayList<Player>();
 		for (Player player : accountController.getInvitePlayerList()) {
-			if((player.getPlayerStatus().equals(PlayerStatus.CHALLENGEE)  || player.getPlayerStatus().equals(PlayerStatus.CHALLENGER)) && !gameLobby.contains(player)) {
+			if(!gameLobby.contains(player)) {
 				gameLobby.add(player);
 				System.out.println(gameLobby);
 			}
@@ -158,8 +158,8 @@ public class LobbyView extends BorderPane {
 		}
 	}
 	
-	private void makeGame() {
-//		accountController.makeGame();
+	private void startGame() {
+		accountController.startGame(gameLobby);
 	}
 
 	

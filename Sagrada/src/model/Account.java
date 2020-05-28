@@ -199,5 +199,9 @@ public class Account {
 	public ArrayList<Player> getChallengeePlayers() {
 		return playerDBA.getChallengeePlayers(this);
 	}
+	
+	public ArrayList<Player> getStartPlayers() {
+		return playerDBA.getStartPlayers(this);
+	}
 
 }  

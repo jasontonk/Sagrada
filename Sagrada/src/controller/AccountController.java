@@ -48,10 +48,16 @@ public class AccountController {
 		invitePlayerList = new ArrayList<Player>();
 		
 		accountDBA = new AccountDBA(c);
-		makeThread();
+		makeInviteThread();
+		makeNewGameThread();
 	}
 	
-	public void makeThread() {
+	public void makeNewGameThread() {
+		Thread newGameController = new Thread(new NewGameController(10, this));
+		newGameController.start();
+	}
+
+	public void makeInviteThread() {
 		Thread invitationChecker = new Thread(new InvitationController(10, this));
 		invitationChecker.start();
 	}
@@ -151,28 +157,25 @@ public class AccountController {
 	}
 	
 	public void showInvite(Player player) {
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Invite");
-				
-		System.out.println("TEST 1" + player);
-		System.out.println("TEST 2" + player.getGame());
-		System.out.println("TEST 3" + player.getGame().getChallengerOfGameWithID(player.getGame().getGameID()));
-				String inviter = player.getGame().getChallengerOfGameWithID(player.getGame().getGameID());
-				alert.setHeaderText(inviter + " wil je inviten voor een game");
-
-		alert.setContentText("Wil je dit accepteren?");
-
-		Optional<ButtonType> result = alert.showAndWait();
-		if (result.get() == ButtonType.OK){
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Invite");
 			
-			player.setPlayerStatus(PlayerStatus.ACCEPTED);
-		} else {
-			player.setPlayerStatus(PlayerStatus.REFUSED);
-		}
-	}
-
-	public void makeGame() {
-//		GameController gameContoller = new GameController(connection, myScene);
+					String inviter = player.getGame().getChallengerOfGameWithID(player.getGame().getGameID());
+					alert.setHeaderText(inviter + " wil je inviten voor een game");
+	
+			alert.setContentText("Wil je dit accepteren?");
+	
+			
+			
+			Optional<ButtonType> result = alert.showAndWait();
+			
+			
+			if (result.get() == ButtonType.OK){
+				
+				player.setPlayerStatus(PlayerStatus.ACCEPTED);
+			} else {
+				player.setPlayerStatus(PlayerStatus.REFUSED);
+			}
 	}
 
 	public void inviteAccounts(ArrayList<Account> inviteList) {
@@ -191,6 +194,7 @@ public class AccountController {
 		     return; 
 	     }
 			Game game = new Game(connection);
+			game.addGameToDB();
 			Player player = new Player(connection);
 			player.setAccount(account);
 			player.setName(account.getUsername());
@@ -220,5 +224,29 @@ public class AccountController {
 	public void render() {
 		myScene.setContentPane(lobbyView.makeAccountPane());
 		System.out.println("========== LOBBYVIEW GERENDERD");
+	}
+
+	public void startGame(ArrayList<Player> gameLobby) {
+		for (Player player : gameLobby) {
+			
+			if(player.getPlayerStatus().equals(PlayerStatus.CHALLENGEE)) {
+				showWarning("game", "Niet elke speler heeft gereageerd op je invite");
+				return;
+			}
+			player.setPlayerStatus(PlayerStatus.START);
+		}	
+	}
+	
+	public void joinGame(Player player, Game game) {
+		
+		if (player.getPatternCard() == null) {
+			GameController gameController = new GameController(connection, myScene, game, 0);
+        } else {
+            if (!game.everyoneSelectedPatternCard()) {
+            	showWarning("game", "Niet elke speler heeft een patroonkaart geselecteerd");
+            } else {
+            	
+            }
+        }
 	}
 }

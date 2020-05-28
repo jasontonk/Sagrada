@@ -44,7 +44,7 @@ public class GameController {
 		
 		myScene = ms;
 		this.game = game;
-//		game =  new Game(conn, true);
+		game =  new Game(conn, true);
 		System.out.println("loading...20%");
 		dieController = new DieController(conn, this);
 		System.out.println("loading...40%");
@@ -54,11 +54,11 @@ public class GameController {
 		System.out.println("loading...80%");
 		gameView = new GameView(this);
 		System.out.println("loading...100%");
-//		Timer timer = new Timer();
+		Timer timer = new Timer();
 //		Task task = new Task;
-//		game.playround();
-//		patterncardView = new PatterncardView(patterncardController);
-//		patterncardSelectionView = new PatterncardSelectionView(this);
+		game.playround();
+		patterncardView = new PatterncardView(patterncardController);
+		patterncardSelectionView = new PatterncardSelectionView(this);
 		gameRoundPlayer =  new GameRoundPlayer(this, 3);
 		gameUpdater = new GameUpdater(this);
 		gameViewUpdater = new GameViewUpdater(this, gameUpdater);
@@ -76,8 +76,42 @@ public class GameController {
 //		myScene.setContentPane(patterncardSelectionView);
 //		myScene.setContentPane(gameView.getPatterncardSelectionView());
 		
-		
 
+	}
+	
+	public GameController(DataBaseConnection conn, MyScene ms, Game game, int niks) {
+		this.conn= conn;
+		myScene = ms;
+		this.game = game;
+		
+		System.out.println("loading...20%");
+		dieController = new DieController(conn, this);
+		System.out.println("loading...40%");
+		patterncardController= new PatterncardController(conn, this);
+		System.out.println("loading...60%");
+		roundtrackController= new RoundtrackController(game, this);
+		System.out.println("loading...80%");
+		gameView = new GameView(this);
+		System.out.println("loading...100%");
+		
+		patterncardView = new PatterncardView(patterncardController);
+		patterncardSelectionView = new PatterncardSelectionView(this);
+		gameRoundPlayer =  new GameRoundPlayer(this, 3);
+		gameUpdater = new GameUpdater(this);
+		gameViewUpdater = new GameViewUpdater(this, gameUpdater);
+		
+		changedDiceOnRoundTrack = new ArrayList<GameDie>();
+		diceOnRoundTrack = new ArrayList<GameDie>();
+		
+		
+		Thread updateGame = new Thread(gameUpdater);
+		updateGame.setDaemon(true);
+		updateGame.start();
+		Thread updateViews = new Thread(gameViewUpdater);
+		updateViews.setDaemon(true);
+		updateViews.start();
+		
+		myScene.setContentPane(patterncardSelectionView);
 	}
 	
 public ArrayList<PatterncardController> getPatternCardsToChoose(){
@@ -215,5 +249,10 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 	
 	public void clearChangedDiceOnRoundTrack() {
 		changedDiceOnRoundTrack.clear();
+	}
+
+	public void viewPatternCardSelection() {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -5,5 +5,8 @@ public enum PlayerStatus {
  CHALLENGEE,
  CHALLENGER,
  FINISHED,
- REFUSED
+ REFUSED,
+ START,
+ INGAME
+ //test
 }

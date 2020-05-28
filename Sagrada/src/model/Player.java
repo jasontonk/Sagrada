@@ -44,9 +44,7 @@ public class Player {
 		modelColor = modelColor.RED;
 		this.setColor(modelColor);
 
-		
-		
-		
+
 		playerDBA.addPlayer(this, playerStatus);
 		System.out.println("test2");
 		patternCard = new PatternCard(c);

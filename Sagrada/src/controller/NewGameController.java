@@ -2,14 +2,13 @@ package controller;
 
 import javafx.application.Platform;
 import model.Player;
-import model.PlayerStatus;
 
-public class InvitationController implements Runnable {
+public class NewGameController implements Runnable {
 
 	private int seconds;
 	private AccountController accountController;
 	
-	public InvitationController(int i, AccountController accountController) {
+	public NewGameController(int i, AccountController accountController) {
 		this.seconds = i;
 		this.accountController = accountController;
 	}
@@ -18,25 +17,26 @@ public class InvitationController implements Runnable {
 	public void run() {
 		
 		while(true) {
-			System.out.println("Invitation Controller Running...");
+			System.out.println("NewGameController Running...");
 
-			for(Player player : accountController.getAccount().getChallengeePlayers()) {
-
+			for(Player player : accountController.getAccount().getStartPlayers()) {
+				
 					Platform.runLater(new Runnable() {
 						@Override
 						public void run() {
-							accountController.showInvite(player);
+							accountController.joinGame(player, player.getGame());;
 						}				
 					});
-					
 			}
 			
-			System.out.println("Invitation Controller Stop...");
+			System.out.println("NewGameController Stop...");
 			try {
 				Thread.sleep(seconds * 1000);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
+	
 	}
 }
+

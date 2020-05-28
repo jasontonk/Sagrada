@@ -44,7 +44,7 @@ public class Game {
 		roundTrack = new RoundTrack(this);
 		gameDBA = new GameDBA(conn);
 		gamedieDBA = new GameDieDBA(conn);
-//		gameDBA.addNewGameDB(LocalDateTime.now(), this);
+		gameDBA.addNewGameDB(LocalDateTime.now(), this);
 		offer = new GameDie[9];
 		players = new ArrayList<Player>();
 		currentPlayer = new Player(conn, new Account("ditis2", "eentest", conn), this, PlayerStatus.CHALLENGER);
@@ -69,13 +69,18 @@ public class Game {
 		gameDBA = new GameDBA(conn);
 		gamedieDBA = new GameDieDBA(conn);
 		
-		gameDBA.addNewGameDB(LocalDateTime.now(), this);
+//		gameDBA.addNewGameDB(LocalDateTime.now(), this);
 		
 		round = 1;
 		roundTrack = new RoundTrack(this);
 		
 		offer = new GameDie[9];
 		players = new ArrayList<Player>();
+	}
+	
+	public void addGameToDB() {
+		// TODO Auto-generated method stub
+		gameDBA.addNewGameDB(LocalDateTime.now(), this);
 	}
 
 //	public void checkInvites() {
@@ -438,6 +443,15 @@ public class Game {
 		}
 		return offer;
 		
+	}
+
+	public boolean everyoneSelectedPatternCard() {
+		for (Player player : players) {
+			if(player.getPatternCard() == null) {
+				return false;
+			}
+		}
+			return true;	
 	}
 
 }
