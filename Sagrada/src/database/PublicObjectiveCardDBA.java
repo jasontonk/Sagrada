@@ -23,7 +23,7 @@ public class PublicObjectiveCardDBA {
         	Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next()) {
-				PublicObjectiveCard publicObjectiveCard = new PublicObjectiveCard(rs.getString("name"),rs.getString("description"),rs.getInt("points"),rs.getInt("idpublic_objectivecard"));
+				PublicObjectiveCard publicObjectiveCard = new PublicObjectiveCard(rs.getInt("points"),rs.getString("description"),rs.getString("name"),rs.getInt("idpublic_objectivecard"));
 				list.add(publicObjectiveCard);
 			}
 			stmt.close();
@@ -40,7 +40,7 @@ public class PublicObjectiveCardDBA {
 	        	Statement stmt = conn.getConn().createStatement();
 				ResultSet rs = stmt.executeQuery(query);
 				while(rs.next()) {
-					PublicObjectiveCard publicObjectiveCard = new PublicObjectiveCard(rs.getString("name"),rs.getString("description"),rs.getInt("points"),rs.getInt("idpublic_objectivecard"));
+					PublicObjectiveCard publicObjectiveCard = new PublicObjectiveCard(rs.getInt("points"),rs.getString("description"),rs.getString("name"),rs.getInt("idpublic_objectivecard"));
 					list.add(publicObjectiveCard);
 				}
 				stmt.close();
@@ -69,7 +69,7 @@ public class PublicObjectiveCardDBA {
 	        	Statement stmt = conn.getConn().createStatement();
 				ResultSet rs = stmt.executeQuery(query);
 				if(rs.next()) {
-					publicObjectiveCard = new PublicObjectiveCard(rs.getString("name"),rs.getString("description"),rs.getInt("points"),id);
+					publicObjectiveCard = new PublicObjectiveCard(rs.getInt("points"),rs.getString("description"),rs.getString("name"),id);
 				}
 				stmt.close();
 	        } catch (SQLException e) {
