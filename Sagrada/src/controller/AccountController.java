@@ -233,7 +233,7 @@ public class AccountController {
 				showWarning("game", "Niet elke speler heeft gereageerd op je invite");
 				return;
 			}
-			player.setPlayerStatus(PlayerStatus.START);
+			this.joinGame(player, player.getGame());
 		}	
 	}
 	

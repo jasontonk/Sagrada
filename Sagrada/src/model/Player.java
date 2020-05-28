@@ -164,6 +164,9 @@ public class Player {
 	}
 
 	public PatternCard getPatternCard() {
+		if(patternCard == null) {
+			return null;
+		}
 		patternCard.setpattern(false);
 		return patternCard;
 	}
@@ -304,7 +307,9 @@ public class Player {
 			score = score + 1;
 		}
 		
-		//TODO publicobjective
+		for (PublicObjectiveCard publicObjectiveCard : game.getPublicObjectiveCards()) {
+            score = score + publicObjectiveCard.calculateScore(board);
+        }
 		
 		this.score = score;
 		

@@ -67,5 +67,13 @@ public class PatterncardController {
 	public int getSelectedDieValue() {
 		return gameController.getSelectedDieValue();
 	}
+	
+	public GameController getGameController() {
+		return gameController;
+	}
+	
+	public PatternCard getPatterncard() {
+		return patterncard;
+	}
 }
   

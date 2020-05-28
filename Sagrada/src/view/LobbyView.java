@@ -65,7 +65,7 @@ public class LobbyView extends BorderPane {
 			gameid.setMinWidth(150);
             
             Button playGame = buildButton("Speel!");
-            playGame.setOnAction(e -> System.out.println("speel"));
+            playGame.setOnAction(e -> accountController.joinGame(p, p.getGame()));
             
             playerlist.getChildren().addAll(gameid,playGame);
             overview.getChildren().add(playerlist);

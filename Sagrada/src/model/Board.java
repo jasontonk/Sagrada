@@ -116,119 +116,67 @@ public class Board {
 		}
 	}
 
-	/**
-     * returns true if there is a die with the color of the parameter north west of the boardfield of the parameter
-     */
-	private boolean checkNorthWestDieColor(BoardField boardField, ModelColor modelColor) {
-		if(boardField.getyPos() == 0 || boardField.getxPos() == 0) {
-			return false;
-		}
-		BoardField boardFieldNext = getBoardField(boardField.getxPos() - 1, boardField.getyPos() - 1);
-		if(boardFieldNext.hasDie()) {
-			return checkFieldColorAndDieColor(boardFieldNext, modelColor);
-		}
-		return false;
-	}
-	
 	//============================================
 	
-//	/**
-//     * returns true if there is a die with the value of the parameter north west of the boardfield of the parameter
-//     */
-//	private boolean checkNorthWestDieValue(BoardField boardField, int value) {
-//		if(boardField.getyPos() == 1 || boardField.getxPos() == 1) {
-//			return false;
-//		}
-//		BoardField boardFieldNext = getBoardField(boardField.getxPos() - 1, boardField.getyPos() - 1);
-//		if(boardFieldNext.hasDie()) {
-//			return checkFieldValueAndDieValue(boardFieldNext, value);
-//		}
-//		return false;
-//	}
-//	
-//	/**
-//     * returns true if there is a die with the color of the parameter north east of the boardfield of the parameter
-//     */
-//	private boolean checkNorthEastDieColor(BoardField boardField, Color color) {
-//		if(boardField.getyPos() == 1 || boardField.getxPos() == BOARD_SQUARES_HORIZONTAL) {
-//			return false;
-//		}
-//		BoardField boardFieldNext = getBoardField(boardField.getxPos() + 1, boardField.getyPos() - 1);
-//		if(boardFieldNext.hasDie()) {
-//			return checkFieldColorAndDieColor(boardFieldNext, color);
-//		}
-//		return false;
-//	}
-//	
-//	/**
-//     * checks if there is a die with the value of the parameter north east of the boardfield of the parameter
-//     */
-//	private boolean checkNorthEastDieValue(BoardField boardField, int value) {
-//		if(boardField.getyPos() == 1 || boardField.getxPos() == BOARD_SQUARES_HORIZONTAL) {
-//			return false;
-//		}
-//		BoardField boardFieldNext = getBoardField(boardField.getxPos() + 1, boardField.getyPos() - 1);
-//		if(boardFieldNext.hasDie()) {
-//			return checkFieldValueAndDieValue(boardFieldNext, value);
-//		}
-//		return false;
-//	}
-//	
-//	/**
-//     * returns true if there is a die with the color of the parameter south east of the boardfield of the parameter
-//     */
-//	private boolean checkSouthEastDieColor(BoardField boardField, Color color) {
-//		if(boardField.getyPos() == BOARD_SQUARES_VERTICAL || boardField.getxPos() == BOARD_SQUARES_HORIZONTAL) {
-//			return false;
-//		}
-//		BoardField boardFieldNext = getBoardField(boardField.getxPos() + 1, boardField.getyPos() + 1);
-//		if(boardFieldNext.hasDie()) {
-//			return checkFieldColorAndDieColor(boardFieldNext, color);
-//		}
-//		return false;
-//	}
-//	
-//	/**
-//     * returns true if there is a die with the value of the parameter south east of the boardfield of the parameter
-//     */
-//	private boolean checkSouthEastDieValue(BoardField boardField, int value) {
-//		if(boardField.getyPos() == BOARD_SQUARES_VERTICAL || boardField.getxPos() == BOARD_SQUARES_HORIZONTAL) {
-//			return false;
-//		}
-//		BoardField boardFieldNext = getBoardField(boardField.getxPos() + 1, boardField.getyPos() + 1);
-//		if(boardFieldNext.hasDie()) {
-//			return checkFieldValueAndDieValue(boardFieldNext, value);
-//		}
-//		return false;
-//	}
-//	
-//	/**
-//     * returns true if there is a die with the value of the parameter south west of the boardfield of the parameter
-//     */
-//	private boolean checkSouthWestDieValue(BoardField boardField, int value) {
-//		if(boardField.getyPos() == BOARD_SQUARES_VERTICAL || boardField.getxPos() == 1) {
-//			return false;
-//		}
-//		BoardField boardFieldNext = getBoardField(boardField.getxPos() - 1, boardField.getyPos() + 1);
-//		if(boardFieldNext.hasDie()) {
-//			return checkFieldValueAndDieValue(boardFieldNext, value);
-//		}
-//		return false;
-//	}
-//	
-//	/**
-//     * returns true if there is a die with the color of the parameter south west of the boardfield of the parameter
-//     */
-//	private boolean checkSouthWestDieColor(BoardField boardField, Color color) {
-//		if(boardField.getyPos() == BOARD_SQUARES_VERTICAL || boardField.getxPos() == 1) {
-//			return false;
-//		}
-//		BoardField boardFieldNext = getBoardField(boardField.getxPos() - 1, boardField.getyPos() + 1);
-//		if(boardFieldNext.hasDie()) {
-//			return checkFieldColorAndDieColor(boardFieldNext, color);
-//		}
-//		return false;
-//	}
+
+	public BoardField checkNorthWestDieColor(BoardField boardField, ModelColor modelColor) {	        
+	    if (boardField.getxPos() == 1 || boardField.getyPos() == 1) {
+	        return null;
+	    }
+	    if (!getBoardField(boardField.getxPos() - 1, boardField.getyPos() - 1).hasDie()) {
+	        return null;
+	    }
+	    GameDie gameDie = getBoardField(boardField.getxPos() - 1, boardField.getyPos() - 1).getDie();
+	    if (gameDie.getColor().equals(modelColor)) {
+	        return getBoardField(boardField.getxPos() - 1, boardField.getyPos() - 1);
+	    }
+	    return null;
+	}
+	
+	
+	public BoardField checkNorthEastDieColor(BoardField boardField, ModelColor modelColor) {	       
+	    if (boardField.getxPos() == 5 || boardField.getyPos() == 1) {
+	        return null;
+	    }
+	    if (!getBoardField(boardField.getxPos() + 1, boardField.getyPos() - 1).hasDie()) {
+	        return null;
+	    }
+	    GameDie gameDie = getBoardField(boardField.getxPos() + 1, boardField.getyPos() - 1).getDie();
+	    if (gameDie.getColor().equals(modelColor)) {
+	        return getBoardField(boardField.getxPos() + 1, boardField.getyPos() - 1);
+	    }
+	    return null;
+	}
+	
+	public BoardField checkSouthEastDieColor(BoardField boardField, ModelColor color) {
+	    if (boardField.getxPos() == 5 || boardField.getyPos() == 4) {
+	        return null;
+	    }
+	    if (!getBoardField(boardField.getxPos() + 1, boardField.getyPos() + 1).hasDie()) {
+	        return null;
+	    }
+	    GameDie gameDie = getBoardField(boardField.getxPos() + 1, boardField.getyPos() + 1).getDie();
+	    if (gameDie.getColor().equals(color)) {
+	        return getBoardField(boardField.getxPos() + 1, boardField.getyPos() + 1);
+	    }
+	    return null;
+	}
+	
+	
+	public BoardField checkSouthWestDieColor(BoardField boardField, ModelColor color) {	       
+	    if (boardField.getxPos() == 1 || boardField.getyPos() == 4) {
+	        return null;
+	    }
+	    if (!getBoardField(boardField.getxPos() - 1, boardField.getyPos() + 1).hasDie()) {
+	        return null;
+	    }
+	    GameDie gameDie = getBoardField(boardField.getxPos() - 1,
+	    		boardField.getyPos() + 1).getDie();
+	    if (gameDie.getColor().equals(color)) {
+	        return getBoardField(boardField.getxPos() - 1, boardField.getyPos() + 1);
+	    }
+	    return null;
+	}
 	
 //===============================================	
 	

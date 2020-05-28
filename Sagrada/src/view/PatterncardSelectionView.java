@@ -46,10 +46,16 @@ public class PatterncardSelectionView extends VBox {
 		for (int i = 0; i < patterncardView.size(); i++) {
 			Button button = new Button();
 			button.setText("Selecteer mij!");
+			button.setOnAction(e -> test());
 			gridpane.add(button, i, 2);
 			gridpane.setHalignment(button, HPos.CENTER);
 		}
 		return gridpane;
+	}
+
+
+	private void test() {
+		System.out.println("patterncardview weergeven");
 	}
 
 
