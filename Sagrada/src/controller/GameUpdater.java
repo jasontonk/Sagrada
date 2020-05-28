@@ -64,10 +64,14 @@ public class GameUpdater implements Runnable {
 	}
 	
 	private void updateScore() {
+//		for (Player p : gameCtrl.getGame().getPlayers()) {
+//			p.calculateScore();
+//		}
+//		gameCtrl.getGameView().getScoreView().makeScoreBoard();
+//		System.out.println("gelukt 1");
+		
 		for (Player p : gameCtrl.getGame().getPlayers()) {
-			p.calculateScore();
+			p.getScore();
 		}
-		gameCtrl.getGameView().getScoreView().makeScoreBoard();
-		System.out.println("gelukt 1");
 	}
 }

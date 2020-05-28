@@ -50,17 +50,18 @@ public class ScoreView extends BorderPane {
             playerNameLabel.setTextAlignment(TextAlignment.CENTER);
             
             Label playerScore = new Label();
+            playerScore.textProperty().bind(game.getPlayers().get(i).getScore().asString());
             
-            CalculateScoreTask cst = new CalculateScoreTask(player);
-            cst.setOnSucceeded(e -> {
-                playerScore.setText("" + cst.getValue());
+//            CalculateScoreTask cst = new CalculateScoreTask(player);
+//            cst.setOnSucceeded(e -> {
+//                playerScore.setText("" + cst.getValue());
                 playerScore.setTextAlignment(TextAlignment.CENTER);
                 playerLine.getChildren().addAll(playerNameLabel, playerScore);
                 playerLine.setAlignment(Pos.CENTER);
-            });
-            Thread thread = new Thread(cst);
-            thread.setName("Calculate score");
-            thread.start();
+//            });
+//            Thread thread = new Thread(cst);
+//            thread.setName("Calculate score");
+//            thread.start();
             scoreLines.add(i, playerLine);
         }
         scoreBoardContent.getChildren().addAll(scoreLines);

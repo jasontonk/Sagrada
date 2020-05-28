@@ -432,6 +432,7 @@ public class Game {
 	}
 
 	public void setFinishedTurnTrue() {
+		currentPlayer.calculateScore();
 		finishedTurn = true;
 		
 	}

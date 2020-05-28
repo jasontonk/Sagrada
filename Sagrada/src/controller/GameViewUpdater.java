@@ -69,11 +69,11 @@ public class GameViewUpdater extends Task<Void> {
 	}
 	
 	private void updateScoreBoard() {
-		for (Player p : gameCtrl.getGame().getPlayers()) {
-			p.calculateScore();
-		}
-		gameCtrl.getGameView().getScoreView().makeScoreBoard();
-		System.out.println("gelukt 2");
+//		for (Player p : gameCtrl.getGame().getPlayers()) {
+//			p.calculateScore();
+//		}
+//		gameCtrl.getGameView().getScoreView().makeScoreBoard();
+//		System.out.println("gelukt 2");
 	}
 
 

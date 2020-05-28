@@ -44,7 +44,7 @@ public class GameController {
 		
 		myScene = ms;
 		this.game = game;
-		game =  new Game(conn, true);
+//		game =  new Game(conn, true);
 		System.out.println("loading...20%");
 		dieController = new DieController(conn, this);
 		System.out.println("loading...40%");

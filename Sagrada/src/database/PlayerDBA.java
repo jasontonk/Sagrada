@@ -206,8 +206,9 @@ public class PlayerDBA {
 		}
 	}
 
-	public void setScore(Player player) {
-		String query = "UPDATE player SET score = " + player.getScore() + " WHERE idplayer = " + player.getId() + ";";
+	public void setScore(Player player, int score) {
+		String query = "UPDATE player SET score = " + score + " WHERE idplayer = " + player.getId() + ";";
+		System.out.println(query);
 		try {
 			Statement stmt = conn.getConn().createStatement();
 			stmt.executeUpdate(query);
@@ -443,6 +444,25 @@ public class PlayerDBA {
 			e.printStackTrace();
 		}
 		return list;
+	}
+
+
+
+	public int getScoreFromDB(Player player) {
+		System.out.println("jaaaaaa");
+		int playerscore = 0;
+		String query = "SELECT score FROM player WHERE idplayer= " + player.getId() + ";";
+		try {
+			Statement stmt = conn.getConn().createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			if (rs.next()) {
+				playerscore = rs.getInt("score");
+			}
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return playerscore;
 	}
 
 

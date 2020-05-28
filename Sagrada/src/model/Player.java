@@ -7,12 +7,13 @@ import database.DataBaseConnection;
 import database.FavorTokenDBA;
 import database.PatternCardDBA;
 import database.PlayerDBA;
+import javafx.beans.property.SimpleIntegerProperty;
 
 public class Player {
 	
 	private int id;
 	private int sequenceNumber;
-	private int score;
+	private SimpleIntegerProperty score;
 	private String name;
 	private PlayerStatus playerStatus;
 	
@@ -37,6 +38,7 @@ public class Player {
 	public Player(DataBaseConnection c, Account account, Game game, PlayerStatus playerStatus) {
 		connection = c;
 		playerDBA = new PlayerDBA(c);
+
 		this.account = account;
 		this.setName(account.getUsername());
 		this.setGame(game);
@@ -49,7 +51,10 @@ public class Player {
 		playerDBA.addPlayer(this, playerStatus);
 		System.out.println("test2");
 		patternCard = new PatternCard(c);
-		board = new Board(1, this, c);		
+		board = new Board(1, this, c);	
+		
+		score = new SimpleIntegerProperty();
+		setScore(-20);
 		
 	}
 
@@ -83,12 +88,14 @@ public class Player {
 		playerDBA.setPlayerSeqNumber(seqnr, this);;
 	}
 
-	public int getScore() {
+	public SimpleIntegerProperty getScore() {
+		score.set(playerDBA.getScoreFromDB(this));
 		return score;
 	}
 
 	public void setScore(int score) {
-		this.score = score;
+		this.score.set(score);
+		playerDBA.setScore(this, score);
 	}
 
 	public String getName() {
@@ -311,10 +318,9 @@ public class Player {
 //            score = score + publicObjectiveCard.calculateScore(board);
 //        }
 		
-		this.score = score;
+		this.score.set(score);
 		
-	
-		playerDBA.setScore(this);
+		playerDBA.setScore(this, score);
 		 
 		return score;
 	}
