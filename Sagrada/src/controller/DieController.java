@@ -83,6 +83,7 @@ public class DieController {
 			if(selectedDie == die.get(i)) {
 				gameController.getGameView().getDicePoolView().deleteDie(i);
 				die.remove(i);
+				gameController.getGame().setSelectedDie(null);
 				break;
 			}
 		}

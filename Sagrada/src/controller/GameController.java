@@ -153,7 +153,6 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 
 	public void deleteSelectedDie() {
 		dieController.deleteSelectedDie(game.getSelectedDie());
-		game.setSelectedDie(null);
 		
 	}
 	public void setSelectedDie(GameDie die) {
