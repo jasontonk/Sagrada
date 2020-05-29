@@ -58,7 +58,7 @@ public class DicePoolView extends VBox {
 	public BorderPane drawTitle() {
 		BorderPane titlePane = new BorderPane();
 		Text title = new Text();
-		title.setText("Aanbod");
+		title.setText("Aanbod - GameID: " + dieController.getGameController().getGame().getGameID());
 		titlePane.setPadding(padding);
 		titlePane.setCenter(title);
 		return titlePane;

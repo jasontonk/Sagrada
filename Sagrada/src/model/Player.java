@@ -63,7 +63,9 @@ public class Player {
 		connection = c;
 		playerDBA = new PlayerDBA(c);
 		this.setPlayerStatus(PlayerStatus.CHALLENGEE);
-
+		
+		score = new SimpleIntegerProperty();
+		setScore(-20);
 		}		
 
 

@@ -285,33 +285,33 @@ public class PlayerDBA {
 		return list;
 	}
 
-//	public Player getPlayerUsingSeqnrAndGame(int seqnr, Game game) {
-//
-//		Player player = new Player(conn, null, game, null);
-//		String query = "SELECT * FROM player WHERE seqnr= " + seqnr + " AND idgame=" + game.getGameID() + ";";
-//		try {
-//			Statement stmt = conn.getConn().createStatement();
-//			ResultSet rs = stmt.executeQuery(query);
-//			if (rs.next()) {
-//				PatternCardDBA patternCard = new PatternCardDBA(conn);
-//				AccountDBA account = new AccountDBA(conn);
-//				GameDBA g = new GameDBA(conn);
-//				player.setAccount(account.GetAccountDB(rs.getString("username")));
-//				player.setName(rs.getString("username"));
-//				player.setId(rs.getInt("idplayer"));
-//				player.setPlayerStatus(getPlayerStatusFromString(rs.getString("playstatus")));
-//				player.setSequenceNumber(rs.getInt("seqnr"));
-//				player.setScore(rs.getInt("score"));
-//				player.setColor(getColorFromString(rs.getString("private_objectivecard_color")));
-//				player.setPatternCard(patternCard.getPatterncardByID(rs.getInt("idpatterncard")));
-//				player.setGame(g.getGameByID(rs.getInt("idgame")));
-//			}
-//			stmt.close();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return player;
-//	}
+	public Player getPlayerUsingSeqnrAndGame(int seqnr, Game game) {
+
+		Player player = new Player(conn, null, game, null);
+		String query = "SELECT * FROM player WHERE seqnr= " + seqnr + " AND idgame=" + game.getGameID() + ";";
+		try {
+			Statement stmt = conn.getConn().createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			if (rs.next()) {
+				PatternCardDBA patternCard = new PatternCardDBA(conn);
+				AccountDBA account = new AccountDBA(conn);
+				GameDBA g = new GameDBA(conn);
+				player.setAccount(account.GetAccountDB(rs.getString("username")));
+				player.setName(rs.getString("username"));
+				player.setId(rs.getInt("idplayer"));
+				player.setPlayerStatus(getPlayerStatusFromString(rs.getString("playstatus")));
+				player.setSequenceNumber(rs.getInt("seqnr"));
+				player.setScore(rs.getInt("score"));
+				player.setColor(getColorFromString(rs.getString("private_objectivecard_color")));
+				player.setPatternCard(patternCard.getPatterncardByID(rs.getInt("idpatterncard")));
+				player.setGame(g.getGameByID(rs.getInt("idgame")));
+			}
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return player;
+	}
 
 	public void setPlayerSeqNumber(int seqnr, Player player) {
 
