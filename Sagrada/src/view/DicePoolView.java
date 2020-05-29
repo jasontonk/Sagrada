@@ -97,13 +97,9 @@ public class DicePoolView extends VBox {
 
 	public void updateDicePool(int amountofdice) {
 		
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
 				deleteAllDiceFromDicepool();
 				addAllDiceFromDicepool(amountofdice);
-			}
-		});
+		
 	}
 
 

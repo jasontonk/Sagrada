@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import model.GameDie;
 import model.ModelColor;
@@ -19,8 +20,13 @@ public class GameViewUpdater extends Task<Void> {
 	@Override
 	public Void call() {
 		while(true){
-			updateAll();
-			System.out.println("updated Views");
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					updateAll();
+					System.out.println("updated Views");
+				}
+			});
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {

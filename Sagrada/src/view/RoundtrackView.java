@@ -91,9 +91,7 @@ public class RoundtrackView extends VBox {
 		return roundPane;
 	}
 	public void addDice(int round, ArrayList<ModelColor> colors, ArrayList<Integer> values) {
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
+		
 				for(int i = 0; i < colors.size(); i++) {
 					String imgURL;
 					Button button = new Button();
@@ -118,7 +116,5 @@ public class RoundtrackView extends VBox {
 						stackpanes.add(stackpane);
 						}
 					}
-			}
-		});
 	}
 }
