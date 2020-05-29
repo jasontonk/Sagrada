@@ -200,8 +200,6 @@ public class Account {
 		return playerDBA.getChallengeePlayers(this);
 	}
 	
-	public ArrayList<Player> getStartPlayers() {
-		return playerDBA.getStartPlayers(this);
-	}
+
 
 }  

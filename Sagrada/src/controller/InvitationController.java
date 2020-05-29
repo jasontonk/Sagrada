@@ -20,16 +20,17 @@ public class InvitationController implements Runnable {
 		while(true) {
 			System.out.println("Invitation Controller Running...");
 
-			for(Player player : accountController.getAccount().getChallengeePlayers()) {
-
 					Platform.runLater(new Runnable() {
-						@Override
-						public void run() {
+						
+					@Override
+					public void run() {
+						for(Player player : accountController.getAccount().getChallengeePlayers()) {
 							accountController.showInvite(player);
-						}				
-					});
+						}			
+					}
+				});
 					
-			}
+			
 			
 			System.out.println("Invitation Controller Stop...");
 			try {

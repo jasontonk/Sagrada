@@ -285,33 +285,33 @@ public class PlayerDBA {
 		return list;
 	}
 
-	public Player getPlayerUsingSeqnrAndGame(int seqnr, Game game) {
-
-		Player player = new Player(conn, null, game, null);
-		String query = "SELECT * FROM player WHERE seqnr= " + seqnr + " AND idgame=" + game.getGameID() + ";";
-		try {
-			Statement stmt = conn.getConn().createStatement();
-			ResultSet rs = stmt.executeQuery(query);
-			if (rs.next()) {
-				PatternCardDBA patternCard = new PatternCardDBA(conn);
-				AccountDBA account = new AccountDBA(conn);
-				GameDBA g = new GameDBA(conn);
-				player.setAccount(account.GetAccountDB(rs.getString("username")));
-				player.setName(rs.getString("username"));
-				player.setId(rs.getInt("idplayer"));
-				player.setPlayerStatus(getPlayerStatusFromString(rs.getString("playstatus")));
-				player.setSequenceNumber(rs.getInt("seqnr"));
-				player.setScore(rs.getInt("score"));
-				player.setColor(getColorFromString(rs.getString("private_objectivecard_color")));
-				player.setPatternCard(patternCard.getPatterncardByID(rs.getInt("idpatterncard")));
-				player.setGame(g.getGameByID(rs.getInt("idgame")));
-			}
-			stmt.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return player;
-	}
+//	public Player getPlayerUsingSeqnrAndGame(int seqnr, Game game) {
+//
+//		Player player = new Player(conn, null, game, null);
+//		String query = "SELECT * FROM player WHERE seqnr= " + seqnr + " AND idgame=" + game.getGameID() + ";";
+//		try {
+//			Statement stmt = conn.getConn().createStatement();
+//			ResultSet rs = stmt.executeQuery(query);
+//			if (rs.next()) {
+//				PatternCardDBA patternCard = new PatternCardDBA(conn);
+//				AccountDBA account = new AccountDBA(conn);
+//				GameDBA g = new GameDBA(conn);
+//				player.setAccount(account.GetAccountDB(rs.getString("username")));
+//				player.setName(rs.getString("username"));
+//				player.setId(rs.getInt("idplayer"));
+//				player.setPlayerStatus(getPlayerStatusFromString(rs.getString("playstatus")));
+//				player.setSequenceNumber(rs.getInt("seqnr"));
+//				player.setScore(rs.getInt("score"));
+//				player.setColor(getColorFromString(rs.getString("private_objectivecard_color")));
+//				player.setPatternCard(patternCard.getPatterncardByID(rs.getInt("idpatterncard")));
+//				player.setGame(g.getGameByID(rs.getInt("idgame")));
+//			}
+//			stmt.close();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return player;
+//	}
 
 	public void setPlayerSeqNumber(int seqnr, Player player) {
 
@@ -411,41 +411,6 @@ public class PlayerDBA {
 		return list;
 	}
 
-
-
-	public ArrayList<Player> getStartPlayers(Account account) {
-		ArrayList<Player> list = new ArrayList<>();
-		
-    	
-		String username = "'" + account.getUsername() + "'";
-
-		String query = "SELECT * FROM player WHERE username = "+username+" AND playstatus = 'START';";
-		try {
-			Statement stmt = conn.getConn().createStatement();
-			ResultSet rs = stmt.executeQuery(query);
-			while (rs.next()) {
-				Player player = new Player(conn);
-				player.setAccount(account);
-				PatternCardDBA patternCard = new PatternCardDBA(conn);
-				player.setName(rs.getString("username"));
-				player.setId(rs.getInt("idplayer"));
-				player.setPlayerStatus(getPlayerStatusFromString(rs.getString("playstatus")));
-				player.setSequenceNumber(rs.getInt("seqnr"));
-				player.setScore(rs.getInt("score"));
-				player.setColor(getColorFromString(rs.getString("private_objectivecard_color")));
-				player.setPatternCard(patternCard.getPatterncardByID(rs.getInt("idpatterncard")));
-				player.setGame(game.getGameByID(rs.getInt("idgame")));
-				list.add(player);
-			}
-			stmt.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
-
-
-
 	public int getScoreFromDB(Player player) {
 		int playerscore = 0;
 		String query = "SELECT score FROM player WHERE idplayer= " + player.getId() + ";";
@@ -461,6 +426,32 @@ public class PlayerDBA {
 		}
 		return playerscore;
 	}
+
+
+
+	public Player getPlayerById(int id) {
+        Player player = new Player(conn);
+        String query = "SELECT * FROM player WHERE idplayer = " + id + ";";
+        
+        try {
+        	Statement stmt = conn.getConn().createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+            if (rs.next()) {
+                AccountDBA accountDBA = new AccountDBA(conn);
+                Account account = accountDBA.GetAccountDB(rs.getString("username"));
+                player.setId(rs.getInt("idplayer"));
+                player.setPlayerStatus(getPlayerStatusFromString(rs.getString("playstatus_playstatus")));
+                player.setColor(getColorFromString(rs.getString("private_objectivecard_color")));
+                player.setSequenceNumber(rs.getInt("seqnr"));
+                player.setCurrentPlayer(rs.getBoolean("isCurrentPlayer"));
+                player.setAccount(account);
+            }
+        } catch (Exception e) {
+            player = null;
+            e.printStackTrace();
+        }
+        return player;
+    }
 
 
 }

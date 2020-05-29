@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import model.Game;
+import model.Player;
 
 public class GameDBA {
 	
@@ -223,4 +224,26 @@ public class GameDBA {
 		}
 		return name;
 	}
+	
+	 public ArrayList<Player> getPlayersOfGame(Game game) {
+	        PlayerDBA playerDBA = new PlayerDBA(conn);
+	        ArrayList<Player> players = new ArrayList<>();
+	        String query = "SELECT idplayer FROM player WHERE idgame = " + game.getGameID();
+	        
+	        try {
+	        	Statement stmt = conn.getConn().createStatement();
+				ResultSet rs = stmt.executeQuery(query);
+	            while (rs.next()) {
+	                int playerId = rs.getInt("idplayer");
+	                Player player = playerDBA.getPlayerById(playerId);
+	                player.setGame(game);
+	                players.add(player);
+	            }
+	            rs.close();
+	        }catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        return players;
+	    }
+	 
 }

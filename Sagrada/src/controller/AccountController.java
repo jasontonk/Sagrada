@@ -16,6 +16,7 @@ import model.Account;
 import model.Game;
 import model.Invitation;
 import model.ModelColor;
+import model.PatternCard;
 import model.Player;
 import model.PlayerStatus;
 import view.ChooseView;
@@ -49,13 +50,8 @@ public class AccountController {
 		
 		accountDBA = new AccountDBA(c);
 		makeInviteThread();
-		makeNewGameThread();
 	}
 	
-	public void makeNewGameThread() {
-		Thread newGameController = new Thread(new NewGameController(10, this));
-		newGameController.start();
-	}
 
 	public void makeInviteThread() {
 		Thread invitationChecker = new Thread(new InvitationController(10, this));
@@ -240,13 +236,9 @@ public class AccountController {
 	public void joinGame(Player player, Game game) {
 		
 		if (player.getPatternCard() == null) {
-			GameController gameController = new GameController(connection, myScene, game, 0);
-        } else {
-            if (!game.everyoneSelectedPatternCard()) {
-            	showWarning("game", "Niet elke speler heeft een patroonkaart geselecteerd");
-            } else {
-            	
-            }
-        }
+			player.setPatternCard(new PatternCard(connection));
+        } 
+		GameController gameController = new GameController(connection, myScene, game, 0);
+		myScene.setContentPane(gameController.getGameView());
 	}
 }
