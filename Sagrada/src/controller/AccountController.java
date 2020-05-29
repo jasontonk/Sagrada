@@ -122,7 +122,7 @@ public class AccountController {
 	}
 	
 	public ArrayList<Player> getAllPlayersOfThisAccount() {
-		return account.getPlayers();
+		return account.getPlayers(); 
 	}
 	
 	public void viewLogin() {
