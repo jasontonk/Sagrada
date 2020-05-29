@@ -24,18 +24,27 @@ public class GameUpdater implements Runnable {
 	@Override
 	public void run() {
 		while(isRunning){
-			Platform.runLater(new Runnable() {
-				@Override
-				public void run() {
-					updateAll();
-					System.out.println("updated games");
-				}				
-			});
-			
-			try {
-				Thread.sleep(10000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+			if(!isPaused) {
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						updateAll();
+						System.out.println("updated games");
+					}				
+				});
+				
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			else {
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		
@@ -43,6 +52,9 @@ public class GameUpdater implements Runnable {
 
 	public void setRunning(boolean isRunning) {
 		this.isRunning = isRunning;
+	}
+	public void setPaused(boolean isPaused) {
+		this.isPaused = isPaused;
 	}
 
 	private void updateAll() {

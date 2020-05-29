@@ -47,16 +47,6 @@ public class Game {
 		gameDBA.addNewGameDB(LocalDateTime.now(), this);
 		offer = new ArrayList<GameDie>();
 		players = new ArrayList<Player>();
-		currentPlayer = new Player(conn, new Account("ditis2", "eentest", conn), this, PlayerStatus.CHALLENGER);
-		Player player = new Player(conn, new Account("ditiseentest2", "testtest", conn), this, PlayerStatus.CHALLENGEE);
-		players.add(currentPlayer);
-		players.add(player);
-		currentPlayer = players.get(0);
-		players.get(0).setSequenceNumber(1);
-		players.get(1).setSequenceNumber(2);
-		personalPlayer = players.get(0);
-		System.out.println("player 1 : " + players.get(0).getId());
-		System.out.println("player 2 : " + players.get(1).getId());
 		diceInBag = new GameDie[90];
 		usedDice = new ArrayList<GameDie>();
 		makedie();
@@ -71,7 +61,7 @@ public class Game {
 		
 		gameDBA.addNewGameDB(LocalDateTime.now(), this);
 		
-		this.randomPatterncards = true;
+		this.randomPatterncards = false;
 		round = 1;
 		roundTrack = new RoundTrack(this);
 		
@@ -182,6 +172,8 @@ public class Game {
 	
 	public void getDicePoolFromDB() {
 		ArrayList<GameDie> offerfromDB = gamedieDBA.getAllavailableDiceOfRound(this);
+		System.out.println("offerfromDBsize : " + offerfromDB.size());
+		offer.clear();
 		offer =	offerfromDB;
 		usedDice.addAll(offerfromDB);
 	}
@@ -224,10 +216,10 @@ public class Game {
 				round++;
 			}
 			else if(currentPlayer.getSequenceNumber() == 1 && !isClockwise) {
-				addLeftOverDiceToDicePool();
 				changeSequenceNumber();
 				gameDBA.changeRoundDirection(this);
 				round++;
+				
 			}
 			else if(isClockwise) {
 				for (int i = players.size()-1; i >= 0; i--) {
@@ -260,9 +252,9 @@ public class Game {
 			} 
 			System.out.println("next player : " + currentPlayer.getId());
 	}
-	private void addLeftOverDiceToDicePool() {
+	public void addLeftOverDiceToRoundTrack() {
 		for (int i = 0; i < offer.size(); i++) {
-			gamedieDBA.addDieToRoundTrack(offer.get(i), this, round);
+			gamedieDBA.addDieToRoundTrack(offer.get(i), this, round/2);//TODO check if right
 		}
 		offer.clear();
 		
@@ -453,11 +445,12 @@ public class Game {
 	}
 
 	public ArrayList<GameDie> getOffer() {
+		System.out.println("de size van de offer voor: " + offer.size());
 		if(currentPlayer.getSequenceNumber() == 1 && round%2 == 1 && offer.size() == 0) {
 			grabDiceFromBag();
 		}
+		System.out.println("de size van de offer : " + offer.size());
 		return offer;
-		
 	}
 
 	public boolean everyoneSelectedPatternCard() {

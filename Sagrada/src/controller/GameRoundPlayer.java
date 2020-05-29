@@ -33,6 +33,9 @@ public class GameRoundPlayer implements Runnable {
 			}
 			gameController.getGame().playround();
 		}
+		if(gameController.getGame().getRound()%2 == 0 && gameController.getGame().getRound() != 1 && gameController.getGame().getCurrentPlayer().getSequenceNumber() == 1) {
+			gameController.getGame().addLeftOverDiceToRoundTrack();
+		}
 		gameController.getGame().setNextPlayer();
 		
 		

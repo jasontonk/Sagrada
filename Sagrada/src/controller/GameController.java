@@ -216,19 +216,16 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 	}
 
 	public void playround() {
-		gameViewUpdater.setRunning(false);
-		gameUpdater.setRunning(false);
+		gameViewUpdater.setPaused(true);
+		gameUpdater.setPaused(true);
 		Thread playround = new Thread(gameRoundPlayer);
 		playround.start();
 	}
 	public void stopround() {
 		getGamePoller().setFinishedTurn(true);
-		if(!updateGame.isAlive()) {
-			gameUpdater.setRunning(true);
-		}
-		if(!updateViews.isAlive()) {
-			gameViewUpdater.setRunning(true);
-		}
+		gameUpdater.setPaused(false);
+		gameViewUpdater.setPaused(false);
+
 	}
 	public Game getGame() {
 		return game;

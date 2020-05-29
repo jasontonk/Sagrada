@@ -181,11 +181,19 @@ public class GameDieDBA {
     }
 	
 	public ArrayList<GameDie> getAllavailableDiceOfRound(Game game) {
-        ArrayList<GameDie> list = new ArrayList<GameDie>();
+        int roundFromGameClass = game.getRound();
+		int round;
+		if(roundFromGameClass%2 == 0) {
+			round = roundFromGameClass - 1;
+		}
+		else {
+			round = roundFromGameClass;
+		}
+		ArrayList<GameDie> list = new ArrayList<GameDie>();
         String query = "SELECT gamedie.* FROM gamedie LEFT JOIN playerframefield ON gamedie.dienumber = playerframefield.dienumber "
         		+ "AND gamedie.idgame = playerframefield.idgame AND gamedie.diecolor = playerframefield.diecolor "
         		+ "WHERE playerframefield.dienumber IS NULL AND playerframefield.diecolor IS NULL AND roundtrack IS NULL "
-        		+ "AND gamedie.idgame = "+game.getGameID()+" AND roundID = "+game.getRound()+" "
+        		+ "AND gamedie.idgame = "+game.getGameID()+" AND roundID = "+round+" "
         		+ "ORDER BY gamedie.diecolor, gamedie.dienumber;";
         try {
         	Statement stmt = conn.getConn().createStatement();

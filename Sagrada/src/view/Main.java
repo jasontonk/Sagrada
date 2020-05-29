@@ -15,7 +15,7 @@ import model.Game;
 
 public class Main extends Application  {
 	DataBaseConnection conn = new DataBaseConnection("com.mysql.jdbc.Driver");
-	Game game = new Game(conn, false);
+	Game game = new Game(conn);
 	private GameController gameController = new GameController(conn, null, game);
 	private PatterncardSelectionView patterncardSelectionView = new PatterncardSelectionView(gameController);
 	

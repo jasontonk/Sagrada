@@ -62,6 +62,7 @@ public class DieController {
 	}
 
 	public void setSelectedDie(int dieID, String selectedDieURL) {
+		System.out.println("de die size bij het slecteren van een die : "+ die.size());
 		gameController.setSelectedDie(die.get(dieID));
 		this.selectedDieURL = selectedDieURL;
 	}
@@ -82,8 +83,10 @@ public class DieController {
 			if(selectedDie == die.get(i)) {
 				gameController.getGameView().getDicePoolView().deleteDie(i);
 				die.remove(i);
+				break;
 			}
 		}
+		System.out.println("de die size na het plaatsen van een die : "+ die.size());
 		selectedDieURL = null;
 		
 	}
@@ -97,6 +100,7 @@ public class DieController {
 	public void updateDicePool(ArrayList<GameDie> offer) {
 		die = offer;
 		int offersize = offer.size();
+		System.out.println("Die size in diecontroller: " + die.size());
 		System.out.println("offer: " + offersize);
 		gameController.getGameView().updateDicePoolView(offersize);
 		

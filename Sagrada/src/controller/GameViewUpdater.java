@@ -12,6 +12,7 @@ public class GameViewUpdater extends Task<Boolean> {
 	private GameController gameCtrl;
 	private GameUpdater gameUpdates;
 	private volatile boolean isRunning;
+	private volatile boolean isPaused;
 	
 	public GameViewUpdater(GameController gameCtrl, GameUpdater gameUpdater ) {
 		this.gameCtrl = gameCtrl;
@@ -22,23 +23,35 @@ public class GameViewUpdater extends Task<Boolean> {
 	public Boolean call() {
 		isRunning = true;
 		while(isRunning){
-			Platform.runLater(new Runnable() {
-				@Override
-				public void run() {
-					updateAll();
-					System.out.println("updated Views");
+			if(!isPaused) {
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						updateAll();
+						System.out.println("updated Views");
+					}
+				});
+				try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
-			});
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+			}
+			else {
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		return isRunning;
 	}
 	public void setRunning(boolean isRunning) {
 		this.isRunning = isRunning;
+	}
+	public void setPaused(boolean isPaused) {
+		this.isPaused = isPaused;
 	}
 
 	private void updateAll() {
