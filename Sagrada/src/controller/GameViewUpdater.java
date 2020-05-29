@@ -8,9 +8,10 @@ import model.GameDie;
 import model.ModelColor;
 import model.Player;
 
-public class GameViewUpdater extends Task<Void> {
+public class GameViewUpdater extends Task<Boolean> {
 	private GameController gameCtrl;
 	private GameUpdater gameUpdates;
+	private volatile boolean isRunning;
 	
 	public GameViewUpdater(GameController gameCtrl, GameUpdater gameUpdater ) {
 		this.gameCtrl = gameCtrl;
@@ -18,8 +19,9 @@ public class GameViewUpdater extends Task<Void> {
 	}
 	
 	@Override
-	public Void call() {
-		while(true){
+	public Boolean call() {
+		isRunning = true;
+		while(isRunning){
 			Platform.runLater(new Runnable() {
 				@Override
 				public void run() {
@@ -33,7 +35,12 @@ public class GameViewUpdater extends Task<Void> {
 				e.printStackTrace();
 			}
 		}
+		return isRunning;
 	}
+	public void setRunning(boolean isRunning) {
+		this.isRunning = isRunning;
+	}
+
 	private void updateAll() {
 		updateDicePoolView();
 		updatePatterncardsView();

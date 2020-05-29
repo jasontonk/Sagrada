@@ -11,15 +11,19 @@ public class GameUpdater implements Runnable {
 
 	private GameController gameCtrl;
 	private ArrayList<GameDie> diceOnRoundTrack;
+	private volatile boolean isRunning;
+	private volatile boolean isPaused;
 	
 	public GameUpdater(GameController gamecontroller) {
 		diceOnRoundTrack = new ArrayList<GameDie>();
 		gameCtrl = gamecontroller;
+		isRunning = true;
+		isPaused = false;
 	}
 	
 	@Override
 	public void run() {
-		while(true){
+		while(isRunning){
 			Platform.runLater(new Runnable() {
 				@Override
 				public void run() {
@@ -35,6 +39,10 @@ public class GameUpdater implements Runnable {
 			}
 		}
 		
+	}
+
+	public void setRunning(boolean isRunning) {
+		this.isRunning = isRunning;
 	}
 
 	private void updateAll() {

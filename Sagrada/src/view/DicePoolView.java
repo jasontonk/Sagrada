@@ -104,17 +104,7 @@ public class DicePoolView extends VBox {
 
 
 	private void deleteAllDiceFromDicepool() {
-		int index = dicePool.getChildren().size();
-		System.out.println("index : "+index +" & dicepool : "+dicePool);
-		int counter = 0;
-		for(int i = 0; i < index;i++) {
-			System.out.println("dicepool i: "+dicePool.getChildren().get(i));
-			if(counter < index && !dicePool.getChildren().get(i).equals(null)) {
-				dieView.remove(i);
-				dicePool.getChildren().remove(i);
-			}
-			i--;
-		}
-		counter++;
+		dieView.clear();
+		dicePool.getChildren().clear();
 	}
 } 

@@ -120,7 +120,7 @@ public class GameDieDBA {
 	}
 	
 	public void addDieToRoundTrack(GameDie gamedie, Game game, int round) {
-		String query = "UPDATE gamedie SET roundtrack = "+round+" WHERE idgame = "+game.getGameID()+"AND dienumber = "+gamedie.getNumber()+"AND diecolor = "+getStringFromColor(gamedie)+";";
+		String query = "UPDATE gamedie SET roundtrack = "+round+" WHERE idgame = "+game.getGameID()+" AND dienumber = "+gamedie.getNumber()+" AND diecolor = '"+getStringFromColor(gamedie)+"';";
 		try {
 				Statement stmt = conn.getConn().createStatement();
 				stmt.executeUpdate(query);
@@ -184,8 +184,9 @@ public class GameDieDBA {
         ArrayList<GameDie> list = new ArrayList<GameDie>();
         String query = "SELECT gamedie.* FROM gamedie LEFT JOIN playerframefield ON gamedie.dienumber = playerframefield.dienumber "
         		+ "AND gamedie.idgame = playerframefield.idgame AND gamedie.diecolor = playerframefield.diecolor "
-        		+ "WHERE playerframefield.dienumber IS NULL AND playerframefield.diecolor IS NULL "
-        		+ "AND gamedie.idgame= "+game.getGameID()+" AND roundID= "+game.getRound()+";";
+        		+ "WHERE playerframefield.dienumber IS NULL AND playerframefield.diecolor IS NULL AND roundtrack IS NULL "
+        		+ "AND gamedie.idgame = "+game.getGameID()+" AND roundID = "+game.getRound()+" "
+        		+ "ORDER BY gamedie.diecolor, gamedie.dienumber;";
         try {
         	Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);

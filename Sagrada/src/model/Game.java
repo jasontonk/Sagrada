@@ -224,6 +224,7 @@ public class Game {
 				round++;
 			}
 			else if(currentPlayer.getSequenceNumber() == 1 && !isClockwise) {
+				addLeftOverDiceToDicePool();
 				changeSequenceNumber();
 				gameDBA.changeRoundDirection(this);
 				round++;
@@ -259,6 +260,14 @@ public class Game {
 			} 
 			System.out.println("next player : " + currentPlayer.getId());
 	}
+	private void addLeftOverDiceToDicePool() {
+		for (int i = 0; i < offer.size(); i++) {
+			gamedieDBA.addDieToRoundTrack(offer.get(i), this, round);
+		}
+		offer.clear();
+		
+	}
+
 	public void changeSequenceNumber() {
 		System.out.println("stap 1");
 		if(currentPlayer.getSequenceNumber() == 1 && !gameDBA.isRoundClockwise(this)) {
@@ -444,7 +453,7 @@ public class Game {
 	}
 
 	public ArrayList<GameDie> getOffer() {
-		if(currentPlayer.getSequenceNumber() == 1 && round%2 == 1) {
+		if(currentPlayer.getSequenceNumber() == 1 && round%2 == 1 && offer.size() == 0) {
 			grabDiceFromBag();
 		}
 		return offer;

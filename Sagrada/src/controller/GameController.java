@@ -38,6 +38,9 @@ public class GameController {
 	private ArrayList<GameDie> changedDiceOnRoundTrack;
 	private ArrayList<GameDie> diceOnRoundTrack;
 	
+	private Thread updateGame;
+	private Thread updateViews = new Thread(gameViewUpdater);
+	
 
 	public GameController(DataBaseConnection conn, MyScene ms, Game game) {
 		this.conn= conn;
@@ -67,10 +70,10 @@ public class GameController {
 		diceOnRoundTrack = new ArrayList<GameDie>();
 		
 		
-		Thread updateGame = new Thread(gameUpdater);
+		updateGame = new Thread(gameUpdater);
 		updateGame.setDaemon(true);
 		updateGame.start();
-		Thread updateViews = new Thread(gameViewUpdater);
+		updateViews = new Thread(gameViewUpdater);
 		updateViews.setDaemon(true);
 		updateViews.start();
 //		myScene.setContentPane(patterncardSelectionView);
@@ -104,10 +107,10 @@ public class GameController {
 		diceOnRoundTrack = new ArrayList<GameDie>();
 		
 		
-		Thread updateGame = new Thread(gameUpdater);
+		updateGame = new Thread(gameUpdater);
 		updateGame.setDaemon(true);
 		updateGame.start();
-		Thread updateViews = new Thread(gameViewUpdater);
+		updateViews = new Thread(gameViewUpdater);
 		updateViews.setDaemon(true);
 		updateViews.start();
 		
@@ -213,8 +216,19 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 	}
 
 	public void playround() {
+		gameViewUpdater.setRunning(false);
+		gameUpdater.setRunning(false);
 		Thread playround = new Thread(gameRoundPlayer);
 		playround.start();
+	}
+	public void stopround() {
+		getGamePoller().setFinishedTurn(true);
+		if(!updateGame.isAlive()) {
+			gameUpdater.setRunning(true);
+		}
+		if(!updateViews.isAlive()) {
+			gameViewUpdater.setRunning(true);
+		}
 	}
 	public Game getGame() {
 		return game;
