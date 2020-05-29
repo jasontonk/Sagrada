@@ -173,9 +173,10 @@ public class Game {
 	public void getDicePoolFromDB() {
 		ArrayList<GameDie> offerfromDB = gamedieDBA.getAllavailableDiceOfRound(this);
 		System.out.println("offerfromDBsize : " + offerfromDB.size());
-		offer.clear();
-		offer =	offerfromDB;
-		usedDice.addAll(offerfromDB);
+		if(offer != offerfromDB && offerfromDB.size() != 0) {
+			offer =	offerfromDB;
+		}
+		usedDice.addAll(offer);
 	}
 	
 	public void getDicePool() {
