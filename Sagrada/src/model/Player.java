@@ -316,9 +316,9 @@ public class Player {
 			score = score + 1;
 		}
 		
-//		for (PublicObjectiveCard publicObjectiveCard : game.getPublicObjectiveCards()) {
-//            score = score + publicObjectiveCard.calculateScore(board);
-//        }
+		for (PublicObjectiveCard publicObjectiveCard : game.getPublicObjectiveCards()) {
+            score = score + publicObjectiveCard.calculateScore(board);
+        }
 		
 		this.score.set(score);
 		

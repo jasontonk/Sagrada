@@ -10,10 +10,6 @@ public class PublicObjectiveCard {
     private int points;
 
 
-    public PublicObjectiveCard() {
-    }
-
-
     public PublicObjectiveCard(int id, String name, String description, int points) {
         this.id = id;
         this.name = name;
@@ -92,8 +88,8 @@ public class PublicObjectiveCard {
         int score = 0;
 
         ArrayList<Integer> valueList = new ArrayList<>();
-        for (int x = 1; x <= Board.BOARD_SQUARES_HORIZONTAL; x++) { 
-            for (int y = 1; y <= Board.BOARD_SQUARES_VERTICAL; y++) { 
+        for (int x = 0; x < Board.BOARD_SQUARES_HORIZONTAL; x++) { 
+            for (int y = 0; y < Board.BOARD_SQUARES_VERTICAL; y++) { 
                 if (board.getBoardField(x, y).hasDie()) { 
                     int value = board.getBoardField(x, y).getDie().getEyes();
                     if (value == val1 || value == val2) { 
@@ -125,8 +121,8 @@ public class PublicObjectiveCard {
         int score = 0;
 
         ArrayList<Integer> valueList = new ArrayList<>();
-        for (int x = 1; x <= Board.BOARD_SQUARES_HORIZONTAL; x++) { 
-            for (int y = 1; y <= Board.BOARD_SQUARES_VERTICAL; y++) { 
+        for (int x = 0; x < Board.BOARD_SQUARES_HORIZONTAL; x++) { 
+            for (int y = 0; y < Board.BOARD_SQUARES_VERTICAL; y++) { 
                 if (board.getBoardField(x, y).hasDie()) { 
                     valueList.add(board.getBoardField(x, y).getDie().getEyes()); 
                 }
@@ -167,9 +163,9 @@ public class PublicObjectiveCard {
         int score = 0;
 
         outerloop:
-        for (int y = 1; y <= Board.BOARD_SQUARES_VERTICAL; y++) { 
+        for (int y = 0; y < Board.BOARD_SQUARES_VERTICAL; y++) { 
             ArrayList<Integer> valueList = new ArrayList<>();
-            for (int x = 1; x <= Board.BOARD_SQUARES_HORIZONTAL; x++) { 
+            for (int x = 0; x < Board.BOARD_SQUARES_HORIZONTAL; x++) { 
                 if (board.getBoardField(x, y).hasDie()) { 
                     valueList.add(board.getBoardField(x, y).getDie().getEyes()); 
                 }
@@ -197,9 +193,9 @@ public class PublicObjectiveCard {
         int score = 0;
 
         outerloop:
-        for (int y = 1; y <= Board.BOARD_SQUARES_VERTICAL; y++) {
+        for (int y = 0; y < Board.BOARD_SQUARES_VERTICAL; y++) {
             ArrayList<ModelColor> colorList = new ArrayList<>();
-            for (int x = 1; x <= Board.BOARD_SQUARES_HORIZONTAL; x++) {
+            for (int x = 0; x < Board.BOARD_SQUARES_HORIZONTAL; x++) {
                 if (board.getBoardField(x, y).hasDie()) {
                     colorList.add(board.getBoardField(x, y).getDie().getColor()); 
                 }
@@ -227,8 +223,8 @@ public class PublicObjectiveCard {
         int score = 0;
 
         ArrayList<ModelColor> colorList = new ArrayList<>();
-        for (int x = 1; x <= Board.BOARD_SQUARES_HORIZONTAL; x++) { 
-            for (int y = 1; y <= Board.BOARD_SQUARES_VERTICAL; y++) {
+        for (int x = 0; x < Board.BOARD_SQUARES_HORIZONTAL; x++) { 
+            for (int y = 0; y < Board.BOARD_SQUARES_VERTICAL; y++) {
                 if (board.getBoardField(x, y).hasDie()) { 
                     colorList.add(board.getBoardField(x, y).getDie().getColor()); 
                 }
@@ -270,9 +266,9 @@ public class PublicObjectiveCard {
         int score = 0;
 
         outerloop:
-        for (int x = 1; x <= Board.BOARD_SQUARES_HORIZONTAL; x++) { 
+        for (int x = 0; x < Board.BOARD_SQUARES_HORIZONTAL; x++) { 
             ArrayList<Integer> valueList = new ArrayList<>();
-            for (int y = 1; y <= Board.BOARD_SQUARES_VERTICAL; y++) { 
+            for (int y = 0; y < Board.BOARD_SQUARES_VERTICAL; y++) { 
                 if (board.getBoardField(x, y).hasDie()) { 
                     valueList.add(board.getBoardField(x, y).getDie().getEyes()); 
                 }
@@ -300,9 +296,9 @@ public class PublicObjectiveCard {
         int score = 0;
 
         outerloop:
-        for (int x = 1; x <= Board.BOARD_SQUARES_HORIZONTAL; x++) { 
+        for (int x = 0; x < Board.BOARD_SQUARES_HORIZONTAL; x++) { 
             ArrayList<ModelColor> colorList = new ArrayList<>();
-            for (int y = 1; y <= Board.BOARD_SQUARES_VERTICAL; y++) {
+            for (int y = 0; y < Board.BOARD_SQUARES_VERTICAL; y++) {
                 if (board.getBoardField(x, y).hasDie()) { 
                     colorList.add(board.getBoardField(x, y).getDie().getColor()); 
                 }
@@ -330,8 +326,8 @@ public class PublicObjectiveCard {
         int score = 0;
 
         ArrayList<BoardField> blockedFields = new ArrayList<>();
-        for (int y = 1; y <= Board.BOARD_SQUARES_VERTICAL; y++) {
-            for (int x = 1; x <= Board.BOARD_SQUARES_HORIZONTAL; x++) {
+        for (int y = 0; y < Board.BOARD_SQUARES_VERTICAL; y++) {
+            for (int x = 0; x < Board.BOARD_SQUARES_HORIZONTAL; x++) {
                 if (blockedFields.contains(board.getBoardField(x, y))) {
                     continue; 
                 }

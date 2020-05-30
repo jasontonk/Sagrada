@@ -33,6 +33,26 @@ public class PublicObjectiveCardDBA {
         return list;
     }
 	
+	public ArrayList<PublicObjectiveCard> getAllAvailablePublicObjectiveCards(Game game) {
+	       ArrayList<PublicObjectiveCard> list = new ArrayList<PublicObjectiveCard>();
+	       String query = "SELECT DISTINCt(public_objectivecard.idpublic_objectivecard), name, description, points FROM public_objectivecard "+
+	       					"LEFT JOIN gameobjectivecard_public " + 
+	    		   			"ON public_objectivecard.idpublic_objectivecard = gameobjectivecard_public.idpublic_objectivecard " + 
+	    		   			"WHERE idgame != "+ game.getGameID() +" OR idgame IS NULL;";
+	        try {
+	        	Statement stmt = conn.getConn().createStatement();
+				ResultSet rs = stmt.executeQuery(query);
+				while(rs.next()) {
+					PublicObjectiveCard publicObjectiveCard = new PublicObjectiveCard(rs.getInt("idpublic_objectivecard"),rs.getString("name"),rs.getString("description"),rs.getInt("points"));
+					list.add(publicObjectiveCard);
+				}
+				stmt.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        return list;
+	    }
+	
 	public ArrayList<PublicObjectiveCard> getAllPublicObjectiveCardsFromGame(Game game) {
 	       ArrayList<PublicObjectiveCard> list = new ArrayList<PublicObjectiveCard>();
 	       String query = "SELECT public_objectivecard.* FROM public_objectivecard INNER JOIN gameobjectivecard_public s on public_objectivecard.idpublic_objectivecard = s.idpublic_objectivecard WHERE s.idgame="+game.getGameID()+";";

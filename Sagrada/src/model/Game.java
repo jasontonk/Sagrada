@@ -8,6 +8,7 @@ import controller.GameController;
 import database.DataBaseConnection;
 import database.GameDBA;
 import database.GameDieDBA;
+import database.PublicObjectiveCardDBA;
 
 public class Game {
 	private ArrayList<Player> players;
@@ -33,7 +34,8 @@ public class Game {
 	private GameDBA gameDBA;
 	private boolean finishedTurn;
 	private boolean placedDie;	
-	private GameDieDBA gamedieDBA = new GameDieDBA(conn);
+	private GameDieDBA gamedieDBA;
+	private PublicObjectiveCardDBA publicObjectiveCardDBA;
 
 
 	public Game(DataBaseConnection conn, boolean randomgeneratedpatterncards) {
@@ -44,6 +46,7 @@ public class Game {
 		roundTrack = new RoundTrack(this);
 		gameDBA = new GameDBA(conn);
 		gamedieDBA = new GameDieDBA(conn);
+		publicObjectiveCardDBA = new PublicObjectiveCardDBA(conn);
 		gameDBA.addNewGameDB(LocalDateTime.now(), this);
 		offer = new ArrayList<GameDie>();
 		players = new ArrayList<Player>();
@@ -58,9 +61,9 @@ public class Game {
 		this.conn = conn;
 		gameDBA = new GameDBA(conn);
 		gamedieDBA = new GameDieDBA(conn);
-		
 		gameDBA.addNewGameDB(LocalDateTime.now(), this);
 		
+		publicObjectiveCardDBA = new PublicObjectiveCardDBA(conn);
 		this.randomPatterncards = false;
 		round = 1;
 		roundTrack = new RoundTrack(this);
@@ -82,8 +85,27 @@ public class Game {
 		makedie();
 		finishedGame = false;
 		placedDie = true;
+		publicObjectiveCards = new ArrayList<PublicObjectiveCard>();
+		getPublicObjectiveCardsOfGame();
 	}
 	
+	private void getPublicObjectiveCardsOfGame() {
+		ArrayList<PublicObjectiveCard> publicObjectiveCardsFromDB = publicObjectiveCardDBA.getAllAvailablePublicObjectiveCards(this);
+		int i = 0;
+		Random r = new Random();
+		while(i < 3) {
+			PublicObjectiveCard publicObjectiveCard = publicObjectiveCardsFromDB.get(r.nextInt(publicObjectiveCardsFromDB.size()));
+			if(publicObjectiveCard != null && !publicObjectiveCards.contains(publicObjectiveCard)) {
+				publicObjectiveCards.add(publicObjectiveCard);
+				i++;
+			}
+		}
+		for (PublicObjectiveCard publicObjectiveCard2 : publicObjectiveCards) {
+			System.out.println("public objectivecard: "+ publicObjectiveCard2.getName() + " id= " +publicObjectiveCard2.getId());
+			publicObjectiveCardDBA.addPublicObjectiveCardToGame(publicObjectiveCard2, this);
+		}
+	}
+
 	public void addGameToDB() {
 		// TODO Auto-generated method stub
 		gameDBA.addNewGameDB(LocalDateTime.now(), this);
@@ -467,8 +489,8 @@ public class Game {
 		return publicObjectiveCards;
 	}
 
-	public void setPublicObjectiveCards(ArrayList<PublicObjectiveCard> publicObjectiveCards) {
-		this.publicObjectiveCards = publicObjectiveCards;
-	}
+//	public void setPublicObjectiveCards(ArrayList<PublicObjectiveCard> publicObjectiveCards) {
+//		this.publicObjectiveCards = publicObjectiveCards;
+//	}
 
 }

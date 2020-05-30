@@ -120,7 +120,7 @@ public class Board {
 	
 
 	public BoardField checkNorthWestDieColor(BoardField boardField, ModelColor modelColor) {	        
-	    if (boardField.getxPos() == 1 || boardField.getyPos() == 1) {
+	    if (boardField.getxPos() == 0 || boardField.getyPos() == 0) {
 	        return null;
 	    }
 	    if (!getBoardField(boardField.getxPos() - 1, boardField.getyPos() - 1).hasDie()) {
@@ -135,7 +135,7 @@ public class Board {
 	
 	
 	public BoardField checkNorthEastDieColor(BoardField boardField, ModelColor modelColor) {	       
-	    if (boardField.getxPos() == 5 || boardField.getyPos() == 1) {
+	    if (boardField.getxPos() == 4 || boardField.getyPos() == 0) {
 	        return null;
 	    }
 	    if (!getBoardField(boardField.getxPos() + 1, boardField.getyPos() - 1).hasDie()) {
@@ -149,7 +149,7 @@ public class Board {
 	}
 	
 	public BoardField checkSouthEastDieColor(BoardField boardField, ModelColor color) {
-	    if (boardField.getxPos() == 5 || boardField.getyPos() == 4) {
+	    if (boardField.getxPos() == 4 || boardField.getyPos() == 3) {
 	        return null;
 	    }
 	    if (!getBoardField(boardField.getxPos() + 1, boardField.getyPos() + 1).hasDie()) {
@@ -164,7 +164,7 @@ public class Board {
 	
 	
 	public BoardField checkSouthWestDieColor(BoardField boardField, ModelColor color) {	       
-	    if (boardField.getxPos() == 1 || boardField.getyPos() == 4) {
+	    if (boardField.getxPos() == 0 || boardField.getyPos() == 3) {
 	        return null;
 	    }
 	    if (!getBoardField(boardField.getxPos() - 1, boardField.getyPos() + 1).hasDie()) {
@@ -481,7 +481,6 @@ public class Board {
 									patternCard.getFieldColor(boardField.getxPos(), boardField.getyPos()) == null && 
 										patternCard.getFieldValue(boardField.getxPos(), boardField.getyPos()) == 0){
 							placeDie(boardField, player.getSelectedDie());
-							playerFrameFieldDBA.setDie(player.getSelectedDie(), player, boardField.getxPos(), boardField.getyPos());
 							return true;
 						}
 					}
