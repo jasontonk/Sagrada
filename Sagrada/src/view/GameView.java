@@ -3,6 +3,7 @@ package view;
 
 import controller.GameController;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -16,6 +17,7 @@ public class GameView extends BorderPane {
 	private PatterncardView patterncardView;
 	private RoundtrackView roundtrackView;
 	private ScoreView scoreView;
+	private PublicObjectiveCardsView publicObjectiveCardsView;
 	
 	public GameView(GameController gameController){
 		this.gameController = gameController;
@@ -23,17 +25,23 @@ public class GameView extends BorderPane {
 		patterncardView = new PatterncardView(gameController.getPatterncardController());
 		roundtrackView = new RoundtrackView(gameController.getRoundtrackController());
 		scoreView = new ScoreView(gameController.getGame());
-		Button button = new Button("Klik om uw beurt te beëindigen.");//TODO temporary
+		publicObjectiveCardsView = new PublicObjectiveCardsView(gameController.getGame().getPublicObjectiveCardIDs());
+		Button button = new Button("Beurt beëindigen.");//TODO temporary
 		button.setOnMouseClicked(e-> gameController.stopround());
-		Button button2 = new Button("Klik om beurt te beginnen");
+		Button button2 = new Button("Beurt beginnen");
 		button2.setOnMouseClicked(e-> gameController.playround());
+		this.setTop(publicObjectiveCardsView);
 		this.setLeft(patterncardView);
 		this.setRight(dicePoolView);
-		VBox bottom = new VBox();
+		HBox bottom = new HBox();
 		bottom.getChildren().addAll(roundtrackView, scoreView);
+		button.setPadding(new Insets(10));
+		button2.setPadding(new Insets(10));
 		this.setBottom(bottom);
-		this.setTop(button);
-		this.setCenter(button2);
+		VBox center = new VBox();
+		center.getChildren().addAll(button,button2);
+		center.setSpacing(50);
+		this.setCenter(center);
 		this.setPrefSize(800, 600);
 		this.setAlignment(roundtrackView, Pos.CENTER);
 	}

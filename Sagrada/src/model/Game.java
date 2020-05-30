@@ -55,6 +55,7 @@ public class Game {
 		makedie();
 		finishedGame = false;
 		placedDie = true;
+		getPublicObjectiveCardsOfGame();
 	}
 	
 	public Game(DataBaseConnection conn) {
@@ -487,6 +488,14 @@ public class Game {
 
 	public ArrayList<PublicObjectiveCard> getPublicObjectiveCards() {
 		return publicObjectiveCards;
+	}
+
+	public int[] getPublicObjectiveCardIDs() {
+		int[] publicObjectiveCardIDs = new int[3];
+		for (int i = 0; i < publicObjectiveCards.size(); i++) {
+			publicObjectiveCardIDs[i] = publicObjectiveCards.get(i).getId();
+		}
+		return publicObjectiveCardIDs;
 	}
 
 //	public void setPublicObjectiveCards(ArrayList<PublicObjectiveCard> publicObjectiveCards) {

@@ -6,9 +6,15 @@ import controller.CalculateScoreTask;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -23,8 +29,9 @@ public class ScoreView extends BorderPane {
 	 
 	public ScoreView (Game game) {
         this.game = game;
-        setPrefSize(100, 100);
-        setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+        setPrefSize(200, 100);
+        setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, null, null)));
+        setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
         makeScoreBoard();
     }
 
@@ -52,21 +59,15 @@ public class ScoreView extends BorderPane {
             Label playerScore = new Label();
             playerScore.textProperty().bind(game.getPlayers().get(i).getScore().asString());
             
-//            CalculateScoreTask cst = new CalculateScoreTask(player);
-//            cst.setOnSucceeded(e -> {
-//                playerScore.setText("" + cst.getValue());
-                playerScore.setTextAlignment(TextAlignment.CENTER);
-                playerLine.getChildren().addAll(playerNameLabel, playerScore);
-                playerLine.setAlignment(Pos.CENTER);
-//            });
-//            Thread thread = new Thread(cst);
-//            thread.setName("Calculate score");
-//            thread.start();
+            playerScore.setTextAlignment(TextAlignment.CENTER);
+            playerLine.getChildren().addAll(playerNameLabel, playerScore);
+            playerLine.setAlignment(Pos.CENTER);
             scoreLines.add(i, playerLine);
         }
         scoreBoardContent.getChildren().addAll(scoreLines);
         setTop(scoreBoardTitlePane);
         setCenter(scoreBoardContent);
+        
     }
 
 }
