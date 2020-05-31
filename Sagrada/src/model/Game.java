@@ -488,7 +488,9 @@ public class Game {
 
 	public ArrayList<GameDie> getOffer() {
 		System.out.println("de size van de offer voor: " + offer.size());
-		if(currentPlayer.getSequenceNumber() == 1 && round%2 == 1 && offer.size() == 0) {
+		if(currentPlayer.getSequenceNumber() == 1 && 
+				round%2 == 1 && 
+				offer.size() == 0) {
 			grabDiceFromBag();
 		}
 		System.out.println("de size van de offer : " + offer.size());
