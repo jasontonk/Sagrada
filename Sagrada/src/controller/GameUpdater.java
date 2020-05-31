@@ -24,26 +24,31 @@ public class GameUpdater implements Runnable {
 	@Override
 	public void run() {
 		while(isRunning){
-			if(!isPaused) {
-				Platform.runLater(new Runnable() {
-					@Override
-					public void run() {
-						updateAll();
-						System.out.println("updated games");
-					}				
-				});
-				
-				try {
-					Thread.sleep(10000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+			if(gameCtrl.getGame().isFinishedGame()) {
+				isRunning = false;
 			}
 			else {
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+				if(!isPaused) {
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							updateAll();
+							System.out.println("updated games");
+						}				
+					});
+					
+					try {
+						Thread.sleep(10000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				else {
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}

@@ -29,7 +29,6 @@ public class GameDBA {
 			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			if(rs.next()) {
-//				game = new Game(conn, false);
 				game = new Game(conn);
 				game.setGameID(rs.getInt("idgame"));
 				game.setRound(getCurrentRound(id));
@@ -245,5 +244,25 @@ public class GameDBA {
 	        }
 	        return players;
 	    }
+	 public Player getWinnerOfGameUsingGameID(Game game) {
+		 PlayerDBA playerDBA = new PlayerDBA(conn);
+		 Player player = null;
+		 String query = "SELECT idplayer, max(score) FROM player WHERE idgame = " + game.getGameID();
+	        
+	        try {
+	        	Statement stmt = conn.getConn().createStatement();
+				ResultSet rs = stmt.executeQuery(query);
+	            while (rs.next()) {
+	                int playerId = rs.getInt("idplayer");
+	                player = playerDBA.getPlayerById(playerId);
+	            }
+	            rs.close();
+	        }catch (Exception e) {
+	            e.printStackTrace();
+	        }
+		 
+		 
+		 return player;
+	 }
 	 
 }

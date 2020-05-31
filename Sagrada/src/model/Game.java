@@ -241,8 +241,11 @@ public class Game {
 			}
 			else if(currentPlayer.getSequenceNumber() == 1 && !isClockwise) {
 				changeSequenceNumber();
-				gameDBA.changeRoundDirection(this);
-				round++;
+				if(round != 20) {
+					gameDBA.changeRoundDirection(this);
+					round++;
+				}
+				
 				
 			}
 			else if(isClockwise) {
@@ -299,7 +302,10 @@ public class Game {
 				}
 			}
 			if(round >= 20) {
+				System.out.println("Hier wordt de game beëindigd");
 				finishedGame = true;
+				
+				
 			}
 			for (int i = 0; i < players.size(); i++) {
 				if(players.get(i).getSequenceNumber() == 1) {
@@ -496,6 +502,15 @@ public class Game {
 			publicObjectiveCardIDs[i] = publicObjectiveCards.get(i).getId();
 		}
 		return publicObjectiveCardIDs;
+	}
+
+	public boolean isFinishedGame() {
+		return finishedGame;
+	}
+
+	public Player getWinnerOfGameWithID(int gameID) {
+		gameDBA.getWinnerOfGameUsingGameID(this);
+		return null;
 	}
 
 //	public void setPublicObjectiveCards(ArrayList<PublicObjectiveCard> publicObjectiveCards) {

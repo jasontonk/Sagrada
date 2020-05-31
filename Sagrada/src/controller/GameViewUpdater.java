@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 
 import javafx.application.Platform;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.concurrent.Task;
 import model.GameDie;
 import model.ModelColor;
@@ -23,25 +24,35 @@ public class GameViewUpdater extends Task<Boolean> {
 	public Boolean call() {
 		isRunning = true;
 		while(isRunning){
-			if(!isPaused) {
-				Platform.runLater(new Runnable() {
-					@Override
-					public void run() {
-						updateAll();
-						System.out.println("updated Views");
-					}
-				});
-				try {
-					Thread.sleep(5000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+			if(gameCtrl.getGame().isFinishedGame()) {
+				isRunning = false;
+				Player winner = gameCtrl.getGame().getWinnerOfGameWithID(gameCtrl.getGame().getGameID());
+				String username = winner.getName();
+				SimpleIntegerProperty score = winner.getScore();
+				String winnerText = "DE WINNAAR IS: " +username+ "\n" + username + "heeft gewonnen met een score van: "+ score; 
+				gameCtrl.showWarning("Game Over", winnerText);
 			}
 			else {
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+				if(!isPaused) {
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							updateAll();
+							System.out.println("updated Views");
+						}
+					});
+					try {
+						Thread.sleep(5000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				else {
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}
