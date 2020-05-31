@@ -48,14 +48,17 @@ public class Game {
 		gameDBA = new GameDBA(conn);
 		gamedieDBA = new GameDieDBA(conn);
 		publicObjectiveCardDBA = new PublicObjectiveCardDBA(conn);
-		gameDBA.addNewGameDB(LocalDateTime.now(), this);
+		
 		offer = new ArrayList<GameDie>();
 		
 	}
+	
+	public void addGametoDB() {
+		gameDBA.addNewGameDB(LocalDateTime.now(), this);
+	}
 	public void finishGameSetup(AccountController accountController) {
 		this.players = gameDBA.getPlayersOfGame(this);
-		System.out.println(""+ players);
-		setCurrentPlayer();
+		System.out.println("DIT ZIJN DE PLAYERS VAN DE GAME "+ players);
 		//setcurrentplayer aanroepen bij aanmaken
 		for (int i = 0; i < players.size(); i++) {
 			players.get(i).setSequenceNumber(i+1);
@@ -75,37 +78,37 @@ public class Game {
 		getPublicObjectiveCardsOfGame();
 	}
 	
-	public Game(DataBaseConnection conn) {
-		this.conn = conn;
-		gameDBA = new GameDBA(conn);
-		gamedieDBA = new GameDieDBA(conn);
-		gameDBA.addNewGameDB(LocalDateTime.now(), this);
-		
-		publicObjectiveCardDBA = new PublicObjectiveCardDBA(conn);
-		this.randomPatterncards = false;
-		round = 1;
-		roundTrack = new RoundTrack(this);
-		
-		offer = new ArrayList<GameDie>();
-		players = new ArrayList<Player>();
-//		currentPlayer = new Player(conn, new Account("ditis2", "eentest", conn), this, PlayerStatus.CHALLENGER);
-//		Player player = new Player(conn, new Account("ditiseentest2", "testtest", conn), this, PlayerStatus.CHALLENGEE);
-//		players.add(currentPlayer);
-//		players.add(player);
-//		currentPlayer = players.get(0);
-//		players.get(0).setSequenceNumber(1);
-//		players.get(1).setSequenceNumber(2);
-//		personalPlayer = players.get(0);
-//		System.out.println("player 1 : " + players.get(0).getId());
-//		System.out.println("player 2 : " + players.get(1).getId());
-		diceInBag = new GameDie[90];
-		usedDice = new ArrayList<GameDie>();
-		makedie();
-		finishedGame = false;
-		placedDie = true;
-		publicObjectiveCards = new ArrayList<PublicObjectiveCard>();
-		getPublicObjectiveCardsOfGame();
-	}
+//	public Game(DataBaseConnection conn) {
+//		this.conn = conn;
+//		gameDBA = new GameDBA(conn);
+//		gamedieDBA = new GameDieDBA(conn);
+//		gameDBA.addNewGameDB(LocalDateTime.now(), this);
+//		
+//		publicObjectiveCardDBA = new PublicObjectiveCardDBA(conn);
+//		this.randomPatterncards = false;
+//		round = 1;
+//		roundTrack = new RoundTrack(this);
+//		
+//		offer = new ArrayList<GameDie>();
+//		players = new ArrayList<Player>();
+////		currentPlayer = new Player(conn, new Account("ditis2", "eentest", conn), this, PlayerStatus.CHALLENGER);
+////		Player player = new Player(conn, new Account("ditiseentest2", "testtest", conn), this, PlayerStatus.CHALLENGEE);
+////		players.add(currentPlayer);
+////		players.add(player);
+////		currentPlayer = players.get(0);
+////		players.get(0).setSequenceNumber(1);
+////		players.get(1).setSequenceNumber(2);
+////		personalPlayer = players.get(0);
+////		System.out.println("player 1 : " + players.get(0).getId());
+////		System.out.println("player 2 : " + players.get(1).getId());
+//		diceInBag = new GameDie[90];
+//		usedDice = new ArrayList<GameDie>();
+//		makedie();
+//		finishedGame = false;
+//		placedDie = true;
+//		publicObjectiveCards = new ArrayList<PublicObjectiveCard>();
+//		getPublicObjectiveCardsOfGame();
+//	}
 	
 	private void getPublicObjectiveCardsOfGame() {
 		ArrayList<PublicObjectiveCard> publicObjectiveCardsFromDB = publicObjectiveCardDBA.getAllAvailablePublicObjectiveCards(this);
@@ -419,13 +422,9 @@ public class Game {
 		return currentPlayer;
 	}
 
-	public void setCurrentPlayer() {
-		for (int i = 0; i < players.size(); i++) {
-			if(players.get(i).isCurrentPlayer()) {
-				currentPlayer = players.get(i);
-				break;
-			}
-		}
+	public void setCurrentPlayer(Player player) {
+		currentPlayer = player;	
+		System.out.println("DIT IS NU DE CURRENT PLAYER" +  currentPlayer);
 	}
 
 
@@ -488,6 +487,8 @@ public class Game {
 
 	public ArrayList<GameDie> getOffer() {
 		System.out.println("de size van de offer voor: " + offer.size());
+		System.out.println(currentPlayer + "CURRENT PLAYER");
+		System.out.println(currentPlayer.getSequenceNumber() + "CURRENT PLAYER SQNR");
 		if(currentPlayer.getSequenceNumber() == 1 && 
 				round%2 == 1 && 
 				offer.size() == 0) {

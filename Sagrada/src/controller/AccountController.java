@@ -190,6 +190,7 @@ public class AccountController {
 		     return; 
 	     }
 			Game game = new Game(connection, false);
+			game.addGametoDB();
 			Player player = new Player(connection);
 			player.setAccount(account);
 			player.setName(account.getUsername());
@@ -198,6 +199,7 @@ public class AccountController {
 			player.setPersonalObjectiveCardColor();
 			player.addPlayer(player);
 			player.setScore(-20);
+			game.setCurrentPlayer(player);
 			invitePlayerList.add(player);
 			
 			for (Account account : inviteList) {
@@ -237,7 +239,8 @@ public class AccountController {
 		
 		if (player.getPatternCard() == null) {
 			player.setPatternCard(new PatternCard(connection));
-        } 
+        }
+		else player.setPatternCard(player.getPatternCard());
 		GameController gameController = new GameController(connection, myScene, game, 0);
 		myScene.setContentPane(gameController.getGameView());
 	}

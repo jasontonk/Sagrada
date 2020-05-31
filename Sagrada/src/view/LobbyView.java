@@ -67,6 +67,9 @@ public class LobbyView extends BorderPane {
             Button playGame = buildButton("Speel!");
             playGame.setOnAction(e -> accountController.joinGame(p, p.getGame()));
             
+//            playGame.setOnAction(e -> startGame());
+            
+            
             playerlist.getChildren().addAll(gameid,playGame);
             overview.getChildren().add(playerlist);
 		}

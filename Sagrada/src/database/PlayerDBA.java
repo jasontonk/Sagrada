@@ -443,8 +443,8 @@ public class PlayerDBA {
                 player.setPlayerStatus(getPlayerStatusFromString(rs.getString("playstatus")));
                 player.setPersonalObjectiveCardColorFromDB(getColorFromString(rs.getString("private_objectivecard_color")));
                 player.setSequenceNumber(rs.getInt("seqnr"));
-//                player.setCurrentPlayer(rs.getBoolean("isCurrentPlayer"));
                 player.setAccount(account);
+                player.setName(account.getUsername());
             }
         } catch (Exception e) {
             player = null;
