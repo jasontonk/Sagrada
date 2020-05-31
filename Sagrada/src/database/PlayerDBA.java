@@ -116,12 +116,6 @@ public class PlayerDBA {
 			case REFUSED:
 				playerStatus = "refused";
 				break;
-			case START:
-				playerStatus = "start";
-				break;
-			case INGAME:
-				playerStatus = "ingame";
-				break;
 			}
 			
 		}
@@ -148,12 +142,6 @@ public class PlayerDBA {
 				break;
 			case "refused":
 				playerStatus = PlayerStatus.REFUSED;
-				break;
-			case "start":
-				playerStatus = PlayerStatus.START;
-				break;
-			case "ingame":
-				playerStatus = PlayerStatus.INGAME;
 				break;
 				
 			default:

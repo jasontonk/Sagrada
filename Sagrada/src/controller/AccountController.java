@@ -227,12 +227,19 @@ public class AccountController {
 	public void startGame(ArrayList<Player> gameLobby) {
 		for (Player player : gameLobby) {
 			
-			if(player.getPlayerStatus().equals(PlayerStatus.CHALLENGEE)) {
-				showWarning("game", "Niet elke speler heeft gereageerd op je invite");
-				return;
+			if(player.getPlayerStatus().equals(PlayerStatus.CHALLENGER)) {
 			}
-			this.joinGame(player, player.getGame());
+			else if(player.getPlayerStatus().equals(PlayerStatus.CHALLENGEE)) {
+				showWarning("game", "Niet elke speler heeft gereageerd op je invite");
+			}
+			else {
+				joinGame(player, player.getGame());
+			}
 		}	
+		
+//		for(int i = 0; i < gameLobby.size(); i++) {
+//			if(gameLobby.get(1).equals(obj))
+//		}
 	}
 	
 	public void joinGame(Player player, Game game) {
