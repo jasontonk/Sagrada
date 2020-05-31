@@ -61,7 +61,7 @@ public class Game {
 	public void finishGameSetup(AccountController accountController) {
 		this.players = gameDBA.getPlayersOfGame(this);
 		System.out.println("DIT ZIJN DE PLAYERS VAN DE GAME "+ players);
-		//setcurrentplayer aanroepen bij aanmaken
+		currentPlayer = players.get(0);
 		for (int i = 0; i < players.size(); i++) {
 			players.get(i).setSequenceNumber(i+1);
 		}

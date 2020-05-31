@@ -98,7 +98,7 @@ public class GameController {
 		System.out.println("loading...100%");
 		
 		patterncardView = new PatterncardView(patterncardController);
-		patterncardSelectionView = new PatterncardSelectionView(this);
+//		patterncardSelectionView = new PatterncardSelectionView(this);
 		gameRoundPlayer =  new GameRoundPlayer(this, 3);
 		gameUpdater = new GameUpdater(this);
 		gameViewUpdater = new GameViewUpdater(this, gameUpdater);
@@ -114,7 +114,7 @@ public class GameController {
 		updateViews.setDaemon(true);
 		updateViews.start();
 		
-		myScene.setContentPane(patterncardSelectionView);
+		myScene.setContentPane(new GameView(this));
 	}
 	
 public ArrayList<PatterncardController> getPatternCardsToChoose(){

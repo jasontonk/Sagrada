@@ -190,8 +190,8 @@ public class Player {
 	}
 
 	public ArrayList<PatternCard> getPatternCardsToChoose(boolean random) {
-//		PatternCardDBA patternCardDBA = new PatternCardDBA(connection);
-//		patternCardsToChoose = patternCardDBA.getOptionalPatternCardsOfPlayer(getId(), this);
+		PatternCardDBA patternCardDBA = new PatternCardDBA(connection);
+		patternCardsToChoose = patternCardDBA.getOptionalPatternCardsOfPlayer(this);
 		patternCardsToChoose = patternCard.getPatternCardsToChoose(random, this);
 		return patternCardsToChoose;
 	}
