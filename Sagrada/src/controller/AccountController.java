@@ -244,7 +244,7 @@ public class AccountController {
 	
 	public void joinGame(Player player, Game game) {
 		
-		if (player.getPatternCard() == null) {
+		if (player.getPatternCard() == null) { 
 			player.setPatternCard(new PatternCard(connection));
         }
 		else player.setPatternCard(player.getPatternCard());
