@@ -8,6 +8,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -85,7 +86,10 @@ public class RoundtrackView extends VBox {
 	public BorderPane drawRound() {
 		BorderPane roundPane =  new BorderPane();
 		Text round = new Text();
-		round.setText("Ronde: " + roundtrackController.getRound());
+		Label roundnr = new Label();
+		roundnr.textProperty().bind(roundtrackController.getGameController().getGame().getRound().asString());
+		
+		round.setText("Ronde: " + roundnr);
 		roundPane.setPadding(padding);
 		roundPane.setRight(round);
 		return roundPane;

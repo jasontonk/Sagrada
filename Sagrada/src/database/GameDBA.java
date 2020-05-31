@@ -180,7 +180,7 @@ public class GameDBA {
 
 	public void changeRoundDirection(Game game) {
 		
-		String query = "UPDATE game SET current_roundID = "+(game.getRound()+1)+" WHERE idgame = "+game.getGameID()+";";
+		String query = "UPDATE game SET current_roundID = "+(game.getRound().get()+1)+" WHERE idgame = "+game.getGameID()+";";
 		try {
 				Statement stmt = conn.getConn().createStatement();
 				stmt.executeUpdate(query);
@@ -193,7 +193,7 @@ public class GameDBA {
 	}
 
 	public void setNextRound(Game game) {
-		String query = "UPDATE game SET current_roundID = "+(game.getRound()+1)+" WHERE idgame = "+game.getGameID()+";";
+		String query = "UPDATE game SET current_roundID = "+(game.getRound().get()+1)+" WHERE idgame = "+game.getGameID()+";";
 		try {
 				Statement stmt = conn.getConn().createStatement();
 				stmt.executeUpdate(query);

@@ -209,7 +209,7 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 	}
 
 	public int getCurrentRound() {
-		return game.getRound();
+		return game.getRound().get();
 	}
 
 	public boolean isRandom() {

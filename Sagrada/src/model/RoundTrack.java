@@ -24,9 +24,9 @@ public class RoundTrack {
 	 * TODO change to the right method for getRound
 	 */
 	public GameDie takeDie(int die) {
-		if(roundTrackFields[game.getRound()].getDieSavingSpot() != null) {//changed to getRounc() to fix error
+		if(roundTrackFields[game.getRound().get()].getDieSavingSpot() != null) {//changed to getRounc() to fix error
 			//krijgt array terug
-			GameDie[] dieOnField = roundTrackFields[game.getRound()].getDieSavingSpot();
+			GameDie[] dieOnField = roundTrackFields[game.getRound().get()].getDieSavingSpot();
 			return dieOnField[die];
 		}
 		return null;//returns null if nothing can be returned

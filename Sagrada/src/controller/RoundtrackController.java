@@ -13,8 +13,8 @@ public class RoundtrackController {
 		roundtrack = new RoundTrack(game); 
 		this.gameController = gameController;
 	}
-	public int getRound() {
-		return gameController.getCurrentRound();
+	public GameController getGameController() {
+		return gameController;
 	}
 
 }

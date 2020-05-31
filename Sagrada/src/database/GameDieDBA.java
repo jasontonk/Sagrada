@@ -32,7 +32,7 @@ public class GameDieDBA {
 	
 	public void addRoundID(GameDie gamedie, Game game) {
 		
-		String query = "UPDATE gamedie SET roundID = "+game.getRound()+" WHERE idgame = "+game.getGameID()+" AND dienumber ="+gamedie.getNumber()+" AND diecolor= '"+getStringFromColor(gamedie)+"';";
+		String query = "UPDATE gamedie SET roundID = "+game.getRound().get()+" WHERE idgame = "+game.getGameID()+" AND dienumber ="+gamedie.getNumber()+" AND diecolor= '"+getStringFromColor(gamedie)+"';";
 		try {
 				Statement stmt = conn.getConn().createStatement();
 				stmt.executeUpdate(query);
@@ -181,7 +181,7 @@ public class GameDieDBA {
     }
 	
 	public ArrayList<GameDie> getAllavailableDiceOfRound(Game game) {
-        int roundFromGameClass = game.getRound();
+        int roundFromGameClass = game.getRound().get();
 		int round;
 		if(roundFromGameClass%2 == 0) {
 			round = roundFromGameClass - 1;
