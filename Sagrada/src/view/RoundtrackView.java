@@ -18,6 +18,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -89,9 +90,11 @@ public class RoundtrackView extends VBox {
 		Label roundnr = new Label();
 		roundnr.textProperty().bind(roundtrackController.getGameController().getGame().getRound().asString());
 		
-		round.setText("Ronde: " + roundnr); 
+		round.setText("Ronde: "); 
 		roundPane.setPadding(padding);
-		roundPane.setRight(round);
+		HBox text = new HBox();
+		text.getChildren().addAll(round,roundnr);
+		roundPane.setRight(text);
 		return roundPane;
 	}
 	public void addDice(int round, ArrayList<ModelColor> colors, ArrayList<Integer> values) {
