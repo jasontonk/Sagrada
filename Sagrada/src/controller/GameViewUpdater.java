@@ -25,12 +25,28 @@ public class GameViewUpdater extends Task<Boolean> {
 		isRunning = true;
 		while(isRunning){
 			if(gameCtrl.getGame().isFinishedGame()) {
-				isRunning = false;
-				Player winner = gameCtrl.getGame().getWinnerOfGameWithID(gameCtrl.getGame().getGameID());
-				String username = winner.getName();
-				SimpleIntegerProperty score = winner.getScore();
-				String winnerText = "DE WINNAAR IS: " +username+ "\n" + username + "heeft gewonnen met een score van: "+ score; 
-				gameCtrl.showWarning("Game Over", winnerText);
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						isRunning = false;
+						System.out.println("test");
+						ArrayList<String> winner = gameCtrl.getGame().getWinnerOfGameWithID(gameCtrl.getGame().getGameID());
+						System.out.println("test 2");
+						String username = winner.get(0);
+						System.out.println("test 3");
+						String score = winner.get(1);
+						System.out.println("test 4");
+						String winnerText = "DE WINNAAR IS: " +username+ "\n" + username + "heeft gewonnen met een score van: "+ score; 
+						System.out.println("test 5");
+						gameCtrl.showWarning("Game Over", winnerText);
+						System.out.println("test 6");
+					}
+				});
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 			else {
 				if(!isPaused) {

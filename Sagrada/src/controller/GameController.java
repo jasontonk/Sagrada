@@ -197,10 +197,15 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 	
 	public void showWarning(String header, String text) {
 		Alert alert = new Alert(AlertType.WARNING);
+		System.out.println("test 5.1");
 		alert.setTitle("Let op!");
+		System.out.println("test 5.2");
 		alert.setHeaderText(header);
+		System.out.println("test 5.3");
 		alert.setContentText(text);
+		System.out.println("test 5.4");
 		alert.showAndWait();
+		System.out.println("test 5.5");
 	}
 
 	public int getCurrentRound() {
