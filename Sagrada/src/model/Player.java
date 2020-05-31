@@ -43,10 +43,8 @@ public class Player {
 		this.setName(account.getUsername());
 		this.setGame(game);
 		this.setPlayerStatus(PlayerStatus.CHALLENGER);
-
-		personalObjectiveCardColor = personalObjectiveCardColor.RED;
 		this.setPersonalObjectiveCardColor();
-
+		System.out.println("De personal objectivecard color van " +name+ " is: "+personalObjectiveCardColor);
 
 		playerDBA.addPlayer(this, playerStatus);
 		System.out.println("test2");
@@ -158,8 +156,8 @@ public class Player {
 	}
 
 	public void setPersonalObjectiveCardColor() {
-		this.personalObjectiveCardColor = ModelColor.BLUE;
-//		this.personalObjectiveCardColor = ModelColor.randomColor(ModelColor.class);
+//		this.personalObjectiveCardColor = ModelColor.BLUE;
+		this.personalObjectiveCardColor = ModelColor.randomColor(ModelColor.class);
 		
 		
 	}
