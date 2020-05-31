@@ -62,7 +62,12 @@ public class Player {
 		playerDBA = new PlayerDBA(c);
 		this.setPlayerStatus(PlayerStatus.CHALLENGEE);
 		
+		this.setPersonalObjectiveCardColor();
+		System.out.println("De personal objectivecard color van " +name+ " is: "+personalObjectiveCardColor);
+//		board = new Board(1, this, c);	
+		
 		score = new SimpleIntegerProperty();
+		setScore(-20);
 		}		
 
 

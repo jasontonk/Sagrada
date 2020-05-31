@@ -114,7 +114,9 @@ public class GameController {
 		updateViews.setDaemon(true);
 		updateViews.start();
 		
+		
 		myScene.setContentPane(new GameView(this));
+		game.playround();
 	}
 	
 public ArrayList<PatterncardController> getPatternCardsToChoose(){

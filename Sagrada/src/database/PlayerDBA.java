@@ -275,7 +275,7 @@ public class PlayerDBA {
 
 	public Player getPlayerUsingSeqnrAndGame(int seqnr, Game game) {
 
-		Player player = new Player(conn, null, game, null);
+		Player player = new Player(conn);
 		String query = "SELECT * FROM player WHERE seqnr= " + seqnr + " AND idgame=" + game.getGameID() + ";";
 		try {
 			Statement stmt = conn.getConn().createStatement();
