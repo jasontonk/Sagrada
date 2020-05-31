@@ -89,7 +89,7 @@ public class RoundtrackView extends VBox {
 		Label roundnr = new Label();
 		roundnr.textProperty().bind(roundtrackController.getGameController().getGame().getRound().asString());
 		
-		round.setText("Ronde: " + roundnr);
+		round.setText("Ronde: " + roundnr); 
 		roundPane.setPadding(padding);
 		roundPane.setRight(round);
 		return roundPane;
