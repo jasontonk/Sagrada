@@ -422,6 +422,7 @@ public class Game {
 		return selectedDie;
 	}
 	public Player getCurrentPlayer() {
+//		currentPlayer = gameDBA.getCurrentPlayer(this);
 		return currentPlayer;
 	}
 
@@ -527,8 +528,11 @@ public class Game {
 	}
 
 	public ArrayList<String> getWinnerOfGameWithID(int gameID) {
-		
 		return gameDBA.getWinnerOfGameUsingGameID(this);
+	}
+
+	public Player getPersonalPlayer() {
+		return personalPlayer;
 	}
 
 //	public void setPublicObjectiveCards(ArrayList<PublicObjectiveCard> publicObjectiveCards) {
