@@ -523,9 +523,9 @@ public class Game {
 		return finishedGame;
 	}
 
-	public Player getWinnerOfGameWithID(int gameID) {
-		gameDBA.getWinnerOfGameUsingGameID(this);
-		return null;
+	public ArrayList<String> getWinnerOfGameWithID(int gameID) {
+		
+		return gameDBA.getWinnerOfGameUsingGameID(this);
 	}
 
 //	public void setPublicObjectiveCards(ArrayList<PublicObjectiveCard> publicObjectiveCards) {

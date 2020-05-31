@@ -244,25 +244,24 @@ public class GameDBA {
 	        }
 	        return players;
 	    }
-	 public Player getWinnerOfGameUsingGameID(Game game) {
-		 PlayerDBA playerDBA = new PlayerDBA(conn);
-		 Player player = null;
-		 String query = "SELECT idplayer, max(score) FROM player WHERE idgame = " + game.getGameID();
-	        
-	        try {
-	        	Statement stmt = conn.getConn().createStatement();
-				ResultSet rs = stmt.executeQuery(query);
-	            while (rs.next()) {
-	                int playerId = rs.getInt("idplayer");
-	                player = playerDBA.getPlayerById(playerId);
-	            }
-	            rs.close();
-	        }catch (Exception e) {
-	            e.printStackTrace();
-	        }
-		 
-		 
-		 return player;
-	 }
+	 public  ArrayList<String> getWinnerOfGameUsingGameID(Game game) {
+         ArrayList<String> winnerInfo = new ArrayList<>();
+         String query = "SELECT idplayer, max(score) AS score, username FROM player WHERE idgame = " + game.getGameID();
+
+            try {
+                Statement stmt = conn.getConn().createStatement();
+                ResultSet rs = stmt.executeQuery(query);
+                while (rs.next()) {
+                    winnerInfo.add(rs.getString("username"));
+                    winnerInfo.add(Integer.toString(rs.getInt("score")));
+                }
+                rs.close();
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+         return winnerInfo;
+     }
 	 
 }
