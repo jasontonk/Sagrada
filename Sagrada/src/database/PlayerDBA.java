@@ -48,8 +48,8 @@ public class PlayerDBA {
 
 	private String getStringFromColor(Player player) {
 		String color = null;
-		if (player.getColor() != null) {
-			switch (player.getColor()) {
+		if (player.getPersonalObjectiveCardColor() != null) {
+			switch (player.getPersonalObjectiveCardColor()) {
 			case BLUE:
 				color = "blue";
 				break;
@@ -240,7 +240,7 @@ public class PlayerDBA {
 				
 				player.setSequenceNumber(rs.getInt("seqnr"));
 				player.setScore(rs.getInt("score"));
-				player.setColor(getColorFromString(rs.getString("private_objectivecard_color")));
+				player.setPersonalObjectiveCardColorFromDB(getColorFromString(rs.getString("private_objectivecard_color")));
 				player.setPatternCard(patternCard.getPatterncardByID(rs.getInt("idpatterncard")));
 				player.setGame(game.getGameByID(rs.getInt("idgame")));
 			}
@@ -273,7 +273,7 @@ public class PlayerDBA {
 				player.setPlayerStatus(getPlayerStatusFromString(rs.getString("playstatus")));
 				player.setSequenceNumber(rs.getInt("seqnr"));
 				player.setScore(rs.getInt("score"));
-				player.setColor(getColorFromString(rs.getString("private_objectivecard_color")));
+				player.setPersonalObjectiveCardColorFromDB(getColorFromString(rs.getString("private_objectivecard_color")));
 				player.setPatternCard(patternCard.getPatterncardByID(rs.getInt("idpatterncard")));
 				player.setGame(game.getGameByID(rs.getInt("idgame")));
 				list.add(player);
@@ -302,7 +302,7 @@ public class PlayerDBA {
 				player.setPlayerStatus(getPlayerStatusFromString(rs.getString("playstatus")));
 				player.setSequenceNumber(rs.getInt("seqnr"));
 				player.setScore(rs.getInt("score"));
-				player.setColor(getColorFromString(rs.getString("private_objectivecard_color")));
+				player.setPersonalObjectiveCardColorFromDB(getColorFromString(rs.getString("private_objectivecard_color")));
 				player.setPatternCard(patternCard.getPatterncardByID(rs.getInt("idpatterncard")));
 				player.setGame(g.getGameByID(rs.getInt("idgame")));
 			}
@@ -399,7 +399,7 @@ public class PlayerDBA {
 				player.setPlayerStatus(getPlayerStatusFromString(rs.getString("playstatus")));
 				player.setSequenceNumber(rs.getInt("seqnr"));
 				player.setScore(rs.getInt("score"));
-				player.setColor(getColorFromString(rs.getString("private_objectivecard_color")));
+				player.setPersonalObjectiveCardColorFromDB(getColorFromString(rs.getString("private_objectivecard_color")));
 				player.setPatternCard(patternCard.getPatterncardByID(rs.getInt("idpatterncard")));
 				player.setGame(game.getGameByID(rs.getInt("idgame")));
 				list.add(player);
@@ -441,7 +441,7 @@ public class PlayerDBA {
                 Account account = accountDBA.GetAccountDB(rs.getString("username"));
                 player.setId(rs.getInt("idplayer"));
                 player.setPlayerStatus(getPlayerStatusFromString(rs.getString("playstatus_playstatus")));
-                player.setColor(getColorFromString(rs.getString("private_objectivecard_color")));
+                player.setPersonalObjectiveCardColorFromDB(getColorFromString(rs.getString("private_objectivecard_color")));
                 player.setSequenceNumber(rs.getInt("seqnr"));
                 player.setCurrentPlayer(rs.getBoolean("isCurrentPlayer"));
                 player.setAccount(account);

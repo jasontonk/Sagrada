@@ -23,7 +23,7 @@ public class Player {
 	
 	private Account account;
 	private FavorToken favorToken;
-	private ModelColor modelColor;
+	private ModelColor personalObjectiveCardColor;
 	private Board board;
 	
 	private ArrayList<FavorToken> favorTokens;
@@ -44,8 +44,8 @@ public class Player {
 		this.setGame(game);
 		this.setPlayerStatus(PlayerStatus.CHALLENGER);
 
-		modelColor = modelColor.RED;
-		this.setColor(modelColor);
+		personalObjectiveCardColor = personalObjectiveCardColor.RED;
+		this.setPersonalObjectiveCardColor();
 
 
 		playerDBA.addPlayer(this, playerStatus);
@@ -65,7 +65,6 @@ public class Player {
 		this.setPlayerStatus(PlayerStatus.CHALLENGEE);
 		
 		score = new SimpleIntegerProperty();
-		setScore(-20);
 		}		
 
 
@@ -154,12 +153,16 @@ public class Player {
 		this.favorToken = favorToken;
 	}
 
-	public ModelColor getColor() {
-		return modelColor;
+	public ModelColor getPersonalObjectiveCardColor() {
+		return personalObjectiveCardColor;
 	}
 
-	public void setColor(ModelColor modelColor) {
-		this.modelColor = modelColor;
+	public void setPersonalObjectiveCardColor() {
+		this.personalObjectiveCardColor = ModelColor.BLUE;
+	}
+	public void setPersonalObjectiveCardColorFromDB(ModelColor modelcolor) {
+		
+		this.personalObjectiveCardColor = modelcolor;
 	}
 
 	public ArrayList<FavorToken> getFavorTokens() {
@@ -305,7 +308,7 @@ public class Player {
 					score = score - 1;
 					System.out.println("SPELER: " + this.getName() + " SCORE -1 =================== " + "BOARDFIELD (" + x + ", " + y + ") SCORE: " + score);
 				}
-				else if(board.getBoardField(x, y).getDie().getColor().equals(modelColor)) {
+				else if(board.getBoardField(x, y).getDie().getColor().equals(personalObjectiveCardColor)) {
 					score = score + 1;
 					System.out.println("SPELER: " + this.getName() + " SCORE -1 =================== " + "BOARDFIELD (" + x + ", " + y + ") SCORE: " + score);
 				}

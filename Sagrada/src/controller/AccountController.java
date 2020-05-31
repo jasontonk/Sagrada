@@ -196,8 +196,9 @@ public class AccountController {
 			player.setName(account.getUsername());
 			player.setGame(game);
 			player.setPlayerStatus(PlayerStatus.CHALLENGER);
-			player.setColor(ModelColor.BLUE);
+			player.setPersonalObjectiveCardColor();
 			player.addPlayer(player);
+			player.setScore(-20);
 			invitePlayerList.add(player);
 			
 			for (Account account : inviteList) {
@@ -206,7 +207,7 @@ public class AccountController {
 				p.setName(account.getUsername());
 				p.setGame(game);
 				p.setPlayerStatus(PlayerStatus.CHALLENGEE);
-				p.setColor(ModelColor.BLUE);
+				p.setPersonalObjectiveCardColor();
 				p.addPlayer(p);
 				invitePlayerList.add(p);
 			}
