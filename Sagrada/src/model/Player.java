@@ -159,6 +159,9 @@ public class Player {
 
 	public void setPersonalObjectiveCardColor() {
 		this.personalObjectiveCardColor = ModelColor.BLUE;
+//		this.personalObjectiveCardColor = ModelColor.randomColor(ModelColor.class);
+		
+		
 	}
 	public void setPersonalObjectiveCardColorFromDB(ModelColor modelcolor) {
 		

@@ -440,10 +440,10 @@ public class PlayerDBA {
                 AccountDBA accountDBA = new AccountDBA(conn);
                 Account account = accountDBA.GetAccountDB(rs.getString("username"));
                 player.setId(rs.getInt("idplayer"));
-                player.setPlayerStatus(getPlayerStatusFromString(rs.getString("playstatus_playstatus")));
+                player.setPlayerStatus(getPlayerStatusFromString(rs.getString("playstatus")));
                 player.setPersonalObjectiveCardColorFromDB(getColorFromString(rs.getString("private_objectivecard_color")));
                 player.setSequenceNumber(rs.getInt("seqnr"));
-                player.setCurrentPlayer(rs.getBoolean("isCurrentPlayer"));
+//                player.setCurrentPlayer(rs.getBoolean("isCurrentPlayer"));
                 player.setAccount(account);
             }
         } catch (Exception e) {

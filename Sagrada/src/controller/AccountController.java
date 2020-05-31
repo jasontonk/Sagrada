@@ -189,8 +189,7 @@ public class AccountController {
 	    	 showWarning("invites niet verstuurd", "Je kan niet jezelf uitnodigen");
 		     return; 
 	     }
-			Game game = new Game(connection);
-			game.addGameToDB();
+			Game game = new Game(connection, false);
 			Player player = new Player(connection);
 			player.setAccount(account);
 			player.setName(account.getUsername());
@@ -211,7 +210,7 @@ public class AccountController {
 				p.addPlayer(p);
 				invitePlayerList.add(p);
 			}
-		
+			game.finishGameSetup(this);
 	}
 
 	public ArrayList<Player> getInvitePlayerList() {
