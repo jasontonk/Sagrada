@@ -263,6 +263,7 @@ public class AccountController {
 		game.setCurrentPlayer(game.getPlayers().get(0));
 		
 		game.addpublicobjectivecards();
+		
 		GameController gameController = new GameController(connection, myScene, game, 0);
 		myScene.setContentPane(gameController.getGameView());
 	}

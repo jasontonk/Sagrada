@@ -120,8 +120,9 @@ public class Game {
 //	}
 	
 	private void getPublicObjectiveCardsOfGame() {
-		ArrayList<PublicObjectiveCard> publicObjectiveCardsOfGameFromDB = publicObjectiveCardDBA.getPublicObjectiveCardsOfGame(this);
-		if(publicObjectiveCardsOfGameFromDB == null) {
+		ArrayList<PublicObjectiveCard> publicObjectiveCardsOfGameFromDB = publicObjectiveCardDBA.getPublicObjectiveCardsOfGame(this); 
+		if(publicObjectiveCardsOfGameFromDB.size() == 0) {
+			System.out.println("ik maak nieuwe objectivecards aan");
 			ArrayList<PublicObjectiveCard> publicObjectiveCardsFromDB = publicObjectiveCardDBA.getAllAvailablePublicObjectiveCards(this);
 			int i = 0;
 			Random r = new Random();
@@ -138,6 +139,7 @@ public class Game {
 			}
 		}
 		else {
+			System.out.println("ik gebruik bestaande objectivecards");
 			publicObjectiveCards = publicObjectiveCardsOfGameFromDB;
 		}
 	}
