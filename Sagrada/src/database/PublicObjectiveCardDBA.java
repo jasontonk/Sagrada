@@ -23,7 +23,7 @@ public class PublicObjectiveCardDBA {
         	Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next()) {
-				PublicObjectiveCard publicObjectiveCard = new PublicObjectiveCard(rs.getInt("points"),rs.getString("description"),rs.getString("name"),rs.getInt("idpublic_objectivecard"));
+				PublicObjectiveCard publicObjectiveCard = new PublicObjectiveCard(rs.getInt("idpublic_objectivecard"),rs.getString("name"),rs.getString("description"),rs.getInt("points"));
 				list.add(publicObjectiveCard);
 			}
 			stmt.close();
@@ -60,7 +60,7 @@ public class PublicObjectiveCardDBA {
 	        	Statement stmt = conn.getConn().createStatement();
 				ResultSet rs = stmt.executeQuery(query);
 				while(rs.next()) {
-					PublicObjectiveCard publicObjectiveCard = new PublicObjectiveCard(rs.getInt("points"),rs.getString("description"),rs.getString("name"),rs.getInt("idpublic_objectivecard"));
+					PublicObjectiveCard publicObjectiveCard = new PublicObjectiveCard(rs.getInt("idpublic_objectivecard"),rs.getString("name"),rs.getString("description"),rs.getInt("points"));
 					list.add(publicObjectiveCard);
 				}
 				stmt.close();
@@ -89,7 +89,7 @@ public class PublicObjectiveCardDBA {
 	        	Statement stmt = conn.getConn().createStatement();
 				ResultSet rs = stmt.executeQuery(query);
 				if(rs.next()) {
-					publicObjectiveCard = new PublicObjectiveCard(rs.getInt("points"),rs.getString("description"),rs.getString("name"),id);
+					publicObjectiveCard = new PublicObjectiveCard(id,rs.getString("name"),rs.getString("description"),rs.getInt("points"));
 				}
 				stmt.close();
 	        } catch (SQLException e) {
@@ -97,6 +97,25 @@ public class PublicObjectiveCardDBA {
 	        }
 	        return publicObjectiveCard;
 	    }
-	
+
+	public ArrayList<PublicObjectiveCard> getPublicObjectiveCardsOfGame(Game game) {
+		ArrayList<PublicObjectiveCard> publicObjectiveCards = null;
+	       String query = "SELECT * FROM gameobjectivecard_public LEFT JOIN public_objectivecard "
+	       		+ "ON gameobjectivecard_public.idpublic_objectivecard = public_objectivecard.idpublic_objectivecard "
+	       		+ "WHERE idgame = "+game.getGameID()+";";
+	        try {
+	        	Statement stmt = conn.getConn().createStatement();
+				ResultSet rs = stmt.executeQuery(query);
+				while(rs.next()) {
+
+					PublicObjectiveCard publicObjectiveCard = new PublicObjectiveCard(rs.getInt("idpublic_objectivecard"),rs.getString("name"),rs.getString("description"),rs.getInt("points"));
+					publicObjectiveCards.add(publicObjectiveCard);
+				}
+				stmt.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        return publicObjectiveCards;
+	}
 	
 }

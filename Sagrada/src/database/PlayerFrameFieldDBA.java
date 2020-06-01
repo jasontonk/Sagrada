@@ -18,6 +18,7 @@ public class PlayerFrameFieldDBA {
 
 		String query = "INSERT INTO playerframefield(idplayer, position_x, position_y, idgame) VALUES("+player.getId()+","+(xposition+1)+","+(yposition+1)+
 				","+player.getGame().getGameID()+");";
+		System.out.println(query);
 		
 		try {
 			Statement stmt = conn.getConn().createStatement();

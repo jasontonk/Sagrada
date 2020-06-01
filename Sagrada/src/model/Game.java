@@ -120,19 +120,25 @@ public class Game {
 //	}
 	
 	private void getPublicObjectiveCardsOfGame() {
-		ArrayList<PublicObjectiveCard> publicObjectiveCardsFromDB = publicObjectiveCardDBA.getAllAvailablePublicObjectiveCards(this);
-		int i = 0;
-		Random r = new Random();
-		while(i < 3) {
-			PublicObjectiveCard publicObjectiveCard = publicObjectiveCardsFromDB.get(r.nextInt(publicObjectiveCardsFromDB.size()));
-			if(publicObjectiveCard != null && !publicObjectiveCards.contains(publicObjectiveCard)) {
-				publicObjectiveCards.add(publicObjectiveCard);
-				i++;
+		ArrayList<PublicObjectiveCard> publicObjectiveCardsOfGameFromDB = publicObjectiveCardDBA.getPublicObjectiveCardsOfGame(this);
+		if(publicObjectiveCardsOfGameFromDB == null) {
+			ArrayList<PublicObjectiveCard> publicObjectiveCardsFromDB = publicObjectiveCardDBA.getAllAvailablePublicObjectiveCards(this);
+			int i = 0;
+			Random r = new Random();
+			while(i < 3) {
+				PublicObjectiveCard publicObjectiveCard = publicObjectiveCardsFromDB.get(r.nextInt(publicObjectiveCardsFromDB.size()));
+				if(publicObjectiveCard != null && !publicObjectiveCards.contains(publicObjectiveCard)) {
+					publicObjectiveCards.add(publicObjectiveCard);
+					i++;
+				}
+			}
+			for (PublicObjectiveCard publicObjectiveCard2 : publicObjectiveCards) {
+				System.out.println("public objectivecard: "+ publicObjectiveCard2.getName() + " id= " +publicObjectiveCard2.getId());
+				publicObjectiveCardDBA.addPublicObjectiveCardToGame(publicObjectiveCard2, this);
 			}
 		}
-		for (PublicObjectiveCard publicObjectiveCard2 : publicObjectiveCards) {
-			System.out.println("public objectivecard: "+ publicObjectiveCard2.getName() + " id= " +publicObjectiveCard2.getId());
-			publicObjectiveCardDBA.addPublicObjectiveCardToGame(publicObjectiveCard2, this);
+		else {
+			publicObjectiveCards = publicObjectiveCardsOfGameFromDB;
 		}
 	}
 
