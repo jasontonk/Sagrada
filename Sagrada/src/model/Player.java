@@ -35,26 +35,26 @@ public class Player {
 	
 	private PlayerDBA playerDBA ;
 	
-	public Player(DataBaseConnection c, Account account, Game game, PlayerStatus playerStatus) {
-		connection = c;
-		playerDBA = new PlayerDBA(c);
-
-		this.account = account;
-		this.setName(account.getUsername());
-		this.setGame(game);
-		this.setPlayerStatus(PlayerStatus.CHALLENGER);
-		this.setPersonalObjectiveCardColor();
-		System.out.println("De personal objectivecard color van " +name+ " is: "+personalObjectiveCardColor);
-
-		playerDBA.addPlayer(this, playerStatus);
-		System.out.println("test2");
-		patternCard = new PatternCard(c);
-		board = new Board(1, this, c);	
-		
-		score = new SimpleIntegerProperty();
-		setScore(-20);
-		
-	}
+//	public Player(DataBaseConnection c, Account account, Game game, PlayerStatus playerStatus) {
+//		connection = c;
+//		playerDBA = new PlayerDBA(c);
+//
+//		this.account = account;
+//		this.setName(account.getUsername());
+//		this.setGame(game);
+//		this.setPlayerStatus(PlayerStatus.CHALLENGER);
+//		this.setPersonalObjectiveCardColor();
+//		System.out.println("De personal objectivecard color van " +name+ " is: "+personalObjectiveCardColor);
+//
+//		playerDBA.addPlayer(this, playerStatus);
+//		System.out.println("test2");
+//		patternCard = new PatternCard(c);
+//		board = new Board(1, this, c);	
+//		
+//		score = new SimpleIntegerProperty();
+//		setScore(-20);
+//		
+//	}
 
 
 	public Player(DataBaseConnection c) {
@@ -64,11 +64,15 @@ public class Player {
 		
 		this.setPersonalObjectiveCardColor();
 		System.out.println("De personal objectivecard color van " +name+ " is: "+personalObjectiveCardColor);
-		board = new Board(1, this, c);	
+//		board = new Board(1, this, c);	
 		
 		score = new SimpleIntegerProperty();
 		setScore(-20);
-		}		
+		}	
+	
+	public void createBoard() {
+		board = new Board(1, this, connection);	
+	}
 
 
 	public void addPlayer(Player player) {
