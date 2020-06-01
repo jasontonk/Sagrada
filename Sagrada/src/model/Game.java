@@ -203,30 +203,33 @@ public class Game {
 		int amountofdice = players.size() * 2 + 1;
 		System.out.println("amountofdice : " + amountofdice);
 		Random r = new Random();
-		
-		while (offer.size() < amountofdice) {
-			for (int i = 0; i < amountofdice; i++) {
-				System.out.println("diceInBag " + diceInBag);
-				GameDie selectedDice = diceInBag[r.nextInt(89)];
-				if (!checkDieUsed(selectedDice)) {
-					offer.add(selectedDice);
-					
-					usedDice.add(selectedDice);
-					for (int j = 0; j < usedDice.size(); j++) {
-						System.out.println("TEST 1 " + usedDice);
-						System.out.println("TEST 2 " + usedDice.get(j));
-						System.out.println("TEST 3 " + usedDice.get(j).getRoundID(this));
-						if (usedDice.get(j).getRoundID(this) == 0) {
-							selectedDice.setRoundID(this);
+		offer = gamedieDBA.getAllRoundDice(this);
+		System.out.println("GRABDICE OFFER = " + offer);
+//		if() {
+			while (offer.size() < amountofdice) {
+				for (int i = 0; i < amountofdice; i++) {
+					System.out.println("diceInBag " + diceInBag);
+					GameDie selectedDice = diceInBag[r.nextInt(89)];
+					if (!checkDieUsed(selectedDice)) {
+						offer.add(selectedDice);
+						
+						usedDice.add(selectedDice);
+						for (int j = 0; j < usedDice.size(); j++) {
+							System.out.println("TEST 1 " + usedDice);
+							System.out.println("TEST 2 " + usedDice.get(j));
+							System.out.println("TEST 3 " + usedDice.get(j).getRoundID(this));
+							if (usedDice.get(j).getRoundID(this) == 0) {
+								selectedDice.setRoundID(this);
+							}
 						}
 					}
+					else {
+						i--;
+					}
+					System.out.println("offersize : "+offer.size());
 				}
-				else {
-					i--;
-				}
-				System.out.println("offersize : "+offer.size());
 			}
-		}
+//		}
 	}
 	
 	public void getDicePoolFromDB() {

@@ -168,7 +168,7 @@ public class GameDieDBA {
 	
 	public ArrayList<GameDie> getAllRoundDice(Game game) {
         ArrayList<GameDie> list = new ArrayList<GameDie>();
-        String query = "SELECT * FROM gamedie WHERE idgame="+game.getGameID()+"AND roundID = "+game.getRound()+";";
+        String query = "SELECT * FROM gamedie WHERE idgame="+game.getGameID()+" AND roundID = "+game.getRound().get()+";";
         try {
         	Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
