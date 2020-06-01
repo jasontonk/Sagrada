@@ -107,6 +107,7 @@ public class GameController {
 		changedDiceOnRoundTrack = new ArrayList<GameDie>();
 		diceOnRoundTrack = new ArrayList<GameDie>();
 		
+		game.playround();
 		
 		updateGame = new Thread(gameUpdater);
 		updateGame.setDaemon(true);
@@ -117,7 +118,7 @@ public class GameController {
 		
 		
 		myScene.setContentPane(new GameView(this));
-		game.playround();
+
 	}
 	
 public ArrayList<PatterncardController> getPatternCardsToChoose(){

@@ -232,6 +232,7 @@ public class Game {
 		if(offer != offerfromDB && offerfromDB.size() != 0) {
 			offer =	offerfromDB;
 		}
+		System.out.println("de offersize is: "+offer.size());
 		usedDice.addAll(offer);
 	}
 	
@@ -513,6 +514,7 @@ public class Game {
 		System.out.println(currentPlayer + "CURRENT PLAYER");
 		System.out.println(currentPlayer.getSequenceNumber() + "CURRENT PLAYER SQNR");
 		if(currentPlayer.getSequenceNumber() == 1 && round.get()%2 == 1 && offer.size() == 0) {
+			System.out.println("ik maak een nieuw offer");
 			grabDiceFromBag();
 		}
 		System.out.println("de size van de offer : " + offer.size());
