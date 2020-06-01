@@ -60,12 +60,12 @@ public class Player {
 	public Player(DataBaseConnection c) {
 		connection = c;
 		playerDBA = new PlayerDBA(c);
+		patternCard = new PatternCard(c);
 		this.setPlayerStatus(PlayerStatus.CHALLENGEE);
 		
 		this.setPersonalObjectiveCardColor();
 		System.out.println("De personal objectivecard color van " +name+ " is: "+personalObjectiveCardColor);
 //		board = new Board(1, this, c);	
-		
 		score = new SimpleIntegerProperty();
 		setScore(-20);
 		}	
@@ -187,14 +187,24 @@ public class Player {
 
 	public PatternCard getPatternCard() {
 		if(patternCard == null) {
-			return null;
+			if(patternCard
+					.getPatterncardDB()
+					.getSelectedPatterncardOfPlayer(this.getId(), this)
+					.getPatterncardID() == 0) {
+				patternCard = patternCard.getPatterncardDB().getPatterncard();
+				patternCard.setpattern(false);
+			}
+			else {
+				patternCard = patternCard.getPatterncardDB().getSelectedPatterncardOfPlayer(this.getId(), this);	
+			}
 		}
 		patternCard.setpattern(false);
 		return patternCard;
 	}
 
 	public void setPatternCard(PatternCard patternCard) {
-		this.patternCard = patternCard;
+		playerDBA.setPlayerPatternCard(patternCard, this);
+		this.patternCard = patternCard.getPatterncardDB().getSelectedPatterncardOfPlayer(this.getId(), this);
 
 	}
 

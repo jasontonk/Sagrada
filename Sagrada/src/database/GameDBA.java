@@ -269,7 +269,7 @@ public class GameDBA {
 		ArrayList<Player> players = game.getPlayers();
 	    String query = "SELECT player.* FROM game RIGHT JOIN player " + 
 	    				"ON game.idgame = player.idgame AND game.turn_idplayer = player.idplayer " + 
-	    				"WHERE game.idgame= 272;";
+	    				"WHERE game.idgame= "+game.getGameID()+";";
 	        
 	        try {
 				Statement stmt = conn.getConn().createStatement();

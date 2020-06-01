@@ -80,6 +80,14 @@ public class Game {
 				break;
 			}
 		}
+		for (int i = 0; i < players.size(); i++) {
+			if (players.get(i).getPatternCard() == null) {
+				PatternCard patternCard = new PatternCard(conn);
+				patternCard = patternCard.getPatterncardDB().getPatterncard();
+				patternCard.setpattern(false);
+				players.get(i).setPatternCard(patternCard);
+			}
+		}
 		finishedGame = false;
 		placedDie = true;
 		
@@ -462,7 +470,7 @@ public class Game {
 		return selectedDie;
 	}
 	public Player getCurrentPlayer() {
-//		currentPlayer = gameDBA.getCurrentPlayer(this);
+		currentPlayer = gameDBA.getCurrentPlayer(this);
 		return currentPlayer;
 	}
 

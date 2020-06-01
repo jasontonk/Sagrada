@@ -22,6 +22,7 @@ public class PatternCard {
 	
 	
 	public PatternCard(String name, int difficulty, DataBaseConnection conn) {
+		patterncardID = 0;
 		this.name = name;
 		this.difficulty = difficulty;
 		this.conn = conn;
@@ -37,6 +38,7 @@ public class PatternCard {
 		
 	}
 	public PatternCard(DataBaseConnection conn) {
+		patterncardID = 0;
 		this.conn = conn;
 		patterncardDB = new PatternCardDBA(conn);
 		patterncardfieldDB = new PatternCardFieldDBA(conn);
@@ -197,6 +199,9 @@ public class PatternCard {
 			}
 		}
 		return patternCardsToChoose;
+	}
+	public PatternCardDBA getPatterncardDB() {
+		return patterncardDB;
 	}
 	
 }

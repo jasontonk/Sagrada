@@ -229,7 +229,7 @@ public class PlayerDBA {
 				player.setSequenceNumber(rs.getInt("seqnr"));
 				player.setScore(rs.getInt("score"));
 				player.setPersonalObjectiveCardColorFromDB(getColorFromString(rs.getString("private_objectivecard_color")));
-				player.setPatternCard(patternCard.getPatterncardByID(rs.getInt("idpatterncard")));
+//				player.setPatternCard(patternCard.getPatterncardByID(rs.getInt("idpatterncard")));
 				player.setGame(game.getGameByID(rs.getInt("idgame")));
 			}
 			
@@ -262,7 +262,7 @@ public class PlayerDBA {
 				player.setSequenceNumber(rs.getInt("seqnr"));
 				player.setScore(rs.getInt("score"));
 				player.setPersonalObjectiveCardColorFromDB(getColorFromString(rs.getString("private_objectivecard_color")));
-				player.setPatternCard(patternCard.getPatterncardByID(rs.getInt("idpatterncard")));
+//				player.setPatternCard(patternCard.getPatterncardByID(rs.getInt("idpatterncard")));
 				player.setGame(game.getGameByID(rs.getInt("idgame")));
 				list.add(player);
 			}
@@ -291,7 +291,7 @@ public class PlayerDBA {
 				player.setSequenceNumber(rs.getInt("seqnr"));
 				player.setScore(rs.getInt("score"));
 				player.setPersonalObjectiveCardColorFromDB(getColorFromString(rs.getString("private_objectivecard_color")));
-				player.setPatternCard(patternCard.getPatterncardByID(rs.getInt("idpatterncard")));
+//				player.setPatternCard(patternCard.getPatterncardByID(rs.getInt("idpatterncard")));
 				player.setGame(g.getGameByID(rs.getInt("idgame")));
 			}
 			stmt.close();
@@ -334,9 +334,11 @@ public class PlayerDBA {
 	}
 
 	public void setPlayerPatternCard(PatternCard patternCard, Player player) {
-
+		System.out.println("patterncard= "+patternCard + " & patterncardID= ");
+	//+ patternCard.getPatterncardID());
 		String query = "UPDATE player SET idpatterncard = " + patternCard.getPatterncardID() + " WHERE idplayer = "
 				+ player.getId() + ";";
+	
 		try {
 			Statement stmt = conn.getConn().createStatement();
 			stmt.executeUpdate(query);
@@ -388,7 +390,7 @@ public class PlayerDBA {
 				player.setSequenceNumber(rs.getInt("seqnr"));
 				player.setScore(rs.getInt("score"));
 				player.setPersonalObjectiveCardColorFromDB(getColorFromString(rs.getString("private_objectivecard_color")));
-				player.setPatternCard(patternCard.getPatterncardByID(rs.getInt("idpatterncard")));
+//				player.setPatternCard(patternCard.getPatterncardByID(rs.getInt("idpatterncard")));
 				player.setGame(game.getGameByID(rs.getInt("idgame")));
 				list.add(player);
 			}

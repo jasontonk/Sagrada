@@ -217,8 +217,20 @@ public class AccountController {
 				p.createBoard();
 				invitePlayerList.add(p);
 			}
+			ArrayList<PatternCard> patterncards = new ArrayList<>();
+			for (int i = 0; i < invitePlayerList.size(); i++) {
+				PatternCard patternCard = new PatternCard(connection);
+				patternCard.getPatterncardDB().getPatterncard();
+				patternCard.setpattern(false);
+				patterncards.add(patternCard);
+			}
+			System.out.println("de aangemaakte patterncards zijn: "+ patterncards);
+			for (int j = 0; j < invitePlayerList.size(); j++) {
+				if(player.getPatternCard() == null) {
+					player.setPatternCard(patterncards.get(j));
+				}
+			}
 			game.getDicePoolFromDB();
-//			game.getOffer(); //check to see if working
 			game.finishGameSetup(this);
 	}
 

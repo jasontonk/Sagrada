@@ -84,11 +84,11 @@ public class GameViewUpdater extends Task<Boolean> {
 	private void updateAll() {
 		updateDicePoolView();
 		updatePatterncardsView();
-		updateRountrackView();
+		updateRoundtrackView();
 //		updateScoreBoard();
 	}
 	
-	private void updateRountrackView() {
+	private void updateRoundtrackView() {
 		ArrayList<GameDie> diceOnRoundTrack = new ArrayList<GameDie>();
 		diceOnRoundTrack = gameCtrl.getChangedDiceOnRoundTrack();
 		ArrayList<ModelColor> colors = new ArrayList<>();
