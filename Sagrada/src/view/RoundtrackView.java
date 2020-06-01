@@ -9,6 +9,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -40,6 +41,7 @@ public class RoundtrackView extends VBox {
  	
 	
 	public RoundtrackView(RoundtrackController roundtrackController) {
+		ScrollPane roundTrackScroll = new ScrollPane();
 		this.roundtrackController = roundtrackController;
 		javafxColor = new JavafxColor();
 		roundtrack = new GridPane();
@@ -49,7 +51,10 @@ public class RoundtrackView extends VBox {
 		stackpanes = new ArrayList<StackPane>();
 		this.setPadding(new Insets(0, 30, 0, 30));
 		this.setMaxWidth((10 * (ROUNDTRACKFIELD_SIZE + SPACING) + SPACING));
-		this.getChildren().addAll(drawTitle(), drawRoundtrack(), drawRound());
+		this.setMaxHeight(100);
+		VBox content = new VBox(drawTitle(), drawRoundtrack(), drawRound());
+		roundTrackScroll.setContent(content);
+		this.getChildren().add(roundTrackScroll);
 	}
 	
 	public GridPane drawRoundtrack() {

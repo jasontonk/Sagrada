@@ -44,7 +44,7 @@ public class GameView extends BorderPane {
 		center.getChildren().addAll(button,button2);
 		center.setSpacing(50);
 		this.setCenter(center);
-		this.setPrefSize(800, 600);
+		this.setPrefSize(1000, 800);
 		this.setAlignment(roundtrackView, Pos.CENTER);
 	}
 
