@@ -468,6 +468,8 @@ public class Board {
 		return false;
 	}
 	public boolean checkAll(BoardField boardField, ModelColor modelColor, int value) {
+		System.out.println("patterncard1" + patternCard.getName());
+		System.out.println("patterncard2" +player.getPatternCard().getName());
 		
 		boolean firstturn = isFirstTurn();
 		System.out.println("HIER PLEK 0: " + modelColor);

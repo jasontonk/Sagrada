@@ -75,14 +75,14 @@ public class Game {
 			players.get(i).setSequenceNumber(i+1);
 		}
 		
-		for (int i = 0; i < players.size(); i++) {
-			if (players.get(i).getPatternCard().getPatterncardID() == 0) {
-				PatternCard patternCard = new PatternCard(conn);
-				patternCard = patternCard.getPatterncardDB().getPatterncard();
-				patternCard.setpattern(false);
-				players.get(i).setPatternCard(patternCard);
-			}
-		}
+//		for (int i = 0; i < players.size(); i++) {
+//			if (players.get(i).getPatternCard().getPatterncardID() == 0) {
+//				PatternCard patternCard = new PatternCard(conn);
+//				patternCard = patternCard.getPatterncardDB().getPatterncard();
+//				patternCard.setpattern(false);
+//				players.get(i).setPatternCard(patternCard);
+//			}
+//		}
 		finishedGame = false;
 		placedDie = true;
 		
