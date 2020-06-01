@@ -240,10 +240,15 @@ public class Game {
 	}
 	
 	public boolean checkDieUsed(GameDie selectedDice) {
-		System.out.println("SELECTEDDIE " + selectedDice);
-		System.out.println("GETROUNDID" + selectedDice.getRoundID(this));
-		if(selectedDice.getRoundID(this) != 0){
-			return true;
+		if(selectedDice != null) {
+			System.out.println("SELECTEDDIE " + selectedDice);
+			System.out.println("GETROUNDID" + selectedDice.getRoundID(this));
+			if(selectedDice.getRoundID(this) != 0){
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 		else {
 			return false;

@@ -8,6 +8,7 @@ import database.GameDieDBA;
 public class GameDie extends Die {
 
 	private int eyes;
+	private int round;
 	private boolean isAvailable;
 	private boolean isFirstTurn;
 	private int isOnRoundtrackfield;
@@ -70,13 +71,17 @@ public class GameDie extends Die {
 		gameDieDBA.addGameDie(this, game);
 	}
 	public void setRoundID(Game game) {
+		round = game.getRound().get();
 		gameDieDBA.addRoundID(this,game);
-		
+	}
+	public void setRoundIDFromDB(int roundID) {
+		this.round = roundID;
 	}
 	public ArrayList<GameDie> getAllRoundDice(Game game){
 		return gameDieDBA.getAllRoundDice(game);
 	}
 	public int getRoundID(Game game) {
-		return gameDieDBA.getRoundID(this, game);
+		this.round = gameDieDBA.getRoundID(this, game);
+		return round;
 	}
 }

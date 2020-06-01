@@ -138,6 +138,9 @@ public class GameDieDBA {
 			ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 GameDie gameDie = new GameDie(getColorFromString(rs.getString("color")),rs.getInt("dienumber"),rs.getInt("eyes"), game, conn, this);
+                if(rs.getInt("roundID") != 0) {
+                	gameDie.setRoundIDFromDB(rs.getInt("roundID"));
+                }
                 list.add(gameDie);
             }
             stmt.close();
