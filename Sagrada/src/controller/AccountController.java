@@ -253,6 +253,7 @@ public class AccountController {
 			}
 			game.getDicePoolFromDB();
 			game.finishGameSetup(this);
+			game.setCurrentPlayer(player);
 			game.setPersonalPlayer(getAccount());
 	}
 
