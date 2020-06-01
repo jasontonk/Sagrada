@@ -271,6 +271,7 @@ public class Game {
 	}
 
 	public void playround() {// boolean first round false
+		
 		System.out.println("round: " +round+ " Databaseround: "+gameDBA.getCurrentRound(this.getGameID()));
 		if(round.equals(gameDBA.getCurrentRound(this.getGameID()))) {
 			if(currentPlayer == personalPlayer) {

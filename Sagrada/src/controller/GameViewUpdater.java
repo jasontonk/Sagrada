@@ -86,6 +86,7 @@ public class GameViewUpdater extends Task<Boolean> {
 		updatePatterncardsView();
 		updateRoundtrackView();
 //		updateScoreBoard();
+		System.out.println();
 	}
 	
 	private void updateRoundtrackView() {
