@@ -497,6 +497,9 @@ public class Game {
 	public boolean checkPlacementAgainstRules(int x, int y, ModelColor modelColor, int value) {
 		if(!placedDie) {
 			if(personalPlayer == currentPlayer) {
+				if(currentPlayer.getBoard() == null) {
+					currentPlayer.createBoard();
+				}
 				if(currentPlayer.checkPlacementAgainstRules(x, y, modelColor, value)) {
 					placedDie = true;
 					return true;

@@ -104,7 +104,7 @@ public class Board {
      * Returns the board field of the parameters
      */
 	public BoardField getBoardField(int x, int y) {
-		boardFields[x][y] = playerFrameFieldDBA.getPlayerFrameField(getPlayer(),x+1 ,y+1 );
+		boardFields[x][y] = playerFrameFieldDBA.getPlayerFrameField(getPlayer(),x+1  ,y+1 );
 		System.out.println("kijken of ik een null krijg: " + boardFields[x][y]);
 		if(boardFields[x][y] != null){
 			return boardFields[x][y];
@@ -470,14 +470,19 @@ public class Board {
 	public boolean checkAll(BoardField boardField, ModelColor modelColor, int value) {
 		
 		boolean firstturn = isFirstTurn();
+		System.out.println("HIER PLEK 0: " + modelColor);
 		if(firstturn && (boardField.getxPos() == 0 || boardField.getyPos() == 0 || boardField.getxPos() == 4 || boardField.getyPos() == 3) || 
 				!firstturn && checkIsNextToDie(boardField)) {
+			System.out.println("HIER PLEK 1: ");
 				if(!checkSidesColor(boardField, modelColor)) { 
+					System.out.println("HIER PLEK 2: ");
 					if(!checkSidesValue(boardField, value)) {
+						System.out.println("HIER PLEK 3: ");
 						if(checkFieldColorAndDieColor(boardField, modelColor) || checkFieldValueAndDieValue(boardField, value) || 
 								!checkFieldColorAndDieColor(boardField, modelColor) && !checkFieldValueAndDieValue(boardField, value) && 
 									patternCard.getFieldColor(boardField.getxPos(), boardField.getyPos()) == null && 
 										patternCard.getFieldValue(boardField.getxPos(), boardField.getyPos()) == 0){
+							System.out.println("HIER PLEK 4: ");
 							placeDie(boardField, player.getSelectedDie());
 							return true;
 						}

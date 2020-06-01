@@ -224,6 +224,7 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 	}
 
 	public void playround() {
+		game.setCurrentPlayer(game.getPersonalPlayer());
 		gameViewUpdater.setPaused(true);
 		gameUpdater.setPaused(true);
 		Thread playround = new Thread(gameRoundPlayer);

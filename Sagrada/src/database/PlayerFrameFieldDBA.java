@@ -55,7 +55,7 @@ public class PlayerFrameFieldDBA {
 					break;
 				}
 			}
-				String query = "UPDATE playerframefield SET dienumber = "+die.getNumber()+", diecolor= '" +color+"' WHERE idplayer = "+player.getId()+" AND position_x = "+xposition+" AND position_y ="+yposition+";";
+				String query = "UPDATE playerframefield SET dienumber = "+die.getNumber()+", diecolor= '" +color+"' WHERE idplayer = "+player.getId()+" AND position_x = "+xposition+" AND position_y ="+yposition+ " AND idgame = "+player.getGame().getGameID()+";";
 				System.out.println(query);
 				try {
 					Statement stmt = conn.getConn().createStatement();
