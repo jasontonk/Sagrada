@@ -19,16 +19,21 @@ public class PublicObjectiveCardsView extends HBox {
 	}
 
 	private void drawPublicObjectiveCards() {
+		System.out.println("PUBLIC OBJECTIVE CARDS OF GAME: " + objectivecardIDs);
 		for (int i = 0; i < objectivecardIDs.length; i++) {
 //			try {
 //				FileInputStream imageInputStream = new FileInputStream("/images/publicObjectiveCard"+objectivecardIDs[i]+".png");
 				String imgURL = "/images/publicObjectiveCard" + objectivecardIDs[i] + ".png";
-				Image image = new Image(getClass().getResource(imgURL).toString()); 
+				System.out.println("IMGURL " + imgURL);
+				Image image = new Image
+						(getClass().
+								getResource(imgURL)
+								.toString()); 
 				ImageView imageView = new ImageView(image);
 				this.getChildren().add(imageView);
 				
 //			} catch (FileNotFoundException e) {
-////				i--;
+//				i--;
 //				e.printStackTrace();
 //			}
 		}

@@ -64,7 +64,7 @@ public class Player {
 		
 		this.setPersonalObjectiveCardColor();
 		System.out.println("De personal objectivecard color van " +name+ " is: "+personalObjectiveCardColor);
-//		board = new Board(1, this, c);	
+		board = new Board(1, this, c);	
 		
 		score = new SimpleIntegerProperty();
 		setScore(-20);
@@ -310,13 +310,15 @@ public class Player {
 		int score = 0;
 		for(int x = 0; x < Board.BOARD_SQUARES_HORIZONTAL; x++) {
 			for(int y = 0; y < Board.BOARD_SQUARES_VERTICAL; y++) {
-				if(!board.getBoardField(x, y).hasDie()) {
-					score = score - 1;
-					System.out.println("SPELER: " + this.getName() + " SCORE -1 =================== " + "BOARDFIELD (" + x + ", " + y + ") SCORE: " + score);
-				}
-				else if(board.getBoardField(x, y).getDie().getColor().equals(personalObjectiveCardColor)) {
-					score = score + 1;
-					System.out.println("SPELER: " + this.getName() + " SCORE -1 =================== " + "BOARDFIELD (" + x + ", " + y + ") SCORE: " + score);
+				if(!(board == null)) {
+					if(!board.getBoardField(x, y).hasDie()) {
+						score = score - 1;
+						System.out.println("SPELER: " + this.getName() + " SCORE -1 =================== " + "BOARDFIELD (" + x + ", " + y + ") SCORE: " + score);
+					}
+					else if(board.getBoardField(x, y).getDie().getColor().equals(personalObjectiveCardColor)) {
+						score = score + 1;
+						System.out.println("SPELER: " + this.getName() + " SCORE -1 =================== " + "BOARDFIELD (" + x + ", " + y + ") SCORE: " + score);
+					}
 				}
 			}
 		}

@@ -189,8 +189,9 @@ public class AccountController {
 	    	 showWarning("invites niet verstuurd", "Je kan niet jezelf uitnodigen");
 		     return; 
 	     }
-			Game game = new Game(connection, false);
+			Game game = new Game(connection, false);	
 			game.addGametoDB();
+			game.addpublicobjectivecards();
 			Player player = new Player(connection);
 			player.setAccount(account);
 			player.setName(account.getUsername());
@@ -212,6 +213,7 @@ public class AccountController {
 				p.addPlayer(p);
 				invitePlayerList.add(p);
 			}
+			
 			game.finishGameSetup(this);
 	}
 
@@ -248,6 +250,15 @@ public class AccountController {
 			player.setPatternCard(new PatternCard(connection));
         }
 		else player.setPatternCard(player.getPatternCard());
+		
+		System.out.println("GAME.getid: " + game.getGameID());
+		System.out.println("GAME.getplayers: " + game.getPlayers());
+
+		System.out.println("GAME.getplayers.0: " + game.getPlayers().get(0));
+		
+		game.setCurrentPlayer(game.getPlayers().get(0));
+		
+		game.addpublicobjectivecards();
 		GameController gameController = new GameController(connection, myScene, game, 0);
 		myScene.setContentPane(gameController.getGameView());
 	}

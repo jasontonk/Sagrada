@@ -26,6 +26,7 @@ public class GameRoundPlayer implements Runnable {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			
 			gameController.getGame().playround();
 		}
 		if(gameController.getGame().getRound().get()%2 == 0 && gameController.getGame().getRound().get() != 1 && gameController.getGame().getCurrentPlayer().getSequenceNumber() == 1) {

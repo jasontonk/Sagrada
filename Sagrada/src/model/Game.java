@@ -50,15 +50,25 @@ public class Game {
 		gameDBA = new GameDBA(conn);
 		gamedieDBA = new GameDieDBA(conn);
 		publicObjectiveCardDBA = new PublicObjectiveCardDBA(conn);
-		
 		offer = new ArrayList<GameDie>();
-		
+		diceInBag = new GameDie[90];
+		usedDice = new ArrayList<GameDie>();
+		makedie();
+		publicObjectiveCards = new ArrayList<PublicObjectiveCard>();
+	}
+	
+	public void addpublicobjectivecards() {
+		getPublicObjectiveCardsOfGame();
 	}
 	
 	public void addGametoDB() {
 		gameDBA.addNewGameDB(LocalDateTime.now(), this);
 	}
+	
 	public void finishGameSetup(AccountController accountController) {
+		
+		
+		
 		this.players = gameDBA.getPlayersOfGame(this);
 		System.out.println("DIT ZIJN DE PLAYERS VAN DE GAME "+ players);
 		currentPlayer = players.get(0);
@@ -71,47 +81,44 @@ public class Game {
 				break;
 			}
 		}
-		diceInBag = new GameDie[90];
-		usedDice = new ArrayList<GameDie>();
-		makedie();
+		
 		finishedGame = false;
 		placedDie = true;
-		publicObjectiveCards = new ArrayList<PublicObjectiveCard>();
-		getPublicObjectiveCardsOfGame();
+		
 	}
 	
-	public Game(DataBaseConnection conn) {
-		this.conn = conn;
-		gameDBA = new GameDBA(conn);
-		gamedieDBA = new GameDieDBA(conn);
-		gameDBA.addNewGameDB(LocalDateTime.now(), this);
-		
-		publicObjectiveCardDBA = new PublicObjectiveCardDBA(conn);
-		this.randomPatterncards = false;
-		round = new SimpleIntegerProperty();
-		round.set(1);
-		roundTrack = new RoundTrack(this);
-		
-		offer = new ArrayList<GameDie>();
-		players = new ArrayList<Player>();
-		currentPlayer = new Player(conn, new Account("ditis2", "eentest", conn), this, PlayerStatus.CHALLENGER);
-		Player player = new Player(conn, new Account("ditiseentest2", "testtest", conn), this, PlayerStatus.CHALLENGEE);
-		players.add(currentPlayer);
-		players.add(player);
-		currentPlayer = players.get(0);
-		players.get(0).setSequenceNumber(1);
-		players.get(1).setSequenceNumber(2);
-		personalPlayer = players.get(0);
-		System.out.println("player 1 : " + players.get(0).getId());
-		System.out.println("player 2 : " + players.get(1).getId());
-		diceInBag = new GameDie[90];
-		usedDice = new ArrayList<GameDie>();
-		makedie();
-		finishedGame = false;
-		placedDie = true;
-		publicObjectiveCards = new ArrayList<PublicObjectiveCard>();
-		getPublicObjectiveCardsOfGame();
-	}
+//	public Game(DataBaseConnection conn) {
+//		this.conn = conn;
+//		gameDBA = new GameDBA(conn);
+//		gamedieDBA = new GameDieDBA(conn);
+//		gameDBA.addNewGameDB(LocalDateTime.now(), this);
+//		
+//		publicObjectiveCardDBA = new PublicObjectiveCardDBA(conn);
+//		this.randomPatterncards = false;
+//		round = new SimpleIntegerProperty();
+//		round.set(1);
+//		roundTrack = new RoundTrack(this);
+//		
+//		offer = new ArrayList<GameDie>();
+//		players = new ArrayList<Player>();
+//		currentPlayer = new Player(conn, new Account("ditis2", "eentest", conn), this, PlayerStatus.CHALLENGER);
+//		Player player = new Player(conn, new Account("ditiseentest2", "testtest", conn), this, PlayerStatus.CHALLENGEE);
+//		players.add(currentPlayer);
+//		players.add(player);
+//		currentPlayer = players.get(0);
+//		players.get(0).setSequenceNumber(1);
+//		players.get(1).setSequenceNumber(2);
+//		personalPlayer = players.get(0);
+//		System.out.println("player 1 : " + players.get(0).getId());
+//		System.out.println("player 2 : " + players.get(1).getId());
+//		diceInBag = new GameDie[90];
+//		usedDice = new ArrayList<GameDie>();
+//		makedie();
+//		finishedGame = false;
+//		placedDie = true;
+//		publicObjectiveCards = new ArrayList<PublicObjectiveCard>();
+//		getPublicObjectiveCardsOfGame();
+//	}
 	
 	private void getPublicObjectiveCardsOfGame() {
 		ArrayList<PublicObjectiveCard> publicObjectiveCardsFromDB = publicObjectiveCardDBA.getAllAvailablePublicObjectiveCards(this);
@@ -193,6 +200,7 @@ public class Game {
 		
 		while (offer.size() < amountofdice) {
 			for (int i = 0; i < amountofdice; i++) {
+				System.out.println("diceInBag " + diceInBag);
 				GameDie selectedDice = diceInBag[r.nextInt(89)];
 				if (!checkDieUsed(selectedDice)) {
 					offer.add(selectedDice);
@@ -225,6 +233,8 @@ public class Game {
 	}
 	
 	public boolean checkDieUsed(GameDie selectedDice) {
+		System.out.println("SELECTEDDIE " + selectedDice);
+		System.out.println("GETROUNDID" + selectedDice.getRoundID(this));
 		if(selectedDice.getRoundID(this) != 0){
 			return true;
 		}
@@ -342,27 +352,27 @@ public class Game {
 		Random r = new Random();
 		for (int i = 0; i < 18; i++) {
 			diceInBag[i] = new GameDie(ModelColor.GREEN, i+1, r.nextInt(6)+1, this, conn, gamedieDBA);
-			diceInBag[i].addDieToDB(this);
+//			diceInBag[i].addDieToDB(this);
 			diceInBag[i].setEyes(this);
 		}
 		for (int i = 0; i < 18; i++) {
 			diceInBag[i+17] = new GameDie(ModelColor.BLUE, i+1, r.nextInt(6)+1, this, conn, gamedieDBA);
-			diceInBag[i+17].addDieToDB(this);
+//			diceInBag[i+17].addDieToDB(this);
 			diceInBag[i+17].setEyes(this);
 		}
 		for (int i = 0; i < 18; i++) {
 			diceInBag[i+35] = new GameDie(ModelColor.YELLOW, i+1, r.nextInt(6)+1, this, conn, gamedieDBA);
-			diceInBag[i+35].addDieToDB(this);
+//			diceInBag[i+35].addDieToDB(this);
 			diceInBag[i+35].setEyes(this);
 		}
 		for (int i = 0; i < 18; i++) {
 			diceInBag[i+53] = new GameDie(ModelColor.PURPLE, i+1, r.nextInt(6)+1, this, conn, gamedieDBA);
-			diceInBag[i+53].addDieToDB(this);
+//			diceInBag[i+53].addDieToDB(this);
 			diceInBag[i+53].setEyes(this);
 		}
 		for (int i = 0; i < 18; i++) {
 			diceInBag[i+71] = new GameDie(ModelColor.RED, i+1, r.nextInt(6)+1, this, conn, gamedieDBA);
-			diceInBag[i+71].addDieToDB(this);
+//			diceInBag[i+71].addDieToDB(this);
 			diceInBag[i+71].setEyes(this);
 		}
 	}
@@ -391,6 +401,7 @@ public class Game {
 //	}
 
 	public ArrayList<Player> getPlayers() {
+		players = gameDBA.getPlayersOfGame(this);
 		return players;
 	}
 

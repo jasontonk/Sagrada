@@ -25,7 +25,9 @@ public class GameView extends BorderPane {
 		patterncardView = new PatterncardView(gameController.getPatterncardController());
 		roundtrackView = new RoundtrackView(gameController.getRoundtrackController());
 		scoreView = new ScoreView(gameController.getGame());
-		publicObjectiveCardsView = new PublicObjectiveCardsView(gameController.getGame().getPublicObjectiveCardIDs());
+		publicObjectiveCardsView = new PublicObjectiveCardsView(
+				gameController.getGame().getPublicObjectiveCardIDs()
+				);
 		Button button = new Button("Beurt beëindigen.");//TODO temporary
 		button.setOnMouseClicked(e-> gameController.stopround());
 		Button button2 = new Button("Beurt beginnen");
