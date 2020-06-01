@@ -36,6 +36,8 @@ public class AccountController {
 	private MyScene myScene;
 	private AccountDBA accountDBA;
 	private ArrayList<Player> invitePlayerList;
+	private InvitationController invitationController;
+	
 	public AccountController(DataBaseConnection c, MyScene myScene) {
 		this.connection = c;
 		this.myScene = myScene;
@@ -49,13 +51,17 @@ public class AccountController {
 		invitePlayerList = new ArrayList<Player>();
 		
 		accountDBA = new AccountDBA(c);
+		invitationController = new InvitationController(10, this);
 		makeInviteThread();
 	}
 	
 
 	public void makeInviteThread() {
-		Thread invitationChecker = new Thread(new InvitationController(10, this));
+		Thread invitationChecker = new Thread(invitationController);
 		invitationChecker.start();
+	}
+	public void stopInviteThread() {
+		invitationController.setRunning(false);
 	}
 	
 	public void setAccount(Account account) {
@@ -274,6 +280,8 @@ public class AccountController {
 	}
 	
 	public void joinGame(Player player, Game game) {
+		
+		stopInviteThread();
 		
 		if (player.getPatternCard() == null) { 
 			player.setPatternCard(new PatternCard(connection));

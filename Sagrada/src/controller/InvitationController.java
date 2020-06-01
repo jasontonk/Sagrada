@@ -8,16 +8,17 @@ public class InvitationController implements Runnable {
 
 	private int seconds;
 	private AccountController accountController;
+	private volatile boolean isRunning;
 	
 	public InvitationController(int i, AccountController accountController) {
 		this.seconds = i;
 		this.accountController = accountController;
+		isRunning = true;
 	}
 
 	@Override
 	public void run() {
-		
-		while(true) {
+		while(isRunning) {
 			System.out.println("Invitation Controller Running...");
 
 					Platform.runLater(new Runnable() {
@@ -39,5 +40,8 @@ public class InvitationController implements Runnable {
 				e.printStackTrace();
 			}
 		}
+	}
+	public void setRunning(boolean isRunning) {
+		this.isRunning = isRunning;
 	}
 }
