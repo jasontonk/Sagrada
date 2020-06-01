@@ -39,7 +39,7 @@ public class GameController {
 	private ArrayList<GameDie> diceOnRoundTrack;
 	
 	private Thread updateGame;
-	private Thread updateViews = new Thread(gameViewUpdater);
+	private Thread updateViews;
 	
 
 //	public GameController(DataBaseConnection conn, MyScene ms, Game game) {
