@@ -1,7 +1,10 @@
 package database;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import model.BoardField;
 import model.GameDie;
 import model.Player;
 
@@ -96,4 +99,29 @@ public class PlayerFrameFieldDBA {
 				e.printStackTrace();
 			}
 		}
+
+	public BoardField getPlayerFrameField(Player player,int x, int y) {
+		BoardField boardfield = null;
+		String query = "SELECT * FROM playerframefield LEFT JOIN gamedie ON playerframefield.diecolor = gamedie.diecolor "
+				+ "AND playerframefield.dienumber = gamedie.dienumber "
+				+ "WHERE idplayer = "+player.getId()+" AND position_x = "+x+" AND position_y = "+y+";";
+		System.out.println(query);
+		try {
+			Statement stmt = conn.getConn().createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				boardfield = new BoardField(rs.getInt("position_x"),rs.getInt("position_y"));
+				if(rs.getInt("playerframefield.dienumber") != 0) {
+					GameDie die = new GameDie(player.getGame().getGameDieDBA().getColorFromString(rs.getString("gamedie.diecolor")), 
+							rs.getInt("gamedie.dienumber"), rs.getInt("gamedie.eyes"), player.getGame(), conn, player.getGame().getGameDieDBA());
+					boardfield.setDie(die);
+				}
+			}
+			stmt.close();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return boardfield;
+	}
 }

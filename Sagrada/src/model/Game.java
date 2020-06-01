@@ -593,6 +593,10 @@ public class Game {
 		return personalPlayer;
 	}
 
+	public GameDieDBA getGameDieDBA() {
+		return gamedieDBA;
+	}
+
 //	public void setPublicObjectiveCards(ArrayList<PublicObjectiveCard> publicObjectiveCards) {
 //		this.publicObjectiveCards = publicObjectiveCards;
 //	}

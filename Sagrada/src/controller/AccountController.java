@@ -207,6 +207,7 @@ public class AccountController {
 			player.setPersonalObjectiveCardColor();
 			player.addPlayer(player);
 			player.createBoard();
+			player.getBoard().AddBoardFieldsToDB();
 			if (player.getPatternCard().getPatterncardID() == 0) {
 				PatternCard patternCard = new PatternCard(connection);
 				patternCard = patternCard.getPatterncardDB().getPatterncard();
@@ -227,6 +228,7 @@ public class AccountController {
 				p.addPlayer(p);
 				p.setScore(-20);
 				p.createBoard();
+				p.getBoard().AddBoardFieldsToDB();
 				if (player.getPatternCard().getPatterncardID() == 0) {
 					PatternCard patternCard = new PatternCard(connection);
 					patternCard = patternCard.getPatterncardDB().getPatterncard();
@@ -265,6 +267,7 @@ public class AccountController {
 		for (Player player : gameLobby) {
 			
 			if(player.getPlayerStatus().equals(PlayerStatus.CHALLENGER)) {
+				
 			}
 			else if(player.getPlayerStatus().equals(PlayerStatus.CHALLENGEE)) {
 				showWarning("game", "Niet elke speler heeft gereageerd op je invite");
@@ -287,6 +290,7 @@ public class AccountController {
 			player.setPatternCard(new PatternCard(connection));
         }
 		else player.setPatternCard(player.getPatternCard());
+		player.createBoard();
 		
 		System.out.println("GAME.getid: " + game.getGameID());
 		System.out.println("GAME.getplayers: " + game.getPlayers());

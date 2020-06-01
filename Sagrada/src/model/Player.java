@@ -70,7 +70,7 @@ public class Player {
 		}	
 	
 	public void createBoard() {
-		board = new Board(1, this, connection);	
+		board = new Board(this, connection);	
 	}
 
 
@@ -324,7 +324,9 @@ public class Player {
 		for(int x = 0; x < Board.BOARD_SQUARES_HORIZONTAL; x++) {
 			for(int y = 0; y < Board.BOARD_SQUARES_VERTICAL; y++) {
 				if(!(board == null)) {
-					if(!board.getBoardField(x, y).hasDie()) {
+					if(!board.
+							getBoardField(x, y).
+							hasDie()) {
 						score = score - 1;
 						System.out.println("SPELER: " + this.getName() + " SCORE -1 =================== " + "BOARDFIELD (" + x + ", " + y + ") SCORE: " + score);
 					}
@@ -332,6 +334,9 @@ public class Player {
 						score = score + 1;
 						System.out.println("SPELER: " + this.getName() + " SCORE -1 =================== " + "BOARDFIELD (" + x + ", " + y + ") SCORE: " + score);
 					}
+				}
+				else {
+					board = new Board(this, connection);
 				}
 			}
 		}

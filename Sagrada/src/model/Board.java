@@ -6,15 +6,13 @@ import database.PlayerFrameFieldDBA;
 public class Board {
 	private PatternCard patternCard;
 	private BoardField[][] boardFields;
-	private int boardId;
 	private boolean hasPatternCard;
 	public static final int BOARD_SQUARES_HORIZONTAL = 5;
 	public static final int BOARD_SQUARES_VERTICAL = 4;
 	private Player player;
 	private PlayerFrameFieldDBA playerFrameFieldDBA;
 	
-	public Board(int boardId, Player player, DataBaseConnection conn) {
-		this.setBoardId(boardId);
+	public Board(Player player, DataBaseConnection conn) {
 		this.player = player;
 		patternCard = this.player.getPatternCard();
 		boardFields = new BoardField[5][4];
@@ -22,10 +20,16 @@ public class Board {
 		for(int x = 0; x < 5; x++) {
 			for (int y = 0; y < 4; y++) {
 				boardFields[x][y] = new BoardField(x, y);
-				playerFrameFieldDBA.addPlayerFrameField(player, x, y);
 			}
 		}
 		hasPatternCard = false;
+	}
+	public void AddBoardFieldsToDB() {
+		for(int x = 0; x < 5; x++) {
+			for (int y = 0; y < 4; y++) {
+				playerFrameFieldDBA.addPlayerFrameField(player, x, y);
+			}
+		}
 	}
 	
 	public PatternCard getPatternCard() {
@@ -51,14 +55,6 @@ public class Board {
 
 	public void setHasPatternCard(boolean hasPatternCard) {
 		this.hasPatternCard = hasPatternCard;
-	}
-
-	public int getBoardId() {
-		return boardId;
-	}
-
-	public void setBoardId(int boardId) {
-		this.boardId = boardId;
 	}
 
 	/**
@@ -108,6 +104,8 @@ public class Board {
      * Returns the board field of the parameters
      */
 	public BoardField getBoardField(int x, int y) {
+		boardFields[x][y] = playerFrameFieldDBA.getPlayerFrameField(getPlayer(),x+1 ,y+1 );
+		System.out.println("kijken of ik een null krijg: " + boardFields[x][y]);
 		if(boardFields[x][y] != null){
 			return boardFields[x][y];
 		}

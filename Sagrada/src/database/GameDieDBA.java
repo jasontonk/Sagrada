@@ -71,7 +71,7 @@ public class GameDieDBA {
 		}
 	}
 	
-	private String getStringFromColor(GameDie gamedie) {
+	public String getStringFromColor(GameDie gamedie) {
 		String color = null;
 		if(gamedie.getColor()!= null) {
 			switch(gamedie.getColor()) {
@@ -95,7 +95,7 @@ public class GameDieDBA {
 		return color;
 	}
 	
-	private ModelColor getColorFromString(String c) {
+	public ModelColor getColorFromString(String c) {
 		ModelColor modelColor = ModelColor.BLUE;
 		switch(c) {
 		case "blue":
