@@ -1,0 +1,1882 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" automaticImage="JPEG" always-add-relationships="false" 
+  generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true" 
+  router="FAN">  
+  <class id="1" language="java" name="database.PatternCardDBA" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/database/PatternCardDBA.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="353" x="260" y="4945"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="database.DieDBA" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/database/DieDBA.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="172" x="-262" y="4945"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="view.LobbyView" project="Sagrada" file="/Sagrada/Sagrada/src/view/LobbyView.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="251" x="1807" y="1460"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="model.RoundTrack" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/model/RoundTrack.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="224" x="2234" y="2998"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="database.FavorTokenDBA" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/database/FavorTokenDBA.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="315" x="679" y="4464"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="model.PublicObjectiveCard" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/model/PublicObjectiveCard.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="477" width="329" x="-38" y="1460"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="model.FavorToken" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/model/FavorToken.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="261" width="251" x="692" y="3929"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="view.RoundtrackView" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/view/RoundtrackView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="313" x="2522" y="1460"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="database.PatternCardFieldDBA" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/database/PatternCardFieldDBA.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="398" x="653" y="4945"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="view.JavafxColor" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/view/JavafxColor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="263" x="2105" y="3929"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="database.DataBaseConnection" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/database/DataBaseConnection.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="165" x="1452" y="5318"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="database.GameDBA" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/database/GameDBA.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="333" width="303" x="1492" y="4945"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="view.PublicObjectiveCardsView" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/view/PublicObjectiveCardsView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="185" x="3042" y="403"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="view.RegisterView" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/view/RegisterView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="187" x="2540" y="2998"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="model.PatternCardField" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/model/PatternCardField.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="297" width="207" x="-29" y="4945"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="16" language="java" name="model.PlayerStatus" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/model/PlayerStatus.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="161" x="1146" y="3929"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="17" language="java" name="controller.InvitationController" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/controller/InvitationController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="223" x="2875" y="1460"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="18" language="java" name="model.ModelColor" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/model/ModelColor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="140" x="199" y="5318"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="19" language="java" name="controller.GameController" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/controller/GameController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="603" width="322" x="3248" y="1460"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="view.ScoreView" project="Sagrada" file="/Sagrada/Sagrada/src/view/ScoreView.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="140" x="-899" y="1460"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="21" language="java" name="model.InvitationStatus" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/model/InvitationStatus.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="158" x="246" y="192"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="22" language="java" name="model.RoundTrackField" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/model/RoundTrackField.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="191" x="2661" y="3929"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="view.PatterncardSelectionView" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/view/PatterncardSelectionView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="234" x="1845" y="2103"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="controller.PlayerController" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/controller/PlayerController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="229" x="2182" y="1460"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="view.LoginView" project="Sagrada" file="/Sagrada/Sagrada/src/view/LoginView.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="173" x="2767" y="2998"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="controller.RoundtrackController" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/controller/RoundtrackController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="240" x="2737" y="2103"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="model.BoardField" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/model/BoardField.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="261" width="130" x="2674" y="4945"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="view.PatterncardView" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/view/PatterncardView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="296" x="1772" y="2998"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="model.PatternCard" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/model/PatternCard.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="369" width="348" x="291" y="4464"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="database.PlayerDBA" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/database/PlayerDBA.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="405" width="269" x="1368" y="4464"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="controller.DieController" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/controller/DieController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="273" x="3722" y="2103"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="model.Board" project="Sagrada" file="/Sagrada/Sagrada/src/model/Board.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="855" width="318" x="968" y="2103"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="database.PublicObjectiveCardDBA" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/database/PublicObjectiveCardDBA.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="399" x="-719" y="1460"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="view.DicePoolView" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/view/DicePoolView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="261" width="184" x="3610" y="403"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="view.MyScene" project="Sagrada" file="/Sagrada/Sagrada/src/view/MyScene.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="180" x="3204" y="2998"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="database.ChatDBA" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/database/ChatDBA.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="226" x="-69" y="2103"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="view.Main" project="Sagrada" file="/Sagrada/Sagrada/src/view/Main.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="113" x="2889" y="192"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="model.Player" project="Sagrada" file="/Sagrada/Sagrada/src/model/Player.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="891" width="315" x="692" y="2998"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="database.ToolCardDBA" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/database/ToolCardDBA.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="277" x="1133" y="4945"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" name="model.Game" project="Sagrada" file="/Sagrada/Sagrada/src/model/Game.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="1017" width="320" x="1328" y="403"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="41" language="java" name="database.GameDieDBA" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/database/GameDieDBA.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="315" width="348" x="2286" y="4945"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="42" language="java" name="database.PlayerFrameFieldDBA" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/database/PlayerFrameFieldDBA.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="239" x="1047" y="2998"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="43" language="java" name="model.Die" project="Sagrada" file="/Sagrada/Sagrada/src/model/Die.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="150" x="2429" y="3929"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="44" language="java" name="view.DieView" project="Sagrada" file="/Sagrada/Sagrada/src/view/DieView.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="194" x="3610" y="1460"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="45" language="java" name="database.AccountDBA" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/database/AccountDBA.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="333" width="264" x="1898" y="4464"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="46" language="java" name="controller.AccountController" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/controller/AccountController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="405" width="270" x="2427" y="2103"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="47" language="java" name="controller.CalculateScoreTask" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/controller/CalculateScoreTask.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="159" x="685" y="2103"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="48" language="java" name="model.Account" project="Sagrada" file="/Sagrada/Sagrada/src/model/Account.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="495" width="238" x="1368" y="3929"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="49" language="java" name="model.Toolcard" project="Sagrada" file="/Sagrada/Sagrada/src/model/Toolcard.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="297" width="252" x="1034" y="4464"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="50" language="java" name="controller.GameUpdater" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/controller/GameUpdater.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="174" x="3466" y="2998"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="51" language="java" name="model.AccountStatus" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/model/AccountStatus.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="139" x="1698" y="4464"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="52" language="java" name="controller.GameViewUpdater" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/controller/GameViewUpdater.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="268" x="3330" y="2103"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="53" language="java" name="controller.PatterncardController" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/controller/PatterncardController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="315" width="314" x="1730" y="3929"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="54" language="java" name="view.GameView" project="Sagrada" file="/Sagrada/Sagrada/src/view/GameView.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="216" x="3042" y="192"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="55" language="java" name="controller.GameRoundPlayer" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/controller/GameRoundPlayer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="210" x="3017" y="2103"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="56" language="java" name="model.Invitation" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/model/Invitation.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="297" width="185" x="1389" y="2103"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="57" language="java" name="controller.Main" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/controller/Main.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="113" x="1590" y="192"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="58" language="java" name="model.Chat" project="Sagrada" file="/Sagrada/Sagrada/src/model/Chat.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="202" x="-280" y="1460"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="59" language="java" name="model.GameDie" project="Sagrada" file="/Sagrada/Sagrada/src/model/GameDie.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="441" width="360" x="2492" y="4464"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="60" language="java" name="view.ChooseView" project="Sagrada" 
+    file="/Sagrada/Sagrada/src/view/ChooseView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="184" x="2980" y="2998"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="61">    
+    <end type="SOURCE" refId="60" navigable="false">      
+      <attribute id="62" name="accountController"/>      
+      <multiplicity id="63" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="46" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="64">    
+    <bendpoint x="1888" y="4945"/>    
+    <end type="SOURCE" refId="45" navigable="false">      
+      <attribute id="65" name="conn"/>      
+      <multiplicity id="66" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="67">    
+    <bendpoint x="3670" y="2103"/>    
+    <bendpoint x="3670" y="2998"/>    
+    <bendpoint x="3670" y="3929"/>    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="68" name="changedDiceOnRoundTrack"/>      
+      <multiplicity id="69" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="59" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="70">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="71" name="conn"/>      
+      <multiplicity id="72" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="73">    
+    <bendpoint x="3278" y="403"/>    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="74" name="gameView"/>      
+      <multiplicity id="75" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="76">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="77" name="roundtrackController"/>      
+      <multiplicity id="78" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="79">    
+    <bendpoint x="3649" y="2103"/>    
+    <end type="SOURCE" refId="50" navigable="false">      
+      <attribute id="80" name="gameCtrl"/>      
+      <multiplicity id="81" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="82">    
+    <bendpoint x="1115" y="3929"/>    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="83" name="playerDBA"/>      
+      <multiplicity id="84" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="85">    
+    <bendpoint x="3691" y="2103"/>    
+    <bendpoint x="3691" y="2998"/>    
+    <bendpoint x="3712" y="3929"/>    
+    <bendpoint x="3712" y="4464"/>    
+    <bendpoint x="3712" y="4945"/>    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="86" name="conn"/>      
+      <multiplicity id="87" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="88">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="89" name="game"/>      
+      <multiplicity id="90" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="91">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="92" name="favorToken"/>      
+      <multiplicity id="93" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="94">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="95" name="dieView"/>      
+      <multiplicity id="96" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="44" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="97">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="98" name="gameRoundPlayer"/>      
+      <multiplicity id="99" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="55" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="100">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="101" name="accountController"/>      
+      <multiplicity id="102" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="46" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="103">    
+    <end type="SOURCE" refId="44" navigable="false">      
+      <attribute id="104" name="dieController"/>      
+      <multiplicity id="105" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="106">    
+    <end type="SOURCE" refId="56" navigable="false">      
+      <attribute id="107" name="player"/>      
+      <multiplicity id="108" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="109">    
+    <end type="SOURCE" refId="46" navigable="false">      
+      <attribute id="110" name="invitePlayerList"/>      
+      <multiplicity id="111" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="112">    
+    <end type="SOURCE" refId="46" navigable="false">      
+      <attribute id="113" name="lobbyView"/>      
+      <multiplicity id="114" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="115">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="116" name="game"/>      
+      <multiplicity id="117" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="118">    
+    <bendpoint x="1720" y="2998"/>    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="119" name="patterncardControllers"/>      
+      <multiplicity id="120" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="53" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="121">    
+    <bendpoint x="2488" y="2998"/>    
+    <bendpoint x="2398" y="3929"/>    
+    <end type="SOURCE" refId="46" navigable="false">      
+      <attribute id="122" name="accountDBA"/>      
+      <multiplicity id="123" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="45" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="124">    
+    <bendpoint x="3257" y="403"/>    
+    <end type="SOURCE" refId="54" navigable="false">      
+      <attribute id="125" name="gameController"/>      
+      <multiplicity id="126" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="127">    
+    <end type="SOURCE" refId="53" navigable="false">      
+      <attribute id="128" name="patterncardOptions"/>      
+      <multiplicity id="129" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="130">    
+    <bendpoint x="363" y="2998"/>    
+    <bendpoint x="363" y="3929"/>    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="131" name="patternCard"/>      
+      <multiplicity id="132" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="133">    
+    <bendpoint x="1751" y="2103"/>    
+    <bendpoint x="1636" y="2998"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="134" name="inviteList"/>      
+      <multiplicity id="135" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="48" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="136">    
+    <bendpoint x="2990" y="403"/>    
+    <end type="SOURCE" refId="54" navigable="false">      
+      <attribute id="137" name="roundtrackView"/>      
+      <multiplicity id="138" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="139">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="140" name="player"/>      
+      <multiplicity id="141" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="142">    
+    <bendpoint x="1709" y="1460"/>    
+    <bendpoint x="1709" y="2103"/>    
+    <bendpoint x="1699" y="2998"/>    
+    <bendpoint x="1699" y="3929"/>    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="143" name="selectedDie"/>      
+      <multiplicity id="144" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="59" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="145">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="146" name="game"/>      
+      <multiplicity id="147" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="148">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="149" name="accountController"/>      
+      <multiplicity id="150" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="46" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="151">    
+    <bendpoint x="3628" y="2103"/>    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="152" name="gameUpdater"/>      
+      <multiplicity id="153" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="50" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="154">    
+    <bendpoint x="1081" y="4945"/>    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="155" name="conn"/>      
+      <multiplicity id="156" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="157">    
+    <bendpoint x="3299" y="2103"/>    
+    <bendpoint x="3414" y="2998"/>    
+    <bendpoint x="3393" y="3929"/>    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="158" name="diceOnRoundTrack"/>      
+      <multiplicity id="159" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="59" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="160">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="161" name="accountController"/>      
+      <multiplicity id="162" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="46" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="163">    
+    <bendpoint x="937" y="2103"/>    
+    <bendpoint x="937" y="1460"/>    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="164" name="game"/>      
+      <multiplicity id="165" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="166">    
+    <end type="SOURCE" refId="59"/>    
+    <end type="TARGET" refId="43"/>  
+  </generalization>  
+  <association id="167">    
+    <end type="SOURCE" refId="49" navigable="false">      
+      <attribute id="168" name="toolcardDB"/>      
+      <multiplicity id="169" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="39" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="170">    
+    <bendpoint x="-293" y="2103"/>    
+    <bendpoint x="-293" y="2998"/>    
+    <bendpoint x="-293" y="3929"/>    
+    <bendpoint x="-293" y="4464"/>    
+    <bendpoint x="-293" y="4945"/>    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="171" name="conn"/>      
+      <multiplicity id="172" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="173">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="174" name="game"/>      
+      <multiplicity id="175" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="176">    
+    <end type="SOURCE" refId="48" navigable="false">      
+      <attribute id="177" name="playerDBA"/>      
+      <multiplicity id="178" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="179">    
+    <bendpoint x="1400" y="2998"/>    
+    <end type="SOURCE" refId="56" navigable="false">      
+      <attribute id="180" name="invitedAccount"/>      
+      <multiplicity id="181" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="48" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="182">    
+    <end type="SOURCE" refId="46" navigable="false">      
+      <attribute id="183" name="chooseView"/>      
+      <multiplicity id="184" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="60" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="185">    
+    <end type="SOURCE" refId="59" navigable="false">      
+      <attribute id="186" name="gameDieDBA"/>      
+      <multiplicity id="187" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="41" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="188">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="189" name="patterncard"/>      
+      <multiplicity id="190" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="191">    
+    <bendpoint x="2109" y="403"/>    
+    <bendpoint x="2109" y="1460"/>    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="192" name="patterncardSelectionView"/>      
+      <multiplicity id="193" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="194">    
+    <bendpoint x="1667" y="4464"/>    
+    <bendpoint x="1846" y="4945"/>    
+    <end type="SOURCE" refId="48" navigable="false">      
+      <attribute id="195" name="connection"/>      
+      <multiplicity id="196" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="197">    
+    <bendpoint x="1421" y="2998"/>    
+    <end type="SOURCE" refId="48" navigable="false">      
+      <attribute id="198" name="invitations"/>      
+      <multiplicity id="199" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="56" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="200">    
+    <bendpoint x="2214" y="2103"/>    
+    <bendpoint x="2203" y="2998"/>    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="201" name="javafxColor"/>      
+      <multiplicity id="202" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="203">    
+    <bendpoint x="1646" y="2103"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="204" name="players"/>      
+      <multiplicity id="205" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="206">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="207" name="accountController"/>      
+      <multiplicity id="208" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="46" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="209">    
+    <bendpoint x="3712" y="2998"/>    
+    <bendpoint x="3691" y="3929"/>    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="210" name="die"/>      
+      <multiplicity id="211" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="59" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="212">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="213" name="die"/>      
+      <multiplicity id="214" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="59" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="215">    
+    <bendpoint x="2255" y="4464"/>    
+    <bendpoint x="2255" y="4945"/>    
+    <end type="SOURCE" refId="43" navigable="false">      
+      <attribute id="216" name="modelColor"/>      
+      <multiplicity id="217" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="218">    
+    <end type="SOURCE" refId="52" navigable="false">      
+      <attribute id="219" name="gameUpdates"/>      
+      <multiplicity id="220" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="50" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="221">    
+    <bendpoint x="208" y="4945"/>    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="222" name="modelColor"/>      
+      <multiplicity id="223" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="224">    
+    <end type="SOURCE" refId="58" navigable="false">      
+      <attribute id="225" name="chatDB"/>      
+      <multiplicity id="226" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="227">    
+    <bendpoint x="3257" y="2103"/>    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="228" name="myScene"/>      
+      <multiplicity id="229" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="230">    
+    <bendpoint x="874" y="1460"/>    
+    <bendpoint x="874" y="2103"/>    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="231" name="currentPlayer"/>      
+      <multiplicity id="232" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="233">    
+    <bendpoint x="2234" y="4464"/>    
+    <bendpoint x="2234" y="4945"/>    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="234" name="modelColor"/>      
+      <multiplicity id="235" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="236">    
+    <bendpoint x="2119" y="2998"/>    
+    <bendpoint x="2235" y="2103"/>    
+    <end type="SOURCE" refId="53" navigable="false">      
+      <attribute id="237" name="gameController"/>      
+      <multiplicity id="238" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="239">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="240" name="accountController"/>      
+      <multiplicity id="241" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="46" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="242">    
+    <bendpoint x="1688" y="2103"/>    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="243" name="player"/>      
+      <multiplicity id="244" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="245">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="246" name="conn"/>      
+      <multiplicity id="247" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="248">    
+    <bendpoint x="1081" y="403"/>    
+    <end type="SOURCE" refId="54" navigable="false">      
+      <attribute id="249" name="scoreView"/>      
+      <multiplicity id="250" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="251">    
+    <bendpoint x="1316" y="1460"/>    
+    <bendpoint x="1316" y="2103"/>    
+    <bendpoint x="1316" y="2998"/>    
+    <bendpoint x="1073" y="3929"/>    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="252" name="toolcards"/>      
+      <multiplicity id="253" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="49" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="254">    
+    <bendpoint x="1793" y="2103"/>    
+    <bendpoint x="1657" y="2998"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="255" name="accounts"/>      
+      <multiplicity id="256" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="48" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="257">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="258" name="toolcard"/>      
+      <multiplicity id="259" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="49" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="260">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="261" name="gameController"/>      
+      <multiplicity id="262" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="263">    
+    <bendpoint x="3414" y="3929"/>    
+    <end type="SOURCE" refId="50" navigable="false">      
+      <attribute id="264" name="diceOnRoundTrack"/>      
+      <multiplicity id="265" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="59" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="266">    
+    <bendpoint x="2969" y="403"/>    
+    <bendpoint x="3128" y="1460"/>    
+    <bendpoint x="3278" y="2103"/>    
+    <bendpoint x="3435" y="2998"/>    
+    <bendpoint x="3435" y="3929"/>    
+    <bendpoint x="3435" y="4464"/>    
+    <bendpoint x="3435" y="4945"/>    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="267" name="conn"/>      
+      <multiplicity id="268" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="269">    
+    <end type="SOURCE" refId="59" navigable="false">      
+      <attribute id="270" name="boardField"/>      
+      <multiplicity id="271" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="272">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="273" name="patterncardView"/>      
+      <multiplicity id="274" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="275">    
+    <end type="SOURCE" refId="48" navigable="false">      
+      <attribute id="276" name="accountDBA"/>      
+      <multiplicity id="277" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="45" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="278">    
+    <end type="SOURCE" refId="52" navigable="false">      
+      <attribute id="279" name="gameCtrl"/>      
+      <multiplicity id="280" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="281">    
+    <end type="SOURCE" refId="54" navigable="false">      
+      <attribute id="282" name="publicObjectiveCardsView"/>      
+      <multiplicity id="283" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="284">    
+    <bendpoint x="2172" y="2103"/>    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="285" name="patterncardView"/>      
+      <multiplicity id="286" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="287">    
+    <bendpoint x="1825" y="4945"/>    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="288" name="conn"/>      
+      <multiplicity id="289" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="290">    
+    <bendpoint x="1379" y="1460"/>    
+    <end type="SOURCE" refId="56" navigable="false">      
+      <attribute id="291" name="game"/>      
+      <multiplicity id="292" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="293">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="294" name="conn"/>      
+      <multiplicity id="295" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="296">    
+    <bendpoint x="3011" y="403"/>    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="297" name="gameController"/>      
+      <multiplicity id="298" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="299">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="300" name="patterncardfieldDB"/>      
+      <multiplicity id="301" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="302">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="303" name="playerFrameFieldDBA"/>      
+      <multiplicity id="304" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="42" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="305">    
+    <end type="SOURCE" refId="46" navigable="false">      
+      <attribute id="306" name="loginView"/>      
+      <multiplicity id="307" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="308">    
+    <end type="SOURCE" refId="41" navigable="false">      
+      <attribute id="309" name="conn"/>      
+      <multiplicity id="310" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="311">    
+    <bendpoint x="1358" y="1460"/>    
+    <bendpoint x="1358" y="2103"/>    
+    <bendpoint x="1358" y="2998"/>    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="312" name="accounts"/>      
+      <multiplicity id="313" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="48" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="314">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="315" name="favorTokens"/>      
+      <multiplicity id="316" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="317">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="318" name="playerStatus"/>      
+      <multiplicity id="319" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="320">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="321" name="dieSavingSpot"/>      
+      <multiplicity id="322" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="59" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="323">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="324" name="patterncardDB"/>      
+      <multiplicity id="325" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="326">    
+    <bendpoint x="2140" y="2998"/>    
+    <end type="SOURCE" refId="46" navigable="false">      
+      <attribute id="327" name="account"/>      
+      <multiplicity id="328" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="48" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="329">    
+    <bendpoint x="521" y="3929"/>    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="330" name="player"/>      
+      <multiplicity id="331" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="332">    
+    <bendpoint x="2088" y="1460"/>    
+    <bendpoint x="2109" y="2103"/>    
+    <bendpoint x="2182" y="2998"/>    
+    <bendpoint x="2630" y="3929"/>    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="333" name="offer"/>      
+      <multiplicity id="334" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="59" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="335">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="336" name="patterncardSelectionView"/>      
+      <multiplicity id="337" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="338">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="339" name="account"/>      
+      <multiplicity id="340" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="48" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="341">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="342" name="patterncardController"/>      
+      <multiplicity id="343" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="53" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="344">    
+    <bendpoint x="1440" y="4945"/>    
+    <end type="SOURCE" refId="49" navigable="false">      
+      <attribute id="345" name="conn"/>      
+      <multiplicity id="346" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="347">    
+    <end type="SOURCE" refId="46" navigable="false">      
+      <attribute id="348" name="myScene"/>      
+      <multiplicity id="349" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="350">    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="351" name="publicObjectiveCards"/>      
+      <multiplicity id="352" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="353">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="354" name="favorTokenDB"/>      
+      <multiplicity id="355" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="356">    
+    <bendpoint x="2509" y="2998"/>    
+    <bendpoint x="2882" y="3929"/>    
+    <bendpoint x="2882" y="4464"/>    
+    <bendpoint x="2882" y="4945"/>    
+    <end type="SOURCE" refId="46" navigable="false">      
+      <attribute id="357" name="connection"/>      
+      <multiplicity id="358" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="359">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="360" name="board"/>      
+      <multiplicity id="361" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="32" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="362">    
+    <bendpoint x="384" y="3929"/>    
+    <bendpoint x="260" y="4464"/>    
+    <bendpoint x="229" y="4945"/>    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="363" name="connection"/>      
+      <multiplicity id="364" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="365">    
+    <bendpoint x="1667" y="1460"/>    
+    <bendpoint x="1667" y="2103"/>    
+    <bendpoint x="1678" y="2998"/>    
+    <bendpoint x="1678" y="3929"/>    
+    <bendpoint x="2213" y="4464"/>    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="366" name="gamedieDBA"/>      
+      <multiplicity id="367" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="41" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="368">    
+    <end type="SOURCE" refId="55" navigable="false">      
+      <attribute id="369" name="gameController"/>      
+      <multiplicity id="370" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="371">    
+    <end type="SOURCE" refId="53" navigable="false">      
+      <attribute id="372" name="patterncard"/>      
+      <multiplicity id="373" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="374">    
+    <bendpoint x="1379" y="2998"/>    
+    <bendpoint x="1636" y="3929"/>    
+    <bendpoint x="2192" y="4464"/>    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="375" name="boardFields"/>      
+      <multiplicity id="376" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="377">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="378" name="roundtrack"/>      
+      <multiplicity id="379" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="380">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="381" name="roundtrackController"/>      
+      <multiplicity id="382" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="383">    
+    <bendpoint x="321" y="1460"/>    
+    <bendpoint x="313" y="2103"/>    
+    <bendpoint x="306" y="2998"/>    
+    <bendpoint x="300" y="3929"/>    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="384" name="gamePatterncards"/>      
+      <multiplicity id="385" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="386">    
+    <bendpoint x="500" y="3929"/>    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="387" name="patternCardsToChoose"/>      
+      <multiplicity id="388" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="389">    
+    <bendpoint x="916" y="1460"/>    
+    <bendpoint x="916" y="2103"/>    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="390" name="personalPlayer"/>      
+      <multiplicity id="391" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="392">    
+    <bendpoint x="1337" y="1460"/>    
+    <bendpoint x="1337" y="2103"/>    
+    <bendpoint x="1337" y="2998"/>    
+    <bendpoint x="1337" y="3929"/>    
+    <bendpoint x="1337" y="4464"/>    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="393" name="gameDBA"/>      
+      <multiplicity id="394" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="395">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="396" name="gameViewUpdater"/>      
+      <multiplicity id="397" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="52" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="398">    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="399" name="publicObjectiveCardDBA"/>      
+      <multiplicity id="400" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="401">    
+    <end type="SOURCE" refId="54" navigable="false">      
+      <attribute id="402" name="dicePoolView"/>      
+      <multiplicity id="403" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="404">    
+    <bendpoint x="479" y="3929"/>    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="405" name="patternCard"/>      
+      <multiplicity id="406" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="407">    
+    <bendpoint x="2151" y="2103"/>    
+    <bendpoint x="2151" y="1460"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="408" name="game"/>      
+      <multiplicity id="409" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="410">    
+    <end type="SOURCE" refId="48" navigable="false">      
+      <attribute id="411" name="players"/>      
+      <multiplicity id="412" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="413">    
+    <end type="SOURCE" refId="47" navigable="false">      
+      <attribute id="414" name="player"/>      
+      <multiplicity id="415" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="416">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="417" name="conn"/>      
+      <multiplicity id="418" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="419">    
+    <bendpoint x="1102" y="4945"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="420" name="conn"/>      
+      <multiplicity id="421" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="422">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="423" name="modelColor"/>      
+      <multiplicity id="424" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="425">    
+    <bendpoint x="3834" y="1460"/>    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="426" name="dieController"/>      
+      <multiplicity id="427" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="428">    
+    <bendpoint x="1157" y="1460"/>    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="429" name="board"/>      
+      <multiplicity id="430" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="32" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="431">    
+    <bendpoint x="2193" y="2103"/>    
+    <bendpoint x="2098" y="2998"/>    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="432" name="patterncardController"/>      
+      <multiplicity id="433" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="53" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="434">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="435" name="javafxColor"/>      
+      <multiplicity id="436" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="437">    
+    <bendpoint x="-60" y="2998"/>    
+    <bendpoint x="-60" y="3929"/>    
+    <bendpoint x="-60" y="4464"/>    
+    <bendpoint x="-60" y="4945"/>    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="438" name="conn"/>      
+      <multiplicity id="439" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="440">    
+    <bendpoint x="1625" y="2103"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="441" name="gameLobby"/>      
+      <multiplicity id="442" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="443">    
+    <bendpoint x="1755" y="1460"/>    
+    <bendpoint x="1814" y="2103"/>    
+    <bendpoint x="2161" y="2998"/>    
+    <bendpoint x="2609" y="3929"/>    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="444" name="diceInBag"/>      
+      <multiplicity id="445" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="59" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="446">    
+    <end type="SOURCE" refId="46" navigable="false">      
+      <attribute id="447" name="registerView"/>      
+      <multiplicity id="448" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="449">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="450" name="conn"/>      
+      <multiplicity id="451" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="452">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="453" name="dieController"/>      
+      <multiplicity id="454" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="455">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="456" name="gameController"/>      
+      <multiplicity id="457" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="458">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="459" name="accountController"/>      
+      <multiplicity id="460" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="46" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="461">    
+    <bendpoint x="1094" y="3929"/>    
+    <bendpoint x="1316" y="4464"/>    
+    <bendpoint x="1461" y="4945"/>    
+    <end type="SOURCE" refId="42" navigable="false">      
+      <attribute id="462" name="conn"/>      
+      <multiplicity id="463" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="464">    
+    <bendpoint x="895" y="1460"/>    
+    <bendpoint x="895" y="2103"/>    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="465" name="players"/>      
+      <multiplicity id="466" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="467">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="468" name="roundTrackFields"/>      
+      <multiplicity id="469" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="470">    
+    <bendpoint x="342" y="1460"/>    
+    <bendpoint x="342" y="2103"/>    
+    <bendpoint x="342" y="2998"/>    
+    <bendpoint x="342" y="3929"/>    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="471" name="playerPatterncards"/>      
+      <multiplicity id="472" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="473">    
+    <bendpoint x="2130" y="1460"/>    
+    <bendpoint x="2130" y="2103"/>    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="474" name="roundTrack"/>      
+      <multiplicity id="475" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="476">    
+    <bendpoint x="1730" y="1460"/>    
+    <bendpoint x="1730" y="2103"/>    
+    <bendpoint x="1741" y="2998"/>    
+    <bendpoint x="2074" y="3929"/>    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="477" name="usedDice"/>      
+      <multiplicity id="478" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="59" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="479">    
+    <bendpoint x="2130" y="403"/>    
+    <bendpoint x="1776" y="1460"/>    
+    <bendpoint x="1772" y="2103"/>    
+    <end type="SOURCE" refId="54" navigable="false">      
+      <attribute id="480" name="patterncardView"/>      
+      <multiplicity id="481" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="482">    
+    <bendpoint x="321" y="3929"/>    
+    <bendpoint x="-81" y="4464"/>    
+    <bendpoint x="-314" y="4945"/>    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="483" name="personalObjectiveCardColor"/>      
+      <multiplicity id="484" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="485">    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="486" name="chat"/>      
+      <multiplicity id="487" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="58" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="488">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="489" name="gameController"/>      
+      <multiplicity id="490" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="491">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="492" name="player"/>      
+      <multiplicity id="493" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="494">    
+    <end type="SOURCE" refId="48" navigable="false">      
+      <attribute id="495" name="accountStatus"/>      
+      <multiplicity id="496" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="51" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="497">    
+    <bendpoint x="1604" y="1460"/>    
+    <bendpoint x="1604" y="2103"/>    
+    <bendpoint x="1615" y="2998"/>    
+    <bendpoint x="1657" y="3929"/>    
+    <bendpoint x="1867" y="4464"/>    
+    <bendpoint x="1867" y="4945"/>    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="498" name="conn"/>      
+      <multiplicity id="499" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

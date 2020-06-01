@@ -218,7 +218,7 @@ public class AccountController {
 				invitePlayerList.add(p);
 			}
 			game.getDicePoolFromDB();
-			game.getOffer(); //check to see if working
+//			game.getOffer(); //check to see if working
 			game.finishGameSetup(this);
 	}
 

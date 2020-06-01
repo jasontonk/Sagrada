@@ -51,6 +51,7 @@ public class Game {
 		gamedieDBA = new GameDieDBA(conn);
 		publicObjectiveCardDBA = new PublicObjectiveCardDBA(conn);
 		offer = new ArrayList<GameDie>();
+		diceInBag = new GameDie[90];
 		usedDice = new ArrayList<GameDie>();
 		publicObjectiveCards = new ArrayList<PublicObjectiveCard>();
 	}
@@ -209,9 +210,12 @@ public class Game {
 				GameDie selectedDice = diceInBag[r.nextInt(89)];
 				if (!checkDieUsed(selectedDice)) {
 					offer.add(selectedDice);
+					
 					usedDice.add(selectedDice);
 					for (int j = 0; j < usedDice.size(); j++) {
-						
+						System.out.println("TEST 1 " + usedDice);
+						System.out.println("TEST 2 " + usedDice.get(j));
+						System.out.println("TEST 3 " + usedDice.get(j).getRoundID(this));
 						if (usedDice.get(j).getRoundID(this) == 0) {
 							selectedDice.setRoundID(this);
 						}
@@ -363,7 +367,7 @@ public class Game {
 	public void makedie() {
 		ArrayList<GameDie> diceFromGameFromDB = gamedieDBA.getAllDiceFromGame(this);
 		if(diceFromGameFromDB.size() == 0) {
-			diceInBag = new GameDie[90];
+			
 			System.out.println("ik maak nieuwe dice aan");
 			Random r = new Random();
 			for (int i = 0; i < 18; i++) {
@@ -523,6 +527,13 @@ public class Game {
 	}
 
 	public ArrayList<GameDie> getOffer() {
+//		diceInBag = gamedieDBA.getAllDiceFromGame(this)
+		int i = 0;
+		System.out.println("JAAAAAAAAA" +  gamedieDBA.getAllDiceFromGame(this));
+		for (GameDie gameDie : gamedieDBA.getAllDiceFromGame(this)) {
+			diceInBag[i] = gameDie;
+			i++;
+		}
 		
 		System.out.println("de size van de offer voor: " + offer.size());
 		System.out.println(currentPlayer + "CURRENT PLAYER");
