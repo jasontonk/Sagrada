@@ -81,7 +81,6 @@ public class Game {
 				break;
 			}
 		}
-		
 		finishedGame = false;
 		placedDie = true;
 		
@@ -501,12 +500,11 @@ public class Game {
 	}
 
 	public ArrayList<GameDie> getOffer() {
+		
 		System.out.println("de size van de offer voor: " + offer.size());
 		System.out.println(currentPlayer + "CURRENT PLAYER");
 		System.out.println(currentPlayer.getSequenceNumber() + "CURRENT PLAYER SQNR");
-		if(currentPlayer.getSequenceNumber() == 1 && 
-				round.get()%2 == 1 && 
-				offer.size() == 0) {
+		if(currentPlayer.getSequenceNumber() == 1 && round.get()%2 == 1 && offer.size() == 0) {
 			grabDiceFromBag();
 		}
 		System.out.println("de size van de offer : " + offer.size());
