@@ -192,6 +192,7 @@ public class AccountController {
 			Game game = new Game(connection, false);	
 			game.addGametoDB();
 			game.addpublicobjectivecards();
+			game.makedie();
 			Player player = new Player(connection);
 			player.setAccount(account);
 			player.setName(account.getUsername());
