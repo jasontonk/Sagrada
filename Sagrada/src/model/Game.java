@@ -51,7 +51,6 @@ public class Game {
 		gamedieDBA = new GameDieDBA(conn);
 		publicObjectiveCardDBA = new PublicObjectiveCardDBA(conn);
 		offer = new ArrayList<GameDie>();
-		diceInBag = new GameDie[90];
 		usedDice = new ArrayList<GameDie>();
 		publicObjectiveCards = new ArrayList<PublicObjectiveCard>();
 	}
@@ -212,6 +211,7 @@ public class Game {
 					offer.add(selectedDice);
 					usedDice.add(selectedDice);
 					for (int j = 0; j < usedDice.size(); j++) {
+						
 						if (usedDice.get(j).getRoundID(this) == 0) {
 							selectedDice.setRoundID(this);
 						}
@@ -363,6 +363,8 @@ public class Game {
 	public void makedie() {
 		ArrayList<GameDie> diceFromGameFromDB = gamedieDBA.getAllDiceFromGame(this);
 		if(diceFromGameFromDB.size() == 0) {
+			diceInBag = new GameDie[90];
+			System.out.println("ik maak nieuwe dice aan");
 			Random r = new Random();
 			for (int i = 0; i < 18; i++) {
 				diceInBag[i] = new GameDie(ModelColor.GREEN, i+1, r.nextInt(6)+1, this, conn, gamedieDBA);
@@ -391,6 +393,8 @@ public class Game {
 			}
 		}
 		else {
+			System.out.println("ik haal dice uit de database");
+			System.out.println("aantal dice uit DB: "+diceFromGameFromDB.size());
 			diceInBag = diceFromGameFromDB.toArray(diceInBag);
 		}
 	}
