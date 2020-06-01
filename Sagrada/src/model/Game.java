@@ -81,7 +81,7 @@ public class Game {
 			}
 		}
 		for (int i = 0; i < players.size(); i++) {
-			if (players.get(i).getPatternCard() == null) {
+			if (players.get(i).getPatternCard().getPatterncardID() == 0) {
 				PatternCard patternCard = new PatternCard(conn);
 				patternCard = patternCard.getPatterncardDB().getPatterncard();
 				patternCard.setpattern(false);
@@ -471,6 +471,9 @@ public class Game {
 	}
 	public Player getCurrentPlayer() {
 		currentPlayer = gameDBA.getCurrentPlayer(this);
+		if(currentPlayer == null) {
+			currentPlayer = gameDBA.getChallengerOfGameWithID(this.getGameID());
+		}
 		return currentPlayer;
 	}
 
@@ -530,7 +533,7 @@ public class Game {
 		
 	}
 	public String getChallengerOfGameWithID(int gameID) {
-		return gameDBA.getChallengerOfGameWithID(gameID);
+		return gameDBA.getNameOfChallengerOfGameWithID(gameID);
 	}
 
 	public RoundTrack getRoundTrack() {

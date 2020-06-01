@@ -206,7 +206,7 @@ public class GameDBA {
 	}
 
 
-	public String getChallengerOfGameWithID(int gameID) {
+	public String getNameOfChallengerOfGameWithID(int gameID) {
 		String name = "";
 		String query = "SELECT username FROM player WHERE idgame = " + gameID + " AND playstatus = 'CHALLENGER';";
 		try {
@@ -222,6 +222,23 @@ public class GameDBA {
 			e.printStackTrace();
 		}
 		return name;
+	}
+	public Player getChallengerOfGameWithID(int gameID) {
+		Player player = new Player(conn);
+		String query = "SELECT idplayer FROM player WHERE idgame = " + gameID + " AND playstatus = 'CHALLENGER';";
+		try {
+				Statement stmt = conn.getConn().createStatement();
+				ResultSet rs = stmt.executeQuery(query);
+				if (rs.next()) {
+	                PlayerDBA playerDBA = new PlayerDBA(conn);
+					player = playerDBA.getPlayerUsingID(rs.getInt("idplayer"));
+	            }
+				stmt.close();
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return player;
 	}
 	
 	 public ArrayList<Player> getPlayersOfGame(Game game) {

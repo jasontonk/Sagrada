@@ -101,7 +101,7 @@ public class PatternCardDBA {
 	
 	public PatternCard getSelectedPatterncardOfPlayer(int idplayer, Player player) {
         PatternCard patternCard = null;
-        String query = "SELECT patterncard.* FROM patterncard INNER JOIN player p on patterncard.idpatterncard = p.patterncard_idpatterncard WHERE p.idplayer= "+idplayer+";";
+        String query = "SELECT patterncard.* FROM patterncard INNER JOIN player p on patterncard.idpatterncard = p.idpatterncard WHERE p.idplayer= "+idplayer+";";
         try {
 			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);

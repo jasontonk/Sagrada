@@ -14,6 +14,7 @@ public class PatterncardController {
 	
 	public PatterncardController(DataBaseConnection conn, GameController gameController) {
 		this.gameController = gameController;
+		System.out.println("de currentplayer is: "+ gameController.getCurrentPlayer());
 		patterncard = gameController.getPlayerPatterncard(gameController.getCurrentPlayer());
 		if (patterncard == null) {
 			patterncard = new PatternCard(conn);

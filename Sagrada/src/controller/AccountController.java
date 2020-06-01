@@ -201,6 +201,12 @@ public class AccountController {
 			player.setPersonalObjectiveCardColor();
 			player.addPlayer(player);
 			player.createBoard();
+			if (player.getPatternCard().getPatterncardID() == 0) {
+				PatternCard patternCard = new PatternCard(connection);
+				patternCard = patternCard.getPatterncardDB().getPatterncard();
+				patternCard.setpattern(false);
+				player.setPatternCard(patternCard);
+			}
 			player.setScore(-20);
 			game.setCurrentPlayer(player);
 			invitePlayerList.add(player);
@@ -215,6 +221,12 @@ public class AccountController {
 				p.addPlayer(p);
 				p.setScore(-20);
 				p.createBoard();
+				if (player.getPatternCard().getPatterncardID() == 0) {
+					PatternCard patternCard = new PatternCard(connection);
+					patternCard = patternCard.getPatterncardDB().getPatterncard();
+					patternCard.setpattern(false);
+					player.setPatternCard(patternCard);
+				}
 				invitePlayerList.add(p);
 			}
 			ArrayList<PatternCard> patterncards = new ArrayList<>();
