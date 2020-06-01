@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.application.Platform;
 import model.Player;
 
 public class GameRoundPlayer implements Runnable {
@@ -26,8 +27,14 @@ public class GameRoundPlayer implements Runnable {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
-			gameController.getGame().playround();
+			Platform.runLater(new Runnable() {
+				
+				@Override
+				public void run() {
+					gameController.getGame().playround();			
+				}
+			});
+				
 		}
 		if(gameController.getGame().getRound().get()%2 == 0 && gameController.getGame().getRound().get() != 1 && gameController.getGame().getCurrentPlayer().getSequenceNumber() == 1) {
 			gameController.getGame().addLeftOverDiceToRoundTrack();
