@@ -99,7 +99,7 @@ public class PublicObjectiveCardDBA {
 	    }
 
 	public ArrayList<PublicObjectiveCard> getPublicObjectiveCardsOfGame(Game game) {
-		ArrayList<PublicObjectiveCard> publicObjectiveCards = null;
+		ArrayList<PublicObjectiveCard> publicObjectiveCards = new ArrayList<>();
 	       String query = "SELECT * FROM gameobjectivecard_public LEFT JOIN public_objectivecard "
 	       		+ "ON gameobjectivecard_public.idpublic_objectivecard = public_objectivecard.idpublic_objectivecard "
 	       		+ "WHERE idgame = "+game.getGameID()+";";

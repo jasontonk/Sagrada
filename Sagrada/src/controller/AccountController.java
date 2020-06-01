@@ -196,10 +196,10 @@ public class AccountController {
 			player.setAccount(account);
 			player.setName(account.getUsername());
 			player.setGame(game);
-			player.createBoard();
 			player.setPlayerStatus(PlayerStatus.CHALLENGER);
 			player.setPersonalObjectiveCardColor();
 			player.addPlayer(player);
+			player.createBoard();
 			player.setScore(-20);
 			game.setCurrentPlayer(player);
 			invitePlayerList.add(player);
@@ -209,10 +209,11 @@ public class AccountController {
 				p.setAccount(account);
 				p.setName(account.getUsername());
 				p.setGame(game);
-				p.createBoard();
 				p.setPlayerStatus(PlayerStatus.CHALLENGEE);
 				p.setPersonalObjectiveCardColor();
 				p.addPlayer(p);
+				p.setScore(-20);
+				p.createBoard();
 				invitePlayerList.add(p);
 			}
 			game.getDicePoolFromDB();
