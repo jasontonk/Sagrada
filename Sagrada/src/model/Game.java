@@ -74,12 +74,7 @@ public class Game {
 		for (int i = 0; i < players.size(); i++) {
 			players.get(i).setSequenceNumber(i+1);
 		}
-		for (int i = 0; i < players.size(); i++) {
-			if(players.get(i).getAccount() == accountController.getAccount()) {
-				personalPlayer = players.get(i);
-				break;
-			}
-		}
+		
 		for (int i = 0; i < players.size(); i++) {
 			if (players.get(i).getPatternCard().getPatterncardID() == 0) {
 				PatternCard patternCard = new PatternCard(conn);
@@ -91,6 +86,19 @@ public class Game {
 		finishedGame = false;
 		placedDie = true;
 		
+	}
+	
+	public void setPersonalPlayer(Account account) {
+		for (int i = 0; i < players.size(); i++) {
+			System.out.println("DIT IS PLAYERS.GETACCOUNT " + players.get(i).getAccount().getUsername());
+			System.out.println("DIT IS ACCOUNCONTROLLER.GETACCOUNT: " + account.getUsername());
+			if(players.get(i).getAccount().getUsername().equals(account.getUsername())) {
+				System.out.println("PERSONALPLAYER GEVONDEN 1: " + players.get(i));				
+				personalPlayer = players.get(i);
+				System.out.println("PERSONALPLAYER GEVONDEN 2: " + personalPlayer);
+				break;
+			}
+		}
 	}
 	
 //	public Game(DataBaseConnection conn) {
@@ -273,8 +281,10 @@ public class Game {
 	public void playround() {// boolean first round false
 		
 		System.out.println("round: " +round+ " Databaseround: "+gameDBA.getCurrentRound(this.getGameID()));
-		if(round.equals(gameDBA.getCurrentRound(this.getGameID()))) {
-			if(currentPlayer == personalPlayer) {
+//		if(round.equals(gameDBA.getCurrentRound(this.getGameID()))) {
+		if(round.get() == gameDBA.getCurrentRound(this.getGameID())) {
+			System.out.println("JAZEKER");
+			if(currentPlayer.equals(personalPlayer)) {
 				playTurn();
 			}
 			else {

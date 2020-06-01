@@ -215,6 +215,7 @@ public class AccountController {
 				player.setPatternCard(patternCard);
 			}
 			player.setScore(-20);
+			
 			game.setCurrentPlayer(player);
 			invitePlayerList.add(player);
 			
@@ -252,6 +253,7 @@ public class AccountController {
 			}
 			game.getDicePoolFromDB();
 			game.finishGameSetup(this);
+			game.setPersonalPlayer(getAccount());
 	}
 
 	public ArrayList<Player> getInvitePlayerList() {
@@ -297,10 +299,9 @@ public class AccountController {
 
 		System.out.println("GAME.getplayers.0: " + game.getPlayers().get(0));
 		
-		game.setCurrentPlayer(game.getPlayers().get(0));
-		
+		game.finishGameSetup(this);
 		game.addpublicobjectivecards();
-		
+		game.setPersonalPlayer(getAccount());
 		GameController gameController = new GameController(connection, myScene, game, 0);
 		myScene.setContentPane(gameController.getGameView());
 	}
