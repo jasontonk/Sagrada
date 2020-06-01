@@ -263,5 +263,31 @@ public class GameDBA {
 
          return winnerInfo;
      }
+
+	public Player getCurrentPlayer(Game game) {
+		Player currentplayer = null;
+		ArrayList<Player> players = game.getPlayers();
+	    String query = "SELECT player.* FROM game RIGHT JOIN player " + 
+	    				"ON game.idgame = player.idgame AND game.turn_idplayer = player.idplayer " + 
+	    				"WHERE game.idgame= 272;";
+	        
+	        try {
+				Statement stmt = conn.getConn().createStatement();
+				ResultSet rs = stmt.executeQuery(query);
+				if(rs.next()) {
+					for (Player player : players) {
+						if(player.getId() == rs.getInt("idplayer")) {
+							currentplayer = player;
+							break;
+						}
+					}
+				}
+				stmt.close();
+				
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
+	        return currentplayer;
+	}
 	 
 }
