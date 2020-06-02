@@ -104,13 +104,13 @@ public class PlayerFrameFieldDBA {
 		BoardField boardfield = null;
 		String query = "SELECT * FROM playerframefield LEFT JOIN gamedie ON playerframefield.diecolor = gamedie.diecolor "
 				+ "AND playerframefield.dienumber = gamedie.dienumber "
-				+ "WHERE idplayer = "+player.getId()+" AND position_x = "+x+" AND position_y = "+y+";";
+				+ "WHERE idplayer = "+player.getId()+" AND position_x = "+(x + 1)+" AND position_y = "+(y + 1)+";";
 		System.out.println(query);
 		try {
 			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
-				boardfield = new BoardField(rs.getInt("position_x"),rs.getInt("position_y"));
+				boardfield = new BoardField(rs.getInt("position_x") - 1,rs.getInt("position_y") - 1);
 				if(rs.getInt("playerframefield.dienumber") != 0) {
 					GameDie die = new GameDie(player.getGame().getGameDieDBA().getColorFromString(rs.getString("gamedie.diecolor")), 
 							rs.getInt("gamedie.dienumber"), rs.getInt("gamedie.eyes"), player.getGame(), conn, player.getGame().getGameDieDBA());

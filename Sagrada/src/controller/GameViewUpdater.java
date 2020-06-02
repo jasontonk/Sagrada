@@ -112,7 +112,6 @@ public class GameViewUpdater extends Task<Boolean> {
 		gameCtrl.clearChangedDiceOnRoundTrack(); 
 	}
 	private void updatePatterncardsView() {
-		// TODO Auto-generated method stub
 		
 	}
 

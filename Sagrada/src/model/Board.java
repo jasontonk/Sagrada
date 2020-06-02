@@ -94,13 +94,18 @@ public class Board {
      * Checks if it is the first turn of the player
      */
 	public boolean isFirstTurn() {
+		int counter = 0;
 		for(int y = 0; y < BOARD_SQUARES_VERTICAL; y++) {
 			for(int x = 0; x < BOARD_SQUARES_HORIZONTAL; x++) {
 				BoardField boardField = getBoardField(x, y);
 				GameDie gameDie = boardField.getDie();
 				if (gameDie != null) {
-					return false;
+					counter++;
+					if(counter == 1) {
+						return false;
+					}
 				}
+				
 			}
 		}
 		return true;
@@ -110,7 +115,9 @@ public class Board {
      * Returns the board field of the parameters
      */
 	public BoardField getBoardField(int x, int y) {
-		boardFields[x][y] = playerFrameFieldDBA.getPlayerFrameField(getPlayer(),x+1  ,y+1 );
+		boardFields[x][y] = playerFrameFieldDBA.getPlayerFrameField(getPlayer(),x  ,y );
+		System.out.println("kijken of ik een null krijg x: " + x);
+		System.out.println("kijken of ik een null krijg y: " + y);
 		System.out.println("kijken of ik een null krijg: " + boardFields[x][y]);
 		if(boardFields[x][y] != null){
 			return boardFields[x][y];
@@ -481,6 +488,9 @@ public class Board {
 		
 		boolean firstturn = isFirstTurn();
 		System.out.println("HIER PLEK 0: " + modelColor);
+		System.out.println("ISFIRSTTURN " + firstturn);
+		System.out.println("XPOS"+boardField.getxPos());
+		System.out.println("XPOS"+boardField.getyPos());
 		if(firstturn && (boardField.getxPos() == 0 || boardField.getyPos() == 0 || boardField.getxPos() == 4 || boardField.getyPos() == 3) || 
 				!firstturn && checkIsNextToDie(boardField)) {
 			System.out.println("HIER PLEK 1: ");

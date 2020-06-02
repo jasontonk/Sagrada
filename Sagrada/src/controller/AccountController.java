@@ -206,8 +206,8 @@ public class AccountController {
 			player.setPlayerStatus(PlayerStatus.CHALLENGER);
 			player.setPersonalObjectiveCardColor();
 			player.addPlayer(player);
-			player.createBoard();
-			player.getBoard().AddBoardFieldsToDB();
+//			player.createBoard();
+//			player.getBoard().AddBoardFieldsToDB();
 //			if (player.getPatternCard().getPatterncardID() == 0) {
 //				PatternCard patternCard = new PatternCard(connection);
 //				patternCard = patternCard.getPatterncardDB().getPatterncard();
@@ -228,8 +228,8 @@ public class AccountController {
 				p.setPersonalObjectiveCardColor();
 				p.addPlayer(p);
 				p.setScore(-20);
-				p.createBoard();
-				p.getBoard().AddBoardFieldsToDB();
+//				p.createBoard();
+//				p.getBoard().AddBoardFieldsToDB();
 //				if (p.getPatternCard().getPatterncardID() == 0) {
 //					PatternCard patternCard = new PatternCard(connection);
 //					patternCard = patternCard.getPatterncardDB().getPatterncard();
@@ -301,6 +301,11 @@ public class AccountController {
 		game.addpublicobjectivecards();
 		game.setPersonalPlayer(getAccount());
 		game.getPersonalPlayer().createBoard();
+		for(int x = 0; x < 5; x++) {
+			for (int y = 0; y < 4; y++) {
+				game.getPersonalPlayer().getBoard().getBoardField(x, y);
+			}
+		}
 		GameController gameController = new GameController(connection, myScene, game, 0);
 		myScene.setContentPane(gameController.getGameView());
 	}

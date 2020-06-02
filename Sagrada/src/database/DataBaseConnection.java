@@ -29,6 +29,7 @@ public class DataBaseConnection {
 		
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://databases.aii.avans.nl:3306/jjtonk_db2?user=jjtonk&password=Ab12345");
+//			conn = DriverManager.getConnection("jdbc:mysql://databases.aii.avans.nl:3306/2020_soprj4_sagrada_ab?user=2020_soprj4_b&password=Ab12345");
 			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
