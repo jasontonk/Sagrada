@@ -27,7 +27,9 @@ public class PublicObjectiveCardsView extends HBox {
 				(getClass().
 						getResource(imgURL)
 							.toString()); 
+			
 			ImageView imageView = new ImageView(image);
+			imageView.resize(100, 200);
 			this.getChildren().add(imageView);
 		}
 		

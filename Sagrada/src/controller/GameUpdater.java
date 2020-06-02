@@ -67,7 +67,7 @@ public class GameUpdater implements Runnable {
 		updatePatterncards();
 		updateRountrack();
 		updateScore();
-		updateCurrentPlayer();
+//		updateCurrentPlayer();
 	}
 
 	private void updateCurrentPlayer() {

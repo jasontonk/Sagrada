@@ -115,10 +115,6 @@ public class Board {
      * Returns the board field of the parameters
      */
 	public BoardField getBoardField(int x, int y) {
-		boardFields[x][y] = playerFrameFieldDBA.getPlayerFrameField(getPlayer(),x  ,y );
-		System.out.println("kijken of ik een null krijg x: " + x);
-		System.out.println("kijken of ik een null krijg y: " + y);
-		System.out.println("kijken of ik een null krijg: " + boardFields[x][y]);
 		if(boardFields[x][y] != null){
 			return boardFields[x][y];
 		}
@@ -127,6 +123,15 @@ public class Board {
 		}
 	}
 
+	public BoardField getBoardFieldFromDB(int x, int y) {
+		boardFields[x][y] = playerFrameFieldDBA.getPlayerFrameField(getPlayer(),x  ,y );
+		if(boardFields[x][y] != null){
+			return boardFields[x][y];
+		}
+		else {
+			return null;
+		}
+	}
 	//============================================
 	
 

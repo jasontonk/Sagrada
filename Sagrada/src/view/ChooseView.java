@@ -28,6 +28,9 @@ public class ChooseView extends Pane{
 	public Pane makeChoosePane() {
 		choosePane = new VBox();
 		choosePane.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, null, null)));
+
+//		String url = "/images/loginbackground.jpg";
+//		choosePane.setBackground(new Background(new BackgroundImage(new Image(getClass().getResource(url).toString()), null, null, null, null)));
 		
 		BorderPane textPane = new BorderPane();
 		Text text = new Text("Heb je een account?");

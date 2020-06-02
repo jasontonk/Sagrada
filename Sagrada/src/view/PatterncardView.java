@@ -15,6 +15,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import model.ModelColor;
 
@@ -33,7 +36,7 @@ public class PatterncardView extends VBox{
 	public PatterncardView(PatterncardController patterncardController) {
 		this.patterncardController = patterncardController;
 		this.setPadding(new Insets(0, 30, 0, 30));
-		this.getChildren().addAll(drawTitle(), drawPatterncard(), drawDifficulty());
+		this.getChildren().addAll(drawTitle(), drawPatterncard(), drawDifficulty(), drawPersonalObjectiveCardColor());
 	}
 	
 	public GridPane drawPatterncard() {
@@ -117,6 +120,17 @@ public class PatterncardView extends VBox{
 	    difficultyPane.setRight(difficulty);
 	    return difficultyPane;
 	}
+	
+	public BorderPane drawPersonalObjectiveCardColor() {
+		BorderPane personalObjectiveCardColor = new BorderPane();
+		Text color = new Text();
+		color.setText("Persoonlijke doelkaartkleur = " + patterncardController.getGameController().getGame().getPersonalPlayer().getPersonalObjectiveCardColor().toString());
+		color.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 12));
+		personalObjectiveCardColor.setPadding(padding);
+		personalObjectiveCardColor.setCenter(color);
+	    return personalObjectiveCardColor;
+	}
+	
 	public boolean checkPlacementAgainstRules(int x, int y, StackPane stackpane) {
 		if(patterncardController.checkPlacementAgainstRules(x, y, patterncardController.getSelectedDieColor(), patterncardController.getSelectedDieValue())) {
 			placeSelectedDie(stackpane);

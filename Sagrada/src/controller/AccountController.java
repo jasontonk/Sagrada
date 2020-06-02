@@ -303,7 +303,7 @@ public class AccountController {
 		game.getPersonalPlayer().createBoard();
 		for(int x = 0; x < 5; x++) {
 			for (int y = 0; y < 4; y++) {
-				game.getPersonalPlayer().getBoard().getBoardField(x, y);
+				game.getPersonalPlayer().getBoard().getBoardFieldFromDB(x, y);
 			}
 		}
 		GameController gameController = new GameController(connection, myScene, game, 0);

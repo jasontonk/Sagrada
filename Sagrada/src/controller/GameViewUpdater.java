@@ -85,7 +85,7 @@ public class GameViewUpdater extends Task<Boolean> {
 		updateDicePoolView();
 		updatePatterncardsView();
 		updateRoundtrackView();
-//		updateScoreBoard();
+		updateScoreBoard();
 		System.out.println();
 	}
 	
@@ -126,13 +126,10 @@ public class GameViewUpdater extends Task<Boolean> {
 		
 	}
 	
-//	private void updateScoreBoard() {
-//		for (Player p : gameCtrl.getGame().getPlayers()) {
-//			p.calculateScore();
-//		}
-//		gameCtrl.getGameView().getScoreView().makeScoreBoard();
-//		System.out.println("gelukt 2");
-//	}
+	private void updateScoreBoard() {
+		gameCtrl.getGameView().getScoreView().makeScoreBoard();
+		System.out.println("gelukt 2");
+	}
 
 
 }

@@ -315,39 +315,40 @@ public class Player {
 	}
 	
 	public int calculateScore() {
-		if (patternCard == null) {
-            patternCard = getPatternCard();
-        }
 		
 		int score = 0;
 		for(int x = 0; x < Board.BOARD_SQUARES_HORIZONTAL; x++) {
 			for(int y = 0; y < Board.BOARD_SQUARES_VERTICAL; y++) {
+				System.out.println("TESTER1");
 				if(!(board == null)) {
-					if(!board.
-							getBoardField(x, y).
-							hasDie()) {
+					System.out.println("TESTER2");
+					if(!board.getBoardField(x, y).hasDie()) {
+						System.out.println("TESTER3");
 						score = score - 1;
 						System.out.println("SPELER: " + this.getName() + " SCORE -1 =================== " + "BOARDFIELD (" + x + ", " + y + ") SCORE: " + score);
 					}
 					else if(board.getBoardField(x, y).getDie().getColor().equals(personalObjectiveCardColor)) {
+						System.out.println("TESTER4");
 						score = score + 1;
 						System.out.println("SPELER: " + this.getName() + " SCORE -1 =================== " + "BOARDFIELD (" + x + ", " + y + ") SCORE: " + score);
 					}
 				}
 				else {
+					System.out.println("TESTER5");
 //					board = new Board(this, connection);
 				}
 			}
 		}
-		
+		System.out.println("TESTER6");
 		for(FavorToken favorToken : this.getFavorTokens()) {
 			score = score + 1;
 		}
 		
+		System.out.println("TESTER7");
 		for (PublicObjectiveCard publicObjectiveCard : game.getPublicObjectiveCards()) {
             score = score + publicObjectiveCard.calculateScore(board);
         }
-		
+		System.out.println("TESTER8");
 		this.score.set(score);
 		
 		playerDBA.setScore(this, score);

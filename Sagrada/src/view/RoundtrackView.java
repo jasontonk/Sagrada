@@ -51,7 +51,7 @@ public class RoundtrackView extends VBox {
 		stackpanes = new ArrayList<StackPane>();
 		this.setPadding(new Insets(0, 30, 0, 30));
 		this.setMaxWidth((10 * (ROUNDTRACKFIELD_SIZE + SPACING) + SPACING));
-		this.setMaxHeight(100);
+		this.setMaxHeight(200);
 		VBox content = new VBox(drawTitle(), drawRoundtrack(), drawRound());
 		roundTrackScroll.setContent(content);
 		this.getChildren().add(roundTrackScroll);
