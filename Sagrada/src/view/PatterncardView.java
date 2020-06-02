@@ -70,6 +70,19 @@ public class PatterncardView extends VBox{
 				}
 				button.setOnMouseClicked(e-> checkPlacementAgainstRules(xPos, yPos, stackpane));
 				stackpane.getChildren().add(button);
+				if(patterncardController.getGameController().getGame().getPersonalPlayer().getBoard().getBoardField(xPos, yPos).hasDie()) {
+					Button die = new Button();
+					imgURL = "/images/" + patterncardController.getGameController().getGame().getPersonalPlayer().getBoard().getBoardField(xPos, yPos).getDie().getColor().toString()
+							+ patterncardController.getGameController().getGame().getPersonalPlayer().getBoard().getBoardField(xPos, yPos).getDie().getEyes() 
+							+ "_Die.png";
+					if(imgURL != null) {
+						Image image = new Image(getClass().getResource(imgURL).toString());
+						die.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
+						die.setPrefSize(40, 40);
+						stackpane.getChildren().add(die);
+					}
+				}
+				
 				patterncardfields.add(stackpane, x, y);
 			}
 		}
