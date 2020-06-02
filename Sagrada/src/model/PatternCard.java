@@ -127,10 +127,10 @@ public class PatternCard {
 			patterncardfieldDB.addPatternCardField(patterncardfields, this);
 		}
 		else {
-			PatternCard temp = patterncardDB.getPatterncard();
-			setPatterncardID(temp.getPatterncardID());
-			setName(temp.getName());
-			setDifficulty(temp.getDifficulty());
+//			PatternCard temp = patterncardDB.getPatterncard();
+//			setPatterncardID(temp.getPatterncardID());
+//			setName(temp.getName());
+//			setDifficulty(temp.getDifficulty());
 			ArrayList<PatternCardField> list = patterncardfieldDB.getPatternCardFieldsOfPatterncard(this);
 			for(PatternCardField p:list) {
 				patterncard[p.getPositionX()-1][p.getPositionY()-1] = p;

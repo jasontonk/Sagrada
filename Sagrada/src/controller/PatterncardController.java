@@ -15,17 +15,21 @@ public class PatterncardController {
 	public PatterncardController(DataBaseConnection conn, GameController gameController) {
 		this.gameController = gameController;
 		System.out.println("de personalplayer is: "+ gameController.getGame().getPersonalPlayer());
-		patterncard = gameController.getPlayerPatterncard(gameController.getGame().getPersonalPlayer());
+		patterncard = gameController.
+				getGame().
+				getPersonalPlayer().
+				getBoard().
+				getPatternCard();
 		System.out.println("patterncardcontroller patterncard = " + patterncard.getName());
 		if (patterncard.getPatterncardID() == 0) {
 			patterncard = new PatternCard(conn);
 		}
-		patterncard.setpattern(false);
+//		patterncard.setpattern(false);
 	}
 	
 	public PatterncardController(PatternCard patterncard) {
 		this.patterncard = patterncard;
-		patterncard.setpattern(false);
+//		patterncard.setpattern(false);
 	}
 	
 	

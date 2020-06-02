@@ -1,6 +1,8 @@
 package model;
 
 import database.DataBaseConnection;
+import database.PatternCardDBA;
+import database.PlayerDBA;
 import database.PlayerFrameFieldDBA;
 
 public class Board {
@@ -11,10 +13,14 @@ public class Board {
 	public static final int BOARD_SQUARES_VERTICAL = 4;
 	private Player player;
 	private PlayerFrameFieldDBA playerFrameFieldDBA;
+	private PatternCardDBA patternCardDBA;
 	
 	public Board(Player player, DataBaseConnection conn) {
 		this.player = player;
-		patternCard = this.player.getPatternCard();
+		patternCardDBA = new PatternCardDBA(conn);
+		patternCard = player.getPatternCard();
+		System.out.println("THIS IS THE PATTERNCARDDD " + patternCard.getName());
+		player.setPatternCard(patternCard);
 		boardFields = new BoardField[5][4];
 		playerFrameFieldDBA = new PlayerFrameFieldDBA(conn);
 		for(int x = 0; x < 5; x++) {
@@ -468,8 +474,10 @@ public class Board {
 		return false;
 	}
 	public boolean checkAll(BoardField boardField, ModelColor modelColor, int value) {
+		
 		System.out.println("patterncard1" + patternCard.getName());
 		System.out.println("patterncard2" +player.getPatternCard().getName());
+		
 		
 		boolean firstturn = isFirstTurn();
 		System.out.println("HIER PLEK 0: " + modelColor);

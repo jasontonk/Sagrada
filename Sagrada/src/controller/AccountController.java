@@ -208,12 +208,12 @@ public class AccountController {
 			player.addPlayer(player);
 			player.createBoard();
 			player.getBoard().AddBoardFieldsToDB();
-			if (player.getPatternCard().getPatterncardID() == 0) {
-				PatternCard patternCard = new PatternCard(connection);
-				patternCard = patternCard.getPatterncardDB().getPatterncard();
-				patternCard.setpattern(false);
-				player.setPatternCard(patternCard);
-			}
+//			if (player.getPatternCard().getPatterncardID() == 0) {
+//				PatternCard patternCard = new PatternCard(connection);
+//				patternCard = patternCard.getPatterncardDB().getPatterncard();
+//				patternCard.setpattern(false);
+//				player.setPatternCard(patternCard);
+//			}
 			player.setScore(-20);
 			
 			game.setCurrentPlayer(player);
@@ -230,27 +230,27 @@ public class AccountController {
 				p.setScore(-20);
 				p.createBoard();
 				p.getBoard().AddBoardFieldsToDB();
-				if (player.getPatternCard().getPatterncardID() == 0) {
-					PatternCard patternCard = new PatternCard(connection);
-					patternCard = patternCard.getPatterncardDB().getPatterncard();
-					patternCard.setpattern(false);
-					player.setPatternCard(patternCard);
-				}
+//				if (p.getPatternCard().getPatterncardID() == 0) {
+//					PatternCard patternCard = new PatternCard(connection);
+//					patternCard = patternCard.getPatterncardDB().getPatterncard();
+//					patternCard.setpattern(false);
+//					player.setPatternCard(patternCard);
+//				}
 				invitePlayerList.add(p);
 			}
-			ArrayList<PatternCard> patterncards = new ArrayList<>();
-			for (int i = 0; i < invitePlayerList.size(); i++) {
-				PatternCard patternCard = new PatternCard(connection);
-				patternCard.getPatterncardDB().getPatterncard();
-				patternCard.setpattern(false);
-				patterncards.add(patternCard);
-			}
-			System.out.println("de aangemaakte patterncards zijn: "+ patterncards);
-			for (int j = 0; j < invitePlayerList.size(); j++) {
-				if(player.getPatternCard() == null) {
-					player.setPatternCard(patterncards.get(j));
-				}
-			}
+//			ArrayList<PatternCard> patterncards = new ArrayList<>();
+//			for (int i = 0; i < invitePlayerList.size(); i++) {
+//				PatternCard patternCard = new PatternCard(connection);
+//				patternCard.getPatterncardDB().getPatterncard();
+//				patternCard.setpattern(false);
+//				patterncards.add(patternCard);
+//			}
+//			System.out.println("de aangemaakte patterncards zijn: "+ patterncards);
+//			for (int j = 0; j < invitePlayerList.size(); j++) {
+//				if(player.getPatternCard() == null) {
+//					player.setPatternCard(patterncards.get(j));
+//				}
+//			}
 			game.getDicePoolFromDB();
 			game.finishGameSetup(this);
 			game.setCurrentPlayer(player);
@@ -289,11 +289,8 @@ public class AccountController {
 		
 		stopInviteThread();
 		
-		if (player.getPatternCard() == null) { 
-			player.setPatternCard(new PatternCard(connection));
-        }
-		else player.setPatternCard(player.getPatternCard());
-		player.createBoard();
+		player.setPatternCard(player.getPatternCard());
+		
 		
 		System.out.println("GAME.getid: " + game.getGameID());
 		System.out.println("GAME.getplayers: " + game.getPlayers());
@@ -303,6 +300,7 @@ public class AccountController {
 		game.finishGameSetup(this);
 		game.addpublicobjectivecards();
 		game.setPersonalPlayer(getAccount());
+		game.getPersonalPlayer().createBoard();
 		GameController gameController = new GameController(connection, myScene, game, 0);
 		myScene.setContentPane(gameController.getGameView());
 	}

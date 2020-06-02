@@ -98,7 +98,7 @@ public class GameController {
 		gameView = new GameView(this);
 		System.out.println("loading...100%");
 		
-		patterncardView = new PatterncardView(patterncardController);
+//		patterncardView = new PatterncardView(patterncardController);
 //		patterncardSelectionView = new PatterncardSelectionView(this);
 		gameRoundPlayer =  new GameRoundPlayer(this, 3);
 		gameUpdater = new GameUpdater(this);
