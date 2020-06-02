@@ -228,8 +228,8 @@ public class AccountController {
 				p.setPersonalObjectiveCardColor();
 				p.addPlayer(p);
 				p.setScore(-20);
-//				p.createBoard();
-//				p.getBoard().AddBoardFieldsToDB();
+				p.createBoard();
+				p.getBoard().AddBoardFieldsToDB();
 //				if (p.getPatternCard().getPatterncardID() == 0) {
 //					PatternCard patternCard = new PatternCard(connection);
 //					patternCard = patternCard.getPatterncardDB().getPatterncard();

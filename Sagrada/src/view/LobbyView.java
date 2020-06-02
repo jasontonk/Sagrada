@@ -88,9 +88,7 @@ public class LobbyView extends BorderPane {
 		
 		top.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, null, null)));
 		top.setMinSize(250, 600);
-		Button startGame = new Button("Start het spel");
-		startGame.setOnAction(e -> startGame());
-		top.getChildren().add(startGame);
+
 
 		Button refresh = new Button("Vernieuw");
 		refresh.setOnAction(e -> accountController.render());
