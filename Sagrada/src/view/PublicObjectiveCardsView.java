@@ -24,12 +24,11 @@ public class PublicObjectiveCardsView extends HBox {
 			String imgURL = "/images/publicObjectiveCard" + objectivecardIDs[i] + ".png";
 			System.out.println("IMGURL " + imgURL);
 			Image image = new Image
-				(getClass().
-						getResource(imgURL)
-							.toString()); 
+				(getClass().getResource(imgURL).toString()); 
 			
 			ImageView imageView = new ImageView(image);
-			imageView.resize(100, 200);
+			imageView.setFitWidth(250);
+			imageView.setFitHeight(320);
 			this.getChildren().add(imageView);
 		}
 		
