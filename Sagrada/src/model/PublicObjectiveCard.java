@@ -270,7 +270,9 @@ public class PublicObjectiveCard {
         for (int x = 0; x < Board.BOARD_SQUARES_HORIZONTAL; x++) { 
             ArrayList<Integer> valueList = new ArrayList<>();
             for (int y = 0; y < Board.BOARD_SQUARES_VERTICAL; y++) { 
-                if (board.getBoardField(x, y).hasDie()) { 
+                if (board.
+                		getBoardField(x, y)
+                		.hasDie()) { 
                     valueList.add(board.getBoardField(x, y).getDie().getEyes()); 
                 }
             }

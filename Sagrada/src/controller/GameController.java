@@ -224,18 +224,24 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 	}
 
 	public void playround() {
-		gameViewUpdater.updateScoreBoard();
-		game.setCurrentPlayer(game.getPersonalPlayer());
-		gameViewUpdater.setPaused(true);
-		gameUpdater.setPaused(true);
-		Thread playround = new Thread(gameRoundPlayer);
-		playround.start();
+		if(game.getCurrentPlayer().getId() == game.getPersonalPlayer().getId()) {
+			gameViewUpdater.updateScoreBoard();
+			game.setCurrentPlayer(game.getPersonalPlayer());
+			gameViewUpdater.setPaused(true);
+			gameUpdater.setPaused(true);
+			Thread playround = new Thread(gameRoundPlayer);
+			playround.start();
+		}
+		else showWarning("Beurt", "Het is niet jouw beurt");
 	}
 	public void stopround() {
-		gameViewUpdater.updateScoreBoard();
-		getGamePoller().setFinishedTurn(true);
-		gameUpdater.setPaused(false);
-		gameViewUpdater.setPaused(false);
+		if(game.getCurrentPlayer().getId() == game.getPersonalPlayer().getId()) {
+			gameViewUpdater.updateScoreBoard();
+			getGamePoller().setFinishedTurn(true);
+			gameUpdater.setPaused(false);
+			gameViewUpdater.setPaused(false);
+		}
+		else showWarning("Beurt", "Het is niet jouw beurt");
 	}
 	
 	public Game getGame() {
