@@ -21,11 +21,15 @@ public class ToolCardDBA {
 		int id2 = (int)(Math.random() * 12 + 1);
 		while(id2 == id1) {
 			id2 = (int)(Math.random() * 12 + 1);
+			System.out.println("while loop 1");
 		}
 		int id3 = (int)(Math.random() * 12 + 1);
-		while(id3 != id1 && id3 != id2) {
+		while(id3 == id1 || id3 == id2) {
 			id3 = (int)(Math.random() * 12 + 1);
+			System.out.println("while loop 2");
 		}
+		
+		System.out.println(id1+ "   " + id2 + "   " + id3);
 	       
 		ArrayList<Toolcard> list = new ArrayList<Toolcard>();
 	    String query = "SELECT * from toolcard where idtoolcard = "+id1+" OR idtoolcard = "+id2+" OR idtoolcard = "+id3+";";
@@ -35,6 +39,7 @@ public class ToolCardDBA {
 			while(rs.next()) {
 				Toolcard toolcard = new Toolcard(rs.getString("name"), rs.getString("description"),rs.getInt("idtoolcard"),conn);
 				list.add(toolcard);
+				System.out.println("toolcard id is"+ toolcard.getId());
 			}
 			stmt.close();
 	        } catch (SQLException e) {

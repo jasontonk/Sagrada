@@ -22,8 +22,8 @@ public class Main extends Application  {
 		DataBaseConnection db = new DataBaseConnection("com.mysql.jdbc.Driver");
 		MyScene scene = new MyScene(db);
 		primaryStage.setScene(scene);
-		primaryStage.setWidth(800);
-		primaryStage.setHeight(600);
+		primaryStage.setWidth(1600);
+		primaryStage.setHeight(900);
 		primaryStage.setTitle("Sagrada - Projectgroep B");
 		Image icon = new Image("/images/SagradaIcon.png");
 		primaryStage.getIcons().add(icon);

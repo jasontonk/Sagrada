@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import controller.AccountController;
-import controller.GameController;
 import database.DataBaseConnection;
 import database.GameDBA;
 import database.GameDieDBA;
 import database.PublicObjectiveCardDBA;
+import database.ToolCardDBA;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -39,6 +39,7 @@ public class Game {
 	private boolean placedDie;	
 	private GameDieDBA gamedieDBA;
 	private PublicObjectiveCardDBA publicObjectiveCardDBA;
+	private ToolCardDBA toolcardDBA;
 	private SimpleStringProperty currentPlayerName;
 
 	
@@ -52,6 +53,7 @@ public class Game {
 		gameDBA = new GameDBA(conn);
 		gamedieDBA = new GameDieDBA(conn);
 		publicObjectiveCardDBA = new PublicObjectiveCardDBA(conn);
+		toolcardDBA = new ToolCardDBA(conn);
 		offer = new ArrayList<GameDie>();
 		diceInBag = new GameDie[90];
 		usedDice = new ArrayList<GameDie>();
@@ -62,6 +64,11 @@ public class Game {
 	
 	public void addpublicobjectivecards() {
 		getPublicObjectiveCardsOfGame();
+	}
+	
+	
+	public void addToolcards() {
+		getToolcardsOfGame();
 	}
 	
 	public void addGametoDB() {
@@ -165,6 +172,33 @@ public class Game {
 		}
 	}
 
+	
+	private void getToolcardsOfGame() {
+		ArrayList<Toolcard> toolcardsOfGameFromDB = toolcardDBA.get3ToolcardsForAGame(); 
+		if(toolcardsOfGameFromDB.size() == 0) {
+			System.out.println("ik maak nieuwe toolcards aan");
+			ArrayList<Toolcard> toolcardsFromDB = toolcardDBA.getToolcardsFromGame(this);
+			int i = 0;
+			Random r = new Random();
+			while(i < 3) {
+				Toolcard toolcard = toolcardsFromDB.get(r.nextInt(toolcardsFromDB.size()));
+				if(toolcard != null && !toolcards.contains(toolcard)) {
+					toolcards.add(toolcard);
+					i++;
+				}
+			}
+			for (Toolcard toolcard2 : toolcards) {
+				System.out.println("toolcard: "+ toolcard2.getName() + " id= " +toolcard2.getId());
+				toolcardDBA.addToolCardToGame(this, toolcard2);
+			}
+		}
+		else {
+			System.out.println("ik gebruik bestaande toolcards");
+			toolcards = toolcardsOfGameFromDB;
+		}
+	}
+	
+	
 //	public void checkInvites() {
 //		for (Account account : accounts) {
 //
@@ -615,6 +649,16 @@ public class Game {
 		}
 		return publicObjectiveCardIDs;
 	}
+	
+	
+	public int[] getToolcardIDs() {
+		int[] toolcardIDs = new int[3];
+		for (int i = 0; i < toolcards.size(); i++) {
+			toolcardIDs[i] = toolcards.get(i).getId();
+		}
+		return toolcardIDs;
+	}
+
 
 	public boolean isFinishedGame() {
 		return finishedGame;

@@ -198,6 +198,7 @@ public class AccountController {
 			Game game = new Game(connection, false);	
 			game.addGametoDB();
 			game.addpublicobjectivecards();
+			game.addToolcards();
 			game.makedie();
 			Player player = new Player(connection);
 			player.setAccount(account);
@@ -299,6 +300,7 @@ public class AccountController {
 		
 		game.finishGameSetup(this);
 		game.addpublicobjectivecards();
+		game.addToolcards();
 		game.setPersonalPlayer(getAccount());
 		game.getPersonalPlayer().createBoard();
 		for(int x = 0; x < 5; x++) {
