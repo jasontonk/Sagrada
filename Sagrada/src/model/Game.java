@@ -98,7 +98,7 @@ public class Game {
 		for (int i = 0; i < players.size(); i++) {
 			System.out.println("DIT IS PLAYERS.GETACCOUNT " + players.get(i).getAccount().getUsername());
 			System.out.println("DIT IS ACCOUNCONTROLLER.GETACCOUNT: " + account.getUsername());
-			if(players.get(i).getAccount().getUsername().equals(account.getUsername())) {
+			if(players.get(i).getName().equals(account.getUsername())) {
 				System.out.println("PERSONALPLAYER GEVONDEN 1: " + players.get(i));				
 				personalPlayer = players.get(i);
 				System.out.println("PERSONALPLAYER GEVONDEN 2: " + personalPlayer);

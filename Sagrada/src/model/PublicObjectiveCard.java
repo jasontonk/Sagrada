@@ -90,8 +90,8 @@ public class PublicObjectiveCard {
         ArrayList<Integer> valueList = new ArrayList<>();
         for (int x = 0; x < Board.BOARD_SQUARES_HORIZONTAL; x++) { 
             for (int y = 0; y < Board.BOARD_SQUARES_VERTICAL; y++) { 
-                if (board.getBoardField(x, y).hasDie()) { 
-                    int value = board.getBoardField(x, y).getDie().getEyes();
+                if (board.getBoardFieldFromDB(x, y).hasDie()) { 
+                    int value = board.getBoardFieldFromDB(x, y).getDie().getEyes();
                     if (value == val1 || value == val2) { 
                         valueList.add(value);
                     }
@@ -123,9 +123,9 @@ public class PublicObjectiveCard {
         ArrayList<Integer> valueList = new ArrayList<>();
         for (int x = 0; x < Board.BOARD_SQUARES_HORIZONTAL; x++) { 
             for (int y = 0; y < Board.BOARD_SQUARES_VERTICAL; y++) { 
-               System.out.println(""+ board.getBoardField(x, y));
-            	if (board.getBoardField(x, y).hasDie()) { 
-                    valueList.add(board.getBoardField(x, y).getDie().getEyes()); 
+               System.out.println(""+ board.getBoardFieldFromDB(x, y));
+            	if (board.getBoardFieldFromDB(x, y).hasDie()) { 
+                    valueList.add(board.getBoardFieldFromDB(x, y).getDie().getEyes()); 
                 }
             }
         }
@@ -167,8 +167,8 @@ public class PublicObjectiveCard {
         for (int y = 0; y < Board.BOARD_SQUARES_VERTICAL; y++) { 
             ArrayList<Integer> valueList = new ArrayList<>();
             for (int x = 0; x < Board.BOARD_SQUARES_HORIZONTAL; x++) { 
-                if (board.getBoardField(x, y).hasDie()) { 
-                    valueList.add(board.getBoardField(x, y).getDie().getEyes()); 
+                if (board.getBoardFieldFromDB(x, y).hasDie()) { 
+                    valueList.add(board.getBoardFieldFromDB(x, y).getDie().getEyes()); 
                 }
             }
 
@@ -197,8 +197,8 @@ public class PublicObjectiveCard {
         for (int y = 0; y < Board.BOARD_SQUARES_VERTICAL; y++) {
             ArrayList<ModelColor> colorList = new ArrayList<>();
             for (int x = 0; x < Board.BOARD_SQUARES_HORIZONTAL; x++) {
-                if (board.getBoardField(x, y).hasDie()) {
-                    colorList.add(board.getBoardField(x, y).getDie().getColor()); 
+                if (board.getBoardFieldFromDB(x, y).hasDie()) {
+                    colorList.add(board.getBoardFieldFromDB(x, y).getDie().getColor()); 
                 }
             }
 
@@ -226,8 +226,8 @@ public class PublicObjectiveCard {
         ArrayList<ModelColor> colorList = new ArrayList<>();
         for (int x = 0; x < Board.BOARD_SQUARES_HORIZONTAL; x++) { 
             for (int y = 0; y < Board.BOARD_SQUARES_VERTICAL; y++) {
-                if (board.getBoardField(x, y).hasDie()) { 
-                    colorList.add(board.getBoardField(x, y).getDie().getColor()); 
+                if (board.getBoardFieldFromDB(x, y).hasDie()) { 
+                    colorList.add(board.getBoardFieldFromDB(x, y).getDie().getColor()); 
                 }
             }
         }
@@ -271,9 +271,9 @@ public class PublicObjectiveCard {
             ArrayList<Integer> valueList = new ArrayList<>();
             for (int y = 0; y < Board.BOARD_SQUARES_VERTICAL; y++) { 
                 if (board.
-                		getBoardField(x, y)
+                		getBoardFieldFromDB(x, y)
                 		.hasDie()) { 
-                    valueList.add(board.getBoardField(x, y).getDie().getEyes()); 
+                    valueList.add(board.getBoardFieldFromDB(x, y).getDie().getEyes()); 
                 }
             }
 
@@ -302,8 +302,8 @@ public class PublicObjectiveCard {
         for (int x = 0; x < Board.BOARD_SQUARES_HORIZONTAL; x++) { 
             ArrayList<ModelColor> colorList = new ArrayList<>();
             for (int y = 0; y < Board.BOARD_SQUARES_VERTICAL; y++) {
-                if (board.getBoardField(x, y).hasDie()) { 
-                    colorList.add(board.getBoardField(x, y).getDie().getColor()); 
+                if (board.getBoardFieldFromDB(x, y).hasDie()) { 
+                    colorList.add(board.getBoardFieldFromDB(x, y).getDie().getColor()); 
                 }
             }
 
@@ -331,11 +331,11 @@ public class PublicObjectiveCard {
         ArrayList<BoardField> blockedFields = new ArrayList<>();
         for (int y = 0; y < Board.BOARD_SQUARES_VERTICAL; y++) {
             for (int x = 0; x < Board.BOARD_SQUARES_HORIZONTAL; x++) {
-                if (blockedFields.contains(board.getBoardField(x, y))) {
+                if (blockedFields.contains(board.getBoardFieldFromDB(x, y))) {
                     continue; 
                 }
-                if (board.getBoardField(x, y).hasDie()) {
-                    BoardField firstBoardField = board.getBoardField(x, y); 
+                if (board.getBoardFieldFromDB(x, y).hasDie()) {
+                    BoardField firstBoardField = board.getBoardFieldFromDB(x, y); 
                     blockedFields.add(firstBoardField);
 
                     ArrayList<BoardField> nextIteration = new ArrayList<>();
