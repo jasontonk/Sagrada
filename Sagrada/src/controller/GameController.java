@@ -251,7 +251,7 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 	}
 	
 	public Game getGame() {
-		return game;
+		return game; 
 	}
 
 	public GameRoundPlayer getGamePoller() {
