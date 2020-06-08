@@ -509,12 +509,17 @@ public class Game {
 
 
 	public boolean checkPlacementAgainstRules(int x, int y, ModelColor modelColor, int value) {
+		System.out.println("IK KOM HIER");
 		if(!placedDie) {
+			System.out.println("IK KOM HIER 2");
 			if(personalPlayer == currentPlayer) {
+				System.out.println("IK KOM HIER 3");
 				if(currentPlayer.getBoard() == null) {
+					System.out.println("IK KOM HIER 4");
 					currentPlayer.createBoard();
 				}
 				if(currentPlayer.checkPlacementAgainstRules(x, y, modelColor, value)) {
+					System.out.println("IK KOM HIER 5");
 					placedDie = true;
 					return true;
 				}

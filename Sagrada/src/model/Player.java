@@ -358,13 +358,14 @@ public class Player {
 	}
 	
 	public boolean checkPlacementAgainstRules(int x, int y, ModelColor modelColor, int value) {
-		System.out.println("TEST 1 ========= " + board);
-		System.out.println("TEST 1.x ========= " + x);
-		System.out.println("TEST 1.y ========= " + y);
-		System.out.println("TEST 2 ========= " + board.getBoardField(x, y));
-		System.out.println("TEST 3 ========= " + board.checkAll(board.getBoardField(x, y), modelColor, value));
-		System.out.println("TEST 4 ========= " + modelColor);
-		System.out.println("TEST 5 ========= " + value);
+//		System.out.println("TEST 1 ========= " + board);
+//		System.out.println("TEST 1.x ========= " + x);
+//		System.out.println("TEST 1.y ========= " + y);
+//		System.out.println("TEST 2 ========= " + board.getBoardField(x, y));
+//		System.out.println("TEST 3 ========= " + board.checkAll(board.getBoardField(x, y), modelColor, value));
+//		System.out.println("TEST 4 ========= " + modelColor);
+//		System.out.println("TEST 5 ========= " + value);
+		
 		return board.checkAll(board.getBoardField(x, y), modelColor, value);
 	}
 

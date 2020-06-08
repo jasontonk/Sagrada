@@ -4,6 +4,7 @@ import database.DataBaseConnection;
 import database.PatternCardDBA;
 import database.PlayerDBA;
 import database.PlayerFrameFieldDBA;
+import javafx.application.Platform;
 
 public class Board {
 	private PatternCard patternCard;
@@ -508,7 +509,10 @@ public class Board {
 									patternCard.getFieldColor(boardField.getxPos(), boardField.getyPos()) == null && 
 										patternCard.getFieldValue(boardField.getxPos(), boardField.getyPos()) == 0){
 							System.out.println("HIER PLEK 4: ");
-							placeDie(boardField, player.getSelectedDie());
+							
+									placeDie(boardField, player.getSelectedDie());
+
+							
 							return true;
 						}
 					}
