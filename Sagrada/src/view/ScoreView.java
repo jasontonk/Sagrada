@@ -2,7 +2,6 @@ package view;
 
 import java.util.ArrayList;
 
-import controller.CalculateScoreTask;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;

@@ -57,6 +57,7 @@ public class Game {
 		usedDice = new ArrayList<GameDie>();
 		publicObjectiveCards = new ArrayList<PublicObjectiveCard>();
 		currentPlayerName = new SimpleStringProperty();
+		players = new ArrayList<Player>();
 	}
 	
 	public void addpublicobjectivecards() {
@@ -459,7 +460,9 @@ public class Game {
 //	}
 
 	public ArrayList<Player> getPlayers() {
-		players = gameDBA.getPlayersOfGame(this);
+		if(players.size() == 0) {
+			players = gameDBA.getPlayersOfGame(this);
+		}
 		return players;
 	}
 
@@ -552,7 +555,7 @@ public class Game {
 
 	public void setFinishedTurnTrue() {
 		finishedTurn = true;
-		currentPlayer.calculateScore();	
+//		currentPlayer.calculateScore();	
 	}
 
 	public void setPlacedDie(boolean b) {

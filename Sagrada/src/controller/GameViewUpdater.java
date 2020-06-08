@@ -66,6 +66,7 @@ public class GameViewUpdater extends Task<Boolean> {
 				else {
 					try {
 						Thread.sleep(2000);
+//						gameCtrl.getGame().getPersonalPlayer().calculateScore();
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}

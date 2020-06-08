@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-import controller.CalculateScoreTask;
 import database.DataBaseConnection;
 import database.FavorTokenDBA;
 import database.PatternCardDBA;
@@ -98,6 +97,7 @@ public class Player {
 
 	public SimpleIntegerProperty getScore() {
 		score.set(playerDBA.getScoreFromDB(this));
+		System.out.println("DE SCORE VAN DE DATABASE IS: " + score);
 		return score;
 	}
 
@@ -310,13 +310,10 @@ public class Player {
 		playerDBA.setPlayerSeqNumber(NewSequenceNumber, this);
 	}
 	
-	public CalculateScoreTask calculateScoreTask() {
-		CalculateScoreTask cst = new CalculateScoreTask(this);
-        return cst;
-	}
+
 	
 	public int calculateScore() {
-		
+		System.out.println("IK KOM IN CALCULATESCORE");
 		int score = 0;
 		for(int x = 0; x < Board.BOARD_SQUARES_HORIZONTAL; x++) {
 			for(int y = 0; y < Board.BOARD_SQUARES_VERTICAL; y++) {
@@ -350,7 +347,9 @@ public class Player {
             score = score + publicObjectiveCard.calculateScore(board);
         }
 		System.out.println("TESTER8");
-		this.score.set(score);
+		
+//		Platform.r
+			this.score.set(score);
 		
 		playerDBA.setScore(this, score);
 		 

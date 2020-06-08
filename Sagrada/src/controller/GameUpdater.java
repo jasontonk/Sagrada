@@ -66,12 +66,21 @@ public class GameUpdater implements Runnable {
 		updateDicePool();
 		updatePatterncards();
 		updateRountrack();
-		updateScore();
-		updateCurrentPlayer();
+		
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				updateScore();
+				updateCurrentPlayer();
+			}
+		});
+		
 	}
 
 	private void updateCurrentPlayer() {
+		
 		gameCtrl.getGame().setCurrentPlayer(gameCtrl.getGame().getCurrentPlayer());
+		
 	}
 
 	private void updateRountrack() {
