@@ -224,6 +224,7 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 	}
 
 	public void playround() {
+		gameViewUpdater.updateScoreBoard();
 		game.setCurrentPlayer(game.getPersonalPlayer());
 		gameViewUpdater.setPaused(true);
 		gameUpdater.setPaused(true);
@@ -231,11 +232,12 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 		playround.start();
 	}
 	public void stopround() {
+		gameViewUpdater.updateScoreBoard();
 		getGamePoller().setFinishedTurn(true);
 		gameUpdater.setPaused(false);
 		gameViewUpdater.setPaused(false);
-
 	}
+	
 	public Game getGame() {
 		return game;
 	}

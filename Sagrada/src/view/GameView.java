@@ -6,9 +6,11 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 public class GameView extends BorderPane {
 
@@ -32,6 +34,14 @@ public class GameView extends BorderPane {
 		button.setOnMouseClicked(e-> gameController.stopround());
 		Button button2 = new Button("Beurt beginnen");
 		button2.setOnMouseClicked(e-> gameController.playround());
+		
+		HBox currentPlayerText = new HBox();
+		Text text = new Text();
+		text.textProperty().bind(gameController.getGame().getCurrentPlayerName());
+		Label currentPlayerLabel = new Label("De huidige speler = ");
+		currentPlayerText.getChildren().addAll(currentPlayerLabel, text);
+		
+		
 		this.setTop(publicObjectiveCardsView);
 		this.setLeft(patterncardView);
 		this.setRight(dicePoolView);
@@ -41,7 +51,7 @@ public class GameView extends BorderPane {
 		button2.setPadding(new Insets(10));
 		this.setBottom(bottom);
 		VBox center = new VBox();
-		center.getChildren().addAll(button,button2);
+		center.getChildren().addAll(button,button2, currentPlayerText);
 		center.setSpacing(50);
 		this.setCenter(center);
 		this.setPrefSize(1000, 800);

@@ -85,10 +85,15 @@ public class GameViewUpdater extends Task<Boolean> {
 		updateDicePoolView();
 		updatePatterncardsView();
 		updateRoundtrackView();
-		updateScoreBoard();
+		updateCurrentPlayerLabel();
+//		updateScoreBoard();
 		System.out.println();
 	}
 	
+	private void updateCurrentPlayerLabel() {
+		
+	}
+
 	private void updateRoundtrackView() {
 		ArrayList<GameDie> diceOnRoundTrack = new ArrayList<GameDie>();
 		diceOnRoundTrack = gameCtrl.getChangedDiceOnRoundTrack();
@@ -126,7 +131,7 @@ public class GameViewUpdater extends Task<Boolean> {
 		
 	}
 	
-	private void updateScoreBoard() {
+	public void updateScoreBoard() {
 		gameCtrl.getGameView().getScoreView().makeScoreBoard();
 		System.out.println("gelukt 2");
 	}

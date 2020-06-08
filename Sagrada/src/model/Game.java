@@ -11,6 +11,7 @@ import database.GameDBA;
 import database.GameDieDBA;
 import database.PublicObjectiveCardDBA;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 public class Game {
 	private ArrayList<Player> players;
@@ -38,8 +39,9 @@ public class Game {
 	private boolean placedDie;	
 	private GameDieDBA gamedieDBA;
 	private PublicObjectiveCardDBA publicObjectiveCardDBA;
+	private SimpleStringProperty currentPlayerName;
 
-
+	
 	public Game(DataBaseConnection conn, boolean randomgeneratedpatterncards) {
 		
 		this.conn = conn;
@@ -54,6 +56,7 @@ public class Game {
 		diceInBag = new GameDie[90];
 		usedDice = new ArrayList<GameDie>();
 		publicObjectiveCards = new ArrayList<PublicObjectiveCard>();
+		currentPlayerName = new SimpleStringProperty();
 	}
 	
 	public void addpublicobjectivecards() {
@@ -71,6 +74,8 @@ public class Game {
 		this.players = gameDBA.getPlayersOfGame(this);
 		System.out.println("DIT ZIJN DE PLAYERS VAN DE GAME "+ players);
 		currentPlayer = players.get(0);
+		gameDBA.changeCurrentPlayer(currentPlayer.getId(), this);
+		currentPlayerName.set(players.get(0).getName()); 
 		for (int i = 0; i < players.size(); i++) {
 			players.get(i).setSequenceNumber(i+1);
 		}
@@ -320,9 +325,11 @@ public class Game {
 					if(currentPlayer.getSequenceNumber() == players.get(i).getSequenceNumber()) {
 						if(i == players.size()-1) {
 							currentPlayer = players.get(0);
+							currentPlayerName.set(players.get(0).getName());
 						}
 						else {
 							currentPlayer = players.get(i+1);
+							currentPlayerName.set(players.get(i+1).getName());
 						}
 						gameDBA.changeCurrentPlayer(currentPlayer.getId(), this);
 						break;
@@ -334,9 +341,11 @@ public class Game {
 					if(currentPlayer.getSequenceNumber() == players.get(i).getSequenceNumber()) {
 						if(i == 0) {
 							currentPlayer = players.get(players.size()-1);
+							currentPlayerName.set(players.get(players.size()-1).getName());
 						}
 						else {
 							currentPlayer = players.get(i-1);
+							currentPlayerName.set(players.get(i-1).getName());
 						}
 						gameDBA.changeCurrentPlayer(currentPlayer.getId(), this);
 						break;
@@ -376,6 +385,7 @@ public class Game {
 			for (int i = 0; i < players.size(); i++) {
 				if(players.get(i).getSequenceNumber() == 1) {
 					currentPlayer = players.get(i);
+					currentPlayerName.set(players.get(i).getName());
 				}
 			}
 			gameDBA.changeCurrentPlayer(currentPlayer.getId(), this);
@@ -482,14 +492,18 @@ public class Game {
 	}
 	public Player getCurrentPlayer() {
 		currentPlayer = gameDBA.getCurrentPlayer(this);
+		currentPlayerName.set(
+				currentPlayer.getName());
 		if(currentPlayer == null) {
 			currentPlayer = gameDBA.getChallengerOfGameWithID(this.getGameID());
+			currentPlayerName.set(gameDBA.getChallengerOfGameWithID(this.getGameID()).getName());
 		}
 		return currentPlayer;
 	}
 
 	public void setCurrentPlayer(Player player) {
 		currentPlayer = player;	
+		currentPlayerName.set(player.getName());
 		System.out.println("DIT IS NU DE CURRENT PLAYER" +  currentPlayer);
 	}
 
@@ -608,6 +622,14 @@ public class Game {
 
 	public GameDieDBA getGameDieDBA() {
 		return gamedieDBA;
+	}
+	
+	public SimpleStringProperty getCurrentPlayerName() {
+		return currentPlayerName;
+	}
+
+	public void setCurrentPlayerName(SimpleStringProperty currentPlayerName) {
+		this.currentPlayerName = currentPlayerName;
 	}
 
 //	public void setPublicObjectiveCards(ArrayList<PublicObjectiveCard> publicObjectiveCards) {

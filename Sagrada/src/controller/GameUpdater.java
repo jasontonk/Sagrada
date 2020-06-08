@@ -67,13 +67,11 @@ public class GameUpdater implements Runnable {
 		updatePatterncards();
 		updateRountrack();
 		updateScore();
-//		updateCurrentPlayer();
+		updateCurrentPlayer();
 	}
 
 	private void updateCurrentPlayer() {
-		if(gameCtrl.getGame().getCurrentPlayer() == gameCtrl.getGame().getPersonalPlayer()) {
-			gameCtrl.playround();
-		}
+		gameCtrl.getGame().setCurrentPlayer(gameCtrl.getGame().getCurrentPlayer());
 	}
 
 	private void updateRountrack() {

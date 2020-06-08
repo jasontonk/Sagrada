@@ -8,6 +8,7 @@ import database.FavorTokenDBA;
 import database.PatternCardDBA;
 import database.PlayerDBA;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 public class Player {
 	
