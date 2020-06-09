@@ -40,7 +40,7 @@ public class LobbyView extends BorderPane {
 	
 	public LobbyView(AccountController accountController) {
 		this.accountController = accountController;
-        this.setPrefSize(800, 600);
+        this.setPrefSize(800, 600); 
         center = new VBox();
 	}
 
