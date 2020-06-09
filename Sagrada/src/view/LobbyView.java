@@ -68,9 +68,6 @@ public class LobbyView extends BorderPane {
 		}
 	}
 	
-	private void startGame() {
-		accountController.startGame(gameLobby);
-	}
 
 	private VBox makeGamesView() {
 		ScrollPane overviewscroll = new ScrollPane();

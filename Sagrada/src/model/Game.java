@@ -81,9 +81,12 @@ public class Game {
 		
 		this.players = gameDBA.getPlayersOfGame(this);
 		System.out.println("DIT ZIJN DE PLAYERS VAN DE GAME "+ players);
-		currentPlayer = players.get(0);
-		gameDBA.changeCurrentPlayer(currentPlayer.getId(), this);
-		currentPlayerName.set(players.get(0).getName()); 
+		currentPlayer = gameDBA.getCurrentPlayer(this);
+        if(currentPlayer.getId() == 0) {
+            currentPlayer = players.get(0);
+            gameDBA.changeCurrentPlayer(currentPlayer.getId(), this);
+            currentPlayerName.set(players.get(0).getName()); 
+        }
 		for (int i = 0; i < players.size(); i++) {
 			players.get(i).setSequenceNumber(i+1);
 		}
@@ -262,14 +265,10 @@ public class Game {
 		offer = gamedieDBA.getAllRoundDice(this);
 		System.out.println("GRABDICE OFFER = " + offer);
 //		if() {
-		diceInBag = new GameDie[90];
-		gamedieDBA.getAllUnusedDiceOfGame(this).toArray(diceInBag);
-		System.out.println(diceInBag + "DIT IS DE DICEINBAG");
-		
 			while (offer.size() < amountofdice) {
 				for (int i = 0; i < amountofdice; i++) {
 					System.out.println("diceInBag " + diceInBag);
-					GameDie selectedDice = diceInBag[r.nextInt(diceInBag.length - 1)];
+					GameDie selectedDice = diceInBag[r.nextInt(89)];
 					if (!checkDieUsed(selectedDice)) {
 						offer.add(selectedDice);
 						

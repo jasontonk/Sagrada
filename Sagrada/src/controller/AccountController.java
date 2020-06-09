@@ -266,50 +266,55 @@ public class AccountController {
 		myScene.setContentPane(lobbyView.makeAccountPane());
 		System.out.println("========== LOBBYVIEW GERENDERD");
 	}
-
-	public void startGame(ArrayList<Player> gameLobby) {
-		for (Player player : gameLobby) {
-			
-			if(player.getPlayerStatus().equals(PlayerStatus.CHALLENGER)) {
-				
-			}
-			else if(player.getPlayerStatus().equals(PlayerStatus.CHALLENGEE)) {
-				showWarning("game", "Niet elke speler heeft gereageerd op je invite");
-			}
-			else {
-				joinGame(player, player.getGame());
-			}
-		}	
-		
-//		for(int i = 0; i < gameLobby.size(); i++) {
-//			if(gameLobby.get(1).equals(obj))
-//		}
-	}
 	
 	public void joinGame(Player player, Game game) {
-		
-		stopInviteThread();
-		
-		player.setPatternCard(player.getPatternCard());
-		
-		
-		System.out.println("GAME.getid: " + game.getGameID());
-		System.out.println("GAME.getplayers: " + game.getPlayers());
-
-		System.out.println("GAME.getplayers.0: " + game.getPlayers().get(0));
-		
-		game.finishGameSetup(this);
-		game.addpublicobjectivecards();
-		game.addToolcards();
-		game.setPersonalPlayer(getAccount());
-		game.getPersonalPlayer().createBoard();
-		for(int x = 0; x < 5; x++) {
-			for (int y = 0; y < 4; y++) {
-				game.getPersonalPlayer().getBoard().getBoardFieldFromDB(x, y);
+		boolean challengeeInGame = false;
+		boolean refusedPlayer = false;
+		for(Player p : game.getPlayers()) {
+			if(p.getPlayerStatus().equals(PlayerStatus.CHALLENGEE)) {
+				challengeeInGame = true;
+				break;
+			}
+			else if(p.getPlayerStatus().equals(PlayerStatus.REFUSED)) {
+				refusedPlayer = true;
+				break;
 			}
 		}
 		
-		GameController gameController = new GameController(connection, myScene, game, 0);
-		myScene.setContentPane(gameController.getGameView());
+		if(!challengeeInGame) {
+			if(!refusedPlayer){
+
+				stopInviteThread();
+				
+				player.setPatternCard(player.getPatternCard());
+				
+				
+				System.out.println("GAME.getid: " + game.getGameID());
+				System.out.println("GAME.getplayers: " + game.getPlayers());
+		
+				System.out.println("GAME.getplayers.0: " + game.getPlayers().get(0));
+				
+				game.finishGameSetup(this);
+				game.addpublicobjectivecards();
+				game.addToolcards();
+				game.setPersonalPlayer(getAccount());
+				game.getPersonalPlayer().createBoard();
+				for(int x = 0; x < 5; x++) {
+					for (int y = 0; y < 4; y++) {
+						game.getPersonalPlayer().getBoard().getBoardFieldFromDB(x, y);
+					}
+				}
+				
+				GameController gameController = new GameController(connection, myScene, game, 0);
+				myScene.setContentPane(gameController.getGameView());
+			}
+			else {
+				showWarning("game", "Een speler heeft de uitnodiging geweigerd, waardoor de game niet gestart wordt");
+			}
+			
+		}
+		else {
+			showWarning("game", "Niet elke speler heeft gereageerd op de uitnodiging");
+		}	
 	}
 }
