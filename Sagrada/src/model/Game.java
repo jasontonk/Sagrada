@@ -58,6 +58,7 @@ public class Game {
 		diceInBag = new GameDie[90];
 		usedDice = new ArrayList<GameDie>();
 		publicObjectiveCards = new ArrayList<PublicObjectiveCard>();
+		toolcards = new ArrayList<Toolcard>();
 		currentPlayerName = new SimpleStringProperty();
 		players = new ArrayList<Player>();
 	}
@@ -177,9 +178,20 @@ public class Game {
 
 	
 	private void getToolcardsOfGame() {
-		ArrayList<Toolcard> toolcardsOfGameFromDB = toolcardDBA.get3ToolcardsForAGame(); 
+		ArrayList<Toolcard> toolcardsOfGameFromDB = toolcardDBA.getToolcardsFromGame(this);
 		if(toolcardsOfGameFromDB.size() == 0) {
 			System.out.println("ik maak nieuwe toolcards aan");
+			toolcardsOfGameFromDB = toolcardDBA.get3ToolcardsForAGame();
+			
+			for (Toolcard toolcard2 : toolcardsOfGameFromDB) {
+				System.out.println("toolcard: "+ toolcard2.getName() + " id= " +toolcard2.getId());
+				toolcards.add(toolcard2);
+				System.out.println("ik voeg de toolcard aan de db toe");
+				toolcardDBA.addToolCardToGame(this, toolcard2);
+			}
+		}
+		else if(toolcardsOfGameFromDB.size() == 3) {
+			System.out.println("ik gebruik bestaande toolcards");
 			ArrayList<Toolcard> toolcardsFromDB = toolcardDBA.getToolcardsFromGame(this);
 			int i = 0;
 			Random r = new Random();
@@ -187,16 +199,14 @@ public class Game {
 				Toolcard toolcard = toolcardsFromDB.get(r.nextInt(toolcardsFromDB.size()));
 				if(toolcard != null && !toolcards.contains(toolcard)) {
 					toolcards.add(toolcard);
+					System.out.println("de toolcard heeft" + toolcards.get(i));
 					i++;
 				}
 			}
-			for (Toolcard toolcard2 : toolcards) {
-				System.out.println("toolcard: "+ toolcard2.getName() + " id= " +toolcard2.getId());
-				toolcardDBA.addToolCardToGame(this, toolcard2);
-			}
+			
 		}
 		else {
-			System.out.println("ik gebruik bestaande toolcards");
+			System.out.println("nog meer toolcards: " + toolcardsOfGameFromDB.size());
 			toolcards = toolcardsOfGameFromDB;
 		}
 	}
