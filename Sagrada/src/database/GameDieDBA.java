@@ -184,7 +184,7 @@ public class GameDieDBA {
     }
 	
 	public ArrayList<GameDie> getAllavailableDiceOfRound(Game game) {
-        int roundFromGameClass = game.getRound().get();
+        int roundFromGameClass = game.getRoundFromDB();
 		int round;
 		if(roundFromGameClass%2 == 0) {
 			round = roundFromGameClass - 1;
