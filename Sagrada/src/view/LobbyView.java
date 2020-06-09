@@ -20,6 +20,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import model.Account;
 import model.Invitation;
 import model.Player;
@@ -43,12 +44,34 @@ public class LobbyView extends BorderPane {
 		accounts = accountController.getAllAccounts();
         inviteList = new ArrayList<Account>();
         players = accountController.getAllPlayersOfThisAccount();  
-        
-        
+         
 		this.getChildren().clear();
 		HBox accountView = new HBox();  
+	
+		accountView.getChildren().addAll(makeGamesView(), makeInvitationsViewToReceived(), makeInvitationsViewToSend(), sendInvitationsView());
 		
+		return accountView;
+	}
+
+	private void addPlayerToInviteList(CheckBox invite, Account a) {
 		
+		if(a.getUsername().equals(accountController.getAccount().getUsername())) {
+			accountController.showWarning("invite", "Je kunt niet jezelf uitnodingen");
+			return;
+		}
+		else if(invite.isSelected()) {
+			inviteList.add(a);
+		}
+		else {
+			inviteList.remove(a);
+		}
+	}
+	
+	private void startGame() {
+		accountController.startGame(gameLobby);
+	}
+
+	private VBox makeGamesView() {
 		ScrollPane overviewscroll = new ScrollPane();
 		overviewscroll.setMinSize(300, 400);
 		VBox overview = new VBox();
@@ -79,20 +102,51 @@ public class LobbyView extends BorderPane {
 		output.setMinSize(300, 200);
 		output.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 		
-		VBox left = new VBox(overviewscroll, output);
+		VBox left = new VBox();
 		
+		left.getChildren().addAll(drawTitle("Speel overzicht"),overviewscroll, output);
+		
+		return left;
+	}
+	
+	private VBox makeInvitationsViewToSend() {
+		VBox invitations = new VBox();
+		invitations.setMinSize(250, 600);
+		invitations.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, null, null)));
+		
+		invitations.getChildren().add(drawTitle("Received invitations overzicht"));
+		
+		return invitations;
+	}
+	
+	private VBox makeInvitationsViewToReceived() {
 		VBox center = new VBox();
+		
 		center.setMinSize(250, 600);
+		center.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, null, null)));
 		
-		VBox top = new VBox();
+		center.getChildren().add(drawTitle("Invitations to send overzicht"));
 		
-		top.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, null, null)));
-		top.setMinSize(250, 600);
-
+		
+		for(Account a : accounts) {
+			HBox invitations = new HBox();
+			
+			Label username = new Label("Speler: " + a.getUsername());
+            username.setMinWidth(100);
+            
+            Button viewStatsButton = buildButton("Stats");
+            viewStatsButton.setOnAction(e -> showStats(a));
+            
+            invitations.getChildren().addAll(username,viewStatsButton);
+            
+            center.getChildren().add(invitations);
+            
+           
+            }
 
 		Button refresh = new Button("Vernieuw");
 		refresh.setOnAction(e -> accountController.render());
-		top.getChildren().add(refresh);
+		center.getChildren().add(refresh);
 		
 		gameLobby = new ArrayList<Player>();
 		for (Player player : accountController.getInvitePlayerList()) {
@@ -109,15 +163,18 @@ public class LobbyView extends BorderPane {
             
             System.out.println("Speler:" + player.getName());
             playerlist.getChildren().add(username);
-            top.getChildren().add(playerlist);
+            center.getChildren().add(playerlist);
 		}
 		
-		
-		center.getChildren().addAll(top);
-		
+		return center;
+	}
+	
+	private VBox sendInvitationsView() {
 		VBox right = new VBox();
 		right.setMinSize(250, 600);
 		right.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+		
+		right.getChildren().add(drawTitle("Spelers overzicht"));
 		
 		for(Account a : accounts) {
 			HBox playerlist = new HBox();
@@ -141,29 +198,8 @@ public class LobbyView extends BorderPane {
 		inviteButton.setOnAction(e -> accountController.inviteAccounts(inviteList));
 		right.getChildren().add(inviteButton);
 		
-		accountView.getChildren().addAll(left, center, right);
-		return accountView;
+		return right;
 	}
-
-	private void addPlayerToInviteList(CheckBox invite, Account a) {
-		
-		if(a.getUsername().equals(accountController.getAccount().getUsername())) {
-			accountController.showWarning("invite", "Je kunt niet jezelf uitnodingen");
-			return;
-		}
-		else if(invite.isSelected()) {
-			inviteList.add(a);
-		}
-		else {
-			inviteList.remove(a);
-		}
-	}
-	
-	private void startGame() {
-		accountController.startGame(gameLobby);
-	}
-
-	
 
 	private void showStats(Account account) {
 		TextArea stats = new TextArea();
@@ -182,6 +218,15 @@ public class LobbyView extends BorderPane {
 	private Button buildButton(String text) {
 		Button button = new Button(text);
         return button;
+	}
+	
+	private BorderPane drawTitle(String s) {
+		BorderPane titlePane = new BorderPane();
+		Text title = new Text();
+		title.setText(s);
+		titlePane.setPadding(new Insets(5));
+		titlePane.setCenter(title);
+		return titlePane;
 	}
 	
 //	private void setGames() {
