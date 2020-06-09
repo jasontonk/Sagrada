@@ -47,7 +47,7 @@ public class GameRoundPlayer extends Task<Boolean> {
 							
 					}
 					
-					if(gameController.getGame().getRound().get()%2 == 0 && gameController.getGame().getRound().get() != 1 && gameController.getGame().getCurrentPlayer().getSequenceNumber() == 1) {
+					if(gameController.getGame().getRoundFromDB()%2 == 0 && gameController.getGame().getRound().get() != 1 && gameController.getGame().getCurrentPlayer().getSequenceNumber() == 1) {
 						gameController.getGame().addLeftOverDiceToRoundTrack();
 					}
 					gameController.getGame().setNextPlayer();
