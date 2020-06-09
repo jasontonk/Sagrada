@@ -71,7 +71,7 @@ public class GameDie extends Die {
 		gameDieDBA.addGameDie(this, game);
 	}
 	public void setRoundID(Game game) {
-		round = game.getRound().get();
+		round = game.getRoundFromDB();
 		gameDieDBA.addRoundID(this,game);
 	}
 	public void setRoundIDFromDB(int roundID) {

@@ -298,10 +298,6 @@ public class Game {
 		usedDice.addAll(offer);
 	}
 	
-	public void getDicePool() {
-		grabDiceFromBag();
-	}
-	
 	public boolean checkDieUsed(GameDie selectedDice) {
 		if(selectedDice != null) {
 			System.out.println("SELECTEDDIE " + selectedDice);
