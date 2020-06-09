@@ -621,7 +621,9 @@ public class Game {
 		System.out.println("de size van de offer voor: " + offer.size());
 		System.out.println(currentPlayer + "CURRENT PLAYER");
 		System.out.println(currentPlayer.getSequenceNumber() + "CURRENT PLAYER SQNR");
-		if(currentPlayer.getSequenceNumber() == 1 && gameDBA.getCurrentRound(this.getGameID())%2 == 1 && offer.size() == 0) {
+		offer = gamedieDBA.getAllavailableDiceOfRound(this);
+		currentPlayer = gameDBA.getCurrentPlayer(this);
+		if(currentPlayer.getSequenceNumber() == 1 && currentPlayer.getId() == personalPlayer.getId() && gameDBA.getCurrentRound(this.getGameID())%2 == 1 && offer.size() == 0) {
 			System.out.println("ik maak een nieuw offer");
 			grabDiceFromBag();
 		}
