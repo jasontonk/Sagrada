@@ -33,22 +33,28 @@ public class LobbyView extends BorderPane {
     private Pane output; 
     private ArrayList<Player> players;
     private ArrayList<Account> inviteList;
+    private ArrayList<Player> receivedInvitations;
+    private ArrayList<Player> test;
+    private VBox center;
     private ArrayList<Player> gameLobby;
 	
 	public LobbyView(AccountController accountController) {
 		this.accountController = accountController;
         this.setPrefSize(800, 600);
+        center = new VBox();
 	}
 
 	public Pane makeAccountPane() {
 		accounts = accountController.getAllAccounts();
         inviteList = new ArrayList<Account>();
         players = accountController.getAllPlayersOfThisAccount();  
+        receivedInvitations = new ArrayList<Player>();
+        test = new ArrayList<Player>(); 
          
 		this.getChildren().clear();
 		HBox accountView = new HBox();  
 	
-		accountView.getChildren().addAll(makeGamesView(), makeInvitationsViewToReceived(), makeInvitationsViewToSend(), sendInvitationsView());
+		accountView.getChildren().addAll(makeGamesView(), receivecInvitationsView(), makeInvitationsViewToSend(), sendInvitationsView());
 		
 		
 		return accountView;
@@ -112,59 +118,118 @@ public class LobbyView extends BorderPane {
 		invitations.setMinSize(250, 600);
 		invitations.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, null, null)));
 		
-		invitations.getChildren().add(drawTitle("Received invitations overzicht"));
+		invitations.getChildren().add(drawTitle("Invitations to send overzicht"));
 		
 		return invitations;
 	}
 	
-	private VBox makeInvitationsViewToReceived() {
-		VBox center = new VBox();
+	private VBox receivecInvitationsView() {
+		
+		
+		
+		
+		
+		
+		
+		
+//		
+//		for(Account a : accounts) {
+//			HBox invitations = new HBox();
+//			
+//			Label username = new Label("Speler: " + a.getUsername());
+//            username.setMinWidth(100);
+//            
+//            Button viewStatsButton = buildButton("Stats");
+//            viewStatsButton.setOnAction(e -> showStats(a));
+//            
+//            invitations.getChildren().addAll(username,viewStatsButton);
+//            
+//            center.getChildren().add(invitations);
+//            
+//           
+//            }
+//
+//		Button refresh = new Button("Vernieuw");
+//		refresh.setOnAction(e -> accountController.render());
+//		center.getChildren().add(refresh);
+//		
+//		gameLobby = new ArrayList<Player>();
+//		for (Player player : accountController.getReceivedInvitations()) {
+//			if(!gameLobby.contains(player)) {
+//				gameLobby.add(player);
+//				System.out.println(gameLobby);
+//			}
+//		}
+//		
+//		for (Player player : gameLobby) {
+//			HBox playerlist = new HBox();
+//			Label username = new Label("Speler: " + player.getName() + " | Playerstatus: " + player.getPlayerStatus());
+//            username.setMinWidth(100);
+//            
+//            System.out.println("Speler:" + player.getName());
+//            playerlist.getChildren().add(username);
+//            center.getChildren().add(playerlist);
+//		}
+		
+		return center;
+	}
+	
+	public void update() {
+		
+		center.getChildren().clear();
 		
 		center.setMinSize(250, 600);
 		center.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, null, null)));
 		
-		center.getChildren().add(drawTitle("Invitations to send overzicht"));
+		center.getChildren().add(drawTitle("Received invitations overzicht"));
+		
+		ArrayList<Player> tijdelijk = new ArrayList<Player>();
+		
+		tijdelijk = accountController.getReceivedInvitations();
 		
 		
-		for(Account a : accounts) {
-			HBox invitations = new HBox();
-			
-			Label username = new Label("Speler: " + a.getUsername());
-            username.setMinWidth(100);
-            
-            Button viewStatsButton = buildButton("Stats");
-            viewStatsButton.setOnAction(e -> showStats(a));
-            
-            invitations.getChildren().addAll(username,viewStatsButton);
-            
-            center.getChildren().add(invitations);
-            
-           
-            }
-
-		Button refresh = new Button("Vernieuw");
-		refresh.setOnAction(e -> accountController.render());
-		center.getChildren().add(refresh);
-		
-		gameLobby = new ArrayList<Player>();
-		for (Player player : accountController.getInvitePlayerList()) {
-			if(!gameLobby.contains(player)) {
-				gameLobby.add(player);
-				System.out.println(gameLobby);
+		if(receivedInvitations.size() == 0) {
+			if(tijdelijk.size() != 0) {
+				for(int i = 0; i < tijdelijk.size();i++) {
+					receivedInvitations.add(tijdelijk.get(i));
+					test.add(tijdelijk.get(i));
+				}
+			}
+		}else {
+			for(Player p :receivedInvitations) {
+				for(Player t:tijdelijk) {
+					if(p.getGame().getGameID() != t.getGame().getGameID()) {
+						receivedInvitations.add(t);
+						test.add(t);
+					}
+				}
 			}
 		}
 		
-		for (Player player : gameLobby) {
-			HBox playerlist = new HBox();
-			Label username = new Label("Speler: " + player.getName() + " | Playerstatus: " + player.getPlayerStatus());
-            username.setMinWidth(100);
-            
-            System.out.println("Speler:" + player.getName());
-            playerlist.getChildren().add(username);
-            center.getChildren().add(playerlist);
-		}
 		
-		return center;
+		
+		System.out.println("receivedInvitations "+receivedInvitations.size());
+		
+		for(Player p :test ) {
+			
+			HBox playerlist = new HBox();
+			
+		Label username = new Label("Speler: " + p.getName());
+	      username.setMinWidth(100);
+	      
+	      Button accept = buildButton("Accept");
+	      accept.setOnAction(e -> p.setPlayerStatus(PlayerStatus.ACCEPTED));
+	      test.remove(p);
+	      
+	      
+	      Button refuse = buildButton("Refuse");
+	      refuse.setOnAction(e -> p.setPlayerStatus(PlayerStatus.REFUSED));
+	      test.remove(p);
+	      
+	      playerlist.getChildren().addAll(username,accept,refuse);
+	      
+	      center.getChildren().add(playerlist);
+		}
 	}
 	
 	private VBox sendInvitationsView() {
