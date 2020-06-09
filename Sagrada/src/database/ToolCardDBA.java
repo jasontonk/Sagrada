@@ -83,7 +83,6 @@ public class ToolCardDBA {
 	    }
 	
 	public void addToolCardToGame(Game game,Toolcard toolcard) {
-			
 			String query = "INSERT INTO gametoolcard VALUES("+autoToolcardId()+","+toolcard.getId()+","+game.getGameID()+");";
 			try {
 				Statement stmt = conn.getConn().createStatement();

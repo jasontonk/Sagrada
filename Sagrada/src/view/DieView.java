@@ -43,6 +43,8 @@ public class DieView extends BorderPane {
 		this.setMinSize(DIE_SIZE, DIE_SIZE);
 		this.setCenter(die);
 	}
+	
+	
 	public void setDieID(int ID) {
 		this.diePoolID = ID;	
 	}

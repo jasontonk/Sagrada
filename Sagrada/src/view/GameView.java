@@ -20,7 +20,7 @@ public class GameView extends BorderPane {
 	private RoundtrackView roundtrackView;
 	private ScoreView scoreView;
 	private PublicObjectiveCardsView publicObjectiveCardsView;
-	private ToolcardView toolcardView;
+	private ToolcardPoolView toolcardPoolView;
 	
 	public GameView(GameController gameController){
 		this.gameController = gameController;
@@ -31,7 +31,7 @@ public class GameView extends BorderPane {
 		publicObjectiveCardsView = new PublicObjectiveCardsView(
 				gameController.getGame().getPublicObjectiveCardIDs()
 				);
-		toolcardView = new ToolcardView(gameController.getGame().getToolcardIDs());
+		toolcardPoolView = new ToolcardPoolView(gameController.getGame().getToolcardIDs());
 		Button button = new Button("Beurt beëindigen.");//TODO temporary
 		button.setOnMouseClicked(e-> gameController.stopround());
 		Button button2 = new Button("Beurt beginnen");
@@ -45,7 +45,7 @@ public class GameView extends BorderPane {
 		
 		HBox topView = new HBox();
 		topView.getChildren().add(publicObjectiveCardsView);
-		topView.getChildren().add(toolcardView);
+		topView.getChildren().add(toolcardPoolView);
 		
 		this.setTop(topView);
 		this.setLeft(patterncardView);
