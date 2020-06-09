@@ -81,7 +81,7 @@ public class Game {
 		this.players = gameDBA.getPlayersOfGame(this);
 		System.out.println("DIT ZIJN DE PLAYERS VAN DE GAME "+ players);
 		currentPlayer = gameDBA.getCurrentPlayer(this);
-        if(currentPlayer.getId() == 0) {
+        if(currentPlayer == null) {
             currentPlayer = players.get(0);
             gameDBA.changeCurrentPlayer(currentPlayer.getId(), this);
             currentPlayerName.set(players.get(0).getName()); 
