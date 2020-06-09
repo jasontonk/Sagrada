@@ -205,7 +205,7 @@ public class GameDieDBA {
                 GameDie gameDie = new GameDie(getColorFromString(rs.getString("diecolor")),rs.getInt("dienumber"),rs.getInt("eyes"), game, conn, this);
                 gameDie.setAvailable(true);
                 list.add(gameDie);
-            }
+            } 
             stmt.close();
         } catch (Exception e) {
             e.printStackTrace();
