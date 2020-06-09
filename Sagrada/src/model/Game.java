@@ -20,6 +20,7 @@ public class Game {
 	private ArrayList<Toolcard> toolcards;
 	private ArrayList<PublicObjectiveCard> publicObjectiveCards;
 	private GameDie[] diceInBag; // 18 per kleur 5 kleuren
+	private ArrayList<GameDie> usedDice ;
 	private ArrayList<GameDie> offer;
 	private RoundTrack roundTrack;
 	private Chat chat;
@@ -55,6 +56,7 @@ public class Game {
 		toolcardDBA = new ToolCardDBA(conn);
 		offer = new ArrayList<GameDie>();
 		diceInBag = new GameDie[90];
+		usedDice = new ArrayList<GameDie>();
 		publicObjectiveCards = new ArrayList<PublicObjectiveCard>();
 		toolcards = new ArrayList<Toolcard>();
 		currentPlayerName = new SimpleStringProperty();
@@ -81,7 +83,7 @@ public class Game {
 		this.players = gameDBA.getPlayersOfGame(this);
 		System.out.println("DIT ZIJN DE PLAYERS VAN DE GAME "+ players);
 		currentPlayer = gameDBA.getCurrentPlayer(this);
-        if(currentPlayer == null) {
+        if(currentPlayer.getId() == 0) {
             currentPlayer = players.get(0);
             gameDBA.changeCurrentPlayer(currentPlayer.getId(), this);
             currentPlayerName.set(players.get(0).getName()); 
@@ -278,7 +280,17 @@ public class Game {
 					System.out.println("diceInBag " + diceInBag);
 					GameDie selectedDice = diceInBag[r.nextInt(89)];
 					if (!checkDieUsed(selectedDice)) {
-						offer.add(selectedDice);	
+						offer.add(selectedDice);
+						
+						usedDice.add(selectedDice);
+						for (int j = 0; j < usedDice.size(); j++) {
+							System.out.println("TEST 1 " + usedDice);
+							System.out.println("TEST 2 " + usedDice.get(j));
+							System.out.println("TEST 3 " + usedDice.get(j).getRoundID(this));
+							if (usedDice.get(j).getRoundID(this) == 0) {
+								selectedDice.setRoundID(this);
+							}
+						}
 					}
 					else {
 						i--;
@@ -296,6 +308,7 @@ public class Game {
 			offer =	offerfromDB;
 		}
 		System.out.println("de offersize is: "+offer.size());
+		usedDice.addAll(offer);
 	}
 	
 	public boolean checkDieUsed(GameDie selectedDice) {
