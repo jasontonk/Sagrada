@@ -50,6 +50,7 @@ public class LobbyView extends BorderPane {
 	
 		accountView.getChildren().addAll(makeGamesView(), makeInvitationsViewToReceived(), makeInvitationsViewToSend(), sendInvitationsView());
 		
+		
 		return accountView;
 	}
 
