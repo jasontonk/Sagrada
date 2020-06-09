@@ -247,7 +247,7 @@ public class GameDieDBA {
 
 	public ArrayList<GameDie> getAllUnusedDiceOfGame(Game game) {
         ArrayList<GameDie> list = new ArrayList<GameDie>();
-        String query = "SELECT * FROM gamedie WHERE idgame="+game.getGameID()+ " AND round is null;";
+        String query = "SELECT * FROM gamedie WHERE idgame="+game.getGameID()+ " AND roundID is null;";
         try {
         	Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);

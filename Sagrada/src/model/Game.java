@@ -262,7 +262,7 @@ public class Game {
 		offer = gamedieDBA.getAllRoundDice(this);
 		System.out.println("GRABDICE OFFER = " + offer);
 //		if() {
-		diceInBag = null;
+		diceInBag = new GameDie[90];
 		gamedieDBA.getAllUnusedDiceOfGame(this).toArray(diceInBag);
 		System.out.println(diceInBag + "DIT IS DE DICEINBAG");
 		
