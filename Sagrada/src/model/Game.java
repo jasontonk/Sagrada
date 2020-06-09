@@ -687,6 +687,10 @@ public class Game {
 		return gameDBA.getCurrentRound(this.getGameID());
 	}
 
+	public Player getPlayerChallengerOfGameWithID(int gameid) {
+		return gameDBA.getChallengerOfGameWithID(gameid);
+	}
+
 //	public void setPublicObjectiveCards(ArrayList<PublicObjectiveCard> publicObjectiveCards) {
 //		this.publicObjectiveCards = publicObjectiveCards;
 //	}

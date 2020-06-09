@@ -37,6 +37,7 @@ public class AccountController {
 	private AccountDBA accountDBA;
 	private ArrayList<Player> invitePlayerList;
 	private InvitationController invitationController;
+	private ArrayList<Player> players;
 	
 	public AccountController(DataBaseConnection c, MyScene myScene) {
 		this.connection = c;
@@ -55,6 +56,19 @@ public class AccountController {
 		makeInviteThread();
 	}
 	
+	public void setReceivedInvitations(ArrayList<Player> players) {
+		this.players = players;
+	}
+	
+	public ArrayList<Player> getReceivedInvitations() {
+		return players;
+	}
+
+	public LobbyView getLobbyView() {
+		return lobbyView;
+	}
+
+
 
 	public void makeInviteThread() {
 		Thread invitationChecker = new Thread(invitationController);
