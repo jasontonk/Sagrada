@@ -262,10 +262,14 @@ public class Game {
 		offer = gamedieDBA.getAllRoundDice(this);
 		System.out.println("GRABDICE OFFER = " + offer);
 //		if() {
+		diceInBag = null;
+		gamedieDBA.getAllUnusedDiceOfGame(this).toArray(diceInBag);
+		System.out.println(diceInBag + "DIT IS DE DICEINBAG");
+		
 			while (offer.size() < amountofdice) {
 				for (int i = 0; i < amountofdice; i++) {
 					System.out.println("diceInBag " + diceInBag);
-					GameDie selectedDice = diceInBag[r.nextInt(89)];
+					GameDie selectedDice = diceInBag[r.nextInt(diceInBag.length - 1)];
 					if (!checkDieUsed(selectedDice)) {
 						offer.add(selectedDice);
 						

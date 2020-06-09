@@ -244,5 +244,25 @@ public class GameDieDBA {
 			e.printStackTrace();
 		}
 	}
+
+	public ArrayList<GameDie> getAllUnusedDiceOfGame(Game game) {
+        ArrayList<GameDie> list = new ArrayList<GameDie>();
+        String query = "SELECT * FROM gamedie WHERE idgame="+game.getGameID()+ " AND round is null;";
+        try {
+        	Statement stmt = conn.getConn().createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                GameDie gameDie = new GameDie(getColorFromString(rs.getString("diecolor")),rs.getInt("dienumber"),rs.getInt("eyes"), game, conn, this);
+                if(rs.getInt("roundID") != 0) {
+                	gameDie.setRoundIDFromDB(rs.getInt("roundID"));
+                }
+                list.add(gameDie);
+            }
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+	}
 	
 }
