@@ -68,6 +68,7 @@ public class GameUpdater implements Runnable {
 		updateDicePool();
 		updatePatterncards();
 		updateRountrack();
+		checkFinished();
 		
 		Platform.runLater(new Runnable() {
 			@Override
