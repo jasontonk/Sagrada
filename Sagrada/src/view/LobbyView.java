@@ -198,6 +198,7 @@ public class LobbyView extends BorderPane {
 		}else {
 			for(Player p :receivedInvitations) {
 				for(Player t:tijdelijk) {
+					
 					if(p.getGame().getGameID() != t.getGame().getGameID()) {
 						receivedInvitations.add(t);
 						test.add(t);
@@ -208,7 +209,7 @@ public class LobbyView extends BorderPane {
 		
 		
 		
-		System.out.println("receivedInvitations "+receivedInvitations.size());
+		System.out.println("receivedInvitations "+test.size());
 		
 		for(Player p :test ) {
 			

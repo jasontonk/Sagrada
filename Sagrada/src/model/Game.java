@@ -8,6 +8,7 @@ import controller.AccountController;
 import database.DataBaseConnection;
 import database.GameDBA;
 import database.GameDieDBA;
+import database.PlayerDBA;
 import database.PublicObjectiveCardDBA;
 import database.ToolCardDBA;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -38,6 +39,7 @@ public class Game {
 	private boolean placedDie;	
 	private GameDieDBA gamedieDBA;
 	private PublicObjectiveCardDBA publicObjectiveCardDBA;
+	private PlayerDBA playerDBA;
 	private ToolCardDBA toolcardDBA;
 	private SimpleStringProperty currentPlayerName;
 
@@ -53,6 +55,7 @@ public class Game {
 		gamedieDBA = new GameDieDBA(conn);
 		publicObjectiveCardDBA = new PublicObjectiveCardDBA(conn);
 		toolcardDBA = new ToolCardDBA(conn);
+		playerDBA = new PlayerDBA(conn);
 		offer = new ArrayList<GameDie>();
 		diceInBag = new GameDie[90];
 		publicObjectiveCards = new ArrayList<PublicObjectiveCard>();
@@ -529,8 +532,8 @@ public class Game {
 		currentPlayerName.set(
 				currentPlayer.getName());
 		if(currentPlayer == null) {
-			currentPlayer = gameDBA.getChallengerOfGameWithID(this.getGameID());
-			currentPlayerName.set(gameDBA.getChallengerOfGameWithID(this.getGameID()).getName());
+			currentPlayer = gameDBA.getChallengerOfGameWithID(this.getGameID(), this);
+			currentPlayerName.set(gameDBA.getChallengerOfGameWithID(this.getGameID(), this).getName());
 		}
 		return currentPlayer;
 	}
@@ -688,7 +691,11 @@ public class Game {
 	}
 
 	public Player getPlayerChallengerOfGameWithID(int gameid) {
-		return gameDBA.getChallengerOfGameWithID(gameid);
+		return gameDBA.getChallengerOfGameWithID(gameid, this);
+	}
+	
+	public ArrayList<Player> getChallengeePlayers(Account account) {
+		return playerDBA.getChallengeePlayers(account);
 	}
 
 //	public void setPublicObjectiveCards(ArrayList<PublicObjectiveCard> publicObjectiveCards) {

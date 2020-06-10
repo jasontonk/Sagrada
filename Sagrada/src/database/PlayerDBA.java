@@ -207,10 +207,10 @@ public class PlayerDBA {
 		}
 	}
 
-	public Player getPlayerUsingID(int idplayer) {
+	public Player getPlayerUsingID(int idplayer,Game game) {
 		
 
-		Player player = new Player(conn);
+		Player player = new Player(conn,game);
 		String query = "SELECT * FROM player WHERE idplayer = " + idplayer + ";";
 		try {
 			Statement stmt = conn.getConn().createStatement();
@@ -218,7 +218,7 @@ public class PlayerDBA {
 			if (rs.next()) {
 				PatternCardDBA patternCard = new PatternCardDBA(conn);
 				
-				GameDBA game = new GameDBA(conn);
+//				GameDBA gameDBA = new GameDBA(conn);
 				AccountDBA account = new AccountDBA(conn);
 				player.setAccount(account.GetAccountDB(rs.getString("username")));
 				player.setName(rs.getString("username"));
@@ -230,7 +230,7 @@ public class PlayerDBA {
 				player.setScore(rs.getInt("score"));
 				player.setPersonalObjectiveCardColorFromDB(getColorFromString(rs.getString("private_objectivecard_color")));
 //				player.setPatternCard(patternCard.getPatterncardByID(rs.getInt("idpatterncard")));
-				player.setGame(game.getGameByID(rs.getInt("idgame")));
+//				player.setGame(game.getGameByID(rs.getInt("idgame")));
 			}
 			
 			stmt.close();
@@ -253,9 +253,10 @@ public class PlayerDBA {
 			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
-				Player player = new Player(conn);
+				GameDBA g = new GameDBA(conn);
+				Player player = new Player(conn,g.getGameByID(rs.getInt("idgame")));
 				player.setAccount(account);
-				PatternCardDBA patternCard = new PatternCardDBA(conn);
+//				PatternCardDBA patternCard = new PatternCardDBA(conn);
 				player.setName(rs.getString("username"));
 				player.setId(rs.getInt("idplayer"));
 				player.setPlayerStatus(getPlayerStatusFromString(rs.getString("playstatus")));
@@ -263,7 +264,8 @@ public class PlayerDBA {
 				player.setScore(rs.getInt("score"));
 				player.setPersonalObjectiveCardColorFromDB(getColorFromString(rs.getString("private_objectivecard_color")));
 //				player.setPatternCard(patternCard.getPatterncardByID(rs.getInt("idpatterncard")));
-				player.setGame(game.getGameByID(rs.getInt("idgame")));
+//				player.setGame(game.getGameByID(rs.getInt("idgame")));
+				
 				list.add(player);
 			}
 			stmt.close();
@@ -275,7 +277,7 @@ public class PlayerDBA {
 
 	public Player getPlayerUsingSeqnrAndGame(int seqnr, Game game) {
 
-		Player player = new Player(conn);
+		Player player = new Player(conn,game);
 		String query = "SELECT * FROM player WHERE seqnr= " + seqnr + " AND idgame=" + game.getGameID() + ";";
 		try {
 			Statement stmt = conn.getConn().createStatement();
@@ -283,7 +285,7 @@ public class PlayerDBA {
 			if (rs.next()) {
 				PatternCardDBA patternCard = new PatternCardDBA(conn);
 				AccountDBA account = new AccountDBA(conn);
-				GameDBA g = new GameDBA(conn);
+//				GameDBA g = new GameDBA(conn);
 				player.setAccount(account.GetAccountDB(rs.getString("username")));
 				player.setName(rs.getString("username"));
 				player.setId(rs.getInt("idplayer"));
@@ -292,7 +294,7 @@ public class PlayerDBA {
 				player.setScore(rs.getInt("score"));
 				player.setPersonalObjectiveCardColorFromDB(getColorFromString(rs.getString("private_objectivecard_color")));
 //				player.setPatternCard(patternCard.getPatterncardByID(rs.getInt("idpatterncard")));
-				player.setGame(g.getGameByID(rs.getInt("idgame")));
+//				player.setGame(g.getGameByID(rs.getInt("idgame")));
 			}
 			stmt.close();
 		} catch (Exception e) {
@@ -381,9 +383,10 @@ public class PlayerDBA {
 			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
-				Player player = new Player(conn);
+				GameDBA g = new GameDBA(conn);
+				Player player = new Player(conn,g.getGameByID(rs.getInt("idgame")));
 				player.setAccount(account);
-				PatternCardDBA patternCard = new PatternCardDBA(conn);
+//				PatternCardDBA patternCard = new PatternCardDBA(conn);
 				player.setName(rs.getString("username"));
 				player.setId(rs.getInt("idplayer"));
 				player.setPlayerStatus(getPlayerStatusFromString(rs.getString("playstatus")));
@@ -391,7 +394,7 @@ public class PlayerDBA {
 				player.setScore(rs.getInt("score"));
 				player.setPersonalObjectiveCardColorFromDB(getColorFromString(rs.getString("private_objectivecard_color")));
 //				player.setPatternCard(patternCard.getPatterncardByID(rs.getInt("idpatterncard")));
-				player.setGame(game.getGameByID(rs.getInt("idgame")));
+//				player.setGame(game.getGameByID(rs.getInt("idgame")));
 				list.add(player);
 			}
 			stmt.close();
@@ -399,6 +402,24 @@ public class PlayerDBA {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	public Player getChallenger(Account account,Game game) {
+		Player player = new Player(conn,game);
+		String query = "SELECT idplayer FROM player WHERE username = " + account.getUsername() + " AND playstatus = 'CHALLENGER';";
+		try {
+				Statement stmt = conn.getConn().createStatement();
+				ResultSet rs = stmt.executeQuery(query);
+				while (rs.next()) {
+	                PlayerDBA playerDBA = new PlayerDBA(conn);
+					player = playerDBA.getPlayerUsingID(rs.getInt("idplayer"), game);
+	            }
+				stmt.close();
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return player;
 	}
 
 	public int getScoreFromDB(Player player) {
@@ -419,8 +440,8 @@ public class PlayerDBA {
 
 
 
-	public Player getPlayerById(int id) {
-        Player player = new Player(conn);
+	public Player getPlayerById(int id,Game game) {
+        Player player = new Player(conn,game);
         String query = "SELECT * FROM player WHERE idplayer = " + id + ";";
         
         try {

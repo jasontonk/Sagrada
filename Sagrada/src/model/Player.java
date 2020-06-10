@@ -57,12 +57,12 @@ public class Player {
 //	}
 
 
-	public Player(DataBaseConnection c) {
+	public Player(DataBaseConnection c, Game game) {
 		connection = c;
 		playerDBA = new PlayerDBA(c);
 		patternCard = new PatternCard(c);
 		this.setPlayerStatus(PlayerStatus.CHALLENGEE);
-		
+		this.game = game;
 		this.setPersonalObjectiveCardColor();
 		System.out.println("De personal objectivecard color van " +name+ " is: "+personalObjectiveCardColor);	
 		score = new SimpleIntegerProperty();
@@ -115,9 +115,9 @@ public class Player {
 	}
 
 	public PlayerStatus getPlayerStatus() {
-		System.out.println("Getting playerstatus of: " + this.getName());
-		System.out.println("getplayerusingid" + (playerDBA.getPlayerUsingID(this.getId())).getAccount());
-		playerStatus = playerDBA.getPlayerStatusFromDB(playerDBA.getPlayerUsingID(this.getId())); 
+//		System.out.println("Getting playerstatus of: " + this.getName());
+		System.out.println("getplayerusingid" + (playerDBA.getPlayerUsingID(this.getId(), game)).getAccount());
+		playerStatus = playerDBA.getPlayerStatusFromDB(playerDBA.getPlayerUsingID(this.getId(), game)); 
 		System.out.println("Playerstatus is: " + playerStatus);
 		return playerStatus;
 	}

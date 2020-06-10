@@ -214,7 +214,7 @@ public class AccountController {
 			game.addpublicobjectivecards();
 			game.addToolcards();
 			game.makedie();
-			Player player = new Player(connection);
+			Player player = new Player(connection,game);
 			player.setAccount(account);
 			player.setName(account.getUsername());
 			player.setGame(game);
@@ -235,7 +235,7 @@ public class AccountController {
 			invitePlayerList.add(player);
 			
 			for (Account account : inviteList) {
-				Player p = new Player(connection);
+				Player p = new Player(connection,game);
 				p.setAccount(account);
 				p.setName(account.getUsername());
 				p.setGame(game);

@@ -223,15 +223,15 @@ public class GameDBA {
 		}
 		return name;
 	}
-	public Player getChallengerOfGameWithID(int gameID) {
-		Player player = new Player(conn);
+	public Player getChallengerOfGameWithID(int gameID,Game game) {
+		Player player = new Player(conn,game);
 		String query = "SELECT idplayer FROM player WHERE idgame = " + gameID + " AND playstatus = 'CHALLENGER';";
 		try {
 				Statement stmt = conn.getConn().createStatement();
 				ResultSet rs = stmt.executeQuery(query);
 				if (rs.next()) {
 	                PlayerDBA playerDBA = new PlayerDBA(conn);
-					player = playerDBA.getPlayerUsingID(rs.getInt("idplayer"));
+					player = playerDBA.getPlayerUsingID(rs.getInt("idplayer"), game);
 	            }
 				stmt.close();
 			
@@ -240,6 +240,7 @@ public class GameDBA {
 		}
 		return player;
 	}
+	
 	
 	 public ArrayList<Player> getPlayersOfGame(Game game) {
 	        PlayerDBA playerDBA = new PlayerDBA(conn);
@@ -251,7 +252,7 @@ public class GameDBA {
 				ResultSet rs = stmt.executeQuery(query);
 	            while (rs.next()) {
 	                int playerId = rs.getInt("idplayer");
-	                Player player = playerDBA.getPlayerById(playerId);
+	                Player player = playerDBA.getPlayerById(playerId,game);
 	                player.setGame(game);
 	                players.add(player);
 	            }
