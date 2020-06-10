@@ -129,7 +129,7 @@ public class Player {
 		this.playerStatus = playerStatus;
 		playerDBA.setPlayerStatus(this, playerStatus);
 	}
-
+ 
 	public boolean isCurrentPlayer() {
 		return isCurrentPlayer;
 	}
