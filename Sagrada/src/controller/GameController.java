@@ -13,7 +13,9 @@ import model.GameDie;
 import model.ModelColor;
 import model.PatternCard;
 import model.Player;
+import view.FinishedGameView;
 import view.GameView;
+import view.LobbyView;
 import view.MyScene;
 import view.PatterncardSelectionView;
 import view.PatterncardView;
@@ -28,6 +30,7 @@ public class GameController {
 	private DieController dieController;
 	private PatterncardController patterncardController;
 	private RoundtrackController roundtrackController;
+	private AccountController accountController;
 	private DataBaseConnection conn;
 	private MyScene myScene;
 
@@ -83,11 +86,12 @@ public class GameController {
 //
 //	}
 	
-	public GameController(DataBaseConnection conn, MyScene ms, Game game, int niks) {
+	public GameController(DataBaseConnection conn, MyScene ms, Game game, AccountController accountController) {
 		this.conn= conn;
 		myScene = ms;
 		this.game = game;
 		
+		this.accountController = accountController;
 		
 		System.out.println("loading...20%");
 		dieController = new DieController(conn, this);
@@ -287,6 +291,17 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 	public void viewPatternCardSelection() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void setFinishedGameView() {
+		gameViewUpdater.setRunning(false); 
+		gameUpdater.setRunning(false);
+		gameRoundPlayer.setRunning(false);
+		myScene.setContentPane(new FinishedGameView(this));
+	}
+
+	public void setLobbyView() {
+		myScene.setContentPane(accountController.getLobbyView());
 	}
 
 }

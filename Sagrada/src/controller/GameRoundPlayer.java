@@ -24,7 +24,7 @@ public class GameRoundPlayer extends Task<Boolean> {
 		isRunning = true;
 		while(isRunning) {
 			if(gameController.getGame().isFinishedGame()) {
-				
+				gameController.setFinishedGameView();
 			}
 			else {
 				if(!isPaused) {
@@ -86,5 +86,8 @@ public class GameRoundPlayer extends Task<Boolean> {
 		isPaused = b;
 	}
 	
+	public void setRunning(boolean isRunning) {
+		this.isRunning = isRunning;
+	}
 	
 }

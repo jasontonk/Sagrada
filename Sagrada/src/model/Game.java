@@ -339,6 +339,7 @@ public class Game {
 			System.out.println("still your turn");
 	}
 	public void setNextPlayer() {
+		if(!(getRoundFromDB() >= 20 && getCurrentPlayer().getSequenceNumber() == 1)) {
 			boolean isClockwise = gameDBA.isRoundClockwise(this);
 			
 			if(currentPlayer.getSequenceNumber() == players.size() && isClockwise) {
@@ -388,7 +389,12 @@ public class Game {
 				}
 			} 
 			System.out.println("next player : " + currentPlayer.getId());
+		}
+		else {
+			finishGame();
+		}
 	}
+	
 	public void addLeftOverDiceToRoundTrack() {
 		for (int i = 0; i < offer.size(); i++) {
 			gamedieDBA.addDieToRoundTrack(offer.get(i), this, round.get()/2);//TODO check if right
@@ -399,7 +405,12 @@ public class Game {
 
 	public void changeSequenceNumber() {
 		System.out.println("stap 1");
-		if(currentPlayer.getSequenceNumber() == 1 && !gameDBA.isRoundClockwise(this)) {
+	if(currentPlayer.getSequenceNumber() == 1 && !gameDBA.isRoundClockwise(this)) {
+			
+		if(getRoundFromDB() >= 20 && this.getCurrentPlayer().getSequenceNumber() == 1) {
+			finishGame();
+		}
+		else {
 			System.out.println("stap 2");
 			for (int i = 0; i < players.size(); i++) {
 				if(players.get(i).getSequenceNumber() == players.size()) {
@@ -411,12 +422,7 @@ public class Game {
 					players.get(i).setSequenceNumber(players.get(i).getSequenceNumber()+1);
 				}
 			}
-			if(round.get() >= 20) {
-				System.out.println("Hier wordt de game beëindigd");
-				finishedGame = true;
 				
-				
-			}
 			for (int i = 0; i < players.size(); i++) {
 				if(players.get(i).getSequenceNumber() == 1) {
 					currentPlayer = players.get(i);
@@ -424,7 +430,14 @@ public class Game {
 				}
 			}
 			gameDBA.changeCurrentPlayer(currentPlayer.getId(), this);
+			}
 		}
+	}
+
+	public void finishGame() {
+		System.out.println("Hier wordt de game beëindigd");
+		finishedGame = true;
+		personalPlayer.setPlayerStatus(PlayerStatus.FINISHED);
 	}
 
 	private boolean getFinishedTurn() {
