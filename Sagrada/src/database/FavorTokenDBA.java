@@ -16,15 +16,17 @@ private DataBaseConnection conn;
 		this.conn = c;
 	}
 	
-	public ArrayList<FavorToken> getFavortokensOfPlayer(int playerid, Player player) {
+	public ArrayList<FavorToken> getFavortokensOfPlayer(Player player) {
 		ArrayList<FavorToken> list = new ArrayList<FavorToken>();
+		int playerid = player.getId();
 		String query = "SELECT * FROM gamefavortoken WHERE idplayer= "+playerid+" AND gametoolcard IS NULL;";
 		
 		try {
 			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
-                FavorToken favorToken = new FavorToken(rs.getInt("idfavortoken"), player, rs.getInt("idgame"), conn); //edited to fix error
+//                FavorToken favorToken = new FavorToken(rs.getInt("idfavortoken"), player, rs.getInt("idgame"), conn); //edited to fix error
+                FavorToken favorToken = new FavorToken(player, rs.getInt("idgame"), conn); //edited to fix error
                 list.add(favorToken);
             }
 			stmt.close();
@@ -53,10 +55,10 @@ private DataBaseConnection conn;
 		return favorTokenId;
 	}
 	
-	public boolean addFavorToken(int gameid) {
+	public boolean addFavorToken(int gameid, int playerid) {
 		
 		int favortokenid = autoIdFavorToken();
-		String query = "INSERT INTO gamefavortoken ((idfavortoken, idgame) VALUES("+favortokenid+","+gameid+");";
+		String query = "INSERT INTO gamefavortoken (idfavortoken, idgame, idplayer) VALUES("+favortokenid+","+gameid+","+playerid+");";
 		
 		try {
 			Statement stmt = conn.getConn().createStatement();
@@ -82,23 +84,23 @@ private DataBaseConnection conn;
 			}
 	}
 	
-	public ArrayList<FavorToken> getUnusedFavorTokensOfGame(int gameid){//removed game to fix error
-		ArrayList<FavorToken> list = new ArrayList<>();
-		String query = "SELECT * FROM gamefavortoken WHERE idgame= "+gameid+" AND idplayer IS NULL;";
-		try {
-			Statement stmt = conn.getConn().createStatement();
-			ResultSet rs = stmt.executeQuery(query);
-			while (rs.next()) {
-                FavorToken favorToken = new FavorToken(rs.getInt("idfavortoken"), gameid, conn);// changed to add gameid and conn to constructor
-                favorToken.setGameId(gameid); //changed to setgameID to fix error
-                list.add(favorToken);
-            }
-			stmt.close();
-		}catch (SQLException e) {
-				e.printStackTrace();
-		}
-		return list;
-	}
+//	public ArrayList<FavorToken> getUnusedFavorTokensOfGame(int gameid){//removed game to fix error
+//		ArrayList<FavorToken> list = new ArrayList<>();
+//		String query = "SELECT * FROM gamefavortoken WHERE idgame= "+gameid+" AND idplayer IS NULL;";
+//		try {
+//			Statement stmt = conn.getConn().createStatement();
+//			ResultSet rs = stmt.executeQuery(query);
+//			while (rs.next()) {
+//                FavorToken favorToken = new FavorToken(rs.getInt("idfavortoken"), gameid, conn);// changed to add gameid and conn to constructor
+//                favorToken.setGameId(gameid); //changed to setgameID to fix error
+//                list.add(favorToken);
+//            }
+//			stmt.close();
+//		}catch (SQLException e) {
+//				e.printStackTrace();
+//		}
+//		return list;
+//	}
 	
 	public void setFavortokensForToolCard(int playerid, int gametoolcard, int round, int idfavortoken) {
 		String query = "UPDATE gamefavortoken SET idplayer= "+playerid+", gametoolcard= "+gametoolcard+", round= "+round+" WHERE idfavortoken="+idfavortoken+";";

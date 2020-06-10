@@ -34,6 +34,7 @@ public class Player {
 	private DataBaseConnection connection;
 	
 	private PlayerDBA playerDBA ;
+	private FavorTokenDBA favorTokenDBA;
 	
 //	public Player(DataBaseConnection c, Account account, Game game, PlayerStatus playerStatus) {
 //		connection = c;
@@ -60,6 +61,7 @@ public class Player {
 	public Player(DataBaseConnection c, Game game) {
 		connection = c;
 		playerDBA = new PlayerDBA(c);
+		favorTokenDBA = new FavorTokenDBA(c);
 		patternCard = new PatternCard(c);
 		this.setPlayerStatus(PlayerStatus.CHALLENGEE);
 		this.game = game;
@@ -177,7 +179,7 @@ public class Player {
 
 	public ArrayList<FavorToken> getFavorTokens() {
 		FavorTokenDBA favorTokenDBA = new FavorTokenDBA(connection);
-		this.favorTokens = favorTokenDBA.getFavortokensOfPlayer(getId(), this);
+		this.favorTokens = favorTokenDBA.getFavortokensOfPlayer(this);
 		return favorTokens;
 	}
 
@@ -240,16 +242,36 @@ public class Player {
 	* Assign favor tokens of a game to the player
 	*/
 	public void assignFavorTokens() {
-		FavorTokenDBA favorTokenDBA = new FavorTokenDBA(connection);
-		ArrayList<FavorToken> allUnusedGameFavorTokens = favorTokenDBA.getUnusedFavorTokensOfGame(game.getGameID());
-		ArrayList<FavorToken> favorTokens = new ArrayList<>();
-		for(int i = 0; i < patternCard.getDifficulty(); i++) {
-			FavorToken favorToken = allUnusedGameFavorTokens.get(0);
-			allUnusedGameFavorTokens.remove(0);
-			favorTokenDBA.setFavortokenForPlayer(favorToken.getId(), this.getId());
-			favorTokens.add(favorToken);
+//		FavorTokenDBA favorTokenDBA = new FavorTokenDBA(connection);
+//		ArrayList<FavorToken> allUnusedGameFavorTokens = favorTokenDBA.getUnusedFavorTokensOfGame(game.getGameID());
+//		System.out.println("favortoken 1");
+//		ArrayList<FavorToken> favorTokens = new ArrayList<>();
+//		System.out.println("favortoken 2");
+//		System.out.println(patternCard.getDifficulty());
+//		for(int i = 0; i < patternCard.getDifficulty(); i++) {
+//			FavorToken favorToken = allUnusedGameFavorTokens.get(0);
+//			allUnusedGameFavorTokens.remove(0);
+//			System.out.println("favortoken 3");
+//			favorTokenDBA.setFavortokenForPlayer(favorToken.getId(), this.getId());
+//			favorTokens.add(favorToken);
+//		}
+//		this.favorTokens = favorTokens;
+//		System.out.println("favortoken 4");
+//		for (FavorToken favorToken : favorTokens) {
+//			System.out.println("Ik hoor bij: " + favorToken.getPlayer());
+//		}
+		favorTokens = new ArrayList<FavorToken>();
+		favorTokens = favorTokenDBA.getFavortokensOfPlayer(this);
+		
+		if(favorTokens.size() == 0) {
+			for (int i = 0; i < patternCard.getDifficulty(); i++) {
+				favorToken = new FavorToken(this, game.getGameID(), connection);
+				favorToken.addFavorTokenToDB();
+				favorTokens.add(favorToken);
+				System.out.println("favortoken added");
+			}
 		}
-		this.favorTokens = favorTokens;
+	
 	}
 	
 	public void setNextSequenceNumber() {

@@ -6,7 +6,7 @@ import database.FavorTokenDBA;
 
 public class FavorToken {
 
-	private int id;
+//	private int id;
 	private int gameId;
 	private Player player;
 	private Toolcard toolcard;
@@ -14,42 +14,42 @@ public class FavorToken {
 
 	// Partial constructor, generate favor tokens of player.
 
-	public FavorToken(int id, Player player, int gameid, DataBaseConnection c) {
-
-		this.id = id;
-
+	public FavorToken(Player player, int gameid, DataBaseConnection c) {
 		this.player = player;
-
 		gameId = gameid;
-
 		favorTokenDB = new FavorTokenDBA(c);
-
+		System.out.println("favortoken hoort bij" + gameid);
+		
 	}
 	
 	public FavorToken(int id, int gameId, DataBaseConnection c) {//added constructor to fix error in FaverTokenDBA
-		this.id = id;
+//		this.id = id;
 		this.gameId = gameId;
 		favorTokenDB = new FavorTokenDBA(c);
+	}
+	
+	
+	public void addFavorTokenToDB() {
+		favorTokenDB.addFavorToken(gameId, player.getId());
 	}
 
 	// Return the id of FavorToken.
 
-	public int getId() {
-		return id;
-	}
+//	public int getId() {
+//		return id;
+//	}
 
 	// Return the game of player.
 
 	public int getGameId() {
-
 		return gameId;
 	}
 
 	// Set the game of is FavorToken is located.
 
-	public void setGameId(int gameid) {
-		favorTokenDB.addFavorToken(gameid);
-	}
+//	public void setGameId(int gameid) {
+//		favorTokenDB.addFavorToken(gameid);
+//	}
 
 	// Return the player of this FavorToken.
 
