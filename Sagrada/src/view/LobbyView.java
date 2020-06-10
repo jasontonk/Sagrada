@@ -21,6 +21,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
 import model.Account;
 import model.Invitation;
 import model.Player;
@@ -217,15 +218,24 @@ public class LobbyView extends BorderPane {
 					
 			Label username = new Label("Speler: " + p.getName());
 		    username.setMinWidth(100);
-		      
-		     Button accept = buildButton("Accept");
-		     accept.setOnAction(e -> p.setPlayerStatus(PlayerStatus.ACCEPTED));
-		     test.remove(p);
-		      
-		      
+		    ArrayList<Player> players = p.getGame().getPlayers();
+		     
+		    Button accept = buildButton("Accept"); 
 		      Button refuse = buildButton("Refuse");
-		      refuse.setOnAction(e -> p.setPlayerStatus(PlayerStatus.REFUSED));
-		      test.remove(p);
+		     for (int i = 0; i < players.size(); i++) {
+		    	 final int index = i;
+		    	 if(players.get(i).getName().equals(accountController.getAccount().getUsername())){
+		    		 accept.setOnAction(e -> players.get(index).setPlayerStatus(PlayerStatus.ACCEPTED));
+				     refuse.setOnAction(e -> players.get(index).setPlayerStatus(PlayerStatus.REFUSED));
+//				     test.remove(p);
+				     break;
+		    	 }
+		     }
+		     
+		      
+		      
+
+
 		      
 		      playerlist.getChildren().addAll(username,accept,refuse);
 		      
