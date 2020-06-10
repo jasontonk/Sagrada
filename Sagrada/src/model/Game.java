@@ -405,7 +405,16 @@ public class Game {
 
 	public void changeSequenceNumber() {
 		System.out.println("stap 1");
-		if(currentPlayer.getSequenceNumber() == 1 && !gameDBA.isRoundClockwise(this)) {
+	if(currentPlayer.getSequenceNumber() == 1 && !gameDBA.isRoundClockwise(this)) {
+			
+		if(getRoundFromDB() >= 20 && this.getCurrentPlayer().getSequenceNumber() == 1) {
+			System.out.println("Hier wordt de game beëindigd");
+			finishedGame = true;
+			for (Player p : players) {
+				p.setPlayerStatus(PlayerStatus.FINISHED);
+			}
+		}
+		else {
 			System.out.println("stap 2");
 			for (int i = 0; i < players.size(); i++) {
 				if(players.get(i).getSequenceNumber() == players.size()) {
@@ -417,13 +426,7 @@ public class Game {
 					players.get(i).setSequenceNumber(players.get(i).getSequenceNumber()+1);
 				}
 			}
-			if(getRoundFromDB() >= 20 && this.getCurrentPlayer().getSequenceNumber() == 1) {
-				System.out.println("Hier wordt de game beëindigd");
-				finishedGame = true;
-				for (Player p : players) {
-					p.setPlayerStatus(PlayerStatus.FINISHED);
-				}
-			}
+				
 			for (int i = 0; i < players.size(); i++) {
 				if(players.get(i).getSequenceNumber() == 1) {
 					currentPlayer = players.get(i);
@@ -431,6 +434,7 @@ public class Game {
 				}
 			}
 			gameDBA.changeCurrentPlayer(currentPlayer.getId(), this);
+			}
 		}
 	}
 
