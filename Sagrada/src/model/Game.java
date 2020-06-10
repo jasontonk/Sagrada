@@ -391,7 +391,7 @@ public class Game {
 			System.out.println("next player : " + currentPlayer.getId());
 		}
 		else {
-			changeSequenceNumber();
+			finishGame();
 		}
 	}
 	
@@ -408,11 +408,7 @@ public class Game {
 	if(currentPlayer.getSequenceNumber() == 1 && !gameDBA.isRoundClockwise(this)) {
 			
 		if(getRoundFromDB() >= 20 && this.getCurrentPlayer().getSequenceNumber() == 1) {
-			System.out.println("Hier wordt de game beëindigd");
-			finishedGame = true;
-			for (Player p : players) {
-				p.setPlayerStatus(PlayerStatus.FINISHED);
-			}
+			finishGame();
 		}
 		else {
 			System.out.println("stap 2");
@@ -436,6 +432,12 @@ public class Game {
 			gameDBA.changeCurrentPlayer(currentPlayer.getId(), this);
 			}
 		}
+	}
+
+	public void finishGame() {
+		System.out.println("Hier wordt de game beëindigd");
+		finishedGame = true;
+		personalPlayer.setPlayerStatus(PlayerStatus.FINISHED);
 	}
 
 	private boolean getFinishedTurn() {

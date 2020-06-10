@@ -8,6 +8,7 @@ import javafx.concurrent.Task;
 import model.GameDie;
 import model.ModelColor;
 import model.Player;
+import model.PlayerStatus;
 
 public class GameViewUpdater extends Task<Boolean> {
 	private GameController gameCtrl;
@@ -137,5 +138,10 @@ public class GameViewUpdater extends Task<Boolean> {
 		System.out.println("gelukt 2");
 	}
 
+	public void checkFinishedGame(){
+		if(gameCtrl.getGame().getPersonalPlayer().getPlayerStatus().equals(PlayerStatus.FINISHED)) {
+			gameCtrl.setFinishedGameView();
+		}
+	}
 
 }

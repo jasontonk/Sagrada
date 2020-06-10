@@ -86,5 +86,8 @@ public class GameRoundPlayer extends Task<Boolean> {
 		isPaused = b;
 	}
 	
+	public void setRunning(boolean isRunning) {
+		this.isRunning = isRunning;
+	}
 	
 }

@@ -6,6 +6,7 @@ import javafx.application.Platform;
 import model.GameDie;
 import model.ModelColor;
 import model.Player;
+import model.PlayerStatus;
 
 public class GameUpdater implements Runnable {
 
@@ -17,12 +18,13 @@ public class GameUpdater implements Runnable {
 	public GameUpdater(GameController gamecontroller) {
 		diceOnRoundTrack = new ArrayList<GameDie>();
 		gameCtrl = gamecontroller;
-		isRunning = true;
+		
 		isPaused = false;
 	}
 	
 	@Override
 	public void run() {
+		isRunning = true;
 		while(isRunning){
 			if(gameCtrl.getGame().isFinishedGame()) {
 				isRunning = false;
@@ -111,6 +113,12 @@ public class GameUpdater implements Runnable {
 		
 		for (Player p : gameCtrl.getGame().getPlayers()) {
 			p.getScore();
+		}
+	}
+	
+	private void checkFinished() {
+		if(gameCtrl.getGame().getCurrentPlayer().getPlayerStatus().equals(PlayerStatus.FINISHED)) {
+			gameCtrl.getGame().finishGame();
 		}
 	}
 }

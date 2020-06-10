@@ -319,7 +319,7 @@ public class AccountController {
 					}
 				}
 				
-				GameController gameController = new GameController(connection, myScene, game, 0);
+				GameController gameController = new GameController(connection, myScene, game, this);
 				myScene.setContentPane(gameController.getGameView());
 			}
 			else {
