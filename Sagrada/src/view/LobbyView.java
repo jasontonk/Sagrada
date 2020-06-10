@@ -150,17 +150,17 @@ public class LobbyView extends BorderPane {
 //           
 //            }
 //
-//		Button refresh = new Button("Vernieuw");
-//		refresh.setOnAction(e -> accountController.render());
-//		center.getChildren().add(refresh);
-//		
-//		gameLobby = new ArrayList<Player>();
-//		for (Player player : accountController.getReceivedInvitations()) {
-//			if(!gameLobby.contains(player)) {
-//				gameLobby.add(player);
-//				System.out.println(gameLobby);
-//			}
-//		}
+		Button refresh = new Button("Vernieuw");
+		refresh.setOnAction(e -> accountController.render());
+		center.getChildren().add(refresh);
+		
+		gameLobby = new ArrayList<Player>();
+		for (Player player : accountController.getReceivedInvitations()) {
+			if(!gameLobby.contains(player)) {
+				gameLobby.add(player);
+				System.out.println(gameLobby);
+			}
+		}
 //		
 //		for (Player player : gameLobby) {
 //			HBox playerlist = new HBox();
