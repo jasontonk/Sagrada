@@ -450,7 +450,7 @@ public class Game {
 			for (int i = 0; i < 18; i++) {
 				diceInBag[i+35] = new GameDie(ModelColor.YELLOW, i+1, r.nextInt(6)+1, this, conn, gamedieDBA);
 				diceInBag[i+35].addDieToDB(this);
-				diceInBag[i+35].setEyes(this);
+				diceInBag[i+35].setEyes(this); 
 			}
 			for (int i = 0; i < 18; i++) {
 				diceInBag[i+53] = new GameDie(ModelColor.PURPLE, i+1, r.nextInt(6)+1, this, conn, gamedieDBA);
