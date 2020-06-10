@@ -214,22 +214,22 @@ public class LobbyView extends BorderPane {
 		for(Player p :test ) {
 			
 			HBox playerlist = new HBox();
-			
-		Label username = new Label("Speler: " + p.getName());
-	      username.setMinWidth(100);
-	      
-	      Button accept = buildButton("Accept");
-	      accept.setOnAction(e -> p.setPlayerStatus(PlayerStatus.ACCEPTED));
-	      test.remove(p);
-	      
-	      
-	      Button refuse = buildButton("Refuse");
-	      refuse.setOnAction(e -> p.setPlayerStatus(PlayerStatus.REFUSED));
-	      test.remove(p);
-	      
-	      playerlist.getChildren().addAll(username,accept,refuse);
-	      
-	      center.getChildren().add(playerlist);
+					
+			Label username = new Label("Speler: " + p.getName());
+		    username.setMinWidth(100);
+		      
+		     Button accept = buildButton("Accept");
+		     accept.setOnAction(e -> p.setPlayerStatus(PlayerStatus.ACCEPTED));
+		     test.remove(p);
+		      
+		      
+		      Button refuse = buildButton("Refuse");
+		      refuse.setOnAction(e -> p.setPlayerStatus(PlayerStatus.REFUSED));
+		      test.remove(p);
+		      
+		      playerlist.getChildren().addAll(username,accept,refuse);
+		      
+		      center.getChildren().add(playerlist);
 		}
 	}
 	
