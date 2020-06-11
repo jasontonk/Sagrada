@@ -33,14 +33,15 @@ public class GameViewUpdater extends Task<Boolean> {
 						System.out.println("test");
 						ArrayList<String> winner = gameCtrl.getGame().getWinnerOfGameWithID(gameCtrl.getGame().getGameID());
 						System.out.println("test 2");
-						String username = winner.get(0);
+//						String username = winner.get(0);
 						System.out.println("test 3");
-						String score = winner.get(1);
+//						String score = winner.get(1);
 						System.out.println("test 4");
-						String winnerText = "DE WINNAAR IS: " +username+ "\n" + username + "heeft gewonnen met een score van: "+ score; 
+//						String winnerText = "DE WINNAAR IS: " +username+ "\n" + username + "heeft gewonnen met een score van: "+ score; 
 						System.out.println("test 5");
-						gameCtrl.showWarning("Game Over", winnerText);
+//						gameCtrl.showWarning("Game Over", winnerText);
 						System.out.println("test 6");
+						gameCtrl.setFinishedGameView();
 					}
 				});
 				try {
@@ -141,6 +142,7 @@ public class GameViewUpdater extends Task<Boolean> {
 	public void checkFinishedGame(){
 		if(gameCtrl.getGame().getPersonalPlayer().getPlayerStatus().equals(PlayerStatus.FINISHED)) {
 			gameCtrl.setFinishedGameView();
+			setRunning(false);
 		}
 	}
 

@@ -161,7 +161,7 @@ public class LobbyView extends BorderPane {
 		receivedInvitationsView.setMinSize(250, 600);
 		receivedInvitationsView.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, null, null)));
 		
-		receivedInvitationsView.getChildren().add(drawTitle("Received invitations"));
+		
 		
 		return receivedInvitationsView;
 	}
@@ -169,7 +169,7 @@ public class LobbyView extends BorderPane {
 	public void inviteFromChallenger(Player player) {
 		
 		VBox inviteListView = new VBox();
-		
+		invitationsView.getChildren().add(drawTitle("Ontvangen uitnodigingen"));
 		if(challengerList.size() != 0) {
 			for(Player p : challengerList ) {
 				if(!player.getName().equals(p.getName()))

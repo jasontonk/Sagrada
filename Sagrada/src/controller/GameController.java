@@ -294,14 +294,15 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 	}
 
 	public void setFinishedGameView() {
+		myScene.setContentPane(new FinishedGameView(this));
 		gameViewUpdater.setRunning(false); 
 		gameUpdater.setRunning(false);
 		gameRoundPlayer.setRunning(false);
-		myScene.setContentPane(new FinishedGameView(this));
 	}
 
 	public void setLobbyView() {
-		myScene.setContentPane(accountController.getLobbyView());
+		accountController.viewLobby();
+//		myScene.setContentPane(accountController.getLobbyView());
 	}
 
 }

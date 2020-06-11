@@ -142,8 +142,8 @@ public class AccountController {
 	public void viewLobby() {
 		if(lobbyView == null) {
 			lobbyView = new LobbyView(this);
-			makeInviteThread();
 		}
+		makeInviteThread();
 		myScene.setContentPane(lobbyView.makeAccountPane());
 	}
 	
