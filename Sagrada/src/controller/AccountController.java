@@ -1,22 +1,15 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import database.AccountDBA;
 import database.DataBaseConnection;
-import database.GameDBA;
-import database.PlayerDBA;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
 import model.Account;
 import model.Game;
-import model.Invitation;
-import model.ModelColor;
-import model.PatternCard;
 import model.Player;
 import model.PlayerStatus;
 import view.ChooseView;
@@ -37,7 +30,6 @@ public class AccountController {
 	private AccountDBA accountDBA;
 	private ArrayList<Player> invitePlayerList;
 	private InvitationController invitationController;
-	private ArrayList<Player> players;
 	
 	public AccountController(DataBaseConnection c, MyScene myScene) {
 		this.connection = c;
@@ -53,22 +45,12 @@ public class AccountController {
 		
 		accountDBA = new AccountDBA(c);
 		invitationController = new InvitationController(10, this);
-		makeInviteThread();
-	}
-	
-	public void setReceivedInvitations(ArrayList<Player> players) {
-		this.players = players;
-	}
-	
-	public ArrayList<Player> getReceivedInvitations() {
-		return players;
+		
 	}
 
 	public LobbyView getLobbyView() {
 		return lobbyView;
 	}
-
-
 
 	public void makeInviteThread() {
 		Thread invitationChecker = new Thread(invitationController);
@@ -160,6 +142,7 @@ public class AccountController {
 	public void viewLobby() {
 		if(lobbyView == null) {
 			lobbyView = new LobbyView(this);
+			makeInviteThread();
 		}
 		myScene.setContentPane(lobbyView.makeAccountPane());
 	}
@@ -173,25 +156,9 @@ public class AccountController {
 	}
 	
 	public void showInvite(Player player) {
-			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Invite");
-			
-					String inviter = player.getGame().getChallengerOfGameWithID(player.getGame().getGameID());
-					alert.setHeaderText(inviter + " wil je inviten voor een game");
-	
-			alert.setContentText("Wil je dit accepteren?");
-	
-			
-			
-			Optional<ButtonType> result = alert.showAndWait();
-			
-			
-			if (result.get() == ButtonType.OK){
-				
-				player.setPlayerStatus(PlayerStatus.ACCEPTED);
-			} else {
-				player.setPlayerStatus(PlayerStatus.REFUSED);
-			}
+		
+		Player challengerPlayer = player.getGame().getPlayerChallengerOfGameWithID(player.getGame().getGameID());
+		lobbyView.inviteFromChallenger(challengerPlayer);
 	}
 
 	public void inviteAccounts(ArrayList<Account> inviteList) {
@@ -223,12 +190,7 @@ public class AccountController {
 			player.addPlayer(player);
 			player.createBoard();
 			player.getBoard().AddBoardFieldsToDB();
-//			if (player.getPatternCard().getPatterncardID() == 0) {
-//				PatternCard patternCard = new PatternCard(connection);
-//				patternCard = patternCard.getPatterncardDB().getPatterncard();
-//				patternCard.setpattern(false);
-//				player.setPatternCard(patternCard);
-//			}
+
 			player.setScore(-20);
 			
 			game.setCurrentPlayer(player);
@@ -245,27 +207,10 @@ public class AccountController {
 				p.setScore(-20);
 				p.createBoard();
 				p.getBoard().AddBoardFieldsToDB();
-//				if (p.getPatternCard().getPatterncardID() == 0) {
-//					PatternCard patternCard = new PatternCard(connection);
-//					patternCard = patternCard.getPatterncardDB().getPatterncard();
-//					patternCard.setpattern(false);
-//					player.setPatternCard(patternCard);
-//				}
+
 				invitePlayerList.add(p);
 			}
-//			ArrayList<PatternCard> patterncards = new ArrayList<>();
-//			for (int i = 0; i < invitePlayerList.size(); i++) {
-//				PatternCard patternCard = new PatternCard(connection);
-//				patternCard.getPatterncardDB().getPatterncard();
-//				patternCard.setpattern(false);
-//				patterncards.add(patternCard);
-//			}
-//			System.out.println("de aangemaakte patterncards zijn: "+ patterncards);
-//			for (int j = 0; j < invitePlayerList.size(); j++) {
-//				if(player.getPatternCard() == null) {
-//					player.setPatternCard(patterncards.get(j));
-//				}
-//			}
+
 			game.getDicePoolFromDB();
 			game.finishGameSetup(this);
 			game.setCurrentPlayer(player);
@@ -330,5 +275,11 @@ public class AccountController {
 		else {
 			showWarning("game", "Niet elke speler heeft gereageerd op de uitnodiging");
 		}	
+	}
+	
+	public void updateLobbyView() {
+		lobbyView.clearInvitations();
+		lobbyView.updateGameViews();
+		lobbyView.updateSentInvitations();
 	}
 }
