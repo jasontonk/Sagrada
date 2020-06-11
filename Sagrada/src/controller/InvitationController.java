@@ -33,6 +33,7 @@ public class InvitationController extends Task<Void> {
 					@Override
 					public void run() {
 						accountController.updateLobbyView();
+						
 						for(Player player : accountController.getAccount().getChallengeePlayers()) {
 							accountController.showInvite(player);
 						}

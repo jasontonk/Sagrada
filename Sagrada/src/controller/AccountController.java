@@ -279,6 +279,7 @@ public class AccountController {
 	
 	public void updateLobbyView() {
 		lobbyView.clearInvitations();
+		lobbyView.challengerListClear();
 		lobbyView.updateGameViews();
 		lobbyView.updateSentInvitations();
 	}

@@ -32,6 +32,8 @@ public class LobbyView extends BorderPane {
     private ArrayList<Player> challengerList;
     private Insets padding;
     private VBox sentinvitationsView;
+    private ArrayList<String> playernames;
+    
 	
 	public LobbyView(AccountController accountController) {
 		this.accountController = accountController;
@@ -46,6 +48,8 @@ public class LobbyView extends BorderPane {
         players = accountController.getAllPlayersOfThisAccount();   
         challengerList = new ArrayList<>();
         sentinvitationsView = new VBox();
+        playernames = new ArrayList<String>();
+       
          
 		this.getChildren().clear();
 		HBox accountView = new HBox();  
@@ -125,6 +129,7 @@ public class LobbyView extends BorderPane {
 		sentinvitationsView.getChildren().clear();
 		
 		VBox gamesView = new VBox();
+		int gameid = 0;
 		
 		ArrayList<Player> lobbyPlayerList = new ArrayList<Player>();
 		
@@ -142,9 +147,10 @@ public class LobbyView extends BorderPane {
 				gameID.setMinWidth(100);
 				gameID.setPadding(padding);
 				gamesView.getChildren().add(gameID);
-				
-				for(Player g :lobbyPlayerList ) {
-					
+				gameid = lobbyPlayerList.get(i).getGame().getGameID();
+			}
+			for(Player g :lobbyPlayerList ) {
+				if(g.getGame().getGameID() == gameid) {
 					Label playerStatus = new Label("Speler: " + g.getName()+" | Status: " + g.getPlayerStatus());
 					playerStatus.setMinWidth(100);
 					playerStatus.setPadding(padding);
@@ -166,22 +172,42 @@ public class LobbyView extends BorderPane {
 		return receivedInvitationsView;
 	}
 	
+	public void challengerListClear() {
+		challengerList.clear();
+		playernames.clear();
+	}
+	
 	public void inviteFromChallenger(Player player) {
 		
-		VBox inviteListView = new VBox();
+		invitationsView.getChildren().clear();
+		
 		invitationsView.getChildren().add(drawTitle("Ontvangen uitnodigingen"));
-		if(challengerList.size() != 0) {
-			for(Player p : challengerList ) {
-				if(!player.getName().equals(p.getName()))
-					challengerList.add(player);
-			}
-		}else {
+		
+		if(!playernames.contains(player.getName())) {
+			playernames.add(player.getName());
 			challengerList.add(player);
 		}
-
-		HBox challengerView = new HBox();
 		
+		VBox inviteListView = new VBox();
+		
+//		if(challengerList.size() != 0) {
+//			for(int i = 0; i < challengerList.size(); i++) {
+//				if(!challengerList.get(i).getName().equals(player.getName())) {
+//						challengerList.add(player);
+//				}else {
+//					challengerList.remove(player);
+//				}
+//			}
+//		}else {
+//			challengerList.add(player);
+//		}
+		
+		System.out.println("listSize"+ challengerList.size());
+
 		for(int i = 0; i< challengerList.size(); i++) {	
+			
+				HBox challengerView = new HBox();
+				challengerView.setPadding(padding);
 				
 				Label username = new Label("Speler: " + challengerList.get(i).getName());
 				username.setMinWidth(100); 
@@ -191,12 +217,18 @@ public class LobbyView extends BorderPane {
 				    
 				 for(Player p: accountController.getAccount().getChallengeePlayers()) {
 					 if(p.getGame().getChallengerOfGameWithID(p.getGame().getGameID()).equals(challengerList.get(i).getName())) {
-						 accept.setOnAction(e -> p.setPlayerStatus(PlayerStatus.ACCEPTED));
-					     refuse.setOnAction(e -> p.setPlayerStatus(PlayerStatus.REFUSED));
+						 System.out.println("boven"+ challengerList.size());
+						 accept.setOnAction(e -> accepted(p));
+						 System.out.println("Accepted"+ challengerList.size());
+					     refuse.setOnAction(e -> refused(p));
 					     
-					     if(p.getPlayerStatus() == PlayerStatus.ACCEPTED || p.getPlayerStatus() == PlayerStatus.REFUSED) {
-					    	 challengerList.remove(challengerList.get(i)); 
-					     }
+					     
+//					     if(p.isAccepted() || p.isRefused()) {
+//					    	 System.out.println("Binnen de onderste if"+ challengerList.size());
+//					    	 challengerList.remove(challengerList.get(i)); 
+//					    	 playernames.remove(challengerList.get(i).getName());
+//					    	 System.out.println("listSizeJalap"+ challengerList.size());
+//					     }
 					 }
 				 }
 				 
@@ -204,11 +236,35 @@ public class LobbyView extends BorderPane {
 			    
 			    invitationsView.getChildren().add(challengerView);
 
-			   
 			}
-		
+		 System.out.println("listSize3"+ challengerList.size());
 		inviteListView.getChildren().add(invitationsView);
 		receivedInvitationsView.getChildren().add(inviteListView);
+	}
+	
+	private void accepted(Player p ) {
+		p.setPlayerStatus(PlayerStatus.ACCEPTED);
+		accountController.showWarning("Uitnodiging" , "U heeft de uitnodiging geaccepteerd ");
+//		p.setAccepted(true);
+//		challengerList.remove(p);
+//    	playernames.remove(p.getName());
+	}
+	
+	private void refused(Player p ) {
+//		 challengerList.remove(p);
+//		 playernames.remove(p.getName());
+		p.setPlayerStatus(PlayerStatus.REFUSED);
+		accountController.showWarning("Uitnodiging" , "U heeft de uitnodiging geweigerd");
+//		p.setRefused(true);
+//		for(Player player : challengerList) {
+//			if(player.getId() == p.getId()) {
+//				p = player;
+//				break;
+//			}
+//		}
+		 
+    	 
+    	 System.out.println("refused123"+ challengerList.size());
 	}
 	
 	public void updateGameViews() {
