@@ -6,7 +6,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import model.FavorToken;
+import model.Game;
 import model.Player;
+import model.Toolcard;
 
 public class FavorTokenDBA {
 
@@ -35,6 +37,24 @@ private DataBaseConnection conn;
 		}
 	
 		return list;
+	}
+	
+	public int getFavortokensOfToolcard(Toolcard toolcard) {
+		int index = 0;
+		String query = "SELECT * FROM gamefavortoken WHERE gametoolcard= "+toolcard.getId()+" ;";
+		
+		try {
+			Statement stmt = conn.getConn().createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()) {
+                index ++;
+            }
+			stmt.close();
+		}catch (SQLException e) {
+				e.printStackTrace();
+		}
+	
+		return index;
 	}
 	
 	private int autoIdFavorToken() {
