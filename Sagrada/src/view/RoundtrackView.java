@@ -45,12 +45,12 @@ public class RoundtrackView extends VBox {
 		this.roundtrackController = roundtrackController;
 		javafxColor = new JavafxColor();
 		roundtrack = new GridPane();
-		padding = new Insets(5);
+		padding = new Insets(5,20,5,5);
 		SPACING = 5.0;
 		ROUNDTRACKFIELD_SIZE = 60;
 		stackpanes = new ArrayList<StackPane>();
 		this.setPadding(new Insets(0, 30, 0, 30));
-		this.setMaxWidth((10 * (ROUNDTRACKFIELD_SIZE + SPACING) + SPACING));
+		this.setMinWidth((10 * (ROUNDTRACKFIELD_SIZE + SPACING) + SPACING) + 50);
 		this.setMaxHeight(200);
 		VBox content = new VBox(drawTitle(), drawRoundtrack(), drawRound());
 		roundTrackScroll.setContent(content);
