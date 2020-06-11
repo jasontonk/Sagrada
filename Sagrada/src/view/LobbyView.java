@@ -184,7 +184,7 @@ public class LobbyView extends BorderPane {
 		for(int i = 0; i< challengerList.size(); i++) {	
 				
 				Label username = new Label("Speler: " + challengerList.get(i).getName());
-				username.setMinWidth(100);
+				username.setMinWidth(100); 
 
 				 Button accept = buildButton("Accept"); 
 				 Button refuse = buildButton("Refuse");
