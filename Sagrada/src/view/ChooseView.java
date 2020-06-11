@@ -84,7 +84,7 @@ public class ChooseView extends Pane{
 		
 		VBox rulesView = new VBox(imageView1, imageView2, imageView3, imageView4);
 		ScrollPane scrollPane = new ScrollPane(rulesView);
-		scrollPane.setMaxWidth(700);
+		scrollPane.setMaxWidth(720);
 		BorderPane centerScroll = new BorderPane();
 		centerScroll.setCenter(scrollPane);
 		choosePane.getChildren().addAll(textPane, yesno, centerScroll);
