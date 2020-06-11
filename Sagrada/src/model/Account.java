@@ -157,26 +157,29 @@ public class Account {
 	
 	private ModelColor getColorFromString(String c) {
 		ModelColor modelColor = ModelColor.BLUE;
-		switch(c) {
-		case "blue":
-			modelColor = ModelColor.BLUE;
-			break;
-		case "green":
-			modelColor = ModelColor.GREEN;
-			break;
-		case "purple":
-			modelColor = ModelColor.PURPLE;
-			break;
-		case "red":
-			modelColor = ModelColor.RED;
-			break;
-		case "yellow":
-			modelColor = ModelColor.YELLOW;
-			break;
-		default:
-			modelColor = null;
+		if(c != null) {
+			switch(c.toLowerCase()) {
+			case "blue":
+				modelColor = ModelColor.BLUE;
+				break;
+			case "green":
+				modelColor = ModelColor.GREEN;
+				break;
+			case "purple":
+				modelColor = ModelColor.PURPLE;
+				break;
+			case "red":
+				modelColor = ModelColor.RED;
+				break;
+			case "yellow":
+				modelColor = ModelColor.YELLOW;
+				break;
+			default:
+				modelColor = null;
+			}
+			return modelColor;
 		}
-		return modelColor;
+		return null;
 	}
 	
 	/**
