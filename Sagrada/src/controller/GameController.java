@@ -33,6 +33,7 @@ public class GameController {
 	private AccountController accountController;
 	private DataBaseConnection conn;
 	private MyScene myScene;
+	private volatile boolean isPlayingTurn;
 
 
 	private PatterncardView patterncardView;
@@ -127,6 +128,7 @@ public class GameController {
 		
 		gameRoundPlayer.setIsPaused(true);
 		myScene.setContentPane(new GameView(this));
+		isPlayingTurn = false;
 
 	}
 	
@@ -235,11 +237,15 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 	public void playround() {
 		
 		if(game.getCurrentPlayer().getId() == game.getPersonalPlayer().getId()) {
-//			gameViewUpdater.updateScoreBoard();
-			game.setCurrentPlayer(game.getPersonalPlayer());
-			gameViewUpdater.setPaused(true);
-			gameUpdater.setPaused(true);
-			gameRoundPlayer.setIsPaused(false);
+			if(!isPlayingTurn) {
+	//			gameViewUpdater.updateScoreBoard();
+				game.setCurrentPlayer(game.getPersonalPlayer());
+				gameViewUpdater.setPaused(true);
+				gameUpdater.setPaused(true);
+				gameRoundPlayer.setIsPaused(false);
+				isPlayingTurn = true;
+			}
+			else showWarning("Beurt", "Je bent jouw beurt al begonnen");
 		}
 		else showWarning("Beurt", "Het is niet jouw beurt");
 	}
@@ -250,6 +256,7 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 			gameViewUpdater.setPaused(false);
 //			gameViewUpdater.updateScoreBoard();
 			gameRoundPlayer.setIsPaused(true);
+			isPlayingTurn = false;
 		}
 		else showWarning("Beurt", "Het is niet jouw beurt");
 	}
