@@ -34,6 +34,8 @@ public class LobbyView extends BorderPane {
     private VBox sentinvitationsView;
     private ArrayList<String> playernames;
     private VBox sendInvitationsView;
+    private ArrayList<Integer> gameIDList;;
+	private ArrayList<Player> lobbyPlayerList;
     
 	
 	public LobbyView(AccountController accountController) {
@@ -45,8 +47,7 @@ public class LobbyView extends BorderPane {
 
 	public Pane makeAccountPane() {
 		accounts = accountController.getAllAccounts();
-        inviteList = new ArrayList<Account>();
-        players = accountController.getAllPlayersOfThisAccount();   
+        inviteList = new ArrayList<Account>();  
         challengerList = new ArrayList<>();
         sentinvitationsView = new VBox();
         playernames = new ArrayList<String>();
@@ -123,6 +124,9 @@ public class LobbyView extends BorderPane {
 	
 	private VBox makeInvitationsViewToSend() {
 		
+		gameIDList = new ArrayList<Integer>();
+		lobbyPlayerList = new ArrayList<Player>();
+		
 		sentinvitationsView.setMinSize(250, 600);
 		sentinvitationsView.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, null, null)));
 		
@@ -136,34 +140,36 @@ public class LobbyView extends BorderPane {
 		sentinvitationsView.getChildren().clear();
 		
 		VBox gamesView = new VBox();
-		int gameid = 0;
-		
-		ArrayList<Player> lobbyPlayerList = new ArrayList<Player>();
 		
 		sentinvitationsView.getChildren().add(drawTitle("Verzonden uitnodigingen"));
 		
 		for(Player player : accountController.getInvitePlayerList() ) {
 			if(!lobbyPlayerList.contains(player)) {
 				lobbyPlayerList.add(player);
+				if(!gameIDList.contains(player.getGame().getGameID())) {
+					gameIDList.add(player.getGame().getGameID());
+				}
 			}
 		}
+		
 		if(lobbyPlayerList.size() != 0) {
-			for(int i = 0; i < 1; i++ ) {
+			for(int i = 0; i < gameIDList.size(); i++ ) {
 				
-				Label gameID = new Label("GameId: " + lobbyPlayerList.get(i).getGame().getGameID());
+				Label gameID = new Label("GameId: " + gameIDList.get(i));
 				gameID.setMinWidth(100);
 				gameID.setPadding(padding);
 				gamesView.getChildren().add(gameID);
-				gameid = lobbyPlayerList.get(i).getGame().getGameID();
-			}
-			for(Player g :lobbyPlayerList ) {
-				if(g.getGame().getGameID() == gameid) {
-					Label playerStatus = new Label("Speler: " + g.getName()+" | Status: " + g.getPlayerStatus());
-					playerStatus.setMinWidth(100);
-					playerStatus.setPadding(padding);
-					gamesView.getChildren().add(playerStatus);
+				
+				for(int j =0; j < lobbyPlayerList.size();j++ ) {
+					if(lobbyPlayerList.get(j).getGame().getGameID() == gameIDList.get(i)) {
+						Label playerStatus = new Label("Speler: " + lobbyPlayerList.get(j).getName()+" | Status: " + lobbyPlayerList.get(j).getPlayerStatus());
+						playerStatus.setMinWidth(100);
+						playerStatus.setPadding(padding);
+						gamesView.getChildren().add(playerStatus);
+					}
 				}
 			}
+			
 		}
 
 		sentinvitationsView.getChildren().add(gamesView);
@@ -173,9 +179,7 @@ public class LobbyView extends BorderPane {
 		invitationsView = new VBox();
 		receivedInvitationsView.setMinSize(250, 600);
 		receivedInvitationsView.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, null, null)));
-		
-		
-		
+
 		return receivedInvitationsView;
 	}
 	
@@ -196,8 +200,6 @@ public class LobbyView extends BorderPane {
 		}
 		
 		VBox inviteListView = new VBox();
-		
-		System.out.println("listSize"+ challengerList.size());
 
 		for(int i = 0; i< challengerList.size(); i++) {	
 			
@@ -212,9 +214,8 @@ public class LobbyView extends BorderPane {
 				    
 				 for(Player p: accountController.getAccount().getChallengeePlayers()) {
 					 if(p.getGame().getChallengerOfGameWithID(p.getGame().getGameID()).equals(challengerList.get(i).getName())) {
-						 System.out.println("boven"+ challengerList.size());
 						 accept.setOnAction(e -> accepted(p));
-						 System.out.println("Accepted"+ challengerList.size());
+
 					     refuse.setOnAction(e -> refused(p));
 					 }
 				 }
@@ -224,7 +225,6 @@ public class LobbyView extends BorderPane {
 			    invitationsView.getChildren().add(challengerView);
 
 			}
-		 System.out.println("listSize3"+ challengerList.size());
 		inviteListView.getChildren().add(invitationsView);
 		receivedInvitationsView.getChildren().add(inviteListView);
 	}
@@ -270,6 +270,8 @@ public class LobbyView extends BorderPane {
 		 
 		sendInvitationsView.getChildren().clear();
 		accounts = accountController.getAllAccounts();
+		
+		inviteList.clear();
 		
 		for(Account a : accounts) {
 			HBox playerlist = new HBox();

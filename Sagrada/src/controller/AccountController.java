@@ -44,7 +44,7 @@ public class AccountController {
 		invitePlayerList = new ArrayList<Player>();
 		
 		accountDBA = new AccountDBA(c);
-		invitationController = new InvitationController(10, this);
+		invitationController = new InvitationController(8, this);
 		
 	}
 
@@ -162,7 +162,6 @@ public class AccountController {
 	}
 
 	public void inviteAccounts(ArrayList<Account> inviteList) {
-		System.out.println(inviteList);
 		
 		 if (inviteList.size() == 0) {
 			 	showWarning("invites niet verstuurd", "Te weinig accounts geselecteerd");
@@ -215,6 +214,7 @@ public class AccountController {
 			game.finishGameSetup(this);
 			game.setCurrentPlayer(player);
 			game.setPersonalPlayer(getAccount());
+			
 	}
 
 	public ArrayList<Player> getInvitePlayerList() {
@@ -223,7 +223,6 @@ public class AccountController {
 
 	public void render() {
 		myScene.setContentPane(lobbyView.makeAccountPane());
-		System.out.println("========== LOBBYVIEW GERENDERD");
 	}
 	
 	public void joinGame(Player player, Game game) {
@@ -246,12 +245,6 @@ public class AccountController {
 				stopInviteThread();
 				
 				player.setPatternCard(player.getPatternCard());
-				
-				
-				System.out.println("GAME.getid: " + game.getGameID());
-				System.out.println("GAME.getplayers: " + game.getPlayers());
-		
-				System.out.println("GAME.getplayers.0: " + game.getPlayers().get(0));
 				
 				game.finishGameSetup(this);
 				game.addpublicobjectivecards();
