@@ -31,19 +31,19 @@ public class DieController {
 			if(modelColor != null) {
 				switch (modelColor) {
 				case BLUE:
-					color = "Blue";
+					color = "BLUE";
 					break;
 				case GREEN:
-					color = "Green";
+					color = "GREEN";
 					break;
 				case RED:
-					color = "Red";
+					color = "RED";
 					break;
 				case PURPLE:
-					color = "Purple";
+					color = "PURPLE";
 					break;
 				case YELLOW:
-					color = "Yellow";
+					color = "YELLOW";
 					break;
 				default:
 					color = null;
