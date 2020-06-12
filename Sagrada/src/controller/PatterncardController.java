@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 
 import database.DataBaseConnection;
+import model.GameDie;
 import model.ModelColor;
 import model.PatternCard;
 
@@ -83,6 +84,13 @@ public class PatterncardController {
 	
 	public PatternCard getPatterncard() {
 		return patterncard;
+	}
+
+	public void setSelectedDie(int x, int y) {
+		GameDie gameDie = gameController.getGame().getPersonalPlayer().getBoard().getBoardField(x, y).getDie();
+		if(gameDie != null) {
+			gameController.setSelectedDie(gameDie);
+		}
 	}
 }
   

@@ -18,6 +18,9 @@ public class RoundTrack {
 		roundTrackFields[round].addDice(die);
 	}
 	
+	public RoundTrackField getRoundTrackField(int round) {
+		return roundTrackFields[round];
+	}
 	
 	/*
 	 * Returns die that gets chosen

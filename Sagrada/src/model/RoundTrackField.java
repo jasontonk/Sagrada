@@ -31,4 +31,8 @@ public class RoundTrackField {
 	public void setDieSavingSpot(GameDie[] dieSavingSpot) {
 		this.dieSavingSpot = dieSavingSpot;
 	}
+	
+	public GameDie getDie(int index) {
+		return dieSavingSpot[index];
+	}
 }

@@ -536,6 +536,9 @@ public class Game {
 	}
 
 	public void setSelectedDie(GameDie die) {
+		if(die != null) 
+		System.out.println("game.setselecteddie : "+ die.getEyes() + die.getColor());
+		else System.out.println("Selecteddie ==== nullllllllllll");
 		this.selectedDie = die;
 	}
 

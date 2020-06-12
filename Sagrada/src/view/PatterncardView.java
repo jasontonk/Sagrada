@@ -97,7 +97,7 @@ public class PatterncardView extends VBox{
 		}
 		return patterncardfields;
 	}
-	private void placeSelectedDie(StackPane stackpane) {
+	private void placeSelectedDie(int x, int y, StackPane stackpane) {
 		Button die = new Button();
 		
 		imgURL = patterncardController.getSelectedDieUrl();
@@ -108,6 +108,11 @@ public class PatterncardView extends VBox{
 			stackpane.getChildren().add(die);
 			patterncardController.deleteDieFromPool();
 		}
+		die.setOnMouseClicked(e -> setSelectedDie(x, y));
+	}
+
+	private void setSelectedDie(int x, int y) {
+		patterncardController.setSelectedDie(x, y);
 	}
 
 	public BorderPane drawTitle() {
@@ -139,7 +144,7 @@ public class PatterncardView extends VBox{
 	
 	public boolean checkPlacementAgainstRules(int x, int y, StackPane stackpane) {
 		if(patterncardController.checkPlacementAgainstRules(x, y, patterncardController.getSelectedDieColor(), patterncardController.getSelectedDieValue())) {
-			placeSelectedDie(stackpane);
+			placeSelectedDie(x, y, stackpane);
 			return true;
 		}
 		else {

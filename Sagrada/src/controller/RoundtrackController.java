@@ -1,6 +1,7 @@
 package controller;
 
 import model.Game;
+import model.GameDie;
 import model.RoundTrack;
 
 public class RoundtrackController {
@@ -12,8 +13,22 @@ public class RoundtrackController {
 		roundtrack = new RoundTrack(game); 
 		this.gameController = gameController;
 	}
+	
 	public GameController getGameController() {
 		return gameController;
+	}
+	
+	public void setSelectedDie(int round, int index) {
+		
+		GameDie gameDie = gameController.
+				getGame().
+				getRoundTrack().
+				getRoundTrackField(round-1).
+				getDie(index);
+		
+		if(gameDie != null) {
+			gameController.setSelectedDie(gameDie);
+		}
 	}
 
 }
