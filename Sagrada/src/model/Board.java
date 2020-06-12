@@ -499,16 +499,16 @@ public class Board {
 		System.out.println("XPOS"+boardField.getyPos());
 		if(firstturn && (boardField.getxPos() == 0 || boardField.getyPos() == 0 || boardField.getxPos() == 4 || boardField.getyPos() == 3) || 
 				!firstturn && checkIsNextToDie(boardField)) {
-			System.out.println("HIER PLEK 1: ");
+			System.out.println("REGEL 1 - eerste beurt en staat aan de rand of niet eerste beurt en staat naast een dobbelsteen klopt");
 				if(!checkSidesColor(boardField, modelColor)) { 
-					System.out.println("HIER PLEK 2: ");
+					System.out.println("REGEL 2 - staat niet naast een dobbelsteen met dezelfde kleur klopt");
 					if(!checkSidesValue(boardField, value)) {
-						System.out.println("HIER PLEK 3: ");
+						System.out.println("REGEL 3 - staat niet naast een dobbelsteen met dezelfde waarde klopt");
 						if(checkFieldColorAndDieColor(boardField, modelColor) || checkFieldValueAndDieValue(boardField, value) || 
 								!checkFieldColorAndDieColor(boardField, modelColor) && !checkFieldValueAndDieValue(boardField, value) && 
 									patternCard.getFieldColor(boardField.getxPos(), boardField.getyPos()) == null && 
 										patternCard.getFieldValue(boardField.getxPos(), boardField.getyPos()) == 0){
-							System.out.println("HIER PLEK 4: ");
+							System.out.println("REGEL 4 - veldkleur en waarde komt overeen met de waarde/kleur van het veld of het veld is wit");
 							
 									placeDie(boardField, player.getSelectedDie());
 
