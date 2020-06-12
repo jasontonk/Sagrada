@@ -2,6 +2,8 @@ package controller;
 
 import java.util.ArrayList;
 
+import com.sun.webkit.ContextMenu.ShowContext;
+
 import javafx.application.Platform;
 import model.GameDie;
 import model.ModelColor;
@@ -31,6 +33,11 @@ public class GameUpdater implements Runnable {
 			}
 			else {
 				if(!isPaused) {
+					try {
+						Thread.sleep(10000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 					Platform.runLater(new Runnable() {
 						@Override
 						public void run() {
@@ -38,12 +45,6 @@ public class GameUpdater implements Runnable {
 							System.out.println("updated games");
 						}				
 					});
-					
-					try {
-						Thread.sleep(10000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
 				}
 				else {
 					try {
@@ -82,7 +83,8 @@ public class GameUpdater implements Runnable {
 
 	private void updateCurrentPlayer() {
 		
-		gameCtrl.getGame().setCurrentPlayer(gameCtrl.getGame().getCurrentPlayer());
+		
+		gameCtrl.getGame().setCurrentPlayer(gameCtrl.getCurrentPlayer());
 		
 	}
 
