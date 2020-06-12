@@ -7,8 +7,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -288,13 +290,13 @@ public class LobbyView extends BorderPane {
 		}
 	}
 	
-	private ScrollPane sendInvitationsView() {
+	private VBox sendInvitationsView() {
 		
 		ScrollPane overviewscroll = new ScrollPane();
-		overviewscroll.setMinSize(400, 600);
+//		overviewscroll.setMinSize(400, 600);
 		
 		VBox right = new VBox();
-		right.setMinSize(400, 600);
+//		right.setMinSize(400, 600);
 		right.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 		
 		right.getChildren().add(drawTitle("Spelers overzicht"));
@@ -323,12 +325,20 @@ public class LobbyView extends BorderPane {
 		Button inviteButton = buildButton("Invite");
 		inviteButton.setPadding(padding);
 		inviteButton.setOnAction(e -> accountController.inviteAccounts(inviteList));
-		
-		right.getChildren().add(inviteButton);
+		right.setPadding(padding);
 		
 		overviewscroll.setContent(right);
+		VBox content = new VBox(right);
+		inviteButton.setMinWidth(300);
+		inviteButton.setMinHeight(70);
+		content.setSpacing(10);
+		content.getChildren().add(inviteButton);
 		
-		return overviewscroll;
+//		String url = "/images/invitelist.jpg";
+//		Image image = new Image(url);
+//		content.setBackground(new Background(new BackgroundImage(image, null, null, null, null)));
+		
+		return content;
 	}
 
 	private void showStats(Account account) {
