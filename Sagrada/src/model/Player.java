@@ -63,6 +63,7 @@ public class Player {
 		playerDBA = new PlayerDBA(c);
 		favorTokenDBA = new FavorTokenDBA(c);
 		patternCard = new PatternCard(c);
+		favorTokens = new ArrayList<FavorToken>();
 		this.setPlayerStatus(PlayerStatus.CHALLENGEE);
 		this.game = game;
 		this.setPersonalObjectiveCardColor();
@@ -206,6 +207,9 @@ public class Player {
 		playerDBA.setPlayerPatternCard(patternCard, this);
 //		this.patternCard = patternCard.getPatterncardDB().getSelectedPatterncardOfPlayer(this.getId(), this);
 		this.patternCard = patternCard;
+		for(int i = 0; i < patternCard.getDifficulty(); i++) {
+			favorTokens.add(new FavorToken(this, this.getGame().getGameID(), connection));
+		}
 	}
 
 	public ArrayList<PatternCard> getPatternCardsToChoose(boolean random) {
