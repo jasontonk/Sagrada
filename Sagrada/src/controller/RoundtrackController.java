@@ -10,7 +10,7 @@ public class RoundtrackController {
 	private GameController gameController;
 	
 	public RoundtrackController(Game game, GameController gameController) {
-		roundtrack = new RoundTrack(game); 
+		roundtrack = game.getRoundTrack();
 		this.gameController = gameController;
 	}
 	
@@ -25,8 +25,10 @@ public class RoundtrackController {
 				getRoundTrack().
 				getRoundTrackField(round-1).
 				getDie(index);
-		
+			 System.out.println("GAMEDIE IS MISSCHIEN GESELECTEERD");
+			 
 		if(gameDie != null) {
+			System.out.println("GAMEDIE IS GESELECTEERD");
 			gameController.setSelectedDie(gameDie);
 		}
 	}

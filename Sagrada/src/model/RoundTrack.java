@@ -8,6 +8,9 @@ public class RoundTrack {
 	//constructor
 	public RoundTrack(Game game) {
 		roundTrackFields = new RoundTrackField[10];
+		for (int i = 0; i < roundTrackFields.length; i++) {
+			roundTrackFields[i] = new RoundTrackField();
+		}
 		this.game = game;
 	}
 	
