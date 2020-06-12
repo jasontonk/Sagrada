@@ -7,10 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -35,6 +33,7 @@ public class LobbyView extends BorderPane {
     private Insets padding;
     private VBox sentinvitationsView;
     private ArrayList<String> playernames;
+    private VBox sendInvitationsView;
     
 	
 	public LobbyView(AccountController accountController) {
@@ -85,21 +84,7 @@ public class LobbyView extends BorderPane {
 		overview.setBackground(new Background(new BackgroundFill(Color.LIGHTGOLDENRODYELLOW, null, null)));
 		overview.setMinSize(300, 400);
 		
-		System.out.println(players);
-		
-		for(Player p : players) {
-			HBox playerlist = new HBox();
-			
-			Label gameid = new Label("Game-ID: " + p.getGame().getGameID());
-			gameid.setPadding(new Insets(5, 4, 5, 4));
-			gameid.setMinWidth(150);
-            
-            Button playGame = buildButton("Speel!");
-            playGame.setOnAction(e -> accountController.joinGame(p, p.getGame()));
-
-            playerlist.getChildren().addAll(gameid,playGame);
-            overview.getChildren().add(playerlist);  
-		}
+		updateGameViews();
 		
 		overviewscroll.setContent(overview);
 		Pane op = new Pane();
@@ -109,11 +94,31 @@ public class LobbyView extends BorderPane {
 		
 		VBox left = new VBox();
 		
-//		left.setPrefWidth();
-		
 		left.getChildren().addAll(drawTitle("Game overview"),overviewscroll, output);
 		
 		return left;
+	}
+	
+	public void updateGameViews() {
+		
+		players = accountController.getAllPlayersOfThisAccount();
+		overview.getChildren().clear();
+
+		for(int i = 0; i< players.size(); i++) {
+				
+				final int index =i;
+				HBox playerlist = new HBox();
+				
+				Label gameid = new Label("Game-ID: " + players.get(i).getGame().getGameID());
+				gameid.setPadding(new Insets(5, 4, 5, 4));
+				gameid.setMinWidth(150);
+	            
+	            Button playGame = buildButton("Speel!");
+	            playGame.setOnAction(e -> accountController.joinGame(players.get(index), players.get(index).getGame()));
+	            
+	            playerlist.getChildren().addAll(gameid,playGame);
+	            overview.getChildren().add(playerlist);
+		}
 	}
 	
 	private VBox makeInvitationsViewToSend() {
@@ -192,18 +197,6 @@ public class LobbyView extends BorderPane {
 		
 		VBox inviteListView = new VBox();
 		
-//		if(challengerList.size() != 0) {
-//			for(int i = 0; i < challengerList.size(); i++) {
-//				if(!challengerList.get(i).getName().equals(player.getName())) {
-//						challengerList.add(player);
-//				}else {
-//					challengerList.remove(player);
-//				}
-//			}
-//		}else {
-//			challengerList.add(player);
-//		}
-		
 		System.out.println("listSize"+ challengerList.size());
 
 		for(int i = 0; i< challengerList.size(); i++) {	
@@ -223,14 +216,6 @@ public class LobbyView extends BorderPane {
 						 accept.setOnAction(e -> accepted(p));
 						 System.out.println("Accepted"+ challengerList.size());
 					     refuse.setOnAction(e -> refused(p));
-					     
-					     
-//					     if(p.isAccepted() || p.isRefused()) {
-//					    	 System.out.println("Binnen de onderste if"+ challengerList.size());
-//					    	 challengerList.remove(challengerList.get(i)); 
-//					    	 playernames.remove(challengerList.get(i).getName());
-//					    	 System.out.println("listSizeJalap"+ challengerList.size());
-//					     }
 					 }
 				 }
 				 
@@ -247,59 +232,44 @@ public class LobbyView extends BorderPane {
 	private void accepted(Player p ) {
 		p.setPlayerStatus(PlayerStatus.ACCEPTED);
 		accountController.showWarning("Uitnodiging" , "U heeft de uitnodiging geaccepteerd ");
-//		p.setAccepted(true);
-//		challengerList.remove(p);
-//    	playernames.remove(p.getName());
 	}
 	
 	private void refused(Player p ) {
-//		 challengerList.remove(p);
-//		 playernames.remove(p.getName());
 		p.setPlayerStatus(PlayerStatus.REFUSED);
 		accountController.showWarning("Uitnodiging" , "U heeft de uitnodiging geweigerd");
-//		p.setRefused(true);
-//		for(Player player : challengerList) {
-//			if(player.getId() == p.getId()) {
-//				p = player;
-//				break;
-//			}
-//		}
-		 
-    	 
-    	 System.out.println("refused123"+ challengerList.size());
-	}
-	
-	public void updateGameViews() {
-		
-		players = accountController.getAllPlayersOfThisAccount();
-		overview.getChildren().clear();
-		
-		for(int i = 0; i< players.size(); i++) {
-			final int index =i;
-				HBox playerlist = new HBox();
-				
-				Label gameid = new Label("Game-ID: " + players.get(i).getGame().getGameID());
-				gameid.setPadding(new Insets(5, 4, 5, 4));
-				gameid.setMinWidth(150);
-	            
-	            Button playGame = buildButton("Speel!");
-	            playGame.setOnAction(e -> accountController.joinGame(players.get(index), players.get(index).getGame()));
-	            
-	            playerlist.getChildren().addAll(gameid,playGame);
-	            overview.getChildren().add(playerlist);
-		}
 	}
 	
 	private VBox sendInvitationsView() {
 		
 		ScrollPane overviewscroll = new ScrollPane();
-//		overviewscroll.setMinSize(400, 600);
-		
+		sendInvitationsView = new VBox();
 		VBox right = new VBox();
-//		right.setMinSize(400, 600);
 		right.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 		
 		right.getChildren().add(drawTitle("Spelers overzicht"));
+		
+		updatesendInvitationsView();
+		
+		right.getChildren().add(sendInvitationsView);
+		Button inviteButton = buildButton("Invite");
+		inviteButton.setPadding(padding);
+		inviteButton.setOnAction(e -> accountController.inviteAccounts(inviteList));
+		right.setPadding(padding);
+		
+		overviewscroll.setContent(right);
+		VBox content = new VBox(right);
+		inviteButton.setMinWidth(300);
+		inviteButton.setMinHeight(70);
+		content.setSpacing(10);
+		content.getChildren().add(inviteButton);
+		
+		return content;
+	}
+	
+	public void updatesendInvitationsView() {
+		 
+		sendInvitationsView.getChildren().clear();
+		accounts = accountController.getAllAccounts();
 		
 		for(Account a : accounts) {
 			HBox playerlist = new HBox();
@@ -319,26 +289,8 @@ public class LobbyView extends BorderPane {
             invite.setOnAction(e -> addPlayerToInviteList(invite, a));
 
             playerlist.getChildren().addAll(username,viewStatsButton, invite);
-            right.getChildren().add(playerlist);
+            sendInvitationsView.getChildren().add(playerlist);
 		}
-		
-		Button inviteButton = buildButton("Invite");
-		inviteButton.setPadding(padding);
-		inviteButton.setOnAction(e -> accountController.inviteAccounts(inviteList));
-		right.setPadding(padding);
-		
-		overviewscroll.setContent(right);
-		VBox content = new VBox(right);
-		inviteButton.setMinWidth(300);
-		inviteButton.setMinHeight(70);
-		content.setSpacing(10);
-		content.getChildren().add(inviteButton);
-		
-//		String url = "/images/invitelist.jpg";
-//		Image image = new Image(url);
-//		content.setBackground(new Background(new BackgroundImage(image, null, null, null, null)));
-		
-		return content;
 	}
 
 	private void showStats(Account account) { 

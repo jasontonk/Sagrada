@@ -248,7 +248,7 @@ public class PlayerDBA {
 		String username = "'" + account.getUsername() + "'";
 		System.out.println("'" + account.getUsername() + "'");
 //		String username = "'test10'";
-		String query = "SELECT * FROM player WHERE username = "+username;
+		String query = "SELECT * FROM player WHERE username = "+username+ " And (playstatus != 'finished' AND playstatus != 'refused');";
 		try {
 			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
