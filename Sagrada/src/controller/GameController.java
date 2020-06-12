@@ -259,7 +259,6 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 	public void stopround() {
 		if(game.getCurrentPlayer().getId() == game.getPersonalPlayer().getId()) {
 			isPlayingTurn = false;
-			shownTurnMessage = false;
 			getGamePoller().setFinishedTurn(true);
 			gameUpdater.setPaused(false);
 			gameViewUpdater.setPaused(false);
@@ -268,6 +267,9 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 
 		}
 		else showWarning("Beurt", "Het is niet jouw beurt");
+	}
+	public void setShowTurnMessage(Boolean value) {
+		shownTurnMessage = value;
 	}
 	
 	public Game getGame() {

@@ -51,6 +51,7 @@ public class GameRoundPlayer extends Task<Boolean> {
 						gameController.getGame().addLeftOverDiceToRoundTrack();
 					}
 					gameController.getGame().setNextPlayer();
+					gameController.setShowTurnMessage(false);
 					
 					Platform.runLater(new Runnable() {
 			
