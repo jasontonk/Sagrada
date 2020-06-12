@@ -341,7 +341,7 @@ public class LobbyView extends BorderPane {
 		return content;
 	}
 
-	private void showStats(Account account) {
+	private void showStats(Account account) { 
 		VBox statusView = new VBox();
 		statusView.setPadding(padding);
 		output.getChildren().clear();
