@@ -264,7 +264,7 @@ public class GameDBA {
 	    }
 	 public  ArrayList<String> getWinnerOfGameUsingGameID(Game game) {
          ArrayList<String> winnerInfo = new ArrayList<>();
-         String query = "SELECT idplayer, max(score) AS score, username FROM player WHERE idgame = " + game.getGameID();
+         String query = "SELECT idplayer, score, username FROM player WHERE idgame = " + game.getGameID() + " ORDER BY score DESC limit 1;";
 
             try {
                 Statement stmt = conn.getConn().createStatement();
