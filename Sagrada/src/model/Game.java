@@ -44,8 +44,21 @@ public class Game {
 	private PlayerDBA playerDBA;
 	private ToolCardDBA toolcardDBA;
 	private SimpleStringProperty currentPlayerName;
+	private Toolcard selectedToolcard;
 
 	
+	public Toolcard getSelectedToolcard() {
+		return selectedToolcard;
+	}
+
+	public void setSelectedToolcard(int id) {
+		for (Toolcard toolcard : toolcards) {
+			if(toolcard.getId() == id) {
+				this.selectedToolcard = toolcard;
+			}
+		}
+	}
+
 	public Game(DataBaseConnection conn, boolean randomgeneratedpatterncards) {
 		
 		this.conn = conn;
@@ -661,6 +674,24 @@ public class Game {
 	public ArrayList<PublicObjectiveCard> getPublicObjectiveCards() {
 		return publicObjectiveCards;
 	}
+	
+	
+	public boolean checkSelectedToolcard(int x, int y) {
+		if(personalPlayer == currentPlayer) {		
+			switch (selectedToolcard.getName()) {
+			case "Grozing Pliers":
+				return selectedToolcard.eglomiseBorstel(personalPlayer, personalPlayer.getPatternCard(), board.getBoardField(x, y), board, selectedDie.getColor(), selectedDie.getEyes());
+			case "Eglomise Brush":
+			
+				break;
+			case "Copper Foil Burnisher":
+				
+				break;
+			}
+		}
+		return false;
+	}
+	
 
 	public int[] getPublicObjectiveCardIDs() {
 		int[] publicObjectiveCardIDs = new int[3];

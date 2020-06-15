@@ -1,5 +1,6 @@
 package view;
 
+import controller.GameController;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
@@ -13,7 +14,7 @@ public class ToolcardView extends BorderPane {
 
 	private Button toolcard = new Button();
 	
-	public ToolcardView(int id) {
+	public ToolcardView(int id, GameController gamecontroller) {
 		System.out.println("TOOL CARD OF GAME");
 		
 		String imgURL = "/images/toolcard" + id + ".png";
@@ -21,7 +22,7 @@ public class ToolcardView extends BorderPane {
 		Image image = new Image(getClass().getResource(imgURL).toString());
 		toolcard.setMinSize(220, 320);
 		toolcard.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
-		toolcard.setOnMouseClicked((e)-> System.out.println("big pog"));
+		toolcard.setOnMouseClicked((e)-> gamecontroller.setSelectedToolcard(id));
 		this.setCenter(toolcard);
 		
 	}

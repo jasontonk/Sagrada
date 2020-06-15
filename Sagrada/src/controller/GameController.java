@@ -180,12 +180,23 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 		return gameView;
 	}
 
+	
+	public void setSelectedToolcard(int id) {
+		game.setSelectedToolcard(id);
+	}
+	
+	
 	public boolean checkPlacementAgainstRules(int x, int y, ModelColor modelColor, int value) {
-		boolean checkplacement = game.checkPlacementAgainstRules(x, y, modelColor, value);
-		if(!checkplacement) {
-			showWarning("Dobbelsteen zetten", "De geselecteerde dobbelsteen kan niet op deze plek worden geplaatst.");
-		}
+		if(game.getSelectedToolcard() == null) {
+			boolean checkplacement = game.checkPlacementAgainstRules(x, y, modelColor, value);
+			if(!checkplacement) {
+				showWarning("Dobbelsteen zetten", "De geselecteerde dobbelsteen kan niet op deze plek worden geplaatst.");
+			}
 		return checkplacement;
+		}
+		else {
+			return game.checkSelectedToolcard(x, y);
+		}
 	}
 
 	public Player getCurrentPlayer() {

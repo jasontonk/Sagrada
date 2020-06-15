@@ -2,6 +2,7 @@ package view;
 
 import java.util.ArrayList;
 
+import controller.GameController;
 import javafx.scene.layout.HBox;
 
 public class ToolcardPoolView extends HBox {
@@ -9,12 +10,11 @@ public class ToolcardPoolView extends HBox {
 	private int[] ToolcardIDs;
 	private ArrayList<ToolcardView> toolcardView;
 	private HBox toolcardPool = new HBox();
+	private GameController gamecontroller;
 	
-	public ToolcardPoolView(int[] toolcardIDs) {
-		ToolcardIDs = toolcardIDs;
-		System.out.println(ToolcardIDs[0]);
-		System.out.println(ToolcardIDs[1]);
-		System.out.println(ToolcardIDs[2]);
+	public ToolcardPoolView(GameController gamecontroller) {
+		this.gamecontroller = gamecontroller;
+		ToolcardIDs = gamecontroller.getGame().getToolcardIDs();
 		createCards();
 		this.getChildren().add(toolcardPool);
 	}
@@ -22,7 +22,7 @@ public class ToolcardPoolView extends HBox {
 	
 	private void createCards() {
 		for (int i = 0; i < ToolcardIDs.length; i++) {
-			toolcardPool.getChildren().add(new ToolcardView(ToolcardIDs[i]));
+			toolcardPool.getChildren().add(new ToolcardView(ToolcardIDs[i], gamecontroller));
 		}
 	}
 	

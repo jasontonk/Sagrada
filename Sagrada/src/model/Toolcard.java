@@ -53,4 +53,32 @@ public class Toolcard {
 	}
 	
 	
+	
+	
+	public boolean eglomiseBorstel(Player player, PatternCard patternCard, BoardField boardField, Board board, ModelColor modelColor, int value) {
+		System.out.println("patterncard1" + patternCard.getName());
+		System.out.println("patterncard2" +player.getPatternCard().getName());
+					
+		if(!board.checkSidesColor(boardField, modelColor)) { 
+				if(!board.checkSidesValue(boardField, value)) {
+					if(//board.checkFieldColorAndDieColor(boardField, modelColor) || 
+							board.checkFieldValueAndDieValue(boardField, value) 
+//							|| !board.checkFieldColorAndDieColor(boardField, modelColor) 
+							|| !board.checkFieldValueAndDieValue(boardField, value) 
+							&& patternCard.getFieldColor(boardField.getxPos(), boardField.getyPos()) == null 
+							&& patternCard.getFieldValue(boardField.getxPos(), boardField.getyPos()) == 0){
+				
+							
+								board.placeDie(boardField, player.getSelectedDie());
+							
+							return true;
+						}
+					}
+				}
+		return false;
+	}
+
 }
+	
+	
+

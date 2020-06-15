@@ -31,7 +31,7 @@ public class GameView extends BorderPane {
 		publicObjectiveCardsView = new PublicObjectiveCardsView(
 				gameController.getGame().getPublicObjectiveCardIDs()
 				);
-		toolcardPoolView = new ToolcardPoolView(gameController.getGame().getToolcardIDs());
+		toolcardPoolView = new ToolcardPoolView(gameController);
 		Button button = new Button("Beurt beëindigen.");//TODO temporary
 		button.setOnMouseClicked(e-> gameController.stopround());
 //		Button button2 = new Button("Beurt beginnen");
