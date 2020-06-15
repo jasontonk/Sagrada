@@ -307,10 +307,10 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 		changedDiceOnRoundTrack.clear();
 	}
 
-	public void viewPatternCardSelection() {
-		patterncardSelectionView = new PatterncardSelectionView(this);
-		
-	}
+//	public void viewPatternCardSelection() {
+//		patterncardSelectionView = new PatterncardSelectionView(this);
+//		
+//	}
 
 	public void setFinishedGameView() {
 		myScene.setContentPane(new FinishedGameView(this));
