@@ -34,8 +34,8 @@ public class GameView extends BorderPane {
 		toolcardPoolView = new ToolcardPoolView(gameController.getGame().getToolcardIDs());
 		Button button = new Button("Beurt beëindigen.");//TODO temporary
 		button.setOnMouseClicked(e-> gameController.stopround());
-		Button button2 = new Button("Beurt beginnen");
-		button2.setOnMouseClicked(e-> gameController.playround());
+//		Button button2 = new Button("Beurt beginnen");
+//		button2.setOnMouseClicked(e-> gameController.playround());
 		
 		HBox currentPlayerText = new HBox();
 		Text text = new Text();
@@ -53,10 +53,11 @@ public class GameView extends BorderPane {
 		HBox bottom = new HBox();
 		bottom.getChildren().addAll(roundtrackView, scoreView);
 		button.setPadding(new Insets(10));
-		button2.setPadding(new Insets(10));
+//		button2.setPadding(new Insets(10));
 		this.setBottom(bottom);
 		VBox center = new VBox();
-		center.getChildren().addAll(button,button2, currentPlayerText);
+//		center.getChildren().addAll(button,button2, currentPlayerText);
+		center.getChildren().addAll(button, currentPlayerText);
 		center.setSpacing(50);
 		this.setCenter(center);
 		this.setPrefSize(1000, 800);

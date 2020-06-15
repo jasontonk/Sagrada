@@ -192,6 +192,7 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 		Player currentplayer = game.getCurrentPlayer();
 		if(!shownTurnMessage && currentplayer.getId() == game.getPersonalPlayer().getId()) {
 			shownTurnMessage = true;
+			playround();
 			showWarning("Beurt", "jij bent aan de beurt");
 		}
 		return currentplayer;

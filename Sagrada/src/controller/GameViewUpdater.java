@@ -88,14 +88,11 @@ public class GameViewUpdater extends Task<Boolean> {
 		updateDicePoolView();
 		updatePatterncardsView();
 		updateRoundtrackView();
-		updateCurrentPlayerLabel();
 //		updateScoreBoard();
 		System.out.println();
 	}
 	
-	private void updateCurrentPlayerLabel() {
-		
-	}
+
 
 	private void updateRoundtrackView() {
 		ArrayList<GameDie> diceOnRoundTrack = new ArrayList<GameDie>();
