@@ -184,7 +184,7 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 	public void setSelectedToolcard(int id) {
 		game.setSelectedToolcard(id);
 	}
-	
+	 
 	
 	public boolean checkPlacementAgainstRules(int x, int y, ModelColor modelColor, int value) {
 		if(game.getSelectedToolcard() == null) {
