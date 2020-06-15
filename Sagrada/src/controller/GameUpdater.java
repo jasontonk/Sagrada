@@ -34,7 +34,7 @@ public class GameUpdater implements Runnable {
 			else {
 				if(!isPaused) {
 					try {
-						Thread.sleep(10000);
+						Thread.sleep(3000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}

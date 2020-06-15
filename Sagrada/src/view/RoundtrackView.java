@@ -107,7 +107,7 @@ public class RoundtrackView extends VBox {
 				for(int i = 0; i < colors.size(); i++) {
 					String imgURL;
 					Button button = new Button();
-					String color = javafxColor.getStringColorFromModelColor(colors.get(i));
+					String color = javafxColor.getStringColorFromModelColor(colors.get(i)).toUpperCase();
 					final int index = i;
 					
 					imgURL = "/images/" + color + values.get(i) + "_Die.png";

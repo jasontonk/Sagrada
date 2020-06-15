@@ -286,7 +286,7 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 			changedDiceOnRoundTrack.add(gameDieFromDB);
 			for (int i = 0; i < diceOnRoundTrack.size(); i++) {
 				if(gameDieFromDB.getColor() == diceOnRoundTrack.get(i).getColor() && gameDieFromDB.getNumber() == diceOnRoundTrack.get(i).getNumber()) {
-					ArrayList<GameDie> temporaryList = (ArrayList<GameDie>) changedDiceOnRoundTrack.clone();
+					ArrayList<GameDie> temporaryList = (ArrayList<GameDie>) changedDiceOnRoundTrack.clone();// TODO miss geen clone
 					for (int j = 0; j < changedDiceOnRoundTrack.size(); j++) {
 						if(gameDieFromDB.getColor() == changedDiceOnRoundTrack.get(j).getColor() && gameDieFromDB.getNumber() == changedDiceOnRoundTrack.get(j).getNumber()) {
 							temporaryList.remove(j);
