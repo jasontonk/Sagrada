@@ -73,13 +73,7 @@ public class PatterncardView extends VBox{
 				}
 				button.setOnMouseClicked(e-> checkPlacementAgainstRules(xPos, yPos, stackpane));
 				stackpane.getChildren().add(button);
-				if(patterncardController
-						.getGameController()
-						.getGame()
-						.getPersonalPlayer()
-						.getBoard()
-						.getBoardField(xPos, yPos)
-						.hasDie()) {
+				if(patterncardController.getGameController() != null && patterncardController.getGameController().getGame().getPersonalPlayer().getBoard().getBoardField(xPos, yPos).hasDie()) {
 					Button die = new Button();
 					imgURL = "/images/" + patterncardController.getGameController().getGame().getPersonalPlayer().getBoard().getBoardField(xPos, yPos).getDie().getColor().toString()
 							+ patterncardController.getGameController().getGame().getPersonalPlayer().getBoard().getBoardField(xPos, yPos).getDie().getEyes() 
@@ -134,12 +128,14 @@ public class PatterncardView extends VBox{
 	
 	public BorderPane drawPersonalObjectiveCardColor() {
 		BorderPane personalObjectiveCardColor = new BorderPane();
-		Text color = new Text();
-		color.setText("Persoonlijke doelkaartkleur = " + patterncardController.getGameController().getGame().getPersonalPlayer().getPersonalObjectiveCardColor().toString());
-		color.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 12));
-		personalObjectiveCardColor.setPadding(padding);
-		personalObjectiveCardColor.setCenter(color);
-	    return personalObjectiveCardColor;
+		if(patterncardController.getGameController() != null) {	
+			Text color = new Text();
+			color.setText("Persoonlijke doelkaartkleur = " + patterncardController.getGameController().getGame().getPersonalPlayer().getPersonalObjectiveCardColor().toString());
+			color.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 12));
+			personalObjectiveCardColor.setPadding(padding);
+			personalObjectiveCardColor.setCenter(color);
+		}
+		return personalObjectiveCardColor;
 	}
 	
 	public boolean checkPlacementAgainstRules(int x, int y, StackPane stackpane) {

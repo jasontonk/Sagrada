@@ -2,6 +2,7 @@ package view;
 
 import java.util.ArrayList;
 
+import controller.AccountController;
 import controller.GameController;
 import controller.PatterncardController;
 import javafx.geometry.HPos;
@@ -12,6 +13,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import model.PatternCard;
+import model.Player;
 
 public class PatterncardSelectionView extends VBox {
 	
@@ -20,11 +23,14 @@ public class PatterncardSelectionView extends VBox {
 	private Insets padding = new Insets(5);
 	
 	
-	public PatterncardSelectionView(GameController gameController) {
+	public PatterncardSelectionView(AccountController accountController, Player player) {
 		patterncardView = new ArrayList<PatterncardView>();
 		patterncardControllers = new ArrayList<PatterncardController>();
-		
-		patterncardControllers = gameController.getPatternCardsToChoose();
+		ArrayList<PatternCard> patterncardsToChoose = accountController.getPatternCardsToChoose(player);
+		for (PatternCard patterncard : patterncardsToChoose) {
+			patterncardControllers.add(new PatterncardController(patterncard));
+		}
+	
 		for (int i = 0; i < 4; i++) {
 			patterncardView.add(new PatterncardView(patterncardControllers.get(i)));
 		}

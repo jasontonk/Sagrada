@@ -32,6 +32,7 @@ public class AccountController {
 	private AccountDBA accountDBA;
 	private ArrayList<Player> invitePlayerList;
 	private InvitationController invitationController;
+	private PatterncardSelectionView patterncardSelectionView;
 	
 	public AccountController(DataBaseConnection c, MyScene myScene) {
 		this.connection = c;
@@ -244,7 +245,7 @@ public class AccountController {
 			if(!refusedPlayer){
 
 				stopInviteThread();
-				
+				viewPatterncardSelectionView(player);
 				player.setPatternCard(player.getPatternCard());
 				player.createBoard();
 				player.getBoard().AddBoardFieldsToDB();
@@ -274,11 +275,32 @@ public class AccountController {
 		}	
 	}
 	
+	public void viewPatterncardSelectionView(Player player) {
+		patterncardSelectionView = new PatterncardSelectionView(this, player);
+		myScene.setContentPane(patterncardSelectionView);
+		boolean selected = false;
+		while(!selected) {
+			if(player.getPatternCard() != null) {
+				selected = true;
+			}
+			System.out.println("kijk hoe snel ik gaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 	public void updateLobbyView() {
 		lobbyView.clearInvitations();
 		lobbyView.challengerListClear();
 		lobbyView.updateGameViews();
 		lobbyView.updatesendInvitationsView();
 		lobbyView.updateSentInvitations();
+	}
+
+	public ArrayList<PatternCard> getPatternCardsToChoose(Player player) {
+		return player.getPatternCardsToChoose(false);
 	}
 }
