@@ -23,7 +23,7 @@ public class PatterncardController {
 				getPatternCard();
 		System.out.println("patterncardcontroller patterncard = " + patterncard.getName());
 		if (patterncard.getPatterncardID() == 0) {
-			patterncard = new PatternCard(conn);
+			gameController.viewPatternCardSelection();
 		}
 //		patterncard.setpattern(false);
 	}

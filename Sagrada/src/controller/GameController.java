@@ -308,7 +308,7 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 	}
 
 	public void viewPatternCardSelection() {
-		// TODO Auto-generated method stub
+		patterncardSelectionView = new PatterncardSelectionView(this);
 		
 	}
 

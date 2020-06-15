@@ -10,12 +10,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import model.Account;
 import model.Game;
+import model.PatternCard;
 import model.Player;
 import model.PlayerStatus;
 import view.ChooseView;
 import view.LobbyView;
 import view.LoginView;
 import view.MyScene;
+import view.PatterncardSelectionView;
 import view.RegisterView;
 
 public class AccountController {
@@ -258,6 +260,8 @@ public class AccountController {
 				}
 				
 				GameController gameController = new GameController(connection, myScene, game, this);
+				
+				
 				myScene.setContentPane(gameController.getGameView());
 			}
 			else {

@@ -191,9 +191,10 @@ public class Player {
 	public PatternCard getPatternCard() {
 		if(patternCard.getPatterncardID() == 0) {
 			if(patternCard.getPatterncardDB().getSelectedPatterncardOfPlayer(this.getId(), this) == null) {
-				patternCard = patternCard.getPatterncardDB().getPatterncard();
-				patternCard.setpattern(false);
-				playerDBA.setPlayerPatternCard(patternCard, this);
+//				patternCard = patternCard.getPatterncardDB().getPatterncard();
+//				patternCard.setpattern(false);
+//				playerDBA.setPlayerPatternCard(patternCard, this);
+				return null;
 			}
 			else {
 				patternCard = patternCard.getPatterncardDB().getSelectedPatterncardOfPlayer(this.getId(), this);	
@@ -204,11 +205,12 @@ public class Player {
 	}
 
 	public void setPatternCard(PatternCard patternCard) {
-		playerDBA.setPlayerPatternCard(patternCard, this);
-//		this.patternCard = patternCard.getPatterncardDB().getSelectedPatterncardOfPlayer(this.getId(), this);
-		this.patternCard = patternCard;
-		for(int i = 0; i < patternCard.getDifficulty(); i++) {
-			favorTokens.add(new FavorToken(this, this.getGame().getGameID(), connection));
+		if(patternCard != null) {
+			playerDBA.setPlayerPatternCard(patternCard, this);
+			this.patternCard = patternCard;
+			for(int i = 0; i < patternCard.getDifficulty(); i++) {
+				favorTokens.add(new FavorToken(this, this.getGame().getGameID(), connection));
+			}
 		}
 	}
 
