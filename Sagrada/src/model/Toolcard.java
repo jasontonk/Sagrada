@@ -18,7 +18,7 @@ public class Toolcard {
 		this.description = description;
 		amountOfCoins = 0;
 		this.conn=conn;
-		toolcardDB = new ToolCardDBA(conn);
+		toolcardDB = new ToolCardDBA(conn); 
 	}
 	
 	public void addFavorToken(int amount) {
