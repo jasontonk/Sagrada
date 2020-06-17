@@ -58,15 +58,21 @@ public class Toolcard {
 	public boolean eglomiseBorstel(Player player, PatternCard patternCard, BoardField boardField, Board board, ModelColor modelColor, int value) {
 		System.out.println("patterncard1" + patternCard.getName());
 		System.out.println("patterncard2" +player.getPatternCard().getName());
-					
-		if(!board.checkSidesColor(boardField, modelColor)) { 
+		System.out.println(boardField.getxPos() + " " + boardField.getyPos());
+		
+		if(board.checkIsNextToDie(boardField)) {			
+//		if(!board.checkSidesColor(boardField, modelColor)) {
+			System.out.println("ik kom in de 1e");
 				if(!board.checkSidesValue(boardField, value)) {
-					if(//board.checkFieldColorAndDieColor(boardField, modelColor) || 
+					System.out.println("ik kom in de 2e");
+					if(board.checkFieldColorAndDieColor(boardField, modelColor) || 
 							board.checkFieldValueAndDieValue(boardField, value) 
-//							|| !board.checkFieldColorAndDieColor(boardField, modelColor) 
-							|| !board.checkFieldValueAndDieValue(boardField, value) 
+							|| !board.checkFieldColorAndDieColor(boardField, modelColor)
+							|| !board.checkFieldColorAndDieColor(boardField, modelColor)
+							&& !board.checkFieldValueAndDieValue(boardField, value) 
 							&& patternCard.getFieldColor(boardField.getxPos(), boardField.getyPos()) == null 
 							&& patternCard.getFieldValue(boardField.getxPos(), boardField.getyPos()) == 0){
+						System.out.println("ik kom in de 3e");
 				
 							
 								board.placeDie(boardField, player.getSelectedDie());
@@ -74,7 +80,8 @@ public class Toolcard {
 							return true;
 						}
 					}
-				}
+		}
+//				}
 		return false;
 	}
 

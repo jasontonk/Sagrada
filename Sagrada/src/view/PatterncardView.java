@@ -82,7 +82,9 @@ public class PatterncardView extends VBox{
 						Image image = new Image(getClass().getResource(imgURL).toString());
 						die.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
 						die.setPrefSize(40, 40);
+						die.setOnMouseClicked(e -> setSelectedDie(xPos, yPos));
 						stackpane.getChildren().add(die);
+						
 					}
 				}
 				

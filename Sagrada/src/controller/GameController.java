@@ -195,8 +195,15 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 		return checkplacement;
 		}
 		else {
-			return game.checkSelectedToolcard(x, y);
+			System.out.println("Ik ga hier mooie toolcardjes doen");
+			boolean testje = game.checkSelectedToolcard(x, y);
+			if(!testje) {
+				showWarning("toolcard helemaal kut", "");
+				
+			}
+			return testje;
 		}
+		
 	}
 
 	public Player getCurrentPlayer() {

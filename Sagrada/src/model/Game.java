@@ -680,10 +680,16 @@ public class Game {
 		if(personalPlayer == currentPlayer) {		
 			switch (selectedToolcard.getName()) {
 			case "Grozing Pliers":
-				return selectedToolcard.eglomiseBorstel(personalPlayer, personalPlayer.getPatternCard(), board.getBoardField(x, y), board, selectedDie.getColor(), selectedDie.getEyes());
-			case "Eglomise Brush":
-			
 				break;
+			case "Eglomise Brush":
+				return selectedToolcard.eglomiseBorstel(
+						personalPlayer, 
+						personalPlayer.getPatternCard(), 
+						personalPlayer.getBoard().
+						getBoardField(x, y), 
+						personalPlayer.getBoard(), 
+						selectedDie.getColor(), 
+						selectedDie.getEyes());
 			case "Copper Foil Burnisher":
 				
 				break;
