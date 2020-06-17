@@ -17,17 +17,21 @@ public class ToolCardDBA {
 	
 	public ArrayList<Toolcard> get3ToolcardsForAGame() {
 				
-		int id1 =  (int)(Math.random() * 12 + 1);
-		int id2 = (int)(Math.random() * 12 + 1);
-		while(id2 == id1) {
-			id2 = (int)(Math.random() * 12 + 1);
-			System.out.println("while loop 1");
-		}
-		int id3 = (int)(Math.random() * 12 + 1);
-		while(id3 == id1 || id3 == id2) {
-			id3 = (int)(Math.random() * 12 + 1);
-			System.out.println("while loop 2");
-		}
+//		int id1 =  (int)(Math.random() * 12 + 1);
+//		int id2 = (int)(Math.random() * 12 + 1);
+//		while(id2 == id1) {
+//			id2 = (int)(Math.random() * 12 + 1);
+//			System.out.println("while loop 1");
+//		}
+//		int id3 = (int)(Math.random() * 12 + 1);
+//		while(id3 == id1 || id3 == id2) {
+//			id3 = (int)(Math.random() * 12 + 1);
+//			System.out.println("while loop 2");
+//		}
+		
+		int id1 = 1;
+		int id2 = 2;
+		int id3 = 3;
 		
 		System.out.println(id1+ "   " + id2 + "   " + id3);
 	       

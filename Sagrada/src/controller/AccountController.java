@@ -248,8 +248,8 @@ public class AccountController {
 				stopInviteThread();
 //				viewPatterncardSelectionView(player);
 				player.setPatternCard(player.getPatternCard());
-				player.createBoard();
-				player.getBoard().AddBoardFieldsToDB();
+//				player.createBoard();
+//				player.getBoard().AddBoardFieldsToDB();
 				game.finishGameSetup(this);
 				game.addpublicobjectivecards();
 				game.addToolcards();

@@ -205,12 +205,12 @@ public class Player {
 	}
 
 	public void setPatternCard(PatternCard patternCard) {
-		if(patternCard != null) {
+//		if(patternCard != null) {
 			playerDBA.setPlayerPatternCard(patternCard, this);
 			this.patternCard = patternCard;
 			for(int i = 0; i < patternCard.getDifficulty(); i++) {
 				favorTokens.add(new FavorToken(this, this.getGame().getGameID(), connection));
-			}
+//			}
 		}
 	}
 

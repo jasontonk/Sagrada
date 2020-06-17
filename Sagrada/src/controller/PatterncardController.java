@@ -24,6 +24,7 @@ public class PatterncardController {
 		System.out.println("patterncardcontroller patterncard = " + patterncard.getName());
 		if (patterncard.getPatterncardID() == 0) {
 //			gameController.viewPatternCardSelection();
+			patterncard = new PatternCard(conn);
 		}
 //		patterncard.setpattern(false);
 	}
