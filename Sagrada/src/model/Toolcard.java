@@ -17,7 +17,7 @@ public class Toolcard {
 		this.id = id;
 		this.description = description;
 		amountOfCoins = 0;
-		this.conn=conn;
+		this.conn=conn; 
 		toolcardDB = new ToolCardDBA(conn); 
 	}
 	
