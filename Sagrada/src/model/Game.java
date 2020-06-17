@@ -4,8 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.sun.webkit.ContextMenu.ShowContext;
-
 import controller.AccountController;
 import database.DataBaseConnection;
 import database.GameDBA;
@@ -38,7 +36,7 @@ public class Game {
 	private GameDie selectedDie;
 	private GameDBA gameDBA;
 	private boolean finishedTurn;
-	private boolean placedDie;	
+	private boolean placedDie;
 	private GameDieDBA gamedieDBA;
 	private PublicObjectiveCardDBA publicObjectiveCardDBA;
 	private PlayerDBA playerDBA;
@@ -46,21 +44,24 @@ public class Game {
 	private SimpleStringProperty currentPlayerName;
 	private Toolcard selectedToolcard;
 
-	
 	public Toolcard getSelectedToolcard() {
 		return selectedToolcard;
 	}
 
 	public void setSelectedToolcard(int id) {
-		for (Toolcard toolcard : toolcards) {
-			if(toolcard.getId() == id) {
-				this.selectedToolcard = toolcard;
+		if (id != 0) {
+			for (Toolcard toolcard : toolcards) {
+				if (toolcard.getId() == id) {
+					this.selectedToolcard = toolcard;
+				}
 			}
+		} else {
+			this.selectedToolcard = null;
 		}
 	}
 
 	public Game(DataBaseConnection conn, boolean randomgeneratedpatterncards) {
-		
+
 		this.conn = conn;
 		this.randomPatterncards = randomgeneratedpatterncards;
 		round = new SimpleIntegerProperty();
@@ -78,36 +79,33 @@ public class Game {
 		currentPlayerName = new SimpleStringProperty();
 		players = new ArrayList<Player>();
 	}
-	
+
 	public void addpublicobjectivecards() {
 		getPublicObjectiveCardsOfGame();
 	}
-	
-	
+
 	public void addToolcards() {
 		getToolcardsOfGame();
 	}
-	
+
 	public void addGametoDB() {
 		gameDBA.addNewGameDB(LocalDateTime.now(), this);
 	}
-	
+
 	public void finishGameSetup(AccountController accountController) {
-		
-		
-		
+
 		this.players = gameDBA.getPlayersOfGame(this);
-		System.out.println("DIT ZIJN DE PLAYERS VAN DE GAME "+ players);
+		System.out.println("DIT ZIJN DE PLAYERS VAN DE GAME " + players);
 		currentPlayer = gameDBA.getCurrentPlayer(this);
-        if(currentPlayer == null) {
-            currentPlayer = players.get(0);
-            gameDBA.changeCurrentPlayer(currentPlayer.getId(), this);
-            currentPlayerName.set(players.get(0).getName()); 
-        }
-		for (int i = 0; i < players.size(); i++) {
-			players.get(i).setSequenceNumber(i+1);
+		if (currentPlayer == null) {
+			currentPlayer = players.get(0);
+			gameDBA.changeCurrentPlayer(currentPlayer.getId(), this);
+			currentPlayerName.set(players.get(0).getName());
 		}
-		
+		for (int i = 0; i < players.size(); i++) {
+			players.get(i).setSequenceNumber(i + 1);
+		}
+
 //		for (int i = 0; i < players.size(); i++) {
 //			if (players.get(i).getPatternCard().getPatterncardID() == 0) {
 //				PatternCard patternCard = new PatternCard(conn);
@@ -118,22 +116,22 @@ public class Game {
 //		}
 		finishedGame = false;
 		placedDie = true;
-		
+
 	}
-	
+
 	public void setPersonalPlayer(Account account) {
 		for (int i = 0; i < players.size(); i++) {
 			System.out.println("DIT IS PLAYERS.GETACCOUNT " + players.get(i).getAccount().getUsername());
 			System.out.println("DIT IS ACCOUNCONTROLLER.GETACCOUNT: " + account.getUsername());
-			if(players.get(i).getName().equals(account.getUsername())) {
-				System.out.println("PERSONALPLAYER GEVONDEN 1: " + players.get(i));				
+			if (players.get(i).getName().equals(account.getUsername())) {
+				System.out.println("PERSONALPLAYER GEVONDEN 1: " + players.get(i));
 				personalPlayer = players.get(i);
 				System.out.println("PERSONALPLAYER GEVONDEN 2: " + personalPlayer);
 				break;
 			}
 		}
 	}
-	
+
 //	public Game(DataBaseConnection conn) {
 //		this.conn = conn;
 //		gameDBA = new GameDBA(conn);
@@ -166,68 +164,67 @@ public class Game {
 //		publicObjectiveCards = new ArrayList<PublicObjectiveCard>();
 //		getPublicObjectiveCardsOfGame();
 //	}
-	
+
 	private void getPublicObjectiveCardsOfGame() {
-		ArrayList<PublicObjectiveCard> publicObjectiveCardsOfGameFromDB = publicObjectiveCardDBA.getPublicObjectiveCardsOfGame(this); 
-		if(publicObjectiveCardsOfGameFromDB.size() == 0) {
+		ArrayList<PublicObjectiveCard> publicObjectiveCardsOfGameFromDB = publicObjectiveCardDBA
+				.getPublicObjectiveCardsOfGame(this);
+		if (publicObjectiveCardsOfGameFromDB.size() == 0) {
 			System.out.println("ik maak nieuwe objectivecards aan");
-			ArrayList<PublicObjectiveCard> publicObjectiveCardsFromDB = publicObjectiveCardDBA.getAllAvailablePublicObjectiveCards(this);
+			ArrayList<PublicObjectiveCard> publicObjectiveCardsFromDB = publicObjectiveCardDBA
+					.getAllAvailablePublicObjectiveCards(this);
 			int i = 0;
 			Random r = new Random();
-			while(i < 3) {
-				PublicObjectiveCard publicObjectiveCard = publicObjectiveCardsFromDB.get(r.nextInt(publicObjectiveCardsFromDB.size()));
-				if(publicObjectiveCard != null && !publicObjectiveCards.contains(publicObjectiveCard)) {
+			while (i < 3) {
+				PublicObjectiveCard publicObjectiveCard = publicObjectiveCardsFromDB
+						.get(r.nextInt(publicObjectiveCardsFromDB.size()));
+				if (publicObjectiveCard != null && !publicObjectiveCards.contains(publicObjectiveCard)) {
 					publicObjectiveCards.add(publicObjectiveCard);
 					i++;
 				}
 			}
 			for (PublicObjectiveCard publicObjectiveCard2 : publicObjectiveCards) {
-				System.out.println("public objectivecard: "+ publicObjectiveCard2.getName() + " id= " +publicObjectiveCard2.getId());
+				System.out.println("public objectivecard: " + publicObjectiveCard2.getName() + " id= "
+						+ publicObjectiveCard2.getId());
 				publicObjectiveCardDBA.addPublicObjectiveCardToGame(publicObjectiveCard2, this);
 			}
-		}
-		else {
+		} else {
 			System.out.println("ik gebruik bestaande objectivecards");
 			publicObjectiveCards = publicObjectiveCardsOfGameFromDB;
 		}
 	}
 
-	
 	private void getToolcardsOfGame() {
 		ArrayList<Toolcard> toolcardsOfGameFromDB = toolcardDBA.getToolcardsFromGame(this);
-		if(toolcardsOfGameFromDB.size() == 0) {
+		if (toolcardsOfGameFromDB.size() == 0) {
 			System.out.println("ik maak nieuwe toolcards aan");
 			toolcardsOfGameFromDB = toolcardDBA.get3ToolcardsForAGame();
-			
+
 			for (Toolcard toolcard2 : toolcardsOfGameFromDB) {
-				System.out.println("toolcard: "+ toolcard2.getName() + " id= " +toolcard2.getId());
+				System.out.println("toolcard: " + toolcard2.getName() + " id= " + toolcard2.getId());
 				toolcards.add(toolcard2);
 				System.out.println("ik voeg de toolcard aan de db toe");
 				toolcardDBA.addToolCardToGame(this, toolcard2);
 			}
-		}
-		else if(toolcardsOfGameFromDB.size() == 3) {
+		} else if (toolcardsOfGameFromDB.size() == 3) {
 			System.out.println("ik gebruik bestaande toolcards");
 			ArrayList<Toolcard> toolcardsFromDB = toolcardDBA.getToolcardsFromGame(this);
 			int i = 0;
 			Random r = new Random();
-			while(i < 3) {
+			while (i < 3) {
 				Toolcard toolcard = toolcardsFromDB.get(r.nextInt(toolcardsFromDB.size()));
-				if(toolcard != null && !toolcards.contains(toolcard)) {
+				if (toolcard != null && !toolcards.contains(toolcard)) {
 					toolcards.add(toolcard);
 					System.out.println("de toolcard heeft" + toolcards.get(i));
 					i++;
 				}
 			}
-			
-		}
-		else {
+
+		} else {
 			System.out.println("nog meer toolcards: " + toolcardsOfGameFromDB.size());
 			toolcards = toolcardsOfGameFromDB;
 		}
 	}
-	
-	
+
 //	public void checkInvites() {
 //		for (Account account : accounts) {
 //
@@ -243,7 +240,7 @@ public class Game {
 	public void play() {
 		gamesetup();
 //		playfirstround();
-		while(!finishedGame) {
+		while (!finishedGame) {
 			playround();
 		}
 
@@ -254,13 +251,13 @@ public class Game {
 		for (Player player : players) {
 			setPlayerPatternCards(player);
 			player.assignFavorTokens();
-			player.setPersonalObjectiveCardColor();//todo color mee geven voor speler
+			player.setPersonalObjectiveCardColor();// todo color mee geven voor speler
 		}
 		for (int i = 0; i < 3; i++) {
 //			bepaal public objective
 //		bepaal toolcards
 		}
-	
+
 	}
 
 //	public void playfirstround() { // met boolean first round treu
@@ -284,6 +281,10 @@ public class Game {
 //
 //	}
 
+	public void deleteDieFromPatternCard(int x_pos, int y_pos) {
+		personalPlayer.getBoard().removedie(selectedDie, x_pos, y_pos);
+	}
+
 	public void grabDiceFromBag() {
 		int amountofdice = players.size() * 2 + 1;
 		System.out.println("amountofdice : " + amountofdice);
@@ -291,160 +292,148 @@ public class Game {
 		offer = gamedieDBA.getAllRoundDice(this);
 		System.out.println("GRABDICE OFFER = " + offer);
 //		if() {
-			while (offer.size() < amountofdice) {
-				for (int i = 0; i < amountofdice; i++) {
-					System.out.println("diceInBag " + diceInBag);
-					GameDie selectedDice = diceInBag[r.nextInt(89)];
-					if (!checkDieUsed(selectedDice)) {
-						offer.add(selectedDice);
-								selectedDice.setRoundID(this);		
-					}
-					else {
-						i--;
-					}
-					System.out.println("offersize : "+offer.size());
+		while (offer.size() < amountofdice) {
+			for (int i = 0; i < amountofdice; i++) {
+				System.out.println("diceInBag " + diceInBag);
+				GameDie selectedDice = diceInBag[r.nextInt(89)];
+				if (!checkDieUsed(selectedDice)) {
+					offer.add(selectedDice);
+					selectedDice.setRoundID(this);
+				} else {
+					i--;
 				}
+				System.out.println("offersize : " + offer.size());
 			}
+		}
 //		}
 	}
-	
+
 	public void getDicePoolFromDB() {
 		ArrayList<GameDie> offerfromDB = gamedieDBA.getAllavailableDiceOfRound(this);
 		System.out.println("offerfromDBsize : " + offerfromDB.size());
-		if(offer != offerfromDB) {
-			offer =	offerfromDB;
+		if (offer != offerfromDB) {
+			offer = offerfromDB;
 		}
-		System.out.println("de offersize is: "+offer.size());
+		System.out.println("de offersize is: " + offer.size());
 	}
-	
+
 	public boolean checkDieUsed(GameDie selectedDice) {
-		if(selectedDice != null) {
+		if (selectedDice != null) {
 			System.out.println("SELECTEDDIE " + selectedDice);
 			System.out.println("GETROUNDID" + selectedDice.getRoundID(this));
-			if(selectedDice.getRoundID(this) != 0){
+			if (selectedDice.getRoundID(this) != 0) {
 				return true;
-			}
-			else {
+			} else {
 				return false;
 			}
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
 
 	public void playround() {// boolean first round false
 		personalPlayer.assignFavorTokens();
-		System.out.println("round: " +round+ " Databaseround: "+gameDBA.getCurrentRound(this.getGameID()));
+		System.out.println("round: " + round + " Databaseround: " + gameDBA.getCurrentRound(this.getGameID()));
 //		if(round.equals(gameDBA.getCurrentRound(this.getGameID()))) {
-		if(round.get() == gameDBA.getCurrentRound(this.getGameID())) {
+		if (round.get() == gameDBA.getCurrentRound(this.getGameID())) {
 			System.out.println("JAZEKER");
-			if(currentPlayer.equals(personalPlayer)) {
+			if (currentPlayer.equals(personalPlayer)) {
 				playTurn();
-			}
-			else {
+			} else {
 				System.out.println("wacht tot een andere speler de beurt beindigt");
 			}
 		}
 		round.set(gameDBA.getCurrentRound(this.getGameID()));
 	}
-	
+
 	public void playTurn() {
-		
-			System.out.println("still your turn");
+
+		System.out.println("still your turn");
 	}
+
 	public void setNextPlayer() {
-		if(!(getRoundFromDB() >= 20 && getCurrentPlayer().getSequenceNumber() == 1)) {
+		if (!(getRoundFromDB() >= 20 && getCurrentPlayer().getSequenceNumber() == 1)) {
 			boolean isClockwise = gameDBA.isRoundClockwise(this);
-			
-			if(currentPlayer.getSequenceNumber() == players.size() && isClockwise) {
+
+			if (currentPlayer.getSequenceNumber() == players.size() && isClockwise) {
 				gameDBA.changeRoundDirection(this);
 				round.add(1);
-			}
-			else if(currentPlayer.getSequenceNumber() == 1 && !isClockwise) {
+			} else if (currentPlayer.getSequenceNumber() == 1 && !isClockwise) {
 				changeSequenceNumber();
-				if(!round.equals(20)) {
+				if (!round.equals(20)) {
 					gameDBA.changeRoundDirection(this);
 					round.add(1);
 				}
-				
-				
-			}
-			else if(isClockwise) {
-				for (int i = players.size()-1; i >= 0; i--) {
-					
-					if(currentPlayer.getSequenceNumber() == players.get(i).getSequenceNumber()) {
-						if(i == players.size()-1) {
+
+			} else if (isClockwise) {
+				for (int i = players.size() - 1; i >= 0; i--) {
+
+					if (currentPlayer.getSequenceNumber() == players.get(i).getSequenceNumber()) {
+						if (i == players.size() - 1) {
 							currentPlayer = players.get(0);
 							currentPlayerName.set(players.get(0).getName());
-						}
-						else {
-							currentPlayer = players.get(i+1);
-							currentPlayerName.set(players.get(i+1).getName());
+						} else {
+							currentPlayer = players.get(i + 1);
+							currentPlayerName.set(players.get(i + 1).getName());
 						}
 						gameDBA.changeCurrentPlayer(currentPlayer.getId(), this);
 						break;
 					}
 				}
-			} 
-			else if(!isClockwise){
+			} else if (!isClockwise) {
 				for (int i = 0; i < players.size(); i++) {
-					if(currentPlayer.getSequenceNumber() == players.get(i).getSequenceNumber()) {
-						if(i == 0) {
-							currentPlayer = players.get(players.size()-1);
-							currentPlayerName.set(players.get(players.size()-1).getName());
-						}
-						else {
-							currentPlayer = players.get(i-1);
-							currentPlayerName.set(players.get(i-1).getName());
+					if (currentPlayer.getSequenceNumber() == players.get(i).getSequenceNumber()) {
+						if (i == 0) {
+							currentPlayer = players.get(players.size() - 1);
+							currentPlayerName.set(players.get(players.size() - 1).getName());
+						} else {
+							currentPlayer = players.get(i - 1);
+							currentPlayerName.set(players.get(i - 1).getName());
 						}
 						gameDBA.changeCurrentPlayer(currentPlayer.getId(), this);
 						break;
 					}
 				}
-			} 
+			}
 			System.out.println("next player : " + currentPlayer.getId());
-		}
-		else {
+		} else {
 			finishGame();
 		}
 	}
-	
+
 	public void addLeftOverDiceToRoundTrack() {
 		for (int i = 0; i < offer.size(); i++) {
-			gamedieDBA.addDieToRoundTrack(offer.get(i), this, round.get()/2);//TODO check if right
+			gamedieDBA.addDieToRoundTrack(offer.get(i), this, round.get() / 2);// TODO check if right
 		}
 		offer.clear();
-		
+
 	}
 
 	public void changeSequenceNumber() {
 		System.out.println("stap 1");
-	if(currentPlayer.getSequenceNumber() == 1 && !gameDBA.isRoundClockwise(this)) {
-			
-		if(getRoundFromDB() >= 20 && this.getCurrentPlayer().getSequenceNumber() == 1) {
-			finishGame();
-		}
-		else {
-			System.out.println("stap 2");
-			for (int i = 0; i < players.size(); i++) {
-				if(players.get(i).getSequenceNumber() == players.size()) {
-					System.out.println("stap 3.1");
-					players.get(i).setSequenceNumber(1);
+		if (currentPlayer.getSequenceNumber() == 1 && !gameDBA.isRoundClockwise(this)) {
+
+			if (getRoundFromDB() >= 20 && this.getCurrentPlayer().getSequenceNumber() == 1) {
+				finishGame();
+			} else {
+				System.out.println("stap 2");
+				for (int i = 0; i < players.size(); i++) {
+					if (players.get(i).getSequenceNumber() == players.size()) {
+						System.out.println("stap 3.1");
+						players.get(i).setSequenceNumber(1);
+					} else {
+						System.out.println("stap 3.2");
+						players.get(i).setSequenceNumber(players.get(i).getSequenceNumber() + 1);
+					}
 				}
-				else {
-					System.out.println("stap 3.2");
-					players.get(i).setSequenceNumber(players.get(i).getSequenceNumber()+1);
+
+				for (int i = 0; i < players.size(); i++) {
+					if (players.get(i).getSequenceNumber() == 1) {
+						currentPlayer = players.get(i);
+						currentPlayerName.set(players.get(i).getName());
+					}
 				}
-			}
-				
-			for (int i = 0; i < players.size(); i++) {
-				if(players.get(i).getSequenceNumber() == 1) {
-					currentPlayer = players.get(i);
-					currentPlayerName.set(players.get(i).getName());
-				}
-			}
-			gameDBA.changeCurrentPlayer(currentPlayer.getId(), this);
+				gameDBA.changeCurrentPlayer(currentPlayer.getId(), this);
 			}
 		}
 	}
@@ -461,54 +450,54 @@ public class Game {
 
 	public void makedie() {
 		ArrayList<GameDie> diceFromGameFromDB = gamedieDBA.getAllDiceFromGame(this);
-		if(diceFromGameFromDB.size() == 0) {
-			
+		if (diceFromGameFromDB.size() == 0) {
+
 			System.out.println("ik maak nieuwe dice aan");
 			Random r = new Random();
 			for (int i = 0; i < 18; i++) {
-				diceInBag[i] = new GameDie(ModelColor.GREEN, i+1, r.nextInt(6)+1, this, conn, gamedieDBA);
+				diceInBag[i] = new GameDie(ModelColor.GREEN, i + 1, r.nextInt(6) + 1, this, conn, gamedieDBA);
 				diceInBag[i].addDieToDB(this);
 				diceInBag[i].setEyes(this);
 			}
 			for (int i = 0; i < 18; i++) {
-				diceInBag[i+17] = new GameDie(ModelColor.BLUE, i+1, r.nextInt(6)+1, this, conn, gamedieDBA);
-				diceInBag[i+17].addDieToDB(this);
-				diceInBag[i+17].setEyes(this);
+				diceInBag[i + 17] = new GameDie(ModelColor.BLUE, i + 1, r.nextInt(6) + 1, this, conn, gamedieDBA);
+				diceInBag[i + 17].addDieToDB(this);
+				diceInBag[i + 17].setEyes(this);
 			}
 			for (int i = 0; i < 18; i++) {
-				diceInBag[i+35] = new GameDie(ModelColor.YELLOW, i+1, r.nextInt(6)+1, this, conn, gamedieDBA);
-				diceInBag[i+35].addDieToDB(this);
-				diceInBag[i+35].setEyes(this); 
+				diceInBag[i + 35] = new GameDie(ModelColor.YELLOW, i + 1, r.nextInt(6) + 1, this, conn, gamedieDBA);
+				diceInBag[i + 35].addDieToDB(this);
+				diceInBag[i + 35].setEyes(this);
 			}
 			for (int i = 0; i < 18; i++) {
-				diceInBag[i+53] = new GameDie(ModelColor.PURPLE, i+1, r.nextInt(6)+1, this, conn, gamedieDBA);
-				diceInBag[i+53].addDieToDB(this);
-				diceInBag[i+53].setEyes(this);
+				diceInBag[i + 53] = new GameDie(ModelColor.PURPLE, i + 1, r.nextInt(6) + 1, this, conn, gamedieDBA);
+				diceInBag[i + 53].addDieToDB(this);
+				diceInBag[i + 53].setEyes(this);
 			}
 			for (int i = 0; i < 18; i++) {
-				diceInBag[i+71] = new GameDie(ModelColor.RED, i+1, r.nextInt(6)+1, this, conn, gamedieDBA);
-				diceInBag[i+71].addDieToDB(this);
-				diceInBag[i+71].setEyes(this);
+				diceInBag[i + 71] = new GameDie(ModelColor.RED, i + 1, r.nextInt(6) + 1, this, conn, gamedieDBA);
+				diceInBag[i + 71].addDieToDB(this);
+				diceInBag[i + 71].setEyes(this);
 			}
-		}
-		else {
+		} else {
 			System.out.println("ik haal dice uit de database");
-			System.out.println("aantal dice uit DB: "+diceFromGameFromDB.size());
+			System.out.println("aantal dice uit DB: " + diceFromGameFromDB.size());
 			diceInBag = diceFromGameFromDB.toArray(diceInBag);
 		}
 	}
-	
-	public ArrayList<PatternCard> generategamePatterncards(boolean randomgenerated){
+
+	public ArrayList<PatternCard> generategamePatterncards(boolean randomgenerated) {
 		ArrayList<PatternCard> patterncards = new ArrayList<PatternCard>();
-		for(int i = 0;i<(accounts.size()*4);i++){
+		for (int i = 0; i < (accounts.size() * 4); i++) {
 			PatternCard patterncard = new PatternCard(conn);
 			patterncards.add(patterncard);
 		}
 		return patterncards;
 	}
+
 	public void setPlayerPatternCards(Player player) {
-		for(int i = 0; i < 4; i++) {
-			int randomPatterncardNumber = (int)(Math.random() * gamePatterncards.size());
+		for (int i = 0; i < 4; i++) {
+			int randomPatterncardNumber = (int) (Math.random() * gamePatterncards.size());
 			playerPatterncards.add(gamePatterncards.get(randomPatterncardNumber));
 			gamePatterncards.remove(i);
 		}
@@ -522,7 +511,7 @@ public class Game {
 //	}
 
 	public ArrayList<Player> getPlayers() {
-		if(players.size() == 0) {
+		if (players.size() == 0) {
 			players = gameDBA.getPlayersOfGame(this);
 		}
 		return players;
@@ -549,20 +538,21 @@ public class Game {
 	}
 
 	public void setSelectedDie(GameDie die) {
-		if(die != null) 
-		System.out.println("game.setselecteddie : "+ die.getEyes() + die.getColor());
-		else System.out.println("Selecteddie ==== nullllllllllll");
+		if (die != null)
+			System.out.println("game.setselecteddie : " + die.getEyes() + die.getColor());
+		else
+			System.out.println("Selecteddie ==== nullllllllllll");
 		this.selectedDie = die;
 	}
 
 	public GameDie getSelectedDie() {
 		return selectedDie;
 	}
+
 	public Player getCurrentPlayer() {
 		currentPlayer = gameDBA.getCurrentPlayer(this);
-		currentPlayerName.set(
-				currentPlayer.getName());
-		if(currentPlayer == null) {
+		currentPlayerName.set(currentPlayer.getName());
+		if (currentPlayer == null) {
 			currentPlayer = gameDBA.getChallengerOfGameWithID(this.getGameID(), this);
 			currentPlayerName.set(gameDBA.getChallengerOfGameWithID(this.getGameID(), this).getName());
 		}
@@ -570,23 +560,22 @@ public class Game {
 	}
 
 	public void setCurrentPlayer(Player player) {
-		currentPlayer = player;	
+		currentPlayer = player;
 		currentPlayerName.set(player.getName());
-		System.out.println("DIT IS NU DE CURRENT PLAYER" +  currentPlayer);
+		System.out.println("DIT IS NU DE CURRENT PLAYER" + currentPlayer);
 	}
-
 
 	public boolean checkPlacementAgainstRules(int x, int y, ModelColor modelColor, int value) {
 		System.out.println("IK KOM HIER");
-		if(!placedDie) {
+		if (!placedDie) {
 			System.out.println("IK KOM HIER 2");
-			if(personalPlayer == currentPlayer) {
+			if (personalPlayer == currentPlayer) {
 				System.out.println("IK KOM HIER 3");
-				if(currentPlayer.getBoard() == null) {
+				if (currentPlayer.getBoard() == null) {
 					System.out.println("IK KOM HIER 4");
 					currentPlayer.createBoard();
 				}
-				if(currentPlayer.checkPlacementAgainstRules(x, y, modelColor, value)) {
+				if (currentPlayer.checkPlacementAgainstRules(x, y, modelColor, value)) {
 					System.out.println("IK KOM HIER 5");
 					placedDie = true;
 					return true;
@@ -601,14 +590,14 @@ public class Game {
 	}
 
 	public ModelColor getSelectedDieColor() {
-		if(selectedDie != null) {
+		if (selectedDie != null) {
 			return selectedDie.getColor();
 		}
 		return null;
 	}
 
 	public int getSelectedDieValue() {
-		if(selectedDie != null) {
+		if (selectedDie != null) {
 			return selectedDie.getEyes();
 		}
 		return 0;
@@ -625,13 +614,14 @@ public class Game {
 
 	public void setPlacedDie(boolean b) {
 		placedDie = b;
-		
+
 	}
 
 	public ArrayList<GameDie> getDiceOnRoundtrack() {
 		return gamedieDBA.getDiceOnRoundTrack(this);
-		
+
 	}
+
 	public String getChallengerOfGameWithID(int gameID) {
 		return gameDBA.getNameOfChallengerOfGameWithID(gameID);
 	}
@@ -643,18 +633,19 @@ public class Game {
 	public ArrayList<GameDie> getOffer() {
 //		diceInBag = gamedieDBA.getAllDiceFromGame(this)
 		int i = 0;
-		System.out.println("JAAAAAAAAA" +  gamedieDBA.getAllDiceFromGame(this));
+		System.out.println("JAAAAAAAAA" + gamedieDBA.getAllDiceFromGame(this));
 		for (GameDie gameDie : gamedieDBA.getAllDiceFromGame(this)) {
 			diceInBag[i] = gameDie;
 			i++;
 		}
-		
+
 		System.out.println("de size van de offer voor: " + offer.size());
 		System.out.println(currentPlayer + "CURRENT PLAYER");
 		System.out.println(currentPlayer.getSequenceNumber() + "CURRENT PLAYER SQNR");
 		offer = gamedieDBA.getAllavailableDiceOfRound(this);
 		currentPlayer = gameDBA.getCurrentPlayer(this);
-		if(currentPlayer.getSequenceNumber() == 1 && currentPlayer.getId() == personalPlayer.getId() && gameDBA.getCurrentRound(this.getGameID())%2 == 1 && offer.size() == 0) {
+		if (currentPlayer.getSequenceNumber() == 1 && currentPlayer.getId() == personalPlayer.getId()
+				&& gameDBA.getCurrentRound(this.getGameID()) % 2 == 1 && offer.size() == 0) {
 			System.out.println("ik maak een nieuw offer");
 			grabDiceFromBag();
 		}
@@ -664,40 +655,33 @@ public class Game {
 
 	public boolean everyoneSelectedPatternCard() {
 		for (Player player : players) {
-			if(player.getPatternCard() == null) {
+			if (player.getPatternCard() == null) {
 				return false;
 			}
 		}
-			return true;	
+		return true;
 	}
 
 	public ArrayList<PublicObjectiveCard> getPublicObjectiveCards() {
 		return publicObjectiveCards;
 	}
-	
-	
+
 	public boolean checkSelectedToolcard(int x, int y) {
-		if(personalPlayer == currentPlayer) {		
+		if (personalPlayer == currentPlayer) {
 			switch (selectedToolcard.getName()) {
 			case "Grozing Pliers":
 				break;
 			case "Eglomise Brush":
-				return selectedToolcard.eglomiseBorstel(
-						personalPlayer, 
-						personalPlayer.getPatternCard(), 
-						personalPlayer.getBoard().
-						getBoardField(x, y), 
-						personalPlayer.getBoard(), 
-						selectedDie.getColor(), 
-						selectedDie.getEyes());
+				return selectedToolcard.eglomiseBorstel(personalPlayer, personalPlayer.getPatternCard(),
+						personalPlayer.getBoard().getBoardField(x, y), personalPlayer.getBoard(),
+						selectedDie.getColor(), selectedDie.getEyes());
 			case "Copper Foil Burnisher":
-				
+
 				break;
 			}
 		}
 		return false;
 	}
-	
 
 	public int[] getPublicObjectiveCardIDs() {
 		int[] publicObjectiveCardIDs = new int[3];
@@ -706,8 +690,7 @@ public class Game {
 		}
 		return publicObjectiveCardIDs;
 	}
-	
-	
+
 	public int[] getToolcardIDs() {
 		int[] toolcardIDs = new int[3];
 		for (int i = 0; i < toolcards.size(); i++) {
@@ -715,7 +698,6 @@ public class Game {
 		}
 		return toolcardIDs;
 	}
-
 
 	public boolean isFinishedGame() {
 		return finishedGame;
@@ -732,7 +714,7 @@ public class Game {
 	public GameDieDBA getGameDieDBA() {
 		return gamedieDBA;
 	}
-	
+
 	public SimpleStringProperty getCurrentPlayerName() {
 		return currentPlayerName;
 	}
@@ -748,7 +730,7 @@ public class Game {
 	public Player getPlayerChallengerOfGameWithID(int gameid) {
 		return gameDBA.getChallengerOfGameWithID(gameid, this);
 	}
-	
+
 	public ArrayList<Player> getChallengeePlayers(Account account) {
 		return playerDBA.getChallengeePlayers(account);
 	}

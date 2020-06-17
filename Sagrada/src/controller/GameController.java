@@ -1,11 +1,8 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.Timer;
 
 import database.DataBaseConnection;
-import javafx.concurrent.Task;
-import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import model.Game;
@@ -15,7 +12,6 @@ import model.PatternCard;
 import model.Player;
 import view.FinishedGameView;
 import view.GameView;
-import view.LobbyView;
 import view.MyScene;
 import view.PatterncardSelectionView;
 import view.PatterncardView;
@@ -36,17 +32,15 @@ public class GameController {
 	private volatile boolean isPlayingTurn;
 	private volatile boolean shownTurnMessage;
 
-
 	private PatterncardView patterncardView;
 	private PatterncardSelectionView patterncardSelectionView;
-	
+
 	private ArrayList<GameDie> changedDiceOnRoundTrack;
 	private ArrayList<GameDie> diceOnRoundTrack;
-	
+
 	private Thread updateGame;
 	private Thread updateViews;
 	private Thread playround;
-	
 
 //	public GameController(DataBaseConnection conn, MyScene ms, Game game) {
 //		this.conn= conn;
@@ -87,63 +81,63 @@ public class GameController {
 //		
 //
 //	}
-	
+
 	public GameController(DataBaseConnection conn, MyScene ms, Game game, AccountController accountController) {
-		this.conn= conn;
+		this.conn = conn;
 		myScene = ms;
 		this.game = game;
-		
+
 		this.accountController = accountController;
-		
+
 		System.out.println("loading...20%");
 		dieController = new DieController(conn, this);
 		System.out.println("loading...40%");
-		patterncardController= new PatterncardController(conn, this);
+		patterncardController = new PatterncardController(conn, this);
 		System.out.println("loading...60%");
-		roundtrackController= new RoundtrackController(game, this);
+		roundtrackController = new RoundtrackController(game, this);
 		System.out.println("loading...80%");
 		gameView = new GameView(this);
 		System.out.println("loading...100%");
-		
+
 //		patterncardView = new PatterncardView(patterncardController);
 //		patterncardSelectionView = new PatterncardSelectionView(this);
-		gameRoundPlayer =  new GameRoundPlayer(this, 3);
+		gameRoundPlayer = new GameRoundPlayer(this, 3);
 		gameUpdater = new GameUpdater(this);
 		gameViewUpdater = new GameViewUpdater(this, gameUpdater);
-		
+
 		changedDiceOnRoundTrack = new ArrayList<GameDie>();
 		diceOnRoundTrack = new ArrayList<GameDie>();
-		
+
 		game.playround();
-		
+
 		updateGame = new Thread(gameUpdater);
 		updateGame.setDaemon(true);
 		updateGame.start();
 		updateViews = new Thread(gameViewUpdater);
 		updateViews.setDaemon(true);
 		updateViews.start();
-		
+
 		playround = new Thread(gameRoundPlayer);
 		playround.setDaemon(true);
 		playround.start();
-		
+
 		gameRoundPlayer.setIsPaused(true);
 		myScene.setContentPane(new GameView(this));
 		isPlayingTurn = false;
 		shownTurnMessage = false;
 
 	}
-	
-public ArrayList<PatterncardController> getPatternCardsToChoose(){
+
+	public ArrayList<PatterncardController> getPatternCardsToChoose() {
 		ArrayList<PatterncardController> patterncardControllers = new ArrayList<PatterncardController>();
 		ArrayList<PatternCard> patternCard = new ArrayList<PatternCard>();
 		patternCard = getCurrentPlayer().getPatternCardsToChoose(this.isRandom());
-		
-		for(int i = 0;i < 4;i++) {
-			
-			patterncardControllers.add(new PatterncardController(patternCard.get(i)));	
+
+		for (int i = 0; i < 4; i++) {
+
+			patterncardControllers.add(new PatterncardController(patternCard.get(i)));
 			System.out.println(patternCard.get(i).getName());
-			
+
 		}
 		return patterncardControllers;
 	}
@@ -156,10 +150,6 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 		return game.getOffer();
 	}
 
-	public void getSelectedDie() {
-		
-	}
-
 	public PatterncardController getPatterncardController() {
 		return patterncardController;
 	}
@@ -170,8 +160,12 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 
 	public void deleteSelectedDie() {
 		dieController.deleteSelectedDie(game.getSelectedDie());
-		
 	}
+
+	public void setToolCardUnused() {
+		game.setSelectedToolcard(0);
+	}
+
 	public void setSelectedDie(GameDie die) {
 		game.setSelectedDie(die);
 	}
@@ -180,35 +174,33 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 		return gameView;
 	}
 
-	
 	public void setSelectedToolcard(int id) {
 		game.setSelectedToolcard(id);
 	}
-	 
-	
+
 	public boolean checkPlacementAgainstRules(int x, int y, ModelColor modelColor, int value) {
-		if(game.getSelectedToolcard() == null) {
+		if (game.getSelectedToolcard() == null) {
 			boolean checkplacement = game.checkPlacementAgainstRules(x, y, modelColor, value);
-			if(!checkplacement) {
-				showWarning("Dobbelsteen zetten", "De geselecteerde dobbelsteen kan niet op deze plek worden geplaatst.");
+			if (!checkplacement) {
+				showWarning("Dobbelsteen zetten",
+						"De geselecteerde dobbelsteen kan niet op deze plek worden geplaatst.");
 			}
-		return checkplacement;
-		}
-		else {
+			return checkplacement;
+		} else {
 			System.out.println("Ik ga hier mooie toolcardjes doen");
 			boolean testje = game.checkSelectedToolcard(x, y);
-			if(!testje) {
+			if (!testje) {
 				showWarning("toolcard helemaal kut", "");
-				
+
 			}
 			return testje;
 		}
-		
+
 	}
 
 	public Player getCurrentPlayer() {
 		Player currentplayer = game.getCurrentPlayer();
-		if(!shownTurnMessage && currentplayer.getId() == game.getPersonalPlayer().getId()) {
+		if (!shownTurnMessage && currentplayer.getId() == game.getPersonalPlayer().getId()) {
 			shownTurnMessage = true;
 			playround();
 			showWarning("Beurt", "jij bent aan de beurt");
@@ -221,7 +213,7 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 	}
 
 	public ModelColor getSelectedDieColor() {
-		if(game.getSelectedDieColor() == null) {
+		if (game.getSelectedDieColor() == null) {
 			showWarning("Geselecteerde dobbelsteen", "U heeft geen dobbelsteen geselecteerd");
 		}
 		return game.getSelectedDieColor();
@@ -233,9 +225,9 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 
 	public void removeAllBorders() {
 		gameView.getDicePoolView().removeAllBorders();
-		
+
 	}
-	
+
 	public void showWarning(String header, String text) {
 		Alert alert = new Alert(AlertType.WARNING);
 		System.out.println("test 5.1");
@@ -256,27 +248,29 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 	public boolean isRandom() {
 		return game.isRandom();
 	}
+
 	public void setFinishedTurnTrue() {
 		game.setFinishedTurnTrue();
 	}
 
 	public void playround() {
-		
-		if(game.getCurrentPlayer().getId() == game.getPersonalPlayer().getId()) {
-			if(!isPlayingTurn) {
-	//			gameViewUpdater.updateScoreBoard();
+
+		if (game.getCurrentPlayer().getId() == game.getPersonalPlayer().getId()) {
+			if (!isPlayingTurn) {
+				// gameViewUpdater.updateScoreBoard();
 				game.setCurrentPlayer(game.getPersonalPlayer());
 				gameViewUpdater.setPaused(true);
 				gameUpdater.setPaused(true);
 				gameRoundPlayer.setIsPaused(false);
 				isPlayingTurn = true;
-			}
-			else showWarning("Beurt", "Je bent jouw beurt al begonnen");
-		}
-		else showWarning("Beurt", "Het is niet jouw beurt");
+			} else
+				showWarning("Beurt", "Je bent jouw beurt al begonnen");
+		} else
+			showWarning("Beurt", "Het is niet jouw beurt");
 	}
+
 	public void stopround() {
-		if(game.getCurrentPlayer().getId() == game.getPersonalPlayer().getId()) {
+		if (game.getCurrentPlayer().getId() == game.getPersonalPlayer().getId()) {
 			isPlayingTurn = false;
 			getGamePoller().setFinishedTurn(true);
 			gameUpdater.setPaused(false);
@@ -284,29 +278,34 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 //			gameViewUpdater.updateScoreBoard();
 			gameRoundPlayer.setIsPaused(true);
 
-		}
-		else showWarning("Beurt", "Het is niet jouw beurt");
+		} else
+			showWarning("Beurt", "Het is niet jouw beurt");
 	}
+
 	public void setShowTurnMessage(Boolean value) {
 		shownTurnMessage = value;
 	}
-	
+
 	public Game getGame() {
-		return game; 
+		return game;
 	}
 
 	public GameRoundPlayer getGamePoller() {
 		return gameRoundPlayer;
 	}
-	
+
 	public void updateRoundTrack(ArrayList<GameDie> diceOnRoundTrackFromDB) {
 		for (GameDie gameDieFromDB : diceOnRoundTrackFromDB) {
 			changedDiceOnRoundTrack.add(gameDieFromDB);
 			for (int i = 0; i < diceOnRoundTrack.size(); i++) {
-				if(gameDieFromDB.getColor() == diceOnRoundTrack.get(i).getColor() && gameDieFromDB.getNumber() == diceOnRoundTrack.get(i).getNumber()) {
-					ArrayList<GameDie> temporaryList = (ArrayList<GameDie>) changedDiceOnRoundTrack.clone();// TODO miss geen clone
+				if (gameDieFromDB.getColor() == diceOnRoundTrack.get(i).getColor()
+						&& gameDieFromDB.getNumber() == diceOnRoundTrack.get(i).getNumber()) {
+					ArrayList<GameDie> temporaryList = (ArrayList<GameDie>) changedDiceOnRoundTrack.clone();// TODO miss
+																											// geen
+																											// clone
 					for (int j = 0; j < changedDiceOnRoundTrack.size(); j++) {
-						if(gameDieFromDB.getColor() == changedDiceOnRoundTrack.get(j).getColor() && gameDieFromDB.getNumber() == changedDiceOnRoundTrack.get(j).getNumber()) {
+						if (gameDieFromDB.getColor() == changedDiceOnRoundTrack.get(j).getColor()
+								&& gameDieFromDB.getNumber() == changedDiceOnRoundTrack.get(j).getNumber()) {
 							temporaryList.remove(j);
 						}
 					}
@@ -316,11 +315,11 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 		}
 		diceOnRoundTrack = (ArrayList<GameDie>) diceOnRoundTrackFromDB.clone();
 	}
-	
+
 	public ArrayList<GameDie> getChangedDiceOnRoundTrack() {
 		return changedDiceOnRoundTrack;
 	}
-	
+
 	public void clearChangedDiceOnRoundTrack() {
 		changedDiceOnRoundTrack.clear();
 	}
@@ -332,7 +331,7 @@ public ArrayList<PatterncardController> getPatternCardsToChoose(){
 
 	public void setFinishedGameView() {
 		myScene.setContentPane(new FinishedGameView(this));
-		gameViewUpdater.setRunning(false); 
+		gameViewUpdater.setRunning(false);
 		gameUpdater.setRunning(false);
 		gameRoundPlayer.setRunning(false);
 	}

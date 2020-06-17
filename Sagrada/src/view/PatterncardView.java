@@ -21,7 +21,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import model.ModelColor;
 
-public class PatterncardView extends VBox{
+public class PatterncardView extends VBox {
 
 	private PatterncardController patterncardController;
 	private JavafxColor javafxColor = new JavafxColor();;
@@ -30,24 +30,25 @@ public class PatterncardView extends VBox{
 	private Insets padding = new Insets(5);
 //	private final int[] xPos = new int[] {0,1,2,3,4};
 //	private final int[] yPos = new int[] {0,1,2,3};
-	
+
 	private String imgURL;
-	
+
 	public PatterncardView(PatterncardController patterncardController) {
 		this.patterncardController = patterncardController;
 		this.setPadding(new Insets(0, 30, 0, 30));
 		this.getChildren().addAll(drawTitle(), drawPatterncard(), drawDifficulty(), drawPersonalObjectiveCardColor());
 	}
-	
+
 	public GridPane drawPatterncard() {
 		GridPane patterncardfields = new GridPane();
-		patterncardfields.setBackground(new Background(new BackgroundFill(Color.BLACK,null,null)));
-		patterncardfields.setMinSize((5 * (PATTERNCARDFIELD_SIZE + GRIDSPACING) + GRIDSPACING), (4 * (PATTERNCARDFIELD_SIZE + GRIDSPACING) + GRIDSPACING));
+		patterncardfields.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
+		patterncardfields.setMinSize((5 * (PATTERNCARDFIELD_SIZE + GRIDSPACING) + GRIDSPACING),
+				(4 * (PATTERNCARDFIELD_SIZE + GRIDSPACING) + GRIDSPACING));
 		patterncardfields.setPadding(padding);
 		patterncardfields.setHgap(GRIDSPACING);
 		patterncardfields.setVgap(GRIDSPACING);
-		
-		for(int x = 0; x < 5; x++) {
+
+		for (int x = 0; x < 5; x++) {
 			for (int y = 0; y < 4; y++) {
 				StackPane stackpane = new StackPane();
 				Button button = new Button();
@@ -55,60 +56,74 @@ public class PatterncardView extends VBox{
 				int xPos = x;
 				int yPos = y;
 				String imgURL;
-				
+
 				ModelColor modelColor = patterncardController.getFieldColor(x, y);
 				Color color = javafxColor.getJavafxColor(modelColor);
 				int value = patterncardController.getFieldValue(x, y);
-				
-				if(color == null && value == 0) {
-					button.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));	
-				}
-				else if(modelColor != null) {
+
+				if (color == null && value == 0) {
+					button.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+				} else if (modelColor != null) {
 					button.setBackground(new Background(new BackgroundFill(color, null, null)));
-				}
-				else if(value != 0) {
+				} else if (value != 0) {
 					imgURL = "/images/" + Integer.toString(value) + "_fieldValue.jpg";
 					Image image = new Image(getClass().getResource(imgURL).toString());
-					button.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
+					button.setBackground(new Background(
+							new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+									BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
 				}
-				button.setOnMouseClicked(e-> checkPlacementAgainstRules(xPos, yPos, stackpane));
+				button.setOnMouseClicked(e -> checkPlacementAgainstRules(xPos, yPos, stackpane));
 				stackpane.getChildren().add(button);
-				if(patterncardController.getGameController() != null && patterncardController.getGameController().getGame().getPersonalPlayer().getBoard().getBoardField(xPos, yPos).hasDie()) {
+				if (patterncardController.getGameController() != null && patterncardController.getGameController()
+						.getGame().getPersonalPlayer().getBoard().getBoardField(xPos, yPos).hasDie()) {
 					Button die = new Button();
-					imgURL = "/images/" + patterncardController.getGameController().getGame().getPersonalPlayer().getBoard().getBoardField(xPos, yPos).getDie().getColor().toString()
-							+ patterncardController.getGameController().getGame().getPersonalPlayer().getBoard().getBoardField(xPos, yPos).getDie().getEyes() 
+					imgURL = "/images/"
+							+ patterncardController.getGameController().getGame().getPersonalPlayer().getBoard()
+									.getBoardField(xPos, yPos).getDie().getColor().toString()
+							+ patterncardController.getGameController().getGame().getPersonalPlayer().getBoard()
+									.getBoardField(xPos, yPos).getDie().getEyes()
 							+ "_Die.png";
-					if(imgURL != null) {
+					if (imgURL != null) {
 						Image image = new Image(getClass().getResource(imgURL).toString());
-						die.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
+						die.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT,
+								BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+								new BackgroundSize(1, 1, false, false, false, true))));
 						die.setPrefSize(40, 40);
-						die.setOnMouseClicked(e -> setSelectedDie(xPos, yPos));
+						die.setOnMouseClicked(e -> setSelectedDie(xPos, yPos, die, stackpane));
 						stackpane.getChildren().add(die);
-						
+
 					}
 				}
-				
+
 				patterncardfields.add(stackpane, x, y);
 			}
 		}
 		return patterncardfields;
 	}
+
 	private void placeSelectedDie(int x, int y, StackPane stackpane) {
 		Button die = new Button();
-		
+
 		imgURL = patterncardController.getSelectedDieUrl();
-		if(imgURL != null) {
+		if (imgURL != null) {
 			Image image = new Image(getClass().getResource(imgURL).toString());
-			die.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
+			die.setBackground(
+					new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+							BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
 			die.setPrefSize(40, 40);
 			stackpane.getChildren().add(die);
 			patterncardController.deleteDieFromPool();
+
 		}
-		die.setOnMouseClicked(e -> setSelectedDie(x, y));
+		die.setOnMouseClicked(e -> setSelectedDie(x, y, die, stackpane));
 	}
 
-	private void setSelectedDie(int x, int y) {
+	private void setSelectedDie(int x, int y, Button button, StackPane stackPane) {
 		patterncardController.setSelectedDie(x, y);
+		if (patterncardController.getGameController().getGame().getSelectedToolcard() != null) {
+			stackPane.getChildren().remove(button);
+//			patterncardController.getGameController().getGame().deleteDieFromPatternCard(x, y);
+		}
 	}
 
 	public BorderPane drawTitle() {
@@ -119,36 +134,47 @@ public class PatterncardView extends VBox{
 		titlePane.setCenter(title);
 		return titlePane;
 	}
+
 	public BorderPane drawDifficulty() {
 		BorderPane difficultyPane = new BorderPane();
 		Text difficulty = new Text();
 		difficulty.setText("Moeilijkheidsgraad = " + patterncardController.getDifficulty());
 		difficultyPane.setPadding(padding);
-	    difficultyPane.setRight(difficulty);
-	    return difficultyPane;
+		difficultyPane.setRight(difficulty);
+		return difficultyPane;
 	}
-	
+
 	public BorderPane drawPersonalObjectiveCardColor() {
 		BorderPane personalObjectiveCardColor = new BorderPane();
-		if(patterncardController.getGameController() != null) {	
+		if (patterncardController.getGameController() != null) {
 			Text color = new Text();
-			color.setText("Persoonlijke doelkaartkleur = " + patterncardController.getGameController().getGame().getPersonalPlayer().getPersonalObjectiveCardColor().toString());
+			color.setText("Persoonlijke doelkaartkleur = " + patterncardController.getGameController().getGame()
+					.getPersonalPlayer().getPersonalObjectiveCardColor().toString());
 			color.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 12));
 			personalObjectiveCardColor.setPadding(padding);
 			personalObjectiveCardColor.setCenter(color);
 		}
 		return personalObjectiveCardColor;
 	}
-	
+
 	public boolean checkPlacementAgainstRules(int x, int y, StackPane stackpane) {
-		if(patterncardController.checkPlacementAgainstRules(x, y, patterncardController.getSelectedDieColor(), patterncardController.getSelectedDieValue())) {
+		if (patterncardController.checkPlacementAgainstRules(x, y, patterncardController.getSelectedDieColor(),
+				patterncardController.getSelectedDieValue())) {
 			placeSelectedDie(x, y, stackpane);
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
-	
-	
+
+//	public void deleteDie(int index) {
+//		for (int i = 0; i < getChildren().size() - index; i++) {
+//			if (getChildren().get(index + i) != null && (index + 1) != 9) {
+//				dieView.get(index + i).decreaseDiePoolID();
+//			}
+//		}
+//		dieView.remove(index);
+//		getChildren().remove(index);
+//	}
+
 }

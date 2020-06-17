@@ -69,27 +69,7 @@ public class PlayerFrameFieldDBA {
 	}
 	
 	public void removeDie(GameDie die, Player player, int xposition, int yposition){
-		String color = null;
-		if(die.getColor() != null) {
-			switch(die.getColor()) {
-			case BLUE:
-				color = "blue" ;
-				break;
-			case GREEN:
-				color = "green";
-				break;
-			case PURPLE:
-				color = "purple";
-				break;
-			case RED:
-				color = "red";
-				break;
-			case YELLOW:
-				color = "yellow";
-				break;
-			}
-		}
-			String query = "UPDATE playerframefield SET dienumber = "+die.getNumber()+", diecolor= '" +color+"' WHERE idplayer = "+player.getId()+" AND position_x = "+xposition+" AND position_y ="+yposition+";";
+			String query = "UPDATE playerframefield SET dienumber = NULL, diecolor= NULL WHERE idplayer = "+player.getId()+" AND position_x = "+xposition+" AND position_y ="+yposition+";";
 			try {
 				Statement stmt = conn.getConn().createStatement();
 				stmt.executeUpdate(query);

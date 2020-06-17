@@ -8,19 +8,15 @@ import model.ModelColor;
 import model.PatternCard;
 
 public class PatterncardController {
-  
+
 	private ArrayList<PatternCard> patterncardOptions;
 	private PatternCard patterncard;
 	private GameController gameController;
-	
+
 	public PatterncardController(DataBaseConnection conn, GameController gameController) {
 		this.gameController = gameController;
-		System.out.println("de personalplayer is: "+ gameController.getGame().getPersonalPlayer());
-		patterncard = gameController.
-				getGame().
-				getPersonalPlayer().
-				getBoard().
-				getPatternCard();
+		System.out.println("de personalplayer is: " + gameController.getGame().getPersonalPlayer());
+		patterncard = gameController.getGame().getPersonalPlayer().getBoard().getPatternCard();
 		System.out.println("patterncardcontroller patterncard = " + patterncard.getName());
 		if (patterncard.getPatterncardID() == 0) {
 //			gameController.viewPatternCardSelection();
@@ -28,43 +24,46 @@ public class PatterncardController {
 		}
 //		patterncard.setpattern(false);
 	}
-	
+
 	public PatterncardController(PatternCard patterncard) {
 		this.patterncard = patterncard;
 //		patterncard.setpattern(false);
 	}
-	
-	
-	public ModelColor getFieldColor(int x, int y){
+
+	public ModelColor getFieldColor(int x, int y) {
 		return patterncard.getFieldColor(x, y);
 	}
-	
-	public int getFieldValue(int x, int y){
+
+	public int getFieldValue(int x, int y) {
 		return patterncard.getFieldValue(x, y);
 	}
-	
-	public String getName(){
+
+	public String getName() {
 		return patterncard.getName();
-		
+
 	}
-	
-	public int getDifficulty(){
+
+	public int getDifficulty() {
 		return patterncard.getDifficulty();
 	}
 
-	public void getSelectedDie() {
-		gameController.getSelectedDie();
-		
-	}
-
 	public String getSelectedDieUrl() {
-		return gameController.getDieController().getSelectedDieURL();
-		
+		if (gameController.getGame().getSelectedToolcard() == null) {
+			return gameController.getDieController().getSelectedDieURL();
+		} else {
+			return "/images/" + gameController.getSelectedDieColor() + gameController.getSelectedDieValue()
+					+ "_Die.png";
+		}
 	}
 
 	public void deleteDieFromPool() {
-		gameController.deleteSelectedDie();
-		
+		if (gameController.getGame().getSelectedToolcard() != null) {
+			gameController.setToolCardUnused();
+		} else {
+
+			gameController.deleteSelectedDie();
+		}
+
 	}
 
 	public boolean checkPlacementAgainstRules(int x, int y, ModelColor modelColor, int value) {
@@ -78,20 +77,25 @@ public class PatterncardController {
 	public int getSelectedDieValue() {
 		return gameController.getSelectedDieValue();
 	}
-	
+
 	public GameController getGameController() {
 		return gameController;
 	}
-	
+
 	public PatternCard getPatterncard() {
 		return patterncard;
 	}
 
 	public void setSelectedDie(int x, int y) {
 		GameDie gameDie = gameController.getGame().getPersonalPlayer().getBoard().getBoardField(x, y).getDie();
-		if(gameDie != null) {
+		if (gameDie != null) {
 			gameController.setSelectedDie(gameDie);
 		}
 	}
+
+	public void deleteDieFromPatternCard() {
+		gameController.deleteSelectedDie();
+
+	}
+
 }
-  
