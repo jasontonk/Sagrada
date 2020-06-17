@@ -190,7 +190,8 @@ public class AccountController {
 			player.setPlayerStatus(PlayerStatus.CHALLENGER);
 			player.setPersonalObjectiveCardColor();
 			player.addPlayer(player);
-
+			player.createBoard();
+			player.getBoard().AddBoardFieldsToDB();
 
 			player.setScore(-20);
 			
@@ -206,8 +207,8 @@ public class AccountController {
 				p.setPersonalObjectiveCardColor();
 				p.addPlayer(p);
 				p.setScore(-20);
-//				p.createBoard();
-//				p.getBoard().AddBoardFieldsToDB();
+				p.createBoard();
+				p.getBoard().AddBoardFieldsToDB();
 
 				invitePlayerList.add(p);
 			}
@@ -245,7 +246,7 @@ public class AccountController {
 			if(!refusedPlayer){
 
 				stopInviteThread();
-				viewPatterncardSelectionView(player);
+//				viewPatterncardSelectionView(player);
 				player.setPatternCard(player.getPatternCard());
 				player.createBoard();
 				player.getBoard().AddBoardFieldsToDB();
