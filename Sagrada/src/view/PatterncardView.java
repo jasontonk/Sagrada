@@ -120,10 +120,32 @@ public class PatterncardView extends VBox {
 
 	private void setSelectedDie(int x, int y, Button button, StackPane stackPane) {
 		patterncardController.setSelectedDie(x, y);
+		
 		if (patterncardController.getGameController().getGame().getSelectedToolcard() != null) {
-			stackPane.getChildren().remove(button);
-			patterncardController.getGameController().getGame().deleteDieFromPatternCard(x, y);
+			int id = patterncardController.getGameController().getGame().getSelectedToolcard().getId();
+			switch (id) {
+			case 1:
+				break;
+			case 2:
+				stackPane.getChildren().remove(button);
+				patterncardController.getGameController().getGame().deleteDieFromPatternCard(x, y);
+				break;
+			case 5:
+
+				break;
+			case 6:
+
+				break;
+			case 10:
+
+				break;
+			case 11:
+
+				break;
+			}
 		}
+		
+		
 	}
 
 	public BorderPane drawTitle() {

@@ -82,5 +82,10 @@ public class Toolcard {
 //				}
 		return false;
 	}
+	
+	public void grozingPliers(Player palyer, PatternCard patternCard, BoardField boardfield, Board board) {
+		
+		
+	}
 
 }
