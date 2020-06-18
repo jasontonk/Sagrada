@@ -52,6 +52,11 @@ public class GameViewUpdater extends Task<Boolean> {
 			}
 			else {
 				if(!isPaused) {
+					try {
+						Thread.sleep(1500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 					Platform.runLater(new Runnable() {
 						@Override
 						public void run() {
@@ -59,11 +64,6 @@ public class GameViewUpdater extends Task<Boolean> {
 							System.out.println("updated Views");
 						}
 					});
-					try {
-						Thread.sleep(1500);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
 				}
 				else {
 					try {
