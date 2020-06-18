@@ -60,7 +60,6 @@ public class Toolcard {
 		System.out.println(boardField.getxPos() + " " + boardField.getyPos());
 
 		if (board.checkIsNextToDie(boardField)) {
-//		if(!board.checkSidesColor(boardField, modelColor)) {
 			System.out.println("ik kom in de 1e|| " + value);
 			if (!board.checkSidesValue(boardField, value)) {
 				System.out.println("ik kom in de 2e");
@@ -79,13 +78,6 @@ public class Toolcard {
 				}
 			}
 		}
-//				}
 		return false;
 	}
-	
-	public void grozingPliers(Player palyer, PatternCard patternCard, BoardField boardfield, Board board) {
-		
-		
-	}
-
 }

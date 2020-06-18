@@ -19,6 +19,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import model.GameDie;
 import model.ModelColor;
 
 public class PatterncardView extends VBox {
@@ -125,10 +126,14 @@ public class PatterncardView extends VBox {
 			int id = patterncardController.getGameController().getGame().getSelectedToolcard().getId();
 			switch (id) {
 			case 1:
+				patterncardController.getGameController().showConfirmation(patterncardController.getGameController().getGame().getSelectedDie());
+				stackPane.getChildren().remove(button);
+				placeSelectedDie( x, y, stackPane);
 				break;
 			case 2:
 				stackPane.getChildren().remove(button);
 				patterncardController.getGameController().getGame().deleteDieFromPatternCard(x, y);
+				
 				break;
 			case 5:
 
@@ -137,7 +142,9 @@ public class PatterncardView extends VBox {
 
 				break;
 			case 10:
-
+				patterncardController.getGameController().flipDice(patterncardController.getGameController().getGame().getSelectedDie());
+				stackPane.getChildren().remove(button);
+				placeSelectedDie( x, y, stackPane);
 				break;
 			case 11:
 

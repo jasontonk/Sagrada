@@ -1,10 +1,13 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import database.DataBaseConnection;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import model.Game;
 import model.GameDie;
 import model.ModelColor;
@@ -229,17 +232,97 @@ public class GameController {
 	}
 
 	public void showWarning(String header, String text) {
+	
 		Alert alert = new Alert(AlertType.WARNING);
-		System.out.println("test 5.1");
+		
 		alert.setTitle("Let op!");
-		System.out.println("test 5.2");
 		alert.setHeaderText(header);
-		System.out.println("test 5.3");
 		alert.setContentText(text);
-		System.out.println("test 5.4");
 		alert.showAndWait();
-		System.out.println("test 5.5");
+		
+		
 	}
+	
+	public void flipDice(GameDie gamedie) {
+		int dieValue = gamedie.getEyes();
+	
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		
+		alert.setTitle("Let op!");
+		alert.setHeaderText("De waarde van de geselecteerde dobbelsten is = " + dieValue);
+		alert.setContentText("Weet je zeker dat je de dobbelsteen wilt omdraaien?");
+		
+		ButtonType buttonTypeOk = new ButtonType("Ja");
+		ButtonType buttonTypeCancel = new ButtonType("Nee", ButtonData.CANCEL_CLOSE);
+		
+		Optional<ButtonType> result = alert.showAndWait();
+		
+		if (result.get() == buttonTypeOk){
+
+			switch (dieValue) {
+			case 1:
+				gamedie.changeEyes(6, getGame());
+				break;
+			case 2:
+				gamedie.changeEyes(5, getGame());
+				break;
+			case 3:
+				gamedie.changeEyes(4, getGame());
+				break;
+			case 4:
+				gamedie.changeEyes(3, getGame());
+				break;
+			case 5:
+				gamedie.changeEyes(2, getGame());
+				break;
+			case 6:
+				gamedie.changeEyes(1, getGame());
+				break;
+			}
+		    
+		}
+
+		getGame().setSelectedDie(gamedie);
+	}
+	
+	public void showConfirmation(GameDie gamedie) {
+		
+		int dieValue = gamedie.getEyes();
+	
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		
+		alert.setTitle("Let op!");
+		alert.setHeaderText("De waarde van de geselecteerde dobbelsteen is = " + dieValue);
+		alert.setContentText("Wilt u de waarde ervan met 1 verhogen of verlagen?");
+		
+		ButtonType buttonTypeOne = new ButtonType("-1");
+		ButtonType buttonTypeTwo = new ButtonType("+1");
+		ButtonType buttonTypeCancel = new ButtonType("Annuleren", ButtonData.CANCEL_CLOSE);
+
+		if(dieValue == 1){
+			alert.getButtonTypes().setAll(buttonTypeTwo,buttonTypeCancel);
+		}
+		else if(dieValue == 6) {
+			alert.getButtonTypes().setAll(buttonTypeOne,buttonTypeCancel);
+		}
+		else {
+			alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo,buttonTypeCancel);
+		}
+		
+		Optional<ButtonType> result = alert.showAndWait();
+		
+		if (result.get() == buttonTypeOne){
+			
+		    gamedie.changeEyes((dieValue-1), getGame());
+		    
+		} else if (result.get() == buttonTypeTwo) {
+			 gamedie.changeEyes((dieValue+1), getGame());
+		}
+		
+		System.out.println("gamedieValue= "+gamedie.getEyes());
+		getGame().setSelectedDie(gamedie);
+	}
+	
 
 	public int getCurrentRound() {
 		return game.getRound().get();

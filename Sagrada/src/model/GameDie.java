@@ -63,10 +63,16 @@ public class GameDie extends Die {
 	public int getEyes() {
 		return eyes;
 	}
+	
+	public void changeEyes(int eyes, Game game) {
+		this.eyes = eyes;
+		gameDieDBA.addEyes(this, game, eyes);
+	}
 
 	public void setEyes(Game game) {
 		gameDieDBA.addEyes(this, game, eyes);
 	}
+	
 	public void addDieToDB(Game game) {
 		gameDieDBA.addGameDie(this, game);
 	}

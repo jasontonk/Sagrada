@@ -31,7 +31,7 @@ public class ToolCardDBA {
 		
 		int id1 = 1;
 		int id2 = 2;
-		int id3 = 3;
+		int id3 = 10;
 		
 		System.out.println(id1+ "   " + id2 + "   " + id3);
 	       
