@@ -13,21 +13,24 @@ public class ToolcardPoolView extends HBox {
 	private GameController gamecontroller;
 	
 	public ToolcardPoolView(GameController gamecontroller) {
+		toolcardView = new ArrayList<ToolcardView>();
 		this.gamecontroller = gamecontroller;
 		ToolcardIDs = gamecontroller.getGame().getToolcardIDs();
 		createCards();
 		this.getChildren().add(toolcardPool);
 	}
 	
-	
-	private void createCards() {
+	public void removeAllBorders() {
 		for (int i = 0; i < ToolcardIDs.length; i++) {
-			toolcardPool.getChildren().add(new ToolcardView(ToolcardIDs[i], gamecontroller));
+			toolcardView.get(i).removeBorder();
 		}
 	}
 	
 	
-	
-	
-	
+	private void createCards() {
+		for (int i = 0; i < ToolcardIDs.length; i++) {
+			toolcardView.add(new ToolcardView(ToolcardIDs[i], gamecontroller));
+			toolcardPool.getChildren().add(toolcardView.get(i));
+		}
+	}
 }

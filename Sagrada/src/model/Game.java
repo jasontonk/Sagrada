@@ -233,6 +233,8 @@ public class Game {
 			toolcards = toolcardsOfGameFromDB;
 		}
 	}
+	
+	
 
 //	public void checkInvites() {
 //		for (Account account : accounts) {
@@ -709,8 +711,10 @@ public class Game {
 
 	public int[] getToolcardIDs() {
 		int[] toolcardIDs = new int[3];
-		for (int i = 0; i < toolcards.size(); i++) {
+		for (int i = 0; i < 3; i++) {
+			
 			toolcardIDs[i] = toolcards.get(i).getId();
+			
 		}
 		return toolcardIDs;
 	}

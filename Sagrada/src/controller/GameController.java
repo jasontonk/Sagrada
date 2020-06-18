@@ -18,6 +18,7 @@ import view.GameView;
 import view.MyScene;
 import view.PatterncardSelectionView;
 import view.PatterncardView;
+import view.ToolcardView;
 
 public class GameController {
 
@@ -34,6 +35,7 @@ public class GameController {
 	private MyScene myScene;
 	private volatile boolean isPlayingTurn;
 	private volatile boolean shownTurnMessage;
+	private ToolcardView toolcardView;
 
 	private PatterncardView patterncardView;
 	private PatterncardSelectionView patterncardSelectionView;
@@ -166,6 +168,8 @@ public class GameController {
 
 	public void setToolCardUnused() {
 		game.setSelectedToolcard(0);
+		toolcardView.removeBorder();
+		
 	}
 
 	public void setSelectedDie(GameDie die) {
@@ -185,8 +189,9 @@ public class GameController {
 		return gameView;
 	}
 
-	public void setSelectedToolcard(int id) {
+	public void setSelectedToolcard(int id, ToolcardView toolcardView) {
 		game.setSelectedToolcard(id);
+		this.toolcardView = toolcardView;
 	}
 
 	public boolean checkPlacementAgainstRules(int x, int y, ModelColor modelColor, int value) {
@@ -238,6 +243,10 @@ public class GameController {
 		gameView.getDicePoolView().removeAllBorders();
 
 	}
+	
+	public void removeAllBordersFromToolcard() {
+		gameView.getToolcardPoolView().removeAllBorders();
+	}
 
 	public void showWarning(String header, String text) {
 	
@@ -246,9 +255,31 @@ public class GameController {
 		alert.setTitle("Let op!");
 		alert.setHeaderText(header);
 		alert.setContentText(text);
-		alert.showAndWait();
+		alert.showAndWait();	
+	}
+	
+	public void fluxBrush(GameDie gamedie) {
+		int dieValue = gamedie.getEyes();
 		
+		Alert alert = new Alert(AlertType.CONFIRMATION);
 		
+		alert.setTitle("Let op!");
+		alert.setHeaderText("De waarde van de geselecteerde dobbelsten is = " + dieValue);
+		alert.setContentText("Weet je zeker dat je de dobbelsteen opniew wilt werpen?");
+		
+		ButtonType buttonTypeOk = new ButtonType("Ja");
+		ButtonType buttonTypeCancel = new ButtonType("Nee", ButtonData.CANCEL_CLOSE);
+		
+		alert.getButtonTypes().setAll(buttonTypeOk,buttonTypeCancel);
+		
+		Optional<ButtonType> result = alert.showAndWait();
+		
+		if (result.get() == buttonTypeOk){
+			int randomDieValue = (int) (Math.random() * 6) + 1; 
+			gamedie.changeEyes(randomDieValue, game);
+		}
+
+		getGame().setSelectedDieFromDicePool(gamedie);
 	}
 	
 	public void flipDice(GameDie gamedie) {

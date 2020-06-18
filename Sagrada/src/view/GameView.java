@@ -84,6 +84,12 @@ public class GameView extends HBox {
 		return scoreView;
 	}
 	
+	
+	
+	public ToolcardPoolView getToolcardPoolView() {
+		return toolcardPoolView;
+	}
+
 	/**
 	 * @return the patternCardsOfOtherPlayersView
 	 */
