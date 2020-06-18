@@ -38,7 +38,7 @@ public class DieView extends BorderPane {
 		Image image = new Image(getClass().getResource(imgURL).toString());
 		die.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
 		
-		die.setOnMouseClicked((e)-> setSelectedDie(imgURL,die));
+		die.setOnMouseClicked((e)-> setSelectedDie(imgURL));
 		
 		this.setMinSize(DIE_SIZE, DIE_SIZE);
 		this.setCenter(die);
@@ -51,7 +51,7 @@ public class DieView extends BorderPane {
 	public void decreaseDiePoolID() {
 		diePoolID--;
 	}
-	private void setSelectedDie(String imgURL, Button button) {
+	private void setSelectedDie(String imgURL) {
 		dieController.removeAllBorders();
 		setBorder();
 		dieController.setSelectedDieFromDiePool(diePoolID, imgURL);
@@ -73,6 +73,11 @@ public class DieView extends BorderPane {
 				dieController.getGameController().fluxBrush(dieController.getGameController().getGame().getSelectedDieFromDicePool());
 				updateButton(dieController.getGameController().getGame().getSelectedDieFromDicePool().getColorString(),dieController.getGameController().getGame().getSelectedDieFromDicePool().getEyes());
 				dieController.getGameController().setToolCardUnused();
+				break;	
+			case 11:
+				dieController.getGameController().fluxRemover(dieController.getGameController().getGame().getSelectedDieFromDicePool());
+				updateButton(dieController.getGameController().getGame().getSelectedDieFromDicePool().getColorString(),dieController.getGameController().getGame().getSelectedDieFromDicePool().getEyes());
+				dieController.getGameController().setToolCardUnused();
 				break;
 			}
 		}
@@ -87,7 +92,7 @@ public class DieView extends BorderPane {
 		Image image = new Image(getClass().getResource(imgURL).toString());
 		die.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
 		
-		die.setOnMouseClicked((e)-> setSelectedDie(imgURL,die));
+		die.setOnMouseClicked((e)-> setSelectedDie(imgURL));
 	}
 	
 	public void setBorder(){

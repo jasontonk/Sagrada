@@ -124,21 +124,10 @@ public class PatterncardView extends VBox {
 		
 		if (patterncardController.getGameController().getGame().getSelectedToolcard() != null) {
 			int id = patterncardController.getGameController().getGame().getSelectedToolcard().getId();
-			switch (id) {
-			case 2:
+			if(id == 2) {
 				stackPane.getChildren().remove(button);
 				patterncardController.getGameController().getGame().deleteDieFromPatternCard(x, y);
 				patterncardController.getGameController().setToolCardUnused();
-				break;
-			case 5:
-
-				break;
-			case 6:
-
-				break;
-			case 11:
-
-				break;
 			}
 		}
 	}

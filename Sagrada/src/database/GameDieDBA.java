@@ -265,4 +265,31 @@ public class GameDieDBA {
         return list;
 	}
 	
+	public GameDie getUnusedDiceOfGame(Game game) {
+		GameDie gameDie = null;
+        String query = "SELECT * FROM gamedie WHERE idgame="+game.getGameID()+ " AND roundID is null LIMIT 1;";
+        try {
+        	Statement stmt = conn.getConn().createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+            if (rs.next()) {
+                gameDie = new GameDie(getColorFromString(rs.getString("diecolor")),rs.getInt("dienumber"),rs.getInt("eyes"), game, conn, this);
+                gameDie.setRoundID(game); 
+            }
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return gameDie;
+	}
+	
+	public void setGameDieUnused(GameDie gamedie, Game game) {
+		String query = "UPDATE gamedie SET roundID = NULL WHERE idgame = "+game.getGameID()+" AND dienumber = "+gamedie.getNumber()+" AND diecolor = '"+getStringFromColor(gamedie)+"';";
+		try {
+				Statement stmt = conn.getConn().createStatement();
+				stmt.executeUpdate(query);
+				stmt.close();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

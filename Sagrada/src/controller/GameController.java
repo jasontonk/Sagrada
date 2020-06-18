@@ -258,13 +258,59 @@ public class GameController {
 		alert.showAndWait();	
 	}
 	
+	public void fluxRemover(GameDie gamedie) {
+		GameDie unusedDie;
+		game.setGameDieUnused(gamedie);
+		unusedDie = game.getUnusedDiceForGame();
+		
+		while(unusedDie.getNumber() == gamedie.getNumber()) {
+			unusedDie = game.getUnusedDiceForGame();
+		}
+		
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		
+		alert.setTitle("Let op!");
+		alert.setHeaderText("De kleur van de nieuwe dobbelsteen is = " + unusedDie.getColorString());
+		alert.setContentText("U kunt de waarde verandren naar: ");
+		
+		ButtonType buttonType1 = new ButtonType("1");
+		ButtonType buttonType2 = new ButtonType("2");
+		ButtonType buttonType3 = new ButtonType("3");
+		ButtonType buttonType4 = new ButtonType("4");
+		ButtonType buttonType5 = new ButtonType("5");
+		ButtonType buttonType6 = new ButtonType("6");
+		ButtonType buttonTypeCancel = new ButtonType("Annuleren", ButtonData.CANCEL_CLOSE);
+		
+		alert.getButtonTypes().setAll(buttonType1,buttonType2,buttonType3,buttonType4,buttonType5,buttonType6,buttonTypeCancel);
+		
+		Optional<ButtonType> result = alert.showAndWait();
+		
+		if (result.get() == buttonType1){
+			unusedDie.changeEyes(1, game);
+		}else if (result.get() == buttonType2) {
+			unusedDie.changeEyes(2, game);
+		}else if (result.get() == buttonType3) {
+			unusedDie.changeEyes(3, game);
+		}else if (result.get() == buttonType4) {
+			unusedDie.changeEyes(4, game);
+		}else if (result.get() == buttonType5) {
+			unusedDie.changeEyes(5, game);
+		}else if (result.get() == buttonType6) {
+			unusedDie.changeEyes(6, game);
+		}
+		
+		getGame().updateOffer(gamedie, unusedDie);
+		getGame().setSelectedDieFromDicePool(unusedDie);
+		getGame().setSelectedDie(unusedDie);
+	}
+	
 	public void fluxBrush(GameDie gamedie) {
 		int dieValue = gamedie.getEyes();
 		
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		
 		alert.setTitle("Let op!");
-		alert.setHeaderText("De waarde van de geselecteerde dobbelsten is = " + dieValue);
+		alert.setHeaderText("De waarde van de geselecteerde dobbelsteen is = " + dieValue);
 		alert.setContentText("Weet je zeker dat je de dobbelsteen opniew wilt werpen?");
 		
 		ButtonType buttonTypeOk = new ButtonType("Ja");
@@ -288,7 +334,7 @@ public class GameController {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		
 		alert.setTitle("Let op!");
-		alert.setHeaderText("De waarde van de geselecteerde dobbelsten is = " + dieValue);
+		alert.setHeaderText("De waarde van de geselecteerde dobbelsteen is = " + dieValue);
 		alert.setContentText("Weet je zeker dat je de dobbelsteen wilt omdraaien?");
 		
 		ButtonType buttonTypeOk = new ButtonType("Ja");

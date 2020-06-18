@@ -92,14 +92,11 @@ public class DicePoolView extends VBox {
 		for (int i = 0; i < dieView.size(); i++) {
 			dieView.get(i).removeBorder();
 		}
-		
 	}
 
 	public void updateDicePool(int amountofdice) {
-		
 				deleteAllDiceFromDicepool();
-				addAllDiceFromDicepool(amountofdice);
-		
+				addAllDiceFromDicepool(amountofdice);	
 	}
 
 

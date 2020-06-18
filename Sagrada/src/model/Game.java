@@ -647,6 +647,16 @@ public class Game {
 	public RoundTrack getRoundTrack() {
 		return roundTrack;
 	}
+	
+	public void updateOffer(GameDie oldDie, GameDie newDie){
+		for(int i = 0; i < offer.size(); i++) {
+			if(offer.get(i).getNumber() == oldDie.getNumber()) {
+				offer.remove(i);
+				offer.add(newDie);
+				break;
+			}
+		}
+	}
 
 	public ArrayList<GameDie> getOffer() {
 //		diceInBag = gamedieDBA.getAllDiceFromGame(this)
@@ -753,6 +763,14 @@ public class Game {
 
 	public ArrayList<Player> getChallengeePlayers(Account account) {
 		return playerDBA.getChallengeePlayers(account);
+	}
+	
+	public void setGameDieUnused(GameDie gameDie) {
+		gamedieDBA.setGameDieUnused(gameDie, this);
+	}
+	
+	public GameDie getUnusedDiceForGame(){
+		return gamedieDBA.getUnusedDiceOfGame(this);
 	}
 
 //	public void setPublicObjectiveCards(ArrayList<PublicObjectiveCard> publicObjectiveCards) {
