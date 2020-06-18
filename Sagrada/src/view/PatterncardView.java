@@ -122,7 +122,7 @@ public class PatterncardView extends VBox {
 		patterncardController.setSelectedDie(x, y);
 		if (patterncardController.getGameController().getGame().getSelectedToolcard() != null) {
 			stackPane.getChildren().remove(button);
-//			patterncardController.getGameController().getGame().deleteDieFromPatternCard(x, y);
+			patterncardController.getGameController().getGame().deleteDieFromPatternCard(x, y);
 		}
 	}
 
