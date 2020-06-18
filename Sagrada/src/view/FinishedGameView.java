@@ -49,7 +49,7 @@ public class FinishedGameView extends BorderPane {
 		
 		String url = "/images/winner.jpg";
 		Image image = new Image(url);
-		ImageView imageView = new ImageView(image);
+		ImageView imageView = new ImageView(image); 
 		
 		imageView.setFitWidth(960);
 		imageView.setFitHeight(540);
