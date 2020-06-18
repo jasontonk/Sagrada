@@ -263,6 +263,8 @@ public class GameController {
 		ButtonType buttonTypeOk = new ButtonType("Ja");
 		ButtonType buttonTypeCancel = new ButtonType("Nee", ButtonData.CANCEL_CLOSE);
 		
+		alert.getButtonTypes().setAll(buttonTypeOk,buttonTypeCancel);
+		
 		Optional<ButtonType> result = alert.showAndWait();
 		
 		if (result.get() == buttonTypeOk){
