@@ -283,6 +283,7 @@ public class AccountController {
 		}
 		
 		GameController gameController = new GameController(connection, myScene, game, this);
+//		myScene.setContentPane(gameController.getGameView().getPatternCardsOfOtherPlayersView());
 		myScene.setContentPane(gameController.getGameView());
 	}
 

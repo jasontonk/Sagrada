@@ -6,6 +6,7 @@ import database.DataBaseConnection;
 import database.FavorTokenDBA;
 import database.PatternCardDBA;
 import database.PlayerDBA;
+import database.PlayerFrameFieldDBA;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -35,6 +36,7 @@ public class Player {
 	
 	private PlayerDBA playerDBA ;
 	private FavorTokenDBA favorTokenDBA;
+	private PlayerFrameFieldDBA playerFrameFieldDBA;
 	
 //	public Player(DataBaseConnection c, Account account, Game game, PlayerStatus playerStatus) {
 //		connection = c;
@@ -61,6 +63,7 @@ public class Player {
 	public Player(DataBaseConnection c, Game game) {
 		connection = c;
 		playerDBA = new PlayerDBA(c);
+		setPlayerFrameFieldDBA(new PlayerFrameFieldDBA(c));
 		favorTokenDBA = new FavorTokenDBA(c);
 		patternCard = new PatternCard(c);
 		favorTokens = new ArrayList<FavorToken>();
@@ -398,6 +401,20 @@ public class Player {
 	public GameDie getSelectedDie() {
 		return game.getSelectedDie();
 		
+	}
+
+	/**
+	 * @return the playerFrameFieldDBA
+	 */
+	public PlayerFrameFieldDBA getPlayerFrameFieldDBA() {
+		return playerFrameFieldDBA;
+	}
+
+	/**
+	 * @param playerFrameFieldDBA the playerFrameFieldDBA to set
+	 */
+	public void setPlayerFrameFieldDBA(PlayerFrameFieldDBA playerFrameFieldDBA) {
+		this.playerFrameFieldDBA = playerFrameFieldDBA;
 	}
 	
 }

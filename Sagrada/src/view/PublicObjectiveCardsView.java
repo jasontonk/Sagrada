@@ -27,8 +27,8 @@ public class PublicObjectiveCardsView extends HBox {
 				(getClass().getResource(imgURL).toString()); 
 			
 			ImageView imageView = new ImageView(image);
-			imageView.setFitWidth(250);
-			imageView.setFitHeight(320);
+			imageView.setFitWidth(200);
+			imageView.setFitHeight(270);
 			this.getChildren().add(imageView);
 		}
 		

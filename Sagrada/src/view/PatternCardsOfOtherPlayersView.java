@@ -3,6 +3,7 @@ package view;
 import controller.PatterncardController;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -10,17 +11,12 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
-import model.GameDie;
+import model.BoardField;
 import model.ModelColor;
 import model.Player;
 
@@ -39,17 +35,19 @@ public class PatternCardsOfOtherPlayersView extends VBox {
 
 	public PatternCardsOfOtherPlayersView(PatterncardController patterncardController) {
 		this.patterncardController = patterncardController;
-		this.setPadding(new Insets(0, 30, 0, 30));
+		this.setPadding(new Insets(10));
 		allPatternCards = new VBox();
 		for(Player player : patterncardController.getGameController().getGame().getPlayers()) {
 			if(!player.equals(patterncardController.getGameController().getGame().getPersonalPlayer())) {
 				allPatternCards.getChildren().add(drawPatterncard(player));
 			}
 		}
+		this.setBackground(new Background(new BackgroundFill(Color.DARKBLUE, null, null)));
 		this.getChildren().addAll(allPatternCards);
 	}
 
-	public GridPane drawPatterncard(Player player) {
+	public VBox drawPatterncard(Player player) {
+		VBox vbox = new VBox();
 		GridPane patterncardfields = new GridPane();
 		patterncardfields.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
 		patterncardfields.setMinSize((5 * (PATTERNCARDFIELD_SIZE + GRIDSPACING) + GRIDSPACING),
@@ -57,7 +55,11 @@ public class PatternCardsOfOtherPlayersView extends VBox {
 		patterncardfields.setPadding(padding);
 		patterncardfields.setHgap(GRIDSPACING);
 		patterncardfields.setVgap(GRIDSPACING);
-
+		 
+		Label label = new Label("Bord van speler: " + player.getName());
+		label.setFont(new Font(15));
+		label.setTextFill(Color.WHITE);
+		
 		for (int x = 0; x < 5; x++) {
 			for (int y = 0; y < 4; y++) {
 				StackPane stackpane = new StackPane();
@@ -68,11 +70,11 @@ public class PatternCardsOfOtherPlayersView extends VBox {
 				String imgURL;
 				
 				
-				ModelColor modelColor = patterncardController.getPatterncard().getFieldColorFromDB(xPos, yPos);
+				ModelColor modelColor = player.getPatternCard().getFieldColorFromDB(xPos, yPos);
 
 				Color color = javafxColor.getJavafxColor(modelColor);
 				
-				int value = patterncardController.getPatterncard().getFieldValueFromDB(xPos, yPos);
+				int value = player.getPatternCard().getFieldValueFromDB(xPos, yPos);
 				
 				if (color == null && value == 0) {
 					button.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
@@ -90,27 +92,15 @@ public class PatternCardsOfOtherPlayersView extends VBox {
 				
 				
 				
-				
-				if (patterncardController.getGameController() != null && patterncardController.getGameController()
-						.getGame().getPersonalPlayer().getBoard().getBoardFieldFromDB(xPos, yPos).hasDie()) {
-					//TODO
-					
-					
-					
-					
+				BoardField boardField = player.getPlayerFrameFieldDBA().getPlayerFrameField(player, xPos, yPos);
+				if (boardField.hasDie()) {
+		
 					Button die = new Button();
 					imgURL = "/images/"
-							+ patterncardController.getGameController().getGame().getPersonalPlayer().getBoard()
-									.getBoardField(xPos, yPos).getDie().getColor().toString()
-							+ patterncardController.getGameController().getGame().getPersonalPlayer().getBoard()
-									.getBoardField(xPos, yPos).getDie().getEyes()
+							+ boardField.getDie().getColor().toString()
+							+ boardField.getDie().getEyes()
 							+ "_Die.png";
-					//TODO
-					
-					
-					
-					
-					
+
 					
 					if (imgURL != null) {
 						Image image = new Image(getClass().getResource(imgURL).toString());
@@ -126,7 +116,10 @@ public class PatternCardsOfOtherPlayersView extends VBox {
 				patterncardfields.add(stackpane, x, y);
 			}
 		}
-		return patterncardfields;
+		vbox.setSpacing(5);
+		vbox.setPadding(new Insets(0, 0, 0, 5));
+		vbox.getChildren().addAll(label, patterncardfields);
+		return vbox;
 	}
 
 }

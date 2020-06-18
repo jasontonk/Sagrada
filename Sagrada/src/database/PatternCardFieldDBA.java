@@ -110,7 +110,7 @@ public class PatternCardFieldDBA {
 		 public ModelColor getColorOfField(int id, int xpos, int ypos) {
 		
 			 ModelColor modelColor = null;
-			 String query = "SELECT color FROM patterncardfield WHERE idpatterncard= "+id+" AND position_x = "+xpos+" AND position_y = "+ypos+";";
+			 String query = "SELECT color FROM patterncardfield WHERE idpatterncard= "+id+" AND position_x = "+(xpos + 1)+" AND position_y = "+(ypos + 1)+";";
 			 try {
 					Statement stmt = conn.getConn().createStatement();
 					ResultSet rs = stmt.executeQuery(query);
@@ -150,7 +150,7 @@ public class PatternCardFieldDBA {
 		 public int getValueOfField(int id, int xpos, int ypos) {
 			
 			 int value = 0;
-			 String query = "SELECT value FROM patterncardfield WHERE idpatterncard= "+id+" AND position_x = "+xpos+" And position_y ="+ypos+";";
+			 String query = "SELECT value FROM patterncardfield WHERE idpatterncard= "+id+" AND position_x = "+(xpos + 1)+" AND position_y = "+(ypos + 1)+";";
 			 try {
 					Statement stmt = conn.getConn().createStatement();
 					ResultSet rs = stmt.executeQuery(query);

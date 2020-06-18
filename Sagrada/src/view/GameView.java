@@ -12,7 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class GameView extends BorderPane {
+public class GameView extends HBox {
 
 	private GameController gameController;
 	private DicePoolView dicePoolView;
@@ -24,6 +24,7 @@ public class GameView extends BorderPane {
 	private PatternCardsOfOtherPlayersView patternCardsOfOtherPlayersView;
 	
 	public GameView(GameController gameController){
+		BorderPane right = new BorderPane();
 		this.gameController = gameController;
 		dicePoolView = new DicePoolView(gameController.getDieController());
 		patterncardView = new PatterncardView(gameController.getPatterncardController());
@@ -49,21 +50,22 @@ public class GameView extends BorderPane {
 		topView.getChildren().add(publicObjectiveCardsView);
 		topView.getChildren().add(toolcardPoolView);
 		
-		this.setTop(topView);
-		this.setLeft(patterncardView);
-		this.setRight(dicePoolView);
+		right.setTop(topView);
+		right.setLeft(patterncardView);
+		right.setRight(dicePoolView);
 		HBox bottom = new HBox();
 		bottom.getChildren().addAll(roundtrackView, scoreView);
 		button.setPadding(new Insets(10));
 //		button2.setPadding(new Insets(10));
-		this.setBottom(bottom);
+		right.setBottom(bottom);
 		VBox center = new VBox();
 //		center.getChildren().addAll(button,button2, currentPlayerText);
 		center.getChildren().addAll(button, currentPlayerText);
 		center.setSpacing(50);
-		this.setCenter(center);
-		this.setPrefSize(1000, 800);
-		this.setAlignment(roundtrackView, Pos.CENTER);
+		right.setCenter(center);
+		right.setPrefSize(1000, 800);
+		right.setAlignment(roundtrackView, Pos.CENTER);
+		this.getChildren().addAll(patternCardsOfOtherPlayersView, right);
 	}
 
 	public DicePoolView getDicePoolView() {
