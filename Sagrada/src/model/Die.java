@@ -30,6 +30,30 @@ public class Die {
 		return modelColor;
 	}
 	
+	public String getColorString() {
+		String color = null;
+		if (modelColor != null) {
+			switch (modelColor) {
+			case BLUE:
+				color = "blue";
+				break;
+			case GREEN:
+				color = "green";
+				break;
+			case PURPLE:
+				color = "purple";
+				break;
+			case RED:
+				color = "red";
+				break;
+			case YELLOW:
+				color = "yellow";
+				break;
+			}
+		}
+		return color;
+	}
+	
 	/**
      * sets the color of the Die
      */

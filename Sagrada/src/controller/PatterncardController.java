@@ -56,13 +56,7 @@ public class PatterncardController {
 	}
 
 	public void deleteDieFromPool() {
-		if (gameController.getGame().getSelectedToolcard() != null) {
-			gameController.setToolCardUnused();
-		} else {
-
-			gameController.deleteSelectedDie();
-		}
-
+		gameController.deleteSelectedDie();
 	}
 
 	public boolean checkPlacementAgainstRules(int x, int y, ModelColor modelColor, int value) {

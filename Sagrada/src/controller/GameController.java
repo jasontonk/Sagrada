@@ -170,6 +170,15 @@ public class GameController {
 
 	public void setSelectedDie(GameDie die) {
 		game.setSelectedDie(die);
+	
+		if(getGame().getSelectedToolcard()!=null) {
+			if(game.getSelectedDie() != game.getSelectedDieFromDicePool()) {
+				int toolcardID = getGame().getSelectedToolcard().getId();
+				if(toolcardID == 1 || toolcardID == 10) {
+					showWarning("Gereedschapskaart", "De geselecteerde Gereedschapskaart kan niet gebruikt worden!");
+				}
+			}
+		}
 	}
 
 	public GameView getGameView() {
@@ -192,7 +201,7 @@ public class GameController {
 			System.out.println("Ik ga hier mooie toolcardjes doen");
 			boolean testje = game.checkSelectedToolcard(x, y);
 			if (!testje) {
-				showWarning("toolcard helemaal kut", "");
+				showWarning("Gereedschapskaart", "De geselecteerde Gereedschapskaart kan niet gebruikt worden!");
 
 			}
 			return testje;
@@ -281,7 +290,7 @@ public class GameController {
 		    
 		}
 
-		getGame().setSelectedDie(gamedie);
+		getGame().setSelectedDieFromDicePool(gamedie);
 	}
 	
 	public void showConfirmation(GameDie gamedie) {
@@ -319,7 +328,7 @@ public class GameController {
 		}
 		
 		System.out.println("gamedieValue= "+gamedie.getEyes());
-		getGame().setSelectedDie(gamedie);
+		getGame().setSelectedDieFromDicePool(gamedie);
 	}
 	
 

@@ -61,8 +61,9 @@ public class DieController {
 			return die.get(number).getNumber();
 	}
 
-	public void setSelectedDie(int dieID, String selectedDieURL) {
+	public void setSelectedDieFromDiePool(int dieID, String selectedDieURL) {
 		System.out.println("de die size bij het slecteren van een die : "+ die.size());
+		gameController.getGame().setSelectedDieFromDicePool(die.get(dieID));
 		gameController.setSelectedDie(die.get(dieID));
 		this.selectedDieURL = selectedDieURL;
 	}
@@ -83,6 +84,7 @@ public class DieController {
 			if(selectedDie == die.get(i)) {
 				gameController.getGameView().getDicePoolView().deleteDie(i);
 				die.remove(i);
+				gameController.getGame().setSelectedDieFromDicePool(null);
 				gameController.getGame().setSelectedDie(null);
 				break;
 			}
@@ -95,6 +97,10 @@ public class DieController {
 
 	public void removeAllBorders() {
 		gameController.removeAllBorders();
+	}
+
+	public GameController getGameController() {
+		return gameController;
 	}
 
 

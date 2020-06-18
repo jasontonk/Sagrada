@@ -43,6 +43,7 @@ public class Game {
 	private ToolCardDBA toolcardDBA;
 	private SimpleStringProperty currentPlayerName;
 	private Toolcard selectedToolcard;
+	private GameDie selectedDieFromDicePool;
 
 	public Toolcard getSelectedToolcard() {
 		return selectedToolcard;
@@ -90,6 +91,14 @@ public class Game {
 
 	public void addGametoDB() {
 		gameDBA.addNewGameDB(LocalDateTime.now(), this);
+	}
+	
+	public GameDie getSelectedDieFromDicePool() {
+		return selectedDieFromDicePool;
+	}
+
+	public void setSelectedDieFromDicePool(GameDie selectedDieFromDicePool) {
+		this.selectedDieFromDicePool = selectedDieFromDicePool;
 	}
 
 	public void finishGameSetup(AccountController accountController) {
@@ -592,6 +601,13 @@ public class Game {
 	public ModelColor getSelectedDieColor() {
 		if (selectedDie != null) {
 			return selectedDie.getColor();
+		}
+		return null;
+	}
+	
+	public String getSelectedDieColorString() {
+		if (selectedDie != null) {
+			return selectedDie.getColorString();
 		}
 		return null;
 	}
