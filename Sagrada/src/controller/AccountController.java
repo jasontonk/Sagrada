@@ -247,24 +247,18 @@ public class AccountController {
 
 				stopInviteThread();
 //				viewPatterncardSelectionView(player);
-				player.setPatternCard(player.getPatternCard());
-//				player.createBoard();
-//				player.getBoard().AddBoardFieldsToDB();
-				game.finishGameSetup(this);
-				game.addpublicobjectivecards();
-				game.addToolcards();
-				game.setPersonalPlayer(getAccount());
-				game.getPersonalPlayer().createBoard();
-				for(int x = 0; x < 5; x++) {
-					for (int y = 0; y < 4; y++) {
-						game.getPersonalPlayer().getBoard().getBoardFieldFromDB(x, y);
-					}
+				if(player.getPatternCard() != null) {
+					player.setPatternCard(player.getPatternCard());
+					
+	//				player.createBoard();
+	//				player.getBoard().AddBoardFieldsToDB();
+					goToGame(game); 
+					
 				}
-				
-				GameController gameController = new GameController(connection, myScene, game, this);
-				
-				
-				myScene.setContentPane(gameController.getGameView());
+				else {
+					patterncardSelectionView = new PatterncardSelectionView(this, player, game);
+					myScene.setContentPane(patterncardSelectionView);
+				}
 			}
 			else {
 				showWarning("game", "Een speler heeft de uitnodiging geweigerd, waardoor de game niet gestart wordt");
@@ -276,15 +270,33 @@ public class AccountController {
 		}	
 	}
 	
+	public void goToGame(Game game) {
+		game.finishGameSetup(this);
+		game.addpublicobjectivecards();
+		game.addToolcards();
+		game.setPersonalPlayer(getAccount());
+		game.getPersonalPlayer().createBoard();
+		for(int x = 0; x < 5; x++) {
+			for (int y = 0; y < 4; y++) {
+				game.getPersonalPlayer().getBoard().getBoardFieldFromDB(x, y);
+			}
+		}
+		
+		GameController gameController = new GameController(connection, myScene, game, this);
+		myScene.setContentPane(gameController.getGameView());
+	}
+
 	public void viewPatterncardSelectionView(Player player) {
-		patterncardSelectionView = new PatterncardSelectionView(this, player);
+		patterncardSelectionView = new PatterncardSelectionView(this, player, player.getGame());
 		myScene.setContentPane(patterncardSelectionView);
 		boolean selected = false;
 		while(!selected) {
 			if(player.getPatternCard() != null) {
 				selected = true;
 			}
-			System.out.println("kijk hoe snel ik gaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+			else {
+				
+			}
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {

@@ -13,6 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import model.Game;
 import model.PatternCard;
 import model.Player;
 
@@ -21,9 +22,16 @@ public class PatterncardSelectionView extends VBox {
 	private ArrayList<PatterncardView> patterncardView;
 	private ArrayList<PatterncardController> patterncardControllers;
 	private Insets padding = new Insets(5);
+	private Game game;
+	private AccountController accountController;
+	private Player player;
 	
-	
-	public PatterncardSelectionView(AccountController accountController, Player player) {
+	public PatterncardSelectionView(AccountController accountController, Player player, Game game) {
+		this.game = game;
+		this.accountController = accountController;
+		this.player = player;
+		
+		
 		patterncardView = new ArrayList<PatterncardView>();
 		patterncardControllers = new ArrayList<PatterncardController>();
 		ArrayList<PatternCard> patterncardsToChoose = accountController.getPatternCardsToChoose(player);
@@ -38,7 +46,7 @@ public class PatterncardSelectionView extends VBox {
 	}
 
 
-	private GridPane drawPatterncards() {
+	public GridPane drawPatterncards() {
 		GridPane gridpane = new GridPane();
 		gridpane.setPadding(padding);
 		gridpane.setVgap(10.0);
@@ -50,9 +58,10 @@ public class PatterncardSelectionView extends VBox {
 	        gridpane.add(glass, i, 1);
 		}
 		for (int i = 0; i < patterncardView.size(); i++) {
+			final int index = i;
 			Button button = new Button();
 			button.setText("Selecteer mij!");
-			button.setOnAction(e -> test());
+			button.setOnAction(e -> joinGame(index));
 			gridpane.add(button, i, 2);
 			gridpane.setHalignment(button, HPos.CENTER);
 		}
@@ -60,8 +69,10 @@ public class PatterncardSelectionView extends VBox {
 	}
 
 
-	private void test() {
+	private void joinGame(int index) {
 		System.out.println("patterncardview weergeven");
+		player.setPatternCard(patterncardControllers.get(index).getPatterncard());
+		accountController.goToGame(game);
 	}
 
 

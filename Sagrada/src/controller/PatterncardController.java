@@ -17,17 +17,16 @@ public class PatterncardController {
 		this.gameController = gameController;
 		System.out.println("de personalplayer is: " + gameController.getGame().getPersonalPlayer());
 		patterncard = gameController.getGame().getPersonalPlayer().getBoard().getPatternCard();
-		System.out.println("patterncardcontroller patterncard = " + patterncard.getName());
+//		System.out.println("patterncardcontroller patterncard = " + patterncard.getName());
 		if (patterncard.getPatterncardID() == 0) {
-//			gameController.viewPatternCardSelection();
 			patterncard = new PatternCard(conn);
 		}
-//		patterncard.setpattern(false);
+		patterncard.setpattern(false);
 	}
 
 	public PatterncardController(PatternCard patterncard) {
 		this.patterncard = patterncard;
-//		patterncard.setpattern(false);
+		this.patterncard.setpattern(false);
 	}
 
 	public ModelColor getFieldColor(int x, int y) {

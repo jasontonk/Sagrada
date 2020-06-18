@@ -191,10 +191,10 @@ public class Player {
 	public PatternCard getPatternCard() {
 //		if(patternCard.getPatterncardID() == 0) {
 			if(patternCard.getPatterncardDB().getSelectedPatterncardOfPlayer(this.getId(), this) == null) {
-				patternCard = patternCard.getPatterncardDB().getPatterncard();
-				patternCard.setpattern(false);
-				playerDBA.setPlayerPatternCard(patternCard, this);
-//				return null;
+//				patternCard = patternCard.getPatterncardDB().getPatterncard();
+//				patternCard.setpattern(false);
+//				playerDBA.setPlayerPatternCard(patternCard, this);
+				return null;
 			}
 			else {
 				patternCard = patternCard.getPatterncardDB().getSelectedPatterncardOfPlayer(this.getId(), this);	

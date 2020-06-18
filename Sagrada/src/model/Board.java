@@ -18,8 +18,8 @@ public class Board {
 		this.player = player;
 		patternCardDBA = new PatternCardDBA(conn);
 		patternCard = player.getPatternCard();
-		System.out.println("THIS IS THE PATTERNCARDDD " + patternCard.getName());
-		player.setPatternCard(patternCard);
+//		System.out.println("THIS IS THE PATTERNCARDDD " + patternCard.getName());
+//		player.setPatternCard(patternCard);
 		boardFields = new BoardField[5][4];
 		playerFrameFieldDBA = new PlayerFrameFieldDBA(conn);
 		for (int x = 0; x < 5; x++) {
