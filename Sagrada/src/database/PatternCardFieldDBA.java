@@ -110,28 +110,34 @@ public class PatternCardFieldDBA {
 		 public ModelColor getColorOfField(int id, int xpos, int ypos) {
 		
 			 ModelColor modelColor = null;
-			 String query = "SELECT color FROM patterncardfield WHERE idpatterncard= "+id+"AND position_x = "+xpos+" And position_y ="+ypos+";";
+			 String query = "SELECT color FROM patterncardfield WHERE idpatterncard= "+id+" AND position_x = "+xpos+" AND position_y = "+ypos+";";
 			 try {
 					Statement stmt = conn.getConn().createStatement();
 					ResultSet rs = stmt.executeQuery(query);
 					if(rs.next()) {
+						
 						String c = rs.getString("color");
-						switch(c) {
-						case "blue":
-							modelColor = ModelColor.BLUE;
-							break;
-						case "green":
-							modelColor = ModelColor.GREEN;
-							break;
-						case "purple":
-							modelColor = ModelColor.PURPLE;
-							break;
-						case "red":
-							modelColor = ModelColor.RED;
-							break;
-						case "yellow":
-							modelColor = ModelColor.YELLOW;
-							break;
+						if(c == null) {
+							modelColor = null;
+						} else {
+							switch(c) {
+							case "blue":
+								modelColor = ModelColor.BLUE;
+								break;
+							case "green":
+								modelColor = ModelColor.GREEN;
+								break;
+							case "purple":
+								modelColor = ModelColor.PURPLE;
+								break;
+							case "red":
+								modelColor = ModelColor.RED;
+								break;
+							case "yellow":
+								modelColor = ModelColor.YELLOW;
+								break;
+							default: modelColor = null;
+							}
 						}
 					}
 					stmt.close();
@@ -144,7 +150,7 @@ public class PatternCardFieldDBA {
 		 public int getValueOfField(int id, int xpos, int ypos) {
 			
 			 int value = 0;
-			 String query = "SELECT value FROM patterncardfield WHERE idpatterncard= "+id+"AND position_x = "+xpos+" And position_y ="+ypos+";";
+			 String query = "SELECT value FROM patterncardfield WHERE idpatterncard= "+id+" AND position_x = "+xpos+" And position_y ="+ypos+";";
 			 try {
 					Statement stmt = conn.getConn().createStatement();
 					ResultSet rs = stmt.executeQuery(query);

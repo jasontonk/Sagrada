@@ -21,6 +21,7 @@ public class GameView extends BorderPane {
 	private ScoreView scoreView;
 	private PublicObjectiveCardsView publicObjectiveCardsView;
 	private ToolcardPoolView toolcardPoolView;
+	private PatternCardsOfOtherPlayersView patternCardsOfOtherPlayersView;
 	
 	public GameView(GameController gameController){
 		this.gameController = gameController;
@@ -32,6 +33,7 @@ public class GameView extends BorderPane {
 				gameController.getGame().getPublicObjectiveCardIDs()
 				);
 		toolcardPoolView = new ToolcardPoolView(gameController);
+		patternCardsOfOtherPlayersView = new PatternCardsOfOtherPlayersView(gameController.getPatterncardController());
 		Button button = new Button("Beurt beëindigen.");//TODO temporary
 		button.setOnMouseClicked(e-> gameController.stopround());
 //		Button button2 = new Button("Beurt beginnen");
@@ -80,6 +82,13 @@ public class GameView extends BorderPane {
 		return scoreView;
 	}
 	
+	/**
+	 * @return the patternCardsOfOtherPlayersView
+	 */
+	public PatternCardsOfOtherPlayersView getPatternCardsOfOtherPlayersView() {
+		return patternCardsOfOtherPlayersView;
+	}
+
 	public void updateDicePoolView(int amountofdice) {
 		dicePoolView.updateDicePool(amountofdice);
 	}

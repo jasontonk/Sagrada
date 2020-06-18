@@ -76,7 +76,7 @@ public class PatterncardView extends VBox {
 				button.setOnMouseClicked(e -> checkPlacementAgainstRules(xPos, yPos, stackpane));
 				stackpane.getChildren().add(button);
 				if (patterncardController.getGameController() != null && patterncardController.getGameController()
-						.getGame().getPersonalPlayer().getBoard().getBoardField(xPos, yPos).hasDie()) {
+						.getGame().getPersonalPlayer().getBoard().getBoardFieldFromDB(xPos, yPos).hasDie()) {
 					Button die = new Button();
 					imgURL = "/images/"
 							+ patterncardController.getGameController().getGame().getPersonalPlayer().getBoard()

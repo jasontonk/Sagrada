@@ -125,7 +125,6 @@ public class GameController {
 		playround.start();
 
 		gameRoundPlayer.setIsPaused(true);
-		myScene.setContentPane(new GameView(this));
 		isPlayingTurn = false;
 		shownTurnMessage = false;
 

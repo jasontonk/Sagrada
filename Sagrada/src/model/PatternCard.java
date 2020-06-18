@@ -160,6 +160,13 @@ public class PatternCard {
 		return patterncard[xPos][yPos].getValue();
 	}
 	
+	public ModelColor getFieldColorFromDB(int xPos, int yPos) {
+		return patterncardfieldDB.getColorOfField(this.getPatterncardID(), xPos, yPos);
+	}
+	public int getFieldValueFromDB(int xPos, int yPos) {
+		return patterncardfieldDB.getValueOfField(this.getPatterncardID(), xPos, yPos);
+	}
+	
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
