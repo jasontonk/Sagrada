@@ -70,8 +70,9 @@ public class DieController {
 
 
 	public String getSelectedDieURL() {
+		selectedDieURL = "/images/" + gameController.getGame().getSelectedDieColorString() + gameController.getGame().getSelectedDieValue() + "_Die.png";
 		if(selectedDieURL != null) {
-		return selectedDieURL;
+			return selectedDieURL;
 		}
 		else {
 			return null;
