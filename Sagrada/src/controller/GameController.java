@@ -50,7 +50,7 @@ public class GameController {
 	private Thread updateViews;
 	private Thread playround;
 	
-	private boolean newCurrentPlayer;
+	private boolean newCurrentPlayer; 
 	private ChatDBA chatDBA;
 
 //	public GameController(DataBaseConnection conn, MyScene ms, Game game) {
