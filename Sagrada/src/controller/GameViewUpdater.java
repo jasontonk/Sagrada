@@ -125,14 +125,15 @@ public class GameViewUpdater extends Task<Boolean> {
 	}
 
 	private void updateDicePoolView() {
+		ArrayList<GameDie> localOffer = gameCtrl.getGame().getLocalOffer();
 		ArrayList<GameDie> offer = gameCtrl.getGame().getOffer();
 		System.out.println("got offer");
-//		for (int i = 0; i < offer.length; i++) {
-//			System.out.println(offer[i] +", ");
-//		}
-		gameCtrl.getDieController().updateDicePool(offer);
-		System.out.println("updated dicepool");
-		
+		if(localOffer.size() != offer.size()) {
+			gameCtrl.getDieController().updateDicePool(offer);
+			System.out.println("updated dicepool");
+			updatePatternCardsOfOtherPlayers();
+			System.out.println("updated patternCardsOfOtherPlayers");
+		}
 	}
 	
 	public void updateScoreBoard() {
@@ -148,13 +149,8 @@ public class GameViewUpdater extends Task<Boolean> {
 	}
 
 	public void updatePatternCardsOfOtherPlayers() {
-		System.out.println("HIJ KOMT IN DE GAMEVIEWUPDATER");
-		if(gameCtrl.isNewCurrentPlayer()) {
-			System.out.println("HIJ KOMT IN DE GAMEVIEWUPDATER 2");
 			for(Player p : gameCtrl.getGame().getPlayers()) {
 				gameCtrl.getGameView().getPatternCardsOfOtherPlayersView().drawPatterncard(p);
 			}
-			gameCtrl.setNewCurrentPlayer(false);
-		}
 	}
 }

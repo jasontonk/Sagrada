@@ -689,6 +689,10 @@ public class Game {
 		System.out.println("de size van de offer : " + offer.size());
 		return offer;
 	}
+	
+	public ArrayList<GameDie> getLocalOffer(){
+		return offer;
+	}
 
 	public boolean everyoneSelectedPatternCard() {
 		for (Player player : players) {
