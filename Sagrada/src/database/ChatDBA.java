@@ -16,8 +16,11 @@ private DataBaseConnection conn;
 		this.conn = c;
 	}
 	
-	public boolean addChatDB(int idplayer, String message, Chat chatline) {
-		Timestamp timestamp = chatline.getTime();
+	public boolean addChatDB(int idplayer, String message
+			, Chat chat
+			) {
+		Timestamp timestamp = chat.getTime();
+//		String timeStamp = new String("2008-09-01 00:00:01");
 		String query = "INSERT INTO chatline VALUES('"+idplayer+"','"+timestamp+"','"+message+"');";
 		
 		try {
@@ -65,12 +68,12 @@ private DataBaseConnection conn;
 	
 	public ArrayList<Chat> getChatlinesOfGame(int gameid) {
 		ArrayList<Chat> chatlines = new ArrayList<>();
-		String query = "SELECT chatline.* FROM chatline JOIN player ON chatline.player_idplayer = player.idplayer WHERE game_idgame = "+gameid+" ORDER BY time ASC;";
+		String query = "SELECT chatline.* FROM chatline JOIN player ON chatline.idplayer = player.idplayer WHERE idgame = "+gameid+" ORDER BY time ASC;";
 		try {
 			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next()) {
-				Chat chat = new Chat(rs.getInt("player_idplayer"), rs.getString("message"), conn); //edited to fix error
+				Chat chat = new Chat(rs.getInt("idplayer"), rs.getString("message"), conn); //edited to fix error
 				chat.setTime(rs.getTimestamp("time"));
 				chatlines.add(chat);
 			}

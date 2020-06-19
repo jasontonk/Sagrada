@@ -78,8 +78,15 @@ public class GameUpdater implements Runnable {
 	}
 
 	private void updateCurrentPlayer() {
-
-		gameCtrl.getGame().setCurrentPlayer(gameCtrl.getCurrentPlayer());
+		
+		Player local = gameCtrl.getLocalCurrentPlayer();
+		Player database = gameCtrl.getCurrentPlayer();
+		
+		if(local.getId() != database.getId()) {
+			gameCtrl.getGame().setCurrentPlayer(database);
+			gameCtrl.setNewCurrentPlayer(true);
+		}
+		
 
 	}
 

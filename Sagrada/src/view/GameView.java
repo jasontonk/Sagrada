@@ -22,10 +22,13 @@ public class GameView extends HBox {
 	private PublicObjectiveCardsView publicObjectiveCardsView;
 	private ToolcardPoolView toolcardPoolView;
 	private PatternCardsOfOtherPlayersView patternCardsOfOtherPlayersView;
+	private ChatView chatView;
+	
 	
 	public GameView(GameController gameController){
 		BorderPane right = new BorderPane();
 		this.gameController = gameController;
+		chatView = new ChatView(gameController);
 		dicePoolView = new DicePoolView(gameController.getDieController());
 		patterncardView = new PatterncardView(gameController.getPatterncardController());
 		roundtrackView = new RoundtrackView(gameController.getRoundtrackController());
@@ -52,7 +55,8 @@ public class GameView extends HBox {
 		
 		right.setTop(topView);
 		right.setLeft(patterncardView);
-		right.setRight(dicePoolView);
+		HBox dicepoolChat = new HBox(dicePoolView, chatView);
+		right.setRight(dicepoolChat);
 		HBox bottom = new HBox();
 		bottom.getChildren().addAll(roundtrackView, scoreView);
 		button.setPadding(new Insets(10));
@@ -84,7 +88,10 @@ public class GameView extends HBox {
 		return scoreView;
 	}
 	
-	
+	public ChatView getChatView() {
+		return chatView;
+	}
+
 	
 	public ToolcardPoolView getToolcardPoolView() {
 		return toolcardPoolView;

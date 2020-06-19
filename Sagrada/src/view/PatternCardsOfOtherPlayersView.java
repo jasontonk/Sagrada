@@ -47,6 +47,7 @@ public class PatternCardsOfOtherPlayersView extends VBox {
 	}
 
 	public VBox drawPatterncard(Player player) {
+		this.getChildren().clear();
 		VBox vbox = new VBox();
 		GridPane patterncardfields = new GridPane();
 		patterncardfields.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
@@ -60,65 +61,74 @@ public class PatternCardsOfOtherPlayersView extends VBox {
 		label.setFont(new Font(15));
 		label.setTextFill(Color.WHITE);
 		
-		for (int x = 0; x < 5; x++) {
-			for (int y = 0; y < 4; y++) {
-				StackPane stackpane = new StackPane();
-				Button button = new Button();
-				button.setPrefSize(PATTERNCARDFIELD_SIZE, PATTERNCARDFIELD_SIZE);
-				int xPos = x;
-				int yPos = y;
-				String imgURL;
-				
-				
-				ModelColor modelColor = player.getPatternCard().getFieldColorFromDB(xPos, yPos);
-
-				Color color = javafxColor.getJavafxColor(modelColor);
-				
-				int value = player.getPatternCard().getFieldValueFromDB(xPos, yPos);
-				
-				if (color == null && value == 0) {
-					button.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
-				} else if (modelColor != null) {
-					button.setBackground(new Background(new BackgroundFill(color, null, null)));
-				} else if (value != 0) {
-					imgURL = "/images/" + Integer.toString(value) + "_fieldValue.jpg";
-					Image image = new Image(getClass().getResource(imgURL).toString());
-					button.setBackground(new Background(
-							new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
-									BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
-				}
-				stackpane.getChildren().add(button);
-				
-				
-				
-				
-				BoardField boardField = player.getPlayerFrameFieldDBA().getPlayerFrameField(player, xPos, yPos);
-				if (boardField.hasDie()) {
-		
-					Button die = new Button();
-					imgURL = "/images/"
-							+ boardField.getDie().getColor().toString()
-							+ boardField.getDie().getEyes()
-							+ "_Die.png";
-
+		if(player.getPatternCard() != null) {
+			for (int x = 0; x < 5; x++) {
+				for (int y = 0; y < 4; y++) {
+					StackPane stackpane = new StackPane();
+					Button button = new Button();
+					button.setPrefSize(PATTERNCARDFIELD_SIZE, PATTERNCARDFIELD_SIZE);
+					int xPos = x;
+					int yPos = y;
+					String imgURL;
 					
-					if (imgURL != null) {
+					
+					ModelColor modelColor = player.getPatternCard().getFieldColorFromDB(xPos, yPos);
+	
+					Color color = javafxColor.getJavafxColor(modelColor);
+					
+					int value = player.getPatternCard().getFieldValueFromDB(xPos, yPos);
+					
+					if (color == null && value == 0) {
+						button.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+					} else if (modelColor != null) {
+						button.setBackground(new Background(new BackgroundFill(color, null, null)));
+					} else if (value != 0) {
+						imgURL = "/images/" + Integer.toString(value) + "_fieldValue.jpg";
 						Image image = new Image(getClass().getResource(imgURL).toString());
-						die.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT,
-								BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-								new BackgroundSize(1, 1, false, false, false, true))));
-						die.setPrefSize(40, 40);
-						stackpane.getChildren().add(die);
-
+						button.setBackground(new Background(
+								new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+										BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
 					}
+					stackpane.getChildren().add(button);
+					
+					BoardField boardField = player.getPlayerFrameFieldDBA().getPlayerFrameField(player, xPos, yPos);
+					if (boardField.hasDie()) {
+			
+						Button die = new Button();
+						imgURL = "/images/"
+								+ boardField.getDie().getColor().toString()
+								+ boardField.getDie().getEyes()
+								+ "_Die.png";
+	
+						
+						if (imgURL != null) {
+							Image image = new Image(getClass().getResource(imgURL).toString());
+							die.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT,
+									BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+									new BackgroundSize(1, 1, false, false, false, true))));
+							die.setPrefSize(40, 40);
+							stackpane.getChildren().add(die);
+	
+						}
+					}
+	
+					patterncardfields.add(stackpane, x, y);
 				}
-
-				patterncardfields.add(stackpane, x, y);
 			}
+			vbox.setSpacing(5);
+			vbox.setPadding(new Insets(0, 0, 0, 5));
+			vbox.getChildren().addAll(label, patterncardfields);
 		}
-		vbox.setSpacing(5);
-		vbox.setPadding(new Insets(0, 0, 0, 5));
-		vbox.getChildren().addAll(label, patterncardfields);
+		else {
+			Label label2 = new Label("Deze speler is nog aan het kiezen");
+			label2.setFont(new Font(15));
+			label2.setTextFill(Color.RED);
+			
+			vbox.setSpacing(5);
+			vbox.setPadding(new Insets(0, 0, 0, 5));
+			vbox.getChildren().addAll(label, label2);
+		}
+		
 		return vbox;
 	}
 
