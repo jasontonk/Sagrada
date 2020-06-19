@@ -3,16 +3,19 @@ package controller;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import database.ChatDBA;
 import database.DataBaseConnection;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
+import model.Chat;
 import model.Game;
 import model.GameDie;
 import model.ModelColor;
 import model.PatternCard;
 import model.Player;
+import view.ChatView;
 import view.FinishedGameView;
 import view.GameView;
 import view.MyScene;
@@ -48,6 +51,7 @@ public class GameController {
 	private Thread playround;
 	
 	private boolean newCurrentPlayer;
+	private ChatDBA chatDBA;
 
 //	public GameController(DataBaseConnection conn, MyScene ms, Game game) {
 //		this.conn= conn;
@@ -95,7 +99,7 @@ public class GameController {
 		this.game = game;
 
 		this.accountController = accountController;
-
+		chatDBA = new ChatDBA(conn);
 		System.out.println("loading...20%");
 		dieController = new DieController(conn, this);
 		System.out.println("loading...40%");
@@ -594,6 +598,26 @@ public class GameController {
 	
 	public Player getLocalCurrentPlayer() {
 		return game.getLocalCurrentPlayer();
+	}
+
+	public void actionSendMessage(String text, ChatView chatView) {
+		Chat c = new Chat(game.
+				getPersonalPlayer().
+				getId(), text, conn);
+		chatDBA.getTime(c);
+		
+		chatDBA.addChatDB(game.
+				getPersonalPlayer().
+				getId(), text, c);
+		
+//		chatView.addMessage(chat);
+		ArrayList<Chat> chats = chatDBA.getChatlinesOfGame(this.getGame().getGameID());
+		chatView.deleteAllChats();
+		for (Chat chat : chats) {
+			chatDBA.getTime(chat);
+			chatView.addMessage(chat);
+		}
+		chatView.makeChat();
 	}
 
 }
