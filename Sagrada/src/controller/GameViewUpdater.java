@@ -88,6 +88,8 @@ public class GameViewUpdater extends Task<Boolean> {
 		updateDicePoolView();
 		updatePatterncardsView();
 		updateRoundtrackView();
+		updatePatternCardsOfOtherPlayers();
+		
 //		updateScoreBoard();
 		System.out.println();
 	}
@@ -146,7 +148,9 @@ public class GameViewUpdater extends Task<Boolean> {
 	}
 
 	public void updatePatternCardsOfOtherPlayers() {
+		System.out.println("HIJ KOMT IN DE GAMEVIEWUPDATER");
 		if(gameCtrl.isNewCurrentPlayer()) {
+			System.out.println("HIJ KOMT IN DE GAMEVIEWUPDATER 2");
 			for(Player p : gameCtrl.getGame().getPlayers()) {
 				gameCtrl.getGameView().getPatternCardsOfOtherPlayersView().drawPatterncard(p);
 			}
