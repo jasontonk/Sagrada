@@ -95,6 +95,7 @@ public class GameViewUpdater extends Task<Boolean> {
 
 
 	private void updateRoundtrackView() {
+		GameDie gamedie = null;
 		ArrayList<GameDie> diceOnRoundTrack = new ArrayList<GameDie>();
 		diceOnRoundTrack = gameCtrl.getChangedDiceOnRoundTrack();
 		ArrayList<ModelColor> colors = new ArrayList<>();
@@ -104,10 +105,11 @@ public class GameViewUpdater extends Task<Boolean> {
 				if(diceOnRoundTrack.get(j).isOnRoundTrack() == i) {
 					colors.add(diceOnRoundTrack.get(j).getColor());
 					values.add(diceOnRoundTrack.get(j).getEyes());
+					gamedie = diceOnRoundTrack.get(j);
 				}
 			}
-			if(colors.size() != 0) {
-				gameCtrl.getGameView().getRoundtrackView().addDice(i, colors, values);
+			if(colors.size() != 0 && diceOnRoundTrack.size() != 0 && i <= diceOnRoundTrack.size()) {
+				gameCtrl.getGameView().getRoundtrackView().addDice(i, colors, values,diceOnRoundTrack.get(i-1));
 			}
 			colors.clear();
 			values.clear();

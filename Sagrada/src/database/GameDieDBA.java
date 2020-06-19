@@ -292,4 +292,27 @@ public class GameDieDBA {
 			e.printStackTrace();
 		}
 	}
+
+	public void removeDieFromRoundTrack(GameDie selectedDieRoundTrack, GameDie selectedDieFromDicePool, Game game) {
+		 String query = "UPDATE gamedie SET roundtrack = NULL WHERE dienumber = "+selectedDieRoundTrack.getNumber()+" AND eyes =  "+selectedDieRoundTrack.getEyes()+" AND diecolor ='"+selectedDieRoundTrack.getColor()+"';";
+	        try {
+	            Statement stmt = conn.getConn().createStatement();
+	            stmt.executeUpdate(query);
+	            stmt.close();
+	        }catch(SQLException e) {
+	            e.printStackTrace();
+	        }
+	}
+
+	public void setDieOnRoundTrack(GameDie gamedie, GameDie rountrackDie, Game game) {
+		String query = "UPDATE gamedie SET roundtrack = "+rountrackDie.isOnRoundTrack()+" WHERE dienumber = "+gamedie.getNumber()+" AND eyes =  "+gamedie.getEyes()+" AND diecolor ='"+gamedie.getColor()+"';";
+        try {
+            Statement stmt = conn.getConn().createStatement();
+            stmt.executeUpdate(query);
+            stmt.close();
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
+		
+	}
 }

@@ -102,7 +102,7 @@ public class RoundtrackView extends VBox {
 		roundPane.setRight(text);
 		return roundPane;
 	}
-	public void addDice(int round, ArrayList<ModelColor> colors, ArrayList<Integer> values) {
+	public void addDice(int round, ArrayList<ModelColor> colors, ArrayList<Integer> values,GameDie gamedie) {
 		
 				for(int i = 0; i < colors.size(); i++) {
 					String imgURL;
@@ -114,7 +114,7 @@ public class RoundtrackView extends VBox {
 					Image image = new Image(getClass().getResource(imgURL).toString());
 					button.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
 					button.setPrefSize(50, 50);
-					button.setOnMouseClicked(e -> setSelectedDie(round, index));
+					button.setOnMouseClicked(e -> swapDies(round, index,gamedie));
 					if(i == 0) {
 						stackpanes.get(round-1).getChildren().add(button);
 					}
@@ -131,8 +131,14 @@ public class RoundtrackView extends VBox {
 						}
 					}
 	}
-
-	private void setSelectedDie(int round, int index) {
-		roundtrackController.setSelectedDie(round, index);
+	
+	private void swapDies(int round, int index, GameDie die) {
+		roundtrackController.setSelectedDie(round, index,die);
+		if (roundtrackController.getGameController().getGame().getSelectedToolcard() != null) {
+			if(roundtrackController.getGameController().getGame().getSelectedToolcard().getId() == 5 && roundtrackController.getGameController().getGame().getSelectedDieFromDicePool() != null) {
+				roundtrackController.getGameController().lensCutter(die);
+			}
+//        roundtrackController.getGameController().checkPlacementAgainstRules(0, 0, null, 0);
+		}
 	}
 }

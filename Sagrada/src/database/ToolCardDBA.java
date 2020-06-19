@@ -30,7 +30,7 @@ public class ToolCardDBA {
 //		}
 		
 		int id1 = 11;
-		int id2 = 6;
+		int id2 = 5;
 		int id3 = 10;
 		
 		System.out.println(id1+ "   " + id2 + "   " + id3);

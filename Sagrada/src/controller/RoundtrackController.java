@@ -1,7 +1,10 @@
 package controller;
 
+import java.util.ArrayList;
+
 import model.Game;
 import model.GameDie;
+import model.ModelColor;
 import model.RoundTrack;
 
 public class RoundtrackController {
@@ -18,19 +21,11 @@ public class RoundtrackController {
 		return gameController;
 	}
 	
-	public void setSelectedDie(int round, int index) {
-		
-		GameDie gameDie = gameController.
-				getGame().
-				getRoundTrack().
-				getRoundTrackField(round-1).
-				getDie(index);
-			 System.out.println("GAMEDIE IS MISSCHIEN GESELECTEERD");
+	public void setSelectedDie(int round, int index,GameDie gameDie) {
 			 
 		if(gameDie != null) {
-			System.out.println("GAMEDIE IS GESELECTEERD");
-			gameController.setSelectedDie(gameDie);
+			System.out.println("Ik heb RoundTrackDie : " + gameDie.getEyes()+ " And Color= " + gameDie.getColorString());
+			gameController.getGame().setSelectedDieRoundTrack(gameDie);
 		}
 	}
-
 }

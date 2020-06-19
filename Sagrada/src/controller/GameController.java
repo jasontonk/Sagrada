@@ -258,6 +258,70 @@ public class GameController {
 		alert.showAndWait();	
 	}
 	
+	public void lensCutter(GameDie rountrackDie) {
+		
+		GameDie dieOnDiePool = game.getSelectedDieFromDicePool();
+		
+		ArrayList<ModelColor> colors = new ArrayList<>();
+		ArrayList<Integer> values = new ArrayList<>();
+		ArrayList<GameDie> offer;
+		
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		
+		alert.setTitle("Let op!");
+		alert.setHeaderText("De waarde van de geselecteerde dobbelsteen is = " + dieOnDiePool.getEyes() + " en de kleur is = "+ dieOnDiePool.getColorString());
+		alert.setContentText("Weet je zeker dat je deze dobbelsteen wilt wisselen met een dobbelsteen uit de RoundTrack");
+		
+		ButtonType buttonTypeOk = new ButtonType("Ja");
+		ButtonType buttonTypeCancel = new ButtonType("Nee", ButtonData.CANCEL_CLOSE);
+		
+		alert.getButtonTypes().setAll(buttonTypeOk,buttonTypeCancel);
+		
+		Optional<ButtonType> result = alert.showAndWait();
+		
+		if (result.get() == buttonTypeOk){
+			game.removeDieFromRoundTrack(rountrackDie,dieOnDiePool);
+			game.setDieOnRoundTrack(dieOnDiePool,rountrackDie);
+			
+			for(int i=0; i<changedDiceOnRoundTrack.size();i++) {
+				if(changedDiceOnRoundTrack.get(i).getNumber() == rountrackDie.getNumber()) {
+					changedDiceOnRoundTrack.remove(i);
+					changedDiceOnRoundTrack.set(i,dieOnDiePool);
+					dieOnDiePool.setOnRoundTrack(rountrackDie.isOnRoundTrack());
+					break;
+				}
+			}
+			
+			
+			for (int i = 1; i <= 10; i++) {
+				for (int j = 0; j < changedDiceOnRoundTrack.size(); j++) {
+					if(changedDiceOnRoundTrack.get(j).isOnRoundTrack() == i) {
+						colors.add(changedDiceOnRoundTrack.get(j).getColor());
+						values.add(changedDiceOnRoundTrack.get(j).getEyes());
+						dieOnDiePool = changedDiceOnRoundTrack.get(j);
+					}
+				}
+				if(colors.size() != 0 && diceOnRoundTrack.size() != 0 && i <= diceOnRoundTrack.size()) {
+					getGameView().getRoundtrackView().addDice(i, colors, values,diceOnRoundTrack.get(i-1));
+				}
+				colors.clear();
+				values.clear();
+			}
+		}
+		rountrackDie.setOnRoundTrack(0);
+		getGame().setSelectedDieFromDicePool(rountrackDie);
+		getGame().setSelectedDie(rountrackDie);	
+		offer = getGame().getOffer();
+		for(int i = 0; i < offer.size(); i++) {
+			if(offer.get(i).getNumber() == dieOnDiePool.getNumber() && offer.get(i).getColor() == dieOnDiePool.getColor()) {
+				offer.remove(i);
+				offer.add(rountrackDie);	
+			}
+		}
+		getGameView().getDicePoolView().updateDicePool(offer.size());
+	}
+	
+
 	public void fluxRemover(GameDie gamedie) {
 		GameDie unusedDie;
 		game.setGameDieUnused(gamedie);
@@ -489,6 +553,7 @@ public class GameController {
 	public ArrayList<GameDie> getChangedDiceOnRoundTrack() {
 		return changedDiceOnRoundTrack;
 	}
+
 
 	public void clearChangedDiceOnRoundTrack() {
 		changedDiceOnRoundTrack.clear();

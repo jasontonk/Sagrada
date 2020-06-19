@@ -44,6 +44,7 @@ public class Game {
 	private SimpleStringProperty currentPlayerName;
 	private Toolcard selectedToolcard;
 	private GameDie selectedDieFromDicePool;
+	private GameDie selectedDieRoundTrack;
 
 	public Toolcard getSelectedToolcard() {
 		return selectedToolcard;
@@ -83,6 +84,14 @@ public class Game {
 
 	public void addpublicobjectivecards() {
 		getPublicObjectiveCardsOfGame();
+	}
+
+	public GameDie getSelectedDieRoundTrack() {
+		return selectedDieRoundTrack;
+	}
+
+	public void setSelectedDieRoundTrack(GameDie selectedDieRoundTrack) {
+		this.selectedDieRoundTrack = selectedDieRoundTrack;
 	}
 
 	public void addToolcards() {
@@ -771,6 +780,15 @@ public class Game {
 	
 	public GameDie getUnusedDiceForGame(){
 		return gamedieDBA.getUnusedDiceOfGame(this);
+	}
+
+	public void removeDieFromRoundTrack(GameDie selectedDieRoundTrack,GameDie selectedDieFromDicePool) {
+		gamedieDBA.removeDieFromRoundTrack(selectedDieRoundTrack,selectedDieFromDicePool,this);
+	}
+
+	public void setDieOnRoundTrack(GameDie gamedie, GameDie rountrackDie) {
+		gamedieDBA.setDieOnRoundTrack(gamedie,rountrackDie, this);
+		
 	}
 
 //	public void setPublicObjectiveCards(ArrayList<PublicObjectiveCard> publicObjectiveCards) {

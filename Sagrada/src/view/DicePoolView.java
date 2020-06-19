@@ -99,7 +99,6 @@ public class DicePoolView extends VBox {
 				addAllDiceFromDicepool(amountofdice);	
 	}
 
-
 	private void deleteAllDiceFromDicepool() {
 		dieView.clear();
 		dicePool.getChildren().clear();
