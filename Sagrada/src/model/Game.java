@@ -42,7 +42,7 @@ public class Game {
 	private PlayerDBA playerDBA;
 	private ToolCardDBA toolcardDBA;
 	private SimpleStringProperty currentPlayerName;
-	private Toolcard selectedToolcard;
+	private Toolcard selectedToolcard; 
 	private GameDie selectedDieFromDicePool;
 	private GameDie selectedDieRoundTrack;
 
