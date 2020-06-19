@@ -46,6 +46,8 @@ public class GameController {
 	private Thread updateGame;
 	private Thread updateViews;
 	private Thread playround;
+	
+	private boolean newCurrentPlayer;
 
 //	public GameController(DataBaseConnection conn, MyScene ms, Game game) {
 //		this.conn= conn;
@@ -574,6 +576,24 @@ public class GameController {
 	public void setLobbyView() {
 		accountController.viewLobby();
 //		myScene.setContentPane(accountController.getLobbyView());
+	}
+
+	/**
+	 * @return the newCurrentPlayer
+	 */
+	public boolean isNewCurrentPlayer() {
+		return newCurrentPlayer;
+	}
+
+	/**
+	 * @param newCurrentPlayer the newCurrentPlayer to set
+	 */
+	public void setNewCurrentPlayer(boolean newCurrentPlayer) {
+		this.newCurrentPlayer = newCurrentPlayer;
+	}
+	
+	public Player getLocalCurrentPlayer() {
+		return game.getLocalCurrentPlayer();
 	}
 
 }

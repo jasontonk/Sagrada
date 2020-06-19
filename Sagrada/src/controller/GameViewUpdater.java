@@ -145,4 +145,9 @@ public class GameViewUpdater extends Task<Boolean> {
 		}
 	}
 
+	public void updatePatternCardsOfOtherPlayers() {
+//		if(gameCtrl.isNewCurrentPlayer()) {
+//			
+//		}
+	}
 }

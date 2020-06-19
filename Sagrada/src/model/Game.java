@@ -795,4 +795,8 @@ public class Game {
 //		this.publicObjectiveCards = publicObjectiveCards;
 //	}
 
+	public Player getLocalCurrentPlayer() {
+		return currentPlayer;
+	}
+	
 }
