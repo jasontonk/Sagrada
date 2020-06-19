@@ -128,9 +128,7 @@ public class GameUpdater implements Runnable {
 	}
 	
 	public void updatePatternCardsOfOtherPlayers() {
-//		if(gameCtrl.isNewCurrentPlayer()) {
-//			
-//		}
+		
 	}
 	
 	

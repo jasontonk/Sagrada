@@ -147,7 +147,10 @@ public class GameViewUpdater extends Task<Boolean> {
 
 	public void updatePatternCardsOfOtherPlayers() {
 		if(gameCtrl.isNewCurrentPlayer()) {
-			
+			for(Player p : gameCtrl.getGame().getPlayers()) {
+				gameCtrl.getGameView().getPatternCardsOfOtherPlayersView().drawPatterncard(p);
+			}
+			gameCtrl.setNewCurrentPlayer(false);
 		}
 	}
 }
