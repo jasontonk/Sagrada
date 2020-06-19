@@ -30,14 +30,14 @@ public class PatternCardsOfOtherPlayersView extends VBox {
 	private VBox allPatternCards;
 //	private final int[] xPos = new int[] {0,1,2,3,4};
 //	private final int[] yPos = new int[] {0,1,2,3};
-	private StackPane[][] stackpanes;
+	private StackPane[][][] stackpanes;
 
 	private String imgURL;
 
 	public PatternCardsOfOtherPlayersView(PatterncardController patterncardController) {
 		this.patterncardController = patterncardController;
 		this.setPadding(new Insets(10));
-		stackpanes = new StackPane[5][4];
+		stackpanes = new StackPane[1000][5][4];
 		allPatternCards = new VBox();
 		for(Player player : patterncardController.getGameController().getGame().getPlayers()) {
 			if(!player.equals(patterncardController.getGameController().getGame().getPersonalPlayer())) {
@@ -93,7 +93,7 @@ public class PatternCardsOfOtherPlayersView extends VBox {
 					}
 					stackpane.getChildren().add(button);
 					
-					stackpanes[x][y] = stackpane;
+					stackpanes[player.getId()][x][y] = stackpane;
 					updatePatternCards(player, x, y);
 					
 					
@@ -134,7 +134,7 @@ public class PatternCardsOfOtherPlayersView extends VBox {
 						BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
 						new BackgroundSize(1, 1, false, false, false, true))));
 				die.setPrefSize(40, 40);
-				stackpanes[x][y].getChildren().add(die);
+				stackpanes[player.getId()][x][y].getChildren().add(die);
 
 			}
 		}
