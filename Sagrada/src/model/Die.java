@@ -2,10 +2,8 @@ package model;
 
 public class Die {
 
-	
 	private ModelColor modelColor;
 	private int dieNumber;
-	
 	
 	/**
      * constructor to initialize all instance variables
@@ -74,5 +72,4 @@ public class Die {
 	public void setNumber(int number) {
 		this.dieNumber = number;
 	}	
-	
 }

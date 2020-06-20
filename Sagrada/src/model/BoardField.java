@@ -16,7 +16,6 @@ public class BoardField {
 	}
 	
 	public void setDie(GameDie die) {
-		
 		this.die = die;
 	}
 
@@ -43,5 +42,4 @@ public class BoardField {
     public void remove() {
         die = null;
     }
-
 }

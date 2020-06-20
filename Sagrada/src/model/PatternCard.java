@@ -1,8 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import database.DataBaseConnection;
 import database.PatternCardDBA;
 import database.PatternCardFieldDBA;
@@ -19,8 +17,6 @@ public class PatternCard {
 	private Player player;
 	private DataBaseConnection conn;
 	
-	
-	
 	public PatternCard(String name, int difficulty, DataBaseConnection conn) {
 		patterncardID = 0;
 		this.name = name;
@@ -35,8 +31,8 @@ public class PatternCard {
 		}
 		patterncardDB = new PatternCardDBA(conn);
 		patterncardfieldDB = new PatternCardFieldDBA(conn);
-		
 	}
+	
 	public PatternCard(DataBaseConnection conn) {
 		patterncardID = 0;
 		this.conn = conn;
@@ -49,9 +45,7 @@ public class PatternCard {
 				patterncard[i][c].setPositionY(c+1);
 			}
 		}
-		
 	}  
-	
 	/*
 	 * Sets up patterncard. If random patterncard is requested, 
 	 * method generates a random patterncard with 4-6 colored fields and 4-8 numbered fields. 
@@ -127,35 +121,17 @@ public class PatternCard {
 			patterncardfieldDB.addPatternCardField(patterncardfields, this);
 		}
 		else {
-//			PatternCard temp = patterncardDB.getPatterncard();
-//			setPatterncardID(temp.getPatterncardID());
-//			setName(temp.getName());
-//			setDifficulty(temp.getDifficulty());
 			ArrayList<PatternCardField> list = patterncardfieldDB.getPatternCardFieldsOfPatterncard(this);
 			for(PatternCardField p:list) {
 				patterncard[p.getPositionX()-1][p.getPositionY()-1] = p;
 			}
 		}
-		
-	
-//		patterncard[2][0].setColor(ModelColor.GREEN);
-//		patterncard[0][1].setValue(2);
-//		patterncard[1][1].setColor(ModelColor.YELLOW);
-//		patterncard[2][1].setValue(5);
-//		patterncard[3][1].setColor(ModelColor.BLUE);
-//		patterncard[4][1].setValue(1);
-//		patterncard[1][2].setColor(ModelColor.RED);
-//		patterncard[2][2].setValue(3);
-//		patterncard[3][2].setColor(ModelColor.PURPLE);
-//		patterncard[0][3].setValue(1);
-//		patterncard[2][3].setValue(6);
-//		patterncard[4][3].setValue(4);
-//		this.setName("Chromatic Splendor");
-//		this.setDifficulty(4);
 	}
+	
 	public ModelColor getFieldColor(int xPos, int yPos) {
 		return patterncard[xPos][yPos].getColor();
 	}
+	
 	public int getFieldValue(int xPos, int yPos) {
 		return patterncard[xPos][yPos].getValue();
 	}
@@ -163,6 +139,7 @@ public class PatternCard {
 	public ModelColor getFieldColorFromDB(int xPos, int yPos) {
 		return patterncardfieldDB.getColorOfField(this.getPatterncardID(), xPos, yPos);
 	}
+	
 	public int getFieldValueFromDB(int xPos, int yPos) {
 		return patterncardfieldDB.getValueOfField(this.getPatterncardID(), xPos, yPos);
 	}
@@ -170,27 +147,35 @@ public class PatternCard {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
+	
 	public Player getPlayer() {
 		return player;
 	}
+	
 	public void setPatterncardID(int patterncardID) {
 		this.patterncardID = patterncardID;
 	}
+	
 	public int getPatterncardID() {
 		return patterncardID;
 	}
+	
 	public void setDifficulty(int difficulty) {
 		this.difficulty = difficulty;
 	}
+	
 	public int getDifficulty() {
 		return difficulty;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	public String getName() {
 		return name;
 	}
+	
 	public ArrayList<PatternCard> getPatternCardsToChoose(boolean random, Player player) {
 		ArrayList<PatternCard> patternCardsToChoose = new ArrayList<>();
 		if(!random) {
@@ -207,8 +192,8 @@ public class PatternCard {
 		}
 		return patternCardsToChoose;
 	}
+	
 	public PatternCardDBA getPatterncardDB() {
 		return patterncardDB;
 	}
-	
 }

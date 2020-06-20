@@ -17,13 +17,11 @@ import javafx.beans.property.SimpleStringProperty;
 public class Game {
 	private ArrayList<Player> players;
 	private ArrayList<Account> accounts;
-	private Board board;
 	private ArrayList<Toolcard> toolcards;
 	private ArrayList<PublicObjectiveCard> publicObjectiveCards;
 	private GameDie[] diceInBag; // 18 per kleur 5 kleuren
 	private ArrayList<GameDie> offer;
 	private RoundTrack roundTrack;
-	private Chat chat;
 	private Player currentPlayer;
 	private Player personalPlayer;
 	private SimpleIntegerProperty round;
@@ -46,22 +44,6 @@ public class Game {
 	private GameDie selectedDieFromDicePool;
 	private GameDie selectedDieRoundTrack;
 
-	public Toolcard getSelectedToolcard() {
-		return selectedToolcard;
-	}
-
-	public void setSelectedToolcard(int id) {
-		if (id != 0) {
-			for (Toolcard toolcard : toolcards) {
-				if (toolcard.getId() == id) {
-					this.selectedToolcard = toolcard;
-				}
-			}
-		} else {
-			this.selectedToolcard = null;
-		}
-	}
-
 	public Game(DataBaseConnection conn, boolean randomgeneratedpatterncards) {
 
 		this.conn = conn;
@@ -80,6 +62,22 @@ public class Game {
 		toolcards = new ArrayList<Toolcard>();
 		currentPlayerName = new SimpleStringProperty();
 		players = new ArrayList<Player>();
+	}
+	
+	public Toolcard getSelectedToolcard() {
+		return selectedToolcard;
+	}
+
+	public void setSelectedToolcard(int id) {
+		if (id != 0) {
+			for (Toolcard toolcard : toolcards) {
+				if (toolcard.getId() == id) {
+					this.selectedToolcard = toolcard;
+				}
+			}
+		} else {
+			this.selectedToolcard = null;
+		}
 	}
 
 	public void addpublicobjectivecards() {
@@ -113,7 +111,6 @@ public class Game {
 	public void finishGameSetup(AccountController accountController) {
 
 		this.players = gameDBA.getPlayersOfGame(this);
-		System.out.println("DIT ZIJN DE PLAYERS VAN DE GAME " + players);
 		currentPlayer = gameDBA.getCurrentPlayer(this);
 		if (currentPlayer == null) {
 			currentPlayer = players.get(0);
@@ -123,71 +120,23 @@ public class Game {
 		for (int i = 0; i < players.size(); i++) {
 			players.get(i).setSequenceNumber(i + 1);
 		}
-
-//		for (int i = 0; i < players.size(); i++) {
-//			if (players.get(i).getPatternCard().getPatterncardID() == 0) {
-//				PatternCard patternCard = new PatternCard(conn);
-//				patternCard = patternCard.getPatterncardDB().getPatterncard();
-//				patternCard.setpattern(false);
-//				players.get(i).setPatternCard(patternCard);
-//			}
-//		}
 		finishedGame = false;
 		placedDie = true;
-
 	}
 
 	public void setPersonalPlayer(Account account) {
 		for (int i = 0; i < players.size(); i++) {
-			System.out.println("DIT IS PLAYERS.GETACCOUNT " + players.get(i).getAccount().getUsername());
-			System.out.println("DIT IS ACCOUNCONTROLLER.GETACCOUNT: " + account.getUsername());
 			if (players.get(i).getName().equals(account.getUsername())) {
-				System.out.println("PERSONALPLAYER GEVONDEN 1: " + players.get(i));
 				personalPlayer = players.get(i);
-				System.out.println("PERSONALPLAYER GEVONDEN 2: " + personalPlayer);
 				break;
 			}
 		}
 	}
 
-//	public Game(DataBaseConnection conn) {
-//		this.conn = conn;
-//		gameDBA = new GameDBA(conn);
-//		gamedieDBA = new GameDieDBA(conn);
-//		gameDBA.addNewGameDB(LocalDateTime.now(), this);
-//		
-//		publicObjectiveCardDBA = new PublicObjectiveCardDBA(conn);
-//		this.randomPatterncards = false;
-//		round = new SimpleIntegerProperty();
-//		round.set(1);
-//		roundTrack = new RoundTrack(this);
-//		
-//		offer = new ArrayList<GameDie>();
-//		players = new ArrayList<Player>();
-//		currentPlayer = new Player(conn, new Account("ditis2", "eentest", conn), this, PlayerStatus.CHALLENGER);
-//		Player player = new Player(conn, new Account("ditiseentest2", "testtest", conn), this, PlayerStatus.CHALLENGEE);
-//		players.add(currentPlayer);
-//		players.add(player);
-//		currentPlayer = players.get(0);
-//		players.get(0).setSequenceNumber(1);
-//		players.get(1).setSequenceNumber(2);
-//		personalPlayer = players.get(0);
-//		System.out.println("player 1 : " + players.get(0).getId());
-//		System.out.println("player 2 : " + players.get(1).getId());
-//		diceInBag = new GameDie[90];
-//		usedDice = new ArrayList<GameDie>();
-//		makedie();
-//		finishedGame = false;
-//		placedDie = true;
-//		publicObjectiveCards = new ArrayList<PublicObjectiveCard>();
-//		getPublicObjectiveCardsOfGame();
-//	}
-
 	private void getPublicObjectiveCardsOfGame() {
 		ArrayList<PublicObjectiveCard> publicObjectiveCardsOfGameFromDB = publicObjectiveCardDBA
 				.getPublicObjectiveCardsOfGame(this);
 		if (publicObjectiveCardsOfGameFromDB.size() == 0) {
-			System.out.println("ik maak nieuwe objectivecards aan");
 			ArrayList<PublicObjectiveCard> publicObjectiveCardsFromDB = publicObjectiveCardDBA
 					.getAllAvailablePublicObjectiveCards(this);
 			int i = 0;
@@ -201,12 +150,9 @@ public class Game {
 				}
 			}
 			for (PublicObjectiveCard publicObjectiveCard2 : publicObjectiveCards) {
-				System.out.println("public objectivecard: " + publicObjectiveCard2.getName() + " id= "
-						+ publicObjectiveCard2.getId());
 				publicObjectiveCardDBA.addPublicObjectiveCardToGame(publicObjectiveCard2, this);
 			}
 		} else {
-			System.out.println("ik gebruik bestaande objectivecards");
 			publicObjectiveCards = publicObjectiveCardsOfGameFromDB;
 		}
 	}
@@ -214,17 +160,13 @@ public class Game {
 	private void getToolcardsOfGame() {
 		ArrayList<Toolcard> toolcardsOfGameFromDB = toolcardDBA.getToolcardsFromGame(this);
 		if (toolcardsOfGameFromDB.size() == 0) {
-			System.out.println("ik maak nieuwe toolcards aan");
 			toolcardsOfGameFromDB = toolcardDBA.get3ToolcardsForAGame();
 
 			for (Toolcard toolcard2 : toolcardsOfGameFromDB) {
-				System.out.println("toolcard: " + toolcard2.getName() + " id= " + toolcard2.getId());
 				toolcards.add(toolcard2);
-				System.out.println("ik voeg de toolcard aan de db toe");
 				toolcardDBA.addToolCardToGame(this, toolcard2);
 			}
 		} else if (toolcardsOfGameFromDB.size() == 3) {
-			System.out.println("ik gebruik bestaande toolcards");
 			ArrayList<Toolcard> toolcardsFromDB = toolcardDBA.getToolcardsFromGame(this);
 			int i = 0;
 			Random r = new Random();
@@ -232,7 +174,6 @@ public class Game {
 				Toolcard toolcard = toolcardsFromDB.get(r.nextInt(toolcardsFromDB.size()));
 				if (toolcard != null && !toolcards.contains(toolcard)) {
 					toolcards.add(toolcard);
-					System.out.println("de toolcard heeft" + toolcards.get(i));
 					i++;
 				}
 			}
@@ -242,28 +183,12 @@ public class Game {
 			toolcards = toolcardsOfGameFromDB;
 		}
 	}
-	
-	
-
-//	public void checkInvites() {
-//		for (Account account : accounts) {
-//
-//			if (account.getInvitations() && account.accepInvitations) {
-//				Player player = new Player();
-//				account.setPlayers(player);
-//				account.setAccountStatus(accountStatus);
-//				players.add(account.getPlayers());
-//			}
-//		}
-//	}
 
 	public void play() {
 		gamesetup();
-//		playfirstround();
 		while (!finishedGame) {
 			playround();
 		}
-
 	}
 
 	public void gamesetup() {
@@ -273,33 +198,7 @@ public class Game {
 			player.assignFavorTokens();
 			player.setPersonalObjectiveCardColor();// todo color mee geven voor speler
 		}
-		for (int i = 0; i < 3; i++) {
-//			bepaal public objective
-//		bepaal toolcards
-		}
-
 	}
-
-//	public void playfirstround() { // met boolean first round treu
-//
-////		methode die dobbelstenen selecteert // hoe gaan we iedere keer amount of dice pakken en dan iedere keer andere dobbelstenen  ? en waar maken we ze aan en hoeveel 
-//		for (int i = 0; i < players.size(); i++) {
-//
-//		}
-//		for (int j = players.size(); j < 0; j--) {
-////			dobbelsteen kiezen,passen of toolcard gebruiken
-////		 gekozen actie uitvoeren
-////		 dobbelsteen kiezen,einde beurt of toolcard - de eerder gekozen optie 
-////		 actie uitvoeren 
-////		 volgende speler
-//		}
-//
-////		 voeg overige dobbelstenen aan rondespoor toe
-////		for each over de overige dobbelstenen 
-////		RoundTrack.placedie(die-van-foreach,round);
-//		round++;
-//
-//	}
 
 	public void deleteDieFromPatternCard(int x_pos, int y_pos) {
 		personalPlayer.getBoard().removedie(selectedDie, x_pos, y_pos);
@@ -307,14 +206,10 @@ public class Game {
 
 	public void grabDiceFromBag() {
 		int amountofdice = players.size() * 2 + 1;
-		System.out.println("amountofdice : " + amountofdice);
 		Random r = new Random();
 		offer = gamedieDBA.getAllRoundDice(this);
-		System.out.println("GRABDICE OFFER = " + offer);
-//		if() {
 		while (offer.size() < amountofdice) {
 			for (int i = 0; i < amountofdice; i++) {
-				System.out.println("diceInBag " + diceInBag);
 				GameDie selectedDice = diceInBag[r.nextInt(89)];
 				if (!checkDieUsed(selectedDice)) {
 					offer.add(selectedDice);
@@ -322,25 +217,19 @@ public class Game {
 				} else {
 					i--;
 				}
-				System.out.println("offersize : " + offer.size());
 			}
 		}
-//		}
 	}
 
 	public void getDicePoolFromDB() {
 		ArrayList<GameDie> offerfromDB = gamedieDBA.getAllavailableDiceOfRound(this);
-		System.out.println("offerfromDBsize : " + offerfromDB.size());
 		if (offer != offerfromDB) {
 			offer = offerfromDB;
 		}
-		System.out.println("de offersize is: " + offer.size());
 	}
 
 	public boolean checkDieUsed(GameDie selectedDice) {
 		if (selectedDice != null) {
-			System.out.println("SELECTEDDIE " + selectedDice);
-			System.out.println("GETROUNDID" + selectedDice.getRoundID(this));
 			if (selectedDice.getRoundID(this) != 0) {
 				return true;
 			} else {
@@ -353,22 +242,7 @@ public class Game {
 
 	public void playround() {// boolean first round false
 		personalPlayer.assignFavorTokens();
-		System.out.println("round: " + round + " Databaseround: " + gameDBA.getCurrentRound(this.getGameID()));
-//		if(round.equals(gameDBA.getCurrentRound(this.getGameID()))) {
-		if (round.get() == gameDBA.getCurrentRound(this.getGameID())) {
-			System.out.println("JAZEKER");
-			if (currentPlayer.equals(personalPlayer)) {
-				playTurn();
-			} else {
-				System.out.println("wacht tot een andere speler de beurt beindigt");
-			}
-		}
 		round.set(gameDBA.getCurrentRound(this.getGameID()));
-	}
-
-	public void playTurn() {
-
-		System.out.println("still your turn");
 	}
 
 	public void setNextPlayer() {
@@ -415,7 +289,6 @@ public class Game {
 					}
 				}
 			}
-			System.out.println("next player : " + currentPlayer.getId());
 		} else {
 			finishGame();
 		}
@@ -426,23 +299,18 @@ public class Game {
 			gamedieDBA.addDieToRoundTrack(offer.get(i), this, round.get() / 2);// TODO check if right
 		}
 		offer.clear();
-
 	}
 
 	public void changeSequenceNumber() {
-		System.out.println("stap 1");
 		if (currentPlayer.getSequenceNumber() == 1 && !gameDBA.isRoundClockwise(this)) {
 
 			if (getRoundFromDB() >= 20 && this.getCurrentPlayer().getSequenceNumber() == 1) {
 				finishGame();
 			} else {
-				System.out.println("stap 2");
 				for (int i = 0; i < players.size(); i++) {
 					if (players.get(i).getSequenceNumber() == players.size()) {
-						System.out.println("stap 3.1");
 						players.get(i).setSequenceNumber(1);
 					} else {
-						System.out.println("stap 3.2");
 						players.get(i).setSequenceNumber(players.get(i).getSequenceNumber() + 1);
 					}
 				}
@@ -459,20 +327,13 @@ public class Game {
 	}
 
 	public void finishGame() {
-		System.out.println("Hier wordt de game beëindigd");
 		finishedGame = true;
 		personalPlayer.setPlayerStatus(PlayerStatus.FINISHED);
-	}
-
-	private boolean getFinishedTurn() {
-		return finishedTurn;
 	}
 
 	public void makedie() {
 		ArrayList<GameDie> diceFromGameFromDB = gamedieDBA.getAllDiceFromGame(this);
 		if (diceFromGameFromDB.size() == 0) {
-
-			System.out.println("ik maak nieuwe dice aan");
 			Random r = new Random();
 			for (int i = 0; i < 18; i++) {
 				diceInBag[i] = new GameDie(ModelColor.GREEN, i + 1, r.nextInt(6) + 1, this, conn, gamedieDBA);
@@ -500,8 +361,6 @@ public class Game {
 				diceInBag[i + 71].setEyes(this);
 			}
 		} else {
-			System.out.println("ik haal dice uit de database");
-			System.out.println("aantal dice uit DB: " + diceFromGameFromDB.size());
 			diceInBag = diceFromGameFromDB.toArray(diceInBag);
 		}
 	}
@@ -524,11 +383,6 @@ public class Game {
 		player.setPatternCardsToChoose(playerPatterncards);
 		playerPatterncards.clear();
 	}
-
-//	public Player announceWinner() {
-//		
-//		return Player;  
-//	}
 
 	public ArrayList<Player> getPlayers() {
 		if (players.size() == 0) {
@@ -558,10 +412,6 @@ public class Game {
 	}
 
 	public void setSelectedDie(GameDie die) {
-		if (die != null)
-			System.out.println("game.setselecteddie : " + die.getEyes() + die.getColor());
-		else
-			System.out.println("Selecteddie ==== nullllllllllll");
 		this.selectedDie = die;
 	}
 
@@ -582,21 +432,16 @@ public class Game {
 	public void setCurrentPlayer(Player player) {
 		currentPlayer = player;
 		currentPlayerName.set(player.getName());
-		System.out.println("DIT IS NU DE CURRENT PLAYER" + currentPlayer);
 	}
 
 	public boolean checkPlacementAgainstRules(int x, int y, ModelColor modelColor, int value) {
-		System.out.println("IK KOM HIER");
+	
 		if (!placedDie) {
-			System.out.println("IK KOM HIER 2");
 			if (personalPlayer == currentPlayer) {
-				System.out.println("IK KOM HIER 3");
 				if (currentPlayer.getBoard() == null) {
-					System.out.println("IK KOM HIER 4");
 					currentPlayer.createBoard();
 				}
 				if (currentPlayer.checkPlacementAgainstRules(x, y, modelColor, value)) {
-					System.out.println("IK KOM HIER 5");
 					placedDie = true;
 					return true;
 				}
@@ -635,18 +480,15 @@ public class Game {
 	}
 
 	public void setFinishedTurnTrue() {
-		finishedTurn = true;
-//		currentPlayer.calculateScore();	
+		finishedTurn = true;	
 	}
 
 	public void setPlacedDie(boolean b) {
 		placedDie = b;
-
 	}
 
 	public ArrayList<GameDie> getDiceOnRoundtrack() {
 		return gamedieDBA.getDiceOnRoundTrack(this);
-
 	}
 
 	public String getChallengerOfGameWithID(int gameID) {
@@ -668,25 +510,18 @@ public class Game {
 	}
 
 	public ArrayList<GameDie> getOffer() {
-//		diceInBag = gamedieDBA.getAllDiceFromGame(this)
+
 		int i = 0;
-		System.out.println("JAAAAAAAAA" + gamedieDBA.getAllDiceFromGame(this));
 		for (GameDie gameDie : gamedieDBA.getAllDiceFromGame(this)) {
 			diceInBag[i] = gameDie;
 			i++;
 		}
-
-		System.out.println("de size van de offer voor: " + offer.size());
-		System.out.println(currentPlayer + "CURRENT PLAYER");
-		System.out.println(currentPlayer.getSequenceNumber() + "CURRENT PLAYER SQNR");
 		offer = gamedieDBA.getAllavailableDiceOfRound(this);
 		currentPlayer = gameDBA.getCurrentPlayer(this);
 		if (currentPlayer.getSequenceNumber() == 1 && currentPlayer.getId() == personalPlayer.getId()
 				&& gameDBA.getCurrentRound(this.getGameID()) % 2 == 1 && offer.size() == 0) {
-			System.out.println("ik maak een nieuw offer");
 			grabDiceFromBag();
 		}
-		System.out.println("de size van de offer : " + offer.size());
 		return offer;
 	}
 	
@@ -735,9 +570,7 @@ public class Game {
 	public int[] getToolcardIDs() {
 		int[] toolcardIDs = new int[3];
 		for (int i = 0; i < 3; i++) {
-			
 			toolcardIDs[i] = toolcards.get(i).getId();
-			
 		}
 		return toolcardIDs;
 	}
@@ -792,15 +625,9 @@ public class Game {
 
 	public void setDieOnRoundTrack(GameDie gamedie, GameDie rountrackDie) {
 		gamedieDBA.setDieOnRoundTrack(gamedie,rountrackDie, this);
-		
 	}
-
-//	public void setPublicObjectiveCards(ArrayList<PublicObjectiveCard> publicObjectiveCards) {
-//		this.publicObjectiveCards = publicObjectiveCards;
-//	}
 
 	public Player getLocalCurrentPlayer() {
 		return currentPlayer;
 	}
-	
 }

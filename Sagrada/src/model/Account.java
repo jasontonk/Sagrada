@@ -4,9 +4,7 @@ import java.util.ArrayList;
 
 import database.AccountDBA;
 import database.DataBaseConnection;
-import database.GameDBA;
 import database.PlayerDBA;
-import javafx.scene.paint.Color;
 
 public class Account {
 	
@@ -18,8 +16,6 @@ public class Account {
 	private DataBaseConnection connection;
 	private AccountDBA accountDBA;
 	private PlayerDBA playerDBA;
-	private GameDBA gameDBA;
-
 	
 	/**
      * 
@@ -30,7 +26,6 @@ public class Account {
 		connection = c;
 		accountDBA = new AccountDBA(c);
 		playerDBA = new PlayerDBA(connection);
-		gameDBA = new GameDBA(c);
 	}
 	
 	/**
@@ -45,7 +40,6 @@ public class Account {
 		accountDBA = new AccountDBA(c);
 		accountDBA.addAccountDB(username, password);
 		playerDBA = new PlayerDBA(connection);
-		gameDBA = new GameDBA(c);
 	}
 
 	/**
@@ -104,7 +98,6 @@ public class Account {
 	public ArrayList<Player> getPlayers() {
 		
 		players = playerDBA.getPlayersOfAccount(this);
-		System.out.println("=================== PLAYERS OF THIS ACCOUNT: " + players);
 		return players;
 	}
 
@@ -119,7 +112,6 @@ public class Account {
      * 
      */
 	public ArrayList<Invitation> getInvitations() {
-//		invitations = accountDBA.getInvitations();//TODO matheus
 		return invitations;
 	}
 
@@ -206,8 +198,4 @@ public class Account {
 	public ArrayList<Player> getChallengeePlayers() {
 		return playerDBA.getChallengeePlayers(this);
 	}
-	
-	
-
-
 }  

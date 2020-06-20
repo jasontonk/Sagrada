@@ -16,7 +16,6 @@ public class Chat {
 	private Player player;
 
 	// Partial constructor, generate the player id and message of the player.
-
 	public Chat(int playerid, String message, DataBaseConnection c) {
 
 		playerId = playerid;
@@ -24,19 +23,15 @@ public class Chat {
 		player = playerDBA.getPlayerById(playerid, null);
 		this.message = message;
 		chatDB = new ChatDBA(c);
-
 	}
 
 	// Return the time stamp of this chat.
-
 	public Timestamp getTime() {
-
 		return time;
 	}
 
 	// Set the time stamp of this chat.
 	public void setTime(Timestamp time) {
-
 		this.time = time;
 	}
 	
@@ -45,31 +40,22 @@ public class Chat {
 	}
 
 	// Return the player id of this chat.
-
 	public int getPlayerId() {
-
 		return playerId;
 	}
 
 	// Set the player id of this chat.
-
 	public void setPlayerId(int playerId) {
-
 		this.playerId = playerId;
 	}
 
 	// Return the message of this chat.
-
 	public String getMessage() {
-
-//		message = chatDB.getChatTextDB(playerid, timestamp);
-		return message;										//saved message form DB into message
+		return message;	//saved message form DB into message
 	}
 
 	// Set the message of this chat.
-
 	public void setMessage(int playerid, String message) {
 		chatDB.addChatDB(playerid, message, this);
 	}
-
 }

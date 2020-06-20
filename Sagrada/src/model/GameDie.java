@@ -18,7 +18,6 @@ public class GameDie extends Die {
 	public GameDie(ModelColor modelColor, int number, int eyes, Game game, DataBaseConnection conn, GameDieDBA gameDieDBA) {
 		super(modelColor, number);
 		this.gameDieDBA = gameDieDBA;
-//		addDieToDB(game);
 		this.eyes = eyes;
 		isAvailable = false;
 		isFirstTurn = false;

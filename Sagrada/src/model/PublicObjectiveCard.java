@@ -2,13 +2,11 @@ package model;
 
 import java.util.ArrayList;
 
-
 public class PublicObjectiveCard {
     private int id;
     private String name;
     private String description;
     private int points;
-
 
     public PublicObjectiveCard(int id, String name, String description, int points) {
         this.id = id;
@@ -17,16 +15,13 @@ public class PublicObjectiveCard {
         this.points = points;
     }
 
-
     public int getId() {
         return id;
     }
 
-
     public void setId(int id) {
         this.id = id;
     }
-
 
     public String getName() {
         return name;
@@ -40,21 +35,17 @@ public class PublicObjectiveCard {
         return description;
     }
 
-
     public void setDescription(String description) {
         this.description = description;
     }
-
 
     public int getPoints() {
         return points;
     }
 
-
     public void setPoints(int points) {
         this.points = points;
     }
-
 
     public int calculateScore(Board board) {
         switch (id) {
@@ -83,7 +74,6 @@ public class PublicObjectiveCard {
         }
     }
 
-
     private int calculatePairShades(Board board, int val1, int val2, int rewardScore) {
         int score = 0;
 
@@ -98,7 +88,6 @@ public class PublicObjectiveCard {
                 }
             }
         }
-
         outerloop:
         for (int x = 0; x < valueList.size(); ) {
             int value = valueList.get(x);
@@ -115,7 +104,6 @@ public class PublicObjectiveCard {
         }
         return score;
     }
-
 
     private int calculateShadeVariety(Board board, int rewardScore) {
         int score = 0;
@@ -155,10 +143,8 @@ public class PublicObjectiveCard {
                 break;
             }
         }
-
         return score;
     }
-
 
     private int calculateRowShadeVariety(Board board, int rewardScore) {
         int score = 0;
@@ -180,15 +166,12 @@ public class PublicObjectiveCard {
                 }
                 varietyList.add(value); 
             }
-
             if (varietyList.size() == 5) { 
                 score += rewardScore; 
             }
         }
-
         return score;
     }
-
 
     private int calculateRowColorVariety(Board board, int rewardScore) {
         int score = 0;
@@ -210,15 +193,12 @@ public class PublicObjectiveCard {
                 }
                 varietyList.add(color); 
             }
-
             if (varietyList.size() == 5) { 
                 score += rewardScore; 
             }
         }
-
         return score;
     }
-
 
     private int calculateColorVariety(Board board, int rewardScore) {
         int score = 0;
@@ -231,13 +211,11 @@ public class PublicObjectiveCard {
                 }
             }
         }
-
         
         ArrayList<ModelColor> varietyList = new ArrayList<>();
         for (int x = 0; x < colorList.size(); ) {
         	ModelColor firstColor = colorList.get(x); 
             varietyList.add(firstColor); 
-
             for (int i = 1; i < colorList.size(); i++) {
             	ModelColor nextColor = colorList.get(i); 
                 if (varietyList.contains(nextColor)) {
@@ -245,7 +223,6 @@ public class PublicObjectiveCard {
                 }
                 varietyList.add(nextColor);
             }
-
             if (varietyList.contains(ModelColor.RED) && varietyList.contains(ModelColor.BLUE) && varietyList
                     .contains(ModelColor.GREEN) && varietyList.contains(ModelColor.PURPLE) && varietyList
                     .contains(ModelColor.YELLOW)) { 
@@ -258,10 +235,8 @@ public class PublicObjectiveCard {
                 break;
             }
         }
-
         return score;
     }
-
 
     private int calculateColumnShadeVariety(Board board, int rewardScore) {
         int score = 0;
@@ -285,15 +260,12 @@ public class PublicObjectiveCard {
                 }
                 varietyList.add(value);
             }
-
             if (varietyList.size() == 4) { 
                 score = score + rewardScore; 
             }
         }
-
         return score;
     }
-
 
     private int calculateColumnColorVariety(Board board, int rewardScore) {
         int score = 0;
@@ -315,15 +287,12 @@ public class PublicObjectiveCard {
                 }
                 varietyList.add(color);
             }
-
             if (varietyList.size() == 4) {
                 score = score + rewardScore; 
             }
         }
-
         return score;
     }
-
 
     private int calculateColorDiagonals(Board board, int rewardScore) {
         int score = 0;
@@ -346,12 +315,10 @@ public class PublicObjectiveCard {
                             nextIteration.add(boardField); 
                         }
                     }
-
                     if (nextIteration.size() == 0) { 
                         blockedFields.remove(firstBoardField); 
                         continue; 
                     }
-
                     for (int i = 0; i < nextIteration.size(); ) { 
                         BoardField patternCardField = nextIteration.get(i);
                         ArrayList<BoardField> listNext = checkColorDiagonals(board, patternCardField);
@@ -372,7 +339,6 @@ public class PublicObjectiveCard {
         }
         return score;
     }
-
 
     private ArrayList<BoardField> checkColorDiagonals(Board board, BoardField boardField) {
         ArrayList<BoardField> list = new ArrayList<>();
@@ -396,7 +362,6 @@ public class PublicObjectiveCard {
         if (boardFieldNW != null) {
             list.add(boardFieldNW);
         }
-
         return list;
     }
 }

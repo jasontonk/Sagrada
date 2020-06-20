@@ -5,7 +5,6 @@ public class RoundTrackField {
 	private GameDie[] dieSavingSpot;// array to save dies max 9 dies per round
 
 	public RoundTrackField() {
-		// TODO Auto-generated constructor stub
 		dieSavingSpot = new GameDie[9];
 	}
 

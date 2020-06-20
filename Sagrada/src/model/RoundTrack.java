@@ -27,7 +27,6 @@ public class RoundTrack {
 	
 	/*
 	 * Returns die that gets chosen
-	 * TODO change to the right method for getRound
 	 */
 	public GameDie takeDie(int die) {
 		if(roundTrackFields[game.getRound().get()].getDieSavingSpot() != null) {//changed to getRounc() to fix error
@@ -39,7 +38,5 @@ public class RoundTrack {
 	}
 	public RoundTrackField[] getRoundTrackFields(){
 		return roundTrackFields;
-	}
-	
-	
+	}	
 }
