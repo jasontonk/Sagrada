@@ -205,6 +205,8 @@ public class GameController {
 	
 	public void lensCutter(GameDie rountrackDie) {
 		
+		System.out.print("color roundtrack "+ rountrackDie.getColorString()+ " value "+rountrackDie.getEyes());
+		
 		GameDie dieOnDiePool = game.getSelectedDieFromDicePool();
 		
 		Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -232,6 +234,8 @@ public class GameController {
 		getGame().updateOffer(dieOnDiePool, rountrackDie);
 		getGame().setSelectedDieFromDicePool(rountrackDie);
 		getGame().setSelectedDie(rountrackDie);	
+		
+		System.out.print("color roundtrack "+ rountrackDie.getColorString()+ " value "+rountrackDie.getEyes());
 		dieController.getDieViewForToolcard5().updateButton(rountrackDie.getColorString(), rountrackDie.getEyes());
 	}
 	
@@ -299,6 +303,7 @@ public class GameController {
 			int randomDieValue = (int) (Math.random() * 6) + 1; 
 			gamedie.changeEyes(randomDieValue, game);
 		}
+		
 		getGame().setSelectedDieFromDicePool(gamedie);
 	}
 	

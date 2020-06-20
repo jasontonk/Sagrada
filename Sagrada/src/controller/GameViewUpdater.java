@@ -112,7 +112,7 @@ public class GameViewUpdater extends Task<Boolean> {
 		gameCtrl.clearChangedDiceOnRoundTrack(); 
 	}
 
-	private void updateDicePoolView() {
+	public void updateDicePoolView() {
 		ArrayList<GameDie> offer = gameCtrl.getGame().getOffer();
 		gameCtrl.getDieController().updateDicePool(offer);
 	}

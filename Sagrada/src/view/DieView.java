@@ -51,6 +51,8 @@ public class DieView extends BorderPane {
 	private void setSelectedDie(String imgURL) {
 		dieController.removeAllBorders();
 		setBorder();
+		
+		System.out.println(imgURL);
 		dieController.setSelectedDieFromDiePool(diePoolID, imgURL);
 		
 		if (dieController.getGameController().getGame().getSelectedToolcard() != null) {

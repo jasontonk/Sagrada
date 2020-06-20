@@ -93,7 +93,7 @@ public class GameUpdater implements Runnable {
 		gameCtrl.updateRoundTrack(diceOnRoundTrack);
 	}
 
-	private void updateDicePool() {
+	public void updateDicePool() {
 		gameCtrl.getGame().getDicePoolFromDB();
 	}
 
