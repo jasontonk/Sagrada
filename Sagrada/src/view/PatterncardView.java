@@ -1,8 +1,12 @@
 package view;
 
+import java.util.ArrayList;
+
 import controller.PatterncardController;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -12,13 +16,16 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import model.FavorToken;
 import model.ModelColor;
 
 public class PatterncardView extends VBox {
@@ -29,11 +36,18 @@ public class PatterncardView extends VBox {
 	private final double GRIDSPACING = 5.0;
 	private Insets padding = new Insets(5);
 	private String imgURL;
+	private final int CIRCLE_SIZE =5;
+	private final int SPACING = 6;
+	private final int TEXT_SIZE = 12;
+	private BorderPane favortokenView; 
 
 	public PatterncardView(PatterncardController patterncardController) {
 		this.patterncardController = patterncardController;
 		this.setPadding(new Insets(0, 30, 0, 30));
-		this.getChildren().addAll(drawTitle(), drawPatterncard(), drawDifficulty(), drawPersonalObjectiveCardColor());
+		favortokenView = new BorderPane();
+		this.getChildren().addAll(drawTitle(), drawPatterncard(), drawDifficulty(), drawPersonalObjectiveCardColor(),favortokenView);
+		
+		drawFavorToken();
 	}
 
 	public GridPane drawPatterncard() {
@@ -149,11 +163,44 @@ public class PatterncardView extends VBox {
 			Text color = new Text();
 			color.setText("Persoonlijke doelkaartkleur = " + patterncardController.getGameController().getGame()
 					.getPersonalPlayer().getPersonalObjectiveCardColor().toString());
-			color.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 12));
+			color.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, TEXT_SIZE));
 			personalObjectiveCardColor.setPadding(padding);
 			personalObjectiveCardColor.setCenter(color);
 		}
 		return personalObjectiveCardColor;
+	}
+	
+	public void drawFavorToken() {
+		favortokenView.getChildren().clear();
+		
+		ArrayList<FavorToken> favortokens = patterncardController.getGameController().getGame().getPersonalPlayer().getFavorTokens();
+		
+		int totaalfavortokens = 0;
+		
+		for(int i = 0; i < favortokens.size(); i++) {
+			if(favortokens.get(i).getToolcard() == null) {
+				totaalfavortokens++;
+			}
+		}
+		
+		System.out.println("totaalfavortokens = " + totaalfavortokens);
+		
+		HBox hbox = new HBox();
+		hbox.setSpacing(SPACING);
+		hbox.setAlignment(Pos.CENTER);
+		
+		Text favortoken = new Text();
+		favortoken.setText("Betaal stenen = " + totaalfavortokens);
+		favortoken.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, TEXT_SIZE));
+		
+		hbox.getChildren().add(favortoken);	
+		
+		for(int i = 0; i < totaalfavortokens; i++) {
+			Circle circle = new Circle(CIRCLE_SIZE,Color.DARKSLATEBLUE);
+			hbox.getChildren().add(circle);	
+		}
+		
+		favortokenView.setCenter(hbox);
 	}
 
 	public boolean checkPlacementAgainstRules(int x, int y, StackPane stackpane) {

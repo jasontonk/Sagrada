@@ -10,6 +10,7 @@ public class FavorToken {
 	private Player player;
 	private Toolcard toolcard;
 	private FavorTokenDBA favorTokenDB;
+	private int favorTokenid;
 
 	// Partial constructor, generate favor tokens of player.
 	public FavorToken(Player player, int gameid, DataBaseConnection c) {
@@ -48,7 +49,8 @@ public class FavorToken {
 	}
 
 	// Set the Toolcard of which this FavorToken is used for.
-	public void setToolcard(int playerid, int toolcard, int round, int favortokenid) {
-		favorTokenDB.setFavortokensForToolCard(playerid, toolcard, round, favortokenid);
+	public void setToolcard(int playerid, Toolcard toolcard, Game game) {
+		this.toolcard = toolcard;
+		favorTokenDB.setFavortokensForToolCard(playerid, toolcard.getId(), game, this.favorTokenid);
 	}
 }

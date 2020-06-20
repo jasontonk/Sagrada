@@ -10,11 +10,13 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import model.Chat;
+import model.FavorToken;
 import model.Game;
 import model.GameDie;
 import model.ModelColor;
 import model.PatternCard;
 import model.Player;
+import model.Toolcard;
 import view.ChatView;
 import view.FinishedGameView;
 import view.GameView;
@@ -139,9 +141,58 @@ public class GameController {
 		return gameView;
 	}
 
-	public void setSelectedToolcard(int id, ToolcardView toolcardView) {
-		game.setSelectedToolcard(id);
-		this.toolcardView = toolcardView;
+	public void setSelectedToolcard(int id) {
+		game.setSelectedToolcard(id);	
+	}
+	
+	public void selectedToolCard(int id, ToolcardView toolcardView) {
+		Toolcard selectedToolcard = game.getSelectedToolcard();
+		int price = 1; 
+		if(selectedToolcard.returnAmountOfTokens() > 0) {
+			price = 2;
+		}
+		
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Let op!");
+		alert.setHeaderText("U heeft de toolcard "+ selectedToolcard.getName()+ " geselecteerd");
+		alert.setContentText("Deze toolcard kost "+price+" betaalstennen, weet je zeker dat je deze toolcard wilt kopen");
+		
+		ButtonType buttonTypeOk = new ButtonType("Ja");
+		ButtonType buttonTypeCancel = new ButtonType("Nee", ButtonData.CANCEL_CLOSE);
+		
+		alert.getButtonTypes().setAll(buttonTypeOk,buttonTypeCancel);
+		
+		Optional<ButtonType> result = alert.showAndWait();
+		
+		if (result.get() == buttonTypeOk){
+			this.toolcardView = toolcardView;
+			payForToolcard();
+		}else if(result.get() == buttonTypeCancel) {
+			game.setSelectedToolcard(0);
+		}
+	}
+	
+	public void payForToolcard() {
+		ArrayList<FavorToken> favorTokens = game.getPersonalPlayer().getFavorTokens();
+		System.out.println("araaaay = " + favorTokens.size());
+		int counter = 0;
+		for(int i = 0; i < favorTokens.size(); i++) {
+			if(favorTokens.get(i).getToolcard() == null) {
+				favorTokens.get(i).setToolcard(game.getPersonalPlayer().getId(),game.getSelectedToolcard(),game);
+				System.out.println("kom ik hier = " + favorTokens.size());
+				break;
+			}
+			counter++;
+		}
+		
+		if(counter == favorTokens.size()) {
+			showWarning("Je mag toolcard niet kopen!", "Je betaalstennen zij op!");
+			game.setSelectedToolcard(0);
+		}else {
+			
+			System.out.println("kom ik hier 3 = " + favorTokens.size());
+			gameView.updateFavorTokenView();
+		}
 	}
 
 	public boolean checkPlacementAgainstRules(int x, int y, ModelColor modelColor, int value) {

@@ -145,7 +145,6 @@ public class Player {
 	}
 
 	public ArrayList<FavorToken> getFavorTokens() {
-		FavorTokenDBA favorTokenDBA = new FavorTokenDBA(connection);
 		this.favorTokens = favorTokenDBA.getFavortokensOfPlayer(this);
 		return favorTokens;
 	}

@@ -100,4 +100,8 @@ public class GameView extends HBox {
 	public void updateDicePoolView(int amountofdice) {
 		dicePoolView.updateDicePool(amountofdice);
 	}
+
+	public void updateFavorTokenView() {
+		patterncardView.drawFavorToken();
+	}
 }

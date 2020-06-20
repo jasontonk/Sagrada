@@ -6,6 +6,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import model.FavorToken;
+import model.Game;
 import model.Player;
 import model.Toolcard;
 
@@ -102,8 +103,8 @@ private DataBaseConnection conn;
 			}
 	}
 	
-	public void setFavortokensForToolCard(int playerid, int gametoolcard, int round, int idfavortoken) {
-		String query = "UPDATE gamefavortoken SET idplayer= "+playerid+", gametoolcard= "+gametoolcard+", round= "+round+" WHERE idfavortoken="+idfavortoken+";";
+	public void setFavortokensForToolCard(int playerid, int gametoolcard, Game game, int idfavortoken) {
+		String query = "UPDATE gamefavortoken SET idplayer = "+playerid+", gametoolcard = "+gametoolcard+", roundID = "+game.getRoundFromDB()+" WHERE idfavortoken ="+idfavortoken+" And idgame = "+game.getGameID()+";";
 		try {
 			Statement stmt = conn.getConn().createStatement();
 			stmt.executeUpdate(query);

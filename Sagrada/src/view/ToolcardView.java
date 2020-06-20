@@ -35,7 +35,8 @@ public class ToolcardView extends BorderPane {
 	public void setSelectedToolcard(int id) {
 		gamecontroller.removeAllBordersFromToolcard();
 		setBorder();
-		gamecontroller.setSelectedToolcard(id, this);
+		gamecontroller.setSelectedToolcard(id);
+		gamecontroller.selectedToolCard(id,this);
 	}
 	
 	public void setBorder(){
