@@ -13,9 +13,12 @@ public class GameViewUpdater extends Task<Boolean> {
 	private GameController gameCtrl;
 	private volatile boolean isRunning;
 	private volatile boolean isPaused;
+	private int counter = 0;
+	private int updateCounter = 0;
 	
 	public GameViewUpdater(GameController gameCtrl, GameUpdater gameUpdater ) {
 		this.gameCtrl = gameCtrl;
+		
 	}
 	
 	@Override
@@ -72,13 +75,16 @@ public class GameViewUpdater extends Task<Boolean> {
 	}
 
 	private void updateAll() {
+		System.out.println("UPDATING ALL");
 		updateDicePoolView();
 		updateRoundtrackView();
-		updatePatternCardsOfOtherPlayers();
+		if(updateCounter == 10) {
+			updatePatternCardsOfOtherPlayers();
+			updateCounter = 0;
+		}
+		updateCounter++;
 	}
 	
-
-
 	private void updateRoundtrackView() {
 		ArrayList<GameDie> diceOnRoundTrack = new ArrayList<GameDie>();
 		ArrayList<Integer> diceNumber = new ArrayList<Integer>();
@@ -121,10 +127,20 @@ public class GameViewUpdater extends Task<Boolean> {
 	}
 
 	public void updatePatternCardsOfOtherPlayers() {
-		for(Player p : gameCtrl.getGame().getPlayers()) {
-			for (int x = 0; x < 5; x++) {
-				for (int y = 0; y < 4; y++) {
-					gameCtrl.getGameView().getPatternCardsOfOtherPlayersView().updatePatternCards(p, x, y);
+		if(true) {
+			System.out.println("IF 1");
+			for(Player p : gameCtrl.getGame().getPlayers()) {
+				gameCtrl.getGameView().getPatternCardsOfOtherPlayersView().makePatternCards();
+			}
+			counter++;
+		}
+		else {
+			System.out.println("IF 2");
+			for(Player p : gameCtrl.getGame().getPlayers()) {
+				for (int x = 0; x < 5; x++) {
+					for (int y = 0; y < 4; y++) {
+						gameCtrl.getGameView().getPatternCardsOfOtherPlayersView().updatePatternCards(p, x, y);
+					}
 				}
 			}
 		}

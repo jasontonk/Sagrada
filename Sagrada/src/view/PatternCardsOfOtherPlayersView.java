@@ -28,23 +28,28 @@ public class PatternCardsOfOtherPlayersView extends VBox {
 	private Insets padding = new Insets(5);
 	private VBox allPatternCards;
 	private StackPane[][][] stackpanes;
+	private PatterncardController patterncardController;
 
 	private String imgURL;
 
 	public PatternCardsOfOtherPlayersView(PatterncardController patterncardController) {
 		this.setPadding(new Insets(10));
+		this.patterncardController = patterncardController;
 		stackpanes = new StackPane[500][5][4];
+		makePatternCards();
+	}
+
+	public void makePatternCards() {
 		allPatternCards = new VBox();
 		for(Player player : patterncardController.getGameController().getGame().getPlayers()) {
 			if(!player.equals(patterncardController.getGameController().getGame().getPersonalPlayer())) {
 				allPatternCards.getChildren().add(drawPatterncard(player));
 			}
 		}
-		
 		this.setBackground(new Background(new BackgroundFill(Color.DARKBLUE, null, null)));
 		this.getChildren().addAll(allPatternCards);
 	}
-
+	
 	public VBox drawPatterncard(Player player) {
 		this.getChildren().clear();
 		VBox vbox = new VBox();
