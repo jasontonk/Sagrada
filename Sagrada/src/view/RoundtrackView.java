@@ -3,10 +3,8 @@ package view;
 import java.util.ArrayList;
 
 import controller.RoundtrackController;
-import javafx.application.Platform;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -20,13 +18,10 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
-import model.GameDie;
 import model.ModelColor;
 
 public class RoundtrackView extends VBox {
@@ -78,9 +73,9 @@ public class RoundtrackView extends VBox {
 			stackpanes.add(stackpane);
 			roundtrack.add(stackpanes.get(i), i, 2);
 		}
-		
 		return roundtrack;
 	}
+	
 	public BorderPane drawTitle() {
 		BorderPane titlePane = new BorderPane();
 		Text title = new Text();
@@ -89,12 +84,12 @@ public class RoundtrackView extends VBox {
 		titlePane.setCenter(title);
 		return titlePane;
 	}
+	
 	public BorderPane drawRound() {
 		BorderPane roundPane =  new BorderPane();
 		Text round = new Text();
 		Label roundnr = new Label();
 		roundnr.textProperty().bind(roundtrackController.getGameController().getGame().getRound().asString());
-		
 		round.setText("Ronde: "); 
 		roundPane.setPadding(padding);
 		HBox text = new HBox();
@@ -102,6 +97,7 @@ public class RoundtrackView extends VBox {
 		roundPane.setRight(text);
 		return roundPane;
 	}
+	
 	public void addDice(int round, ArrayList<ModelColor> colors, ArrayList<Integer> values, ArrayList<Integer> diceIDs) {
 
 				for(int i = 0; i < colors.size(); i++) {
@@ -118,8 +114,7 @@ public class RoundtrackView extends VBox {
 					if(i == 0) {
 						stackpanes.get(round-1).getChildren().add(button);
 					}
-					else {
-						
+					else {	
 						Button button2 = new Button();
 						StackPane stackpane = new StackPane();
 						button2.setPrefSize(ROUNDTRACKFIELD_SIZE, ROUNDTRACKFIELD_SIZE);
@@ -134,6 +129,5 @@ public class RoundtrackView extends VBox {
 	
 	private void SelectedDie(int round, int index,  ArrayList<Integer>diceIDs) {
 		roundtrackController.setSelectedDie(round, index,diceIDs );
-		
 	}
 }

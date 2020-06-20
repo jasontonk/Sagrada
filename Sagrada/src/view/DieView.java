@@ -16,16 +16,12 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 
-
-
 public class DieView extends BorderPane {
 
 	private DieController dieController;
 	private final int DIE_SIZE = 60;
 	private int diePoolID;
 	private Button die = new Button();
-
-	
 	
 	public DieView(DieController dieController, String color, int value, int dieID) {
 		this.dieController = dieController;
@@ -44,13 +40,14 @@ public class DieView extends BorderPane {
 		this.setCenter(die);
 	}
 	
-	
 	public void setDieID(int ID) {
 		this.diePoolID = ID;	
 	}
+	
 	public void decreaseDiePoolID() {
 		diePoolID--;
 	}
+	
 	private void setSelectedDie(String imgURL) {
 		dieController.removeAllBorders();
 		setBorder();
@@ -79,11 +76,6 @@ public class DieView extends BorderPane {
 				updateButton(dieController.getGameController().getGame().getSelectedDieFromDicePool().getColorString(),dieController.getGameController().getGame().getSelectedDieFromDicePool().getEyes());
 				dieController.getGameController().setToolCardUnused();
 				break;
-//			case 5:
-//				dieController.getGameController().lensCutter(dieController.getGameController().getGame().getSelectedDieFromDicePool());
-//				updateButton(dieController.getGameController().getGame().getSelectedDieFromDicePool().getColorString(),dieController.getGameController().getGame().getSelectedDieFromDicePool().getEyes());
-//				dieController.getGameController().setToolCardUnused();
-//				break;
 			}
 		}
 	}
@@ -93,12 +85,9 @@ public class DieView extends BorderPane {
 		dieController.getGameController().setToolCardUnused();
 	}
 	
-	
-	
 	public int getDiePoolID() {
 		return diePoolID;
 	}
-
 
 	public void updateButton(String color, int value) {
 		
@@ -115,8 +104,8 @@ public class DieView extends BorderPane {
 	public void setBorder(){
 		die.setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(3))));
 	}
+	
 	public void removeBorder() {
 		die.setBorder(null);
 	}
-
 }

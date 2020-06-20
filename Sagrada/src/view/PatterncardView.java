@@ -19,7 +19,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import model.GameDie;
 import model.ModelColor;
 
 public class PatterncardView extends VBox {
@@ -29,9 +28,6 @@ public class PatterncardView extends VBox {
 	private final int PATTERNCARDFIELD_SIZE = 50;
 	private final double GRIDSPACING = 5.0;
 	private Insets padding = new Insets(5);
-//	private final int[] xPos = new int[] {0,1,2,3,4};
-//	private final int[] yPos = new int[] {0,1,2,3};
-
 	private String imgURL;
 
 	public PatterncardView(PatterncardController patterncardController) {
@@ -92,10 +88,8 @@ public class PatterncardView extends VBox {
 						die.setPrefSize(40, 40);
 						die.setOnMouseClicked(e -> setSelectedDie(xPos, yPos, die, stackpane));
 						stackpane.getChildren().add(die);
-
 					}
 				}
-
 				patterncardfields.add(stackpane, x, y);
 			}
 		}
@@ -114,7 +108,6 @@ public class PatterncardView extends VBox {
 			die.setPrefSize(40, 40);
 			stackpane.getChildren().add(die);
 			patterncardController.deleteDieFromPool();
-
 		}
 		die.setOnMouseClicked(e -> setSelectedDie(x, y, die, stackpane));
 	}
@@ -172,15 +165,4 @@ public class PatterncardView extends VBox {
 			return false;
 		}
 	}
-
-//	public void deleteDie(int index) {
-//		for (int i = 0; i < getChildren().size() - index; i++) {
-//			if (getChildren().get(index + i) != null && (index + 1) != 9) {
-//				dieView.get(index + i).decreaseDiePoolID();
-//			}
-//		}
-//		dieView.remove(index);
-//		getChildren().remove(index);
-//	}
-
 }

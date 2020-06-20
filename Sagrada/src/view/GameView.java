@@ -2,7 +2,6 @@ package view;
 
 
 import controller.GameController;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -14,7 +13,6 @@ import javafx.scene.text.Text;
 
 public class GameView extends HBox {
 
-	private GameController gameController;
 	private DicePoolView dicePoolView;
 	private PatterncardView patterncardView;
 	private RoundtrackView roundtrackView;
@@ -27,7 +25,6 @@ public class GameView extends HBox {
 	
 	public GameView(GameController gameController){
 		BorderPane right = new BorderPane();
-		this.gameController = gameController;
 		chatView = new ChatView(gameController);
 		dicePoolView = new DicePoolView(gameController.getDieController());
 		patterncardView = new PatterncardView(gameController.getPatterncardController());
@@ -40,8 +37,6 @@ public class GameView extends HBox {
 		patternCardsOfOtherPlayersView = new PatternCardsOfOtherPlayersView(gameController.getPatterncardController());
 		Button button = new Button("Beurt beëindigen.");//TODO temporary
 		button.setOnMouseClicked(e-> gameController.stopround());
-//		Button button2 = new Button("Beurt beginnen");
-//		button2.setOnMouseClicked(e-> gameController.playround());
 		
 		HBox currentPlayerText = new HBox();
 		Text text = new Text();
@@ -60,10 +55,8 @@ public class GameView extends HBox {
 		HBox bottom = new HBox();
 		bottom.getChildren().addAll(roundtrackView, scoreView);
 		button.setPadding(new Insets(10));
-//		button2.setPadding(new Insets(10));
 		right.setBottom(bottom);
 		VBox center = new VBox();
-//		center.getChildren().addAll(button,button2, currentPlayerText);
 		center.getChildren().addAll(button, currentPlayerText);
 		center.setSpacing(50);
 		right.setCenter(center);
@@ -107,5 +100,4 @@ public class GameView extends HBox {
 	public void updateDicePoolView(int amountofdice) {
 		dicePoolView.updateDicePool(amountofdice);
 	}
-	
 }

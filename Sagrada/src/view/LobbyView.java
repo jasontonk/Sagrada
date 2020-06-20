@@ -35,8 +35,7 @@ public class LobbyView extends BorderPane {
     private ArrayList<String> playernames;
     private VBox sendInvitationsView;
     private ArrayList<Integer> gameIDList;;
-	private ArrayList<Player> lobbyPlayerList;
-    
+	private ArrayList<Player> lobbyPlayerList;   
 	
 	public LobbyView(AccountController accountController) {
 		this.accountController = accountController;
@@ -50,8 +49,7 @@ public class LobbyView extends BorderPane {
         inviteList = new ArrayList<Account>();  
         challengerList = new ArrayList<>();
         sentinvitationsView = new VBox();
-        playernames = new ArrayList<String>();
-       
+        playernames = new ArrayList<String>();      
          
 		this.getChildren().clear();
 		HBox accountView = new HBox();  
@@ -73,8 +71,7 @@ public class LobbyView extends BorderPane {
 		else {
 			inviteList.remove(a);
 		}
-	}
-	
+	}	
 
 	private VBox makeGamesView() {
 		
@@ -168,10 +165,8 @@ public class LobbyView extends BorderPane {
 						gamesView.getChildren().add(playerStatus);
 					}
 				}
-			}
-			
+			}	
 		}
-
 		sentinvitationsView.getChildren().add(gamesView);
 	}
 	
@@ -218,12 +213,10 @@ public class LobbyView extends BorderPane {
 
 					     refuse.setOnAction(e -> refused(p));
 					 }
-				 }
-				 
+				 } 
 				 challengerView.getChildren().addAll(username,accept,refuse);
 			    
 			    invitationsView.getChildren().add(challengerView);
-
 			}
 		inviteListView.getChildren().add(invitationsView);
 		receivedInvitationsView.getChildren().add(inviteListView);

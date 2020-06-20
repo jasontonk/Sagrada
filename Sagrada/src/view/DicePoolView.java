@@ -3,7 +3,6 @@ package view;
 import java.util.ArrayList;
 
 import controller.DieController;
-import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -24,7 +23,6 @@ public class DicePoolView extends VBox {
 	
 	public DicePoolView(DieController dieController) {
 		dieView = new ArrayList<>();
-		int number = 0;
 		this.dieController = dieController;
 		dicePool.setBackground(new Background(new BackgroundFill(Color.BLACK,null,null)));
 		dicePool.setMinSize((3 * (DIE_SIZE + GRIDSPACING) + GRIDSPACING), (3 * (DIE_SIZE + GRIDSPACING) + GRIDSPACING));
@@ -34,35 +32,16 @@ public class DicePoolView extends VBox {
 		dicePool.setVgap(GRIDSPACING);
 		this.setPadding(new Insets(0, 30, 0, 30));
 		this.getChildren().addAll(drawTitle(), dicePool);
-		
-//		for (int i = 0; i < 3; i++) {
-//			for (int j = 0; j < 3; j++) {
-//				if(dieController.getDieColor(number) != null) {
-//					final int index = number;
-//					final int x = i;
-//					final int y = j;
-//					Platform.runLater(new Runnable() {
-//						@Override
-//						public void run() {
-//							dieView.add(new DieView(dieController, dieController.getDieColor(index), dieController.getDieValue(index), index));
-//							dicePool.add(dieView.get(index),x,y);
-//						}
-//					});
-//					number++;
-//				}
-//			}
-//		}
-	}
-	
+	}	
 	
 	public BorderPane drawTitle() {
 		BorderPane titlePane = new BorderPane();
 		Text title = new Text();
-//		title.setText("Aanbod - GameID: " + dieController.getGameController().getGame().getGameID());
 		titlePane.setPadding(padding);
 		titlePane.setCenter(title);
 		return titlePane;
 	}
+	
 	public void addAllDiceFromDicepool(int amountofdice) {
 		int number = 0;
 		for (int i = 0; i < 3; i++) {
@@ -97,8 +76,6 @@ public class DicePoolView extends VBox {
 	public void updateDice(int number, String color, int value) {
 		for(int i = 0; i < dieView.size();i++) {
 			if(dieView.get(i).getDiePoolID() == number) {
-				
-				System.out.println("Dienumber = "+number+" diecolor = "+color+" dievalue= "+value);
 				dieView.get(i).updateButton(color, value);
 			}
 		}

@@ -26,7 +26,6 @@ public class ToolcardPoolView extends HBox {
 		}
 	}
 	
-	
 	private void createCards() {
 		for (int i = 0; i < ToolcardIDs.length; i++) {
 			toolcardView.add(new ToolcardView(ToolcardIDs[i], gamecontroller));

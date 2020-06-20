@@ -1,12 +1,9 @@
 package view;
 
 import controller.AccountController;
-import database.DataBaseConnection;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -34,8 +31,6 @@ public class ChooseView extends Pane{
 		choosePane = new VBox();
 		choosePane.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, null, null)));
 
-		
-//		choosePane.setBackground(new Background(new BackgroundImage(new Image(getClass().getResource(url).toString()), null, null, null, null)));
 		String url = "/images/loginbackground.jpg";
 		Image image = new Image(url);
 		choosePane.setBackground(new Background(new BackgroundImage(image, null, null, null, null)));
@@ -55,9 +50,7 @@ public class ChooseView extends Pane{
 		no.setMinHeight(75);
 		
 		yes.setOnAction(e -> accountController.viewLogin());
-		no.setOnAction(e -> accountController.viewRegister());
-		
-		
+		no.setOnAction(e -> accountController.viewRegister());		
 		
 		HBox yesno = new HBox();
 		yesno.getChildren().addAll(yes,no);
@@ -89,7 +82,5 @@ public class ChooseView extends Pane{
 		centerScroll.setCenter(scrollPane);
 		choosePane.getChildren().addAll(textPane, yesno, centerScroll);
 		return choosePane;
-	}
-
-	
+	}	
 }

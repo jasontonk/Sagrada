@@ -1,6 +1,5 @@
 package view;
 import controller.AccountController;
-import database.DataBaseConnection;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,20 +19,17 @@ import javafx.scene.text.Text;
 public class LoginView extends VBox {
 	
 	private AccountController accountController;
-	
 	private final int BUTTON_WIDTH = 150;
 	private final int BUTTON_HEIGHT = 75;
 	private final int TEXTFIELD_WIDTH = 200;
     private final int TEXTFIELD_HEIGHT = 25;
-	private Pane loginPane;
-	
+	private Pane loginPane;	
 	
 	public LoginView(AccountController accountController) {
 		this.accountController = accountController;
 		this.setPrefSize(800, 600);
 		makeLoginPane();
 	}
-
 	
 	public Pane makeLoginPane() {
 		this.getChildren().clear();
@@ -68,8 +64,7 @@ public class LoginView extends VBox {
 		Button login = new Button("Login");
 		login.setOnAction(e -> accountController.actionLogin(usernameTextField.getText(), passwordTextField.getText()));
 		
-		login.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-		
+		login.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);		
 		
 		Button back = new Button("Terug");
 		back.setOnAction(e -> accountController.viewChoose());
@@ -85,9 +80,5 @@ public class LoginView extends VBox {
 		
 		loginPane.getChildren().addAll(textPane, loginFields, yesno);
 		return loginPane;
-	}
-	
-	
-	
-	
+	}	
 }

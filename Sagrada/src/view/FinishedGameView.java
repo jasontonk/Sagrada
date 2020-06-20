@@ -2,28 +2,21 @@ package view;
 
 import java.util.ArrayList;
 
-import controller.AccountController;
 import controller.GameController;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import model.Player;
 
 public class FinishedGameView extends BorderPane {
-
-
 
 	private VBox finishedGameView;
 	private GameController gameController;
@@ -39,7 +32,6 @@ public class FinishedGameView extends BorderPane {
 		finishedGameView.setPadding(new Insets(50));
 		finishedGameView.setSpacing(15);
 
-		
 		BorderPane textPane = new BorderPane();
 		ArrayList<String> playerInfo = gameController.getGame().getWinnerOfGameWithID(gameController.getGame().getGameID());
 		
@@ -57,10 +49,7 @@ public class FinishedGameView extends BorderPane {
 		VBox test = new VBox();
 		test.getChildren().addAll(imageView, winner);
 		textPane.setCenter(test);
-		
-		
-		
-		
+			
 		BorderPane leaderBoardPane = new BorderPane();
 		Text title = new Text("Leaderboard:");
 		
@@ -77,18 +66,13 @@ public class FinishedGameView extends BorderPane {
 			leaderBoard.getChildren().add(info);
 		}
 		
-		
 		leaderBoardPane.setTop(title);
 		leaderBoardPane.setCenter(leaderBoard);
 		
 		Button lobbyButton = new Button("Ga terug naar de lobby");
 		lobbyButton.setOnAction(e -> gameController.setLobbyView());
 		
-
 		finishedGameView.getChildren().addAll(textPane, leaderBoardPane, lobbyButton);
 		return finishedGameView;
 	}
-
-	
-
 }

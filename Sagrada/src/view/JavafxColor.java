@@ -35,6 +35,7 @@ public class JavafxColor {
 		}
 		return color;
 	}
+	
 	public ModelColor getModelColor(Color color) {
 		if(color == null) {
 			modelColor = null;
@@ -61,6 +62,7 @@ public class JavafxColor {
 		}
 		return modelColor;
 	}
+	
 	public String getStringColorFromModelColor(ModelColor modelcolor) {
 		if(modelcolor == null) {
 			colorString = null;

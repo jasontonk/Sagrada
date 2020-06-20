@@ -3,7 +3,6 @@ package view;
 import java.util.ArrayList;
 
 import controller.AccountController;
-import controller.GameController;
 import controller.PatterncardController;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -30,21 +29,18 @@ public class PatterncardSelectionView extends VBox {
 		this.game = game;
 		this.accountController = accountController;
 		this.player = player;
-		
-		
+	
 		patterncardView = new ArrayList<PatterncardView>();
 		patterncardControllers = new ArrayList<PatterncardController>();
 		ArrayList<PatternCard> patterncardsToChoose = accountController.getPatternCardsToChoose(player);
 		for (PatternCard patterncard : patterncardsToChoose) {
 			patterncardControllers.add(new PatterncardController(patterncard));
 		}
-	
 		for (int i = 0; i < 4; i++) {
 			patterncardView.add(new PatterncardView(patterncardControllers.get(i)));
 		}
 		this.getChildren().addAll(drawTitle(),drawPatterncards());
 	}
-
 
 	public GridPane drawPatterncards() {
 		GridPane gridpane = new GridPane();
@@ -68,13 +64,11 @@ public class PatterncardSelectionView extends VBox {
 		return gridpane;
 	}
 
-
 	private void joinGame(int index) {
 		System.out.println("patterncardview weergeven");
 		player.setPatternCard(patterncardControllers.get(index).getPatterncard());
 		accountController.goToGame(game);
 	}
-
 
 	private BorderPane drawTitle() {
 		BorderPane titlePane = new BorderPane();
@@ -84,5 +78,4 @@ public class PatterncardSelectionView extends VBox {
 		titlePane.setCenter(title);
 		return titlePane;
 	}
-	
 }

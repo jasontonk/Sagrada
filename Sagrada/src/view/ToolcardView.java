@@ -23,16 +23,13 @@ public class ToolcardView extends BorderPane {
 	
 	public ToolcardView(int id, GameController gamecontroller) {
 		this.gamecontroller = gamecontroller;
-		System.out.println("TOOL CARD OF GAME");
 		
 		String imgURL = "/images/toolcard" + id + ".png";
-		System.out.println("IMGURL " + imgURL);
-		Image image = new Image(getClass().getResource(imgURL).toString());
+		System.out.println("IMGURL " + imgURL);	Image image = new Image(getClass().getResource(imgURL).toString());
 		toolcard.setMinSize(200, 270);
 		toolcard.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
 		toolcard.setOnMouseClicked((e)-> setSelectedToolcard(id));
 		this.setCenter(toolcard);
-		
 	}
 	
 	public void setSelectedToolcard(int id) {
@@ -47,7 +44,6 @@ public class ToolcardView extends BorderPane {
 	public void removeBorder() {
 		toolcard.setBorder(null);
 	}
-
 }
 	
 

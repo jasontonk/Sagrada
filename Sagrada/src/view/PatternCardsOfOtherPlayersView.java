@@ -22,22 +22,17 @@ import model.Player;
 
 public class PatternCardsOfOtherPlayersView extends VBox {
 
-	private PatterncardController patterncardController;
 	private JavafxColor javafxColor = new JavafxColor();;
 	private final int PATTERNCARDFIELD_SIZE = 50;
 	private final double GRIDSPACING = 5.0;
 	private Insets padding = new Insets(5);
 	private VBox allPatternCards;
-//	private final int[] xPos = new int[] {0,1,2,3,4};
-//	private final int[] yPos = new int[] {0,1,2,3};
 	private StackPane[][][] stackpanes;
 
 	private String imgURL;
 
 	public PatternCardsOfOtherPlayersView(PatterncardController patterncardController) {
-		this.patterncardController = patterncardController;
 		this.setPadding(new Insets(10));
-		stackpanes = new StackPane[1000][5][4];
 		allPatternCards = new VBox();
 		for(Player player : patterncardController.getGameController().getGame().getPlayers()) {
 			if(!player.equals(patterncardController.getGameController().getGame().getPersonalPlayer())) {
@@ -72,8 +67,7 @@ public class PatternCardsOfOtherPlayersView extends VBox {
 					int xPos = x;
 					int yPos = y;
 					String imgURL;
-					
-					
+										
 					ModelColor modelColor = player.getPatternCard().getFieldColorFromDB(xPos, yPos);
 	
 					Color color = javafxColor.getJavafxColor(modelColor);
@@ -92,11 +86,8 @@ public class PatternCardsOfOtherPlayersView extends VBox {
 										BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
 					}
 					stackpane.getChildren().add(button);
-					
 					stackpanes[player.getId()][x][y] = stackpane;
 					updatePatternCards(player, x, y);
-					
-					
 					patterncardfields.add(stackpane, x, y);
 				}
 			}
@@ -113,21 +104,18 @@ public class PatternCardsOfOtherPlayersView extends VBox {
 			vbox.setPadding(new Insets(0, 0, 0, 5));
 			vbox.getChildren().addAll(label, label2);
 		}
-		
 		return vbox;
 	}
 	
 	public void updatePatternCards(Player player, int x, int y) {
 		BoardField boardField = player.getPlayerFrameFieldDBA().getPlayerFrameField(player, x, y);
 		if (boardField.hasDie()) {
-
 			Button die = new Button();
 			imgURL = "/images/"
 					+ boardField.getDie().getColor().toString()
 					+ boardField.getDie().getEyes()
 					+ "_Die.png";
 
-			
 			if (imgURL != null) {
 				Image image = new Image(getClass().getResource(imgURL).toString());
 				die.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT,
@@ -135,7 +123,6 @@ public class PatternCardsOfOtherPlayersView extends VBox {
 						new BackgroundSize(1, 1, false, false, false, true))));
 				die.setPrefSize(40, 40);
 				stackpanes[player.getId()][x][y].getChildren().add(die);
-
 			}
 		}
 	}

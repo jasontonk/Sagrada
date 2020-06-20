@@ -3,18 +3,12 @@ package view;
 import controller.AccountController;
 import database.DataBaseConnection;
 import javafx.scene.Scene;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 
 public class MyScene extends Scene {
 
     private Pane contentPane;
     private AccountController accountController;
-    
-    
     
 	public MyScene(DataBaseConnection db) {
 		super(new Pane());

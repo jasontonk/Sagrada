@@ -1,7 +1,6 @@
 package view;
 
 import controller.AccountController;
-import database.DataBaseConnection;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -35,7 +34,6 @@ public class RegisterView extends Pane {
 		this.getChildren().clear();
 		VBox rp = new VBox();
 		registerPane = rp;
-		
 		registerPane.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, null, null)));
 		
 		BorderPane textPane = new BorderPane();
@@ -91,7 +89,5 @@ public class RegisterView extends Pane {
 		text.setFill(Color.RED);
 		registerPane.getChildren().add(text);
 		this.getChildren().addAll(registerPane);
-		System.out.println("test");
-		
 	}
 }
