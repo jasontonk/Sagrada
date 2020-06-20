@@ -207,11 +207,6 @@ public class GameController {
 		
 		GameDie dieOnDiePool = game.getSelectedDieFromDicePool();
 		
-		ArrayList<ModelColor> colors = new ArrayList<>();
-		ArrayList<Integer> values = new ArrayList<>();
-		ArrayList<Integer> dieNumber = new ArrayList<>();
-		ArrayList<GameDie> offer;
-		
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Let op!");
 		alert.setHeaderText("De waarde van de geselecteerde dobbelsteen is = " + dieOnDiePool.getEyes() + " en de kleur is = "+ dieOnDiePool.getColorString());
@@ -225,45 +220,19 @@ public class GameController {
 		Optional<ButtonType> result = alert.showAndWait();
 		
 		if (result.get() == buttonTypeOk){
-			game.removeDieFromRoundTrack(rountrackDie,dieOnDiePool);
+			
+			game.removeDieFromRoundTrack(rountrackDie);
 			game.setDieOnRoundTrack(dieOnDiePool,rountrackDie);
 			
-			for(int i=0; i<diceOnRoundTrack.size();i++) {
-				if(diceOnRoundTrack.get(i).getNumber() == rountrackDie.getNumber()) {
-					diceOnRoundTrack.remove(i);
-					diceOnRoundTrack.add(dieOnDiePool);
-					dieOnDiePool.setOnRoundTrack(rountrackDie.isOnRoundTrack());
-					break;
-				}
-			}
-			
-			for (int i = 1; i <= 10; i++) {
-				for (int j = 0; j < diceOnRoundTrack.size(); j++) {
-					if(diceOnRoundTrack.get(j).isOnRoundTrack() == i) {
-						colors.add(diceOnRoundTrack.get(j).getColor());
-						values.add(diceOnRoundTrack.get(j).getEyes());
-						dieNumber.add(diceOnRoundTrack.get(j).getNumber());
-					}
-				}
-				if(colors.size() != 0) {
-					getGameView().getRoundtrackView().addDice(i, colors, values, dieNumber);
-				}
-				colors.clear();
-				values.clear();
-			}
+			gameUpdater.updateRountrack();
+			gameViewUpdater.updateRoundtrackView();
 		}
 		
 		rountrackDie.setOnRoundTrack(0);
+		getGame().updateOffer(dieOnDiePool, rountrackDie);
 		getGame().setSelectedDieFromDicePool(rountrackDie);
 		getGame().setSelectedDie(rountrackDie);	
-		offer = getGame().getOffer();
-		for(int i = 0; i < offer.size(); i++) {
-			if(offer.get(i).getNumber() == dieOnDiePool.getNumber() && offer.get(i).getColor() == dieOnDiePool.getColor()) {
-				offer.remove(i);
-				offer.add(rountrackDie);	
-			}
-		}
-		getGameView().getDicePoolView().updateDice(rountrackDie.getNumber(), rountrackDie.getColorString(), rountrackDie.getEyes());
+		dieController.getDieViewForToolcard5().updateButton(rountrackDie.getColorString(), rountrackDie.getEyes());
 	}
 	
 	public void fluxRemover(GameDie gamedie) {

@@ -293,7 +293,7 @@ public class GameDieDBA {
 		}
 	}
 
-	public void removeDieFromRoundTrack(GameDie selectedDieRoundTrack, GameDie selectedDieFromDicePool, Game game) {
+	public void removeDieFromRoundTrack(GameDie selectedDieRoundTrack, Game game) {
 		 String query = "UPDATE gamedie SET roundtrack = NULL WHERE dienumber = "+selectedDieRoundTrack.getNumber()+" AND eyes =  "+selectedDieRoundTrack.getEyes()+" AND diecolor ='"+selectedDieRoundTrack.getColor()+"';";
 	        try {
 	            Statement stmt = conn.getConn().createStatement();

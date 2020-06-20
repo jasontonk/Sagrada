@@ -27,6 +27,8 @@ public class RoundtrackController {
 				gameDie = dieces.get(i);
 			}
 		}
+		
+		System.out.println("nnumber= "+ gameDie.getEyes()+ " ccolor= "+gameDie.getColorString());
 
 		if(gameDie != null) {
 			gameController.getGame().setSelectedDieRoundTrack(gameDie);
@@ -34,6 +36,7 @@ public class RoundtrackController {
 		
 		if (getGameController().getGame().getSelectedToolcard() != null) {
 			if(getGameController().getGame().getSelectedToolcard().getId() == 5 && getGameController().getGame().getSelectedDieFromDicePool() != null) {
+				System.out.println("number= "+ gameDie.getEyes()+ " color= "+gameDie.getColorString());
 				getGameController().lensCutter(gameDie);
 			}
 		}

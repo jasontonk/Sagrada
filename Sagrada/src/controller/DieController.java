@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import database.DataBaseConnection;
 import model.GameDie;
 import model.ModelColor;
+import view.DieView;
 
 public class DieController {
 
 	private ArrayList<GameDie> die;
 	private GameController gameController;
 	private String selectedDieURL;
+	private DieView dieViewForToolcard5;
 	
 	public DieController(DataBaseConnection conn, GameController gameController) {
 		this.gameController = gameController;
@@ -97,4 +99,14 @@ public class DieController {
 		int offersize = offer.size();
 		gameController.getGameView().updateDicePoolView(offersize);
 	}
+
+	public void toolcard5(DieView dieView) {
+		dieViewForToolcard5 = dieView;
+	}
+
+	public DieView getDieViewForToolcard5() {
+		return dieViewForToolcard5;
+	}
+	
+	
 }

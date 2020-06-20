@@ -88,7 +88,7 @@ public class GameUpdater implements Runnable {
 
 	}
 
-	private void updateRountrack() {
+	public void updateRountrack() {
 		diceOnRoundTrack = gameCtrl.getGame().getDiceOnRoundtrack();
 		gameCtrl.updateRoundTrack(diceOnRoundTrack);
 	}

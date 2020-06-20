@@ -501,7 +501,7 @@ public class Game {
 	
 	public void updateOffer(GameDie oldDie, GameDie newDie){
 		for(int i = 0; i < offer.size(); i++) {
-			if(offer.get(i).getNumber() == oldDie.getNumber()) {
+			if(offer.get(i).getNumber() == oldDie.getNumber() && (offer.get(i).getColorString().equals(oldDie.getColorString()))) {
 				offer.remove(i);
 				offer.add(newDie);
 				break;
@@ -619,8 +619,8 @@ public class Game {
 		return gamedieDBA.getUnusedDiceOfGame(this);
 	}
 
-	public void removeDieFromRoundTrack(GameDie selectedDieRoundTrack,GameDie selectedDieFromDicePool) {
-		gamedieDBA.removeDieFromRoundTrack(selectedDieRoundTrack,selectedDieFromDicePool,this);
+	public void removeDieFromRoundTrack(GameDie selectedDieRoundTrack) {
+		gamedieDBA.removeDieFromRoundTrack(selectedDieRoundTrack,this);
 	}
 
 	public void setDieOnRoundTrack(GameDie gamedie, GameDie rountrackDie) {
