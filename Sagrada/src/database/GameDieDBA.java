@@ -274,12 +274,24 @@ public class GameDieDBA {
             if (rs.next()) {
                 gameDie = new GameDie(getColorFromString(rs.getString("diecolor")),rs.getInt("dienumber"),rs.getInt("eyes"), game, conn, this);
                 gameDie.setRoundID(game); 
+                updateGameDie(gameDie,game);
             }
             stmt.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return gameDie;
+	}
+	
+	public void updateGameDie(GameDie gamedie, Game game) {
+		String query = "UPDATE gamedie SET roundID = "+game.getRoundFromDB()+", eyes = "+gamedie.getEyes()+" WHERE idgame = "+game.getGameID()+" AND dienumber = "+gamedie.getNumber()+" AND diecolor = '"+getStringFromColor(gamedie)+"';";
+		try {
+				Statement stmt = conn.getConn().createStatement();
+				stmt.executeUpdate(query);
+				stmt.close();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void setGameDieUnused(GameDie gamedie, Game game) {

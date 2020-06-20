@@ -502,8 +502,11 @@ public class Game {
 	public void updateOffer(GameDie oldDie, GameDie newDie){
 		for(int i = 0; i < offer.size(); i++) {
 			if(offer.get(i).getNumber() == oldDie.getNumber() && (offer.get(i).getColorString().equals(oldDie.getColorString()))) {
+				System.out.println("offer 1 = "+ offer.size());
 				offer.remove(i);
+				System.out.println("offer 2 = "+ offer.size());
 				offer.add(newDie);
+				System.out.println("offer 3 = "+ offer.size());
 				break;
 			}
 		}

@@ -225,7 +225,7 @@ public class GameController {
 			
 			game.removeDieFromRoundTrack(rountrackDie);
 			game.setDieOnRoundTrack(dieOnDiePool,rountrackDie);
-			
+		
 			gameUpdater.updateRountrack();
 			gameViewUpdater.updateRoundtrackView();
 		}
@@ -236,7 +236,7 @@ public class GameController {
 		getGame().setSelectedDie(rountrackDie);	
 		
 		System.out.print("color roundtrack "+ rountrackDie.getColorString()+ " value "+rountrackDie.getEyes());
-		dieController.getDieViewForToolcard5().updateButton(rountrackDie.getColorString(), rountrackDie.getEyes());
+		dieController.getDieViewForToolcard5().toolcardUpdate();
 	}
 	
 	public void fluxRemover(GameDie gamedie) {

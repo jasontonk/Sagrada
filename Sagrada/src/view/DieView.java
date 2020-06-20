@@ -85,7 +85,7 @@ public class DieView extends BorderPane {
 		}
 	}
 	
-	public void toolcard5() {
+	public void toolcardUpdate() {
 		updateButton(dieController.getGameController().getGame().getSelectedDieFromDicePool().getColorString(),dieController.getGameController().getGame().getSelectedDieFromDicePool().getEyes());
 		dieController.getGameController().setToolCardUnused();
 	}
