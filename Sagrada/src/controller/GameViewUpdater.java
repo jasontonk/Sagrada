@@ -105,12 +105,8 @@ public class GameViewUpdater extends Task<Boolean> {
 	}
 
 	private void updateDicePoolView() {
-		ArrayList<GameDie> localOffer = gameCtrl.getGame().getLocalOffer();
 		ArrayList<GameDie> offer = gameCtrl.getGame().getOffer();
-		if(localOffer.size() != offer.size()) {
-			gameCtrl.getDieController().updateDicePool(offer);
-			updatePatternCardsOfOtherPlayers();
-		}
+		gameCtrl.getDieController().updateDicePool(offer);
 	}
 	
 	public void updateScoreBoard() {
