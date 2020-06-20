@@ -39,6 +39,7 @@ public class PatternCardsOfOtherPlayersView extends VBox {
 				allPatternCards.getChildren().add(drawPatterncard(player));
 			}
 		}
+		stackpanes = new StackPane[1000][5][4];
 		this.setBackground(new Background(new BackgroundFill(Color.DARKBLUE, null, null)));
 		this.getChildren().addAll(allPatternCards);
 	}

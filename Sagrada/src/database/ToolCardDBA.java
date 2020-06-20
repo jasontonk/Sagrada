@@ -27,7 +27,7 @@ public class ToolCardDBA {
 	        Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next()) {
-				Toolcard toolcard = new Toolcard(rs.getString("name"), rs.getString("description"),rs.getInt("idtoolcard"),conn);
+				Toolcard toolcard = new Toolcard(rs.getString("name"), rs.getString("description"),rs.getInt("idtoolcard"));
 				list.add(toolcard);
 				System.out.println("toolcard id is"+ toolcard.getId());
 			}
@@ -46,7 +46,7 @@ public class ToolCardDBA {
 	        Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next()) {
-				Toolcard toolcard = new Toolcard(rs.getString("name"), rs.getString("description"),rs.getInt("idtoolcard"),conn);
+				Toolcard toolcard = new Toolcard(rs.getString("name"), rs.getString("description"),rs.getInt("idtoolcard"));
 				list.add(toolcard);
 			}
 			stmt.close();
@@ -63,7 +63,7 @@ public class ToolCardDBA {
 	        	Statement stmt = conn.getConn().createStatement();
 				ResultSet rs = stmt.executeQuery(query);
 				if(rs.next()) {
-					toolcard = new Toolcard(rs.getString("name"),rs.getString("description"),rs.getInt("idtoolvard"),conn);
+					toolcard = new Toolcard(rs.getString("name"),rs.getString("description"),rs.getInt("idtoolvard"));
 				}
 				stmt.close();
 	        } catch (SQLException e) {
