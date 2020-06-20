@@ -19,8 +19,6 @@ import view.ChatView;
 import view.FinishedGameView;
 import view.GameView;
 import view.MyScene;
-import view.PatterncardSelectionView;
-import view.PatterncardView;
 import view.ToolcardView;
 
 public class GameController {
