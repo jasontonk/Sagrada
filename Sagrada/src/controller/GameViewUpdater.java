@@ -82,7 +82,7 @@ public class GameViewUpdater extends Task<Boolean> {
 			updatePatternCardsOfOtherPlayers();
 			updateCounter = 0;
 		}
-		updateCounter++;
+		updateCounter++; 
 	}
 	
 	private void updateRoundtrackView() {
