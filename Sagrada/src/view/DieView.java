@@ -93,7 +93,14 @@ public class DieView extends BorderPane {
 		dieController.getGameController().setToolCardUnused();
 	}
 	
-	private void updateButton(String color, int value) {
+	
+	
+	public int getDiePoolID() {
+		return diePoolID;
+	}
+
+
+	public void updateButton(String color, int value) {
 		
 		String imgURL;
 		die.setMinSize(DIE_SIZE, DIE_SIZE);

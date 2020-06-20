@@ -30,9 +30,9 @@ public class GameDieDBA {
 		}	
 	}
 	
-	public void addRoundID(GameDie gamedie, Game game) {
+	public void addRoundID(GameDie gamedie, Game game, int round) {
 		
-		String query = "UPDATE gamedie SET roundID = "+game.getRoundFromDB()+" WHERE idgame = "+game.getGameID()+" AND dienumber ="+gamedie.getNumber()+" AND diecolor= '"+getStringFromColor(gamedie)+"';";
+		String query = "UPDATE gamedie SET roundID = "+round+" WHERE idgame = "+game.getGameID()+" AND dienumber ="+gamedie.getNumber()+" AND diecolor= '"+getStringFromColor(gamedie)+"';";
 		try {
 				Statement stmt = conn.getConn().createStatement();
 				stmt.executeUpdate(query);

@@ -93,6 +93,16 @@ public class DicePoolView extends VBox {
 			dieView.get(i).removeBorder();
 		}
 	}
+	
+	public void updateDice(int number, String color, int value) {
+		for(int i = 0; i < dieView.size();i++) {
+			if(dieView.get(i).getDiePoolID() == number) {
+				
+				System.out.println("Dienumber = "+number+" diecolor = "+color+" dievalue= "+value);
+				dieView.get(i).updateButton(color, value);
+			}
+		}
+	}
 
 	public void updateDicePool(int amountofdice) {
 				deleteAllDiceFromDicepool();

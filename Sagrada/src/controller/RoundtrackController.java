@@ -21,11 +21,26 @@ public class RoundtrackController {
 		return gameController;
 	}
 	
-	public void setSelectedDie(int round, int index,GameDie gameDie) {
-			 
+	public void setSelectedDie(int round, int index, ArrayList<Integer> diceIDs) {
+		ArrayList<GameDie> dieces = getGameController().getDiceOnRoundTrack();
+		
+		GameDie gameDie = null;
+		
+		for(int i = 0; i < dieces.size();i++ ) {
+			if(dieces.get(i).getNumber() == diceIDs.get(index)) {
+				gameDie = dieces.get(i);
+			}
+		}
+	
+		
 		if(gameDie != null) {
-			System.out.println("Ik heb RoundTrackDie : " + gameDie.getEyes()+ " And Color= " + gameDie.getColorString());
 			gameController.getGame().setSelectedDieRoundTrack(gameDie);
+		}
+		
+		if (getGameController().getGame().getSelectedToolcard() != null) {
+			if(getGameController().getGame().getSelectedToolcard().getId() == 5 && getGameController().getGame().getSelectedDieFromDicePool() != null) {
+				getGameController().lensCutter(gameDie);
+			}
 		}
 	}
 }

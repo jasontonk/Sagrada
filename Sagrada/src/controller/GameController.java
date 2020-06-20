@@ -266,10 +266,12 @@ public class GameController {
 	
 	public void lensCutter(GameDie rountrackDie) {
 		
-		GameDie dieOnDiePool = game.getSelectedDieFromDicePool();
+GameDie dieOnDiePool = game.getSelectedDieFromDicePool();
 		
 		ArrayList<ModelColor> colors = new ArrayList<>();
 		ArrayList<Integer> values = new ArrayList<>();
+		ArrayList<Integer> dieNumber = new ArrayList<>();
+		
 		ArrayList<GameDie> offer;
 		
 		Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -289,10 +291,10 @@ public class GameController {
 			game.removeDieFromRoundTrack(rountrackDie,dieOnDiePool);
 			game.setDieOnRoundTrack(dieOnDiePool,rountrackDie);
 			
-			for(int i=0; i<changedDiceOnRoundTrack.size();i++) {
-				if(changedDiceOnRoundTrack.get(i).getNumber() == rountrackDie.getNumber()) {
-					changedDiceOnRoundTrack.remove(i);
-					changedDiceOnRoundTrack.set(i,dieOnDiePool);
+			for(int i=0; i<diceOnRoundTrack.size();i++) {
+				if(diceOnRoundTrack.get(i).getNumber() == rountrackDie.getNumber()) {
+					diceOnRoundTrack.remove(i);
+					diceOnRoundTrack.add(dieOnDiePool);
 					dieOnDiePool.setOnRoundTrack(rountrackDie.isOnRoundTrack());
 					break;
 				}
@@ -300,20 +302,21 @@ public class GameController {
 			
 			
 			for (int i = 1; i <= 10; i++) {
-				for (int j = 0; j < changedDiceOnRoundTrack.size(); j++) {
-					if(changedDiceOnRoundTrack.get(j).isOnRoundTrack() == i) {
-						colors.add(changedDiceOnRoundTrack.get(j).getColor());
-						values.add(changedDiceOnRoundTrack.get(j).getEyes());
-						dieOnDiePool = changedDiceOnRoundTrack.get(j);
+				for (int j = 0; j < diceOnRoundTrack.size(); j++) {
+					if(diceOnRoundTrack.get(j).isOnRoundTrack() == i) {
+						colors.add(diceOnRoundTrack.get(j).getColor());
+						values.add(diceOnRoundTrack.get(j).getEyes());
+						dieNumber.add(diceOnRoundTrack.get(j).getNumber());
 					}
 				}
-				if(colors.size() != 0 && diceOnRoundTrack.size() != 0 && i <= diceOnRoundTrack.size()) {
-					getGameView().getRoundtrackView().addDice(i, colors, values,diceOnRoundTrack.get(i-1));
+				if(colors.size() != 0) {
+					getGameView().getRoundtrackView().addDice(i, colors, values, dieNumber);
 				}
 				colors.clear();
 				values.clear();
 			}
 		}
+		
 		rountrackDie.setOnRoundTrack(0);
 		getGame().setSelectedDieFromDicePool(rountrackDie);
 		getGame().setSelectedDie(rountrackDie);	
@@ -324,7 +327,7 @@ public class GameController {
 				offer.add(rountrackDie);	
 			}
 		}
-		getGameView().getDicePoolView().updateDicePool(offer.size());
+		getGameView().getDicePoolView().updateDice(rountrackDie.getNumber(), rountrackDie.getColorString(), rountrackDie.getEyes());
 	}
 	
 
@@ -569,6 +572,10 @@ public class GameController {
 //		patterncardSelectionView = new PatterncardSelectionView(this);
 //		
 //	}
+
+	public ArrayList<GameDie> getDiceOnRoundTrack() {
+		return diceOnRoundTrack;
+	}
 
 	public void setFinishedGameView() {
 		myScene.setContentPane(new FinishedGameView(this));
