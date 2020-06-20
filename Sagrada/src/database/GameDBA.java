@@ -75,7 +75,6 @@ public class GameDBA {
 			}
 			stmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -97,7 +96,6 @@ public class GameDBA {
 			}
 			stmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -122,7 +120,6 @@ public class GameDBA {
 				stmt.close();
 			
 		}catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -187,7 +184,6 @@ public class GameDBA {
 				stmt.close();
 			
 		}catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -200,7 +196,6 @@ public class GameDBA {
 				stmt.close();
 			
 		}catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -218,7 +213,6 @@ public class GameDBA {
 				stmt.close();
 			
 		}catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return name;

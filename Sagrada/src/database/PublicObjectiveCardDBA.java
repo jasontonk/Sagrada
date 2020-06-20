@@ -116,6 +116,5 @@ public class PublicObjectiveCardDBA {
 	            e.printStackTrace();
 	        }
 	        return publicObjectiveCards;
-	}
-	
+	}	
 }

@@ -50,8 +50,7 @@ public class PatternCardDBA {
 	}
 	
 	private int autoIdPatternCard() {
-		int patterncardid = 0;
-		
+		int patterncardid = 0;		
 		ArrayList<Integer> results = new ArrayList<Integer>();
 		
 		String query = "SELECT idpatterncard FROM patterncard;";
@@ -64,7 +63,6 @@ public class PatternCardDBA {
 			}
 			stmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -74,7 +72,6 @@ public class PatternCardDBA {
 			}
 		}
 		patterncardid = patterncardid +1;
-		
 		return patterncardid;
 	}
 	
@@ -94,8 +91,7 @@ public class PatternCardDBA {
 			e.printStackTrace();
 		}
         
-        id =  (int)(Math.random() * totaalid + 1);
-        
+        id =  (int)(Math.random() * totaalid + 1); 
         return id;
 	}
 	

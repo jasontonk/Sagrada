@@ -20,7 +20,6 @@ private DataBaseConnection conn;
 			, Chat chat
 			) {
 		Timestamp timestamp = chat.getTime();
-//		String timeStamp = new String("2008-09-01 00:00:01");
 		String query = "INSERT INTO chatline VALUES('"+idplayer+"','"+timestamp+"','"+message+"');";
 		
 		try {
@@ -46,7 +45,6 @@ private DataBaseConnection conn;
 			}
 			stmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return text;

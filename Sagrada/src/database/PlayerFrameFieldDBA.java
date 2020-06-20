@@ -17,11 +17,9 @@ public class PlayerFrameFieldDBA {
 	}
 	
 	public void addPlayerFrameField(Player player, int xposition, int yposition) {
-		// TODO list van fields.
 
 		String query = "INSERT INTO playerframefield(idplayer, position_x, position_y, idgame) VALUES("+player.getId()+","+(xposition+1)+","+(yposition+1)+
 				","+player.getGame().getGameID()+");";
-		System.out.println(query);
 		
 		try {
 			Statement stmt = conn.getConn().createStatement();
@@ -85,7 +83,6 @@ public class PlayerFrameFieldDBA {
 		String query = "SELECT * FROM playerframefield LEFT JOIN gamedie ON playerframefield.diecolor = gamedie.diecolor "
 				+ "AND playerframefield.dienumber = gamedie.dienumber "
 				+ "WHERE idplayer = "+player.getId()+" AND position_x = "+(x + 1)+" AND position_y = "+(y + 1)+";";
-		System.out.println(query);
 		try {
 			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);

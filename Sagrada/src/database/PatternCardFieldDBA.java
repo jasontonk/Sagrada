@@ -51,7 +51,6 @@ public class PatternCardFieldDBA {
 								break;
 							}
 						}
-						
 						PatternCardField patternCardField = new PatternCardField(modelColor,value, ypos,xpos);
 						list.add(patternCardField);
 					}
@@ -102,7 +101,6 @@ public class PatternCardFieldDBA {
 						
 					}catch(SQLException e) {
 						e.printStackTrace();
-						
 					}	
 			 }
 		 } 

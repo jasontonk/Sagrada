@@ -20,8 +20,6 @@ public class PlayerDBA {
 		this.conn = c;
 	}
 
-
-
 	public void addPlayer(Player player, PlayerStatus playerStatus) {
 		int playerid = autoIdPlayer();
 		player.setId(playerid);
@@ -30,18 +28,13 @@ public class PlayerDBA {
 				+ playerid + ",'" + player.getName() + "'," + player.getGame().getGameID() + ",'"
 				+ playerStatus + "','" + getStringFromColor(player) + "');";
 
-
 		try {
 			Statement stmt = conn.getConn().createStatement();
 			stmt.executeUpdate(query);
 			stmt.close();
-
 		} catch (SQLException e) {
-
 			e.printStackTrace();
-
 		}
-
 	}
 
 	private String getStringFromColor(Player player) {
@@ -65,7 +58,6 @@ public class PlayerDBA {
 				break;
 			}
 		}
-
 		return color;
 	}
 
@@ -179,7 +171,6 @@ public class PlayerDBA {
 
 	public Player getPlayerUsingID(int idplayer,Game game) {
 		
-
 		Player player = new Player(conn,game);
 		String query = "SELECT * FROM player WHERE idplayer = " + idplayer + ";";
 		try {
@@ -190,15 +181,11 @@ public class PlayerDBA {
 				player.setAccount(account.GetAccountDB(rs.getString("username")));
 				player.setName(rs.getString("username"));
 				player.setId(idplayer);
-				
 				player.setPlayerStatus(getPlayerStatusFromString(rs.getString("playstatus")));
-				
 				player.setSequenceNumber(rs.getInt("seqnr"));
 				player.setScore(rs.getInt("score"));
 				player.setPersonalObjectiveCardColorFromDB(getColorFromString(rs.getString("private_objectivecard_color")));
-
-			}
-			
+			}	
 			stmt.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -206,13 +193,10 @@ public class PlayerDBA {
 		return player;
 	}
 	
-
 	public ArrayList<Player> getPlayersOfAccount(Account account) {
 		ArrayList<Player> list = new ArrayList<>();
 		
-    	
 		String username = "'" + account.getUsername() + "'";
-		System.out.println("'" + account.getUsername() + "'");
 		String query = "SELECT * FROM player WHERE username = "+username+ " And (playstatus != 'finished' AND playstatus != 'refused');";
 		try {
 			Statement stmt = conn.getConn().createStatement();
@@ -230,7 +214,7 @@ public class PlayerDBA {
 					player.setPersonalObjectiveCardColorFromDB(getColorFromString(rs.getString("private_objectivecard_color")));
 					
 					list.add(player);
-				};
+				}
 			}
 			stmt.close();
 		} catch (SQLException e) {
@@ -315,7 +299,6 @@ public class PlayerDBA {
 	}
 
 	public void setPlayerPatternCard(PatternCard patternCard, Player player) {
-		System.out.println("patterncard= "+patternCard + " & patterncardID= ");
 		
 		String query = "UPDATE player SET idpatterncard = " + patternCard.getPatterncardID() + " WHERE idplayer = "
 				+ player.getId() + ";";
@@ -329,8 +312,6 @@ public class PlayerDBA {
 			e.printStackTrace();
 		}
 	}
-
-
 
 	public PlayerStatus getPlayerStatusFromDB(Player playerUsingID) {
 		String playerstatusString = null;
@@ -348,14 +329,9 @@ public class PlayerDBA {
 		return getPlayerStatusFromString(playerstatusString);
 	}
 
-
-
 	public ArrayList<Player> getChallengeePlayers(Account account) {
-			ArrayList<Player> list = new ArrayList<>();
-		
-    	
+		ArrayList<Player> list = new ArrayList<>();
 		String username = "'" + account.getUsername() + "'";
-		System.out.println("'" + account.getUsername() + "'");
 
 		String query = "SELECT * FROM player WHERE username = "+username+" AND playstatus = 'CHALLENGEE';";
 		try {
@@ -439,6 +415,4 @@ public class PlayerDBA {
         }
         return player;
     }
-
-
 }

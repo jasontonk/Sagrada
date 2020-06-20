@@ -16,24 +16,10 @@ public class ToolCardDBA {
 	}
 	
 	public ArrayList<Toolcard> get3ToolcardsForAGame() {
-				
-//		int id1 =  (int)(Math.random() * 12 + 1);
-//		int id2 = (int)(Math.random() * 12 + 1);
-//		while(id2 == id1) {
-//			id2 = (int)(Math.random() * 12 + 1);
-//			System.out.println("while loop 1");
-//		}
-//		int id3 = (int)(Math.random() * 12 + 1);
-//		while(id3 == id1 || id3 == id2) {
-//			id3 = (int)(Math.random() * 12 + 1);
-//			System.out.println("while loop 2");
-//		}
 		
 		int id1 = 11;
 		int id2 = 5;
 		int id3 = 10;
-		
-		System.out.println(id1+ "   " + id2 + "   " + id3);
 	       
 		ArrayList<Toolcard> list = new ArrayList<Toolcard>();
 	    String query = "SELECT * from toolcard where idtoolcard = "+id1+" OR idtoolcard = "+id2+" OR idtoolcard = "+id3+";";
