@@ -100,7 +100,7 @@ public class GameViewUpdater extends Task<Boolean> {
 			values.clear();
 		}
 		colors.clear();
-		values.clear();
+		values.clear(); 
 		gameCtrl.clearChangedDiceOnRoundTrack(); 
 	}
 
