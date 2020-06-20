@@ -9,7 +9,6 @@ import view.MyScene;
 
 public class Main extends Application  {
 	
-
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -25,7 +24,6 @@ public class Main extends Application  {
 		Image icon = new Image("/images/SagradaIcon.png");
 		primaryStage.getIcons().add(icon);
 		primaryStage.show();
-
 	}
 	
 	@Override

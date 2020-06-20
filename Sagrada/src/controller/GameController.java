@@ -39,59 +39,13 @@ public class GameController {
 	private volatile boolean isPlayingTurn;
 	private volatile boolean shownTurnMessage;
 	private ToolcardView toolcardView;
-
-	private PatterncardView patterncardView;
-	private PatterncardSelectionView patterncardSelectionView;
-
 	private ArrayList<GameDie> changedDiceOnRoundTrack;
 	private ArrayList<GameDie> diceOnRoundTrack;
-
+	private volatile boolean newCurrentPlayer; 
+	private ChatDBA chatDBA;
 	private Thread updateGame;
 	private Thread updateViews;
 	private Thread playround;
-	
-	private volatile boolean newCurrentPlayer; 
-	private ChatDBA chatDBA;
-
-//	public GameController(DataBaseConnection conn, MyScene ms, Game game) {
-//		this.conn= conn;
-//		
-//		myScene = ms;
-//		this.game = game;
-////		game =  new Game(conn, true);
-//		System.out.println("loading...20%");
-//		dieController = new DieController(conn, this);
-//		System.out.println("loading...40%");
-//		patterncardController= new PatterncardController(conn, this);
-//		System.out.println("loading...60%");
-//		roundtrackController= new RoundtrackController(game, this);
-//		System.out.println("loading...80%");
-//		gameView = new GameView(this);
-//		System.out.println("loading...100%");
-//		Timer timer = new Timer();
-////		Task task = new Task;
-//		game.playround();
-//		patterncardView = new PatterncardView(patterncardController);
-//		patterncardSelectionView = new PatterncardSelectionView(this);
-//		gameRoundPlayer =  new GameRoundPlayer(this, 3);
-//		gameUpdater = new GameUpdater(this);
-//		gameViewUpdater = new GameViewUpdater(this, gameUpdater);
-//		
-//		changedDiceOnRoundTrack = new ArrayList<GameDie>();
-//		diceOnRoundTrack = new ArrayList<GameDie>();
-//		
-//		
-//		updateGame = new Thread(gameUpdater);
-//		updateGame.setDaemon(true);
-//		updateGame.start();
-//		updateViews = new Thread(gameViewUpdater);
-//		updateViews.setDaemon(true);
-//		updateViews.start();
-////		myScene.setContentPane(patterncardSelectionView);
-////		myScene.setContentPane(gameView.getPatterncardSelectionView());
-//		
-//
-//	}
 
 	public GameController(DataBaseConnection conn, MyScene ms, Game game, AccountController accountController) {
 		this.conn = conn;
@@ -110,12 +64,9 @@ public class GameController {
 		gameView = new GameView(this);
 		System.out.println("loading...100%");
 
-//		patterncardView = new PatterncardView(patterncardController);
-//		patterncardSelectionView = new PatterncardSelectionView(this);
 		gameRoundPlayer = new GameRoundPlayer(this, 3);
 		gameUpdater = new GameUpdater(this);
 		gameViewUpdater = new GameViewUpdater(this, gameUpdater);
-
 		changedDiceOnRoundTrack = new ArrayList<GameDie>();
 		diceOnRoundTrack = new ArrayList<GameDie>();
 
@@ -135,7 +86,6 @@ public class GameController {
 		gameRoundPlayer.setIsPaused(true);
 		isPlayingTurn = false;
 		shownTurnMessage = false;
-
 	}
 
 	public ArrayList<PatterncardController> getPatternCardsToChoose() {
@@ -144,10 +94,7 @@ public class GameController {
 		patternCard = getCurrentPlayer().getPatternCardsToChoose(this.isRandom());
 
 		for (int i = 0; i < 4; i++) {
-
 			patterncardControllers.add(new PatterncardController(patternCard.get(i)));
-			System.out.println(patternCard.get(i).getName());
-
 		}
 		return patterncardControllers;
 	}
@@ -175,7 +122,6 @@ public class GameController {
 	public void setToolCardUnused() {
 		game.setSelectedToolcard(0);
 		toolcardView.removeBorder();
-		
 	}
 
 	public void setSelectedDie(GameDie die) {
@@ -209,15 +155,12 @@ public class GameController {
 			}
 			return checkplacement;
 		} else {
-			System.out.println("Ik ga hier mooie toolcardjes doen");
 			boolean testje = game.checkSelectedToolcard(x, y);
 			if (!testje) {
 				showWarning("Gereedschapskaart", "De geselecteerde Gereedschapskaart kan niet gebruikt worden!");
-
 			}
 			return testje;
 		}
-
 	}
 
 	public Player getCurrentPlayer() {
@@ -247,7 +190,6 @@ public class GameController {
 
 	public void removeAllBorders() {
 		gameView.getDicePoolView().removeAllBorders();
-
 	}
 	
 	public void removeAllBordersFromToolcard() {
@@ -257,7 +199,6 @@ public class GameController {
 	public void showWarning(String header, String text) {
 	
 		Alert alert = new Alert(AlertType.WARNING);
-		
 		alert.setTitle("Let op!");
 		alert.setHeaderText(header);
 		alert.setContentText(text);
@@ -266,16 +207,14 @@ public class GameController {
 	
 	public void lensCutter(GameDie rountrackDie) {
 		
-GameDie dieOnDiePool = game.getSelectedDieFromDicePool();
+		GameDie dieOnDiePool = game.getSelectedDieFromDicePool();
 		
 		ArrayList<ModelColor> colors = new ArrayList<>();
 		ArrayList<Integer> values = new ArrayList<>();
 		ArrayList<Integer> dieNumber = new ArrayList<>();
-		
 		ArrayList<GameDie> offer;
 		
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		
 		alert.setTitle("Let op!");
 		alert.setHeaderText("De waarde van de geselecteerde dobbelsteen is = " + dieOnDiePool.getEyes() + " en de kleur is = "+ dieOnDiePool.getColorString());
 		alert.setContentText("Weet je zeker dat je deze dobbelsteen wilt wisselen met een dobbelsteen uit de RoundTrack");
@@ -299,7 +238,6 @@ GameDie dieOnDiePool = game.getSelectedDieFromDicePool();
 					break;
 				}
 			}
-			
 			
 			for (int i = 1; i <= 10; i++) {
 				for (int j = 0; j < diceOnRoundTrack.size(); j++) {
@@ -330,7 +268,6 @@ GameDie dieOnDiePool = game.getSelectedDieFromDicePool();
 		getGameView().getDicePoolView().updateDice(rountrackDie.getNumber(), rountrackDie.getColorString(), rountrackDie.getEyes());
 	}
 	
-
 	public void fluxRemover(GameDie gamedie) {
 		GameDie unusedDie;
 		game.setGameDieUnused(gamedie);
@@ -341,7 +278,6 @@ GameDie dieOnDiePool = game.getSelectedDieFromDicePool();
 		}
 		
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		
 		alert.setTitle("Let op!");
 		alert.setHeaderText("De kleur van de nieuwe dobbelsteen is = " + unusedDie.getColorString());
 		alert.setContentText("U kunt de waarde verandren naar: ");
@@ -381,7 +317,6 @@ GameDie dieOnDiePool = game.getSelectedDieFromDicePool();
 		int dieValue = gamedie.getEyes();
 		
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		
 		alert.setTitle("Let op!");
 		alert.setHeaderText("De waarde van de geselecteerde dobbelsteen is = " + dieValue);
 		alert.setContentText("Weet je zeker dat je de dobbelsteen opniew wilt werpen?");
@@ -397,7 +332,6 @@ GameDie dieOnDiePool = game.getSelectedDieFromDicePool();
 			int randomDieValue = (int) (Math.random() * 6) + 1; 
 			gamedie.changeEyes(randomDieValue, game);
 		}
-
 		getGame().setSelectedDieFromDicePool(gamedie);
 	}
 	
@@ -405,7 +339,6 @@ GameDie dieOnDiePool = game.getSelectedDieFromDicePool();
 		int dieValue = gamedie.getEyes();
 	
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		
 		alert.setTitle("Let op!");
 		alert.setHeaderText("De waarde van de geselecteerde dobbelsteen is = " + dieValue);
 		alert.setContentText("Weet je zeker dat je de dobbelsteen wilt omdraaien?");
@@ -418,7 +351,6 @@ GameDie dieOnDiePool = game.getSelectedDieFromDicePool();
 		Optional<ButtonType> result = alert.showAndWait();
 		
 		if (result.get() == buttonTypeOk){
-
 			switch (dieValue) {
 			case 1:
 				gamedie.changeEyes(6, getGame());
@@ -438,10 +370,8 @@ GameDie dieOnDiePool = game.getSelectedDieFromDicePool();
 			case 6:
 				gamedie.changeEyes(1, getGame());
 				break;
-			}
-		    
+			} 
 		}
-
 		getGame().setSelectedDieFromDicePool(gamedie);
 	}
 	
@@ -450,7 +380,6 @@ GameDie dieOnDiePool = game.getSelectedDieFromDicePool();
 		int dieValue = gamedie.getEyes();
 	
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		
 		alert.setTitle("Let op!");
 		alert.setHeaderText("De waarde van de geselecteerde dobbelsteen is = " + dieValue);
 		alert.setContentText("Wilt u de waarde ervan met 1 verhogen of verlagen?");
@@ -478,12 +407,9 @@ GameDie dieOnDiePool = game.getSelectedDieFromDicePool();
 		} else if (result.get() == buttonTypeTwo) {
 			 gamedie.changeEyes((dieValue+1), getGame());
 		}
-		
-		System.out.println("gamedieValue= "+gamedie.getEyes());
 		getGame().setSelectedDieFromDicePool(gamedie);
 	}
 	
-
 	public int getCurrentRound() {
 		return game.getRound().get();
 	}
@@ -500,7 +426,6 @@ GameDie dieOnDiePool = game.getSelectedDieFromDicePool();
 
 		if (game.getCurrentPlayer().getId() == game.getPersonalPlayer().getId()) {
 			if (!isPlayingTurn) {
-				// gameViewUpdater.updateScoreBoard();
 				game.setCurrentPlayer(game.getPersonalPlayer());
 				gameViewUpdater.setPaused(true);
 				gameUpdater.setPaused(true);
@@ -518,9 +443,7 @@ GameDie dieOnDiePool = game.getSelectedDieFromDicePool();
 			getGamePoller().setFinishedTurn(true);
 			gameUpdater.setPaused(false);
 			gameViewUpdater.setPaused(false);
-//			gameViewUpdater.updateScoreBoard();
 			gameRoundPlayer.setIsPaused(true);
-
 		} else
 			showWarning("Beurt", "Het is niet jouw beurt");
 	}
@@ -543,9 +466,7 @@ GameDie dieOnDiePool = game.getSelectedDieFromDicePool();
 			for (int i = 0; i < diceOnRoundTrack.size(); i++) {
 				if (gameDieFromDB.getColor() == diceOnRoundTrack.get(i).getColor()
 						&& gameDieFromDB.getNumber() == diceOnRoundTrack.get(i).getNumber()) {
-					ArrayList<GameDie> temporaryList = (ArrayList<GameDie>) changedDiceOnRoundTrack.clone();// TODO miss
-																											// geen
-																											// clone
+					ArrayList<GameDie> temporaryList = (ArrayList<GameDie>) changedDiceOnRoundTrack.clone();// TODO miss geen clone
 					for (int j = 0; j < changedDiceOnRoundTrack.size(); j++) {
 						if (gameDieFromDB.getColor() == changedDiceOnRoundTrack.get(j).getColor()
 								&& gameDieFromDB.getNumber() == changedDiceOnRoundTrack.get(j).getNumber()) {
@@ -556,22 +477,16 @@ GameDie dieOnDiePool = game.getSelectedDieFromDicePool();
 				}
 			}
 		}
-		diceOnRoundTrack = (ArrayList<GameDie>) diceOnRoundTrackFromDB.clone();
+		diceOnRoundTrack = (ArrayList<GameDie>) diceOnRoundTrackFromDB.clone();// TODO miss geen clone
 	}
 
 	public ArrayList<GameDie> getChangedDiceOnRoundTrack() {
 		return changedDiceOnRoundTrack;
 	}
 
-
 	public void clearChangedDiceOnRoundTrack() {
 		changedDiceOnRoundTrack.clear();
 	}
-
-//	public void viewPatternCardSelection() {
-//		patterncardSelectionView = new PatterncardSelectionView(this);
-//		
-//	}
 
 	public ArrayList<GameDie> getDiceOnRoundTrack() {
 		return diceOnRoundTrack;
@@ -586,7 +501,6 @@ GameDie dieOnDiePool = game.getSelectedDieFromDicePool();
 
 	public void setLobbyView() {
 		accountController.viewLobby();
-//		myScene.setContentPane(accountController.getLobbyView());
 	}
 
 	/**
@@ -617,7 +531,6 @@ GameDie dieOnDiePool = game.getSelectedDieFromDicePool();
 				getPersonalPlayer().
 				getId(), text, c);
 		
-//		chatView.addMessage(chat);
 		ArrayList<Chat> chats = chatDBA.getChatlinesOfGame(this.getGame().getGameID());
 		chatView.deleteAllChats();
 		for (Chat chat : chats) {
@@ -626,5 +539,4 @@ GameDie dieOnDiePool = game.getSelectedDieFromDicePool();
 		}
 		chatView.makeChat();
 	}
-
 }

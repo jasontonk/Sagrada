@@ -1,15 +1,10 @@
 package controller;
 
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
 
 import database.DataBaseConnection;
 import model.GameDie;
 import model.ModelColor;
-import view.DicePoolView;
 
 public class DieController {
 
@@ -22,7 +17,6 @@ public class DieController {
 		die = new ArrayList<GameDie>();
 		die = gameController.getDicePool();
 	}
-	
 	
 	public String getDieColor(int number) {
 		String color = null;
@@ -62,12 +56,10 @@ public class DieController {
 	}
 
 	public void setSelectedDieFromDiePool(int dieID, String selectedDieURL) {
-		System.out.println("de die size bij het slecteren van een die : "+ die.size());
 		gameController.getGame().setSelectedDieFromDicePool(die.get(dieID));
 		gameController.setSelectedDie(die.get(dieID));
 		this.selectedDieURL = selectedDieURL;
 	}
-
 
 	public String getSelectedDieURL() {
 		selectedDieURL = "/images/" + gameController.getGame().getSelectedDieColorString() + gameController.getGame().getSelectedDieValue() + "_Die.png";
@@ -79,7 +71,6 @@ public class DieController {
 		}
 	}
 
-
 	public void deleteSelectedDie(GameDie selectedDie) {
 		for(int i = 0; i < die.size(); i++) {
 			if(selectedDie == die.get(i)) {
@@ -90,11 +81,8 @@ public class DieController {
 				break;
 			}
 		}
-		System.out.println("de die size na het plaatsen van een die : "+ die.size());
 		selectedDieURL = null;
-		
 	}
-
 
 	public void removeAllBorders() {
 		gameController.removeAllBorders();
@@ -104,23 +92,9 @@ public class DieController {
 		return gameController;
 	}
 
-
 	public void updateDicePool(ArrayList<GameDie> offer) {
 		die = offer;
 		int offersize = offer.size();
-		System.out.println("Die size in diecontroller: " + die.size());
-		System.out.println("offer: " + offersize);
 		gameController.getGameView().updateDicePoolView(offersize);
-		
-		
-//		int index = die.size();
-//		for (int i = index; i > 0; i--) {
-//			System.out.println("werk dit nog");
-//			gameController.getGameView().getDicePoolView().deleteDie(i);
-//		}
-//		gameController.getGameView().getDicePoolView().addAllDiceFromDicepool();
-		
 	}
-
-
 }

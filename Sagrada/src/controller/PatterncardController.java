@@ -1,7 +1,5 @@
 package controller;
 
-import java.util.ArrayList;
-
 import database.DataBaseConnection;
 import model.GameDie;
 import model.ModelColor;
@@ -9,15 +7,12 @@ import model.PatternCard;
 
 public class PatterncardController {
 
-	private ArrayList<PatternCard> patterncardOptions;
 	private PatternCard patterncard;
 	private GameController gameController;
 
 	public PatterncardController(DataBaseConnection conn, GameController gameController) {
 		this.gameController = gameController;
-		System.out.println("de personalplayer is: " + gameController.getGame().getPersonalPlayer());
 		patterncard = gameController.getGame().getPersonalPlayer().getBoard().getPatternCard();
-//		System.out.println("patterncardcontroller patterncard = " + patterncard.getName());
 		if (patterncard.getPatterncardID() == 0) {
 			patterncard = new PatternCard(conn);
 		}
@@ -88,7 +83,5 @@ public class PatterncardController {
 
 	public void deleteDieFromPatternCard() {
 		gameController.deleteSelectedDie();
-
 	}
-
 }

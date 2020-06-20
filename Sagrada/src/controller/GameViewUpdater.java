@@ -3,7 +3,6 @@ package controller;
 import java.util.ArrayList;
 
 import javafx.application.Platform;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.concurrent.Task;
 import model.GameDie;
 import model.ModelColor;
@@ -12,13 +11,11 @@ import model.PlayerStatus;
 
 public class GameViewUpdater extends Task<Boolean> {
 	private GameController gameCtrl;
-	private GameUpdater gameUpdates;
 	private volatile boolean isRunning;
 	private volatile boolean isPaused;
 	
 	public GameViewUpdater(GameController gameCtrl, GameUpdater gameUpdater ) {
 		this.gameCtrl = gameCtrl;
-		gameUpdates = gameUpdater;
 	}
 	
 	@Override
@@ -30,17 +27,6 @@ public class GameViewUpdater extends Task<Boolean> {
 					@Override
 					public void run() {
 						isRunning = false;
-						System.out.println("test");
-						ArrayList<String> winner = gameCtrl.getGame().getWinnerOfGameWithID(gameCtrl.getGame().getGameID());
-						System.out.println("test 2");
-//						String username = winner.get(0);
-						System.out.println("test 3");
-//						String score = winner.get(1);
-						System.out.println("test 4");
-//						String winnerText = "DE WINNAAR IS: " +username+ "\n" + username + "heeft gewonnen met een score van: "+ score; 
-						System.out.println("test 5");
-//						gameCtrl.showWarning("Game Over", winnerText);
-						System.out.println("test 6");
 						gameCtrl.setFinishedGameView();
 					}
 				});
@@ -68,7 +54,6 @@ public class GameViewUpdater extends Task<Boolean> {
 				else {
 					try {
 						Thread.sleep(2000);
-//						gameCtrl.getGame().getPersonalPlayer().calculateScore();
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -77,21 +62,19 @@ public class GameViewUpdater extends Task<Boolean> {
 		}
 		return isRunning;
 	}
+	
 	public void setRunning(boolean isRunning) {
 		this.isRunning = isRunning;
 	}
+	
 	public void setPaused(boolean isPaused) {
 		this.isPaused = isPaused;
 	}
 
 	private void updateAll() {
 		updateDicePoolView();
-		updatePatterncardsView();
 		updateRoundtrackView();
 		updatePatternCardsOfOtherPlayers();
-		
-//		updateScoreBoard();
-		System.out.println();
 	}
 	
 
@@ -108,7 +91,6 @@ public class GameViewUpdater extends Task<Boolean> {
 					colors.add(diceOnRoundTrack.get(j).getColor());
 					values.add(diceOnRoundTrack.get(j).getEyes());
 					diceNumber.add(diceOnRoundTrack.get(j).getNumber());
-					
 				}
 			}
 			if(colors.size() != 0) {
@@ -121,25 +103,18 @@ public class GameViewUpdater extends Task<Boolean> {
 		values.clear();
 		gameCtrl.clearChangedDiceOnRoundTrack(); 
 	}
-	private void updatePatterncardsView() {
-		
-	}
 
 	private void updateDicePoolView() {
 		ArrayList<GameDie> localOffer = gameCtrl.getGame().getLocalOffer();
 		ArrayList<GameDie> offer = gameCtrl.getGame().getOffer();
-		System.out.println("got offer");
 		if(localOffer.size() != offer.size()) {
 			gameCtrl.getDieController().updateDicePool(offer);
-			System.out.println("updated dicepool");
 			updatePatternCardsOfOtherPlayers();
-			System.out.println("updated patternCardsOfOtherPlayers");
 		}
 	}
 	
 	public void updateScoreBoard() {
 		gameCtrl.getGameView().getScoreView().makeScoreBoard();
-		System.out.println("gelukt 2");
 	}
 
 	public void checkFinishedGame(){

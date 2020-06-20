@@ -4,16 +4,12 @@ import java.util.ArrayList;
 
 import model.Game;
 import model.GameDie;
-import model.ModelColor;
-import model.RoundTrack;
 
 public class RoundtrackController {
 
-	private RoundTrack roundtrack;
 	private GameController gameController;
 	
 	public RoundtrackController(Game game, GameController gameController) {
-		roundtrack = game.getRoundTrack();
 		this.gameController = gameController;
 	}
 	
@@ -31,8 +27,7 @@ public class RoundtrackController {
 				gameDie = dieces.get(i);
 			}
 		}
-	
-		
+
 		if(gameDie != null) {
 			gameController.getGame().setSelectedDieRoundTrack(gameDie);
 		}

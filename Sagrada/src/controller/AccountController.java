@@ -40,7 +40,6 @@ public class AccountController {
 		
 		setAccount(new Account(connection));
 		
-		
 		chooseView = new ChooseView(this);
 		registerView = new RegisterView(this);
 		loginView = new LoginView(this);
@@ -48,7 +47,6 @@ public class AccountController {
 		
 		accountDBA = new AccountDBA(c);
 		invitationController = new InvitationController(8, this);
-		
 	}
 
 	public LobbyView getLobbyView() {
@@ -88,7 +86,6 @@ public class AccountController {
 		else {
 			showWarning("gebruikersnaam", "Dit is niet de juiste gebruikersnaam");
 		}
-		
 	}  
  
 	public void actionRegister(String username, String password) {
@@ -212,12 +209,10 @@ public class AccountController {
 
 				invitePlayerList.add(p);
 			}
-
 			game.getDicePoolFromDB();
 			game.finishGameSetup(this);
 			game.setCurrentPlayer(player);
-			game.setPersonalPlayer(getAccount());
-			
+			game.setPersonalPlayer(getAccount());	
 	}
 
 	public ArrayList<Player> getInvitePlayerList() {
@@ -246,14 +241,9 @@ public class AccountController {
 			if(!refusedPlayer){
 
 				stopInviteThread();
-//				viewPatterncardSelectionView(player);
 				if(player.getPatternCard() != null) {
 					player.setPatternCard(player.getPatternCard());
-					
-	//				player.createBoard();
-	//				player.getBoard().AddBoardFieldsToDB();
-					goToGame(game); 
-					
+					goToGame(game); 	
 				}
 				else {
 					patterncardSelectionView = new PatterncardSelectionView(this, player, game);
@@ -263,7 +253,6 @@ public class AccountController {
 			else {
 				showWarning("game", "Een speler heeft de uitnodiging geweigerd, waardoor de game niet gestart wordt");
 			}
-			
 		}
 		else {
 			showWarning("game", "Niet elke speler heeft gereageerd op de uitnodiging");
@@ -283,7 +272,6 @@ public class AccountController {
 		}
 		
 		GameController gameController = new GameController(connection, myScene, game, this);
-//		myScene.setContentPane(gameController.getGameView().getPatternCardsOfOtherPlayersView());
 		myScene.setContentPane(gameController.getGameView());
 	}
 

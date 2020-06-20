@@ -2,7 +2,6 @@ package controller;
 
 import javafx.application.Platform;
 import javafx.concurrent.Task;
-import model.Player;
 
 public class GameRoundPlayer extends Task<Boolean> {
 
@@ -17,8 +16,6 @@ public class GameRoundPlayer extends Task<Boolean> {
 		this.seconds = seconds ;
 	}
 	
-	
-
 	@Override
 	public Boolean call() {
 		isRunning = true;
@@ -43,8 +40,7 @@ public class GameRoundPlayer extends Task<Boolean> {
 							public void run() {
 								gameController.getGame().playround();			
 							}
-						});
-							
+						});		
 					}
 					
 					if(gameController.getGame().getRoundFromDB()%2 == 0 && gameController.getGame().getRound().get() != 1 && gameController.getGame().getCurrentPlayer().getSequenceNumber() == 1) {
@@ -58,8 +54,7 @@ public class GameRoundPlayer extends Task<Boolean> {
 						@Override
 						public void run() {
 							gameController.getGame().getPersonalPlayer().calculateScore();
-						}
-						
+						}	
 					});
 				}
 				else {
@@ -72,16 +67,12 @@ public class GameRoundPlayer extends Task<Boolean> {
 			}
 		}	
 		return isRunning;
-		
-		// 1221 2112 1221
 	}
 
 	public void setFinishedTurn(boolean finishedTurn) {
 		this.finishedTurn = finishedTurn;
 		gameController.setFinishedTurnTrue();		
 	}
-
-
 
 	public void setIsPaused(boolean b) {
 		isPaused = b;
@@ -90,5 +81,4 @@ public class GameRoundPlayer extends Task<Boolean> {
 	public void setRunning(boolean isRunning) {
 		this.isRunning = isRunning;
 	}
-	
 }

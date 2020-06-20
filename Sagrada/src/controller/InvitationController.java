@@ -38,13 +38,8 @@ public class InvitationController extends Task<Void> {
 							accountController.showInvite(player);
 						}
 					}
-					
 				});
-					
-					System.out.println("Invitation Controller Stop...");
-					
-			
-			
+			System.out.println("Invitation Controller Stop...");	
 		}
 		return null;
 	}
