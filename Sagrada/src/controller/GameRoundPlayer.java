@@ -27,6 +27,7 @@ public class GameRoundPlayer extends Task<Boolean> {
 				if(!isPaused) {
 					finishedTurn = false;
 					gameController.getGame().setPlacedDie(false);
+					gameController.getGame().setUsedToolcard(false);
 					while(!finishedTurn) {
 						
 						try {

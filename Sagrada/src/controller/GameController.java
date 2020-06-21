@@ -143,6 +143,7 @@ public class GameController {
 
 	public void setSelectedToolcard(int id) {
 		game.setSelectedToolcard(id);
+		selectedToolCard(id,toolcardView);
 	}
 	
 	public void selectedToolCard(int id, ToolcardView toolcardView) {
@@ -156,7 +157,7 @@ public class GameController {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Let op!");
 			alert.setHeaderText("U heeft de gereedschapskaart "+ selectedToolcard.getName()+ " geselecteerd");
-			alert.setContentText("Deze toolcard kost "+price+" betaalstenen, weet je zeker dat je deze gereedschapskaart wilt kopen");
+			alert.setContentText("Deze gereedschapskaart kost "+price+" betaalstenen, weet je zeker dat je deze gereedschapskaart wilt kopen");
 			
 			ButtonType buttonTypeOk = new ButtonType("Ja");
 			ButtonType buttonTypeCancel = new ButtonType("Nee", ButtonData.CANCEL_CLOSE);
@@ -167,38 +168,37 @@ public class GameController {
 			
 			if (result.get() == buttonTypeOk){
 				this.toolcardView = toolcardView;
-				payForToolcard(selectedToolcard);
+				payForToolcard(selectedToolcard, price);
 				game.setUsedToolcard(true);
 			}else if(result.get() == buttonTypeCancel) {
 				game.setSelectedToolcard(0);
 			}
 		}
 		else {
+			gameView.getToolcardPoolView().removeAllBorders();
 			game.setSelectedToolcard(0);
-			showWarning("Gereedschapskaart", "U heeft deze ronde al een gereedschapskaart gebruikt.");
+			showWarning("Gereedschapskaart", "U heeft deze beurt al een gereedschapskaart gebruikt.");
 		}
 	}
 	
-	public void payForToolcard(Toolcard selectedToolcard) {
+	public void payForToolcard(Toolcard selectedToolcard,int price) {
 		ArrayList<FavorToken> favorTokens = game.getPersonalPlayer().getFavorTokens();
-		System.out.println("araaaay = " + favorTokens.size());
-		int counter = 0;
-		for(int i = 0; i < favorTokens.size(); i++) {
-			if(favorTokens.get(i).getToolcard() == null) {
-				favorTokens.get(i).setToolcard(game.getPersonalPlayer().getId(),selectedToolcard,game);
-				System.out.println("kom ik hier = " + favorTokens.size());
-				break;
-			}
-			counter++;
-		}
 		
+		int counter = 0;
+		
+		
+		System.out.println("counter" + counter);
 		if(counter == favorTokens.size()) {
-			showWarning("Je kunt deze gereedschapskaart niet kopen!", "Je betaalstenen zijn op!");
+			showWarning("Je mag toolcard niet kopen!", "Je betaalstennen zij op!");
 			game.setSelectedToolcard(0);
 		}else {
+			System.out.println("test3" + counter + " toolcard " + selectedToolcard.getId());
 			
-			System.out.println("kom ik hier 3 = " + favorTokens.size());
-			gameView.updateFavorTokenView();
+			selectedToolcard.setAmountOfCoins(price);
+			int index = 0;
+			
+			System.out.println("index" + index);
+//			gameView.updateFavorTokenView(index);
 		}
 	}
 
