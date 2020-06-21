@@ -80,9 +80,10 @@ public class PlayerFrameFieldDBA {
 
 	public BoardField getPlayerFrameField(Player player,int x, int y) {
 		BoardField boardfield = null;
-		String query = "SELECT * FROM playerframefield LEFT JOIN gamedie ON playerframefield.diecolor = gamedie.diecolor "
+		String query = "SELECT position_x, position_y, playerframefield.dienumber, gamedie.dienumber, gamedie.eyes, gamedie.diecolor "
+				+ "FROM playerframefield LEFT JOIN gamedie ON playerframefield.diecolor = gamedie.diecolor "
 				+ "AND playerframefield.dienumber = gamedie.dienumber "
-				+ "WHERE idplayer = "+player.getId()+" AND position_x = "+(x + 1)+" AND position_y = "+(y + 1)+";";
+				+ "WHERE idplayer = "+player.getId()+" AND idgame = "+player.getGame().getGameID()+" AND position_x = "+(x + 1)+" AND position_y = "+(y + 1)+";";
 		try {
 			Statement stmt = conn.getConn().createStatement();
 			ResultSet rs = stmt.executeQuery(query);
