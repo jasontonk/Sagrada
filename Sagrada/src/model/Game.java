@@ -73,7 +73,7 @@ public class Game {
 		if (id != 0) {
 			for (Toolcard toolcard : toolcards) {
 				if (toolcard.getId() == id) {
-					this.selectedToolcard = toolcard;
+					this.selectedToolcard = toolcard; 
 				}
 			}
 		} 
