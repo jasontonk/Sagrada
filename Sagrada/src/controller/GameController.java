@@ -141,14 +141,16 @@ public class GameController {
 		return gameView;
 	}
 
-	public void setSelectedToolcard(int id) {
+	public void setSelectedToolcard(int id,ToolcardView toolcardView) {
 		game.setSelectedToolcard(id);
 		selectedToolCard(id,toolcardView);
 	}
 	
 	public void selectedToolCard(int id, ToolcardView toolcardView) {
 		if(!game.hasUsedToolcard()) {
+			
 			Toolcard selectedToolcard = game.getSelectedToolcard();
+			
 			int price = 1; 
 			if(selectedToolcard.returnAmountOfTokens() > 0) {
 				price = 2;
@@ -182,23 +184,19 @@ public class GameController {
 	}
 	
 	public void payForToolcard(Toolcard selectedToolcard,int price) {
+		
 		ArrayList<FavorToken> favorTokens = game.getPersonalPlayer().getFavorTokens();
 		
-		int counter = 0;
-		
-		
-		System.out.println("counter" + counter);
-		if(counter == favorTokens.size()) {
-			showWarning("Je mag toolcard niet kopen!", "Je betaalstennen zij op!");
-			game.setSelectedToolcard(0);
+		if(favorTokens.size() > price) {
+			for(int i = 0; i < price; i++) {
+				favorTokens.get(i).setFavortokensForToolCard(selectedToolcard.getId(), game);
+				favorTokens.remove(i);
+			}
+			gameView.updateFavorTokenView(favorTokens.size());
+			
 		}else {
-			System.out.println("test3" + counter + " toolcard " + selectedToolcard.getId());
-			
-			selectedToolcard.setAmountOfCoins(price);
-			int index = 0;
-			
-			System.out.println("index" + index);
-//			gameView.updateFavorTokenView(index);
+			showWarning("Je mag toolcard niet kopen!", "Je hebt niet genoeg betaalstenen");
+			game.setSelectedToolcard(0);
 		}
 	}
 

@@ -21,6 +21,10 @@ public class FavorToken {
 	public void addFavorTokenToDB() {
 		favorTokenDB.addFavorToken(gameId, player.getId(),this);
 	}
+	
+	public void setFavortokensForToolCard(int toolcardid, Game game) {
+		favorTokenDB.setFavortokensForToolCard(player.getId(), toolcardid, game, favorTokenid);
+	}
 
 	// Return the game of player.
 	public int getGameId() {
