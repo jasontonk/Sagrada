@@ -35,6 +35,7 @@ public class Game {
 	private GameDBA gameDBA;
 	private boolean finishedTurn;
 	private boolean placedDie;
+	private boolean usedToolcard;
 	private GameDieDBA gamedieDBA;
 	private PublicObjectiveCardDBA publicObjectiveCardDBA;
 	private PlayerDBA playerDBA;
@@ -75,7 +76,8 @@ public class Game {
 					this.selectedToolcard = toolcard;
 				}
 			}
-		} else {
+		} 
+		else {
 			this.selectedToolcard = null;
 		}
 	}
@@ -632,5 +634,13 @@ public class Game {
 
 	public Player getLocalCurrentPlayer() {
 		return currentPlayer;
+	}
+
+	public boolean hasUsedToolcard() {
+		return usedToolcard;
+	}
+
+	public void setUsedToolcard(boolean usedToolcard) {
+		this.usedToolcard = usedToolcard;
 	}
 }

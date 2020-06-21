@@ -131,7 +131,7 @@ public class GameController {
 			if(game.getSelectedDie() != game.getSelectedDieFromDicePool()) {
 				int toolcardID = getGame().getSelectedToolcard().getId();
 				if(toolcardID == 1 || toolcardID == 10) {
-					showWarning("Gereedschapskaart", "De geselecteerde Gereedschapskaart kan niet gebruikt worden!");
+					showWarning("Gereedschapskaart", "De geselecteerde gereedschapskaart kan niet gebruikt worden!");
 				}
 			}
 		}
@@ -142,33 +142,40 @@ public class GameController {
 	}
 
 	public void setSelectedToolcard(int id) {
-		game.setSelectedToolcard(id);	
+		game.setSelectedToolcard(id);
 	}
 	
 	public void selectedToolCard(int id, ToolcardView toolcardView) {
-		Toolcard selectedToolcard = game.getSelectedToolcard();
-		int price = 1; 
-		if(selectedToolcard.returnAmountOfTokens() > 0) {
-			price = 2;
+		if(!game.hasUsedToolcard()) {
+			Toolcard selectedToolcard = game.getSelectedToolcard();
+			int price = 1; 
+			if(selectedToolcard.returnAmountOfTokens() > 0) {
+				price = 2;
+			}
+			
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Let op!");
+			alert.setHeaderText("U heeft de gereedschapskaart "+ selectedToolcard.getName()+ " geselecteerd");
+			alert.setContentText("Deze toolcard kost "+price+" betaalstenen, weet je zeker dat je deze gereedschapskaart wilt kopen");
+			
+			ButtonType buttonTypeOk = new ButtonType("Ja");
+			ButtonType buttonTypeCancel = new ButtonType("Nee", ButtonData.CANCEL_CLOSE);
+			
+			alert.getButtonTypes().setAll(buttonTypeOk,buttonTypeCancel);
+			
+			Optional<ButtonType> result = alert.showAndWait();
+			
+			if (result.get() == buttonTypeOk){
+				this.toolcardView = toolcardView;
+				payForToolcard(selectedToolcard);
+				game.setUsedToolcard(true);
+			}else if(result.get() == buttonTypeCancel) {
+				game.setSelectedToolcard(0);
+			}
 		}
-		
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Let op!");
-		alert.setHeaderText("U heeft de toolcard "+ selectedToolcard.getName()+ " geselecteerd");
-		alert.setContentText("Deze toolcard kost "+price+" betaalstennen, weet je zeker dat je deze toolcard wilt kopen");
-		
-		ButtonType buttonTypeOk = new ButtonType("Ja");
-		ButtonType buttonTypeCancel = new ButtonType("Nee", ButtonData.CANCEL_CLOSE);
-		
-		alert.getButtonTypes().setAll(buttonTypeOk,buttonTypeCancel);
-		
-		Optional<ButtonType> result = alert.showAndWait();
-		
-		if (result.get() == buttonTypeOk){
-			this.toolcardView = toolcardView;
-			payForToolcard(selectedToolcard);
-		}else if(result.get() == buttonTypeCancel) {
+		else {
 			game.setSelectedToolcard(0);
+			showWarning("Gereedschapskaart", "U heeft deze ronde al een gereedschapskaart gebruikt.");
 		}
 	}
 	
@@ -186,7 +193,7 @@ public class GameController {
 		}
 		
 		if(counter == favorTokens.size()) {
-			showWarning("Je mag toolcard niet kopen!", "Je betaalstennen zij op!");
+			showWarning("Je kunt deze gereedschapskaart niet kopen!", "Je betaalstenen zijn op!");
 			game.setSelectedToolcard(0);
 		}else {
 			
@@ -199,8 +206,7 @@ public class GameController {
 		if (game.getSelectedToolcard() == null) {
 			boolean checkplacement = game.checkPlacementAgainstRules(x, y, modelColor, value);
 			if (!checkplacement) {
-				showWarning("Dobbelsteen zetten",
-						"De geselecteerde dobbelsteen kan niet op deze plek worden geplaatst.");
+				showWarning("Dobbelsteen zetten", "De geselecteerde dobbelsteen kan niet op deze plek worden geplaatst.");
 			}
 			return checkplacement;
 		} else {
@@ -262,8 +268,8 @@ public class GameController {
 		
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Let op!");
-		alert.setHeaderText("De waarde van de geselecteerde dobbelsteen is = " + dieOnDiePool.getEyes() + " en de kleur is = "+ dieOnDiePool.getColorString());
-		alert.setContentText("Weet je zeker dat je deze dobbelsteen wilt wisselen met een dobbelsteen uit de RoundTrack");
+		alert.setHeaderText("De waarde van de geselecteerde dobbelsteen is " + dieOnDiePool.getEyes() + " en de kleur is "+ dieOnDiePool.getColorString());
+		alert.setContentText("Weet je zeker dat je deze dobbelsteen wilt wisselen met een dobbelsteen uit het rondespoor?");
 		
 		ButtonType buttonTypeOk = new ButtonType("Ja");
 		ButtonType buttonTypeCancel = new ButtonType("Nee", ButtonData.CANCEL_CLOSE);
@@ -302,8 +308,8 @@ public class GameController {
 		
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Let op!");
-		alert.setHeaderText("De kleur van de nieuwe dobbelsteen is = " + unusedDie.getColorString());
-		alert.setContentText("U kunt de waarde verandren naar: ");
+		alert.setHeaderText("De kleur van de nieuwe dobbelsteen is " + unusedDie.getColorString());
+		alert.setContentText("Welke waarde wilt u deze dobbelsteen geven?");
 		
 		ButtonType buttonType1 = new ButtonType("1");
 		ButtonType buttonType2 = new ButtonType("2");
@@ -341,8 +347,8 @@ public class GameController {
 		
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Let op!");
-		alert.setHeaderText("De waarde van de geselecteerde dobbelsteen is = " + dieValue);
-		alert.setContentText("Weet je zeker dat je de dobbelsteen opniew wilt werpen?");
+		alert.setHeaderText("De waarde van de geselecteerde dobbelsteen is " + dieValue);
+		alert.setContentText("Weet je zeker dat je de dobbelsteen opnieuw wilt werpen?");
 		
 		ButtonType buttonTypeOk = new ButtonType("Ja");
 		ButtonType buttonTypeCancel = new ButtonType("Nee", ButtonData.CANCEL_CLOSE);
@@ -364,7 +370,7 @@ public class GameController {
 	
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Let op!");
-		alert.setHeaderText("De waarde van de geselecteerde dobbelsteen is = " + dieValue);
+		alert.setHeaderText("De waarde van de geselecteerde dobbelsteen is " + dieValue);
 		alert.setContentText("Weet je zeker dat je de dobbelsteen wilt omdraaien?");
 		
 		ButtonType buttonTypeOk = new ButtonType("Ja");
@@ -405,7 +411,7 @@ public class GameController {
 	
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Let op!");
-		alert.setHeaderText("De waarde van de geselecteerde dobbelsteen is = " + dieValue);
+		alert.setHeaderText("De waarde van de geselecteerde dobbelsteen is " + dieValue);
 		alert.setContentText("Wilt u de waarde ervan met 1 verhogen of verlagen?");
 		
 		ButtonType buttonTypeOne = new ButtonType("-1");
