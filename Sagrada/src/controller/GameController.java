@@ -86,6 +86,8 @@ public class GameController {
 		gameRoundPlayer.setIsPaused(true);
 		isPlayingTurn = false;
 		shownTurnMessage = false;
+		
+		gameView.getPatterncardView().drawFavorToken(game.getPersonalPlayer().getFavorTokens().size());
 	}
 
 	public ArrayList<PatterncardController> getPatternCardsToChoose() {
