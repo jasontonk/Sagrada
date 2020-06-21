@@ -8,7 +8,6 @@ public class FavorToken {
 
 	private int gameId;
 	private Player player;
-	private Toolcard toolcard;
 	private FavorTokenDBA favorTokenDB;
 	private int favorTokenid;
 
@@ -19,13 +18,8 @@ public class FavorToken {
 		favorTokenDB = new FavorTokenDBA(c);
 	}
 	
-	public FavorToken(int id, int gameId, DataBaseConnection c) {//added constructor to fix error in FaverTokenDBA
-		this.gameId = gameId;
-		favorTokenDB = new FavorTokenDBA(c);
-	}
-	
 	public void addFavorTokenToDB() {
-		favorTokenDB.addFavorToken(gameId, player.getId());
+		favorTokenDB.addFavorToken(gameId, player.getId(),this);
 	}
 
 	// Return the game of player.
@@ -43,14 +37,13 @@ public class FavorToken {
 		this.player = player;
 	}
 
-	// Return the Toolcard of which this FavorToken is used for.
-	public Toolcard getToolcard() {
-		return toolcard;
+	public int getFavorTokenid() {
+		return favorTokenid;
 	}
 
-	// Set the Toolcard of which this FavorToken is used for.
-	public void setToolcard(int playerid, Toolcard toolcard, Game game) {
-		this.toolcard = toolcard;
-		favorTokenDB.setFavortokensForToolCard(playerid, toolcard.getId(), game, this.favorTokenid);
+	public void setFavorTokenid(int favorTokenid) {
+		this.favorTokenid = favorTokenid;
 	}
+	
+	
 }

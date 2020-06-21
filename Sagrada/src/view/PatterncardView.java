@@ -47,7 +47,7 @@ public class PatterncardView extends VBox {
 		favortokenView = new BorderPane();
 		this.getChildren().addAll(drawTitle(), drawPatterncard(), drawDifficulty(), drawPersonalObjectiveCardColor(),favortokenView);
 		
-		drawFavorToken(7);
+		drawFavorToken(patterncardController.getDifficulty());
 	}
 
 	public GridPane drawPatterncard() {

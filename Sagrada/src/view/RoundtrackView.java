@@ -33,10 +33,11 @@ public class RoundtrackView extends VBox {
 	private Insets padding;
 	private GridPane roundtrack;
 	private ArrayList<StackPane> stackpanes;
+	private ScrollPane roundTrackScroll;
  	
 	
 	public RoundtrackView(RoundtrackController roundtrackController) {
-		ScrollPane roundTrackScroll = new ScrollPane();
+		roundTrackScroll = new ScrollPane();
 		this.roundtrackController = roundtrackController;
 		javafxColor = new JavafxColor();
 		roundtrack = new GridPane();
@@ -49,6 +50,11 @@ public class RoundtrackView extends VBox {
 		this.setMaxHeight(200);
 		VBox content = new VBox(drawTitle(), drawRoundtrack(), drawRound());
 		roundTrackScroll.setContent(content);
+		this.getChildren().add(roundTrackScroll);
+	}
+	
+	public void update() {
+		this.getChildren().clear();
 		this.getChildren().add(roundTrackScroll);
 	}
 	

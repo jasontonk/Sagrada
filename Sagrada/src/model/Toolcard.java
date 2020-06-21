@@ -22,6 +22,10 @@ public class Toolcard {
 		return amountOfCoins;
 	}
 
+	public void setAmountOfCoins(int amountOfCoins) {
+		this.amountOfCoins = this.amountOfCoins + amountOfCoins;
+	}
+
 	public String getName() {
 		return name;
 	}

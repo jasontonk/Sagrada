@@ -28,6 +28,7 @@ private DataBaseConnection conn;
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
                 FavorToken favorToken = new FavorToken(player, rs.getInt("idgame"), conn); //edited to fix error
+                favorToken.setFavorTokenid(rs.getInt("idfavortoken"));
                 list.add(favorToken);
             }
 			stmt.close();
@@ -74,9 +75,10 @@ private DataBaseConnection conn;
 		return favorTokenId;
 	}
 	
-	public boolean addFavorToken(int gameid, int playerid) {
+	public boolean addFavorToken(int gameid, int playerid, FavorToken favortoken) {
 		
 		int favortokenid = autoIdFavorToken();
+		favortoken.setFavorTokenid(favortokenid);
 		String query = "INSERT INTO gamefavortoken (idfavortoken, idgame, idplayer) VALUES("+favortokenid+","+gameid+","+playerid+");";
 		
 		try {
