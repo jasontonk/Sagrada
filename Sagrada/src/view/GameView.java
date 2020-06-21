@@ -102,6 +102,6 @@ public class GameView extends HBox {
 	}
 
 	public void updateFavorTokenView() {
-		patterncardView.drawFavorToken();
+		patterncardView.drawFavorToken(1);
 	}
 }

@@ -292,7 +292,8 @@ public class GameController {
 	
 	public void fluxRemover(GameDie gamedie) {
 		GameDie unusedDie;
-		game.setGameDieUnused(gamedie);
+//		game.setGameDieUnused(gamedie);
+		gamedie.setRoundID(0, game);
 		unusedDie = game.getUnusedDiceForGame();
 		
 		while(unusedDie.getNumber() == gamedie.getNumber()) {
@@ -330,7 +331,6 @@ public class GameController {
 			unusedDie.changeEyes(6, game);
 		}
 		
-		unusedDie.setRoundID(game);
 		getGame().updateOffer(gamedie, unusedDie);
 		getGame().setSelectedDieFromDicePool(unusedDie);
 		getGame().setSelectedDie(unusedDie);

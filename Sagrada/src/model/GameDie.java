@@ -78,10 +78,16 @@ public class GameDie extends Die {
 	
 	public void setRoundID(int id, Game game) {
 		round = id;
-		gameDieDBA.addRoundID(this,game,id);
+		if(round%2 == 0 && round != 0){
+			round--;
+		}
+		gameDieDBA.addRoundID(this,game,round);
 	}
 	public void setRoundID(Game game) {
 		round = game.getRoundFromDB();
+		if(round%2 == 0 && round != 0){
+			round--;
+		}
 		gameDieDBA.addRoundID(this,game,round);
 	}
 	public void setRoundIDFromDB(int roundID) {
