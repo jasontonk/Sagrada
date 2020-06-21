@@ -265,6 +265,7 @@ public class AccountController {
 		game.addToolcards();
 		game.setPersonalPlayer(getAccount());
 		game.getPersonalPlayer().createBoard();
+		game.getPersonalPlayer().assignFavorTokens();
 		for(int x = 0; x < 5; x++) {
 			for (int y = 0; y < 4; y++) {
 				game.getPersonalPlayer().getBoard().getBoardFieldFromDB(x, y);

@@ -191,7 +191,7 @@ public class GameController {
 
 		if(favorTokens.size() >= price) {
 			for(int i = 0; i < price; i++) {
-				favorTokens.get(i).setFavortokensForToolCard(selectedToolcard.getId(), game);
+				favorTokens.get(0).setFavortokensForToolCard(selectedToolcard.getId(), game);
 				favorTokens.remove(0);
 			}
 			gameView.updateFavorTokenView(favorTokens.size());
@@ -306,7 +306,8 @@ public class GameController {
 		gamedie.setRoundID(0, game);
 		unusedDie = game.getUnusedDiceForGame();
 		
-		while(unusedDie.getNumber() == gamedie.getNumber()) {
+		while(unusedDie.getNumber() == gamedie.getNumber() && unusedDie.getColor().equals(gamedie.getColor())) {
+			unusedDie.setRoundID(0, game);
 			unusedDie = game.getUnusedDiceForGame();
 		}
 		
