@@ -627,12 +627,12 @@ public class Game {
 		return gamedieDBA.getUnusedDiceOfGame(this);
 	}
 
-	public void removeDieFromRoundTrack(GameDie selectedDieRoundTrack) {
-		gamedieDBA.removeDieFromRoundTrack(selectedDieRoundTrack,this);
+	public void addDieToRoundTrack(GameDie dieondicepool,GameDie dieonRoundTrack) {
+		gamedieDBA.addDieToRoundTrack(dieondicepool,this,dieonRoundTrack);
 	}
-
-	public void setDieOnRoundTrack(GameDie gamedie, GameDie rountrackDie) {
-		gamedieDBA.setDieOnRoundTrack(gamedie,rountrackDie, this);
+	
+	public void addDieTodiecePool(int dieID, Game game, GameDie dieonRoundTrack) {
+		gamedieDBA.addDieTodiecePool(dieID, this,dieonRoundTrack);
 	}
 
 	public Player getLocalCurrentPlayer() {

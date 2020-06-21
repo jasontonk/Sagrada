@@ -226,6 +226,8 @@ public class GameDieDBA {
         return list;
     }
 	
+	
+	
 	public ArrayList<GameDie> getDiceOnRoundTrack(Game game) {
         ArrayList<GameDie> list = new ArrayList<GameDie>();
         String query = "SELECT * FROM gamedie WHERE idgame = "+game.getGameID()+" AND roundtrack IS NOT NULL ORDER BY roundtrack, diecolor, eyes ASC;";
@@ -324,8 +326,8 @@ public class GameDieDBA {
 		}
 	}
 
-	public void removeDieFromRoundTrack(GameDie selectedDieRoundTrack, Game game) {
-		 String query = "UPDATE gamedie SET roundtrack = NULL WHERE dienumber = "+selectedDieRoundTrack.getNumber()+" AND eyes =  "+selectedDieRoundTrack.getEyes()+" AND diecolor ='"+selectedDieRoundTrack.getColor()+"';";
+	public void addDieToRoundTrack(GameDie dieondicepool, Game game, GameDie dieonRoundTrack) {
+		 String query = "UPDATE gamedie SET roundtrack = "+dieonRoundTrack.isOnRoundTrack()+", roundID = "+dieonRoundTrack.getRoundID(game)+" WHERE dienumber = "+dieondicepool.getNumber()+" AND idgame = "+game.getGameID()+" AND diecolor ='"+dieondicepool.getColor()+"';";
 		    
 		 try {
 	            Statement stmt = conn.getConn().createStatement();
@@ -335,17 +337,16 @@ public class GameDieDBA {
 	            e.printStackTrace();
 	        }
 	}
-
-	public void setDieOnRoundTrack(GameDie gamedie, GameDie rountrackDie, Game game) {
-		String query = "UPDATE gamedie SET roundtrack = "+rountrackDie.isOnRoundTrack()+" WHERE dienumber = "+gamedie.getNumber()+" AND eyes =  "+gamedie.getEyes()+" AND diecolor ='"+gamedie.getColor()+"';";
-		
-		try {
-            Statement stmt = conn.getConn().createStatement();
-            stmt.executeUpdate(query);
-            stmt.close();
-        }catch(SQLException e) {
-            e.printStackTrace();
-        }
-		
+	
+	public void addDieTodiecePool(int dieID, Game game, GameDie dieonRoundTrack) {
+		String query = "UPDATE gamedie SET roundtrack = NULL, roundID = "+dieID+" WHERE dienumber = "+dieonRoundTrack.getNumber()+" AND idgame =  "+game.getGameID()+" AND diecolor ='"+dieonRoundTrack.getColor()+"';";
+	    
+		 try {
+	            Statement stmt = conn.getConn().createStatement();
+	            stmt.executeUpdate(query);
+	            stmt.close();
+	        }catch(SQLException e) {
+	            e.printStackTrace();
+	        }
 	}
 }

@@ -269,8 +269,6 @@ public class GameController {
 	
 	public void lensCutter(GameDie rountrackDie) {
 		
-		System.out.print("color roundtrack "+ rountrackDie.getColorString()+ " value "+rountrackDie.getEyes());
-		
 		GameDie dieOnDiePool = game.getSelectedDieFromDicePool();
 		
 		Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -286,21 +284,26 @@ public class GameController {
 		Optional<ButtonType> result = alert.showAndWait();
 		
 		if (result.get() == buttonTypeOk){
+			int dieId = dieOnDiePool.getRoundID(game); 
 			
-			game.removeDieFromRoundTrack(rountrackDie);
-			game.setDieOnRoundTrack(dieOnDiePool,rountrackDie);
-		
+			System.out.println("Die om die pool1 = "+dieOnDiePool.getRoundID(game));
+			System.out.println("Die on die pool maar in game opgeslagen1 = "+ dieId);
+			
+			game.addDieToRoundTrack(dieOnDiePool, rountrackDie);
+			
+			System.out.println("Die om die pool = "+dieOnDiePool.getRoundID(game));
+			System.out.println("Die on die pool maar in game opgeslagen = "+ dieId);
+			game.addDieTodiecePool(dieId, game, rountrackDie);
+			
 			gameUpdater.updateRountrack();
+			gameUpdater.updateDicePool();
+			
+			gameViewUpdater.updateDicePoolView();
 			gameViewUpdater.updateRoundtrackView();
-		}
-		
-		rountrackDie.setOnRoundTrack(0);
-		getGame().updateOffer(dieOnDiePool, rountrackDie);
-		getGame().setSelectedDieFromDicePool(rountrackDie);
-		getGame().setSelectedDie(rountrackDie);	
-		
-		System.out.print("color roundtrack "+ rountrackDie.getColorString()+ " value "+rountrackDie.getEyes());
-		dieController.getDieViewForToolcard5().toolcardUpdate();
+			
+			getGame().setSelectedDieFromDicePool(rountrackDie);
+			getGame().setSelectedDie(rountrackDie);	
+		}	
 	}
 	
 	
