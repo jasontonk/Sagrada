@@ -243,7 +243,6 @@ public class Game {
 	}
 
 	public void playround() {// boolean first round false
-		personalPlayer.assignFavorTokens();
 		round.set(gameDBA.getCurrentRound(this.getGameID()));
 	}
 

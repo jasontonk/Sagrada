@@ -297,7 +297,10 @@ public class GameController {
 		dieController.getDieViewForToolcard5().toolcardUpdate();
 	}
 	
+	
+	
 	public void fluxRemover(GameDie gamedie) {
+		
 		GameDie unusedDie;
 //		game.setGameDieUnused(gamedie);
 		gamedie.setRoundID(0, game);
@@ -341,6 +344,9 @@ public class GameController {
 		game.updateOffer(gamedie, unusedDie);
 		game.setSelectedDieFromDicePool(unusedDie);
 		game.setSelectedDie(unusedDie);
+		game.getSelectedDie().setColor(unusedDie.getColor());
+        game.getSelectedDie().setNumber(unusedDie.getNumber());
+        game.getSelectedDie().changeEyes(unusedDie.getEyes(), game);
 	}
 	
 	public void fluxBrush(GameDie gamedie) {

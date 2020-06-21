@@ -171,9 +171,6 @@ public class PatterncardView extends VBox {
 	public void drawFavorToken(int favortokens) {
 		favortokenView.getChildren().clear();
 		
-		
-		System.out.println("totaalfavortokens = " + favortokens);
-		
 		HBox hbox = new HBox();
 		hbox.setSpacing(SPACING);
 		hbox.setAlignment(Pos.CENTER);
