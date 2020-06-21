@@ -78,7 +78,7 @@ public class GameViewUpdater extends Task<Boolean> {
 		System.out.println("UPDATING ALL");
 		updateDicePoolView();
 		updateRoundtrackView();
-		if(updateCounter == 10) {
+		if(updateCounter == 5) {
 			updatePatternCardsOfOtherPlayers();
 			updateCounter = 0;
 		}

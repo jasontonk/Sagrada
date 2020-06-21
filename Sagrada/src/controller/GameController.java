@@ -331,9 +331,9 @@ public class GameController {
 			unusedDie.changeEyes(6, game);
 		}
 		
-		getGame().updateOffer(gamedie, unusedDie);
-		getGame().setSelectedDieFromDicePool(unusedDie);
-		getGame().setSelectedDie(unusedDie);
+		game.updateOffer(gamedie, unusedDie);
+		game.setSelectedDieFromDicePool(unusedDie);
+		game.setSelectedDie(unusedDie);
 	}
 	
 	public void fluxBrush(GameDie gamedie) {
