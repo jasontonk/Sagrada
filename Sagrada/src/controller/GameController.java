@@ -166,19 +166,19 @@ public class GameController {
 		
 		if (result.get() == buttonTypeOk){
 			this.toolcardView = toolcardView;
-			payForToolcard();
+			payForToolcard(selectedToolcard);
 		}else if(result.get() == buttonTypeCancel) {
 			game.setSelectedToolcard(0);
 		}
 	}
 	
-	public void payForToolcard() {
+	public void payForToolcard(Toolcard selectedToolcard) {
 		ArrayList<FavorToken> favorTokens = game.getPersonalPlayer().getFavorTokens();
 		System.out.println("araaaay = " + favorTokens.size());
 		int counter = 0;
 		for(int i = 0; i < favorTokens.size(); i++) {
 			if(favorTokens.get(i).getToolcard() == null) {
-				favorTokens.get(i).setToolcard(game.getPersonalPlayer().getId(),game.getSelectedToolcard(),game);
+				favorTokens.get(i).setToolcard(game.getPersonalPlayer().getId(),selectedToolcard,game);
 				System.out.println("kom ik hier = " + favorTokens.size());
 				break;
 			}
@@ -330,6 +330,7 @@ public class GameController {
 			unusedDie.changeEyes(6, game);
 		}
 		
+		unusedDie.setRoundID(game);
 		getGame().updateOffer(gamedie, unusedDie);
 		getGame().setSelectedDieFromDicePool(unusedDie);
 		getGame().setSelectedDie(unusedDie);

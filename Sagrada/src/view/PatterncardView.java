@@ -47,7 +47,7 @@ public class PatterncardView extends VBox {
 		favortokenView = new BorderPane();
 		this.getChildren().addAll(drawTitle(), drawPatterncard(), drawDifficulty(), drawPersonalObjectiveCardColor(),favortokenView);
 		
-		drawFavorToken();
+		drawFavorToken(7);
 	}
 
 	public GridPane drawPatterncard() {
@@ -170,32 +170,23 @@ public class PatterncardView extends VBox {
 		return personalObjectiveCardColor;
 	}
 	
-	public void drawFavorToken() {
+	public void drawFavorToken(int favortokens) {
 		favortokenView.getChildren().clear();
 		
-		ArrayList<FavorToken> favortokens = patterncardController.getGameController().getGame().getPersonalPlayer().getFavorTokens();
 		
-		int totaalfavortokens = 0;
-		
-		for(int i = 0; i < favortokens.size(); i++) {
-			if(favortokens.get(i).getToolcard() == null) {
-				totaalfavortokens++;
-			}
-		}
-		
-		System.out.println("totaalfavortokens = " + totaalfavortokens);
+		System.out.println("totaalfavortokens = " + favortokens);
 		
 		HBox hbox = new HBox();
 		hbox.setSpacing(SPACING);
 		hbox.setAlignment(Pos.CENTER);
 		
 		Text favortoken = new Text();
-		favortoken.setText("Betaal stenen = " + totaalfavortokens);
+		favortoken.setText("Betaal stenen = " + favortokens);
 		favortoken.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, TEXT_SIZE));
 		
 		hbox.getChildren().add(favortoken);	
 		
-		for(int i = 0; i < totaalfavortokens; i++) {
+		for(int i = 0; i < favortokens; i++) {
 			Circle circle = new Circle(CIRCLE_SIZE,Color.DARKSLATEBLUE);
 			hbox.getChildren().add(circle);	
 		}
