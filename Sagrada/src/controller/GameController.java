@@ -149,40 +149,46 @@ public class GameController {
 	}
 	
 	public void selectedToolCard(int id, ToolcardView toolcardView) {
-		if(!game.hasUsedToolcard()) {
-			
-			Toolcard selectedToolcard = game.getSelectedToolcard();
-			
-			int price = 1; 
-			if(selectedToolcard.returnAmountOfTokens(game) > 0) {
-				price = 2;
+		if(game.getCurrentPlayer().getId() == game.getPersonalPlayer().getId()) {
+			if(!game.hasUsedToolcard()) {
+				
+				Toolcard selectedToolcard = game.getSelectedToolcard();
+				
+				int price = 1; 
+				if(selectedToolcard.returnAmountOfTokens(game) > 0) {
+					price = 2;
+				}
+				
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setTitle("Let op!");
+				alert.setHeaderText("U heeft de gereedschapskaart "+ selectedToolcard.getName()+ " geselecteerd");
+				alert.setContentText("Deze gereedschapskaart kost "+price+" betaalstenen, weet je zeker dat je deze gereedschapskaart wilt kopen");
+				
+				ButtonType buttonTypeOk = new ButtonType("Ja");
+				ButtonType buttonTypeCancel = new ButtonType("Nee", ButtonData.CANCEL_CLOSE);
+				
+				alert.getButtonTypes().setAll(buttonTypeOk,buttonTypeCancel);
+				
+				Optional<ButtonType> result = alert.showAndWait();
+				
+				if (result.get() == buttonTypeOk){
+					this.toolcardView = toolcardView;
+					payForToolcard(selectedToolcard, price);
+				}else if(result.get() == buttonTypeCancel) {
+					game.setSelectedToolcard(0);
+					game.setUsedToolcard(false);
+				}
 			}
-			
-			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Let op!");
-			alert.setHeaderText("U heeft de gereedschapskaart "+ selectedToolcard.getName()+ " geselecteerd");
-			alert.setContentText("Deze gereedschapskaart kost "+price+" betaalstenen, weet je zeker dat je deze gereedschapskaart wilt kopen");
-			
-			ButtonType buttonTypeOk = new ButtonType("Ja");
-			ButtonType buttonTypeCancel = new ButtonType("Nee", ButtonData.CANCEL_CLOSE);
-			
-			alert.getButtonTypes().setAll(buttonTypeOk,buttonTypeCancel);
-			
-			Optional<ButtonType> result = alert.showAndWait();
-			
-			if (result.get() == buttonTypeOk){
-				this.toolcardView = toolcardView;
-				payForToolcard(selectedToolcard, price);
-			}else if(result.get() == buttonTypeCancel) {
+			else {
+				gameView.getToolcardPoolView().removeAllBorders();
 				game.setSelectedToolcard(0);
-				game.setUsedToolcard(false);
+				showWarning("Gereedschapskaart", "U heeft deze beurt al een gereedschapskaart gebruikt.");
 			}
-		}
-		else {
+		}else {
 			gameView.getToolcardPoolView().removeAllBorders();
 			game.setSelectedToolcard(0);
-			showWarning("Gereedschapskaart", "U heeft deze beurt al een gereedschapskaart gebruikt.");
-		}
+			showWarning("Gereedschapskaart", "U bent niet aan de beurt.");
+		}	
 	}
 	
 	public void payForToolcard(Toolcard selectedToolcard,int price) {
@@ -211,11 +217,11 @@ public class GameController {
 			}
 			return checkplacement;
 		} else {
-			boolean testje = game.checkSelectedToolcard(x, y);
-			if (!testje) {
+			boolean canBeUsed = game.checkSelectedToolcard(x, y);
+			if (!canBeUsed) {
 				showWarning("Gereedschapskaart", "De geselecteerde Gereedschapskaart kan niet gebruikt worden!");
 			}
-			return testje;
+			return canBeUsed;
 		}
 	}
 

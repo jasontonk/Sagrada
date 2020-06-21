@@ -65,7 +65,6 @@ public class PatterncardSelectionView extends VBox {
 	}
 
 	private void joinGame(int index) {
-		System.out.println("patterncardview weergeven");
 		player.setPatternCard(patterncardControllers.get(index).getPatterncard());
 		accountController.goToGame(game);
 	}

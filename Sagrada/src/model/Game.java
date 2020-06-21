@@ -181,7 +181,7 @@ public class Game {
 			}
 
 		} else {
-			System.out.println("nog meer toolcards: " + toolcardsOfGameFromDB.size());
+			
 			toolcards = toolcardsOfGameFromDB;
 		}
 	}
