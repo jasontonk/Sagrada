@@ -389,6 +389,23 @@ public class PlayerDBA {
 		return playerscore;
 	}
 
+	public int getPrivateObjectiveCardScoreFromDB(Player player) {
+		int playerscore = 0;
+//		String query = "SELECT score FROM player WHERE idplayer= " + player.getId() + ";";
+		String query = "SELECT count(diecolor) AS score FROM player p JOIN playerframefield pf ON p.idplayer = pf.idplayer WHERE p.idgame = "+player.getGame().getGameID()+" "
+				+ "AND p.idplayer = "+player.getId()+" AND pf.diecolor = p.private_objectivecard_color";
+		try {
+			Statement stmt = conn.getConn().createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			if (rs.next()) {
+				playerscore = rs.getInt("score");
+			}
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return playerscore;
+	}
 
 
 	public Player getPlayerById(int id,Game game) {

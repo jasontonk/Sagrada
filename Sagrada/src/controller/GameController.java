@@ -544,6 +544,7 @@ public class GameController {
 	}
 
 	public void setLobbyView() {
+		
 		accountController.viewLobby();
 	}
 

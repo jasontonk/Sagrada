@@ -45,7 +45,6 @@ public class PatternCardsOfOtherPlayersView extends VBox {
 		for(Player player : patterncardController.getGameController().getGame().getPlayers()) {
 			if(!player.isDrawnPatternCard()) {
 				System.out.println("EERSTE IF");
-				player.setDrawnPatternCard(true);
 				if(player.getId() != patterncardController.getGameController().getGame().getPersonalPlayer().getId()) {
 					allPatternCards.getChildren().add(drawPatterncard(player));
 				}
@@ -80,6 +79,7 @@ public class PatternCardsOfOtherPlayersView extends VBox {
 		label.setTextFill(Color.WHITE);
 		
 		if(player.getPatternCard() != null) {
+			player.setDrawnPatternCard(true);
 			for (int x = 0; x < 5; x++) {
 				for (int y = 0; y < 4; y++) {
 					StackPane stackpane = new StackPane();
@@ -108,7 +108,7 @@ public class PatternCardsOfOtherPlayersView extends VBox {
 					}
 					stackpane.getChildren().add(button);
 					stackpanes[player.getId()][x][y] = stackpane;
-					updatePatternCards(player, x, y);
+//					updatePatternCards(player, x, y);
 					patterncardfields.add(stackpane, x, y);
 				}
 			}

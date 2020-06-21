@@ -329,7 +329,11 @@ public class Game {
 
 	public void finishGame() {
 		finishedGame = true;
-		personalPlayer.setPlayerStatus(PlayerStatus.FINISHED);
+		if(getChallengerOfGameWithID(getGameID()).equals(getPersonalPlayer().getName())) {
+			for (Player player : getPlayers()) {
+				player.setPlayerStatus(PlayerStatus.FINISHED);
+			}
+		}
 	}
 
 	public void makedie() {

@@ -75,7 +75,12 @@ public class Player {
 	}
 
 	public SimpleIntegerProperty getScore() {
-		score.set(playerDBA.getScoreFromDB(this));
+		if(id == game.getPersonalPlayer().getId()) {
+			score.set(playerDBA.getScoreFromDB(this));
+		}
+		else {
+			score.set(playerDBA.getScoreFromDB(this) - playerDBA.getPrivateObjectiveCardScoreFromDB(this));
+		}
 		return score;
 	}
 
