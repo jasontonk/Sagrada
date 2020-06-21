@@ -129,22 +129,9 @@ public class GameViewUpdater extends Task<Boolean> {
 	}
 
 	public void updatePatternCardsOfOtherPlayers() {
-		if(true) {
 			System.out.println("IF 1");
-			for(Player p : gameCtrl.getGame().getPlayers()) {
-				gameCtrl.getGameView().getPatternCardsOfOtherPlayersView().makePatternCards();
-			}
+			gameCtrl.getGameView().getPatternCardsOfOtherPlayersView().makePatternCards();
 			counter++;
-		}
-		else {
-			System.out.println("IF 2");
-			for(Player p : gameCtrl.getGame().getPlayers()) {
-				for (int x = 0; x < 5; x++) {
-					for (int y = 0; y < 4; y++) {
-						gameCtrl.getGameView().getPatternCardsOfOtherPlayersView().updatePatternCards(p, x, y);
-					}
-				}
-			}
-		}
+
 	}
 }

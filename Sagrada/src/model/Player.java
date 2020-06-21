@@ -28,6 +28,7 @@ public class Player {
 	private ArrayList<PatternCard> patternCardsToChoose;
 	private Game game;
 	private DataBaseConnection connection;
+	private boolean drawnPatternCard;
 	
 	private PlayerDBA playerDBA ;
 	private FavorTokenDBA favorTokenDBA;
@@ -36,6 +37,7 @@ public class Player {
 	public Player(DataBaseConnection c, Game game) {
 		connection = c;
 		playerDBA = new PlayerDBA(c);
+		drawnPatternCard = false;
 		setPlayerFrameFieldDBA(new PlayerFrameFieldDBA(c));
 		favorTokenDBA = new FavorTokenDBA(c);
 		patternCard = new PatternCard(c);
@@ -324,5 +326,19 @@ public class Player {
 	 */
 	public void setPlayerFrameFieldDBA(PlayerFrameFieldDBA playerFrameFieldDBA) {
 		this.playerFrameFieldDBA = playerFrameFieldDBA;
+	}
+
+	/**
+	 * @return the drawnPatternCard
+	 */
+	public boolean isDrawnPatternCard() {
+		return drawnPatternCard;
+	}
+
+	/**
+	 * @param drawnPatternCard the drawnPatternCard to set
+	 */
+	public void setDrawnPatternCard(boolean drawnPatternCard) {
+		this.drawnPatternCard = drawnPatternCard;
 	}	
 }

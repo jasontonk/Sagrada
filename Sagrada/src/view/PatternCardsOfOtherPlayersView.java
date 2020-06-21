@@ -41,11 +41,25 @@ public class PatternCardsOfOtherPlayersView extends VBox {
 
 	public void makePatternCards() {
 		allPatternCards = new VBox();
+		
 		for(Player player : patterncardController.getGameController().getGame().getPlayers()) {
-			if(!player.equals(patterncardController.getGameController().getGame().getPersonalPlayer())) {
-				allPatternCards.getChildren().add(drawPatterncard(player));
+			if(!player.isDrawnPatternCard()) {
+				System.out.println("EERSTE IF");
+				player.setDrawnPatternCard(true);
+				if(!player.equals(patterncardController.getGameController().getGame().getPersonalPlayer())) {
+					allPatternCards.getChildren().add(drawPatterncard(player));
+				}
+			}
+			else {
+				System.out.println("IN DE ELSE");
+				for (int x = 0; x < 5; x++) {
+					for (int y = 0; y < 4; y++) {
+						updatePatternCards(player, x, y);
+					}
+				}
 			}
 		}
+		
 		this.setBackground(new Background(new BackgroundFill(Color.DARKBLUE, null, null)));
 		this.getChildren().addAll(allPatternCards);
 	}
