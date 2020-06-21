@@ -152,7 +152,7 @@ public class GameController {
 			Toolcard selectedToolcard = game.getSelectedToolcard();
 			
 			int price = 1; 
-			if(selectedToolcard.returnAmountOfTokens() > 0) {
+			if(selectedToolcard.returnAmountOfTokens(game) > 0) {
 				price = 2;
 			}
 			
@@ -171,9 +171,9 @@ public class GameController {
 			if (result.get() == buttonTypeOk){
 				this.toolcardView = toolcardView;
 				payForToolcard(selectedToolcard, price);
-				game.setUsedToolcard(true);
 			}else if(result.get() == buttonTypeCancel) {
 				game.setSelectedToolcard(0);
+				game.setUsedToolcard(false);
 			}
 		}
 		else {
@@ -186,13 +186,14 @@ public class GameController {
 	public void payForToolcard(Toolcard selectedToolcard,int price) {
 		
 		ArrayList<FavorToken> favorTokens = game.getPersonalPlayer().getFavorTokens();
-		
-		if(favorTokens.size() > price) {
+
+		if(favorTokens.size() >= price) {
 			for(int i = 0; i < price; i++) {
 				favorTokens.get(i).setFavortokensForToolCard(selectedToolcard.getId(), game);
-				favorTokens.remove(i);
+				favorTokens.remove(0);
 			}
 			gameView.updateFavorTokenView(favorTokens.size());
+			game.setUsedToolcard(true);
 			
 		}else {
 			showWarning("Je mag toolcard niet kopen!", "Je hebt niet genoeg betaalstenen");

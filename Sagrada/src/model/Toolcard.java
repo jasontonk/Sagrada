@@ -24,8 +24,8 @@ public class Toolcard {
 		amountOfCoins += amount;
 	}
 
-	public int returnAmountOfTokens() {
-		return favorTokenDBA.getFavortokensOfToolcard(this);
+	public int returnAmountOfTokens(Game game) {
+		return favorTokenDBA.getFavortokensOfToolcard(this,game);
 	}
 
 	public void setAmountOfCoins(int amountOfCoins) {

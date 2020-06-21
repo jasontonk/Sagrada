@@ -39,9 +39,9 @@ private DataBaseConnection conn;
 		return list;
 	}
 	
-	public int getFavortokensOfToolcard(Toolcard toolcard) {
+	public int getFavortokensOfToolcard(Toolcard toolcard, Game game) {
 		int index = 0;
-		String query = "SELECT * FROM gamefavortoken WHERE gametoolcard= "+toolcard.getId()+" ;";
+		String query = "SELECT * FROM gamefavortoken WHERE gametoolcard= "+toolcard.getId()+" AND idgame = "+game.getGameID()+ " ;";
 		
 		try {
 			Statement stmt = conn.getConn().createStatement();
