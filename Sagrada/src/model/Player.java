@@ -10,7 +10,7 @@ import database.PlayerFrameFieldDBA;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class Player {
-	
+
 	private int id;
 	private int sequenceNumber;
 	private SimpleIntegerProperty score;
@@ -18,7 +18,7 @@ public class Player {
 	private PlayerStatus playerStatus;
 	private boolean isCurrentPlayer;
 	private boolean placedDie;
-	
+
 	private Account account;
 	private FavorToken favorToken;
 	private ModelColor personalObjectiveCardColor;
@@ -29,11 +29,11 @@ public class Player {
 	private Game game;
 	private DataBaseConnection connection;
 	private boolean drawnPatternCard;
-	
-	private PlayerDBA playerDBA ;
+
+	private PlayerDBA playerDBA;
 	private FavorTokenDBA favorTokenDBA;
 	private PlayerFrameFieldDBA playerFrameFieldDBA;
-	
+
 	public Player(DataBaseConnection c, Game game) {
 		connection = c;
 		playerDBA = new PlayerDBA(c);
@@ -44,13 +44,13 @@ public class Player {
 		favorTokens = new ArrayList<FavorToken>();
 		this.setPlayerStatus(PlayerStatus.CHALLENGEE);
 		this.game = game;
-		this.setPersonalObjectiveCardColor();	
+		this.setPersonalObjectiveCardColor();
 		score = new SimpleIntegerProperty();
 		setScore(-20);
-		}	
-	
+	}
+
 	public void createBoard() {
-		board = new Board(this, connection);	
+		board = new Board(this, connection);
 	}
 
 	public void addPlayer(Player player) {
@@ -71,18 +71,19 @@ public class Player {
 
 	public void setSequenceNumber(int seqnr) {
 		this.sequenceNumber = seqnr;
-		playerDBA.setPlayerSeqNumber(seqnr, this);;
+		playerDBA.setPlayerSeqNumber(seqnr, this);
+		;
 	}
 
 	public SimpleIntegerProperty getScore() {
-		if(id == game.getPersonalPlayer().getId()) {
+		if (id == game.getPersonalPlayer().getId()) {
 			score.set(playerDBA.getScoreFromDB(this));
-		}
-		else {
+		} else {
 			score.set(playerDBA.getScoreFromDB(this) - playerDBA.getPrivateObjectiveCardScoreFromDB(this));
 		}
 		return score;
 	}
+
 	public SimpleIntegerProperty getPrivateScore() {
 		score.set(playerDBA.getScoreFromDB(this));
 		return score;
@@ -102,7 +103,7 @@ public class Player {
 	}
 
 	public PlayerStatus getPlayerStatus() {
-		playerStatus = playerDBA.getPlayerStatusFromDB(playerDBA.getPlayerUsingID(this.getId(), game)); 
+		playerStatus = playerDBA.getPlayerStatusFromDB(playerDBA.getPlayerUsingID(this.getId(), game));
 		return playerStatus;
 	}
 
@@ -110,7 +111,7 @@ public class Player {
 		this.playerStatus = playerStatus;
 		playerDBA.setPlayerStatus(this, playerStatus);
 	}
- 
+
 	public boolean isCurrentPlayer() {
 		return isCurrentPlayer;
 	}
@@ -150,7 +151,7 @@ public class Player {
 	public void setPersonalObjectiveCardColor() {
 		this.personalObjectiveCardColor = ModelColor.randomColor(ModelColor.class);
 	}
-	
+
 	public void setPersonalObjectiveCardColorFromDB(ModelColor modelcolor) {
 		this.personalObjectiveCardColor = modelcolor;
 	}
@@ -165,21 +166,20 @@ public class Player {
 	}
 
 	public PatternCard getPatternCard() {
-			if(patternCard.getPatterncardDB().getSelectedPatterncardOfPlayer(this.getId(), this) == null) {
-				return null;
-			}
-			else {
-				patternCard = patternCard.getPatterncardDB().getSelectedPatterncardOfPlayer(this.getId(), this);	
-			}
+		if (patternCard.getPatterncardDB().getSelectedPatterncardOfPlayer(this.getId(), this) == null) {
+			return null;
+		} else {
+			patternCard = patternCard.getPatterncardDB().getSelectedPatterncardOfPlayer(this.getId(), this);
+		}
 		patternCard.setpattern(false);
 		return patternCard;
 	}
 
 	public void setPatternCard(PatternCard patternCard) {
-			playerDBA.setPlayerPatternCard(patternCard, this);
-			this.patternCard = patternCard;
-			for(int i = 0; i < patternCard.getDifficulty(); i++) {
-				favorTokens.add(new FavorToken(this, this.getGame().getGameID(), connection));
+		playerDBA.setPlayerPatternCard(patternCard, this);
+		this.patternCard = patternCard;
+		for (int i = 0; i < patternCard.getDifficulty(); i++) {
+			favorTokens.add(new FavorToken(this, this.getGame().getGameID(), connection));
 		}
 	}
 
@@ -211,15 +211,15 @@ public class Player {
 	public void setPlacedDie(boolean placedDie) {
 		this.placedDie = placedDie;
 	}
-	
+
 	/**
-	* Assign favor tokens of a game to the player
-	*/
+	 * Assign favor tokens of a game to the player
+	 */
 	public void assignFavorTokens() {
 		favorTokens = new ArrayList<FavorToken>();
 		favorTokens = favorTokenDBA.getFavortokensOfPlayer(this);
-		
-		if(favorTokens.size() == 0) {
+
+		if (favorTokens.size() == 0 && game.getRound().get() == 1) {
 			for (int i = 0; i < patternCard.getDifficulty(); i++) {
 				favorToken = new FavorToken(this, game.getGameID(), connection);
 				favorToken.addFavorTokenToDB();
@@ -227,95 +227,93 @@ public class Player {
 			}
 		}
 	}
-	
+
 	public void setNextSequenceNumber() {
 		int players = this.getGame().getPlayers().size();
 		int NewSequenceNumber = sequenceNumber;
-		
-        if (NewSequenceNumber == 1) { // NewSequenceNumber: 1
-            if (players == 2) { // players: 2
-            	NewSequenceNumber = 4;
-            } else if (players == 3) { // players: 3
-            	NewSequenceNumber = 6;
-            } else if (players == 4) { // players: 4
-            	NewSequenceNumber = 8;
-            }
-        } else if (NewSequenceNumber == 2) { // NewSequenceNumber: 2
-            if (players == 2) { // players: 2
-            	NewSequenceNumber = 3;
-            } else if (players == 3) { // players: 3
-            	NewSequenceNumber = 5;
-            } else if (players == 4) { // players: 4
-            	NewSequenceNumber = 7;
-            }
-        } else if (NewSequenceNumber == 3) { // NewSequenceNumber: 3
-            if (players == 2) { //players: 2
-            	NewSequenceNumber = 1;
-            } else if (players == 3) { // players: 3
-                NewSequenceNumber = 4;
-            } else if (players == 4) { // players: 4
-                NewSequenceNumber = 6;
-            }
-        } else if (NewSequenceNumber == 4) { // NewSequenceNumber: 4
-            if (players == 2) { //players: 2
-                NewSequenceNumber = 2;
-            } else if (players == 3) { // players: 3
-                NewSequenceNumber = 2;
-            } else if (players == 4) { // players: 4
-                NewSequenceNumber = 5;
-            }
-        } else if (NewSequenceNumber == 5) { // NewSequenceNumber: 5
-            if (players == 3) { // players: 3
-                NewSequenceNumber = 1;
-            } else if (players == 4) { // players: 4
-                NewSequenceNumber = 3;
-            }
-        } else if (NewSequenceNumber == 6) { // NewSequenceNumber: 6
-            if (players == 3) { // players: 3
-                NewSequenceNumber = 3;
-            } else if (players == 4) { // players: 4
-                NewSequenceNumber = 2;
-            }
-        } else if (NewSequenceNumber == 7) {
-            NewSequenceNumber = 1;
-        } else if (NewSequenceNumber == 8) {
-            NewSequenceNumber = 4;
-        }
-		
+
+		if (NewSequenceNumber == 1) { // NewSequenceNumber: 1
+			if (players == 2) { // players: 2
+				NewSequenceNumber = 4;
+			} else if (players == 3) { // players: 3
+				NewSequenceNumber = 6;
+			} else if (players == 4) { // players: 4
+				NewSequenceNumber = 8;
+			}
+		} else if (NewSequenceNumber == 2) { // NewSequenceNumber: 2
+			if (players == 2) { // players: 2
+				NewSequenceNumber = 3;
+			} else if (players == 3) { // players: 3
+				NewSequenceNumber = 5;
+			} else if (players == 4) { // players: 4
+				NewSequenceNumber = 7;
+			}
+		} else if (NewSequenceNumber == 3) { // NewSequenceNumber: 3
+			if (players == 2) { // players: 2
+				NewSequenceNumber = 1;
+			} else if (players == 3) { // players: 3
+				NewSequenceNumber = 4;
+			} else if (players == 4) { // players: 4
+				NewSequenceNumber = 6;
+			}
+		} else if (NewSequenceNumber == 4) { // NewSequenceNumber: 4
+			if (players == 2) { // players: 2
+				NewSequenceNumber = 2;
+			} else if (players == 3) { // players: 3
+				NewSequenceNumber = 2;
+			} else if (players == 4) { // players: 4
+				NewSequenceNumber = 5;
+			}
+		} else if (NewSequenceNumber == 5) { // NewSequenceNumber: 5
+			if (players == 3) { // players: 3
+				NewSequenceNumber = 1;
+			} else if (players == 4) { // players: 4
+				NewSequenceNumber = 3;
+			}
+		} else if (NewSequenceNumber == 6) { // NewSequenceNumber: 6
+			if (players == 3) { // players: 3
+				NewSequenceNumber = 3;
+			} else if (players == 4) { // players: 4
+				NewSequenceNumber = 2;
+			}
+		} else if (NewSequenceNumber == 7) {
+			NewSequenceNumber = 1;
+		} else if (NewSequenceNumber == 8) {
+			NewSequenceNumber = 4;
+		}
+
 		this.setSequenceNumber(NewSequenceNumber);
 		playerDBA.setPlayerSeqNumber(NewSequenceNumber, this);
 	}
-	
+
 	public int calculateScore() {
 		int score = 0;
-		for(int x = 0; x < Board.BOARD_SQUARES_HORIZONTAL; x++) {
-			for(int y = 0; y < Board.BOARD_SQUARES_VERTICAL; y++) {
-				if(!(board == null)) {
-					if(!board.getBoardField(x, y).hasDie()) {
+		for (int x = 0; x < Board.BOARD_SQUARES_HORIZONTAL; x++) {
+			for (int y = 0; y < Board.BOARD_SQUARES_VERTICAL; y++) {
+				if (!(board == null)) {
+					if (!board.getBoardField(x, y).hasDie()) {
 						score = score - 1;
-					}
-					else if(board.getBoardField(x, y).getDie().getColor().equals(personalObjectiveCardColor)) {
+					} else if (board.getBoardField(x, y).getDie().getColor().equals(personalObjectiveCardColor)) {
 						score = score + 1;
 					}
-				}
-				else {
-					
+				} else {
+
 				}
 			}
 		}
-		for(FavorToken favorToken : this.getFavorTokens()) {
+		for (FavorToken favorToken : this.getFavorTokens()) {
 			score = score + 1;
 		}
 
 		for (PublicObjectiveCard publicObjectiveCard : game.getPublicObjectiveCards()) {
-            score = score + publicObjectiveCard.calculateScore(board);
-        }
+			score = score + publicObjectiveCard.calculateScore(board);
+		}
 		this.score.set(score);
 		playerDBA.setScore(this, score);
 		return score;
 	}
-	
-	public boolean checkPlacementAgainstRules(int x, int y, ModelColor modelColor, int value) {		
+
+	public boolean checkPlacementAgainstRules(int x, int y, ModelColor modelColor, int value) {
 		return board.checkAll(board.getBoardField(x, y), modelColor, value);
 	}
 
@@ -349,5 +347,5 @@ public class Player {
 	 */
 	public void setDrawnPatternCard(boolean drawnPatternCard) {
 		this.drawnPatternCard = drawnPatternCard;
-	}	
+	}
 }

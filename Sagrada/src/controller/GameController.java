@@ -42,7 +42,7 @@ public class GameController {
 	private ToolcardView toolcardView;
 	private ArrayList<GameDie> changedDiceOnRoundTrack;
 	private ArrayList<GameDie> diceOnRoundTrack;
-	private volatile boolean newCurrentPlayer; 
+	private volatile boolean newCurrentPlayer;
 	private ChatDBA chatDBA;
 	private Thread updateGame;
 	private Thread updateChat;
@@ -66,7 +66,7 @@ public class GameController {
 		System.out.println("loading...80%");
 		gameView = new GameView(this);
 		System.out.println("loading...100%");
-		
+
 		chatView = gameView.getChatView();
 
 		gameRoundPlayer = new GameRoundPlayer(this, 3);
@@ -78,7 +78,7 @@ public class GameController {
 
 		game.playround();
 
-		updateGame = new Thread(gameUpdater); 
+		updateGame = new Thread(gameUpdater);
 		updateGame.setDaemon(true);
 		updateGame.start();
 		updateViews = new Thread(gameViewUpdater);
@@ -87,7 +87,7 @@ public class GameController {
 		updateChat = new Thread(chatViewUpdater);
 		updateChat.setDaemon(true);
 		updateChat.start();
-		
+
 		playround = new Thread(gameRoundPlayer);
 		playround.setDaemon(true);
 		playround.start();
@@ -95,7 +95,7 @@ public class GameController {
 		gameRoundPlayer.setIsPaused(true);
 		isPlayingTurn = false;
 		shownTurnMessage = false;
-		
+
 		gameView.getPatterncardView().drawFavorToken(game.getPersonalPlayer().getFavorTokens().size());
 	}
 
@@ -137,11 +137,11 @@ public class GameController {
 
 	public void setSelectedDie(GameDie die) {
 		game.setSelectedDie(die);
-	
-		if(getGame().getSelectedToolcard()!=null) {
-			if(game.getSelectedDie() != game.getSelectedDieFromDicePool()) {
+
+		if (getGame().getSelectedToolcard() != null) {
+			if (game.getSelectedDie() != game.getSelectedDieFromDicePool()) {
 				int toolcardID = getGame().getSelectedToolcard().getId();
-				if(toolcardID == 1 || toolcardID == 10) {
+				if (toolcardID == 1 || toolcardID == 10) {
 					showWarning("Gereedschapskaart", "De geselecteerde gereedschapskaart kan niet gebruikt worden!");
 				}
 			}
@@ -152,67 +152,67 @@ public class GameController {
 		return gameView;
 	}
 
-	public void setSelectedToolcard(int id,ToolcardView toolcardView) {
+	public void setSelectedToolcard(int id, ToolcardView toolcardView) {
 		game.setSelectedToolcard(id);
-		selectedToolCard(id,toolcardView);
+		selectedToolCard(id, toolcardView);
 	}
-	
+
 	public void selectedToolCard(int id, ToolcardView toolcardView) {
-		if(game.getCurrentPlayer().getId() == game.getPersonalPlayer().getId()) {
-			if(!game.hasUsedToolcard()) {
-				
+		if (game.getCurrentPlayer().getId() == game.getPersonalPlayer().getId()) {
+			if (!game.hasUsedToolcard()) {
+
 				Toolcard selectedToolcard = game.getSelectedToolcard();
-				
-				int price = 1; 
-				if(selectedToolcard.returnAmountOfTokens(game) > 0) {
+
+				int price = 1;
+				if (selectedToolcard.returnAmountOfTokens(game) > 0) {
 					price = 2;
 				}
-				
+
 				Alert alert = new Alert(AlertType.CONFIRMATION);
 				alert.setTitle("Let op!");
-				alert.setHeaderText("U heeft de gereedschapskaart "+ selectedToolcard.getName()+ " geselecteerd");
-				alert.setContentText("Deze gereedschapskaart kost "+price+" betaalstenen, weet je zeker dat je deze gereedschapskaart wilt kopen");
-				
+				alert.setHeaderText("U heeft de gereedschapskaart " + selectedToolcard.getName() + " geselecteerd");
+				alert.setContentText("Deze gereedschapskaart kost " + price
+						+ " betaalstenen, weet je zeker dat je deze gereedschapskaart wilt kopen");
+
 				ButtonType buttonTypeOk = new ButtonType("Ja");
 				ButtonType buttonTypeCancel = new ButtonType("Nee", ButtonData.CANCEL_CLOSE);
-				
-				alert.getButtonTypes().setAll(buttonTypeOk,buttonTypeCancel);
-				
+
+				alert.getButtonTypes().setAll(buttonTypeOk, buttonTypeCancel);
+
 				Optional<ButtonType> result = alert.showAndWait();
-				
-				if (result.get() == buttonTypeOk){
+
+				if (result.get() == buttonTypeOk) {
 					this.toolcardView = toolcardView;
 					payForToolcard(selectedToolcard, price);
-				}else if(result.get() == buttonTypeCancel) {
+				} else if (result.get() == buttonTypeCancel) {
 					game.setSelectedToolcard(0);
 					game.setUsedToolcard(false);
 				}
-			}
-			else {
+			} else {
 				gameView.getToolcardPoolView().removeAllBorders();
 				game.setSelectedToolcard(0);
 				showWarning("Gereedschapskaart", "U heeft deze beurt al een gereedschapskaart gebruikt.");
 			}
-		}else {
+		} else {
 			gameView.getToolcardPoolView().removeAllBorders();
 			game.setSelectedToolcard(0);
 			showWarning("Gereedschapskaart", "U bent niet aan de beurt.");
-		}	
+		}
 	}
-	
-	public void payForToolcard(Toolcard selectedToolcard,int price) {
-		
+
+	public void payForToolcard(Toolcard selectedToolcard, int price) {
+
 		ArrayList<FavorToken> favorTokens = game.getPersonalPlayer().getFavorTokens();
 
-		if(favorTokens.size() >= price) {
-			for(int i = 0; i < price; i++) {
+		if (favorTokens.size() >= price) {
+			for (int i = 0; i < price; i++) {
 				favorTokens.get(0).setFavortokensForToolCard(selectedToolcard.getId(), game);
 				favorTokens.remove(0);
 			}
 			gameView.updateFavorTokenView(favorTokens.size());
 			game.setUsedToolcard(true);
-			
-		}else {
+
+		} else {
 			showWarning("Je mag toolcard niet kopen!", "Je hebt niet genoeg betaalstenen");
 			game.setSelectedToolcard(0);
 		}
@@ -222,7 +222,8 @@ public class GameController {
 		if (game.getSelectedToolcard() == null) {
 			boolean checkplacement = game.checkPlacementAgainstRules(x, y, modelColor, value);
 			if (!checkplacement) {
-				showWarning("Dobbelsteen zetten", "De geselecteerde dobbelsteen kan niet op deze plek worden geplaatst.");
+				showWarning("Dobbelsteen zetten",
+						"De geselecteerde dobbelsteen kan niet op deze plek worden geplaatst.");
 			}
 			return checkplacement;
 		} else {
@@ -262,79 +263,79 @@ public class GameController {
 	public void removeAllBorders() {
 		gameView.getDicePoolView().removeAllBorders();
 	}
-	
+
 	public void removeAllBordersFromToolcard() {
 		gameView.getToolcardPoolView().removeAllBorders();
 	}
 
 	public void showWarning(String header, String text) {
-	
+
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Let op!");
 		alert.setHeaderText(header);
 		alert.setContentText(text);
-		alert.showAndWait();	
+		alert.showAndWait();
 	}
-	
+
 	public void lensCutter(GameDie rountrackDie) {
-		
+
 		GameDie dieOnDiePool = game.getSelectedDieFromDicePool();
-		
+
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Let op!");
-		alert.setHeaderText("De waarde van de geselecteerde dobbelsteen is " + dieOnDiePool.getEyes() + " en de kleur is "+ dieOnDiePool.getColorString());
-		alert.setContentText("Weet je zeker dat je deze dobbelsteen wilt wisselen met een dobbelsteen uit het rondespoor?");
-		
+		alert.setHeaderText("De waarde van de geselecteerde dobbelsteen is " + dieOnDiePool.getEyes()
+				+ " en de kleur is " + dieOnDiePool.getColorString());
+		alert.setContentText(
+				"Weet je zeker dat je deze dobbelsteen wilt wisselen met een dobbelsteen uit het rondespoor?");
+
 		ButtonType buttonTypeOk = new ButtonType("Ja");
 		ButtonType buttonTypeCancel = new ButtonType("Nee", ButtonData.CANCEL_CLOSE);
-		
-		alert.getButtonTypes().setAll(buttonTypeOk,buttonTypeCancel);
-		
+
+		alert.getButtonTypes().setAll(buttonTypeOk, buttonTypeCancel);
+
 		Optional<ButtonType> result = alert.showAndWait();
-		
-		if (result.get() == buttonTypeOk){
-			int dieId = dieOnDiePool.getRoundID(game); 
-			
-			System.out.println("Die om die pool1 = "+dieOnDiePool.getRoundID(game));
-			System.out.println("Die on die pool maar in game opgeslagen1 = "+ dieId);
-			
+
+		if (result.get() == buttonTypeOk) {
+			int dieId = dieOnDiePool.getRoundID(game);
+
+			System.out.println("Die om die pool1 = " + dieOnDiePool.getRoundID(game));
+			System.out.println("Die on die pool maar in game opgeslagen1 = " + dieId);
+
 			game.addDieToRoundTrack(dieOnDiePool, rountrackDie);
-			
-			System.out.println("Die om die pool = "+dieOnDiePool.getRoundID(game));
-			System.out.println("Die on die pool maar in game opgeslagen = "+ dieId);
+
+			System.out.println("Die om die pool = " + dieOnDiePool.getRoundID(game));
+			System.out.println("Die on die pool maar in game opgeslagen = " + dieId);
 			game.addDieTodiecePool(dieId, game, rountrackDie);
-			
+
 			gameUpdater.updateRountrack();
 			gameUpdater.updateDicePool();
-			
+
 			gameViewUpdater.updateDicePoolView();
 			gameViewUpdater.updateRoundtrackView(true);
-			
+
 			getGame().setSelectedDieFromDicePool(rountrackDie);
-			getGame().setSelectedDie(rountrackDie);	
+			getGame().setSelectedDie(rountrackDie);
 		}
 		setToolCardUnused();
 	}
-	
-	
-	
+
 	public void fluxRemover(GameDie gamedie) {
-		
+
 		GameDie unusedDie;
 //		game.setGameDieUnused(gamedie);
 		gamedie.setRoundID(0, game);
 		unusedDie = game.getUnusedDiceForGame();
-		
-		while(unusedDie.getNumber() == gamedie.getNumber() && unusedDie.getColor().equals(gamedie.getColor())) {
+
+		while (unusedDie.getNumber() == gamedie.getNumber() && unusedDie.getColor().equals(gamedie.getColor())) {
 			unusedDie.setRoundID(0, game);
 			unusedDie = game.getUnusedDiceForGame();
 		}
-		
+
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Let op!");
 		alert.setHeaderText("De kleur van de nieuwe dobbelsteen is " + unusedDie.getColorString());
 		alert.setContentText("Welke waarde wilt u deze dobbelsteen geven?");
-		
+
 		ButtonType buttonType1 = new ButtonType("1");
 		ButtonType buttonType2 = new ButtonType("2");
 		ButtonType buttonType3 = new ButtonType("3");
@@ -342,72 +343,73 @@ public class GameController {
 		ButtonType buttonType5 = new ButtonType("5");
 		ButtonType buttonType6 = new ButtonType("6");
 		ButtonType buttonTypeCancel = new ButtonType("Annuleren", ButtonData.CANCEL_CLOSE);
-		
-		alert.getButtonTypes().setAll(buttonType1,buttonType2,buttonType3,buttonType4,buttonType5,buttonType6,buttonTypeCancel);
-		
+
+		alert.getButtonTypes().setAll(buttonType1, buttonType2, buttonType3, buttonType4, buttonType5, buttonType6,
+				buttonTypeCancel);
+
 		Optional<ButtonType> result = alert.showAndWait();
-		
-		if (result.get() == buttonType1){
+
+		if (result.get() == buttonType1) {
 			unusedDie.changeEyes(1, game);
-		}else if (result.get() == buttonType2) {
+		} else if (result.get() == buttonType2) {
 			unusedDie.changeEyes(2, game);
-		}else if (result.get() == buttonType3) {
+		} else if (result.get() == buttonType3) {
 			unusedDie.changeEyes(3, game);
-		}else if (result.get() == buttonType4) {
+		} else if (result.get() == buttonType4) {
 			unusedDie.changeEyes(4, game);
-		}else if (result.get() == buttonType5) {
+		} else if (result.get() == buttonType5) {
 			unusedDie.changeEyes(5, game);
-		}else if (result.get() == buttonType6) {
+		} else if (result.get() == buttonType6) {
 			unusedDie.changeEyes(6, game);
 		}
-		
+
 		game.updateOffer(gamedie, unusedDie);
 		game.setSelectedDieFromDicePool(unusedDie);
 		game.setSelectedDie(unusedDie);
 		game.getSelectedDie().setColor(unusedDie.getColor());
-        game.getSelectedDie().setNumber(unusedDie.getNumber());
-        game.getSelectedDie().changeEyes(unusedDie.getEyes(), game);
+		game.getSelectedDie().setNumber(unusedDie.getNumber());
+		game.getSelectedDie().changeEyes(unusedDie.getEyes(), game);
 	}
-	
+
 	public void fluxBrush(GameDie gamedie) {
 		int dieValue = gamedie.getEyes();
-		
+
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Let op!");
 		alert.setHeaderText("De waarde van de geselecteerde dobbelsteen is " + dieValue);
 		alert.setContentText("Weet je zeker dat je de dobbelsteen opnieuw wilt werpen?");
-		
+
 		ButtonType buttonTypeOk = new ButtonType("Ja");
 		ButtonType buttonTypeCancel = new ButtonType("Nee", ButtonData.CANCEL_CLOSE);
-		
-		alert.getButtonTypes().setAll(buttonTypeOk,buttonTypeCancel);
-		
+
+		alert.getButtonTypes().setAll(buttonTypeOk, buttonTypeCancel);
+
 		Optional<ButtonType> result = alert.showAndWait();
-		
-		if (result.get() == buttonTypeOk){
-			int randomDieValue = (int) (Math.random() * 6) + 1; 
+
+		if (result.get() == buttonTypeOk) {
+			int randomDieValue = (int) (Math.random() * 6) + 1;
 			gamedie.changeEyes(randomDieValue, game);
 		}
-		
+
 		getGame().setSelectedDieFromDicePool(gamedie);
 	}
-	
+
 	public void flipDice(GameDie gamedie) {
 		int dieValue = gamedie.getEyes();
-	
+
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Let op!");
 		alert.setHeaderText("De waarde van de geselecteerde dobbelsteen is " + dieValue);
 		alert.setContentText("Weet je zeker dat je de dobbelsteen wilt omdraaien?");
-		
+
 		ButtonType buttonTypeOk = new ButtonType("Ja");
 		ButtonType buttonTypeCancel = new ButtonType("Nee", ButtonData.CANCEL_CLOSE);
-		
-		alert.getButtonTypes().setAll(buttonTypeOk,buttonTypeCancel);
-		
+
+		alert.getButtonTypes().setAll(buttonTypeOk, buttonTypeCancel);
+
 		Optional<ButtonType> result = alert.showAndWait();
-		
-		if (result.get() == buttonTypeOk){
+
+		if (result.get() == buttonTypeOk) {
 			switch (dieValue) {
 			case 1:
 				gamedie.changeEyes(6, getGame());
@@ -427,46 +429,45 @@ public class GameController {
 			case 6:
 				gamedie.changeEyes(1, getGame());
 				break;
-			} 
+			}
 		}
 		getGame().setSelectedDieFromDicePool(gamedie);
+		getGame().getSelectedDie().changeEyes(gamedie.getEyes(), getGame());
 	}
-	
+
 	public void showConfirmation(GameDie gamedie) {
-		
+
 		int dieValue = gamedie.getEyes();
-	
+
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Let op!");
 		alert.setHeaderText("De waarde van de geselecteerde dobbelsteen is " + dieValue);
 		alert.setContentText("Wilt u de waarde ervan met 1 verhogen of verlagen?");
-		
+
 		ButtonType buttonTypeOne = new ButtonType("-1");
 		ButtonType buttonTypeTwo = new ButtonType("+1");
 		ButtonType buttonTypeCancel = new ButtonType("Annuleren", ButtonData.CANCEL_CLOSE);
 
-		if(dieValue == 1){
-			alert.getButtonTypes().setAll(buttonTypeTwo,buttonTypeCancel);
+		if (dieValue == 1) {
+			alert.getButtonTypes().setAll(buttonTypeTwo, buttonTypeCancel);
+		} else if (dieValue == 6) {
+			alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
+		} else {
+			alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeCancel);
 		}
-		else if(dieValue == 6) {
-			alert.getButtonTypes().setAll(buttonTypeOne,buttonTypeCancel);
-		}
-		else {
-			alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo,buttonTypeCancel);
-		}
-		
+
 		Optional<ButtonType> result = alert.showAndWait();
-		
-		if (result.get() == buttonTypeOne){
-			
-		    gamedie.changeEyes((dieValue-1), getGame());
-		    
+
+		if (result.get() == buttonTypeOne) {
+
+			gamedie.changeEyes((dieValue - 1), getGame());
+
 		} else if (result.get() == buttonTypeTwo) {
-			 gamedie.changeEyes((dieValue+1), getGame());
+			gamedie.changeEyes((dieValue + 1), getGame());
 		}
 		getGame().setSelectedDieFromDicePool(gamedie);
 	}
-	
+
 	public int getCurrentRound() {
 		return game.getRound().get();
 	}
@@ -523,7 +524,9 @@ public class GameController {
 			for (int i = 0; i < diceOnRoundTrack.size(); i++) {
 				if (gameDieFromDB.getColor() == diceOnRoundTrack.get(i).getColor()
 						&& gameDieFromDB.getNumber() == diceOnRoundTrack.get(i).getNumber()) {
-					ArrayList<GameDie> temporaryList = (ArrayList<GameDie>) changedDiceOnRoundTrack.clone();// TODO miss geen clone
+					ArrayList<GameDie> temporaryList = (ArrayList<GameDie>) changedDiceOnRoundTrack.clone();// TODO miss
+																											// geen
+																											// clone
 					for (int j = 0; j < changedDiceOnRoundTrack.size(); j++) {
 						if (gameDieFromDB.getColor() == changedDiceOnRoundTrack.get(j).getColor()
 								&& gameDieFromDB.getNumber() == changedDiceOnRoundTrack.get(j).getNumber()) {
@@ -557,7 +560,7 @@ public class GameController {
 	}
 
 	public void setLobbyView() {
-		
+
 		accountController.viewLobby();
 	}
 
@@ -574,7 +577,7 @@ public class GameController {
 	public void setNewCurrentPlayer(boolean newCurrentPlayer) {
 		this.newCurrentPlayer = newCurrentPlayer;
 	}
-	
+
 	public Player getLocalCurrentPlayer() {
 		return game.getLocalCurrentPlayer();
 	}
@@ -582,30 +585,30 @@ public class GameController {
 	public void actionSendMessage(String text, ChatView chatView) {
 		Chat c = new Chat(game.getPersonalPlayer().getId(), text, conn);
 		chatDBA.getTime(c);
-		
+
 		chatDBA.addChatDB(game.getPersonalPlayer().getId(), text, c);
 		gameView.getChatView().addMessage(c);
 	}
-	
+
 	public void updateChat() {
-		
+
 		int countchats = chatView.getCountchats();
 		int countchatsfromDB = chatDBA.getCountchats(game.getGameID());
-		
+
 		System.out.println("COUNT " + countchats);
 		System.out.println("COUNTDB" + countchatsfromDB);
-		
-		if(!(countchatsfromDB == countchats)) {
+
+		if (!(countchatsfromDB == countchats)) {
 			System.out.println("CHAT = NIET EVEN GROOT");
-			for (Chat chat : chatDBA.getNewChatlinesOfGame(game.getGameID(), countchats, countchatsfromDB - countchats)) {
+			for (Chat chat : chatDBA.getNewChatlinesOfGame(game.getGameID(), countchats,
+					countchatsfromDB - countchats)) {
 				gameView.getChatView().addMessage(chat);
 			}
-		}
-		else{
+		} else {
 			System.out.println("CHAT = EVEN GROOT");
 		}
-	} 
-	
+	}
+
 	public GameViewUpdater getGameViewUpdater() {
 		return gameViewUpdater;
 	}

@@ -41,7 +41,7 @@ public class Game {
 	private PlayerDBA playerDBA;
 	private ToolCardDBA toolcardDBA;
 	private SimpleStringProperty currentPlayerName;
-	private Toolcard selectedToolcard; 
+	private Toolcard selectedToolcard;
 	private GameDie selectedDieFromDicePool;
 	private GameDie selectedDieRoundTrack;
 
@@ -64,7 +64,7 @@ public class Game {
 		currentPlayerName = new SimpleStringProperty();
 		players = new ArrayList<Player>();
 	}
-	
+
 	public Toolcard getSelectedToolcard() {
 		return selectedToolcard;
 	}
@@ -73,11 +73,10 @@ public class Game {
 		if (id != 0) {
 			for (Toolcard toolcard : toolcards) {
 				if (toolcard.getId() == id) {
-					this.selectedToolcard = toolcard; 
+					this.selectedToolcard = toolcard;
 				}
 			}
-		} 
-		else {
+		} else {
 			this.selectedToolcard = null;
 		}
 	}
@@ -101,7 +100,7 @@ public class Game {
 	public void addGametoDB() {
 		gameDBA.addNewGameDB(LocalDateTime.now(), this);
 	}
-	
+
 	public GameDie getSelectedDieFromDicePool() {
 		return selectedDieFromDicePool;
 	}
@@ -181,7 +180,7 @@ public class Game {
 			}
 
 		} else {
-			
+
 			toolcards = toolcardsOfGameFromDB;
 		}
 	}
@@ -309,10 +308,10 @@ public class Game {
 				finishGame();
 			} else {
 				for (int i = 0; i < players.size(); i++) {
-					if (players.get(i).getSequenceNumber() == players.size()) {
-						players.get(i).setSequenceNumber(1);
+					if (players.get(i).getSequenceNumber() == 1) {
+						players.get(i).setSequenceNumber(players.size());
 					} else {
-						players.get(i).setSequenceNumber(players.get(i).getSequenceNumber() + 1);
+						players.get(i).setSequenceNumber(players.get(i).getSequenceNumber() - 1);
 					}
 				}
 
@@ -436,7 +435,7 @@ public class Game {
 	}
 
 	public boolean checkPlacementAgainstRules(int x, int y, ModelColor modelColor, int value) {
-	
+
 		if (!placedDie) {
 			if (personalPlayer == currentPlayer) {
 				if (currentPlayer.getBoard() == null) {
@@ -461,7 +460,7 @@ public class Game {
 		}
 		return null;
 	}
-	
+
 	public String getSelectedDieColorString() {
 		if (selectedDie != null) {
 			return selectedDie.getColorString();
@@ -481,7 +480,7 @@ public class Game {
 	}
 
 	public void setFinishedTurnTrue() {
-		finishedTurn = true;	
+		finishedTurn = true;
 	}
 
 	public void setPlacedDie(boolean b) {
@@ -499,15 +498,16 @@ public class Game {
 	public RoundTrack getRoundTrack() {
 		return roundTrack;
 	}
-	
-	public void updateOffer(GameDie oldDie, GameDie newDie){
-		for(int i = 0; i < offer.size(); i++) {
-			if(offer.get(i).getNumber() == oldDie.getNumber() && (offer.get(i).getColorString().equals(oldDie.getColorString()))) {
-				System.out.println("offer 1 = "+ offer.size());
+
+	public void updateOffer(GameDie oldDie, GameDie newDie) {
+		for (int i = 0; i < offer.size(); i++) {
+			if (offer.get(i).getNumber() == oldDie.getNumber()
+					&& (offer.get(i).getColorString().equals(oldDie.getColorString()))) {
+				System.out.println("offer 1 = " + offer.size());
 				offer.remove(i);
-				System.out.println("offer 2 = "+ offer.size());
+				System.out.println("offer 2 = " + offer.size());
 				offer.add(newDie);
-				System.out.println("offer 3 = "+ offer.size());
+				System.out.println("offer 3 = " + offer.size());
 				break;
 			}
 		}
@@ -528,8 +528,8 @@ public class Game {
 		}
 		return offer;
 	}
-	
-	public ArrayList<GameDie> getLocalOffer(){
+
+	public ArrayList<GameDie> getLocalOffer() {
 		return offer;
 	}
 
@@ -614,21 +614,21 @@ public class Game {
 	public ArrayList<Player> getChallengeePlayers(Account account) {
 		return playerDBA.getChallengeePlayers(account);
 	}
-	
+
 	public void setGameDieUnused(GameDie gameDie) {
 		gamedieDBA.setGameDieUnused(gameDie, this);
 	}
-	
-	public GameDie getUnusedDiceForGame(){
+
+	public GameDie getUnusedDiceForGame() {
 		return gamedieDBA.getUnusedDiceOfGame(this);
 	}
 
-	public void addDieToRoundTrack(GameDie dieondicepool,GameDie dieonRoundTrack) {
-		gamedieDBA.addDieToRoundTrack(dieondicepool,this,dieonRoundTrack);
+	public void addDieToRoundTrack(GameDie dieondicepool, GameDie dieonRoundTrack) {
+		gamedieDBA.addDieToRoundTrack(dieondicepool, this, dieonRoundTrack);
 	}
-	
+
 	public void addDieTodiecePool(int dieID, Game game, GameDie dieonRoundTrack) {
-		gamedieDBA.addDieTodiecePool(dieID, this,dieonRoundTrack);
+		gamedieDBA.addDieTodiecePool(dieID, this, dieonRoundTrack);
 	}
 
 	public Player getLocalCurrentPlayer() {
