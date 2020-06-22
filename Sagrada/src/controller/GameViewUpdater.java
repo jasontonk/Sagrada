@@ -6,7 +6,6 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import model.GameDie;
 import model.ModelColor;
-import model.Player;
 import model.PlayerStatus;
 
 public class GameViewUpdater extends Task<Boolean> {
@@ -50,7 +49,6 @@ public class GameViewUpdater extends Task<Boolean> {
 						@Override
 						public void run() {
 							updateAll();
-							System.out.println("updated Views");
 						}
 					});
 				}
@@ -75,7 +73,7 @@ public class GameViewUpdater extends Task<Boolean> {
 	}
 
 	private void updateAll() {
-		System.out.println("UPDATING ALL");
+	
 		updateDicePoolView();
 		updateRoundtrackView(false);
 		if(updateCounter == 5) {
@@ -94,7 +92,7 @@ public class GameViewUpdater extends Task<Boolean> {
 		diceOnRoundTrack = gameCtrl.getChangedDiceOnRoundTrack();
 		
 		if(roundtrackcounter > 5 || completeUpdate){
-			System.out.println("updated roundtrackview");
+			
 			gameCtrl.getGameView().getRoundtrackView().removeAllDice();
 			diceOnRoundTrack = gameCtrl.getDiceOnRoundTrack();
 			roundtrackcounter = 0;
@@ -139,7 +137,7 @@ public class GameViewUpdater extends Task<Boolean> {
 	}
 
 	public void updatePatternCardsOfOtherPlayers() {
-			System.out.println("IF 1");
+			
 			gameCtrl.getGameView().getPatternCardsOfOtherPlayersView().makePatternCards();
 			counter++;
 	}

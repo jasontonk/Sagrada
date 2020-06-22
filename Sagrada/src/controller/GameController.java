@@ -57,15 +57,10 @@ public class GameController {
 
 		this.accountController = accountController;
 		chatDBA = new ChatDBA(conn);
-		System.out.println("loading...20%");
 		dieController = new DieController(conn, this);
-		System.out.println("loading...40%");
 		patterncardController = new PatterncardController(conn, this);
-		System.out.println("loading...60%");
 		roundtrackController = new RoundtrackController(game, this);
-		System.out.println("loading...80%");
 		gameView = new GameView(this);
-		System.out.println("loading...100%");
 
 		chatView = gameView.getChatView();
 
@@ -297,14 +292,8 @@ public class GameController {
 
 		if (result.get() == buttonTypeOk) {
 			int dieId = dieOnDiePool.getRoundID(game);
-
-			System.out.println("Die om die pool1 = " + dieOnDiePool.getRoundID(game));
-			System.out.println("Die on die pool maar in game opgeslagen1 = " + dieId);
-
+			
 			game.addDieToRoundTrack(dieOnDiePool, rountrackDie);
-
-			System.out.println("Die om die pool = " + dieOnDiePool.getRoundID(game));
-			System.out.println("Die on die pool maar in game opgeslagen = " + dieId);
 			game.addDieTodiecePool(dieId, game, rountrackDie);
 
 			gameUpdater.updateRountrack();
@@ -596,11 +585,7 @@ public class GameController {
 		int countchats = chatView.getCountchats();
 		int countchatsfromDB = chatDBA.getCountchats(game.getGameID());
 
-		System.out.println("COUNT " + countchats);
-		System.out.println("COUNTDB" + countchatsfromDB);
-
 		if (!(countchatsfromDB == countchats)) {
-			System.out.println("CHAT = NIET EVEN GROOT");
 			for (Chat chat : chatDBA.getNewChatlinesOfGame(game.getGameID(), countchats,
 					countchatsfromDB - countchats)) {
 				gameView.getChatView().addMessage(chat);

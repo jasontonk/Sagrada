@@ -38,7 +38,6 @@ public class GameUpdater implements Runnable {
 						@Override
 						public void run() {
 							updateAll();
-							System.out.println("updated games");
 						}
 					});
 				} else {

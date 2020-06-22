@@ -41,7 +41,6 @@ public class ChatViewUpdater extends Task<Boolean> {
 						@Override
 						public void run() {
 							updateChat();
-							System.out.println("updated Chat");
 						}
 					});
 				}

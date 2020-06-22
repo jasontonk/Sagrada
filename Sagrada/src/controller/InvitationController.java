@@ -25,8 +25,6 @@ public class InvitationController extends Task<Void> {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-			System.out.println("Invitation Controller Running...");
 
 					Platform.runLater(new Runnable() {
 						
@@ -39,7 +37,6 @@ public class InvitationController extends Task<Void> {
 						}
 					}
 				});
-			System.out.println("Invitation Controller Stop...");	
 		}
 		return null;
 	}
