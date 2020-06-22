@@ -24,8 +24,9 @@ public class GameUpdater implements Runnable {
 	public void run() {
 		isRunning = true;
 		while (isRunning) {
-			if (gameCtrl.getGame().isFinishedGame()) {
+			if (gameCtrl.getGame().isFinishedGame() || gameCtrl.getGame().getPersonalPlayer().getPlayerStatus().equals(PlayerStatus.FINISHED)) {
 				isRunning = false;
+				gameCtrl.getGame().finishGame();
 			} else {
 				if (!isPaused) {
 					try {
