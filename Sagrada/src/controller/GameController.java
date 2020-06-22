@@ -599,7 +599,7 @@ public class GameController {
 	}
 
 	public GameViewUpdater getGameViewUpdater() {
-		return gameViewUpdater;
+		return gameViewUpdater; 
 	}
 
 	public MyScene getMyScene() {
