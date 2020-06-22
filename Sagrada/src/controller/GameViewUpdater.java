@@ -111,7 +111,7 @@ public class GameViewUpdater extends Task<Boolean> {
 				}
 			}
 			if(colors.size() != 0) {
-				gameCtrl.getGameView().getRoundtrackView().addDice(i, colors, values,diceNumber);
+				gameCtrl.getGameView().getRoundtrackView().addDice(i, colors, values, diceNumber);
 			}
 			colors.clear();
 			values.clear();

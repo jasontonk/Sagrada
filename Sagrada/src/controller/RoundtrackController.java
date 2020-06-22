@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import model.Game;
 import model.GameDie;
+import model.ModelColor;
 
 public class RoundtrackController {
 
@@ -17,18 +18,19 @@ public class RoundtrackController {
 		return gameController;
 	}
 	
-	public void setSelectedDie(int round, int index, ArrayList<Integer> diceIDs) {
-		ArrayList<GameDie> dieces = getGameController().getDiceOnRoundTrack();
+	public void setSelectedDie(int round, ArrayList<ModelColor> colors, int index, ArrayList<Integer> diceIDs) {
+		ArrayList<GameDie> dices = getGameController().getDiceOnRoundTrack();
 		
 		GameDie gameDie = null;
 		
-		for(int i = 0; i < dieces.size();i++ ) {
-			if(dieces.get(i).getNumber() == diceIDs.get(index)) {
-				gameDie = dieces.get(i);
+		for(int i = 0; i < dices.size();i++ ) {
+			if(dices.get(i).getNumber() == diceIDs.get(index) && dices.get(i).getColor().equals(colors.get(index))) {
+				gameDie = dices.get(i);
+				break;
 			}
 		}
 		
-		System.out.println("nnumber= "+ gameDie.getEyes()+ " ccolor= "+gameDie.getColorString());
+		System.out.println("number= "+ gameDie.getEyes()+ " color= "+gameDie.getColorString());
 
 		if(gameDie != null) {
 			gameController.getGame().setSelectedDieRoundTrack(gameDie);

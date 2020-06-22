@@ -116,7 +116,7 @@ public class RoundtrackView extends VBox {
 					Image image = new Image(getClass().getResource(imgURL).toString());
 					button.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
 					button.setPrefSize(50, 50);
-					button.setOnMouseClicked(e -> SelectedDie(round, index,diceIDs));
+					button.setOnMouseClicked(e -> SelectedDie(round, colors, index,diceIDs));
 					if(i == 0) {
 						stackpanes.get(round-1).getChildren().add(button);
 					}
@@ -133,8 +133,8 @@ public class RoundtrackView extends VBox {
 				}
 	}
 	
-	private void SelectedDie(int round, int index,  ArrayList<Integer>diceIDs) {
-		roundtrackController.setSelectedDie(round, index,diceIDs );
+	private void SelectedDie(int round, ArrayList<ModelColor> colors, int index,  ArrayList<Integer>diceIDs) {
+		roundtrackController.setSelectedDie(round, colors, index, diceIDs);
 	}
 	public void removeAllDice() {
 		for (StackPane stackPane : stackpanes) {
