@@ -358,6 +358,7 @@ public class GameController {
 		game.getSelectedDie().setColor(unusedDie.getColor());
 		game.getSelectedDie().setNumber(unusedDie.getNumber());
 		game.getSelectedDie().changeEyes(unusedDie.getEyes(), game);
+		gameViewUpdater.updateDicePoolView();
 	}
 
 	public void fluxBrush(GameDie gamedie) {
