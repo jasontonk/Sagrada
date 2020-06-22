@@ -45,7 +45,7 @@ public class PatterncardController {
 		if (gameController.getGame().getSelectedToolcard() == null) {
 			return gameController.getDieController().getSelectedDieURL();
 		} else {
-			return "/images/" + gameController.getSelectedDieColor() + gameController.getSelectedDieValue()
+			return "/images/" + gameController.getSelectedDieColor().toString().toUpperCase() + gameController.getSelectedDieValue()
 					+ "_Die.png";
 		}
 	}
