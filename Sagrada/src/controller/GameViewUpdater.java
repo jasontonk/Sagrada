@@ -19,7 +19,6 @@ public class GameViewUpdater extends Task<Boolean> {
 	
 	public GameViewUpdater(GameController gameCtrl, GameUpdater gameUpdater ) {
 		this.gameCtrl = gameCtrl;
-		
 	}
 	
 	@Override
@@ -141,6 +140,7 @@ public class GameViewUpdater extends Task<Boolean> {
 			System.out.println("IF 1");
 			gameCtrl.getGameView().getPatternCardsOfOtherPlayersView().makePatternCards();
 			counter++;
-
 	}
+	
+	
 }

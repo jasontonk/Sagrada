@@ -21,10 +21,12 @@ public class ChatView extends BorderPane {
 	private ArrayList<Chat> chats;
 	private ScrollPane chatpane;
 	private TextField textfield;
+	private int countchats;
 	    
 	public ChatView (GameController gameController) {
         this.gameController = gameController;
         chats = new ArrayList<>();
+        setCountchats(0);
         messagebox = new VBox();
         makeChat();
     }
@@ -55,15 +57,16 @@ public class ChatView extends BorderPane {
 		chats.add(chat);
         String playername = chat.getPlayer().getName();
         String message = chat.getMessage();
-       
+        
         int hour = chat.getTime().getHours();
         int minute = chat.getTime().getMinutes();
         int second = chat.getTime().getSeconds();
         
         Label label = new Label("[" + hour + ":" + minute + ":" + second + "] " + playername + ": " + message);
         messagebox.getChildren().add(label);
+        setCountchats(getCountchats() + 1);
     }
-
+	
 	/**
 	 * @return the chats
 	 */
@@ -73,5 +76,19 @@ public class ChatView extends BorderPane {
 
 	public void deleteAllChats() {
 		messagebox.getChildren().clear();
+	}
+
+	/**
+	 * @return the countchats
+	 */
+	public int getCountchats() {
+		return countchats;
+	}
+
+	/**
+	 * @param countchats the countchats to set
+	 */
+	public void setCountchats(int countchats) {
+		this.countchats = countchats;
 	}
 }

@@ -81,4 +81,39 @@ private DataBaseConnection conn;
 		}
 		return chatlines;
 	}
+	
+	public ArrayList<Chat> getNewChatlinesOfGame(int gameid, int int1, int int2) {
+		ArrayList<Chat> chatlines = new ArrayList<>();
+		String query = "SELECT chatline.* FROM chatline JOIN player ON chatline.idplayer = player.idplayer WHERE idgame = "+gameid+" ORDER BY time ASC LIMIT "+int1+","+int2+";";
+		try {
+			Statement stmt = conn.getConn().createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			while(rs.next()) {
+				Chat chat = new Chat(rs.getInt("idplayer"), rs.getString("message"), conn); //edited to fix error
+				chat.setTime(rs.getTimestamp("time"));
+				chatlines.add(chat);
+			}
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return chatlines;
+	}
+
+	public int getCountchats(int gameid) {
+		int i = 0;
+		String query = "SELECT COUNT(time) as size FROM chatline JOIN player ON chatline.idplayer = player.idplayer WHERE idgame = "+gameid+" ORDER BY time ASC;";
+		try {
+			Statement stmt = conn.getConn().createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			while(rs.next()) {
+				i = rs.getInt("size");
+			}
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return i;
+	}
 }
+

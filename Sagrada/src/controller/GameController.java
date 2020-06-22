@@ -28,6 +28,7 @@ public class GameController {
 	private Game game;
 	private GameRoundPlayer gameRoundPlayer;
 	private GameUpdater gameUpdater;
+	private ChatViewUpdater chatViewUpdater;
 	private GameViewUpdater gameViewUpdater;
 	private GameView gameView;
 	private DieController dieController;
@@ -44,8 +45,10 @@ public class GameController {
 	private volatile boolean newCurrentPlayer; 
 	private ChatDBA chatDBA;
 	private Thread updateGame;
+	private Thread updateChat;
 	private Thread updateViews;
 	private Thread playround;
+	private ChatView chatView;
 
 	public GameController(DataBaseConnection conn, MyScene ms, Game game, AccountController accountController) {
 		this.conn = conn;
@@ -63,10 +66,13 @@ public class GameController {
 		System.out.println("loading...80%");
 		gameView = new GameView(this);
 		System.out.println("loading...100%");
+		
+		chatView = gameView.getChatView();
 
 		gameRoundPlayer = new GameRoundPlayer(this, 3);
 		gameUpdater = new GameUpdater(this);
 		gameViewUpdater = new GameViewUpdater(this, gameUpdater);
+		chatViewUpdater = new ChatViewUpdater(this, gameUpdater);
 		changedDiceOnRoundTrack = new ArrayList<GameDie>();
 		diceOnRoundTrack = new ArrayList<GameDie>();
 
@@ -78,7 +84,10 @@ public class GameController {
 		updateViews = new Thread(gameViewUpdater);
 		updateViews.setDaemon(true);
 		updateViews.start();
-
+		updateChat = new Thread(chatViewUpdater);
+		updateChat.setDaemon(true);
+		updateChat.start();
+		
 		playround = new Thread(gameRoundPlayer);
 		playround.setDaemon(true);
 		playround.start();
@@ -571,21 +580,29 @@ public class GameController {
 	}
 
 	public void actionSendMessage(String text, ChatView chatView) {
-		Chat c = new Chat(game.
-				getPersonalPlayer().
-				getId(), text, conn);
+		Chat c = new Chat(game.getPersonalPlayer().getId(), text, conn);
 		chatDBA.getTime(c);
 		
-		chatDBA.addChatDB(game.
-				getPersonalPlayer().
-				getId(), text, c);
+		chatDBA.addChatDB(game.getPersonalPlayer().getId(), text, c);
+		gameView.getChatView().addMessage(c);
+	}
+	
+	public void updateChat() {
 		
-		ArrayList<Chat> chats = chatDBA.getChatlinesOfGame(this.getGame().getGameID());
-		chatView.deleteAllChats();
-		for (Chat chat : chats) {
-			chatDBA.getTime(chat);
-			chatView.addMessage(chat);
+		int countchats = chatView.getCountchats();
+		int countchatsfromDB = chatDBA.getCountchats(game.getGameID());
+		
+		System.out.println("COUNT " + countchats);
+		System.out.println("COUNTDB" + countchatsfromDB);
+		
+		if(!(countchatsfromDB == countchats)) {
+			System.out.println("CHAT = NIET EVEN GROOT");
+			for (Chat chat : chatDBA.getNewChatlinesOfGame(game.getGameID(), countchats, countchatsfromDB - countchats)) {
+				gameView.getChatView().addMessage(chat);
+			}
 		}
-		chatView.makeChat();
+		else{
+			System.out.println("CHAT = EVEN GROOT");
+		}
 	}
 }
