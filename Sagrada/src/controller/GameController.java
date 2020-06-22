@@ -78,7 +78,7 @@ public class GameController {
 
 		game.playround();
 
-		updateGame = new Thread(gameUpdater);
+		updateGame = new Thread(gameUpdater); 
 		updateGame.setDaemon(true);
 		updateGame.start();
 		updateViews = new Thread(gameViewUpdater);
