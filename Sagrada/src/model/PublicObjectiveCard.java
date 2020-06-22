@@ -111,7 +111,6 @@ public class PublicObjectiveCard {
         ArrayList<Integer> valueList = new ArrayList<>();
         for (int x = 0; x < Board.BOARD_SQUARES_HORIZONTAL; x++) { 
             for (int y = 0; y < Board.BOARD_SQUARES_VERTICAL; y++) { 
-               System.out.println(""+ board.getBoardFieldFromDB(x, y));
             	if (board.getBoardFieldFromDB(x, y).hasDie()) { 
                     valueList.add(board.getBoardFieldFromDB(x, y).getDie().getEyes()); 
                 }

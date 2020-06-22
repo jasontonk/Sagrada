@@ -52,7 +52,6 @@ public class ToolCardDBA {
 			while(rs.next()) {
 				Toolcard toolcard = new Toolcard(rs.getString("name"), rs.getString("description"),rs.getInt("idtoolcard"), conn);
 				list.add(toolcard);
-				System.out.println("toolcard id is"+ toolcard.getId());
 			}
 			stmt.close();
 	        } catch (SQLException e) {

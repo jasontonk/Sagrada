@@ -316,7 +316,7 @@ public class GameDieDBA {
 	public void setGameDieUnused(GameDie gamedie, Game game) {
 		
 		String query = "UPDATE gamedie SET roundID = NULL WHERE idgame = "+game.getGameID()+" AND dienumber = "+gamedie.getNumber()+" AND diecolor = '"+getStringFromColor(gamedie)+"';";
-		System.out.println("HIJ DOET HET " + query);
+		
 		try {
 				Statement stmt = conn.getConn().createStatement();
 				stmt.executeUpdate(query);

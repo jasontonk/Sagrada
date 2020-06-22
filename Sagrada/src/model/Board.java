@@ -1,7 +1,6 @@
 package model;
 
 import database.DataBaseConnection;
-import database.PatternCardDBA;
 import database.PlayerFrameFieldDBA;
 
 public class Board {
