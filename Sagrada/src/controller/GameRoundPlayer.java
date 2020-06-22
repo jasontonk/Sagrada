@@ -21,13 +21,13 @@ public class GameRoundPlayer extends Task<Boolean> {
 		isRunning = true;
 		while (isRunning) {
 			if (gameController.getGame().isFinishedGame()) {
-				Platform.runLater(new Runnable() {
-
-					@Override
-					public void run() {
+//				Platform.runLater(new Runnable() {
+//					@Override
+//					public void run() {
+						isRunning = false;
 						gameController.setFinishedGameView();
-					}
-				});
+//					}
+//				});
 
 			} else {
 				if (!isPaused) {
