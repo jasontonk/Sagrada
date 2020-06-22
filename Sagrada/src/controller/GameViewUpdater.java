@@ -30,7 +30,7 @@ public class GameViewUpdater extends Task<Boolean> {
 					@Override
 					public void run() {
 						isRunning = false;
-						gameCtrl.getGame().finishGame();
+						gameCtrl.getGame().finishGame(); 
 						gameCtrl.setFinishedGameView();
 					}
 				});
