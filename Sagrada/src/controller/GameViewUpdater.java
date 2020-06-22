@@ -25,11 +25,12 @@ public class GameViewUpdater extends Task<Boolean> {
 	public Boolean call() {
 		isRunning = true;
 		while(isRunning){
-			if(gameCtrl.getGame().isFinishedGame()) {
+			if(gameCtrl.getGame().isFinishedGame() || gameCtrl.getGame().getPersonalPlayer().getPlayerStatus().equals(PlayerStatus.FINISHED)) {
 				Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
 						isRunning = false;
+						gameCtrl.getGame().finishGame();
 						gameCtrl.setFinishedGameView();
 					}
 				});
