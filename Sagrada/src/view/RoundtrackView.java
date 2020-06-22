@@ -119,7 +119,6 @@ public class RoundtrackView extends VBox {
 					Image image = new Image(getClass().getResource(imgURL).toString());
 					button.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
 					button.setPrefSize(50, 50);
-					System.out.println("gegevens van de button zijn:"+ round+" kleur: "+ finalcolor+" "+ index+" number: "+finalnumber);
 					button.setOnMouseClicked(e -> SelectedDie(round, finalcolor, index, finalnumber));
 					if(i == 0) {
 						stackpanes.get(round-1).getChildren().add(button);

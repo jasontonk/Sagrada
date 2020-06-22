@@ -50,14 +50,14 @@ public class PatternCardsOfOtherPlayersView extends VBox {
 		}
 		for(Player player : patterncardController.getGameController().getGame().getPlayers()) {
 			if(!player.isDrawnPatternCard()) {
-				System.out.println("EERSTE IF");
+				
 				if(player.getId() != patterncardController.getGameController().getGame().getPersonalPlayer().getId()) {
 					
 					allPatternCards.getChildren().add(drawPatterncard(player, allPlayersHavePatternCards));
 				}
 			}
 			else {
-				System.out.println("IN DE ELSE");
+				
 				for (int x = 0; x < 5; x++) {
 					for (int y = 0; y < 4; y++) {
 						updatePatternCards(player, x, y);
