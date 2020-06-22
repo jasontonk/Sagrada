@@ -612,4 +612,9 @@ public class GameController {
 	public GameViewUpdater getGameViewUpdater() {
 		return gameViewUpdater;
 	}
+
+	public MyScene getMyScene() {
+		return myScene;
+	}
+
 }
