@@ -123,6 +123,7 @@ public class PatterncardView extends VBox {
 		}
 		die.setOnMouseClicked(e -> setSelectedDie(x, y, die, stackpane));
 		patterncardController.getGameController().getGameViewUpdater().updateDicePoolView();
+		patterncardController.getGameController().setToolCardUnused();
 	}
 
 	private void setSelectedDie(int x, int y, Button button, StackPane stackPane) {
@@ -133,7 +134,6 @@ public class PatterncardView extends VBox {
 			if(id == 2) {
 				stackPane.getChildren().remove(button);
 				patterncardController.getGameController().getGame().deleteDieFromPatternCard(x, y);
-				patterncardController.getGameController().setToolCardUnused();
 			}
 		}
 	}

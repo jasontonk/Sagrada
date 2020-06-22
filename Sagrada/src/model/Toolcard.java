@@ -64,10 +64,10 @@ public class Toolcard {
 				if (board.checkFieldColorAndDieColor(boardField, modelColor)
 						|| board.checkFieldValueAndDieValue(boardField, value)
 						|| !board.checkFieldColorAndDieColor(boardField, modelColor)
-						|| !board.checkFieldColorAndDieColor(boardField, modelColor)
+						|| (!board.checkFieldColorAndDieColor(boardField, modelColor)
 								&& !board.checkFieldValueAndDieValue(boardField, value)
 								&& patternCard.getFieldColor(boardField.getxPos(), boardField.getyPos()) == null
-								&& patternCard.getFieldValue(boardField.getxPos(), boardField.getyPos()) == 0) {
+								&& patternCard.getFieldValue(boardField.getxPos(), boardField.getyPos()) == 0)) {
 					board.placeDie(boardField, player.getSelectedDie());
 					return true;
 				}
