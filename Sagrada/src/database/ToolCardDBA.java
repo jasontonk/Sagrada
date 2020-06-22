@@ -38,15 +38,11 @@ public class ToolCardDBA {
 			}
 		}
 		
-//		1,2,5,6,10,11
 		
-//		int id1 = toolcardIDS.get(0);
-//		int id2 = toolcardIDS.get(1);
-//		int id3 = toolcardIDS.get(2);
-	       
-		int id1 = 1;
-		int id2 = 2;
-		int id3 = 11;
+		int id1 = toolcardIDS.get(0);
+		int id2 = toolcardIDS.get(1);
+		int id3 = toolcardIDS.get(2);
+
 		
 		ArrayList<Toolcard> list = new ArrayList<Toolcard>();
 	    String query = "SELECT * from toolcard where idtoolcard = "+id1+" OR idtoolcard = "+id2+" OR idtoolcard = "+id3+";";
