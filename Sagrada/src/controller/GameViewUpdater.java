@@ -98,9 +98,10 @@ public class GameViewUpdater extends Task<Boolean> {
 			System.out.println("updated roundtrackview");
 			gameCtrl.getGameView().getRoundtrackView().removeAllDice();
 			diceOnRoundTrack = gameCtrl.getDiceOnRoundTrack();
-			counter = 0;
+			roundtrackcounter = 0;
 		}
-		counter++;
+		roundtrackcounter++;
+		
 		for (int i = 1; i <= 10; i++) {
 			for (int j = 0; j < diceOnRoundTrack.size(); j++) {
 				if(diceOnRoundTrack.get(j).isOnRoundTrack() == i) {
