@@ -4,22 +4,45 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Random;
+
 import model.Game;
 import model.Toolcard;
 
 public class ToolCardDBA {
 
 	private DataBaseConnection conn;
+	private Random random;
+	private ArrayList<Integer> toolcardIDS;
 	
 	public ToolCardDBA(DataBaseConnection c) {
 		this.conn = c;
+		random = new Random();
+		toolcardIDS = new ArrayList<Integer>();
 	}
 	
 	public ArrayList<Toolcard> get3ToolcardsForAGame() {
 		
-		int id1 = 11;
-		int id2 = 5;
-		int id3 = 10;
+		toolcardIDS.clear();
+		int randomid = random.nextInt((11- 1)+1)+1; 
+		int counter = 0;
+		while(counter < 3) {
+			if(!toolcardIDS.contains(randomid) && (randomid == 1 || randomid == 2 || randomid == 5
+					|| randomid == 6 || randomid == 10 || randomid == 11)) {
+					
+					toolcardIDS.add(randomid);
+					counter++;
+					
+				}else {
+					randomid = random.nextInt((11- 1)+1)+1; 
+			}
+		}
+		
+//		1,2,5,6,10,11
+		
+		int id1 = toolcardIDS.get(0);
+		int id2 = toolcardIDS.get(1);
+		int id3 = toolcardIDS.get(2);
 	       
 		ArrayList<Toolcard> list = new ArrayList<Toolcard>();
 	    String query = "SELECT * from toolcard where idtoolcard = "+id1+" OR idtoolcard = "+id2+" OR idtoolcard = "+id3+";";
