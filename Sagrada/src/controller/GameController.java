@@ -308,7 +308,7 @@ public class GameController {
 			gameUpdater.updateDicePool();
 			
 			gameViewUpdater.updateDicePoolView();
-			gameViewUpdater.updateRoundtrackView();
+			gameViewUpdater.updateRoundtrackView(true);
 			
 			getGame().setSelectedDieFromDicePool(rountrackDie);
 			getGame().setSelectedDie(rountrackDie);	
