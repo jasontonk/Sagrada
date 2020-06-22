@@ -20,6 +20,9 @@ public class RoundtrackController {
 	
 	public void setSelectedDie(int round, ModelColor color, int index, int diceID) {
 		ArrayList<GameDie> dices = getGameController().getDiceOnRoundTrack();
+		for (GameDie gameDie : dices) {
+			System.out.println("dobbelsteen in roundtrack: "+ gameDie.getColorString() + gameDie.getNumber());
+		}
 		
 		GameDie gameDie = null;
 		System.out.println("de kleur en ID van dobbelsteen is "+ color.toString() + diceID);
@@ -30,7 +33,11 @@ public class RoundtrackController {
 			}
 		}
 		
-		System.out.println("number= "+ gameDie.getEyes()+ " color= "+gameDie.getColorString());
+		System.out.println("number= "+ 
+		gameDie.
+		getEyes()+ " color= "+
+		gameDie.
+		getColorString());
 
 		if(gameDie != null) {
 			gameController.getGame().setSelectedDieRoundTrack(gameDie);

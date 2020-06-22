@@ -77,7 +77,7 @@ public class GameViewUpdater extends Task<Boolean> {
 	private void updateAll() {
 		System.out.println("UPDATING ALL");
 		updateDicePoolView();
-		updateRoundtrackView();
+		updateRoundtrackView(false);
 		if(updateCounter == 5) {
 			updatePatternCardsOfOtherPlayers();
 			updateCounter = 0;
@@ -85,7 +85,7 @@ public class GameViewUpdater extends Task<Boolean> {
 		updateCounter++; 
 	}
 	
-	public void updateRoundtrackView() {
+	public void updateRoundtrackView(boolean completeUpdate) {
 		ArrayList<GameDie> diceOnRoundTrack = new ArrayList<GameDie>();
 		ArrayList<Integer> diceNumber = new ArrayList<Integer>();
 		ArrayList<ModelColor> colors = new ArrayList<>();
@@ -93,7 +93,7 @@ public class GameViewUpdater extends Task<Boolean> {
 		
 		diceOnRoundTrack = gameCtrl.getChangedDiceOnRoundTrack();
 		
-		if(roundtrackcounter > 5){
+		if(roundtrackcounter > 5 || completeUpdate){
 			System.out.println("updated roundtrackview");
 			gameCtrl.getGameView().getRoundtrackView().removeAllDice();
 			diceOnRoundTrack = gameCtrl.getDiceOnRoundTrack();
@@ -114,9 +114,11 @@ public class GameViewUpdater extends Task<Boolean> {
 			}
 			colors.clear();
 			values.clear();
+			diceNumber.clear();
 		}
 		colors.clear();
 		values.clear(); 
+		diceNumber.clear();
 		gameCtrl.clearChangedDiceOnRoundTrack(); 
 	}
 
