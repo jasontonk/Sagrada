@@ -21,6 +21,10 @@ public class ChatView extends BorderPane {
 	private ArrayList<Chat> chats;
 	private ScrollPane chatpane;
 	private TextField textfield;
+	public TextField getTextfield() {
+		return textfield;
+	}
+
 	private int countchats;
 	    
 	public ChatView (GameController gameController) {

@@ -583,6 +583,7 @@ public class GameController {
 	}
 
 	public void actionSendMessage(String text, ChatView chatView) {
+		chatView.getTextfield().clear();
 		Chat c = new Chat(game.getPersonalPlayer().getId(), text, conn);
 		chatDBA.getTime(c);
 
