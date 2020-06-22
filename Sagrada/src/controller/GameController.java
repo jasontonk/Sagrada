@@ -303,7 +303,8 @@ public class GameController {
 			
 			getGame().setSelectedDieFromDicePool(rountrackDie);
 			getGame().setSelectedDie(rountrackDie);	
-		}	
+		}
+		setToolCardUnused();
 	}
 	
 	
@@ -524,7 +525,7 @@ public class GameController {
 				}
 			}
 		}
-		diceOnRoundTrack = (ArrayList<GameDie>) diceOnRoundTrackFromDB.clone();// TODO miss geen clone
+		diceOnRoundTrack = diceOnRoundTrackFromDB;// TODO miss geen clone
 	}
 
 	public ArrayList<GameDie> getChangedDiceOnRoundTrack() {

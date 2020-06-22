@@ -136,4 +136,11 @@ public class RoundtrackView extends VBox {
 	private void SelectedDie(int round, int index,  ArrayList<Integer>diceIDs) {
 		roundtrackController.setSelectedDie(round, index,diceIDs );
 	}
+	public void removeAllDice() {
+		for (StackPane stackPane : stackpanes) {
+			for (int i = stackPane.getChildren().size(); i > 1; i--) {
+				stackPane.getChildren().remove(i-1);
+			}
+		}
+	}
 }

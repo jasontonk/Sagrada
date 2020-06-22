@@ -15,6 +15,7 @@ public class GameViewUpdater extends Task<Boolean> {
 	private volatile boolean isPaused;
 	private int counter = 0;
 	private int updateCounter = 0;
+	private int roundtrackcounter = 0;
 	
 	public GameViewUpdater(GameController gameCtrl, GameUpdater gameUpdater ) {
 		this.gameCtrl = gameCtrl;
@@ -93,6 +94,13 @@ public class GameViewUpdater extends Task<Boolean> {
 		
 		diceOnRoundTrack = gameCtrl.getChangedDiceOnRoundTrack();
 		
+		if(roundtrackcounter > 5){
+			System.out.println("updated roundtrackview");
+			gameCtrl.getGameView().getRoundtrackView().removeAllDice();
+			diceOnRoundTrack = gameCtrl.getDiceOnRoundTrack();
+			counter = 0;
+		}
+		counter++;
 		for (int i = 1; i <= 10; i++) {
 			for (int j = 0; j < diceOnRoundTrack.size(); j++) {
 				if(diceOnRoundTrack.get(j).isOnRoundTrack() == i) {
