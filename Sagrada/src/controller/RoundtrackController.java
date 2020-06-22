@@ -18,13 +18,13 @@ public class RoundtrackController {
 		return gameController;
 	}
 	
-	public void setSelectedDie(int round, ArrayList<ModelColor> colors, int index, ArrayList<Integer> diceIDs) {
+	public void setSelectedDie(int round, ModelColor color, int index, int diceID) {
 		ArrayList<GameDie> dices = getGameController().getDiceOnRoundTrack();
 		
 		GameDie gameDie = null;
-		
+		System.out.println("de kleur en ID van dobbelsteen is "+ color.toString() + diceID);
 		for(int i = 0; i < dices.size();i++ ) {
-			if(dices.get(i).getNumber() == diceIDs.get(index) && dices.get(i).getColor().equals(colors.get(index))) {
+			if(dices.get(i).getNumber() == diceID && dices.get(i).getColor().equals(color)) {
 				gameDie = dices.get(i);
 				break;
 			}
