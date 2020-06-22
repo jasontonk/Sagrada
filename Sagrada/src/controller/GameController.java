@@ -227,7 +227,7 @@ public class GameController {
 
 	public Player getCurrentPlayer() {
 		Player currentplayer = game.getCurrentPlayer();
-		if (!shownTurnMessage && currentplayer.getId() == game.getPersonalPlayer().getId()) {
+		if (!shownTurnMessage && currentplayer.getId() == game.getPersonalPlayer().getId() && !game.isFinishedGame()) {
 			shownTurnMessage = true;
 			playround();
 			showWarning("Beurt", "jij bent aan de beurt");

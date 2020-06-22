@@ -24,7 +24,7 @@ public class GameUpdater implements Runnable {
 	public void run() {
 		isRunning = true;
 		while (isRunning) {
-			if (gameCtrl.getGame().isFinishedGame() || gameCtrl.getGame().getRound() == 20 && game) {
+			if (gameCtrl.getGame().isFinishedGame()) {
 				isRunning = false;
 			} else {
 				if (!isPaused) {
