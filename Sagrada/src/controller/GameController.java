@@ -292,7 +292,6 @@ public class GameController {
 
 		if (result.get() == buttonTypeOk) {
 			int dieId = dieOnDiePool.getRoundID(game);
-			
 			game.addDieToRoundTrack(dieOnDiePool, rountrackDie);
 			game.addDieTodiecePool(dieId, game, rountrackDie);
 
@@ -351,7 +350,9 @@ public class GameController {
 		} else if (result.get() == buttonType6) {
 			unusedDie.changeEyes(6, game);
 		}
-
+		if(result.get() != buttonTypeCancel) {
+			setToolCardUnused();
+		}
 		game.updateOffer(gamedie, unusedDie);
 		game.setSelectedDieFromDicePool(unusedDie);
 		game.setSelectedDie(unusedDie);
@@ -378,6 +379,7 @@ public class GameController {
 		if (result.get() == buttonTypeOk) {
 			int randomDieValue = (int) (Math.random() * 6) + 1;
 			gamedie.changeEyes(randomDieValue, game);
+			setToolCardUnused();
 		}
 
 		getGame().setSelectedDieFromDicePool(gamedie);
@@ -419,6 +421,7 @@ public class GameController {
 				gamedie.changeEyes(1, getGame());
 				break;
 			}
+			setToolCardUnused();
 		}
 		getGame().setSelectedDieFromDicePool(gamedie);
 		getGame().getSelectedDie().changeEyes(gamedie.getEyes(), getGame());
@@ -450,9 +453,11 @@ public class GameController {
 		if (result.get() == buttonTypeOne) {
 
 			gamedie.changeEyes((dieValue - 1), getGame());
+			setToolCardUnused();
 
 		} else if (result.get() == buttonTypeTwo) {
 			gamedie.changeEyes((dieValue + 1), getGame());
+			setToolCardUnused();
 		}
 		getGame().setSelectedDieFromDicePool(gamedie);
 	}
@@ -590,9 +595,7 @@ public class GameController {
 					countchatsfromDB - countchats)) {
 				gameView.getChatView().addMessage(chat);
 			}
-		} else {
-			System.out.println("CHAT = EVEN GROOT");
-		}
+		} 
 	}
 
 	public GameViewUpdater getGameViewUpdater() {

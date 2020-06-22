@@ -99,7 +99,7 @@ public class DieView extends BorderPane {
 		String imgURL;
 		die.setMinSize(DIE_SIZE, DIE_SIZE);
 		
-		imgURL = "/images/" + color + value + "_Die.png";
+		imgURL = "/images/" + color.toUpperCase() + value + "_Die.png";
 		Image image = new Image(getClass().getResource(imgURL).toString());
 		die.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1, 1, false, false, false, true))));
 		
