@@ -127,7 +127,6 @@ public class GameController {
 
 	public void setToolCardUnused() {
 		game.setSelectedToolcard(0);
-		toolcardView.removeBorder();
 	}
 
 	public void setSelectedDie(GameDie die) {
