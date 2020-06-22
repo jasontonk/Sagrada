@@ -12,7 +12,7 @@ public class AccountDBA {
 	private DataBaseConnection conn;
 	
 	public AccountDBA(DataBaseConnection c) {
-		this.conn = c;
+		this.conn = c; 
 	}
 	
 	public boolean addAccountDB(String username, String password) {
