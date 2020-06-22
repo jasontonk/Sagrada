@@ -604,5 +604,9 @@ public class GameController {
 		else{
 			System.out.println("CHAT = EVEN GROOT");
 		}
+	} 
+	
+	public GameViewUpdater getGameViewUpdater() {
+		return gameViewUpdater;
 	}
 }
