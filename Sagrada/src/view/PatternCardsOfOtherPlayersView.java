@@ -41,12 +41,19 @@ public class PatternCardsOfOtherPlayersView extends VBox {
 
 	public void makePatternCards() {
 		allPatternCards = new VBox();
-		
+		boolean allPlayersHavePatternCards = true;
+		for(Player player : patterncardController.getGameController().getGame().getPlayers()) {
+			if(player.getPatternCard() == null) {
+				allPlayersHavePatternCards = false;
+				break;
+			}
+		}
 		for(Player player : patterncardController.getGameController().getGame().getPlayers()) {
 			if(!player.isDrawnPatternCard()) {
 				System.out.println("EERSTE IF");
 				if(player.getId() != patterncardController.getGameController().getGame().getPersonalPlayer().getId()) {
-					allPatternCards.getChildren().add(drawPatterncard(player));
+					
+					allPatternCards.getChildren().add(drawPatterncard(player, allPlayersHavePatternCards));
 				}
 			}
 			else {
@@ -63,7 +70,8 @@ public class PatternCardsOfOtherPlayersView extends VBox {
 		this.getChildren().addAll(allPatternCards);
 	}
 	
-	public VBox drawPatterncard(Player player) {
+	public VBox drawPatterncard(Player player, boolean allPlayersHavePatternCards) {
+		
 		this.getChildren().clear();
 		VBox vbox = new VBox();
 		GridPane patterncardfields = new GridPane();
@@ -78,7 +86,7 @@ public class PatternCardsOfOtherPlayersView extends VBox {
 		label.setFont(new Font(15));
 		label.setTextFill(Color.WHITE);
 		
-		if(player.getPatternCard() != null) {
+		if(player.getPatternCard() != null && allPlayersHavePatternCards) {
 			player.setDrawnPatternCard(true);
 			for (int x = 0; x < 5; x++) {
 				for (int y = 0; y < 4; y++) {
@@ -117,7 +125,7 @@ public class PatternCardsOfOtherPlayersView extends VBox {
 			vbox.getChildren().addAll(label, patterncardfields);
 		}
 		else {
-			Label label2 = new Label("Deze speler is nog aan het kiezen");
+			Label label2 = new Label("Niet elke speler heeft een patterncard gekozen");
 			label2.setFont(new Font(15));
 			label2.setTextFill(Color.RED);
 			
