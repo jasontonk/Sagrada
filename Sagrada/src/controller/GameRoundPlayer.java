@@ -69,6 +69,7 @@ public class GameRoundPlayer extends Task<Boolean> {
 						public void run() {
 							gameController.getGame().getPersonalPlayer().calculateScore();
 							if(gameController.getGame().isFinishedGame()) {
+								isRunning = false;
 								gameController.setFinishedGameView();
 							}
 						}
