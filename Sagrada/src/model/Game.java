@@ -246,7 +246,7 @@ public class Game {
 	}
 
 	public void setNextPlayer() {
-		if (!(getRoundFromDB() >= 20 && getCurrentPlayer().getSequenceNumber() == 1)) {
+		if (!(getRoundFromDB() >= 20 && getCurrentPlayer().getSequenceNumber() == 1) || getPersonalPlayer().getPlayerStatus() == PlayerStatus.FINISHED) {
 			boolean isClockwise = gameDBA.isRoundClockwise(this);
 
 			if (currentPlayer.getSequenceNumber() == players.size() && isClockwise) {
@@ -328,7 +328,11 @@ public class Game {
 
 	public void finishGame() {
 		finishedGame = true;
-		getPersonalPlayer().setPlayerStatus(PlayerStatus.FINISHED);
+		if(getPersonalPlayer().getPlayerStatus() != PlayerStatus.FINISHED) {
+			for (Player p : players) {
+				p.setPlayerStatus(PlayerStatus.FINISHED);
+			}
+		}
 	}
 
 	public void makedie() {
