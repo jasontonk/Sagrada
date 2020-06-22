@@ -72,7 +72,7 @@ public class FinishedGameView extends BorderPane {
 		leaderBoardPane.setTop(title);
 		leaderBoardPane.setCenter(leaderBoard);
 
-		Button lobbyButton = new Button("Ga terug naar de lobby");
+		Button lobbyButton = new Button("Spel afsluiten");
 		lobbyButton.setOnAction(e -> gameController.getMyScene().exit());
 
 		finishedGameView.getChildren().addAll(textPane, leaderBoardPane, lobbyButton);

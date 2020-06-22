@@ -328,8 +328,8 @@ public class Game {
 
 	public void finishGame() {
 		finishedGame = true;
-		if(getPersonalPlayer().getPlayerStatus() != PlayerStatus.FINISHED) {
-			for (Player p : players) {
+		if(getPersonalPlayer().getId() == getCurrentPlayer().getId() && getPersonalPlayer().getPlayerStatus() != PlayerStatus.FINISHED) {
+			for (Player p : gameDBA.getPlayersOfGame(this)) {
 				p.setPlayerStatus(PlayerStatus.FINISHED);
 			}
 		}
