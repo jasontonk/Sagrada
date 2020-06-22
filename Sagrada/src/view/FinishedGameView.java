@@ -60,7 +60,7 @@ public class FinishedGameView extends BorderPane {
 		VBox leaderBoard = new VBox();
 		
 		for(Player p : gameController.getGame().getPlayers()) {
-			Text info = new Text("Speler: " + p.getName() + " heeft een score behaald van: " + p.getScore().get());
+			Text info = new Text("Speler: " + p.getName() + " heeft een score behaald van: " + p.getPrivateScore().get());
 			info.setStyle("-fx-font: 20 arial; color: white;");
 			info.setFill(Color.WHITE);
 			leaderBoard.getChildren().add(info);

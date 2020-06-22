@@ -83,6 +83,10 @@ public class Player {
 		}
 		return score;
 	}
+	public SimpleIntegerProperty getPrivateScore() {
+		score.set(playerDBA.getScoreFromDB(this));
+		return score;
+	}
 
 	public void setScore(int score) {
 		this.score.set(score);
